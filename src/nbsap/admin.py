@@ -1,6 +1,8 @@
 from django.contrib import admin
 from nbsap.models import *
 
+admin.site.register(Scale)
+
 admin.site.register(AichiGoal)
 admin.site.register(AichiTarget)
 admin.site.register(AichiIndicator)

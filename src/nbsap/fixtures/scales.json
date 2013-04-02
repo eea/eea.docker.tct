@@ -1,0 +1,30 @@
+[
+  {
+    "pk": 1,
+    "model": "nbsap.scale",
+    "fields": {
+      "title": "Global"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "nbsap.scale",
+    "fields": {
+      "title": "National"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "nbsap.scale",
+    "fields": {
+      "title": "Sub-national"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "nbsap.scale",
+    "fields": {
+      "title": "Regional"
+    }
+  }
+]
