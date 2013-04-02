@@ -1,19 +1,48 @@
 from django.db import models
 
 class AichiGoal(models.Model):
-    raise NotImplementedError
+    pass
 
 class AichiTarget(models.Model):
-    raise NotImplementedError
+    pass
 
 class AichiIndicator(models.Model):
-    raise NotImplementedError
+    pass
+
+class NationalAction(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+
+    def __unicode__(self):
+        return self.title
 
 class NationalObjective(models.Model):
-    raise NotImplementedError
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    objectives = models.ForeignKey('self',
+                                    null=True,
+                                    blank=True)
+    actions = models.ForeignKey(NationalAction,
+                                null=True,
+                                blank=True)
 
-class EuTarget(models.Model):
-    raise NotImplementedError
+    def __unicode__(self):
+        return self.title
 
 class EuAction(models.Model):
-    raise NotImplementedError
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    objectives = models.ForeignKey('self',
+                                   null=True,
+                                   blank=True)
+
+    def __unicode__(self):
+        return self.title
+
+class EuTarget(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    actions = models.ForeignKey(EuAction)
+
+    def __unicode__(self):
+        return self.title
