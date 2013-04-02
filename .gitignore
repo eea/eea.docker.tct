@@ -4,3 +4,4 @@ include
 *.egg-info
 .Python
 *.pyc
+build
