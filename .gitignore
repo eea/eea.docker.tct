@@ -1,7 +1,3 @@
-bin
-lib
-include
-*.egg-info
-.Python
+*.egg-info/
 *.pyc
-build
+sandbox_py27/*
