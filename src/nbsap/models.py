@@ -70,9 +70,10 @@ class NationalAction(models.Model):
 class NationalObjective(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
-    objectives = models.ForeignKey('self',
-                                    null=True,
-                                    blank=True)
+    parent = models.ForeignKey('self',
+                                null=True,
+                                blank=True,
+                                related_name='children')
     actions = models.ForeignKey(NationalAction,
                                 null=True,
                                 blank=True)
@@ -83,6 +84,10 @@ class NationalObjective(models.Model):
 class EuAction(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
+    parent = models.ForeignKey('self',
+                                null=True,
+                                blank=True,
+                                related_name='children')
 
     def __unicode__(self):
         return self.title
@@ -90,7 +95,7 @@ class EuAction(models.Model):
 class EuTarget(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
-    actions = models.ForeignKey(EuAction)
+    actions = models.ManyToManyField(EuAction)
 
     def __unicode__(self):
         return self.title
