@@ -46,8 +46,14 @@ class AichiIndicator(models.Model):
 class AichiTarget(models.Model):
     title = models.CharField(max_length=250)
     description = models.TextField()
-    indicators = models.ForeignKey(AichiIndicator, related_name="relevant_target")
-    other_indicators = models.ForeignKey(AichiIndicator, related_name="other_targets")
+    indicators = models.ForeignKey(AichiIndicator,
+                                   related_name="relevant_target",
+                                   blank=True,
+                                   null=True)
+    other_indicators = models.ForeignKey(AichiIndicator,
+                                         related_name="other_targets",
+                                         blank=True,
+                                         null=True)
 
     def __unicode__(self):
         return self.title
