@@ -132,6 +132,8 @@ class NationalObjective(models.Model):
 
 
 class EuAction(models.Model):
+    __metaclass__ = TransMeta
+
     title = models.CharField(max_length=255)
     description = models.TextField()
     parent = models.ForeignKey('self',
@@ -142,11 +144,19 @@ class EuAction(models.Model):
     def __unicode__(self):
         return self.title
 
+    class Meta:
+        translate = ('title', 'description',)
 
 class EuTarget(models.Model):
+    __metaclass__ = TransMeta
+
     title = models.CharField(max_length=255)
     description = models.TextField()
     actions = models.ManyToManyField(EuAction)
 
     def __unicode__(self):
         return self.title
+
+    class Meta:
+        translate = ('title', 'description',)
+
