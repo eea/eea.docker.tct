@@ -9,11 +9,82 @@
     <label class="nav-header">AICHI Goals</label>
     {% for goal in goals %}
     <li {% if goal.code == current_page %}class="active"{% endif %}>
-      <a href="{% url 'goals' code=goal.code %}" title="{{ goal.code }}"</a>
+      <a href="{% url 'goals' code=goal.code %}" title="{{ goal.code|upper }}"</a>
         Goal {{ goal.code | upper }}
       </a>
     </li>
     {% endfor %}
-   </ul>
+  </ul>
 
+  <div class="tab-content homepage_view">
+    <h1>Goal {{ current_goal.code|upper }}: {{ current_goal.description }}</h1>
+    <div class="row">
+      <ul class="span1">
+        {% for target in current_goal.targets.all %}
+        {% if forloop.counter0|divisibleby:"2" and not forloop.first %}
+      </ul>
+      <ul class="span1">
+        {% endif %}
+        <li>
+          <a href="#target_{{target.id}}"
+             rel="tooltip"
+             data-placement="right"
+             data-original-title="{{ target.description }}">
+             {{ target.title }}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    {% for target in current_goal.targets.all %}
+    <div class="element_field" id="target_{{ target.id }}">
+      <h2>{{ target.title }}: {{ target.description }}</h2>
+
+      {% if target.indicators.all %}
+      <label>Most relevant indicators:</label>
+      <div class="well">
+        <ul>
+          {% for indicator in target.indicators.all %}
+          <li>
+            <a href="#">
+              Indicator {{indicator.id}}: {{ indicator.title }}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+
+      {% if target.other_indicators.all %}
+      <label>Other relevant indicators:</label>
+      <div class="well">
+        <ul>
+          {% for indicator in target.other_indicators.all %}
+          <li>
+            <a href="#">
+              Indicator {{indicator.id}}: {{ indicator.title }}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="row">
+      <a class="pull-right" href="#top">{{_('Back to top')}}</a>
+    </div>
+
+    {% endfor %}
+  </div>
+</div>
 {% endblock %}
+
+{% block scripts %}
+<script>
+  $(function () {
+    $("[rel=tooltip]").tooltip();
+  });
+</script>
+{% endblock scripts %}
