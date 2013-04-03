@@ -4,12 +4,11 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-    url(r'^$', 'nbsap.views.home', name='home'),
-    # url(r'^nbsap/', include('nbsap.foo.urls')),
-
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+    url(r'^$', 'nbsap.views.goals', {'code': 'a'}, name='goals'),
+    url(r'^goals/(?P<code>[\w\-]+)$', 'nbsap.views.goals', name='goals'),
+    url(r'^eu_strategy$', 'nbsap.views.eu_strategy', name='eu_strategy'),
+    url(r'^national_strategy$', 'nbsap.views.national_strategy', name='national_strategy'),
+    url(r'^implementation$', 'nbsap.views.implementation', name='implementation'),
 
     url(r'^admin/', include(admin.site.urls)),
 )

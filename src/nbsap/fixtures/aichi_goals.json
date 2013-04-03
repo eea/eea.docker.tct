@@ -1,6 +1,6 @@
 [
   {
-    "pk": 1,
+    "pk": "a",
     "model": "nbsap.aichigoal",
     "fields": {
       "title_nl": "",
@@ -18,7 +18,7 @@
     }
   },
   {
-    "pk": 2,
+    "pk": "b",
     "model": "nbsap.aichigoal",
     "fields": {
       "title_nl": "",
@@ -38,7 +38,7 @@
     }
   },
   {
-    "pk": 3,
+    "pk": "c",
     "model": "nbsap.aichigoal",
     "fields": {
       "title_nl": "",
@@ -55,7 +55,7 @@
     }
   },
   {
-    "pk": 4,
+    "pk": "d",
     "model": "nbsap.aichigoal",
     "fields": {
       "title_nl": "",
@@ -72,7 +72,7 @@
     }
   },
   {
-    "pk": 5,
+    "pk": "e",
     "model": "nbsap.aichigoal",
     "fields": {
       "title_nl": "",

@@ -97,6 +97,7 @@ class AichiTarget(models.Model):
 class AichiGoal(models.Model):
     __metaclass__ = TransMeta
 
+    code = models.CharField(max_length=1, primary_key=True)
     title = models.CharField(verbose_name="Title", max_length=250)
     description = models.TextField(verbose_name="Description")
     targets = models.ManyToManyField(AichiTarget)
