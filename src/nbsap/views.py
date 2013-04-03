@@ -1,12 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-from nbsap.models import AichiIndicator
+from nbsap import models
 
 
-def goals(request):
-    context = {'indicators': AichiIndicator.objects.all()}
-    return render(request, 'goals.html', context)
+def goals(request, code):
+    goals = models.AichiGoal.objects.order_by('code').all()
+    return render(request, 'goals.html',
+                  {'goals': goals,
+                   'current_page': code})
 
 def eu_strategy(request):
     return HttpResponse("eu_strategy")

@@ -7,6 +7,13 @@
 
   <ul class="nav nav-tabs nav-stacked local-navigation">
     <label class="nav-header">AICHI Goals</label>
-  </ul>
+    {% for goal in goals %}
+    <li {% if goal.code == current_page %}class="active"{% endif %}>
+      <a href="{% url 'goals' code=goal.code %}" title="{{ goal.code }}"</a>
+        Goal {{ goal.code | upper }}
+      </a>
+    </li>
+    {% endfor %}
+   </ul>
 
 {% endblock %}
