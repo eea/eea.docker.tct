@@ -78,11 +78,11 @@ class AichiTarget(models.Model):
 
     title = models.CharField(verbose_name="Title", max_length=250)
     description = models.TextField(verbose_name="Description")
-    indicators = models.ForeignKey(AichiIndicator,
+    indicators = models.ManyToManyField(AichiIndicator,
                                    related_name="relevant_target",
                                    blank=True,
                                    null=True)
-    other_indicators = models.ForeignKey(AichiIndicator,
+    other_indicators = models.ManyToManyField(AichiIndicator,
                                          related_name="other_targets",
                                          blank=True,
                                          null=True)
@@ -99,7 +99,7 @@ class AichiGoal(models.Model):
 
     title = models.CharField(verbose_name="Title", max_length=250)
     description = models.TextField(verbose_name="Description")
-    targets = models.ForeignKey(AichiTarget)
+    targets = models.ManyToManyField(AichiTarget)
 
     def __unicode__(self):
         return self.title
