@@ -2,7 +2,7 @@ from django.db import models
 from transmeta import TransMeta
 
 class Link(models.Model):
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=305)
     url = models.URLField()
 
     def __unicode__(self):
@@ -25,7 +25,7 @@ class AichiIndicator(models.Model):
     )
 
     title = models.CharField("Operational Indicator",
-                             max_length=255)
+                             max_length=305)
 
     question = models.CharField("Communication Question",
                                 max_length=255)
@@ -87,7 +87,7 @@ class AichiIndicator(models.Model):
 class AichiTarget(models.Model):
     __metaclass__ = TransMeta
 
-    title = models.CharField(verbose_name="Title", max_length=255)
+    title = models.CharField(verbose_name="Title", max_length=305)
     description = models.TextField(verbose_name="Description")
     indicators = models.ManyToManyField(AichiIndicator,
                                         related_name="relevant_target",
@@ -109,7 +109,7 @@ class AichiGoal(models.Model):
     __metaclass__ = TransMeta
 
     code = models.CharField(max_length=1, primary_key=True)
-    title = models.CharField(verbose_name="Title", max_length=255)
+    title = models.CharField(verbose_name="Title", max_length=305)
     description = models.TextField(verbose_name="Description")
     targets = models.ManyToManyField(AichiTarget,
                                      related_name="goals")
@@ -122,15 +122,23 @@ class AichiGoal(models.Model):
 
 
 class NationalAction(models.Model):
-    title = models.CharField(max_length=255)
+    __metaclass__ = TransMeta
+
+    title = models.CharField(max_length=305)
     description = models.TextField()
 
     def __unicode__(self):
         return self.title
 
+    class Meta:
+        translate = ('title', 'description',)
+
 
 class NationalObjective(models.Model):
-    title = models.CharField(max_length=255)
+
+    __metaclass__ = TransMeta
+
+    title = models.CharField(max_length=305)
     description = models.TextField()
     parent = models.ForeignKey('self',
                                 null=True,
@@ -139,6 +147,8 @@ class NationalObjective(models.Model):
     actions = models.ForeignKey(NationalAction,
                                 null=True,
                                 blank=True)
+    class Meta:
+        translate = ('title', 'description',)
 
     def __unicode__(self):
         return self.title
@@ -147,7 +157,7 @@ class NationalObjective(models.Model):
 class EuAction(models.Model):
     __metaclass__ = TransMeta
 
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=305)
     description = models.TextField()
     parent = models.ForeignKey('self',
                                 null=True,
@@ -172,7 +182,7 @@ class EuAction(models.Model):
 class EuTarget(models.Model):
     __metaclass__ = TransMeta
 
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=305)
     description = models.TextField()
     actions = models.ManyToManyField(EuAction)
 
