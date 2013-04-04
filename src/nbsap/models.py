@@ -2,7 +2,7 @@ from django.db import models
 from transmeta import TransMeta
 
 class Link(models.Model):
-    title = models.CharField(max_length=30)
+    title = models.CharField(max_length=250)
     url = models.URLField()
 
     def __unicode__(self):
