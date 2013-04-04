@@ -1,6 +1,7 @@
 {% extends 'layout.html' %}
 {% block content %}
 
+{% load utils %}
 {% include 'nav_tabs.html' %}
 
 <div class="tabbable tabs-left">
@@ -56,7 +57,7 @@
         <ul>
           {% for indicator in target.indicators.all %}
           <li>
-            <a href="#">
+            <a href="{% url 'indicators' %}?page={{ indicator.id|get_page }}#indicator_{{ indicator.id }}">
               Indicator {{indicator.id}}: {{ indicator.title }}
             </a>
           </li>
@@ -71,7 +72,7 @@
         <ul>
           {% for indicator in target.other_indicators.all %}
           <li>
-            <a href="#">
+            <a href="{% url 'indicators' %}?page={{ indicator.id|get_page }}#indicator_{{ indicator.id }}">
               Indicator {{indicator.id}}: {{ indicator.title }}
             </a>
           </li>
