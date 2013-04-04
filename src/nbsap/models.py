@@ -2,7 +2,7 @@ from django.db import models
 from transmeta import TransMeta
 
 class Link(models.Model):
-    title = models.CharField(max_length=250)
+    title = models.CharField(max_length=255)
     url = models.URLField()
 
     def __unicode__(self):
@@ -25,19 +25,19 @@ class AichiIndicator(models.Model):
     )
 
     title = models.CharField("Operational Indicator",
-                             max_length=250)
+                             max_length=255)
 
     question = models.CharField("Communication Question",
-                                max_length=250)
+                                max_length=255)
 
     head_indicator = models.CharField("Headline Indicator",
-                                      max_length=250)
+                                      max_length=255)
 
     sub_indicator = models.CharField("Indicator Sub-topics",
-                                     max_length=250)
+                                     max_length=255)
 
     classification = models.CharField("Operational Classification",
-                                      max_length=250)
+                                      max_length=255)
 
     status = models.TextField("Status of development",
                               blank=True) #????
@@ -63,7 +63,7 @@ class AichiIndicator(models.Model):
                                              blank=True)
 
     sources = models.CharField("Data Sources",
-                               max_length=250,
+                               max_length=255,
                                blank=True)
 
     requirements = models.TextField(blank=True)
@@ -72,7 +72,7 @@ class AichiIndicator(models.Model):
                                 blank=True)
 
     conventions = models.CharField("Other conventions/processes using indicator",
-                                   max_length=250,
+                                   max_length=255,
                                    blank=True)
 
     links = models.ManyToManyField(Link,
@@ -87,7 +87,7 @@ class AichiIndicator(models.Model):
 class AichiTarget(models.Model):
     __metaclass__ = TransMeta
 
-    title = models.CharField(verbose_name="Title", max_length=250)
+    title = models.CharField(verbose_name="Title", max_length=255)
     description = models.TextField(verbose_name="Description")
     indicators = models.ManyToManyField(AichiIndicator,
                                         related_name="relevant_target",
@@ -109,7 +109,7 @@ class AichiGoal(models.Model):
     __metaclass__ = TransMeta
 
     code = models.CharField(max_length=1, primary_key=True)
-    title = models.CharField(verbose_name="Title", max_length=250)
+    title = models.CharField(verbose_name="Title", max_length=255)
     description = models.TextField(verbose_name="Description")
     targets = models.ManyToManyField(AichiTarget,
                                      related_name="goals")
@@ -168,6 +168,7 @@ class EuAction(models.Model):
             r.extend(ob.get_all_actions())
         return r
 
+
 class EuTarget(models.Model):
     __metaclass__ = TransMeta
 
@@ -180,3 +181,29 @@ class EuTarget(models.Model):
 
     class Meta:
         translate = ('title', 'description',)
+
+
+class NationalStrategy(models.Model):
+    objective = models.ForeignKey(NationalObjective,
+                                  verbose_name="National Objective")
+    relevant_target = models.ForeignKey(AichiTarget,
+                                        verbose_name="Relevant AICHI target")
+    other_targets = models.ManyToManyField(AichiTarget,
+                                           null=True,
+                                           blank=True,
+                                           verbose_name="Other AICHI targets",
+                                           related_name="national_strategy")
+    eu_targets = models.ManyToManyField(EuTarget,
+                                           null=True,
+                                           blank=True,
+                                           verbose_name="EU targets",
+                                           related_name="national_strategy")
+    eu_actions = models.ManyToManyField(EuAction,
+                                           null=True,
+                                           blank=True,
+                                           verbose_name="Eu related actions",
+                                           related_name="national_strategy")
+
+    def __unicode__(self):
+        return self.objective
+

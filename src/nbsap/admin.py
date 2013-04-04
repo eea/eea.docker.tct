@@ -12,3 +12,5 @@ admin.site.register(NationalAction)
 admin.site.register(NationalObjective)
 admin.site.register(EuAction)
 admin.site.register(EuTarget)
+admin.site.register(NationalStrategy)
+
