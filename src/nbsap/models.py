@@ -124,8 +124,9 @@ class AichiGoal(models.Model):
 class NationalAction(models.Model):
     __metaclass__ = TransMeta
 
-    title = models.CharField(max_length=512)
-    description = models.TextField()
+    title = models.CharField(max_length=512,
+                             verbose_name="Title")
+    description = models.TextField(verbose_name="Description")
 
     def __unicode__(self):
         return self.title
@@ -138,8 +139,9 @@ class NationalObjective(models.Model):
 
     __metaclass__ = TransMeta
 
-    title = models.CharField(max_length=512)
-    description = models.TextField()
+    title = models.CharField(max_length=512,
+                             verbose_name="Title")
+    description = models.TextField(verbose_name="Description")
     parent = models.ForeignKey('self',
                                 null=True,
                                 blank=True,
@@ -157,8 +159,9 @@ class NationalObjective(models.Model):
 class EuAction(models.Model):
     __metaclass__ = TransMeta
 
-    title = models.CharField(max_length=512)
-    description = models.TextField()
+    title = models.CharField(max_length=512,
+                             verbose_name="Title")
+    description = models.TextField(verbose_name="Description")
     parent = models.ForeignKey('self',
                                 null=True,
                                 blank=True,
@@ -182,8 +185,9 @@ class EuAction(models.Model):
 class EuTarget(models.Model):
     __metaclass__ = TransMeta
 
-    title = models.CharField(max_length=512)
-    description = models.TextField()
+    title = models.CharField(max_length=512,
+                             verbose_name="Title")
+    description = models.TextField(verbose_name="Description")
     actions = models.ManyToManyField(EuAction)
 
     def __unicode__(self):
