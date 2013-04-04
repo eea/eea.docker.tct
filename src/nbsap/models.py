@@ -218,6 +218,3 @@ class NationalStrategy(models.Model):
                                            verbose_name="Eu related actions",
                                            related_name="national_strategy")
 
-    def __unicode__(self):
-        return self.objective
-
