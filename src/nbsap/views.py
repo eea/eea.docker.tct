@@ -1,33 +1,47 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from nbsap import models
+
+def get_indicators_pages(paginator):
+
+    indicators_pages = {}
+    for i in paginator.page_range:
+      indicators_pages[i] = '{0} to {1}'.format(
+                            paginator.page(i).start_index(),
+                            paginator.page(i).end_index())
+    return indicators_pages
 
 
 def goals(request, code):
     current_goal = get_object_or_404(models.AichiGoal, code=code)
     goals = models.AichiGoal.objects.order_by('code').all()
+    indicators_list = models.AichiIndicator.objects.all()
+
+    paginator = Paginator(indicators_list, 20)
+
     return render(request, 'goals.html',
                   {'goals': goals,
                    'current_goal': current_goal,
+                   'indicators_pages': get_indicators_pages(paginator),
                   })
 
+
 def indicators(request):
-    page = int(request.GET.get('page', 1))
-    if page not in range(1, 6):
-        page = 1
-
-    # Use some math to generate the index intervals from the page number.
-    start_index = lambda (x): 20 * x - 19
-
-    # Render 20 indicators per page.
-    start = start_index(page)
-    end = start + 19
 
     goals = models.AichiGoal.objects.order_by('code').all()
-    indicators = models.AichiIndicator.objects.all()[start:end]
+    indicators_list = models.AichiIndicator.objects.all()
 
-    indicators_range = indicators[0].id + len(indicators) - 1
+    page = request.GET.get('page')
+    paginator = Paginator(indicators_list, 20)
+
+    try:
+      indicators = paginator.page(page)
+    except PageNotAnInteger:
+      indicators = paginator.page(1)
+    except EmptyPage:
+      indicators = paginator.page(paginator.num_pages)
 
     for obj in indicators:
         obj.relevant_target_ob = obj.relevant_target.all()[0]
@@ -36,9 +50,9 @@ def indicators(request):
 
     return render(request, 'indicators.html',
                   {'goals': goals,
+                   'indicators_pages': get_indicators_pages(paginator),
                    'indicators': indicators,
-                   'indicators_range': indicators_range,
-                   'page': page,
+                   'page': int(page),
                   })
 
 
@@ -55,8 +69,10 @@ def eu_targets(request, pk):
                    'current_target': current_target,
                   })
 
+
 def national_strategy(request):
     return HttpResponse("national_strategy")
+
 
 def implementation(request):
     return HttpResponse("implementation")

@@ -2,19 +2,19 @@
 
 <ul class="nav nav-tabs">
 
-  <li class="{% active request '^/$' %} {% active request '^/goals' %}">
+  <li class="{% active request '^/$' %} {% active request '^/indicators' %}{% active request '^/goals' %}">
     <a href="{% url 'goals' %}">Aichi</a>
   </li>
 
-  <li class="{% active request '^/$' %} {% active request '^/eu_strategy' %}">
+  <li class="{% active request '^/eu_targets' %}">
     <a href="{% url 'eu_targets' %}">EU Strategy</a>
   </li>
 
-  <li class="{% active request '^/$' %} {% active request '^/national_strategy' %}">
+  <li class="{% active request '^/national_strategy' %}">
     <a href="{% url 'national_strategy' %}">National Strategy</a>
   </li>
 
-  <li class="{% active request '^/$' %} {% active request '^/implementation' %}">
+  <li class="{% active request '^/implementation' %}">
     <a href="{% url 'implementation' %}">Implementation</a>
   </li>
 
