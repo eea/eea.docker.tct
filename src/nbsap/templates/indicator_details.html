@@ -175,13 +175,18 @@
     </tr>
     {% endif %}
 
-    {% if indicator.links %}
+    {% if indicator.links.all %}
     <tr>
       <td class="span4 indicator_field">
         {{ indicator|field_verbose_name:"links" }}
       </td>
       <td>
-        {{ indicator.links }}
+        <ul>
+          {% for link in indicator.links.all %}
+          <li>
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          </li>
+        </ul>
       </td>
     </tr>
     {% endif %}
