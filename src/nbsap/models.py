@@ -1,6 +1,13 @@
 from django.db import models
 from transmeta import TransMeta
 
+class Link(models.Model):
+    title = models.CharField(max_length=30)
+    url = models.URLField()
+
+    def __unicode__(self):
+        return self.title
+
 
 class Scale(models.Model):
     title = models.CharField(max_length=30)
@@ -33,7 +40,7 @@ class AichiIndicator(models.Model):
                                       max_length=250)
 
     status = models.TextField("Status of development",
-                              blank=True)
+                              blank=True) #????
 
     sensitivity = models.CharField("Sensitivity (can it be used to make assessment by 2015?)",
                                    max_length=3,
@@ -41,6 +48,7 @@ class AichiIndicator(models.Model):
                                    blank=True)
 
     scales = models.ManyToManyField(Scale,
+                                    verbose_name="Scale (global, regional, national, sub-national)",
                                     blank=True,
                                     null=True)
 
@@ -67,7 +75,10 @@ class AichiIndicator(models.Model):
                                    max_length=250,
                                    blank=True)
 
-    links = models.TextField(blank=True)
+    links = models.ManyToManyField(Link,
+                                   verbose_name="Related Links",
+                                   blank=True,
+                                   null=True)
 
     def __unicode__(self):
         return self.title
@@ -79,13 +90,13 @@ class AichiTarget(models.Model):
     title = models.CharField(verbose_name="Title", max_length=250)
     description = models.TextField(verbose_name="Description")
     indicators = models.ManyToManyField(AichiIndicator,
-                                   related_name="relevant_target",
-                                   blank=True,
-                                   null=True)
+                                        related_name="relevant_target",
+                                        blank=True,
+                                        null=True)
     other_indicators = models.ManyToManyField(AichiIndicator,
-                                         related_name="other_targets",
-                                         blank=True,
-                                         null=True)
+                                              related_name="other_targets",
+                                              blank=True,
+                                              null=True)
 
     def __unicode__(self):
         return self.title
@@ -100,7 +111,8 @@ class AichiGoal(models.Model):
     code = models.CharField(max_length=1, primary_key=True)
     title = models.CharField(verbose_name="Title", max_length=250)
     description = models.TextField(verbose_name="Description")
-    targets = models.ManyToManyField(AichiTarget)
+    targets = models.ManyToManyField(AichiTarget,
+                                     related_name="goals")
 
     def __unicode__(self):
         return self.title

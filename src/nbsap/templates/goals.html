@@ -14,6 +14,13 @@
       </a>
     </li>
     {% endfor %}
+
+    <label class="nav-header">Indicators</label>
+    <li><a href="{% url 'indicators' %}?page=1">1 to 20</a></li>
+    <li><a href="{% url 'indicators' %}?page=2">21 to 40</a></li>
+    <li><a href="{% url 'indicators' %}?page=3">41 to 60</a></li>
+    <li><a href="{% url 'indicators' %}?page=4">61 to 80</a></li>
+    <li><a href="{% url 'indicators' %}?page=5">81 to 97</a></li>
   </ul>
 
   <div class="tab-content homepage_view">

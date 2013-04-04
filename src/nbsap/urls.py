@@ -10,5 +10,7 @@ urlpatterns = patterns('',
     url(r'^national_strategy$', 'nbsap.views.national_strategy', name='national_strategy'),
     url(r'^implementation$', 'nbsap.views.implementation', name='implementation'),
 
+    url(r'^indicators/$', 'nbsap.views.indicators', name='indicators'),
+
     url(r'^admin/', include(admin.site.urls)),
 )
