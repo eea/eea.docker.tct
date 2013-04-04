@@ -14,3 +14,7 @@ def active(request, pattern):
 def get_field_verbose_name(instance, arg):
     return instance._meta.get_field(arg).verbose_name
 register.filter('field_verbose_name', get_field_verbose_name)
+
+def key(d, key_name):
+    return d[key_name]
+key = register.filter('key', key)

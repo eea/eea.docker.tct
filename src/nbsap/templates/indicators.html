@@ -1,6 +1,7 @@
 {% extends 'layout.html' %}
 {% block content %}
 
+{% load utils %}
 {% include 'nav_tabs.html' %}
 
 <div class="tabbable tabs-left">
@@ -16,29 +17,20 @@
     {% endfor %}
 
     <label class="nav-header">Indicators</label>
-    <li {% if page == 1%}class="active"{% endif %}>
-        <a href="{% url 'indicators' %}?page=1">1 to 20</a>
+    {% for key,value in indicators_pages.items %}
+    <li {% if key == page%}class="active"{% endif %}>
+      <a href="{% url 'indicators' %}?page={{ key }}">
+        {{ value }}
+      </a>
     </li>
-    <li {% if page == 2%}class="active"{% endif %}>
-        <a href="{% url 'indicators' %}?page=2">21 to 40</a>
-    </li>
-    <li {% if page == 3%}class="active"{% endif %}>
-        <a href="{% url 'indicators' %}?page=3">41 to 60</a>
-    </li>
-    <li {% if page == 4%}class="active"{% endif %}>
-        <a href="{% url 'indicators' %}?page=4">61 to 80</a>
-    </li>
-    <li {% if page == 5%}class="active"{% endif %}>
-        <a href="{% url 'indicators' %}?page=5">81 to 97</a>
-    </li>
+    {% endfor %}
   </ul>
 
 
   <div class="tab-content homepage_view">
   {% if indicators %}
     <h1>
-      Indicators {{ indicators.0.id }}
-      to {{ indicators_range }}
+      Indicators {{ indicators_pages|key:page }}
     </h1>
 
     <div class="row">
