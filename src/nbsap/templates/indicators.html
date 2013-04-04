@@ -46,7 +46,7 @@
         {% for indicator in indicators %}
         <li>
           <a href="#indicator_{{indicator.id}}">
-            Indicator {{ indicator.id }}: {{indicator.title}}
+            Indicator {{ indicator.id }}: {{ indicator.title }}
           </a>
         </li>
         {% endfor %}
@@ -55,9 +55,13 @@
 
     {% for indicator in indicators %}
     <div class="indicator_homepage element_field" id="indicator_{{indicator.id}}">
-      <h2>Indicator {{indicator.id}}: {{indicator.title}}</h2>
+      <h2>Indicator {{ indicator.id }}: {{ indicator.title }}</h2>
 
       {% include 'indicator_details.html' %}
+
+      <div class="row">
+        <a class="pull-right" href="#top">Back to top</a>
+      </div>
 
     </div>
     {% endfor %}
