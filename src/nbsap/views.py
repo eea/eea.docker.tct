@@ -9,7 +9,6 @@ def goals(request, code):
     goals = models.AichiGoal.objects.order_by('code').all()
     return render(request, 'goals.html',
                   {'goals': goals,
-                   'current_page': code,
                    'current_goal': current_goal,
                   })
 
@@ -42,8 +41,19 @@ def indicators(request):
                    'page': page,
                   })
 
-def eu_strategy(request):
-    return HttpResponse("eu_strategy")
+
+def eu_targets(request, pk):
+    current_target = get_object_or_404(models.EuTarget, pk=pk)
+    targets = models.EuTarget.objects.all()
+
+    current_target.actions_tree = []
+    for action in current_target.actions.all():
+        current_target.actions_tree.extend(action.get_all_actions())
+
+    return render(request, 'eu_targets.html',
+                  {'targets': targets,
+                   'current_target': current_target,
+                  })
 
 def national_strategy(request):
     return HttpResponse("national_strategy")

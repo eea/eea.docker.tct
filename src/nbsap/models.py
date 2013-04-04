@@ -154,11 +154,19 @@ class EuAction(models.Model):
                                 blank=True,
                                 related_name='children')
 
+    class Meta:
+        translate = ('title', 'description',)
+
     def __unicode__(self):
         return self.title
 
-    class Meta:
-        translate = ('title', 'description',)
+    def get_all_actions(self):
+        #we should use https://github.com/django-mptt/django-mptt/
+        r = []
+        r.append(self)
+        for ob in EuAction.objects.filter(parent=self):
+            r.extend(ob.get_all_actions())
+        return r
 
 class EuTarget(models.Model):
     __metaclass__ = TransMeta
@@ -172,4 +180,3 @@ class EuTarget(models.Model):
 
     class Meta:
         translate = ('title', 'description',)
-
