@@ -155,6 +155,13 @@ class NationalObjective(models.Model):
     def __unicode__(self):
         return self.title
 
+    def get_all_objectives(self):
+        #we should use https://github.com/django-mptt/django-mptt/
+        r = []
+        for ob in NationalObjective.objects.filter(parent=self):
+            r.append(ob)
+            r.extend(ob.get_all_objectives())
+        return r
 
 class EuAction(models.Model):
     __metaclass__ = TransMeta

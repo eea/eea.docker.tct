@@ -137,6 +137,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django_assets',
     'transmeta',
+    'django.contrib.markup',
     'nbsap',
 )
 

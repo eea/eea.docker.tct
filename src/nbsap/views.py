@@ -70,8 +70,16 @@ def eu_targets(request, pk):
                   })
 
 
-def national_strategy(request):
-    return HttpResponse("national_strategy")
+def nat_strategy(request, pk):
+    current_objective = get_object_or_404(models.NationalObjective, pk=pk)
+    objectives = models.NationalObjective.objects.filter(parent=None).all()
+
+    current_objective.objectives_tree = current_objective.get_all_objectives()
+
+    return render(request, 'nat_strategy.html',
+                  {'objectives': objectives,
+                   'current_objective': current_objective,
+                  })
 
 
 def implementation(request):

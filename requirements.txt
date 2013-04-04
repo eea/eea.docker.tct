@@ -5,3 +5,4 @@ django-transmeta==0.6.10
 django_assets==0.8
 cssmin==0.1.4
 webassets==0.8
+Markdown==2.3.1

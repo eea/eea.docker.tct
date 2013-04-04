@@ -1,0 +1,72 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+{% load utils %}
+{% load markup %}
+{% include 'nav_tabs.html' %}
+
+<div class="tabbable tabs-left">
+
+  <ul class="nav nav-tabs nav-stacked local-navigation">
+    <label class="nav-header">Objectives</label>
+    {% for objective in objectives %}
+      <li {% if objective.pk == current_objective.pk %}class="active"{% endif %}>
+        <a href="{% url 'nat_strategy' pk=objective.pk %}" title="{{ objective.pk }}"</a>
+          Objective {{ objective.pk }}
+      </a>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <div class="tab-content homepage_view" >
+    <h1>{{ current_objective.title }}</h1>
+    <div class="element_field objective-description">
+      {{ current_objective.description|markdown }}
+    </div>
+
+    <div class="row">
+      <label>Table of contents:</label>
+
+      {% if not current_objective.objectives_tree|length %}
+      <ul class="span2">
+        <li>No sub-objectives found</li>
+      </ul>
+      {% endif %}
+
+      {% if current_objective.objectives_tree|length %}
+      <ul class="span1">
+        {% for objective in current_objective.objectives_tree %}
+        {% if forloop.counter0|divisibleby:"2" and not forloop.first %}
+      </ul>
+      <ul class="span1">
+        {% endif %}
+        <li>
+          <a href="#{{ objective.id }}"
+             rel="tooltip"
+             data-placement="right"
+             data-original-title="{{ objective.title }}">
+             Objective{{ objective.id }}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+
+    <div class="row">
+      <ul class="span2">
+        {% if not current_objective.actions %}
+          <li>No related actions found</li>
+        {% endif %}
+
+        {% for action in current_objective.actions %}
+          <li>
+            <a href="#{{ action.id }}">
+              Action {{ action.id }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+
+{% endblock %}
