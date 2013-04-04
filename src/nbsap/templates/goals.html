@@ -33,7 +33,7 @@
       <ul class="span1">
         {% endif %}
         <li>
-          <a href="#target_{{target.id}}"
+          <a href="{% url 'goals' code=current_goal.code %}#target_{{target.id}}"
              rel="tooltip"
              data-placement="right"
              data-original-title="{{ target.description }}">
