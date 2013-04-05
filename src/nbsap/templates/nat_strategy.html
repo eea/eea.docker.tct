@@ -7,11 +7,11 @@
 
 <div class="tabbable tabs-left">
 
+  <label class="nav-header">Objectives</label>
   <ul class="nav nav-tabs nav-stacked local-navigation">
-    <label class="nav-header">Objectives</label>
     {% for objective in objectives %}
       <li {% if objective.pk == current_objective.pk %}class="active"{% endif %}>
-        <a href="{% url 'nat_strategy' pk=objective.pk %}" title="{{ objective.pk }}"</a>
+        <a href="{% url 'nat_strategy' pk=objective.pk %}" title="{{ objective.pk }}">
           Objective {{ objective.pk }}
       </a>
       </li>
