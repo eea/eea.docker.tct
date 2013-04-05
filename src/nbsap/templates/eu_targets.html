@@ -8,7 +8,7 @@
     <label class="nav-header">EU Targets</label>
     {% for target in targets %}
     <li {% if target.pk == current_target.pk %}class="active"{% endif %}>
-      <a href="{% url 'eu_targets' pk=target.pk %}" title="{{ target.pk }}"</a>
+      <a href="{% url 'eu_targets' pk=target.pk %}" title="{{ target.pk }}">
         Target {{ target.pk }}
       </a>
     </li>

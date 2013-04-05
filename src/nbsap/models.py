@@ -183,6 +183,10 @@ class EuAction(models.Model):
     def __unicode__(self):
         return self.title
 
+
+    def get_target(self):
+        return self.target.all()[0]
+
     def get_all_actions(self):
         #we should use https://github.com/django-mptt/django-mptt/
         r = []
@@ -198,7 +202,8 @@ class EuTarget(models.Model):
     title = models.CharField(max_length=512,
                              verbose_name="Title")
     description = models.TextField(verbose_name="Description")
-    actions = models.ManyToManyField(EuAction)
+    actions = models.ManyToManyField(EuAction,
+                                     related_name="target")
 
     def __unicode__(self):
         return self.title
