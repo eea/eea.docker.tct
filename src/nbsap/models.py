@@ -142,6 +142,7 @@ class NationalObjective(models.Model):
 
     __metaclass__ = TransMeta
 
+    code = models.CharField(max_length=16)
     title = models.CharField(max_length=512,
                              verbose_name="Title")
     description = models.TextField(verbose_name="Description")
@@ -225,13 +226,12 @@ class NationalStrategy(models.Model):
                                            verbose_name="Other AICHI targets",
                                            related_name="other_targets_national_strategy")
     eu_targets = models.ManyToManyField(EuTarget,
-                                           null=True,
-                                           blank=True,
-                                           verbose_name="EU targets",
-                                           related_name="eu_targets_national_strategy")
+                                        null=True,
+                                        blank=True,
+                                        verbose_name="EU targets",
+                                        related_name="national_strategy")
     eu_actions = models.ManyToManyField(EuAction,
-                                           null=True,
-                                           blank=True,
-                                           verbose_name="Eu related actions",
-                                           related_name="eu_actions_national_strategy")
-
+                                        null=True,
+                                        blank=True,
+                                        verbose_name="Eu related actions",
+                                        related_name="national_strategy")

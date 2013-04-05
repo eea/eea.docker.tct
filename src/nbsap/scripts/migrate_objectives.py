@@ -58,6 +58,9 @@ for objective in aichi_objectives:
         subobj_counter += 1
 
 # extract subobjectives from objectives
+import re
+progo = re.compile(r"Objective\ ([0-9\.]+)\:.*")
+progs = re.compile(r"Objective\ +([0-9\.]+).*")
 subobj_counter = int(16)
 objectives = []
 for objective in aichi_objectives:
@@ -65,8 +68,14 @@ for objective in aichi_objectives:
     entry["pk"] = int(objective["id"])
     entry["model"] = "nbsap.nationalobjective"
     fields = {}
+
+    try:
+        code = progo.match(objective['title']['en']).groups()[0]
+    except:
+        import pdb; pdb.set_trace()
+    fields["code"] = code
     for lang in languages:
-        fields["title_%s" % (lang)] = objective["title"][lang]
+        fields["title_%s" % (lang)] = objective["title"][lang].split(':')[1].strip()
     for lang in languages:
         fields["description_%s" % (lang)] = objective["body"][lang]
     objective_id = int(objective["id"])
@@ -77,13 +86,28 @@ for objective in aichi_objectives:
 
 
     for subobj in objective["subobjs"]:
+        if (int(objective['id']) == 4):
+            continue
         entry = {}
         entry["pk"] = subobj_counter
         entry["model"] = "nbsap.nationalobjective"
         fields = {}
+        try:
+            code = progs.match(subobj['title']['en']).groups()[0]
+        except:
+            import pdb; pdb.set_trace()
+        fields["code"] = code
         fields["parent"] = int(objective["id"])
         for lang in languages:
-            fields["title_%s" % (lang)] = subobj["title"][lang]
+            x = subobj['title'][lang]
+            if lang != 'nl':
+                try:
+                    fields["title_%s" % (lang)] = subobj["title"][lang].split(' ', 2)[2].strip()
+                except:
+                    import pdb; pdb.set_trace()
+            else:
+                fields["title_%s" % (lang)] = subobj["title"][lang].split(' ', 1)[1].strip()
+            y = fields["title_%s" % (lang)]
         for lang in languages:
             fields["description_%s" % (lang)] = subobj["body"][lang]
         if subobj_counter in action_mapper:
