@@ -101,7 +101,7 @@ class AichiTarget(models.Model):
     def __unicode__(self):
         return self.title
 
-    def get_objective(self):
+    def get_parent_goal(self):
         return self.goals.all()[0]
 
     class Meta:

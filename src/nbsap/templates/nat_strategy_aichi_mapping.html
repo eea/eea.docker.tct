@@ -6,7 +6,7 @@
     <ul class="mapping-list">
     {% for strategy in subobj.objective_national_strategy.all %}
 
-      {% with strategy.relevant_target.get_objective as goal %}  
+      {% with strategy.relevant_target.get_parent_goal as goal %}
         <li>
           <span class="mapping-header">Goal:</span>
           <span>
