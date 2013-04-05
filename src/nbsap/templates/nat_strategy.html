@@ -13,15 +13,15 @@
       <li {% if objective.pk == current_objective.pk %}class="active"{% endif %}>
         <a href="{% url 'nat_strategy' pk=objective.pk %}" title="{{ objective.pk }}">
           Objective {{ objective.pk }}
-      </a>
+        </a>
       </li>
     {% endfor %}
   </ul>
 
-  <div class="tab-content homepage_view" >
+  <div class="tab-content homepage_view">
     <h1>{{ current_objective.title }}</h1>
     <div class="element_field objective-description">
-      {{ current_objective.description|markdown }}
+      {{ current_objective.description|markdown:"safe" }}
     </div>
 
     <div class="row">
@@ -62,7 +62,8 @@
         {% for action in current_objective.actions %}
           <li>
             <a href="#{{ action.id }}">
-              Action {{ action.id }}</a>
+              Action {{ action.id }}
+            </a>
           </li>
         {% endfor %}
       </ul>
@@ -73,11 +74,11 @@
       <h2>{{ subobj.title }}</h2>
 
       <div class="snippet">
-        {{ subobj.description|truncatechars:510|markdown }}
+        {{ subobj.description|truncatechars:510|markdown:"safe" }}
         <a class="more">show more</a>
       </div>
       <div class="full">
-        {{ subobj.description|markdown }}
+        {{ subobj.description|markdown:"safe" }}
         <a class="less">show less</a>
       </div>
 
@@ -85,8 +86,9 @@
 
       {% include 'nat_strategy_eu_mapping.html' %}
 
-    {% endfor %}
     </div>
+    {% endfor %}
+
   </div>
 </div>
 {% endblock %}
