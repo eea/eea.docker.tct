@@ -11,7 +11,7 @@
           <span class="mapping-header">Goal:</span>
           <span>
             <a href="{% url 'goals' code=goal.code %}" title="{{ goal.code|upper }}">
-              <strong>Goal {{ goal.code|upper }}</strong>: {{ goal.description|markdown }}
+              <strong>Goal {{ goal.code|upper }}</strong>: {{ goal.description|markdown:"safe" }}
             </a>
           </span>
         </li>
@@ -22,7 +22,7 @@
           <span>
             <a href="{% url 'goals' code=goal.code %}#target_{{target.id}}"
                title="{{ target.id }}">
-              <strong>Target {{ target.id }}</strong>: {{ target.description|markdown }}
+              <strong>Target {{ target.id }}</strong>: {{ target.description|markdown:"safe" }}
             </a>
           </span>
         </li>
@@ -37,7 +37,7 @@
               <span>
                 <a href="{% url 'goals' code=goal.code %}#target_{{target.id}}"
                    title="{{ target.id }}">
-                  <strong>Target {{ target.id }}</strong>: {{ target.description|markdown }}
+                  <strong>Target {{ target.id }}</strong>: {{ target.description|markdown:"safe" }}
                 </a>
               </span>
             </li>
