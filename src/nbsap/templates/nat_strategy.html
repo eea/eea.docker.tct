@@ -68,5 +68,106 @@
       </ul>
     </div>
 
+    {% for subobj in current_objective.children.all %}
+    <div class="element_field" id="{{ subobj.pk }}">
+      <h2>{{ subobj.title }}</h2>
 
+      <div class="snippet">
+        {{ subobj.description|truncatechars:510|markdown }}
+        <a class="more">show more</a>
+      </div>
+      <div class="full">
+        {{ subobj.description|markdown }}
+        <a class="less">show less</a>
+      </div>
+
+      <label>Mapping with AICHI:</label>
+      <div class="row well">
+        {% if subobj.objective_national_strategy.all %}
+          <ul class="mapping-list">
+          {% for strategy in subobj.objective_national_strategy.all %}
+
+            {% with strategy.relevant_target.get_objective as goal %}  
+              <li>
+                <span class="mapping-header">Goal:</span>
+                <span>
+                  <a href="{% url 'goals' code=goal.code %}" title="{{ goal.code|upper }}">
+                    <strong>goal {{ goal.code|upper }}</strong>: {{ goal.description }}
+                  </a>
+                </span>
+              </li>
+
+              {% with strategy.relevant_target as target %}
+              <li>
+                <span class="mapping-header">Most relevant AICHI target:</span>
+                <span>
+                  <a href="{% url 'goals' code=goal.code %}#target_{{target.id}}"
+                     title="{{ target.id }}">
+                    <strong>target {{ target.id }}</strong>: {{ target.description }}
+                  </a>
+                </span>
+              </li>
+              {% endwith %}
+
+              {% if strategy.other_targets.all %}
+              <li>
+                <span class="mapping-header">Other relevant AICHI targets:</span>
+                <ul class="other-targets">
+                  {% for target in strategy.other_targets.all %}
+                  <li>
+                    <span>
+                      <a href="{% url 'goals' code=goal.code %}#target_{{target.id}}"
+                         title="{{ target.id }}">
+                        <strong>target {{ target.id }}</strong>: {{ target.description }}
+                      </a>
+                    </span>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </li>
+              {% endif %}
+
+            {% endwith %}
+          {% endfor %}
+          </ul>
+        {% else %}
+          <span>No data available.</span>
+        {% endif %}
+      </div>
+
+      <label>Mapping with EU:</label>
+      <div class="row well">
+      </div>
+
+    {% endfor %}
+    </div>
+  </div>
+</div>
 {% endblock %}
+
+
+{% block scripts %}
+  <script>
+  $(function () {
+    $("[rel=tooltip]").tooltip();
+
+    $('.more').on('click', function() {
+      var parents = $(this).parents('.element_field');
+      var snippet = parents.find('.snippet');
+      var full = parents.find('.full');
+
+      snippet.hide();
+      full.show();
+    });
+
+    $('.less').on('click', function() {
+      var parents = $(this).parents('.element_field');
+      var snippet = parents.find('.snippet');
+      var full = parents.find('.full');
+
+      full.hide();
+      snippet.show();
+    });
+  });
+  </script>
+{% endblock scripts %}

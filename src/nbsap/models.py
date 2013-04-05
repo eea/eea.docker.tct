@@ -101,6 +101,9 @@ class AichiTarget(models.Model):
     def __unicode__(self):
         return self.title
 
+    def get_objective(self):
+        return self.goals.all()[0]
+
     class Meta:
         translate = ('title', 'description',)
 
@@ -206,22 +209,24 @@ class EuTarget(models.Model):
 
 class NationalStrategy(models.Model):
     objective = models.ForeignKey(NationalObjective,
-                                  verbose_name="National Objective")
+                                  verbose_name="National Objective",
+                                  related_name="objective_national_strategy")
     relevant_target = models.ForeignKey(AichiTarget,
-                                        verbose_name="Relevant AICHI target")
+                                        verbose_name="Relevant AICHI target",
+                                        related_name="relevant_target_national_strategy")
     other_targets = models.ManyToManyField(AichiTarget,
                                            null=True,
                                            blank=True,
                                            verbose_name="Other AICHI targets",
-                                           related_name="national_strategy")
+                                           related_name="other_targets_national_strategy")
     eu_targets = models.ManyToManyField(EuTarget,
                                            null=True,
                                            blank=True,
                                            verbose_name="EU targets",
-                                           related_name="national_strategy")
+                                           related_name="eu_targets_national_strategy")
     eu_actions = models.ManyToManyField(EuAction,
                                            null=True,
                                            blank=True,
                                            verbose_name="Eu related actions",
-                                           related_name="national_strategy")
+                                           related_name="eu_actions_national_strategy")
 
