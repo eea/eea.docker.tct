@@ -17,4 +17,8 @@ urlpatterns = patterns('',
     url(r'^objectives/(?P<pk>[\w\-]+)$', 'nbsap.views.nat_strategy', name='nat_strategy'),
 
     url(r'^admin/', include(admin.site.urls)),
+
+    # authentication URLs
+    url(r'^accounts/login/$', 'django.contrib.auth.views.login', name='login'),
+    url(r'^accounts/logout/$', 'django.contrib.auth.views.logout_then_login', name='logout'),
 )
