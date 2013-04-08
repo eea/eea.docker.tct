@@ -58,7 +58,7 @@
           <li>No related actions found</li>
         {% endif %}
 
-        {% for action in current_objective.actions %}
+        {% for action in current_objective.actions.all %}
           <li>
             <a href="#{{ action.id }}">
               Action {{ action.id }}
@@ -89,7 +89,7 @@
         <label>Related actions:</label>
         {% for action in subobj.actions.all %}
           <div class="well">
-            <h2>{{ action.code }}</h2>
+            <h2>Actions related to objective {{ action.code }}</h2>
             {{ action.description|markdown:"safe" }}
           </div>
         {% endfor %}
