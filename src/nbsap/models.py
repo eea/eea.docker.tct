@@ -148,9 +148,10 @@ class NationalObjective(models.Model):
                                 null=True,
                                 blank=True,
                                 related_name='children')
-    actions = models.ForeignKey(NationalAction,
-                                null=True,
-                                blank=True)
+    actions = models.ManyToManyField(NationalAction,
+                                     null=True,
+                                     blank=True,
+                                     related_name="objective")
     class Meta:
         translate = ('title', 'description',)
 
