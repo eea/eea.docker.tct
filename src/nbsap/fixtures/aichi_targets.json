@@ -1,724 +1,684 @@
 [
-    {
-        "pk": 1,
-        "model": "nbsap.aichitarget",
-        "fields": {
-            "other_indicators": [
-                73,
-                75,
-                88,
-                96
-            ],
-            "title_nl": "",
-            "title_en": "Target 1",
-            "description_en": "By 2020, at the latest, people are aware of the values of biodiversity and the steps they can take to conserve and use it sustainably.",
-            "description_nl": "",
-            "description_fr": "D’ici à 2020 au plus tard, les individus sont conscients de la \nvaleur de la diversité biologique et des mesures qu’ils peuvent prendre \npour la conserver et l’utiliser de manière durable",
-            "indicators": [
-                66,
-                67,
-                68
-            ],
-            "title_fr": "Objectif 1"
-        }
-    },
-    {
-        "pk": 2,
-        "model": "nbsap.aichitarget",
-        "fields": {
-            "other_indicators": [
-                27,
-                29,
-                51,
-                66,
-                67,
-                73,
-                74,
-                75,
-                77,
-                82,
-                83,
-                88,
-                96,
-                97
-            ],
-            "title_nl": "",
-            "title_en": "Target 2",
-            "description_en": "By 2020, at the latest, biodiversity values have been integrated into national and local development and poverty reduction strategies and planning processes and are being incorporated into national accounting, as appropriate, and reporting systems.",
-            "description_nl": "",
-            "description_fr": "D’ici à 2020 au plus tard, les valeurs de la diversité \nbiologique ont été intégrées dans les stratégies et les processus de \nplanification nationaux et locaux de développement et de réduction de \nla pauvreté, et incorporées dans les comptes nationaux, selon que de \nbesoin, et dans les systèmes de notification.",
-            "indicators": [
-                76,
-                78,
-                79,
-                80,
-                81
-            ],
-            "title_fr": "Objectif 2"
-        }
-    },
-    {
-        "pk": 3,
-        "model": "nbsap.aichitarget",
-        "fields": {
-            "other_indicators": [
-                73,
-                78,
-                79,
-                83,
-                97
-            ],
-            "title_nl": "",
-            "title_en": "Target 3",
-            "description_en": "By 2020, at the latest, incentives, including subsidies, harmful to biodiversity are eliminated, phased out or reformed in order to minimize or avoid negative impacts, and positive incentives for the conservation and sustainable use of biodiversity are developed and applied, consistent and in harmony with the Convention and other relevant international obligations, taking into account national socio economic conditions.",
-            "description_nl": "",
-            "description_fr": "D’ici à 2020 au plus tard, les incitations, y compris les \nsubventions néfastes pour la diversité biologique, sont éliminées, \nréduites progressivement ou réformées, afin de réduire au minimum \nou d’éviter les impacts défavorables, et des incitations positives en \nfaveur de la conservation et de l’utilisation durable de la diversité \nbiologique sont élaborées et appliquées, d’une manière compatible et \nen harmonie avec les dispositions de la Convention et les obligations \ninternationales en vigueur, en tenant compte des conditions socioéconomiques nationales.",
-            "indicators": [
-                74,
-                75
-            ],
-            "title_fr": "Objectif 3"
-        }
-    },
-    {
-        "pk": 4,
-        "model": "nbsap.aichitarget",
-        "fields": {
-            "other_indicators": [
-                15,
-                19,
-                20,
-                21,
-                22,
-                23,
-                24,
-                45,
-                51,
-                53,
-                66,
-                67,
-                68,
-                73,
-                74,
-                75,
-                76,
-                77,
-                78,
-                79,
-                80,
-                81
-            ],
-            "title_nl": "",
-            "title_en": "Target 4",
-            "description_en": "By 2020, at the latest, Governments, business and stakeholders at all levels have taken steps to achieve or have implemented plans for sustainable production and consumption and have kept the impacts of use of natural resources well within safe ecological limits.",
-            "description_nl": "",
-            "description_fr": "D’ici à 2020 au plus tard, les gouvernements, les entreprises \net les parties prenantes, à tous les niveaux, ont pris des mesures ou \nont appliqué des plans pour assurer une production et une consommation durables, et ont maintenu les incidences de l’utilisation des \nressources naturelles dans des limites écologiques sûres.",
-            "indicators": [
-                16,
-                17,
-                18,
-                27,
-                83
-            ],
-            "title_fr": "Objectif 4"
-        }
-    },
-    {
-        "pk": 5,
-        "model": "nbsap.aichitarget",
-        "fields": {
-            "other_indicators": [
-                7,
-                8,
-                9,
-                14,
-                16,
-                17,
-                25,
-                30,
-                32,
-                33,
-                34,
-                38,
-                39,
-                53,
-                62,
-                64,
-                65,
-                69,
-                70,
-                73,
-                77,
-                90,
-                91,
-                92,
-                93,
-                94,
-                95,
-                96
-            ],
-            "title_nl": "",
-            "title_en": "Target 5",
-            "description_en": "By 2020, the rate of loss of all natural habitats, including forests, is at least halved and where feasible brought close to zero, and degradation and fragmentation is significantly reduced.",
-            "description_nl": "",
-            "description_fr": "D’ici à 2020, le rythme d’appauvrissement de tous les \nhabitats naturels, y compris les forêts, est réduit de moitié au moins et \nsi possible ramené à près de zéro, et la dégradation et la fragmentation \ndes habitats sont sensiblement réduites.",
-            "indicators": [
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                12,
-                13,
-                26
-            ],
-            "title_fr": "Objectif 5"
-        }
-    },
-    {
-        "pk": 6,
-        "model": "nbsap.aichitarget",
-        "fields": {
-            "other_indicators": [
-                2,
-                4,
-                7,
-                8,
-                9,
-                16,
-                17,
-                18,
-                19,
-                26,
-                30,
-                73,
-                90,
-                93,
-                94,
-                95,
-                96
-            ],
-            "title_nl": "",
-            "title_en": "Target 6",
-            "description_en": "By 2020 all fish and invertebrate stocks and aquatic plants are managed and harvested sustainably, legally and applying ecosystem based approaches, so that overfishing is avoided, recovery plans and measures are in place for all depleted species, fisheries have no significant adverse impacts on threatened species and vulnerable ecosystems and the impacts of fisheries on stocks, species and ecosystems are within safe ecological limits.",
-            "description_nl": "",
-            "description_fr": "D’ici à 2020, tous les stocks de poissons et d’invertébrés \net plantes aquatiques sont gérés et récoltés d’une manière durable, \nlégale et en appliquant des approches fondées sur les écosystèmes, \nde telle sorte que la surpêche soit évitée, que des plans et des mesures \nde récupération soient en place pour toutes les espèces épuisées, que \nles pêcheries n’aient pas d’impacts négatifs marqués sur les espèces \nmenacées et les écosystèmes vulnérables, et que l’impact de la pêche \nsur les stocks, les espèces et les écosystèmes reste dans des limites \nécologiques sûres.",
-            "indicators": [
-                20,
-                21,
-                22,
-                23,
-                24,
-                25,
-                84
-            ],
-            "title_fr": "Objectif 6"
-        }
-    },
-    {
-        "pk": 7,
-        "model": "nbsap.aichitarget",
-        "fields": {
-            "other_indicators": [
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-                9,
-                10,
-                11,
-                16,
-                17,
-                18,
-                24,
-                25,
-                26,
-                45,
-                53,
-                54,
-                56,
-                59,
-                64,
-                73,
-                90,
-                93,
-                94,
-                95,
-                96
-            ],
-            "title_nl": "",
-            "title_en": "Target 7",
-            "description_en": "By 2020 areas under agriculture, aquaculture and forestry are managed sustainably, ensuring conservation of biodiversity.",
-            "description_nl": "",
-            "description_fr": "D’ici à 2020, les zones consacrées à l’agriculture, l’aquaculture et la sylviculture sont gérées d’une manière durable, afin d’assurer \nla conservation de la diversité biologique.",
-            "indicators": [
-                14,
-                15,
-                19,
-                77
-            ],
-            "title_fr": "Objectif 7"
-        }
-    },
-    {
-        "pk": 8,
-        "model": "nbsap.aichitarget",
-        "fields": {
-            "other_indicators": [
-                2,
-                4,
-                15,
-                16,
-                19,
-                26,
-                52,
-                73,
-                93,
-                94,
-                95
-            ],
-            "title_nl": "",
-            "title_en": "Target 8",
-            "description_en": "By 2020, pollution, including from excess nutrients, has been brought to levels that are not detrimental to ecosystem function and biodiversity",
-            "description_nl": "",
-            "description_fr": "D’ici à 2020, la pollution, notamment celle causée par \nl’excès d’éléments nutritifs, est ramenée à un niveau qui n’a pas d’effet \nnéfaste sur les fonctions des écosystèmes et la diversité biologique.",
-            "indicators": [
-                38,
-                39,
-                40,
-                41,
-                42,
-                43,
-                44,
-                45,
-                46,
-                47,
-                48
-            ],
-            "title_fr": "Objectif 8"
-        }
-    },
-    {
-        "pk": 9,
-        "model": "nbsap.aichitarget",
-        "fields": {
-            "other_indicators": [
-                4,
-                19,
-                26,
-                73,
-                93,
-                94,
-                95
-            ],
-            "title_nl": "",
-            "title_en": "Target 9",
-            "description_en": "By 2020, invasive alien species and pathways are identified and prioritized, priority species are controlled or eradicated, and measures are in place to manage pathways to prevent their introduction and establishment.",
-            "description_nl": "",
-            "description_fr": "D’ici à 2020, les espèces exotiques envahissantes et les \nvoies d’introduction sont identifiées et classées en ordre de priorité, \nles espèces prioritaires sont contrôlées ou éradiquées et des mesures \nsont en place pour gérer les voies de pénétration, afin d’empêcher \nl’introduction et l’établissement de ces espèces.",
-            "indicators": [
-                28,
-                29,
-                36,
-                37,
-                72,
-                82
-            ],
-            "title_fr": "Objectif 9"
-        }
-    },
-    {
-        "pk": 10,
-        "model": "nbsap.aichitarget",
-        "fields": {
-            "other_indicators": [
-                2,
-                4,
-                5,
-                7,
-                8,
-                16,
-                19,
-                20,
-                21,
-                24,
-                25,
-                26,
-                28,
-                29,
-                36,
-                38,
-                39,
-                40,
-                41,
-                42,
-                43,
-                44,
-                47,
-                48,
-                73,
-                90,
-                93,
-                94,
-                95,
-                96
-            ],
-            "title_nl": "",
-            "title_en": "Target 10",
-            "description_en": "By 2015, the multiple anthropogenic pressures on coral reefs, and other vulnerable ecosystems impacted by climate change or ocean acidification are minimized, so as to maintain their integrity and functioning.",
-            "description_nl": "",
-            "description_fr": "D’ici à 2015, les nombreuses pressions anthropiques \nexercées sur les récifs coralliens et les autres écosystèmes vulnérables \nmarins et côtiers affectés par les changements climatiques ou l’acidification des océans sont réduites au minimum, afin de préserver leur \nintégrité et leur fonctionnement.",
-            "indicators": [
-                30,
-                31,
-                32,
-                33,
-                34,
-                35
-            ],
-            "title_fr": "Objectif 10"
-        }
-    },
-    {
-        "pk": 11,
-        "model": "nbsap.aichitarget",
-        "fields": {
-            "other_indicators": [
-                4,
-                5,
-                9,
-                19,
-                25,
-                26,
-                73
-            ],
-            "title_nl": "",
-            "title_en": "Target 11",
-            "description_en": "By 2020, at least 17 per cent of terrestrial and inland water, and 10 per cent of coastal and marine areas, especially areas of particular importance for biodiversity and ecosystem services, are conserved through effectively and equitably managed, ecologically representative and well connected systems of protected areas and other effective area-based conservation measures, and integrated into the wider landscapes and seascapes.",
-            "description_nl": "",
-            "description_fr": "D’ici à 2020, au moins 17% des zones terrestres et \nd’eaux intérieures et 10% des zones marines et côtières, y compris \nles zones qui sont particulièrement importantes pour la diversité biologique et les services fournis par les écosystèmes, \nsont conservées au moyen de réseaux écologiquement \nreprésentatifs et bien reliés d’aires protégées gérées efficacement et équitablement et d’autres mesures de conservation \nefficaces par zone, et intégrées dans l’ensemble du paysage \nterrestre et marin.",
-            "indicators": [
-                90,
-                93,
-                94,
-                95,
-                96
-            ],
-            "title_fr": "Objectif 11"
-        }
-    },
-    {
-        "pk": 12,
-        "model": "nbsap.aichitarget",
-        "fields": {
-            "other_indicators": [
-                2,
-                10,
-                11,
-                14,
-                17,
-                20,
-                21,
-                22,
-                23,
-                24,
-                26,
-                27,
-                28,
-                30,
-                31,
-                32,
-                34,
-                35,
-                37,
-                40,
-                43,
-                44,
-                63,
-                72,
-                73,
-                84,
-                89,
-                93,
-                94,
-                95,
-                96
-            ],
-            "title_nl": "",
-            "title_en": "Target 12",
-            "description_en": "By 2020 the extinction of known threatened species has been prevented and their conservation status, particularly of those most in decline, has been improved and sustained.",
-            "description_nl": "",
-            "description_fr": "D’ici à 2020, l’extinction d’espèces menacées \nconnues est évitée et leur état de conservation, en particulier \nde celles qui tombent le plus en déclin, est amélioré et maintenu.",
-            "indicators": [
-                7,
-                8,
-                9
-            ],
-            "title_fr": "Objectif 12"
-        }
-    },
-    {
-        "pk": 13,
-        "model": "nbsap.aichitarget",
-        "fields": {
-            "other_indicators": [
-                7,
-                8,
-                73,
-                86,
-                89,
-                93,
-                94,
-                95,
-                96
-            ],
-            "title_nl": "",
-            "title_en": "Target 13",
-            "description_en": "By 2020, the genetic diversity of cultivated plants and farmed and domesticated animals and of wild relatives, including other socio-economically as well as culturally valuable species, is maintained, and strategies have been developed and implemented for minimizing genetic erosion and safeguarding their genetic diversity.",
-            "description_nl": "",
-            "description_fr": "D’ici à 2020, la diversité génétique des plantes cultivées, \ndes animaux d’élevage et domestiques et des parents pauvres, y \ncompris celle d’autres espèces qui ont une valeur socio-économique \nou culturelle, est préservée, et des stratégies sont élaborées et mises en \nœuvre pour réduire au minimum l’érosion génétique et sauvegarder \nleur diversité génétique.",
-            "indicators": [
-                10,
-                11,
-                71
-            ],
-            "title_fr": "Objectif 13"
-        }
-    },
-    {
-        "pk": 14,
-        "model": "nbsap.aichitarget",
-        "fields": {
-            "other_indicators": [
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-                9,
-                10,
-                11,
-                12,
-                13,
-                14,
-                16,
-                17,
-                18,
-                19,
-                24,
-                26,
-                27,
-                30,
-                32,
-                33,
-                38,
-                39,
-                41,
-                42,
-                64,
-                73,
-                77,
-                78,
-                92,
-                93,
-                94,
-                95,
-                96,
-                97
-            ],
-            "title_nl": "",
-            "title_en": "Target 14",
-            "description_en": "By 2020, ecosystems that provide essential services, including services related to water, and contribute to health, livelihoods and well-being, are restored and safeguarded, taking into account the needs of women, indigenous and local communities, and the poor and vulnerable.",
-            "description_nl": "",
-            "description_fr": "D’ici à 2020, les écosystèmes qui fournissent des services \nessentiels, en particulier l’eau et contribuent à la santé, aux moyens de \nsubsistance et au bien-être, sont restaurés et sauvegardés, compte tenu \ndes besoins des femmes, des communautés autochtones et locales, et \ndes populations pauvres et vulnérables.",
-            "indicators": [
-                49,
-                50,
-                51,
-                52,
-                53,
-                54,
-                55,
-                56,
-                57,
-                58,
-                59,
-                60,
-                61,
-                62,
-                63,
-                65,
-                91
-            ],
-            "title_fr": "Objectif 14"
-        }
-    },
-    {
-        "pk": 15,
-        "model": "nbsap.aichitarget",
-        "fields": {
-            "other_indicators": [
-                1,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-                9,
-                12,
-                13,
-                17,
-                26,
-                49,
-                50,
-                51,
-                55,
-                63,
-                65,
-                73,
-                77,
-                78,
-                91,
-                93,
-                94,
-                95,
-                96,
-                97
-            ],
-            "title_nl": "",
-            "title_en": "Target 15",
-            "description_en": "By 2020, ecosystem resilience and the contribution of biodiversity to carbon stocks has been enhanced, through conservation and restoration, including restoration of at least 15 per cent of degraded ecosystems, thereby contributing to climate change mitigation and adaptation and to combating desertification.",
-            "description_nl": "",
-            "description_fr": "D’ici à 2020, la résilience des écosystèmes et la contribution de la diversité biologique aux stocks de carbone sont améliorées, \ngrâce aux mesures de conservation et restauration, y compris la restauration d’au moins 15% des écosystèmes dégradés, contribuant ainsi à \nl’atténuation des changements climatiques et l’adaptation à ceux-ci, \nainsi qu’à la lutte contre la désertification.",
-            "indicators": [
-                64,
-                92
-            ],
-            "title_fr": "Objectif 15"
-        }
-    },
-    {
-        "pk": 16,
-        "model": "nbsap.aichitarget",
-        "fields": {
-            "other_indicators": [
-                10,
-                11,
-                73,
-                97
-            ],
-            "title_nl": "",
-            "title_en": "Target 16",
-            "description_en": "By 2015, the Nagoya Protocol on Access to Genetic Resources and the Fair and Equitable Sharing of Benefits Arising from their Utilization is in force and operational, consistent with national legislation.",
-            "description_nl": "",
-            "description_fr": "D’ici à 2015, le Protocole de Nagoya sur l’accès aux \nressources génétiques et le partage juste et équitable des avantages \ndécoulant de leur utilisation est en vigueur et opérationnel, conformé-\nment à la législation nationale.",
-            "indicators": [
-                85
-            ],
-            "title_fr": "Objectif 16"
-        }
-    },
-    {
-        "pk": 17,
-        "model": "nbsap.aichitarget",
-        "fields": {
-            "other_indicators": [
-                66,
-                67,
-                71,
-                82,
-                86,
-                88,
-                97
-            ],
-            "title_nl": "",
-            "title_en": "Target 17",
-            "description_en": "By 2015 each Party has developed, adopted as a policy instrument, and has commenced implementing an effective, participatory and updated national biodiversity strategy and action plan.",
-            "description_nl": "",
-            "description_fr": "D’ici à 2015, toutes les Parties ont élaboré et adopté en tant \nqu’instrument de politique générale, et commencé à mettre en œuvre \nune stratégie et un plan d’action nationaux efficaces, participatifs et \nactualisés pour la diversité biologique.",
-            "indicators": [
-                73
-            ],
-            "title_fr": "Objectif 17"
-        }
-    },
-    {
-        "pk": 18,
-        "model": "nbsap.aichitarget",
-        "fields": {
-            "other_indicators": [
-                54,
-                66,
-                73
-            ],
-            "title_nl": "",
-            "title_en": "Target 18",
-            "description_en": "By 2020, the traditional knowledge, innovations and practices of indigenous and local communities relevant for the conservation and sustainable use of biodiversity, and their customary use of biological resources, are respected, subject to national legislation and relevant international obligations, and fully integrated and reflected in the implementation of the Convention with the full and effective participation of indigenous and local communities, at all relevant levels.",
-            "description_nl": "",
-            "description_fr": "D’ici à 2020, les connaissances, innovations et pratiques \ntraditionnelles des communautés autochtones et locales qui présentent un intérêt pour la conservation et l’utilisation durable de la diversité biologique, ainsi que leur utilisation coutumière durable, sont respectées, sous réserve des dispositions de la législation nationale et des \nobligations internationales en vigueur, et sont pleinement intégrées et \nprises en compte dans le cadre de l’application de la Convention, avec \nla participation entière et effective des communautés autochtones et \nlocales, à tous les niveaux pertinents.",
-            "indicators": [
-                69,
-                70,
-                86,
-                87
-            ],
-            "title_fr": "Objectif 18"
-        }
-    },
-    {
-        "pk": 19,
-        "model": "nbsap.aichitarget",
-        "fields": {
-            "other_indicators": [
-                66,
-                67,
-                73,
-                76,
-                79,
-                87,
-                97
-            ],
-            "title_nl": "",
-            "title_en": "Target 19",
-            "description_en": "By 2020, knowledge, the science base and technologies relating to biodiversity, its values, functioning, status and trends, and the consequences of its loss, are improved, widely shared and transferred, and applied.",
-            "description_nl": "",
-            "description_fr": "D’ici à 2020, les connaissances, la base scientifique et \nles technologies associées à la diversité biologique, ses valeurs, son \nfonctionnement, son état et ses tendances, et les conséquences de son \nappauvrissement, sont améliorées, largement partagées et transférées, \net appliquées.",
-            "indicators": [
-                88,
-                89
-            ],
-            "title_fr": "Objectif 19"
-        }
-    },
-    {
-        "pk": 20,
-        "model": "nbsap.aichitarget",
-        "fields": {
-            "other_indicators": [
-                73,
-                74,
-                75,
-                76,
-                96
-            ],
-            "title_nl": "",
-            "title_en": "Target 20",
-            "description_en": "By 2020, at the latest, the mobilization of financial resources for effectively implementing the Strategic Plan for Biodiversity 2011-2020 from all sources, and in accordance with the consolidated and agreed process in the Strategy for Resource Mobilization, should increase substantially from the current levels. This target will be subject to changes contingent to resource needs assessments to be developed and reported by Parties.",
-            "description_nl": "",
-            "description_fr": "D’ici à 2020 au plus tard, la mobilisation des ressources \nfinancières nécessaires à la mise en œuvre effective du Plan straté-\ngique 2011-2020 pour la diversité biologique de toutes les sources et \nconformément au mécanisme consolidé et convenu de la Stratégie de \nmobilisation des ressources, aura augmenté considérablement par \nrapport aux niveaux actuels. Cet objectif fera l’objet de modifications \nen fonction des évaluations des besoins de ressources que les Parties \ndoivent effectuer et notifier",
-            "indicators": [
-                97
-            ],
-            "title_fr": "Objectif 20"
-        }
+  {
+    "pk": 1,
+    "model": "nbsap.aichitarget",
+    "fields": {
+      "code": "1",
+      "other_indicators": [
+        73,
+        75,
+        88,
+        96
+      ],
+      "description_en": "By 2020, at the latest, people are aware of the values of biodiversity and the steps they can take to conserve and use it sustainably.",
+      "description_nl": "",
+      "description_fr": "D\u2019ici \u00e0 2020 au plus tard, les individus sont conscients de la \nvaleur de la diversit\u00e9 biologique et des mesures qu\u2019ils peuvent prendre \npour la conserver et l\u2019utiliser de mani\u00e8re durable",
+      "indicators": [
+        66,
+        67,
+        68
+      ]
     }
+  },
+  {
+    "pk": 2,
+    "model": "nbsap.aichitarget",
+    "fields": {
+      "code": "2",
+      "other_indicators": [
+        27,
+        29,
+        51,
+        66,
+        67,
+        73,
+        74,
+        75,
+        77,
+        82,
+        83,
+        88,
+        96,
+        97
+      ],
+      "description_en": "By 2020, at the latest, biodiversity values have been integrated into national and local development and poverty reduction strategies and planning processes and are being incorporated into national accounting, as appropriate, and reporting systems.",
+      "description_nl": "",
+      "description_fr": "D\u2019ici \u00e0 2020 au plus tard, les valeurs de la diversit\u00e9 \nbiologique ont \u00e9t\u00e9 int\u00e9gr\u00e9es dans les strat\u00e9gies et les processus de \nplanification nationaux et locaux de d\u00e9veloppement et de r\u00e9duction de \nla pauvret\u00e9, et incorpor\u00e9es dans les comptes nationaux, selon que de \nbesoin, et dans les syst\u00e8mes de notification.",
+      "indicators": [
+        76,
+        78,
+        79,
+        80,
+        81
+      ]
+    }
+  },
+  {
+    "pk": 3,
+    "model": "nbsap.aichitarget",
+    "fields": {
+      "code": "3",
+      "other_indicators": [
+        73,
+        78,
+        79,
+        83,
+        97
+      ],
+      "description_en": "By 2020, at the latest, incentives, including subsidies, harmful to biodiversity are eliminated, phased out or reformed in order to minimize or avoid negative impacts, and positive incentives for the conservation and sustainable use of biodiversity are developed and applied, consistent and in harmony with the Convention and other relevant international obligations, taking into account national socio economic conditions.",
+      "description_nl": "",
+      "description_fr": "D\u2019ici \u00e0 2020 au plus tard, les incitations, y compris les \nsubventions n\u00e9fastes pour la diversit\u00e9 biologique, sont \u00e9limin\u00e9es, \nr\u00e9duites progressivement ou r\u00e9form\u00e9es, afin de r\u00e9duire au minimum \nou d\u2019\u00e9viter les impacts d\u00e9favorables, et des incitations positives en \nfaveur de la conservation et de l\u2019utilisation durable de la diversit\u00e9 \nbiologique sont \u00e9labor\u00e9es et appliqu\u00e9es, d\u2019une mani\u00e8re compatible et \nen harmonie avec les dispositions de la Convention et les obligations \ninternationales en vigueur, en tenant compte des conditions socio\u00e9conomiques nationales.",
+      "indicators": [
+        74,
+        75
+      ]
+    }
+  },
+  {
+    "pk": 4,
+    "model": "nbsap.aichitarget",
+    "fields": {
+      "code": "4",
+      "other_indicators": [
+        15,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        45,
+        51,
+        53,
+        66,
+        67,
+        68,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81
+      ],
+      "description_en": "By 2020, at the latest, Governments, business and stakeholders at all levels have taken steps to achieve or have implemented plans for sustainable production and consumption and have kept the impacts of use of natural resources well within safe ecological limits.",
+      "description_nl": "",
+      "description_fr": "D\u2019ici \u00e0 2020 au plus tard, les gouvernements, les entreprises \net les parties prenantes, \u00e0 tous les niveaux, ont pris des mesures ou \nont appliqu\u00e9 des plans pour assurer une production et une consommation durables, et ont maintenu les incidences de l\u2019utilisation des \nressources naturelles dans des limites \u00e9cologiques s\u00fbres.",
+      "indicators": [
+        16,
+        17,
+        18,
+        27,
+        83
+      ]
+    }
+  },
+  {
+    "pk": 5,
+    "model": "nbsap.aichitarget",
+    "fields": {
+      "code": "5",
+      "other_indicators": [
+        7,
+        8,
+        9,
+        14,
+        16,
+        17,
+        25,
+        30,
+        32,
+        33,
+        34,
+        38,
+        39,
+        53,
+        62,
+        64,
+        65,
+        69,
+        70,
+        73,
+        77,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96
+      ],
+      "description_en": "By 2020, the rate of loss of all natural habitats, including forests, is at least halved and where feasible brought close to zero, and degradation and fragmentation is significantly reduced.",
+      "description_nl": "",
+      "description_fr": "D\u2019ici \u00e0 2020, le rythme d\u2019appauvrissement de tous les \nhabitats naturels, y compris les for\u00eats, est r\u00e9duit de moiti\u00e9 au moins et \nsi possible ramen\u00e9 \u00e0 pr\u00e8s de z\u00e9ro, et la d\u00e9gradation et la fragmentation \ndes habitats sont sensiblement r\u00e9duites.",
+      "indicators": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        12,
+        13,
+        26
+      ]
+    }
+  },
+  {
+    "pk": 6,
+    "model": "nbsap.aichitarget",
+    "fields": {
+      "code": "6",
+      "other_indicators": [
+        2,
+        4,
+        7,
+        8,
+        9,
+        16,
+        17,
+        18,
+        19,
+        26,
+        30,
+        73,
+        90,
+        93,
+        94,
+        95,
+        96
+      ],
+      "description_en": "By 2020 all fish and invertebrate stocks and aquatic plants are managed and harvested sustainably, legally and applying ecosystem based approaches, so that overfishing is avoided, recovery plans and measures are in place for all depleted species, fisheries have no significant adverse impacts on threatened species and vulnerable ecosystems and the impacts of fisheries on stocks, species and ecosystems are within safe ecological limits.",
+      "description_nl": "",
+      "description_fr": "D\u2019ici \u00e0 2020, tous les stocks de poissons et d\u2019invert\u00e9br\u00e9s \net plantes aquatiques sont g\u00e9r\u00e9s et r\u00e9colt\u00e9s d\u2019une mani\u00e8re durable, \nl\u00e9gale et en appliquant des approches fond\u00e9es sur les \u00e9cosyst\u00e8mes, \nde telle sorte que la surp\u00eache soit \u00e9vit\u00e9e, que des plans et des mesures \nde r\u00e9cup\u00e9ration soient en place pour toutes les esp\u00e8ces \u00e9puis\u00e9es, que \nles p\u00eacheries n\u2019aient pas d\u2019impacts n\u00e9gatifs marqu\u00e9s sur les esp\u00e8ces \nmenac\u00e9es et les \u00e9cosyst\u00e8mes vuln\u00e9rables, et que l\u2019impact de la p\u00eache \nsur les stocks, les esp\u00e8ces et les \u00e9cosyst\u00e8mes reste dans des limites \n\u00e9cologiques s\u00fbres.",
+      "indicators": [
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        84
+      ]
+    }
+  },
+  {
+    "pk": 7,
+    "model": "nbsap.aichitarget",
+    "fields": {
+      "code": "7",
+      "other_indicators": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        16,
+        17,
+        18,
+        24,
+        25,
+        26,
+        45,
+        53,
+        54,
+        56,
+        59,
+        64,
+        73,
+        90,
+        93,
+        94,
+        95,
+        96
+      ],
+      "description_en": "By 2020 areas under agriculture, aquaculture and forestry are managed sustainably, ensuring conservation of biodiversity.",
+      "description_nl": "",
+      "description_fr": "D\u2019ici \u00e0 2020, les zones consacr\u00e9es \u00e0 l\u2019agriculture, l\u2019aquaculture et la sylviculture sont g\u00e9r\u00e9es d\u2019une mani\u00e8re durable, afin d\u2019assurer \nla conservation de la diversit\u00e9 biologique.",
+      "indicators": [
+        14,
+        15,
+        19,
+        77
+      ]
+    }
+  },
+  {
+    "pk": 8,
+    "model": "nbsap.aichitarget",
+    "fields": {
+      "code": "8",
+      "other_indicators": [
+        2,
+        4,
+        15,
+        16,
+        19,
+        26,
+        52,
+        73,
+        93,
+        94,
+        95
+      ],
+      "description_en": "By 2020, pollution, including from excess nutrients, has been brought to levels that are not detrimental to ecosystem function and biodiversity",
+      "description_nl": "",
+      "description_fr": "D\u2019ici \u00e0 2020, la pollution, notamment celle caus\u00e9e par \nl\u2019exc\u00e8s d\u2019\u00e9l\u00e9ments nutritifs, est ramen\u00e9e \u00e0 un niveau qui n\u2019a pas d\u2019effet \nn\u00e9faste sur les fonctions des \u00e9cosyst\u00e8mes et la diversit\u00e9 biologique.",
+      "indicators": [
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48
+      ]
+    }
+  },
+  {
+    "pk": 9,
+    "model": "nbsap.aichitarget",
+    "fields": {
+      "code": "9",
+      "other_indicators": [
+        4,
+        19,
+        26,
+        73,
+        93,
+        94,
+        95
+      ],
+      "description_en": "By 2020, invasive alien species and pathways are identified and prioritized, priority species are controlled or eradicated, and measures are in place to manage pathways to prevent their introduction and establishment.",
+      "description_nl": "",
+      "description_fr": "D\u2019ici \u00e0 2020, les esp\u00e8ces exotiques envahissantes et les \nvoies d\u2019introduction sont identifi\u00e9es et class\u00e9es en ordre de priorit\u00e9, \nles esp\u00e8ces prioritaires sont contr\u00f4l\u00e9es ou \u00e9radiqu\u00e9es et des mesures \nsont en place pour g\u00e9rer les voies de p\u00e9n\u00e9tration, afin d\u2019emp\u00eacher \nl\u2019introduction et l\u2019\u00e9tablissement de ces esp\u00e8ces.",
+      "indicators": [
+        28,
+        29,
+        36,
+        37,
+        72,
+        82
+      ]
+    }
+  },
+  {
+    "pk": 10,
+    "model": "nbsap.aichitarget",
+    "fields": {
+      "code": "10",
+      "other_indicators": [
+        2,
+        4,
+        5,
+        7,
+        8,
+        16,
+        19,
+        20,
+        21,
+        24,
+        25,
+        26,
+        28,
+        29,
+        36,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        47,
+        48,
+        73,
+        90,
+        93,
+        94,
+        95,
+        96
+      ],
+      "description_en": "By 2015, the multiple anthropogenic pressures on coral reefs, and other vulnerable ecosystems impacted by climate change or ocean acidification are minimized, so as to maintain their integrity and functioning.",
+      "description_nl": "",
+      "description_fr": "D\u2019ici \u00e0 2015, les nombreuses pressions anthropiques \nexerc\u00e9es sur les r\u00e9cifs coralliens et les autres \u00e9cosyst\u00e8mes vuln\u00e9rables \nmarins et c\u00f4tiers affect\u00e9s par les changements climatiques ou l\u2019acidification des oc\u00e9ans sont r\u00e9duites au minimum, afin de pr\u00e9server leur \nint\u00e9grit\u00e9 et leur fonctionnement.",
+      "indicators": [
+        30,
+        31,
+        32,
+        33,
+        34,
+        35
+      ]
+    }
+  },
+  {
+    "pk": 11,
+    "model": "nbsap.aichitarget",
+    "fields": {
+      "code": "11",
+      "other_indicators": [
+        4,
+        5,
+        9,
+        19,
+        25,
+        26,
+        73
+      ],
+      "description_en": "By 2020, at least 17 per cent of terrestrial and inland water, and 10 per cent of coastal and marine areas, especially areas of particular importance for biodiversity and ecosystem services, are conserved through effectively and equitably managed, ecologically representative and well connected systems of protected areas and other effective area-based conservation measures, and integrated into the wider landscapes and seascapes.",
+      "description_nl": "",
+      "description_fr": "D\u2019ici \u00e0 2020, au moins 17% des zones terrestres et \nd\u2019eaux int\u00e9rieures et 10% des zones marines et c\u00f4ti\u00e8res, y compris \nles zones qui sont particuli\u00e8rement importantes pour la diversit\u00e9 biologique et les services fournis par les \u00e9cosyst\u00e8mes, \nsont conserv\u00e9es au moyen de r\u00e9seaux \u00e9cologiquement \nrepr\u00e9sentatifs et bien reli\u00e9s d\u2019aires prot\u00e9g\u00e9es g\u00e9r\u00e9es efficacement et \u00e9quitablement et d\u2019autres mesures de conservation \nefficaces par zone, et int\u00e9gr\u00e9es dans l\u2019ensemble du paysage \nterrestre et marin.",
+      "indicators": [
+        90,
+        93,
+        94,
+        95,
+        96
+      ]
+    }
+  },
+  {
+    "pk": 12,
+    "model": "nbsap.aichitarget",
+    "fields": {
+      "code": "12",
+      "other_indicators": [
+        2,
+        10,
+        11,
+        14,
+        17,
+        20,
+        21,
+        22,
+        23,
+        24,
+        26,
+        27,
+        28,
+        30,
+        31,
+        32,
+        34,
+        35,
+        37,
+        40,
+        43,
+        44,
+        63,
+        72,
+        73,
+        84,
+        89,
+        93,
+        94,
+        95,
+        96
+      ],
+      "description_en": "By 2020 the extinction of known threatened species has been prevented and their conservation status, particularly of those most in decline, has been improved and sustained.",
+      "description_nl": "",
+      "description_fr": "D\u2019ici \u00e0 2020, l\u2019extinction d\u2019esp\u00e8ces menac\u00e9es \nconnues est \u00e9vit\u00e9e et leur \u00e9tat de conservation, en particulier \nde celles qui tombent le plus en d\u00e9clin, est am\u00e9lior\u00e9 et maintenu.",
+      "indicators": [
+        7,
+        8,
+        9
+      ]
+    }
+  },
+  {
+    "pk": 13,
+    "model": "nbsap.aichitarget",
+    "fields": {
+      "code": "13",
+      "other_indicators": [
+        7,
+        8,
+        73,
+        86,
+        89,
+        93,
+        94,
+        95,
+        96
+      ],
+      "description_en": "By 2020, the genetic diversity of cultivated plants and farmed and domesticated animals and of wild relatives, including other socio-economically as well as culturally valuable species, is maintained, and strategies have been developed and implemented for minimizing genetic erosion and safeguarding their genetic diversity.",
+      "description_nl": "",
+      "description_fr": "D\u2019ici \u00e0 2020, la diversit\u00e9 g\u00e9n\u00e9tique des plantes cultiv\u00e9es, \ndes animaux d\u2019\u00e9levage et domestiques et des parents pauvres, y \ncompris celle d\u2019autres esp\u00e8ces qui ont une valeur socio-\u00e9conomique \nou culturelle, est pr\u00e9serv\u00e9e, et des strat\u00e9gies sont \u00e9labor\u00e9es et mises en \n\u0153uvre pour r\u00e9duire au minimum l\u2019\u00e9rosion g\u00e9n\u00e9tique et sauvegarder \nleur diversit\u00e9 g\u00e9n\u00e9tique.",
+      "indicators": [
+        10,
+        11,
+        71
+      ]
+    }
+  },
+  {
+    "pk": 14,
+    "model": "nbsap.aichitarget",
+    "fields": {
+      "code": "14",
+      "other_indicators": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        16,
+        17,
+        18,
+        19,
+        24,
+        26,
+        27,
+        30,
+        32,
+        33,
+        38,
+        39,
+        41,
+        42,
+        64,
+        73,
+        77,
+        78,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97
+      ],
+      "description_en": "By 2020, ecosystems that provide essential services, including services related to water, and contribute to health, livelihoods and well-being, are restored and safeguarded, taking into account the needs of women, indigenous and local communities, and the poor and vulnerable.",
+      "description_nl": "",
+      "description_fr": "D\u2019ici \u00e0 2020, les \u00e9cosyst\u00e8mes qui fournissent des services \nessentiels, en particulier l\u2019eau et contribuent \u00e0 la sant\u00e9, aux moyens de \nsubsistance et au bien-\u00eatre, sont restaur\u00e9s et sauvegard\u00e9s, compte tenu \ndes besoins des femmes, des communaut\u00e9s autochtones et locales, et \ndes populations pauvres et vuln\u00e9rables.",
+      "indicators": [
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        65,
+        91
+      ]
+    }
+  },
+  {
+    "pk": 15,
+    "model": "nbsap.aichitarget",
+    "fields": {
+      "code": "15",
+      "other_indicators": [
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        12,
+        13,
+        17,
+        26,
+        49,
+        50,
+        51,
+        55,
+        63,
+        65,
+        73,
+        77,
+        78,
+        91,
+        93,
+        94,
+        95,
+        96,
+        97
+      ],
+      "description_en": "By 2020, ecosystem resilience and the contribution of biodiversity to carbon stocks has been enhanced, through conservation and restoration, including restoration of at least 15 per cent of degraded ecosystems, thereby contributing to climate change mitigation and adaptation and to combating desertification.",
+      "description_nl": "",
+      "description_fr": "D\u2019ici \u00e0 2020, la r\u00e9silience des \u00e9cosyst\u00e8mes et la contribution de la diversit\u00e9 biologique aux stocks de carbone sont am\u00e9lior\u00e9es, \ngr\u00e2ce aux mesures de conservation et restauration, y compris la restauration d\u2019au moins 15% des \u00e9cosyst\u00e8mes d\u00e9grad\u00e9s, contribuant ainsi \u00e0 \nl\u2019att\u00e9nuation des changements climatiques et l\u2019adaptation \u00e0 ceux-ci, \nainsi qu\u2019\u00e0 la lutte contre la d\u00e9sertification.",
+      "indicators": [
+        64,
+        92
+      ]
+    }
+  },
+  {
+    "pk": 16,
+    "model": "nbsap.aichitarget",
+    "fields": {
+      "code": "16",
+      "other_indicators": [
+        10,
+        11,
+        73,
+        97
+      ],
+      "description_en": "By 2015, the Nagoya Protocol on Access to Genetic Resources and the Fair and Equitable Sharing of Benefits Arising from their Utilization is in force and operational, consistent with national legislation.",
+      "description_nl": "",
+      "description_fr": "D\u2019ici \u00e0 2015, le Protocole de Nagoya sur l\u2019acc\u00e8s aux \nressources g\u00e9n\u00e9tiques et le partage juste et \u00e9quitable des avantages \nd\u00e9coulant de leur utilisation est en vigueur et op\u00e9rationnel, conform\u00e9-\nment \u00e0 la l\u00e9gislation nationale.",
+      "indicators": [
+        85
+      ]
+    }
+  },
+  {
+    "pk": 17,
+    "model": "nbsap.aichitarget",
+    "fields": {
+      "code": "17",
+      "other_indicators": [
+        66,
+        67,
+        71,
+        82,
+        86,
+        88,
+        97
+      ],
+      "description_en": "By 2015 each Party has developed, adopted as a policy instrument, and has commenced implementing an effective, participatory and updated national biodiversity strategy and action plan.",
+      "description_nl": "",
+      "description_fr": "D\u2019ici \u00e0 2015, toutes les Parties ont \u00e9labor\u00e9 et adopt\u00e9 en tant \nqu\u2019instrument de politique g\u00e9n\u00e9rale, et commenc\u00e9 \u00e0 mettre en \u0153uvre \nune strat\u00e9gie et un plan d\u2019action nationaux efficaces, participatifs et \nactualis\u00e9s pour la diversit\u00e9 biologique.",
+      "indicators": [
+        73
+      ]
+    }
+  },
+  {
+    "pk": 18,
+    "model": "nbsap.aichitarget",
+    "fields": {
+      "code": "18",
+      "other_indicators": [
+        54,
+        66,
+        73
+      ],
+      "description_en": "By 2020, the traditional knowledge, innovations and practices of indigenous and local communities relevant for the conservation and sustainable use of biodiversity, and their customary use of biological resources, are respected, subject to national legislation and relevant international obligations, and fully integrated and reflected in the implementation of the Convention with the full and effective participation of indigenous and local communities, at all relevant levels.",
+      "description_nl": "",
+      "description_fr": "D\u2019ici \u00e0 2020, les connaissances, innovations et pratiques \ntraditionnelles des communaut\u00e9s autochtones et locales qui pr\u00e9sentent un int\u00e9r\u00eat pour la conservation et l\u2019utilisation durable de la diversit\u00e9 biologique, ainsi que leur utilisation coutumi\u00e8re durable, sont respect\u00e9es, sous r\u00e9serve des dispositions de la l\u00e9gislation nationale et des \nobligations internationales en vigueur, et sont pleinement int\u00e9gr\u00e9es et \nprises en compte dans le cadre de l\u2019application de la Convention, avec \nla participation enti\u00e8re et effective des communaut\u00e9s autochtones et \nlocales, \u00e0 tous les niveaux pertinents.",
+      "indicators": [
+        69,
+        70,
+        86,
+        87
+      ]
+    }
+  },
+  {
+    "pk": 19,
+    "model": "nbsap.aichitarget",
+    "fields": {
+      "code": "19",
+      "other_indicators": [
+        66,
+        67,
+        73,
+        76,
+        79,
+        87,
+        97
+      ],
+      "description_en": "By 2020, knowledge, the science base and technologies relating to biodiversity, its values, functioning, status and trends, and the consequences of its loss, are improved, widely shared and transferred, and applied.",
+      "description_nl": "",
+      "description_fr": "D\u2019ici \u00e0 2020, les connaissances, la base scientifique et \nles technologies associ\u00e9es \u00e0 la diversit\u00e9 biologique, ses valeurs, son \nfonctionnement, son \u00e9tat et ses tendances, et les cons\u00e9quences de son \nappauvrissement, sont am\u00e9lior\u00e9es, largement partag\u00e9es et transf\u00e9r\u00e9es, \net appliqu\u00e9es.",
+      "indicators": [
+        88,
+        89
+      ]
+    }
+  },
+  {
+    "pk": 20,
+    "model": "nbsap.aichitarget",
+    "fields": {
+      "code": "20",
+      "other_indicators": [
+        73,
+        74,
+        75,
+        76,
+        96
+      ],
+      "description_en": "By 2020, at the latest, the mobilization of financial resources for effectively implementing the Strategic Plan for Biodiversity 2011-2020 from all sources, and in accordance with the consolidated and agreed process in the Strategy for Resource Mobilization, should increase substantially from the current levels. This target will be subject to changes contingent to resource needs assessments to be developed and reported by Parties.",
+      "description_nl": "",
+      "description_fr": "D\u2019ici \u00e0 2020 au plus tard, la mobilisation des ressources \nfinanci\u00e8res n\u00e9cessaires \u00e0 la mise en \u0153uvre effective du Plan strat\u00e9-\ngique 2011-2020 pour la diversit\u00e9 biologique de toutes les sources et \nconform\u00e9ment au m\u00e9canisme consolid\u00e9 et convenu de la Strat\u00e9gie de \nmobilisation des ressources, aura augment\u00e9 consid\u00e9rablement par \nrapport aux niveaux actuels. Cet objectif fera l\u2019objet de modifications \nen fonction des \u00e9valuations des besoins de ressources que les Parties \ndoivent effectuer et notifier",
+      "indicators": [
+        97
+      ]
+    }
+  }
 ]

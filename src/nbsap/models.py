@@ -87,7 +87,7 @@ class AichiIndicator(models.Model):
 class AichiTarget(models.Model):
     __metaclass__ = TransMeta
 
-    title = models.CharField(verbose_name="Title", max_length=512)
+    code = models.CharField(max_length=16)
     description = models.TextField(verbose_name="Description")
     indicators = models.ManyToManyField(AichiIndicator,
                                         related_name="relevant_target",
@@ -99,13 +99,13 @@ class AichiTarget(models.Model):
                                               null=True)
 
     def __unicode__(self):
-        return self.title
+        return 'Target %s' % self.code
 
     def get_parent_goal(self):
         return self.goals.all()[0]
 
     class Meta:
-        translate = ('title', 'description',)
+        translate = ('description',)
 
 
 class AichiGoal(models.Model):
@@ -148,9 +148,10 @@ class NationalObjective(models.Model):
                                 null=True,
                                 blank=True,
                                 related_name='children')
-    actions = models.ForeignKey(NationalAction,
-                                null=True,
-                                blank=True)
+    actions = models.ManyToManyField(NationalAction,
+                                     null=True,
+                                     blank=True,
+                                     related_name="objective")
     class Meta:
         translate = ('title', 'description',)
 
@@ -168,8 +169,7 @@ class NationalObjective(models.Model):
 class EuAction(models.Model):
     __metaclass__ = TransMeta
 
-    title = models.CharField(max_length=512,
-                             verbose_name="Title")
+    code = models.CharField(max_length=16)
     description = models.TextField(verbose_name="Description")
     parent = models.ForeignKey('self',
                                 null=True,
@@ -177,11 +177,10 @@ class EuAction(models.Model):
                                 related_name='children')
 
     class Meta:
-        translate = ('title', 'description',)
+        translate = ('description',)
 
     def __unicode__(self):
-        return self.title
-
+        return 'Action %s' % self.code
 
     def get_target(self):
         if self.parent is None:
@@ -201,6 +200,7 @@ class EuAction(models.Model):
 class EuTarget(models.Model):
     __metaclass__ = TransMeta
 
+    code = models.CharField(max_length=16)
     title = models.CharField(max_length=512,
                              verbose_name="Title")
     description = models.TextField(verbose_name="Description")
@@ -208,7 +208,7 @@ class EuTarget(models.Model):
                                      related_name="target")
 
     def __unicode__(self):
-        return self.title
+        return 'Target %s' % self.code
 
     class Meta:
         translate = ('title', 'description',)

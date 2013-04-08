@@ -36,7 +36,7 @@
       <ul class="span1">
         {% endif %}
         <li>
-          <a href="{% url 'goals' code=current_goal.code %}#target_{{target.id}}"
+          <a href="{% url 'goals' code=current_goal.code %}#t{{target.id}}"
              rel="tooltip"
              data-placement="right"
              data-original-title="{{ target.description }}">
@@ -48,7 +48,7 @@
     </div>
     
     {% for target in current_goal.targets.all %}
-    <div class="element_field" id="target_{{ target.id }}">
+    <div class="element_field" id="t{{ target.id }}">
       <h2>{{ target.title }}: {{ target.description }}</h2>
 
       {% if target.eu_aichi_strategy.all %}
