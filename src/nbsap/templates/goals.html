@@ -74,7 +74,7 @@
         <ul>
           {% for strategy in target.relevant_target_national_strategy.all %}
           <li>
-             <a href ="{% url 'nat_strategy' pk=strategy.pk %}" title = "{{ strategy.pk }}">Objective {{ strategy.objective.code }}</a>
+             <a href ="{% url 'nat_strategy' %}/{{strategy.objective.parent.id}}#{{strategy.objective.pk}}">Objective {{ strategy.objective.code }}</a>
           </li>
           {% endfor %}
         </ul>
