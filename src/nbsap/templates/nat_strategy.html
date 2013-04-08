@@ -85,6 +85,16 @@
 
       {% include 'nat_strategy_eu_mapping.html' %}
 
+      {% if subobj.actions.all %}
+        <label>Related actions:</label>
+        {% for action in subobj.actions.all %}
+          <div class="well">
+            <h2>{{ action.code }}</h2>
+            {{ action.description|markdown:"safe" }}
+          </div>
+        {% endfor %}
+      {% endif %}
+
     </div>
     {% endfor %}
 
