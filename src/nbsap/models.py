@@ -133,6 +133,8 @@ class NationalAction(models.Model):
     class Meta:
         translate = ('description',)
 
+    def __unicode__(self):
+        return self.code
 
 class NationalObjective(models.Model):
 
@@ -182,7 +184,10 @@ class EuAction(models.Model):
 
 
     def get_target(self):
-        return self.target.all()[0]
+        if self.parent is None:
+            return self.target.all()[0]
+        else:
+            return self.parent.target.all()[0]
 
     def get_all_actions(self):
         #we should use https://github.com/django-mptt/django-mptt/
@@ -207,6 +212,15 @@ class EuTarget(models.Model):
 
     class Meta:
         translate = ('title', 'description',)
+
+
+class EuAichiStrategy(models.Model):
+    eu_target = models.ForeignKey(EuTarget,
+                                  verbose_name="EU Biodiversity Target",
+                                  related_name="eu_aichi_strategy")
+    aichi_targets = models.ManyToManyField(AichiTarget,
+                                           verbose_name="Aichi targets",
+                                           related_name="eu_aichi_strategy")
 
 
 class NationalStrategy(models.Model):

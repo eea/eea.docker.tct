@@ -7,29 +7,33 @@
     <ul class="mapping-list">
     {% for strategy in subobj.objective_national_strategy.all %}
 
-      {% for target in strategy.eu_targets.all %}  
+      {% if strategy.eu_targets.all %}
+        {% for target in strategy.eu_targets.all %}
+          <li>
+            <span class="mapping-header">Targets:</span>
+            <span>
+              <a href="{% url 'eu_targets' pk=target.pk %}" title="{{ target.pk }}">
+                <strong>Target {{ target.pk }}</strong>: {{ target.description|markdown:"safe" }}
+              </a>
+            </span>
+          </li>
+        {% endfor %}
+      {% endif %}
+
+      {% if strategy.eu_actions.all %}
+        {% for action in strategy.eu_actions.all %}
         <li>
-          <span class="mapping-header">Targets:</span>
+          {% with action.get_target as eu_target %}
+          <span class="mapping-header">Related EU actions:</span>
           <span>
-            <a href="{% url 'eu_targets' pk=target.pk %}" title="{{ target.pk }}">
-              <strong>Target {{ target.pk }}</strong>: {{ target.description|markdown:"safe" }}
+            <a href="{% url 'eu_targets' pk=eu_target.pk %}#{{ action.id }}" title="{{ action.id }}">
+              <strong>{{ action.title }}</strong>: {{ action.description|markdown:"safe" }}
             </a>
           </span>
+          {% endwith %}
         </li>
-      {% endfor %}
-
-      {% for action in strategy.eu_actions.all %}
-      <li>
-        {% with action.get_target as eu_target %}
-        <span class="mapping-header">Related EU actions:</span>
-        <span>
-          <a href="{% url 'eu_targets' pk=eu_target.pk %}#{{ action.id }}" title="{{ action.id }}">
-            <strong>{{ action.title }}</strong>: {{ action.description|markdown:"safe" }}
-          </a>
-        </span>
-        {% endwith %}
-      </li>
-      {% endfor %}
+        {% endfor %}
+      {% endif %}
 
     {% endfor %}
     </ul>

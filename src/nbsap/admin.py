@@ -10,6 +10,7 @@ admin.site.register(AichiIndicator)
 
 admin.site.register(NationalAction)
 admin.site.register(NationalObjective)
+admin.site.register(EuAichiStrategy)
 admin.site.register(NationalStrategy)
 admin.site.register(EuAction)
 admin.site.register(EuTarget)

@@ -12,14 +12,14 @@
     {% for objective in objectives %}
       <li {% if objective.pk == current_objective.pk %}class="active"{% endif %}>
         <a href="{% url 'nat_strategy' pk=objective.pk %}" title="{{ objective.pk }}">
-          Objective {{ objective.pk }}
+          Objective {{ objective.code }}
         </a>
       </li>
     {% endfor %}
   </ul>
 
   <div class="tab-content homepage_view">
-    <h1>{{ current_objective.title }}</h1>
+    <h1>Objective {{ current_objective.code }}: {{ current_objective.title }}</h1>
     <div class="element_field objective-description">
       {{ current_objective.description|markdown:"safe" }}
     </div>
@@ -34,19 +34,18 @@
       {% endif %}
 
       {% if current_objective.objectives_tree|length %}
-      <ul class="span1">
+      <ul class="span2">
         {% for objective in current_objective.objectives_tree %}
         {% if forloop.counter0|divisibleby:"2" and not forloop.first %}
       </ul>
-      <ul class="span1">
+      <ul class="span2">
         {% endif %}
         <li>
-          <a href="#{{ objective.id }}"
+          <a href="#{{ objective.code }}"
              rel="tooltip"
              data-placement="right"
              data-original-title="{{ objective.title }}">
-             Objective{{ objective.id }}
-          </a>
+             Objective {{ objective.code }}</a>
         </li>
         {% endfor %}
       </ul>
@@ -70,8 +69,8 @@
     </div>
 
     {% for subobj in current_objective.children.all %}
-    <div class="element_field" id="{{ subobj.pk }}">
-      <h2>{{ subobj.title }}</h2>
+    <div class="element_field" id="{{ subobj.code }}">
+      <h2>Objective {{ subobj.code }}: {{ subobj.title }}</h2>
 
       <div class="snippet">
         {{ subobj.description|truncatechars:510|markdown:"safe" }}
@@ -85,6 +84,16 @@
       {% include 'nat_strategy_aichi_mapping.html' %}
 
       {% include 'nat_strategy_eu_mapping.html' %}
+
+      {% if subobj.actions.all %}
+        <label>Related actions:</label>
+        {% for action in subobj.actions.all %}
+          <div class="well">
+            <h2>{{ action.code }}</h2>
+            {{ action.description|markdown:"safe" }}
+          </div>
+        {% endfor %}
+      {% endif %}
 
     </div>
     {% endfor %}
