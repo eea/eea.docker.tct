@@ -60,9 +60,9 @@
              <a href ="{% url 'nat_strategy' pk=strategy.pk %}" title = "{{ strategy.pk }}">Objective {{ strategy.objective.code }}</a>
           </li>
           {% endfor %}
-		    </ul>
+        </ul>
       </div>
-     {% endif %}
+      {% endif %}
 
       {% if target.eu_aichi_strategy.all %}
       <label>Mapping with EU targets:</label>
