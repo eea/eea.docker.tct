@@ -37,7 +37,7 @@
       <ul class="span8">
         {% for indicator in indicators %}
         <li>
-          <a href="#indicator_{{indicator.id}}">
+          <a href="#i{{indicator.id}}">
             Indicator {{ indicator.id }}: {{ indicator.title }}
           </a>
         </li>
@@ -46,7 +46,7 @@
     </div>
 
     {% for indicator in indicators %}
-    <div class="indicator_homepage element_field" id="indicator_{{indicator.id}}">
+    <div class="indicator_homepage element_field" id="i{{indicator.id}}">
       <h2>Indicator {{ indicator.id }}: {{ indicator.title }}</h2>
 
       {% include 'indicator_details.html' %}

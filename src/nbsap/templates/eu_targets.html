@@ -41,7 +41,7 @@
              rel="tooltip"
              data-placement="right"
              data-original-title="{{ action.description }}">
-             {{ action.title }}
+             Action {{ action.code }}
           </a>
         </li>
         {% endfor %}
@@ -56,7 +56,7 @@
              {% with strategy.aichi_targets.all as aichi_targets %}  
                 {% for aichi_target in aichi_targets %}             
                  <li>
-                   <a href = "{% url 'goals' code=aichi_target.get_parent_goal.code %}#target_{{aichi_target.pk}}">Aichi {{aichi_target.title}}</a>
+                   <a href = "{% url 'goals' code=aichi_target.get_parent_goal.code %}#t{{aichi_target.pk}}">Target {{aichi_target.code}}</a>
                  </li>
                 {% endfor %}
              {% endwith %}
@@ -67,7 +67,7 @@
       <div>
       {% for action in current_target.actions_tree %}
       <div class="element_field" id="a{{ action.pk }}">
-        <h2>{{ action.title }}</h2>
+        <h2>Action {{ action.code }}</h2>
         <div>
           {{ action.description }}
         </div>

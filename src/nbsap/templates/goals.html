@@ -29,18 +29,18 @@
   <div class="tab-content homepage_view">
     <h1>Goal {{ current_goal.code|upper }}: {{ current_goal.description }}</h1>
     <div class="row">
-      <ul class="span1">
+      <ul class="span2">
         {% for target in current_goal.targets.all %}
         {% if forloop.counter0|divisibleby:"2" and not forloop.first %}
       </ul>
-      <ul class="span1">
+      <ul class="span2">
         {% endif %}
         <li>
-          <a href="{% url 'goals' code=current_goal.code %}#t{{target.id}}"
+          <a href="{% url 'goals' code=current_goal.code %}#t{{target.code}}"
              rel="tooltip"
              data-placement="right"
              data-original-title="{{ target.description }}">
-             {{ target.title }}
+             Target {{ target.code }}
           </a>
         </li>
         {% endfor %}
@@ -48,8 +48,8 @@
     </div>
     
     {% for target in current_goal.targets.all %}
-    <div class="element_field" id="t{{ target.id }}">
-      <h2>{{ target.title }}: {{ target.description }}</h2>
+    <div class="element_field" id="t{{ target.code }}">
+      <h2>Target {{ target.code }}: {{ target.description }}</h2>
 
       {% if target.eu_aichi_strategy.all %}
       <label>Mapping with EU targets:</label>
@@ -59,7 +59,7 @@
             {% with strategy.eu_target as eu_target %}
             <li>
               <a href="{% url 'eu_targets' pk=eu_target.pk %}" title="{{ eu_target.pk }}">
-                {{ eu_target.title }}
+                Target {{ eu_target.code }}: {{ eu_target.title }}
               </a>
             </li>
             {% endwith %}
@@ -87,7 +87,7 @@
         <ul>
           {% for indicator in target.indicators.all %}
           <li>
-            <a href="{% url 'indicators' %}?page={{ indicator.id|get_page }}#indicator_{{ indicator.id }}">
+            <a href="{% url 'indicators' %}?page={{ indicator.id|get_page }}#i{{ indicator.id }}">
               Indicator {{indicator.id}}: {{ indicator.title }}
             </a>
           </li>
@@ -102,7 +102,7 @@
         <ul>
           {% for indicator in target.other_indicators.all %}
           <li>
-            <a href="{% url 'indicators' %}?page={{ indicator.id|get_page }}#indicator_{{ indicator.id }}">
+            <a href="{% url 'indicators' %}?page={{ indicator.id|get_page }}#i{{ indicator.id }}">
               Indicator {{indicator.id}}: {{ indicator.title }}
             </a>
           </li>
