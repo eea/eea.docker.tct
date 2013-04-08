@@ -55,14 +55,31 @@
       <label>Maping with National Strategy</label>
       <div class="well">
         <ul>
-		  {% for strategy in target.relevant_target_national_strategy.all %}
-		  <li>
-		     <a href ="{% url 'nat_strategy' %}/{{strategy.objective.parent.id}}#{{strategy.objective.pk}}">Objective {{ strategy.objective.code }}</a>
-		  </li>
-		  {% endfor %}
-		</ul>
+	  {% for strategy in target.relevant_target_national_strategy.all %}
+	  <li>
+	     <a href ="{% url 'nat_strategy' %}/{{strategy.objective.parent.id}}#{{strategy.objective.pk}}">Objective {{ strategy.objective.code }}</a>
+	  </li>
+	  {% endfor %}
+	</ul>
       </div>
-     {% endif %}
+      {% endif %}
+
+      {% if target.eu_aichi_strategy.all %}
+      <label>Mapping with EU targets:</label>
+      <div class="well">
+        <ul>
+          {% for strategy in target.eu_aichi_strategy.all %}
+            {% with strategy.eu_target as eu_target %}
+            <li>
+              <a href="{% url 'eu_targets' pk=eu_target.pk %}" title="{{ eu_target.pk }}">
+                {{ eu_target.title }}
+              </a>
+            </li>
+            {% endwith %}
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
 
       {% if target.indicators.all %}
       <label>Most relevant indicators:</label>
