@@ -127,15 +127,11 @@ class AichiGoal(models.Model):
 class NationalAction(models.Model):
     __metaclass__ = TransMeta
 
-    title = models.CharField(max_length=512,
-                             verbose_name="Title")
+    code = models.CharField(max_length=16)
     description = models.TextField(verbose_name="Description")
 
-    def __unicode__(self):
-        return self.title
-
     class Meta:
-        translate = ('title', 'description',)
+        translate = ('description',)
 
 
 class NationalObjective(models.Model):
