@@ -52,15 +52,17 @@
       <label>Mapping with Aichi Strategy</label> 
       <div class ="well">
         <ul>
-          {% for strategy in current_target.eu_aichi_strategy.all %}
-             {% with strategy.aichi_targets.all as aichi_targets %}  
-                {% for aichi_target in aichi_targets %}             
-                 <li>
-                   <a href = "{% url 'goals' code=aichi_target.get_parent_goal.code %}#target_{{aichi_target.pk}}">Aichi {{aichi_target.title}}</a>
-                 </li>
-                {% endfor %}
-             {% endwith %}
-          {% endfor %}
+          {% if current_target.eu_aichi_strategy.all %}
+            {% for strategy in current_target.eu_aichi_strategy.all %}  
+              {% for aichi_target in strategy.aichi_targets.all %}             
+                <li>
+                  <a href = "{% url 'goals' code=aichi_target.get_parent_goal.code %}#target_{{aichi_target.pk}}">Aichi {{aichi_target.title}}</a>
+                </li>
+              {% endfor %}
+            {% endfor %}
+          {% else %}
+           <li>No data available.</li>  
+          {% endif %}
         </ul>
       </div>
 
