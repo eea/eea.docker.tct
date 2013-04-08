@@ -51,19 +51,6 @@
     <div class="element_field" id="target_{{ target.id }}">
       <h2>{{ target.title }}: {{ target.description }}</h2>
 
-      {%if target.relevant_target_national_strategy.all %}
-      <label>Maping with National Strategy</label>
-      <div class="well">
-        <ul>
-          {% for strategy in target.relevant_target_national_strategy.all %}
-          <li>
-             <a href ="{% url 'nat_strategy' pk=strategy.pk %}" title = "{{ strategy.pk }}">Objective {{ strategy.objective.code }}</a>
-          </li>
-          {% endfor %}
-        </ul>
-      </div>
-      {% endif %}
-
       {% if target.eu_aichi_strategy.all %}
       <label>Mapping with EU targets:</label>
       <div class="well">
@@ -76,6 +63,19 @@
               </a>
             </li>
             {% endwith %}
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+
+      {%if target.relevant_target_national_strategy.all %}
+      <label>Maping with National Strategy</label>
+      <div class="well">
+        <ul>
+          {% for strategy in target.relevant_target_national_strategy.all %}
+          <li>
+             <a href ="{% url 'nat_strategy' pk=strategy.pk %}" title = "{{ strategy.pk }}">Objective {{ strategy.objective.code }}</a>
+          </li>
           {% endfor %}
         </ul>
       </div>
