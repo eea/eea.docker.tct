@@ -133,6 +133,8 @@ class NationalAction(models.Model):
     class Meta:
         translate = ('description',)
 
+    def __unicode__(self):
+        return self.code
 
 class NationalObjective(models.Model):
 
@@ -182,7 +184,10 @@ class EuAction(models.Model):
 
 
     def get_target(self):
-        return self.target.all()[0]
+        if self.parent is None:
+            return self.target.all()[0]
+        else:
+            return self.parent.target.all()[0]
 
     def get_all_actions(self):
         #we should use https://github.com/django-mptt/django-mptt/
