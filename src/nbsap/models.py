@@ -214,6 +214,15 @@ class EuTarget(models.Model):
         translate = ('title', 'description',)
 
 
+class EuAichiStrategy(models.Model):
+    eu_target = models.ForeignKey(EuTarget,
+                                  verbose_name="EU Biodiversity Target",
+                                  related_name="eu_aichi_strategy")
+    aichi_targets = models.ManyToManyField(AichiTarget,
+                                           verbose_name="Aichi targets",
+                                           related_name="eu_aichi_strategy")
+
+
 class NationalStrategy(models.Model):
     objective = models.ForeignKey(NationalObjective,
                                   verbose_name="National Objective",
