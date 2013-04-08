@@ -1,730 +1,618 @@
 [
-    {
-        "pk": 1,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": null,
-            "title_nl": "",
-            "title_en": "Action 1",
-            "description_en": "Complete the establishment of the Natura 2000 network and ensure good management.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 2,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": null,
-            "title_nl": "",
-            "title_en": "Action 2",
-            "description_en": "Ensure adequate financing of Natura 2000 sites.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 3,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": null,
-            "title_nl": "",
-            "title_en": "Action 3",
-            "description_en": "Increase stakeholder awareness and involvement and improve enforcement.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 4,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": null,
-            "title_nl": "",
-            "title_en": "Action 4",
-            "description_en": "Improve and streamline monitoring and reporting.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 5,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": 1,
-            "title_nl": "",
-            "title_en": "Action 1.1",
-            "description_en": "Member States and the Commission will ensure that the phase to establish Natura 2000, including in the marine environment, is largely complete by 2012.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 6,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": 1,
-            "title_nl": "",
-            "title_en": "Action 1.2",
-            "description_en": "Member States and the Commission will further integrate species and habitats protection and management requirements into key land and water use policies, both within and beyond Natura 2000 areas.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 7,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": 1,
-            "title_nl": "",
-            "title_en": "Action 1.3",
-            "description_en": "Member States will ensure that management plans or equivalent instruments which set out conservation and restoration measures are developed and implemented in a timely manner for all Natura 2000 sites.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 8,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": 1,
-            "title_nl": "",
-            "title_en": "Action 1.4",
-            "description_en": "The Commission, together with Member States, will establish by 2012 a process to promote the sharing of experience, good practice and cross-border collaboration on the management of Natura 2000, within the biogeographical frameworks set out in the Habitats Directive.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 9,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": 2,
-            "title_nl": "",
-            "title_en": "Action 2.1",
-            "description_en": "The Commission and Member States will provide the necessary funds and incentives for Natura 2000, including through EU funding instruments, under the next multiannual financial framework. The Commission will set out its views in 2011 on how Natura 2000 will be financed under the next multi-annual financial framework.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 10,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": 3,
-            "title_nl": "",
-            "title_en": "Action 3.1",
-            "description_en": "The Commission, together with Member States, will develop and launch a major communication campaign on Natura 2000 by 2013.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 11,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": 3,
-            "title_nl": "",
-            "title_en": "Action 3.2",
-            "description_en": "The Commission and Member States will improve cooperation with key sectors and continue to develop guidance documents to improve their understanding of the requirements of EU nature legislation and its value in promoting economic development.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 12,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": 3,
-            "title_nl": "",
-            "title_en": "Action 3.3",
-            "description_en": "The Commission and Member States will facilitate enforcement of the nature directives by providing specific training programmes on Natura 2000 for judges and public prosecutors, and by developing better compliance promotion capacities.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 13,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": 4,
-            "title_nl": "",
-            "title_en": "Action 4.1",
-            "description_en": "The Commission, together with Member States, will develop by 2012 a new EU bird reporting system, further develop the reporting system under Article 17 of the Habitats Directive and improve the flow, accessibility and relevance of Natura 2000 data.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 14,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": null,
-            "title_nl": "",
-            "title_en": "Action 5",
-            "description_en": "Improve knowledge of ecosystems and their services in the EU.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 15,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": 14,
-            "title_nl": "",
-            "title_en": "Action 5.1",
-            "description_en": "Member States, with the assistance of the Commission, will map and assess the state of ecosystems and their services in their national territory by 2014, assess the economic value of such services, and promote the integration of these values into accounting and reporting systems at EU and national level by 2020.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 16,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": null,
-            "title_nl": "",
-            "title_en": "Action 6",
-            "description_en": "Set priorities to restore and promote the use of green infrastructure.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 17,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": 16,
-            "title_nl": "",
-            "title_en": "Action 6.1",
-            "description_en": "By 2014, Member States, with the assistance of the Commission, will develop a strategic framework to set priorities for ecosystem restoration at sub-national, national and EU level.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 18,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": 16,
-            "title_nl": "",
-            "title_en": "Action 6.2",
-            "description_en": "The Commission will develop a Green Infrastructure Strategy by 2012 to promote the deployment of green infrastructure in the EU in urban and rural areas, including through incentives to encourage up-front investments in green infrastructure projects and the maintenance of ecosystem services, for example through better targeted use of EU funding streams and Public Private Partnerships.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 19,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": null,
-            "title_nl": "",
-            "title_en": "Action 7",
-            "description_en": "Ensure no net loss of biodiversity and ecosystem services.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 20,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": 19,
-            "title_nl": "",
-            "title_en": "Action 7.1",
-            "description_en": "In collaboration with the Member States, the Commission will develop a methodology for assessing the impact of EU funded projects, plans and programmes on biodiversity by 2014.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 21,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": 19,
-            "title_nl": "",
-            "title_en": "Action 7.2",
-            "description_en": "The Commission will carry out further work with a view to proposing by 2015 an initiative to ensure there is no net loss of ecosystems and their services (e.g. through compensation or offsetting schemes).",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 22,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": null,
-            "title_nl": "",
-            "title_en": "Action 8",
-            "description_en": "Enhance direct payments for environmental public goods in the EU Common Agricultural Policy.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 23,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": 22,
-            "title_nl": "",
-            "title_en": "Action 8.1",
-            "description_en": "The Commission will propose that CAP direct payments will reward the delivery of environmental public goods that go beyond cross-compliance (e.g. permanent pasture, green cover, crop rotation, ecological set-aside, Natura 2000).",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 24,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": 22,
-            "title_nl": "",
-            "title_en": "Action 8.2",
-            "description_en": "The Commission will propose to improve and simplify the GAEC (Good Agricultural and Environmental Conditions) cross-compliance standards and consider including the Water Framework Directive within the scope of crosscompliance once the Directive has been implemented and the operational obligations for farmers have been identified in order to improve the state of aquatic ecosystems in rural areas.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 25,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": null,
-            "title_nl": "",
-            "title_en": "Action 9",
-            "description_en": "Better target Rural Development to biodiversity conservation.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 26,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": 25,
-            "title_nl": "",
-            "title_en": "Action 9.1",
-            "description_en": "The Commission and Member States will integrate quantified biodiversity targets into Rural Development strategies and programmes, tailoring action to regional and local needs.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 27,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": 25,
-            "title_nl": "",
-            "title_en": "Action 9.2",
-            "description_en": "The Commission and Member States will establish mechanisms to facilitate collaboration among farmers and foresters to achieve continuity of landscape features, protection of genetic resources and other cooperation mechanisms to protect biodiversity.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 28,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": null,
-            "title_nl": "",
-            "title_en": "Action 10",
-            "description_en": "Conserve Europe' s agricultural genetic diversity.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 29,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": 28,
-            "title_nl": "",
-            "title_en": "Action 10.1",
-            "description_en": "The Commission and Member States will encourage the uptake of agrienvironmental measures to support genetic diversity in agriculture and explore the scope for developing a strategy for the conservation of genetic diversity.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 30,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": null,
-            "title_nl": "",
-            "title_en": "Action 11",
-            "description_en": "Encourage forest holders to protect and enhance forest biodiversity.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 31,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": 30,
-            "title_nl": "",
-            "title_en": "Action 11.1",
-            "description_en": "Member States and the Commission will encourage the adoption of Management Plans, inter alia through use of rural development measures and the LIFE+ programme.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 32,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": 30,
-            "title_nl": "",
-            "title_en": "Action 11.2",
-            "description_en": "Member States and the Commission will foster innovative mechanisms (e.g. Payments for Ecosystem Services) to finance the maintenance and restoration of ecosystem services provided by multifunctional forests.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 33,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": null,
-            "title_nl": "",
-            "title_en": "Action 12",
-            "description_en": "Integrate biodiversity measures in forest management plans.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 34,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": 33,
-            "title_nl": "",
-            "title_en": "Action 12.1",
-            "description_en": "Member States will ensure that forest management plans or equivalent instruments include as many of the following measures as possible: maintain optimal levels of deadwood, taking into account regional variations such as fire risk or potential insect outbreaks; preserve wilderness areas; ecosystem-based measures to increase the resilience of forests against fires as part of forest fire prevention schemes, in line with activities carried out in the European Forest Fire Information System (EFFIS);specific measures developed for Natura 2000 forest sites; ensuring that afforestation is carried out in accordance with the Pan European Operational Level Guidelines for SFM, in particular as regards the diversity of species, and climate change adaptation needs.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 35,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": null,
-            "title_nl": "",
-            "title_en": "Action 13",
-            "description_en": "Improve the management of fished stocks.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 36,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": 35,
-            "title_nl": "",
-            "title_en": "Action 13.1",
-            "description_en": "The Commission and Member States will maintain and restore fish stocks to levels that can produce MSY in all areas in which EU fish fleets operate, including areas regulated by Regional Fisheries Management Organisations, and the waters of third countries with which the EU has concluded Fisheries Partnership Agreements.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 37,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": 35,
-            "title_nl": "",
-            "title_en": "Action 13.2",
-            "description_en": "The Commission and Member States will develop and implement under the CFP long-term management plans with harvest control rules based on the MSY approach. These plans should be designed to respond to specific time-related targets and be based on scientific advice and sustainability principles.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 38,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": 35,
-            "title_nl": "",
-            "title_en": "Action 13.3",
-            "description_en": "The Commission and Member States will significantly step up their work to collect data to support implementation of MSY. Once this objective is attained, scientific advice will be sought to incorporate ecological considerations in the definition of MSY by 2020.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 39,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": null,
-            "title_nl": "",
-            "title_en": "Action 14",
-            "description_en": "Eliminate adverse impacts on fish stocks, species, habitats and ecosystems.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 40,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": 39,
-            "title_nl": "",
-            "title_en": "Action 14.1",
-            "description_en": "The EU will design measures to gradually eliminate discards, to avoid the by-catch of unwanted species and to preserve vulnerable marine ecosystems in accordance with EU legislation and international obligations.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 41,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": 39,
-            "title_nl": "",
-            "title_en": "Action 14.2",
-            "description_en": "The Commission and Member States will support the implementation of the Marine Strategy Framework Directive, including through providing financial incentives through the future financial instruments for fisheries and maritime policy for marine protected areas (including Natura 2000 areas and those established by international or regional agreements). This could include restoring marine ecosystems, adapting fishing activities and promoting the involvement of the sector in alternative activities, such as eco-tourism, monitoring and managing marine biodiversity, and combating marine litter.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 42,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": null,
-            "title_nl": "",
-            "title_en": "Action 15",
-            "description_en": "Strengthen the EU Plant and Animal Health Regimes.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 43,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": 42,
-            "title_nl": "",
-            "title_en": "Action 15.1",
-            "description_en": "Commission will integrate additional biodiversity concerns into the Plant and Animal Health regimes by 2012.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 44,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": null,
-            "title_nl": "",
-            "title_en": "Action 16",
-            "description_en": "Establish a dedicated instrument on Invasive Alien Species.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 45,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": 44,
-            "title_nl": "",
-            "title_en": "Action 16.1",
-            "description_en": "The Commission will fill policy gaps in combating IAS by developing a dedicated legislative instrument by 2012.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 46,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": null,
-            "title_nl": "",
-            "title_en": "Action 17",
-            "description_en": "Reduce indirect drivers of biodiversity loss.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 47,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": 46,
-            "title_nl": "",
-            "title_en": "Action 17.1",
-            "description_en": "Under the EU flagship initiative on resource efficiency, the EU will take measures (which may include demand and/or supply side measures) to reduce the biodiversity impacts of EU consumption patterns, particularly for resources that have significant negative effects on biodiversity.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 48,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": 46,
-            "title_nl": "",
-            "title_en": "Action 17.2",
-            "description_en": "The Commission will enhance the contribution of trade policy to conserving biodiversity and address potential negative impacts by systematically including it as part of trade negotiations and dialogues with third countries, by identifying and evaluating potential impacts on biodiversity resulting from the liberalisation of trade and investment through ex-ante Trade Sustainability Impact Assessments and ex-post evaluations, and seek to include in all new trade agreements a chapter on sustainable development providing for substantial environmental provisions of importance in the trade context including on biodiversity goals.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 49,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": 46,
-            "title_nl": "",
-            "title_en": "Action 17.3",
-            "description_en": "The Commission will work with Member States and key stakeholders to provide the right market signals for biodiversity conservation, including work to reform, phase out and eliminate harmful subsidies at both EU and Member State level, and to provide positive incentives for biodiversity conservation and sustainable use.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 50,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": null,
-            "title_nl": "",
-            "title_en": "Action 18",
-            "description_en": "Mobilise additional resources for global biodiversity conservation.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 51,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": 50,
-            "title_nl": "",
-            "title_en": "Action 18.1",
-            "description_en": "The Commission and Member States will contribute their fair share to international efforts to significantly increase resources for global biodiversity as part of the international process aimed at estimating biodiversity funding needs and adopting resource mobilisation targets for biodiversity at CBD COP11 in 2012.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 52,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": 50,
-            "title_nl": "",
-            "title_en": "Action 18.2",
-            "description_en": "The Commission will improve the effectiveness of EU funding for global biodiversity inter alia by supporting natural capital assessments in recipient countries and the development and/or updating of National Biodiversity Strategies and Action Plans, and by improving coordination within the EU and with key non-EU donors in implementing biodiversity assistance/projects.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 53,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": null,
-            "title_nl": "",
-            "title_en": "Action 19",
-            "description_en": "'Biodiversity proof' EU development cooperation.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 54,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": 53,
-            "title_nl": "",
-            "title_en": "Action 19.1",
-            "description_en": "The Commission will continue to systematically screen its development cooperation action to minimise any negative impact on biodiversity, and undertake Strategic Environmental Assessments and/or Environmental Impact Assessments for actions likely to have significant effects on biodiversity.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 55,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": null,
-            "title_nl": "",
-            "title_en": "Action 20",
-            "description_en": "Regulate access to genetic resources and the fair and equitable sharing of benefits arising from their use.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
-    },
-    {
-        "pk": 56,
-        "model": "nbsap.euaction",
-        "fields": {
-            "parent": 55,
-            "title_nl": "",
-            "title_en": "Action 20.1",
-            "description_en": "The Commission will propose legislation to implement the Nagoya Protocol on Access to Genetic Resources and the Fair and Equitable Sharing of Benefits Arising from their Utilisation in the European Union so that the EU can ratify the Protocol as soon as possible and by 2015 at the latest, as required by the global target.",
-            "description_nl": "",
-            "description_fr": "",
-            "title_fr": ""
-        }
+  {
+    "pk": 1,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "1",
+      "parent": null,
+      "description_en": "Complete the establishment of the Natura 2000 network and ensure good management.",
+      "description_nl": "",
+      "description_fr": ""
     }
+  },
+  {
+    "pk": 2,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "2",
+      "parent": null,
+      "description_en": "Ensure adequate financing of Natura 2000 sites.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 3,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "3",
+      "parent": null,
+      "description_en": "Increase stakeholder awareness and involvement and improve enforcement.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 4,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "4",
+      "parent": null,
+      "description_en": "Improve and streamline monitoring and reporting.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 5,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "1.1",
+      "parent": 1,
+      "description_en": "Member States and the Commission will ensure that the phase to establish Natura 2000, including in the marine environment, is largely complete by 2012.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 6,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "1.2",
+      "parent": 1,
+      "description_en": "Member States and the Commission will further integrate species and habitats protection and management requirements into key land and water use policies, both within and beyond Natura 2000 areas.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 7,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "1.3",
+      "parent": 1,
+      "description_en": "Member States will ensure that management plans or equivalent instruments which set out conservation and restoration measures are developed and implemented in a timely manner for all Natura 2000 sites.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 8,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "1.4",
+      "parent": 1,
+      "description_en": "The Commission, together with Member States, will establish by 2012 a process to promote the sharing of experience, good practice and cross-border collaboration on the management of Natura 2000, within the biogeographical frameworks set out in the Habitats Directive.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 9,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "2.1",
+      "parent": 2,
+      "description_en": "The Commission and Member States will provide the necessary funds and incentives for Natura 2000, including through EU funding instruments, under the next multiannual financial framework. The Commission will set out its views in 2011 on how Natura 2000 will be financed under the next multi-annual financial framework.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 10,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "3.1",
+      "parent": 3,
+      "description_en": "The Commission, together with Member States, will develop and launch a major communication campaign on Natura 2000 by 2013.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 11,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "3.2",
+      "parent": 3,
+      "description_en": "The Commission and Member States will improve cooperation with key sectors and continue to develop guidance documents to improve their understanding of the requirements of EU nature legislation and its value in promoting economic development.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 12,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "3.3",
+      "parent": 3,
+      "description_en": "The Commission and Member States will facilitate enforcement of the nature directives by providing specific training programmes on Natura 2000 for judges and public prosecutors, and by developing better compliance promotion capacities.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 13,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "4.1",
+      "parent": 4,
+      "description_en": "The Commission, together with Member States, will develop by 2012 a new EU bird reporting system, further develop the reporting system under Article 17 of the Habitats Directive and improve the flow, accessibility and relevance of Natura 2000 data.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 14,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "5",
+      "parent": null,
+      "description_en": "Improve knowledge of ecosystems and their services in the EU.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 15,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "5.1",
+      "parent": 14,
+      "description_en": "Member States, with the assistance of the Commission, will map and assess the state of ecosystems and their services in their national territory by 2014, assess the economic value of such services, and promote the integration of these values into accounting and reporting systems at EU and national level by 2020.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 16,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "6",
+      "parent": null,
+      "description_en": "Set priorities to restore and promote the use of green infrastructure.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 17,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "6.1",
+      "parent": 16,
+      "description_en": "By 2014, Member States, with the assistance of the Commission, will develop a strategic framework to set priorities for ecosystem restoration at sub-national, national and EU level.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 18,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "6.2",
+      "parent": 16,
+      "description_en": "The Commission will develop a Green Infrastructure Strategy by 2012 to promote the deployment of green infrastructure in the EU in urban and rural areas, including through incentives to encourage up-front investments in green infrastructure projects and the maintenance of ecosystem services, for example through better targeted use of EU funding streams and Public Private Partnerships.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 19,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "7",
+      "parent": null,
+      "description_en": "Ensure no net loss of biodiversity and ecosystem services.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 20,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "7.1",
+      "parent": 19,
+      "description_en": "In collaboration with the Member States, the Commission will develop a methodology for assessing the impact of EU funded projects, plans and programmes on biodiversity by 2014.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 21,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "7.2",
+      "parent": 19,
+      "description_en": "The Commission will carry out further work with a view to proposing by 2015 an initiative to ensure there is no net loss of ecosystems and their services (e.g. through compensation or offsetting schemes).",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 22,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "8",
+      "parent": null,
+      "description_en": "Enhance direct payments for environmental public goods in the EU Common Agricultural Policy.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 23,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "8.1",
+      "parent": 22,
+      "description_en": "The Commission will propose that CAP direct payments will reward the delivery of environmental public goods that go beyond cross-compliance (e.g. permanent pasture, green cover, crop rotation, ecological set-aside, Natura 2000).",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 24,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "8.2",
+      "parent": 22,
+      "description_en": "The Commission will propose to improve and simplify the GAEC (Good Agricultural and Environmental Conditions) cross-compliance standards and consider including the Water Framework Directive within the scope of crosscompliance once the Directive has been implemented and the operational obligations for farmers have been identified in order to improve the state of aquatic ecosystems in rural areas.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 25,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "9",
+      "parent": null,
+      "description_en": "Better target Rural Development to biodiversity conservation.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 26,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "9.1",
+      "parent": 25,
+      "description_en": "The Commission and Member States will integrate quantified biodiversity targets into Rural Development strategies and programmes, tailoring action to regional and local needs.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 27,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "9.2",
+      "parent": 25,
+      "description_en": "The Commission and Member States will establish mechanisms to facilitate collaboration among farmers and foresters to achieve continuity of landscape features, protection of genetic resources and other cooperation mechanisms to protect biodiversity.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 28,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "10",
+      "parent": null,
+      "description_en": "Conserve Europe' s agricultural genetic diversity.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 29,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "10.1",
+      "parent": 28,
+      "description_en": "The Commission and Member States will encourage the uptake of agrienvironmental measures to support genetic diversity in agriculture and explore the scope for developing a strategy for the conservation of genetic diversity.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 30,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "11",
+      "parent": null,
+      "description_en": "Encourage forest holders to protect and enhance forest biodiversity.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 31,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "11.1",
+      "parent": 30,
+      "description_en": "Member States and the Commission will encourage the adoption of Management Plans, inter alia through use of rural development measures and the LIFE+ programme.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 32,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "11.2",
+      "parent": 30,
+      "description_en": "Member States and the Commission will foster innovative mechanisms (e.g. Payments for Ecosystem Services) to finance the maintenance and restoration of ecosystem services provided by multifunctional forests.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 33,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "12",
+      "parent": null,
+      "description_en": "Integrate biodiversity measures in forest management plans.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 34,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "12.1",
+      "parent": 33,
+      "description_en": "Member States will ensure that forest management plans or equivalent instruments include as many of the following measures as possible: maintain optimal levels of deadwood, taking into account regional variations such as fire risk or potential insect outbreaks; preserve wilderness areas; ecosystem-based measures to increase the resilience of forests against fires as part of forest fire prevention schemes, in line with activities carried out in the European Forest Fire Information System (EFFIS);specific measures developed for Natura 2000 forest sites; ensuring that afforestation is carried out in accordance with the Pan European Operational Level Guidelines for SFM, in particular as regards the diversity of species, and climate change adaptation needs.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 35,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "13",
+      "parent": null,
+      "description_en": "Improve the management of fished stocks.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 36,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "13.1",
+      "parent": 35,
+      "description_en": "The Commission and Member States will maintain and restore fish stocks to levels that can produce MSY in all areas in which EU fish fleets operate, including areas regulated by Regional Fisheries Management Organisations, and the waters of third countries with which the EU has concluded Fisheries Partnership Agreements.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 37,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "13.2",
+      "parent": 35,
+      "description_en": "The Commission and Member States will develop and implement under the CFP long-term management plans with harvest control rules based on the MSY approach. These plans should be designed to respond to specific time-related targets and be based on scientific advice and sustainability principles.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 38,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "13.3",
+      "parent": 35,
+      "description_en": "The Commission and Member States will significantly step up their work to collect data to support implementation of MSY. Once this objective is attained, scientific advice will be sought to incorporate ecological considerations in the definition of MSY by 2020.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 39,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "14",
+      "parent": null,
+      "description_en": "Eliminate adverse impacts on fish stocks, species, habitats and ecosystems.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 40,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "14.1",
+      "parent": 39,
+      "description_en": "The EU will design measures to gradually eliminate discards, to avoid the by-catch of unwanted species and to preserve vulnerable marine ecosystems in accordance with EU legislation and international obligations.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 41,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "14.2",
+      "parent": 39,
+      "description_en": "The Commission and Member States will support the implementation of the Marine Strategy Framework Directive, including through providing financial incentives through the future financial instruments for fisheries and maritime policy for marine protected areas (including Natura 2000 areas and those established by international or regional agreements). This could include restoring marine ecosystems, adapting fishing activities and promoting the involvement of the sector in alternative activities, such as eco-tourism, monitoring and managing marine biodiversity, and combating marine litter.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 42,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "15",
+      "parent": null,
+      "description_en": "Strengthen the EU Plant and Animal Health Regimes.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 43,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "15.1",
+      "parent": 42,
+      "description_en": "Commission will integrate additional biodiversity concerns into the Plant and Animal Health regimes by 2012.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 44,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "16",
+      "parent": null,
+      "description_en": "Establish a dedicated instrument on Invasive Alien Species.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 45,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "16.1",
+      "parent": 44,
+      "description_en": "The Commission will fill policy gaps in combating IAS by developing a dedicated legislative instrument by 2012.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 46,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "17",
+      "parent": null,
+      "description_en": "Reduce indirect drivers of biodiversity loss.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 47,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "17.1",
+      "parent": 46,
+      "description_en": "Under the EU flagship initiative on resource efficiency, the EU will take measures (which may include demand and/or supply side measures) to reduce the biodiversity impacts of EU consumption patterns, particularly for resources that have significant negative effects on biodiversity.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 48,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "17.2",
+      "parent": 46,
+      "description_en": "The Commission will enhance the contribution of trade policy to conserving biodiversity and address potential negative impacts by systematically including it as part of trade negotiations and dialogues with third countries, by identifying and evaluating potential impacts on biodiversity resulting from the liberalisation of trade and investment through ex-ante Trade Sustainability Impact Assessments and ex-post evaluations, and seek to include in all new trade agreements a chapter on sustainable development providing for substantial environmental provisions of importance in the trade context including on biodiversity goals.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 49,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "17.3",
+      "parent": 46,
+      "description_en": "The Commission will work with Member States and key stakeholders to provide the right market signals for biodiversity conservation, including work to reform, phase out and eliminate harmful subsidies at both EU and Member State level, and to provide positive incentives for biodiversity conservation and sustainable use.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 50,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "18",
+      "parent": null,
+      "description_en": "Mobilise additional resources for global biodiversity conservation.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 51,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "18.1",
+      "parent": 50,
+      "description_en": "The Commission and Member States will contribute their fair share to international efforts to significantly increase resources for global biodiversity as part of the international process aimed at estimating biodiversity funding needs and adopting resource mobilisation targets for biodiversity at CBD COP11 in 2012.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 52,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "18.2",
+      "parent": 50,
+      "description_en": "The Commission will improve the effectiveness of EU funding for global biodiversity inter alia by supporting natural capital assessments in recipient countries and the development and/or updating of National Biodiversity Strategies and Action Plans, and by improving coordination within the EU and with key non-EU donors in implementing biodiversity assistance/projects.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 53,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "19",
+      "parent": null,
+      "description_en": "'Biodiversity proof' EU development cooperation.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 54,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "19.1",
+      "parent": 53,
+      "description_en": "The Commission will continue to systematically screen its development cooperation action to minimise any negative impact on biodiversity, and undertake Strategic Environmental Assessments and/or Environmental Impact Assessments for actions likely to have significant effects on biodiversity.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 55,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "20",
+      "parent": null,
+      "description_en": "Regulate access to genetic resources and the fair and equitable sharing of benefits arising from their use.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  },
+  {
+    "pk": 56,
+    "model": "nbsap.euaction",
+    "fields": {
+      "code": "20.1",
+      "parent": 55,
+      "description_en": "The Commission will propose legislation to implement the Nagoya Protocol on Access to Genetic Resources and the Fair and Equitable Sharing of Benefits Arising from their Utilisation in the European Union so that the EU can ratify the Protocol as soon as possible and by 2015 at the latest, as required by the global target.",
+      "description_nl": "",
+      "description_fr": ""
+    }
+  }
 ]
