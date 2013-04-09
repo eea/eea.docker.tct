@@ -3,7 +3,7 @@
 *.egg-info/
 *.pyc
 sandbox_py27/*
-bin
-lib
-include
 *.swp
+/bin
+/lib
+/include

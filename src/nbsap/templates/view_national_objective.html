@@ -17,7 +17,7 @@
        href="{% url 'edit_national_objective' parent=objective.pk %}">Add sub-objective</a>
 
     <a class="btn edit btn-small"
-       href="#">Add action</a>
+       href="{% url 'edit_national_action' objective=objective.pk %}">Add action</a>
 
     <a class="btn edit btn-small"
        href="{% url 'edit_national_objective' pk=objective.pk %}">Edit</a>
@@ -36,7 +36,7 @@
   <table class="table table-bordered table-striped">
 
     <thead>
-      <th>Code</th>
+      <th class="span1">Code</th>
       <th>Objectives</th>
     </thead>
 
@@ -61,5 +61,36 @@
 
   </table>
 </div>
+
+<div class="property_list">
+  <table class="table table-bordered table-striped">
+
+    <thead>
+      <th class="span1">Code</th>
+      <th>Actions</th>
+    </thead>
+
+    <tbody>
+    {% if objective.actions.all %}
+    {% for action in objective.actions.all %}
+      <tr>
+        <td>{{ action.code }}</td>
+        <td>
+          <a href="{% url 'view_national_action' objective=objective.pk pk=action.pk %}"
+           title="Action {{ action.code }}">
+          Actions related to objective {{ objective.code }}</a>
+        </td>
+      </tr>
+    {% endfor %}
+    {% else %}
+      <tr>
+        <td colspan="2">No actions</td>
+      </tr>
+    {% endif %}
+    </tbody>
+
+  </table>
+</div>
+
 
 {% endblock %}
