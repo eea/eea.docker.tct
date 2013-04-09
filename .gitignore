@@ -4,4 +4,6 @@
 *.pyc
 sandbox_py27/*
 bin
+lib
 include
+*.swp
