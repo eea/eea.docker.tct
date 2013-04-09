@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+{% load assets %}
+
+<style>
+#DataTables_Table_0_previous {
+    margin-right: 10px;
+}
+</style>
+
+<table class="table table-bordered table-striped objectives_listing">
+
+  <thead>
+    <th class="obj-id">Code</th>
+    <th class="obj-title">Title</th>
+  </thead>
+
+  <tbody>
+  {% for objective in objectives %}
+    <tr>
+      <td>{{ objective.code }}</td>
+      <td>
+        <a href="{% url 'view_national_objective' code=objective.code %}"
+           title="Objective {{ objective.code }}">
+          {{ objective.title }}</a>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+
+</table>
+
+{% endblock %}
+
+{% block scripts %}
+
+  {% assets "js_admin" %}
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+  {% endassets %}
+
+  <script>
+
+    $(document).ready(function() {
+      $('.objectives_listing').dataTable({
+          "sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
+          "bStateSave": true,
+          "iDisplayLength": 25,
+      });
+    });
+  </script>
+
+{% endblock scripts %}

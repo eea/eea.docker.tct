@@ -1,8 +1,10 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.forms.models import model_to_dict 
 
 from nbsap import models
+from nbsap.forms import NationalObjectiveForm
 
 def get_indicators_pages(paginator):
 
@@ -84,3 +86,45 @@ def nat_strategy(request, pk):
 
 def implementation(request):
     return HttpResponse("implementation")
+
+
+def list_national_objectives(request):
+    objectives = models.NationalObjective.objects.filter(parent=None).all()
+    return render(request, 'list_national_objectives.html',
+                  {'objectives': objectives,
+                  })
+
+def view_national_objective(request, code):
+    objective = get_object_or_404(models.NationalObjective, code=code)
+    return render(request, 'view_national_objective.html',
+                  {'objective': objective,
+                  })
+
+def edit_national_objective(request, code=None, parent=None):
+    if parent:
+        parent_objective = get_object_or_404(models.NationalObjective, code=parent)
+    else:
+        parent_objective = None
+
+    if code:
+        objective = get_object_or_404(models.NationalObjective, code=code)
+        template = 'edit_national_objective.html'
+    else:
+        objective = None
+        template = 'add_national_objectives.html'
+
+    lang = request.GET.get('lang', 'en')
+
+    if request.method == 'POST':
+        form = NationalObjectiveForm(request.POST,
+                                     objective=objective,
+                                     parent_objective=parent_objective)
+        if form.is_valid():
+            form.save()
+    else:
+        form = NationalObjectiveForm(objective=objective, lang=lang)
+    return render(request, template,
+                  {'form': form,
+                   'objective': objective,
+                   'lang': lang,
+                  })

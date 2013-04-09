@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+{% load markup %}
+
+<h1 class="small">Objective {{ objective.code }}: {{ objective.title }}</h1>
+
+<div class="admin-obj-description">
+  {{ objective.description|markdown:"safe" }}
+</div>
+
+{% if objective.children.all %}
+<div class="property_list">
+  <table class="table table-bordered table-striped">
+
+    <thead>
+      <th>Code</th>
+      <th>Objectives</th>
+    </thead>
+
+    <tbody>
+    {% for subobj in objective.children.all %}
+      <tr>
+        <td>{{ subobj.code }}</td>
+        <td>
+          <a href="{% url 'view_national_objective' code=subobj.pk %}"
+           title="Objective {{ subobj.code }}">
+          {{ subobj.title }}</a>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
+
+{% endblock %}

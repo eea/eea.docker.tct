@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.signals import pre_save
 from transmeta import TransMeta
 
 class Link(models.Model):
@@ -158,6 +159,15 @@ class NationalObjective(models.Model):
     def __unicode__(self):
         return self.title
 
+    @staticmethod
+    def pre_save_objective_code(**kwargs):
+        instance = kwargs['instance']
+        codes = [ ob.code for ob in instance.parent.children.all() if ob ]
+        if codes:
+            codes.sort(key=lambda s: map(int, s.split('.')))
+            parent_code, last_code = codes[-1].split('.')
+            instance.code = '{0}.{1}'.format(parent_code, int(last_code)+1)
+
     def get_all_objectives(self):
         #we should use https://github.com/django-mptt/django-mptt/
         r = []
@@ -245,3 +255,5 @@ class NationalStrategy(models.Model):
                                         blank=True,
                                         verbose_name="Eu related actions",
                                         related_name="national_strategy")
+
+pre_save.connect(NationalObjective.pre_save_objective_code, sender=NationalObjective)
