@@ -6,6 +6,7 @@ JS_ASSETS = (
     'js/jquery.uniform.js',
     'js/chosen.jquery.js',
     'js/jquery.utils.js',
+    'js/uri.js',
     'bootstrap/js/bootstrap-collapse.js',
     'bootstrap/js/bootstrap-dropdown.js',
     'bootstrap/js/bootstrap-tooltip.js',
