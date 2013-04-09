@@ -1,0 +1,58 @@
+{% load markup %}
+
+<label> Mapping with AICHI</label>
+<div class="row well">
+ {% if action.objective.all %} 
+  <ul class="mapping-list">
+  {% for objective in action.objective.all %}
+    {% if objective.objective_national_strategy.all %}
+      {% for  strategy in objective.objective_national_strategy.all %}
+        {% with strategy.relevant_target.get_parent_goal as goal %}
+          <li>
+            <span class="mapping-header">Goal:</span>
+            <span>
+              <a href="{% url 'goals' code=goal.code %}" title="{{ goal.code|upper }}">
+                <strong>Goal {{ goal.code|upper }}:</strong> {{ goal.description|markdown:"safe" }}
+              </a>
+            </span>
+          </li>
+
+          {% with strategy.relevant_target as target %}
+            <li>
+              <span class="mapping-header">Most relelvant AICHI target</span>
+              <span>
+                <a href="{% url 'goals' code=goal.code %}#t{{target.id}}" title="{{ target.id }}">
+                  <strong>Target {{ target.id }}:</strong> {{ target.description|markdown:"safe" }}
+                </a>
+              </span>
+            </li>
+          {% endwith %}
+
+          {%if strategy.other_targets.all %}
+            <li>
+              <span class="mapping-header">Other relevant AICHI targets:</span>
+                <ul class="other-targets">
+                  {% for target in strategy.other_targets.all %}
+                    <li>
+                      <span>
+                        <a href="{% url 'goals' code=target.get_parent_goal.code %}#t{{ target.id }}" title="{{ targe.id }}">
+                          <strong>Target {{ target.id }}:</strong>{{ target.description|markdown:"safe" }}
+                        </a>
+                      </span>
+                    </li>
+                  {% endfor %}
+              </span>
+            </li>
+          {% endif %}
+
+        {% endwith %}
+      {% endfor %}
+    {% else %}
+      <span>No data available.</span>
+    {% endif %}
+  {% endfor %}
+  </ul>
+  {% else %}
+    <span>No data available.</span>
+  {% endif %}
+</div>

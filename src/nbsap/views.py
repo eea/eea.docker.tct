@@ -86,10 +86,6 @@ def nat_strategy(request, pk):
                   })
 
 
-def implementation(request):
-    return HttpResponse("implementation")
-
-
 def list_national_objectives(request):
     objectives = models.NationalObjective.objects.filter(parent=None).all()
     return render(request, 'list_national_objectives.html',
@@ -134,3 +130,17 @@ def edit_national_objective(request, pk=None, parent=None):
 
 def mapping_national_objectives(request):
     pass
+
+def implementation(request, pk):
+    current_objective = get_object_or_404(models.NationalObjective, pk=pk)
+    objectives = models.NationalObjective.objects.filter(parent=None).all()
+
+    current_objective.actions_tree = []
+
+    for objective in current_objective.get_all_objectives():
+        for action in objective.actions.all():
+            current_objective.actions_tree.append(action)
+    return render(request, 'implementation.html',
+                  {'current_objective': current_objective,
+                   'objectives': objectives,
+                  })

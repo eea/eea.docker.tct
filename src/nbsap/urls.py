@@ -6,7 +6,9 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^$', 'nbsap.views.goals', {'code': 'a'}, name='goals'),
     url(r'^goals/(?P<code>[\w\-]+)$', 'nbsap.views.goals', name='goals'),
-    url(r'^implementation$', 'nbsap.views.implementation', name='implementation'),
+    
+    url(r'^implementation$', 'nbsap.views.implementation', {'pk' : '1'}, name='implementation'),
+    url(r'^implementation/(?P<pk>[\w\-]+)$', 'nbsap.views.implementation', name='implementation'),
 
     url(r'^eu_targets$', 'nbsap.views.eu_targets', {'pk': '1'}, name='eu_targets'),
     url(r'^eu_targets/(?P<pk>[\w\-]+)$', 'nbsap.views.eu_targets', name='eu_targets'),
