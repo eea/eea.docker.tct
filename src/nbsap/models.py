@@ -161,12 +161,31 @@ class NationalObjective(models.Model):
 
     @staticmethod
     def pre_save_objective_code(**kwargs):
+
+        if kwargs['raw'] is True:
+            return  #ignore when loading initial_data
+
         instance = kwargs['instance']
-        codes = [ ob.code for ob in instance.parent.children.all() if ob ]
-        if codes:
-            codes.sort(key=lambda s: map(int, s.split('.')))
-            parent_code, last_code = codes[-1].split('.')
-            instance.code = '{0}.{1}'.format(parent_code, int(last_code)+1)
+
+        if instance.code:
+            return  #ignore on edit
+
+        if instance.parent:
+            codes = [ ob.code for ob in instance.parent.children.all() if ob ]
+            #if parent objective has children the increment the last childen's code
+            if codes:
+                codes.sort(key=lambda s: map(int, s.split('.')))
+                parent_code, last_code = codes[-1].split('.')
+                instance.code = '{0}.{1}'.format(parent_code, int(last_code)+1)
+            else:
+                instance.code = '{0}.1'.format(instance.parent.code)
+
+        else:
+            codes = [ ob.code for ob in
+                              NationalObjective.objects.filter(parent=None).all() ]
+            codes.sort(key=lambda s: int(s))
+            last_code = codes[-1]
+            instance.code = '{0}'.format(int(last_code)+1)
 
     def get_all_objectives(self):
         #we should use https://github.com/django-mptt/django-mptt/

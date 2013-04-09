@@ -26,11 +26,11 @@ urlpatterns = patterns('',
             'nbsap.views.list_national_objectives',
             name='list_national_objectives'),
 
-    url(r'^administration/objectives/(?P<code>[\w\-]+)$',
+    url(r'^administration/objectives/(?P<pk>[\w\-]+)$',
             'nbsap.views.view_national_objective',
             name='view_national_objective'),
 
-    url(r'^administration/objectives/(?P<code>[\w\-]+)/edit$',
+    url(r'^administration/objectives/(?P<pk>[\w\-]+)/edit$',
             'nbsap.views.edit_national_objective',
             name='edit_national_objective'),
 
@@ -41,4 +41,8 @@ urlpatterns = patterns('',
     url(r'^administration/objectives/add/$',
             'nbsap.views.edit_national_objective',
              name='edit_national_objective'),
+
+    url(r'^administration/mapping/$',
+            'nbsap.views.mapping_national_objectives',
+            name='mapping_national_objectives'),
 )

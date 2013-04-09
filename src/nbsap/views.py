@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.forms.models import model_to_dict 
@@ -96,20 +96,20 @@ def list_national_objectives(request):
                   {'objectives': objectives,
                   })
 
-def view_national_objective(request, code):
-    objective = get_object_or_404(models.NationalObjective, code=code)
+def view_national_objective(request, pk):
+    objective = get_object_or_404(models.NationalObjective, pk=pk)
     return render(request, 'view_national_objective.html',
                   {'objective': objective,
                   })
 
-def edit_national_objective(request, code=None, parent=None):
+def edit_national_objective(request, pk=None, parent=None):
     if parent:
-        parent_objective = get_object_or_404(models.NationalObjective, code=parent)
+        parent_objective = get_object_or_404(models.NationalObjective, pk=parent)
     else:
         parent_objective = None
 
-    if code:
-        objective = get_object_or_404(models.NationalObjective, code=code)
+    if pk:
+        objective = get_object_or_404(models.NationalObjective, pk=pk)
         template = 'edit_national_objective.html'
     else:
         objective = None
@@ -123,6 +123,7 @@ def edit_national_objective(request, code=None, parent=None):
                                      parent_objective=parent_objective)
         if form.is_valid():
             form.save()
+            return redirect('list_national_objectives')
     else:
         form = NationalObjectiveForm(objective=objective, lang=lang)
     return render(request, template,
@@ -130,3 +131,6 @@ def edit_national_objective(request, code=None, parent=None):
                    'objective': objective,
                    'lang': lang,
                   })
+
+def mapping_national_objectives(request):
+    pass

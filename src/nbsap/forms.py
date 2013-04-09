@@ -28,6 +28,7 @@ class NationalObjectiveForm(forms.Form):
             self.fields['language'].initial = lang
 
     def save(self):
+
         objective = self.objective or NationalObjective()
         lang = self.cleaned_data['language']
         title = self.cleaned_data['title']
@@ -35,8 +36,10 @@ class NationalObjectiveForm(forms.Form):
 
         setattr(objective, 'title_%s' % lang, title)
         setattr(objective, 'description_%s' % lang, description)
+
         if self.parent_objective:
             objective.parent = self.parent_objective
+
         objective.save()
+
         return objective
-   

@@ -3,13 +3,35 @@
 
 {% load markup %}
 
+{% include 'admin_nav_tabs.html' %}
+
 <h1 class="small">Objective {{ objective.code }}: {{ objective.title }}</h1>
+
+<div class="btn-toolbar">
+  <div class="btn-group">
+
+    <a class="btn btn-success btn-small"
+       href="{% url 'list_national_objectives' %}"><i class="icon-white icon-arrow-left"></i> Back</a>
+
+    <a class="btn btn-small"
+       href="{% url 'edit_national_objective' parent=objective.pk %}">Add sub-objective</a>
+
+    <a class="btn edit btn-small"
+       href="#">Add action</a>
+
+    <a class="btn edit btn-small"
+       href="{% url 'edit_national_objective' pk=objective.pk %}">Edit</a>
+
+    <a class="btn btn-danger edit btn-small"
+       href="#">
+       <i class="icon-white icon-trash"></i> Delete</a>
+  </div>
+</div>
 
 <div class="admin-obj-description">
   {{ objective.description|markdown:"safe" }}
 </div>
 
-{% if objective.children.all %}
 <div class="property_list">
   <table class="table table-bordered table-striped">
 
@@ -19,19 +41,25 @@
     </thead>
 
     <tbody>
+    {% if objective.children.all %}
     {% for subobj in objective.children.all %}
       <tr>
         <td>{{ subobj.code }}</td>
         <td>
-          <a href="{% url 'view_national_objective' code=subobj.pk %}"
+          <a href="{% url 'view_national_objective' pk=subobj.pk %}"
            title="Objective {{ subobj.code }}">
           {{ subobj.title }}</a>
         </td>
       </tr>
     {% endfor %}
+    {% else %}
+      <tr>
+        <td colspan="2">No objectives</td>
+      </tr>
+    {% endif %}
     </tbody>
+
   </table>
 </div>
-{% endif %}
 
 {% endblock %}
