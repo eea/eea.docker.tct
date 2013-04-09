@@ -48,6 +48,22 @@ urlpatterns = patterns('',
             'nbsap.views.delete_national_objective',
              name='delete_national_objective'),
 
+    url(r'^administration/objectives/(?P<objective>[\w\-]+)/actions/add',
+            'nbsap.views.edit_national_action',
+             name='edit_national_action'),
+
+    url(r'^administration/objectives/(?P<objective>[\w\-]+)/actions/(?P<pk>[\w\-]+)/edit',
+            'nbsap.views.edit_national_action',
+            name='edit_national_action'),
+
+    url(r'^administration/objectives/(?P<objective>[\w\-]+)/actions/(?P<pk>[\w\-]+)/$',
+            'nbsap.views.view_national_action',
+            name='view_national_action'),
+
+    url(r'^administration/objectives/(?P<objective>[\w\-]+)/actions/(?P<pk>[\w\-]+)/delete',
+            'nbsap.views.delete_national_action',
+            name='delete_national_action'),
+
     url(r'^administration/mapping/$',
             'nbsap.views.mapping_national_objectives',
             name='mapping_national_objectives'),

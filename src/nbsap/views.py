@@ -6,7 +6,7 @@ from django.forms.models import model_to_dict
 from django.contrib.auth.decorators import login_required
 
 from nbsap import models
-from nbsap.forms import NationalObjectiveForm
+from nbsap.forms import NationalObjectiveForm, NationalActionForm
 
 def get_indicators_pages(paginator):
 
@@ -98,6 +98,14 @@ def view_national_objective(request, pk):
                   {'objective': objective,
                   })
 
+def view_national_action(request, objective, pk):
+    objective = get_object_or_404(models.NationalObjective, pk=objective)
+    action = get_object_or_404(models.NationalAction, pk=pk)
+    return render(request, 'view_national_action.html',
+                  {'objective': objective,
+                   'action': action,
+                  })
+
 def edit_national_objective(request, pk=None, parent=None):
     if parent:
         parent_objective = get_object_or_404(models.NationalObjective, pk=parent)
@@ -132,6 +140,41 @@ def delete_national_objective(request, pk):
     objective = get_object_or_404(models.NationalObjective, pk=pk)
     objective.delete()
     return redirect('list_national_objectives')
+
+def edit_national_action(request, objective, pk=None):
+    objective = get_object_or_404(models.NationalObjective, pk=objective)
+    lang = request.GET.get('lang', 'en')
+
+    if pk:
+        action = get_object_or_404(models.NationalAction, pk=pk)
+        template = 'edit_national_action.html'
+    else:
+        action = None
+        template = 'add_national_action.html'
+
+    if request.method == 'POST':
+        form = NationalActionForm(request.POST,
+                                  action=action,
+                                  objective=objective)
+        if form.is_valid():
+            form.save()
+            return redirect('list_national_objectives')
+    else:
+        form = NationalActionForm(action=action,
+                                  objective=objective,
+                                  lang=lang)
+
+    return render(request, template,
+                  {'form': form,
+                   'action': action,
+                   'lang': lang,
+                  })
+ 
+def delete_national_action(request, objective, pk=None):
+    import pdb; pdb.set_trace()
+    action = get_object_or_404(models.NationalAction, pk=pk)
+    action.delete()
+    return redirect('view_national_objective', pk=objective)
 
 def mapping_national_objectives(request):
     pass
