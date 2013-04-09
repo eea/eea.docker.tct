@@ -170,3 +170,6 @@ LOGGING = {
         },
     }
 }
+
+# NBSAP special variables
+LOGIN_REDIRECT_URL = '/'

@@ -22,6 +22,20 @@
           <a class="brand" href="{% url 'goals' %}">
             Convention on Biological Diversity<br> Belgian Clearing House Mechanism
           </a>
+          <ul class="nav pull-right top-menu">
+           {% if user.is_authenticated %}
+                <li>
+                    <a href=""><i class="icon-wrench icon-black"></i>Admin</a>
+               </li>
+               <li>
+                    <a href="{% url 'logout' %}?next_page=/">Logout</a>
+                </li>
+            {% else %}
+            <li>
+                <a href="{% url 'login' %}">Login</a>
+            </li>
+            {% endif %}
+          </ul>
         </div>
       </div>
     </div>

@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.forms.models import model_to_dict 
 
+from django.contrib.auth.decorators import login_required
+
 from nbsap import models
 from nbsap.forms import NationalObjectiveForm
 

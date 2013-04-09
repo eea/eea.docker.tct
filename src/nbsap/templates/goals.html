@@ -2,8 +2,16 @@
 {% block content %}
 
 {% load utils %}
-{% include 'nav_tabs.html' %}
 
+{% if messages %}
+<div class="messages alert alert-success">
+{% for message in messages %}
+    <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+{% endfor %}
+</div>
+{% endif %}
+
+{% include 'nav_tabs.html' %}
 <div class="tabbable tabs-left">
 
   <ul class="nav nav-tabs nav-stacked local-navigation">
@@ -46,7 +54,7 @@
         {% endfor %}
       </ul>
     </div>
-    
+
     {% for target in current_goal.targets.all %}
     <div class="element_field" id="t{{ target.code }}">
       <h2>Target {{ target.code }}: {{ target.description }}</h2>
@@ -125,6 +133,7 @@
 <script>
   $(function () {
     $("[rel=tooltip]").tooltip();
+    $('.messages').delay(5000).fadeOut();
   });
 </script>
 {% endblock scripts %}
