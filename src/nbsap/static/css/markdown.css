@@ -1,2 +1,2 @@
 @import "../bootstrap/less/bootstrap.css";
-@import "Markdown.Editor.css";
+@import "../js/lib/pagedown-bootstrap/Markdown.Editor.css";

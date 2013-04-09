@@ -1,12 +1,19 @@
 {% extends 'layout.html' %}
-{% block content %}
-
 {% load markup %}
 
-<style>
-.controls textarea{width: 100%;}
-.controls textarea#id_title {height: 54px;}
-</style>
+
+{% block extra_head %}
+
+  <style>
+    .controls textarea{width: 100%;}
+    .controls textarea#id_title {height: 54px;}
+  </style>
+
+  {{ form.media }}
+{% endblock %}
+
+
+{% block content %}
 
   <h1>Edit objective {{ objective.code }}</h1>
 

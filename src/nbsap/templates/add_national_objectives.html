@@ -1,11 +1,19 @@
 {% extends 'layout.html' %}
+
+
+{% block extra_head %}
+
+  <style>
+    .controls textarea{width: 100%;}
+    .controls textarea#id_title {height: 54px;}
+  </style>
+
+  {{ form.media }}
+
+{% endblock %}
+
+
 {% block content %}
-
-
-<style>
-.controls textarea{width: 100%;}
-.controls textarea#id_title {height: 54px;}
-</style>
 
 <h1>Add objective</h1>
 

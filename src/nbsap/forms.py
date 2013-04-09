@@ -2,17 +2,18 @@ from django import forms
 from django.conf import settings
 from django.forms import widgets
 
-# from pagedown.widgets import AdminPagedownWidget
+from pagedown.widgets import PagedownWidget
 from models import NationalObjective
+
 
 class NationalObjectiveForm(forms.Form):
     language = forms.ChoiceField(choices=settings.LANGUAGES)
-    title = forms.CharField(widget=widgets.Textarea)
-    description = forms.CharField(widget=widgets.Textarea,
+    title = forms.CharField(widget=PagedownWidget)
+    description = forms.CharField(widget=PagedownWidget,
                                   required=False)
 
     def __init__(self, *args, **kwargs):
-        
+
         self.objective = kwargs.pop('objective', None)
         self.parent_objective = kwargs.pop('parent_objective', None)
         lang = kwargs.pop('lang', None)
