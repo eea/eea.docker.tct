@@ -70,9 +70,9 @@
       {% for action in current_target.actions_tree %}
       <div class="element_field" id="a{{ action.pk }}">
         <h2>Action {{ action.code }}</h2>
-        {{ action.description }}
 
         <div>
+          {{ action.description }}
           <label>Mapping with National Strategy</label>
           <div class="row well">
             {% if action.national_strategy.all %}
