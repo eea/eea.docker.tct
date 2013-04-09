@@ -132,5 +132,10 @@ def edit_national_objective(request, pk=None, parent=None):
                    'lang': lang,
                   })
 
+def delete_national_objective(request, pk):
+    objective = get_object_or_404(models.NationalObjective, pk=pk)
+    objective.delete()
+    return redirect('list_national_objectives')
+
 def mapping_national_objectives(request):
     pass

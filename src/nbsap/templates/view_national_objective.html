@@ -23,7 +23,7 @@
        href="{% url 'edit_national_objective' pk=objective.pk %}">Edit</a>
 
     <a class="btn btn-danger edit btn-small"
-       href="#">
+       href="{% url 'delete_national_objective' pk=objective.pk %}">
        <i class="icon-white icon-trash"></i> Delete</a>
   </div>
 </div>
