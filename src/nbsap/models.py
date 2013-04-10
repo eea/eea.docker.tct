@@ -194,6 +194,18 @@ class NationalObjective(models.Model):
             r.append(ob)
             r.extend(ob.get_all_objectives())
         return r
+    
+    def get_national_strategies(self):
+        return self.objective_national_strategy.all()
+
+    def has_national_strategies(self):
+        strategies = [s.eu_targets.all() for s in self.get_national_strategies()]        
+        strategies = filter(lambda x: len(x) > 0, strategies)        
+        if len(strategies) > 0:
+            return True
+        else:
+            return False
+
 
 class EuAction(models.Model):
     __metaclass__ = TransMeta
