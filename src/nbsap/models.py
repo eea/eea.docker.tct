@@ -210,6 +210,12 @@ class NationalObjective(models.Model):
         else:
             return False
 
+    def get_root_parent(self):
+        if self.parent is None:
+            return self
+        else:
+            return self.parent.get_root_parent()
+
 
 class EuAction(models.Model):
     __metaclass__ = TransMeta
