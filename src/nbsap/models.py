@@ -176,8 +176,10 @@ class NationalObjective(models.Model):
             codes = [ ob.code for ob in instance.parent.children.all() if ob ]
             #if parent objective has children the increment the last childen's code
             if codes:
-                codes.sort(key=lambda s: map(int, s.split('.')))
-                parent_code, last_code = codes[-1].split('.')
+                codes.sort(key=lambda x: [int(y) for y in x.split('.')])
+                parts = codes[-1].split('.')
+                parent_code = '.'.join(parts[:-1])
+                last_code = parts[-1]
                 instance.code = '{0}.{1}'.format(parent_code, int(last_code)+1)
             else:
                 instance.code = '{0}.1'.format(instance.parent.code)
