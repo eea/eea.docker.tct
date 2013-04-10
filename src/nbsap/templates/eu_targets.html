@@ -17,7 +17,7 @@
 
   <div class="tab-content homepage_view" >
 
-    <h1>{{ current_target.title }}</h1>
+    <h1>Target {{ current_target.code }}: {{ current_target.title }}</h1>
     <div class="element_field objective-description">{{ current_target.body }}</div>
 
     <div class="row">
@@ -79,7 +79,7 @@
               <ul>
                 {% for strategy in action.national_strategy.all %}
                   <li>
-                    <a href="{% url 'nat_strategy' pk=strategy.objective.parent.code %}#{{ strategy.objective.code }}">Objective {{strategy.objective.code}}: {{ strategy.objective.title }} {{ strategy.objective.parent.code }}
+                    <a href="{% url 'nat_strategy' pk=strategy.objective.parent.pk %}#{{ strategy.objective.code }}">Objective {{strategy.objective.code}}: {{ strategy.objective.title }} {{ strategy.objective.parent.code }}
                     </a>
                   </li>
                 {% endfor %} 
