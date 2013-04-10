@@ -10,8 +10,8 @@
   <label class="nav-header">Objectives</label>
   <ul class="nav nav-tabs nav-stacked local-navigation">
     {% for objective in objectives %}
-      <li {% if objective.pk == current_objective.pk %}class="active"{% endif %}>
-        <a href="{% url 'nat_strategy' pk=objective.pk %}" title="{{ objective.pk }}">
+      <li {% if objective.code == current_objective.code %}class="active"{% endif %}>
+        <a href="{% url 'nat_strategy' code=objective.code %}" title="{{ objective.code }}">
           Objective {{ objective.code }}
         </a>
       </li>

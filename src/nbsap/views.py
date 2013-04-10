@@ -61,8 +61,8 @@ def indicators(request):
                   })
 
 
-def eu_targets(request, pk):
-    current_target = get_object_or_404(models.EuTarget, pk=pk)
+def eu_targets(request, code):
+    current_target = get_object_or_404(models.EuTarget, code=code)
     targets = models.EuTarget.objects.all()
 
     current_target.actions_tree = []
@@ -75,8 +75,8 @@ def eu_targets(request, pk):
                   })
 
 
-def nat_strategy(request, pk):
-    current_objective = get_object_or_404(models.NationalObjective, pk=pk)
+def nat_strategy(request, code):
+    current_objective = get_object_or_404(models.NationalObjective, code=code)
     objectives = models.NationalObjective.objects.filter(parent=None).all()
 
     current_objective.objectives_tree = current_objective.get_all_objectives()
@@ -215,8 +215,8 @@ def mapping_national_objectives(request):
     pass
 
 
-def implementation(request, pk):
-    current_objective = get_object_or_404(models.NationalObjective, pk=pk)
+def implementation(request, code):
+    current_objective = get_object_or_404(models.NationalObjective, code=code)
     objectives = models.NationalObjective.objects.filter(parent=None).all()
 
     current_objective.actions_tree = []

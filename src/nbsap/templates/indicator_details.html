@@ -56,8 +56,8 @@
         Most Relevant Aichi Target
       </td>
       <td>
-        <a href="{% url 'goals' code=indicator.relevant_target_ob.goals.all.0.code %}#t{{ indicator.relevant_target_ob.id }}">
-          Target {{ indicator.relevant_target_ob.id }}</a>:
+        <a href="{% url 'goals' code=indicator.relevant_target_ob.goals.all.0.code %}#{{ indicator.relevant_target_ob.code }}">
+          Target {{ indicator.relevant_target_ob.code }}</a>:
         <br />
         {{ indicator.relevant_target_ob.description }}
       </td>
@@ -71,8 +71,8 @@
         <ul>
         {% for target in indicator.other_targets_list %}
           <li>
-            <a href="{% url 'goals' code=target.goals.all.0.code %}#t{{ target.id }}">
-              Target {{ target.id }}</a>:
+            <a href="{% url 'goals' code=target.goals.all.0.code %}#{{ target.code }}">
+              Target {{ target.code }}</a>:
             <br />
             {{ target.description }}
           </li>

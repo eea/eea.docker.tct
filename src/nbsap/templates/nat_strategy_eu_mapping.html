@@ -12,8 +12,8 @@
           <li>
             <span class="mapping-header">Targets:</span>
             <span>
-              <a href="{% url 'eu_targets' pk=target.pk %}" title="{{ target.pk }}">
-                <strong>Target {{ target.pk }}</strong>: {{ target.title }}
+              <a href="{% url 'eu_targets' code=target.code %}" title="{{ target.code }}">
+                <strong>Target {{ target.code }}</strong>: {{ target.title }}
               </a>
             </span>
           </li>
@@ -26,7 +26,7 @@
           {% with action.get_target as eu_target %}
           <span class="mapping-header">Related EU actions:</span>
           <span>
-            <a href="{% url 'eu_targets' pk=eu_target.pk %}#a{{ action.id }}" title="{{ action.id }}">
+            <a href="{% url 'eu_targets' code=eu_target.code %}#{{ action.code }}" title="{{ action.code }}">
               <strong>Action {{ action.code }}</strong>: {{ action.description|markdown:"safe" }}
             </a>
           </span>

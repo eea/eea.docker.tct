@@ -20,9 +20,9 @@
         <li>
           <span class="mapping-header">Most relevant AICHI target:</span>
           <span>
-            <a href="{% url 'goals' code=goal.code %}#t{{target.id}}"
-               title="{{ target.id }}">
-              <strong>Target {{ target.id }}</strong>: {{ target.description|markdown:"safe" }}
+            <a href="{% url 'goals' code=goal.code %}#{{ target.code }}"
+               title="{{ target.code }}">
+              <strong>Target {{ target.code }}</strong>: {{ target.description|markdown:"safe" }}
             </a>
           </span>
         </li>
@@ -35,9 +35,9 @@
             {% for target in strategy.other_targets.all %}
             <li>
               <span>
-                <a href="{% url 'goals' code=goal.code %}#t{{target.id}}"
-                   title="{{ target.id }}">
-                  <strong>Target {{ target.id }}</strong>: {{ target.description|markdown:"safe" }}
+                <a href="{% url 'goals' code=goal.code %}#{{ target.code }}"
+                   title="{{ target.code }}">
+                  <strong>Target {{ target.code }}</strong>: {{ target.description|markdown:"safe" }}
                 </a>
               </span>
             </li>

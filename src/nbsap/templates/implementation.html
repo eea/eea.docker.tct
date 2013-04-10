@@ -12,8 +12,8 @@
       <label class="nav-header">Actions related to</label>
     </li>
     {% for objective in objectives %}
-      <li {% if objective.pk == current_objective.pk %}class="active"{% endif %}>
-        <a href="{% url 'implementation' pk=objective.pk %}">Objective {{ objective.code }}
+      <li {% if objective.code == current_objective.code %}class="active"{% endif %}>
+        <a href="{% url 'implementation' code=objective.code %}">Objective {{ objective.code }}
         </a>
       </li>
     {% endfor %}
@@ -28,7 +28,7 @@
         <ul class="span2">
           {% for action in current_objective.actions_tree %}
               <li>
-                <a href="#a{{action.id}}" 
+                <a href="#{{action.code}}" 
                    rel='tooltip' 
                    data-placement='right' 
                    data-original-title="{{ action.description }}">
@@ -41,7 +41,7 @@
       <div class="row">
       {% if current_objective.actions_tree %}
         {% for action in current_objective.actions_tree %}
-        <div class="element_field" id="a{{action.pk}}">
+        <div class="element_field" id="{{action.code}}">
           <h2>Action {{ action.code }}</h2>
           <div class="snippet"> 
             {{ action.description|truncatechars:510|markdown:"safe" }}
