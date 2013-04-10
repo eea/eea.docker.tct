@@ -139,7 +139,12 @@ def edit_national_objective(request, pk=None, parent=None):
                 messages.success(request, 'Objective successfully added.')
             elif template.split('_', 1)[0] == 'edit':
                 messages.success(request, 'Saved changes.')
-            return redirect('list_national_objectives')
+
+            if parent_objective:
+                return redirect('view_national_objective',
+                                pk=parent_objective.pk)
+            else:
+                return redirect('list_national_objectives')
     else:
         form = NationalObjectiveForm(objective=objective, lang=lang)
     return render(request, template,
@@ -152,9 +157,14 @@ def edit_national_objective(request, pk=None, parent=None):
 @login_required
 def delete_national_objective(request, pk):
     objective = get_object_or_404(models.NationalObjective, pk=pk)
+    parent = objective.parent
     objective.delete()
     messages.success(request, 'Objective successfully deleted.')
-    return redirect('list_national_objectives')
+
+    if parent:
+        return redirect('view_national_objective', pk=parent.pk)
+    else:
+        return redirect('list_national_objectives')
 
 
 @login_required
