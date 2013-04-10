@@ -1,0 +1,112 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+{% if messages %}
+<div class="messages alert alert-success">
+{% for message in messages %}
+    <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+{% endfor %}
+</div>
+{% endif %}
+
+{% load markup %}
+
+{% include 'admin_nav_tabs.html' %}
+
+<h1 class="small">Objective {{ objective.code }}: {{ objective.title }}</h1>
+
+<div class="btn-toolbar">
+  <div class="btn-group">
+
+    <a class="btn btn-success btn-small"
+       href="{% url 'list_national_objectives' %}"><i class="icon-white icon-arrow-left"></i> Back</a>
+
+    <a class="btn btn-small"
+       href="{% url 'edit_national_objective' parent=objective.pk %}">Add sub-objective</a>
+
+    <a class="btn edit btn-small"
+       href="{% url 'edit_national_action' objective=objective.pk %}">Add action</a>
+
+    <a class="btn edit btn-small"
+       href="{% url 'edit_national_objective' pk=objective.pk %}">Edit</a>
+
+    <a class="btn btn-danger edit btn-small"
+       href="{% url 'delete_national_objective' pk=objective.pk %}">
+       <i class="icon-white icon-trash"></i> Delete</a>
+  </div>
+</div>
+
+<div class="admin-obj-description">
+  {{ objective.description|markdown:"safe" }}
+</div>
+
+<div class="property_list">
+  <table class="table table-bordered table-striped">
+
+    <thead>
+      <th class="span1">Code</th>
+      <th>Objectives</th>
+    </thead>
+
+    <tbody>
+    {% if objective.children.all %}
+    {% for subobj in objective.children.all %}
+      <tr>
+        <td>{{ subobj.code }}</td>
+        <td>
+          <a href="{% url 'view_national_objective' pk=subobj.pk %}"
+           title="Objective {{ subobj.code }}">
+          {{ subobj.title }}</a>
+        </td>
+      </tr>
+    {% endfor %}
+    {% else %}
+      <tr>
+        <td colspan="2">No objectives</td>
+      </tr>
+    {% endif %}
+    </tbody>
+
+  </table>
+</div>
+
+<div class="property_list">
+  <table class="table table-bordered table-striped">
+
+    <thead>
+      <th class="span1">Code</th>
+      <th>Actions</th>
+    </thead>
+
+    <tbody>
+    {% if objective.actions.all %}
+    {% for action in objective.actions.all %}
+      <tr>
+        <td>{{ action.code }}</td>
+        <td>
+          <a href="{% url 'view_national_action' objective=objective.pk pk=action.pk %}"
+           title="Action {{ action.code }}">
+          Actions related to objective {{ objective.code }}</a>
+        </td>
+      </tr>
+    {% endfor %}
+    {% else %}
+      <tr>
+        <td colspan="2">No actions</td>
+      </tr>
+    {% endif %}
+    </tbody>
+
+  </table>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+  $(function () {
+    $('.messages').delay(2000).fadeOut();
+  });
+</script>
+{% endblock scripts %}
+

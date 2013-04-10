@@ -1,0 +1,196 @@
+{% load utils %}
+
+<table class="indicator_table table table-bordered table-striped">
+  <tbody>
+    <tr>
+      <td class="span4 indicator_field">
+        {{ indicator|field_verbose_name:"title" }}
+      </td>
+      <td>
+        {{ indicator.title }}
+      </td>
+    </tr>
+
+    <tr>
+      <td class="span4 indicator_field">
+        {{ indicator|field_verbose_name:"question" }}
+      </td>
+      <td>
+        {{ indicator.question }}
+      </td>
+    </tr>
+
+    <tr>
+      <td class="span4 indicator_field">
+        Strategic Goal
+      </td>
+      <td>
+        <a href="{% url 'goals' code=indicator.strategic_goal_ob.code %}"
+           title="{{ indicator.strategic_goal_ob.code|upper }}">
+          Goal {{ indicator.strategic_goal_ob.code|upper }}</a>:
+        <br />
+        {{ indicator.strategic_goal_ob.description }}
+      </td>
+    </tr>
+
+    <tr>
+      <td class="span4 indicator_field">
+        {{ indicator|field_verbose_name:"head_indicator" }}
+      </td>
+      <td>
+        {{ indicator.head_indicator }}
+      </td>
+    </tr>
+
+    <tr>
+      <td class="span4 indicator_field">
+        {{ indicator|field_verbose_name:"sub_indicator" }}
+      </td>
+      <td>
+        {{ indicator.sub_indicator }}
+      </td>
+    </tr>
+
+    <tr>
+      <td class="span4 indicator_field">
+        Most Relevant Aichi Target
+      </td>
+      <td>
+        <a href="{% url 'goals' code=indicator.relevant_target_ob.goals.all.0.code %}#{{ indicator.relevant_target_ob.code }}">
+          Target {{ indicator.relevant_target_ob.code }}</a>:
+        <br />
+        {{ indicator.relevant_target_ob.description }}
+      </td>
+    </tr>
+
+    <tr>
+      <td class="span4 indicator_field">
+        Other Relevant Aichi Targets
+      </td>
+      <td>
+        <ul>
+        {% for target in indicator.other_targets_list %}
+          <li>
+            <a href="{% url 'goals' code=target.goals.all.0.code %}#{{ target.code }}">
+              Target {{ target.code }}</a>:
+            <br />
+            {{ target.description }}
+          </li>
+        {% endfor %}
+        </ul>
+      </td>
+    </tr>
+
+    {% if indicator.classification %}
+    <tr>
+      <td class="span4 indicator_field">
+        {{ indicator|field_verbose_name:"classification" }}
+      </td>
+      <td>
+        {{ indicator.classification }}
+      </td>
+    </tr>
+    {% endif %}
+
+    {% if indicator.scales.all %}
+    <tr>
+      <td class="span4 indicator_field">
+        {{ indicator|field_verbose_name:"scales" }}
+      </td>
+      <td>
+        <ul>
+          {% for scale in indicator.scales.all %}
+          <li>
+            {{ scale.title }}
+          </li>
+          {% endfor %}
+        </ul>
+      </td>
+    </tr>
+    {% endif %}
+
+    {% if indicator.validity %}
+    <tr>
+      <td class="span4 indicator_field">
+        {{ indicator|field_verbose_name:"validity" }}
+      </td>
+      <td>
+        {{ indicator.get_validity_display }}
+      </td>
+    </tr>
+    {% endif %}
+
+    {% if indicator.ease_of_communication %}
+    <tr>
+      <td class="span4 indicator_field">
+        {{ indicator|field_verbose_name:"ease_of_communication" }}
+      </td>
+      <td>
+        {{ indicator.get_ease_of_communication_display }}
+      </td>
+    </tr>
+    {% endif %}
+
+    {% if indicator.sources %}
+    <tr>
+      <td class="span4 indicator_field">
+        {{ indicator|field_verbose_name:"sources" }}
+      </td>
+      <td>
+        {{ indicator.sources }}
+      </td>
+    </tr>
+    {% endif %}
+
+    {% if indicator.requirements %}
+    <tr>
+      <td class="span4 indicator_field">
+        {{ indicator|field_verbose_name:"requirements" }}
+      </td>
+      <td>
+        {{ indicator.requirements }}
+      </td>
+    </tr>
+    {% endif %}
+
+    {% if indicator.measurer %}
+    <tr>
+      <td class="span4 indicator_field">
+        {{ indicator|field_verbose_name:"measurer" }}
+      </td>
+      <td>
+        {{ indicator.measurer }}
+      </td>
+    </tr>
+    {% endif %}
+
+    {% if indicator.conventions %}
+    <tr>
+      <td class="span4 indicator_field">
+        {{ indicator|field_verbose_name:"conventions" }}
+      </td>
+      <td>
+        {{ indicator.conventions }}
+      </td>
+    </tr>
+    {% endif %}
+
+    {% if indicator.links.all %}
+    <tr>
+      <td class="span4 indicator_field">
+        {{ indicator|field_verbose_name:"links" }}
+      </td>
+      <td>
+        <ul>
+          {% for link in indicator.links.all %}
+          <li>
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+      </td>
+    </tr>
+    {% endif %}
+
+  </tbody>
+</table>

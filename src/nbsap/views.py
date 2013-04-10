@@ -56,7 +56,7 @@ def indicators(request):
         obj.strategic_goal_ob = obj.relevant_target_ob.goals.all()[0]
         obj.other_targets_list = obj.other_targets.all()
 
-    return render(request, 'indicators.html',
+    return render(request, 'indicators/indicators.html',
                   {'goals': goals,
                    'indicators_pages': get_indicators_pages(paginator),
                    'indicators': indicators,
@@ -84,7 +84,7 @@ def nat_strategy(request, code):
 
     current_objective.objectives_tree = current_objective.get_all_objectives()
 
-    return render(request, 'nat_strategy.html',
+    return render(request, 'mapping/nat_strategy.html',
                   {'objectives': objectives,
                    'current_objective': current_objective,
                   })
@@ -93,7 +93,7 @@ def nat_strategy(request, code):
 @login_required
 def list_national_objectives(request):
     objectives = models.NationalObjective.objects.filter(parent=None).all()
-    return render(request, 'list_national_objectives.html',
+    return render(request, 'objectives/list_national_objectives.html',
                   {'objectives': objectives,
                   })
 
@@ -101,7 +101,7 @@ def list_national_objectives(request):
 @login_required
 def view_national_objective(request, pk):
     objective = get_object_or_404(models.NationalObjective, pk=pk)
-    return render(request, 'view_national_objective.html',
+    return render(request, 'objectives/view_national_objective.html',
                   {'objective': objective,
                   })
 
@@ -110,7 +110,7 @@ def view_national_objective(request, pk):
 def view_national_action(request, objective, pk):
     objective = get_object_or_404(models.NationalObjective, pk=objective)
     action = get_object_or_404(models.NationalAction, pk=pk)
-    return render(request, 'view_national_action.html',
+    return render(request, 'actions/view_national_action.html',
                   {'objective': objective,
                    'action': action,
                   })
@@ -125,10 +125,10 @@ def edit_national_objective(request, pk=None, parent=None):
 
     if pk:
         objective = get_object_or_404(models.NationalObjective, pk=pk)
-        template = 'edit_national_objective.html'
+        template = 'objectives/edit_national_objective.html'
     else:
         objective = None
-        template = 'add_national_objectives.html'
+        template = 'objectives/add_national_objectives.html'
 
     lang = request.GET.get('lang', 'en')
 
@@ -177,10 +177,10 @@ def edit_national_action(request, objective, pk=None):
 
     if pk:
         action = get_object_or_404(models.NationalAction, pk=pk)
-        template = 'edit_national_action.html'
+        template = 'actions/edit_national_action.html'
     else:
         action = None
-        template = 'add_national_action.html'
+        template = 'actions/add_national_action.html'
 
     if request.method == 'POST':
         form = NationalActionForm(request.POST,

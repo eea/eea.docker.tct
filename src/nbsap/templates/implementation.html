@@ -6,7 +6,7 @@
 {% include 'nav_tabs.html' %}
 
 <div class="tabbable tabs-left">
-  
+
   <ul class="nav nav-tabs nav-stacked local-navigation">
     <li>
       <label class="nav-header">Actions related to</label>
@@ -20,21 +20,21 @@
   </ul>
 
   <div class="tab-content homepage_view">
-    
+
     <h1>Actions related to Objective {{ current_objective.code }}: {{ current_objective.title }} </h1>
-    
+
     <div class="row">
       {% if current_objective.actions_tree %}
         <ul class="span2">
           {% for action in current_objective.actions_tree %}
               <li>
-                <a href="#{{action.code}}" 
-                   rel='tooltip' 
-                   data-placement='right' 
+                <a href="#{{action.code}}"
+                   rel='tooltip'
+                   data-placement='right'
                    data-original-title="{{ action.description }}">
                    Action {{ action.code }}</a>
               </li>
-          {% endfor %} 
+          {% endfor %}
         </ul>
       {% endif %}
       </div>
@@ -43,15 +43,15 @@
         {% for action in current_objective.actions_tree %}
         <div class="element_field" id="{{action.code}}">
           <h2>Action {{ action.code }}</h2>
-          <div class="snippet"> 
+          <div class="snippet">
             {{ action.description|truncatechars:510|markdown:"safe" }}
             <a class="more">{{_('show more')}}</a>
           </div>
           <div class="full">
-          {{ action.description|markdown:"safe" }} 
-           
-          {% include 'nat_action_aichi_mapping.html' %}             
-          
+          {{ action.description|markdown:"safe" }}
+
+          {% include 'mapping/nat_action_aichi_mapping.html' %}
+
           <a class="less"> {{_('show less')}}</a>
           </div>
         </div>
