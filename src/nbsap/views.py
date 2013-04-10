@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.forms.models import model_to_dict
-
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 from nbsap import models
@@ -135,6 +135,10 @@ def edit_national_objective(request, pk=None, parent=None):
                                      parent_objective=parent_objective)
         if form.is_valid():
             form.save()
+            if template.split('_', 1)[0] == 'add':
+                messages.success(request, 'Objective successfully added.')
+            elif template.split('_', 1)[0] == 'edit':
+                messages.success(request, 'Saved changes.')
             return redirect('list_national_objectives')
     else:
         form = NationalObjectiveForm(objective=objective, lang=lang)
@@ -149,6 +153,7 @@ def edit_national_objective(request, pk=None, parent=None):
 def delete_national_objective(request, pk):
     objective = get_object_or_404(models.NationalObjective, pk=pk)
     objective.delete()
+    messages.success(request, 'Objective successfully deleted.')
     return redirect('list_national_objectives')
 
 
@@ -170,6 +175,10 @@ def edit_national_action(request, objective, pk=None):
                                   objective=objective)
         if form.is_valid():
             form.save()
+            if template.split('_', 1)[0] == 'add':
+                messages.success(request, 'Action successfully added.')
+            elif template.split('_', 1)[0] == 'edit':
+                messages.success(request, 'Saved changes.')
             return redirect('view_national_objective', pk=objective.pk)
     else:
         form = NationalActionForm(action=action,
@@ -187,6 +196,7 @@ def edit_national_action(request, objective, pk=None):
 def delete_national_action(request, objective, pk=None):
     action = get_object_or_404(models.NationalAction, pk=pk)
     action.delete()
+    messages.success(request, 'Action successfully deleted.')
     return redirect('view_national_objective', pk=objective)
 
 
