@@ -4,9 +4,10 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
+    # homepage URLs
     url(r'^$', 'nbsap.views.goals', {'code': 'a'}, name='goals'),
     url(r'^goals/(?P<code>[\w\-]+)$', 'nbsap.views.goals', name='goals'),
-    
+
     url(r'^implementation$', 'nbsap.views.implementation', {'pk' : '1'}, name='implementation'),
     url(r'^implementation/(?P<pk>[\w\-]+)$', 'nbsap.views.implementation', name='implementation'),
 
@@ -24,6 +25,7 @@ urlpatterns = patterns('',
     url(r'^accounts/login/$', 'django.contrib.auth.views.login', name='login'),
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout_then_login', name='logout'),
 
+    # administration URLs
     url(r'^administration/objectives/$',
             'nbsap.views.list_national_objectives',
             name='list_national_objectives'),

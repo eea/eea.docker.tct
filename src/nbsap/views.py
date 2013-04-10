@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.forms.models import model_to_dict 
+from django.forms.models import model_to_dict
 
 from django.contrib.auth.decorators import login_required
 
@@ -169,7 +169,7 @@ def edit_national_action(request, objective, pk=None):
                    'action': action,
                    'lang': lang,
                   })
- 
+
 def delete_national_action(request, objective, pk=None):
     action = get_object_or_404(models.NationalAction, pk=pk)
     action.delete()
