@@ -31,9 +31,8 @@
       <ul class="span2">
         <li>No sub-objectives found</li>
       </ul>
-      {% endif %}
+      {% else %}
 
-      {% if current_objective.objectives_tree|length %}
       <ul class="span2">
         {% for objective in current_objective.objectives_tree %}
         {% if forloop.counter0|divisibleby:"2" and not forloop.first %}
@@ -68,7 +67,7 @@
       </ul>
     </div>
 
-    {% for subobj in current_objective.children.all %}
+    {% for subobj in current_objective.objectives_tree %}
     <div class="element_field" id="{{ subobj.code }}">
       <h2>Objective {{ subobj.code }}: {{ subobj.title }}</h2>
 
