@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from nbsap import models
 from nbsap.forms import NationalObjectiveForm, NationalActionForm
 
+
 def get_indicators_pages(paginator):
 
     indicators_pages = {}
@@ -86,18 +87,23 @@ def nat_strategy(request, pk):
                   })
 
 
+@login_required
 def list_national_objectives(request):
     objectives = models.NationalObjective.objects.filter(parent=None).all()
     return render(request, 'list_national_objectives.html',
                   {'objectives': objectives,
                   })
 
+
+@login_required
 def view_national_objective(request, pk):
     objective = get_object_or_404(models.NationalObjective, pk=pk)
     return render(request, 'view_national_objective.html',
                   {'objective': objective,
                   })
 
+
+@login_required
 def view_national_action(request, objective, pk):
     objective = get_object_or_404(models.NationalObjective, pk=objective)
     action = get_object_or_404(models.NationalAction, pk=pk)
@@ -106,6 +112,8 @@ def view_national_action(request, objective, pk):
                    'action': action,
                   })
 
+
+@login_required
 def edit_national_objective(request, pk=None, parent=None):
     if parent:
         parent_objective = get_object_or_404(models.NationalObjective, pk=parent)
@@ -136,11 +144,15 @@ def edit_national_objective(request, pk=None, parent=None):
                    'lang': lang,
                   })
 
+
+@login_required
 def delete_national_objective(request, pk):
     objective = get_object_or_404(models.NationalObjective, pk=pk)
     objective.delete()
     return redirect('list_national_objectives')
 
+
+@login_required
 def edit_national_action(request, objective, pk=None):
     objective = get_object_or_404(models.NationalObjective, pk=objective)
     lang = request.GET.get('lang', 'en')
@@ -170,13 +182,18 @@ def edit_national_action(request, objective, pk=None):
                    'lang': lang,
                   })
 
+
+@login_required
 def delete_national_action(request, objective, pk=None):
     action = get_object_or_404(models.NationalAction, pk=pk)
     action.delete()
     return redirect('view_national_objective', pk=objective)
 
+
+@login_required
 def mapping_national_objectives(request):
     pass
+
 
 def implementation(request, pk):
     current_objective = get_object_or_404(models.NationalObjective, pk=pk)
