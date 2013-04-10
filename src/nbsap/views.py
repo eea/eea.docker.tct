@@ -158,7 +158,7 @@ def edit_national_action(request, objective, pk=None):
                                   objective=objective)
         if form.is_valid():
             form.save()
-            return redirect('list_national_objectives')
+            return redirect('view_national_objective', pk=objective.pk)
     else:
         form = NationalActionForm(action=action,
                                   objective=objective,
@@ -171,7 +171,6 @@ def edit_national_action(request, objective, pk=None):
                   })
  
 def delete_national_action(request, objective, pk=None):
-    import pdb; pdb.set_trace()
     action = get_object_or_404(models.NationalAction, pk=pk)
     action.delete()
     return redirect('view_national_objective', pk=objective)

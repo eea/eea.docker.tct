@@ -3,7 +3,8 @@
 <a class="pull-right btn btn-mini" href="{% url 'goals' %}">Back to AICHI</a>
 <ul class="nav nav-tabs">
 
-  <li class="{% active request '^/administration/objectives/[\w\-]+' %}">
+  <li class="{% active request '^/administration/objectives/[\w\-]+' %}
+             {% active request '^/administration/$' %}">
     <a href="{% url 'list_national_objectives' %}">National Strategy</a>
   </li>
 

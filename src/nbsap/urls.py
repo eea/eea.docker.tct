@@ -28,6 +28,10 @@ urlpatterns = patterns('',
             'nbsap.views.list_national_objectives',
             name='list_national_objectives'),
 
+    url(r'^administration/$',
+            'nbsap.views.list_national_objectives',
+            name='list_national_objectives'),
+
     url(r'^administration/objectives/(?P<pk>[\w\-]+)$',
             'nbsap.views.view_national_objective',
             name='view_national_objective'),
