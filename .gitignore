@@ -8,3 +8,6 @@ sandbox_py27/*
 /lib
 /include
 /build
+.webassets-cache
+gen
+local_settings.py
