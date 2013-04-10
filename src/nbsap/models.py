@@ -2,6 +2,8 @@ from django.db import models
 from django.db.models.signals import pre_save
 from transmeta import TransMeta
 
+from django.utils.translation import ugettext_lazy as _
+
 class Link(models.Model):
     title = models.CharField(max_length=512)
     url = models.URLField()
@@ -25,59 +27,59 @@ class AichiIndicator(models.Model):
         ('hig', 'High'),
     )
 
-    title = models.CharField("Operational Indicator",
+    title = models.CharField(_('Operational Indicator'),
                              max_length=512)
 
-    question = models.CharField("Communication Question",
+    question = models.CharField(_('Communication Question'),
                                 max_length=255)
 
-    head_indicator = models.CharField("Headline Indicator",
+    head_indicator = models.CharField(_('Headline Indicator'),
                                       max_length=255)
 
-    sub_indicator = models.CharField("Indicator Sub-topics",
+    sub_indicator = models.CharField(_('Indicator Sub-topics'),
                                      max_length=255)
 
-    classification = models.CharField("Operational Classification",
+    classification = models.CharField(_('Operational Classification'),
                                       max_length=255)
 
-    status = models.TextField("Status of development",
+    status = models.TextField(_('Status of development'),
                               blank=True) #????
 
-    sensitivity = models.CharField("Sensitivity (can it be used to make assessment by 2015?)",
+    sensitivity = models.CharField(_('Sensitivity (can it be used to make assessment by 2015?)'),
                                    max_length=3,
                                    choices=LEVEL_CHOICES,
                                    blank=True)
 
     scales = models.ManyToManyField(Scale,
-                                    verbose_name="Scale (global, regional, national, sub-national)",
+                                    verbose_name=_('Scale (global, regional, national, sub-national)'),
                                     blank=True,
                                     null=True)
 
-    validity = models.CharField("Scientific Validity",
+    validity = models.CharField(_('Scientific Validity'),
                                 max_length=3,
                                 choices=LEVEL_CHOICES,
                                 blank=True)
 
-    ease_of_communication = models.CharField("How easy can it be communicated?",
+    ease_of_communication = models.CharField(_('How easy can it be communicated?'),
                                              max_length=3,
                                              choices=LEVEL_CHOICES,
                                              blank=True)
 
-    sources = models.CharField("Data Sources",
+    sources = models.CharField(_('Data Sources'),
                                max_length=255,
                                blank=True)
 
     requirements = models.TextField(blank=True)
 
-    measurer = models.TextField("Who's responsible for measuring?",
+    measurer = models.TextField(_('Who\'s responsible for measuring?'),
                                 blank=True)
 
-    conventions = models.CharField("Other conventions/processes using indicator",
+    conventions = models.CharField(_('Other conventions/processes using indicator'),
                                    max_length=255,
                                    blank=True)
 
     links = models.ManyToManyField(Link,
-                                   verbose_name="Related Links",
+                                   verbose_name=_('Related Links'),
                                    blank=True,
                                    null=True)
 
@@ -174,15 +176,17 @@ class NationalObjective(models.Model):
             codes = [ ob.code for ob in instance.parent.children.all() if ob ]
             #if parent objective has children the increment the last childen's code
             if codes:
-                codes.sort(key=lambda s: map(int, s.split('.')))
-                parent_code, last_code = codes[-1].split('.')
+                codes.sort(key=lambda x: [int(y) for y in x.split('.')])
+                parts = codes[-1].split('.')
+                parent_code = '.'.join(parts[:-1])
+                last_code = parts[-1]
                 instance.code = '{0}.{1}'.format(parent_code, int(last_code)+1)
             else:
                 instance.code = '{0}.1'.format(instance.parent.code)
 
         else:
             codes = [ ob.code for ob in
-                              NationalObjective.objects.filter(parent=None).all() ]
+                      NationalObjective.objects.filter(parent=None).all() ]
             codes.sort(key=lambda s: int(s))
             last_code = codes[-1]
             instance.code = '{0}'.format(int(last_code)+1)

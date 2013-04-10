@@ -1,6 +1,7 @@
 {% extends 'layout.html' %}
 {% block content %}
 
+{% load i18n %}
 {% load utils %}
 
 {% if messages %}
@@ -15,16 +16,16 @@
 <div class="tabbable tabs-left">
 
   <ul class="nav nav-tabs nav-stacked local-navigation">
-    <label class="nav-header">AICHI Goals</label>
+    <label class="nav-header">{% trans "AICHI Goals" %}</label>
     {% for goal in goals %}
     <li {% if goal.code == current_goal.code %}class="active"{% endif %}>
       <a href="{% url 'goals' code=goal.code %}" title="{{ goal.code|upper }}"</a>
-        Goal {{ goal.code | upper }}
+        {% trans "Goal" %} {{ goal.code | upper }}
       </a>
     </li>
     {% endfor %}
 
-    <label class="nav-header">Indicators</label>
+    <label class="nav-header">{% trans "Indicators" %}</label>
     {% for page,value in indicators_pages.items %}
     <li>
       <a href="{% url 'indicators' %}?page={{ page }}">
@@ -35,7 +36,7 @@
   </ul>
 
   <div class="tab-content homepage_view">
-    <h1>Goal {{ current_goal.code|upper }}: {{ current_goal.description }}</h1>
+    <h1>{% trans "Goal" %} {{ current_goal.code|upper }}: {{ current_goal.description }}</h1>
     <div class="row">
       <ul class="span2">
         {% for target in current_goal.targets.all %}
@@ -48,7 +49,7 @@
              rel="tooltip"
              data-placement="right"
              data-original-title="{{ target.description }}">
-             Target {{ target.code }}
+             {% trans "Target" %} {{ target.code }}
           </a>
         </li>
         {% endfor %}
@@ -57,17 +58,17 @@
 
     {% for target in current_goal.targets.all %}
     <div class="element_field" id="{{ target.code }}">
-      <h2>Target {{ target.code }}: {{ target.description }}</h2>
+      <h2>{% trans "Target" %} {{ target.code }}: {{ target.description }}</h2>
 
       {% if target.eu_aichi_strategy.all %}
-      <label>Mapping with EU targets:</label>
+      <label>{% trans "Mapping with EU targets" %}:</label>
       <div class="well">
         <ul>
           {% for strategy in target.eu_aichi_strategy.all %}
             {% with strategy.eu_target as eu_target %}
             <li>
               <a href="{% url 'eu_targets' code=eu_target.code %}" title="{{ eu_target.code }}">
-                Target {{ eu_target.code }}: {{ eu_target.title }}
+                {% trans "Target" %} {{ eu_target.code }}: {{ eu_target.title }}
               </a>
             </li>
             {% endwith %}
@@ -77,12 +78,13 @@
       {% endif %}
 
       {%if target.relevant_target_national_strategy.all %}
-      <label>Maping with National Strategy</label>
+      <label>{% trans "Maping with National Strategy" %}</label>
       <div class="well">
         <ul>
           {% for strategy in target.relevant_target_national_strategy.all %}
           <li>
-             <a href ="{% url 'nat_strategy' %}/{{strategy.objective.parent.code}}#{{strategy.objective.code}}">Objective {{ strategy.objective.code }}</a>
+             <a href ="{% url 'nat_strategy' %}/{{strategy.objective.parent.code}}#{{strategy.objective.code}}">
+              {% trans "Objective" %} {{ strategy.objective.code }}</a>
           </li>
           {% endfor %}
         </ul>
@@ -90,13 +92,13 @@
       {% endif %}
 
       {% if target.indicators.all %}
-      <label>Most relevant indicators:</label>
+      <label>{% trans "Most relevant indicators" %}:</label>
       <div class="well">
         <ul>
           {% for indicator in target.indicators.all %}
           <li>
             <a href="{% url 'indicators' %}?page={{ indicator.id|get_page }}#{{ indicator.id }}">
-              Indicator {{indicator.id}}: {{ indicator.title }}
+              {% trans "Indicator" %} {{indicator.id}}: {{ indicator.title }}
             </a>
           </li>
           {% endfor %}
@@ -105,13 +107,13 @@
       {% endif %}
 
       {% if target.other_indicators.all %}
-      <label>Other relevant indicators:</label>
+      <label>{% trans "Other relevant indicators" %}:</label>
       <div class="well">
         <ul>
           {% for indicator in target.other_indicators.all %}
           <li>
             <a href="{% url 'indicators' %}?page={{ indicator.id|get_page }}#{{ indicator.id }}">
-              Indicator {{indicator.id}}: {{ indicator.title }}
+              {% trans "Indicator" %} {{indicator.id}}: {{ indicator.title }}
             </a>
           </li>
           {% endfor %}
@@ -121,7 +123,7 @@
     </div>
 
     <div class="row">
-      <a class="pull-right" href="#top">{{_('Back to top')}}</a>
+      <a class="pull-right" href="#top">{% trans "Back to top" %}</a>
     </div>
 
     {% endfor %}

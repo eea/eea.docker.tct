@@ -2,6 +2,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.forms.models import model_to_dict
+
+from django.utils.translation import ugettext_lazy as _
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
@@ -13,9 +16,9 @@ def get_indicators_pages(paginator):
 
     indicators_pages = {}
     for i in paginator.page_range:
-      indicators_pages[i] = '{0} to {1}'.format(
-                            paginator.page(i).start_index(),
-                            paginator.page(i).end_index())
+      indicators_pages[i] = _('%(start)s to %(end)s') % {
+                                'start': paginator.page(i).start_index(),
+                                'end': paginator.page(i).end_index()}
     return indicators_pages
 
 
