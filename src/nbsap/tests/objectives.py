@@ -58,9 +58,12 @@ class NationalObjectiveTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
         response = self.client.post('/administration/objectives/add/', mydata)
-        edited_object = models.NationalObjective.objects.all().filter(id=101)[0]
-        self.assertEqual(edited_object.title, 'My new title')
-        self.assertEqual(edited_object.description, 'My new description')
+        added_object = models.NationalObjective.objects.all().filter(code='16')[0]
+        self.assertEqual(added_object.title, 'My new title')
+        self.assertEqual(added_object.description, 'My new description')
+
+        # clean the mess by deleting the objective
+        response = self.client.get('/administration/objectives/%s/delete' % (str(added_object.id)))
 
     def test_delete_national_objective(self):
         """ Test national objective deleting """
@@ -72,13 +75,11 @@ class NationalObjectiveTestCase(TestCase):
         }
 
         response = self.client.post('/administration/objectives/add/', mydata)
-        response = self.client.get('/administration/objectives/101/delete')
-        deleted_ = models.NationalObjective.objects.all().filter(id=101)
-        try:
-            self.assertEqual(deleted_['title'], 'My new title')
-        except:
-            pass
-        else:
+        _object = models.NationalObjective.objects.all().filter(code='16')[0]
+        response = self.client.get('/administration/objectives/%s/delete' % (str(_object.id)))
+
+        objects = models.NationalObjective.objects.all()
+        if len(objects) != 100:
             # delete operation not working properly
             self.assertEqual(1,2)
 
