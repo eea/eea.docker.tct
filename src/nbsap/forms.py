@@ -49,7 +49,7 @@ class NationalObjectiveForm(forms.Form):
 
 class NationalActionForm(forms.Form):
     language = forms.ChoiceField(choices=settings.LANGUAGES)
-    description = forms.CharField(widget=PagedownWidget)
+    description = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 25}))
 
     def __init__(self, *args, **kwargs):
 

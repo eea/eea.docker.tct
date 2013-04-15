@@ -132,7 +132,7 @@ class NationalAction(models.Model):
     __metaclass__ = TransMeta
 
     code = models.CharField(max_length=16)
-    description = models.TextField(verbose_name="Description")
+    description = tinymce_models.HTMLField(verbose_name="Description")
 
     class Meta:
         translate = ('description',)
