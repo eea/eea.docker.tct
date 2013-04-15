@@ -1,6 +1,7 @@
 from django import forms
 from django.conf import settings
 from django.forms import widgets
+from tinymce.widgets import TinyMCE
 
 from pagedown.widgets import PagedownWidget
 from models import NationalObjective, NationalAction
@@ -9,8 +10,8 @@ from models import NationalObjective, NationalAction
 class NationalObjectiveForm(forms.Form):
     language = forms.ChoiceField(choices=settings.LANGUAGES)
     title = forms.CharField(widget=widgets.Textarea)
-    description = forms.CharField(widget=PagedownWidget,
-                                  required=False)
+    description = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 25}),
+                                                 required=False)
 
     def __init__(self, *args, **kwargs):
 
@@ -51,7 +52,7 @@ class NationalActionForm(forms.Form):
     description = forms.CharField(widget=PagedownWidget)
 
     def __init__(self, *args, **kwargs):
-        
+
         self.action = kwargs.pop('action', None)
         self.objective = kwargs.pop('objective')
         lang = kwargs.pop('lang', None)

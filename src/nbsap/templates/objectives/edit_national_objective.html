@@ -20,7 +20,7 @@
 
 {% block content %}
 
-  <h1>Edit objective {{ objective.code }}</h1>
+  <h1 class="small">Edit objective {{ objective.code }}</h1>
 
   {% if form.errors %}
     <p style="color: red;">
@@ -74,7 +74,7 @@
 
         <p class="original-description">Original description in English</p>
         <div class="well">
-          {{ objective.description_en|markdown }}
+          {{ objective.description_en|safe }}
         </div>
       </div>
       {% endif %}
