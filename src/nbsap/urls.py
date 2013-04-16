@@ -28,7 +28,7 @@ urlpatterns = patterns('',
 
     # authentication URLs
     url(r'^accounts/login/$', 'django.contrib.auth.views.login', name='login'),
-    url(r'^accounts/logout/$', 'django.contrib.auth.views.logout_then_login', name='logout'),
+    url(r'^accounts/logout/$', 'nbsap.views.logout_view', name='logout'),
 
     # administration URLs
     url(r'^administration/objectives/$',
