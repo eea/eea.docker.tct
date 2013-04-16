@@ -26,7 +26,7 @@
 
   <div class="form-actions">
     <button type="submit" class="btn btn-primary">Save</button>
-    <a href="#" class="btn" type="button">Cancel</a>
+    <a href="{% url 'view_national_objective' pk=objective.pk %}" class="btn" type="button">Cancel</a>
   </div>
 
   <div class="control-group">
@@ -54,7 +54,7 @@
 
   <div class="form-actions">
     <button type="submit" class="btn btn-primary">Save</button>
-    <a href="#" class="btn" type="button">Cancel</a>
+    <a href="{% url 'view_national_objective' pk=objective.pk %}" class="btn" type="button">Cancel</a>
   </div>
 
 </form>

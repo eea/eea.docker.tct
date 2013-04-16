@@ -32,7 +32,11 @@
 
   <div class="form-actions">
     <button type="submit" class="btn btn-primary">Save</button>
-    <a href="#" class="btn" type="button">Cancel</a>
+    {% if parent %}
+        <a href="{% url 'view_national_objective' pk=parent.pk %}" class="btn" type="button">Cancel</a>
+    {% else %}
+        <a href="{% url 'list_national_objectives' %}" class="btn" type="button">Cancel</a>
+    {% endif %}
   </div>
 
   <div class="control-group">
@@ -68,7 +72,11 @@
 
   <div class="form-actions">
     <button type="submit" class="btn btn-primary">Save</button>
-    <a href="#" class="btn" type="button">Cancel</a>
+    {% if parent %}
+        <a href="{% url 'view_national_objective' pk=parent.pk %}" class="btn" type="button">Cancel</a>
+    {% else %}
+        <a href="{% url 'list_national_objectives' %}" class="btn" type="button">Cancel</a>
+    {% endif %}
   </div>
 
 </form>

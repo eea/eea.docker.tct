@@ -49,6 +49,7 @@ def edit_national_action(request, objective, pk=None):
                   {'form': form,
                    'action': action,
                    'lang': lang,
+                   'objective': objective,
                   })
 
 

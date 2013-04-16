@@ -57,10 +57,14 @@ def edit_national_objective(request, pk=None, parent=None):
                 return redirect('list_national_objectives')
     else:
         form = NationalObjectiveForm(objective=objective, lang=lang)
+
+
     return render(request, template,
                   {'form': form,
                    'objective': objective,
                    'lang': lang,
+                   # used by add_national_objective.html Cancel button
+                   'parent': parent_objective,
                   })
 
 
