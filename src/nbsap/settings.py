@@ -139,6 +139,7 @@ INSTALLED_APPS = (
     'transmeta',
     'django.contrib.markup',
     'pagedown',
+    'tinymce',
     'nbsap',
 )
 
@@ -178,4 +179,15 @@ try:
     from local_settings import *
 except ImportError:
     pass
+
+TINYMCE_DEFAULT_CONFIG = {
+    "theme_advanced_buttons1": ("formatselect,"
+                                "separator, bold, italic, "
+                                "underline, strikethrough, separator,"
+                                "justifyleft,justifycenter, justifyright,"
+                                "justifyfull, separator, bullist, numlist,"
+                                "separator, link, code")
+}
+TINYMCE_SPELLCHECKER = False
+TINYMCE_COMPRESSOR = False
 
