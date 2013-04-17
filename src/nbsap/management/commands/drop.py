@@ -20,7 +20,7 @@ class Command(NoArgsCommand):
         print "Dropped"
 
         print 'Creating database ...'
-        cursor.execute("create database %s;" % (settings.DATABASES['default']['NAME']))
+        cursor.execute("create database %s CHARACTER SET utf8 COLLATE utf8_general_ci;" % (settings.DATABASES['default']['NAME']))
         print "Created"
 
         db.commit()
