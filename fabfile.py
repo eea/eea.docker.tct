@@ -67,7 +67,7 @@ def install():
 @task
 @choose_target
 def start():
-    run("/usr/local/sbin/start-stop-daemon --start --background "
+    run("/usr/local/bin/start-stop-daemon --start --background "
         "--pidfile %(nbsap_instance)s/fcgi.pid --make-pidfile "
         "--exec %(nbsap_sandbox)s/bin/python %(nbsap_repo)s/manage.py fcgi"
         % env, pty=False)
@@ -76,8 +76,14 @@ def start():
 @task
 @choose_target
 def stop():
-    run("/usr/local/sbin/start-stop-daemon --stop --retry 3 --oknodo "
+    run("/usr/local/bin/start-stop-daemon --stop --retry 3 --oknodo "
         "--pidfile %(nbsap_instance)s/fcgi.pid" % env)
+
+
+@task
+@choose_target
+def drop():
+    run("%(nbsap_sandbox)s/bin/python %(nbsap_repo)s/manage.py drop" % env)
 
 
 @task
