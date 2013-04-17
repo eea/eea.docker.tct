@@ -139,6 +139,7 @@ INSTALLED_APPS = (
     'transmeta',
     'django.contrib.markup',
     'pagedown',
+    'tinymce',
     'nbsap',
 )
 
@@ -173,6 +174,17 @@ LOGGING = {
 
 # NBSAP special variables
 LOGIN_REDIRECT_URL = '/'
+
+TINYMCE_DEFAULT_CONFIG = {
+    "theme_advanced_buttons1": ("formatselect,"
+                                "separator, bold, italic, "
+                                "underline, strikethrough, separator,"
+                                "justifyleft,justifycenter, justifyright,"
+                                "justifyfull, separator, bullist, numlist,"
+                                "separator, link, code")
+}
+TINYMCE_SPELLCHECKER = False
+TINYMCE_COMPRESSOR = False
 
 try:
     from local_settings import *

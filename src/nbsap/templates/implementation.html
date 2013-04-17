@@ -44,11 +44,11 @@
         <div class="element_field" id="{{action.code}}">
           <h2>Action {{ action.code }}</h2>
           <div class="snippet">
-            {{ action.description|truncatechars:510|markdown:"safe" }}
+            {{ action.description|truncatechars:510|safe }}
             <a class="more">{{_('show more')}}</a>
           </div>
           <div class="full">
-          {{ action.description|markdown:"safe" }}
+          {{ action.description|safe }}
 
           {% include 'mapping/nat_action_aichi_mapping.html' %}
 

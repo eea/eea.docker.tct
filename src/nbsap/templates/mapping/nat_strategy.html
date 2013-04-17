@@ -21,7 +21,7 @@
   <div class="tab-content homepage_view">
     <h1>Objective {{ current_objective.code }}: {{ current_objective.title }}</h1>
     <div class="element_field objective-description">
-      {{ current_objective.description|markdown:"safe" }}
+      {{ current_objective.description|safe }}
     </div>
 
     <div class="row">
@@ -72,11 +72,11 @@
       <h2>Objective {{ subobj.code }}: {{ subobj.title }}</h2>
 
       <div class="snippet">
-        {{ subobj.description|truncatechars:510|markdown:"safe" }}
+        {{ subobj.description|truncatechars:510|safe }}
         <a class="more">show more</a>
       </div>
       <div class="full">
-        {{ subobj.description|markdown:"safe" }}
+        {{ subobj.description|safe }}
         <a class="less">show less</a>
       </div>
 
@@ -89,7 +89,7 @@
         {% for action in subobj.actions.all %}
           <div class="well">
             <h2>Actions related to objective {{ action.code }}</h2>
-            {{ action.description|markdown:"safe" }}
+            {{ action.description|safe }}
           </div>
         {% endfor %}
       {% endif %}

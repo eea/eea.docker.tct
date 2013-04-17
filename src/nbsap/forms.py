@@ -3,6 +3,8 @@ from django.conf import settings
 from django.forms import widgets
 from django.shortcuts import get_object_or_404
 
+from tinymce.widgets import TinyMCE
+
 from pagedown.widgets import PagedownWidget
 from models import NationalStrategy, NationalObjective, NationalAction, AichiTarget, AichiGoal, EuAction, EuTarget
 
@@ -10,8 +12,8 @@ from models import NationalStrategy, NationalObjective, NationalAction, AichiTar
 class NationalObjectiveForm(forms.Form):
     language = forms.ChoiceField(choices=settings.LANGUAGES)
     title = forms.CharField(widget=widgets.Textarea)
-    description = forms.CharField(widget=PagedownWidget,
-                                  required=False)
+    description = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 25}),
+                                                 required=False)
 
     def __init__(self, *args, **kwargs):
 
@@ -49,7 +51,7 @@ class NationalObjectiveForm(forms.Form):
 
 class NationalActionForm(forms.Form):
     language = forms.ChoiceField(choices=settings.LANGUAGES)
-    description = forms.CharField(widget=PagedownWidget)
+    description = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 25}))
 
     def __init__(self, *args, **kwargs):
 

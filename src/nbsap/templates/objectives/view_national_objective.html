@@ -37,7 +37,7 @@
 </div>
 
 <div class="admin-obj-description">
-  {{ objective.description|markdown:"safe" }}
+  {{ objective.description|safe }}
 </div>
 
 <div class="property_list">
@@ -105,7 +105,7 @@
 {% block scripts %}
 <script>
   $(function () {
-    $('.messages').delay(2000).fadeOut();
+    $('.messages').delay(1000).fadeOut();
   });
 </script>
 {% endblock scripts %}

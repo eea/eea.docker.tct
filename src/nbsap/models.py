@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models.signals import pre_save
 from transmeta import TransMeta
+from tinymce import models as tinymce_models
 
 from django.utils.translation import ugettext_lazy as _
 
@@ -131,7 +132,7 @@ class NationalAction(models.Model):
     __metaclass__ = TransMeta
 
     code = models.CharField(max_length=16)
-    description = models.TextField(verbose_name="Description")
+    description = tinymce_models.HTMLField(verbose_name="Description")
 
     class Meta:
         translate = ('description',)
@@ -146,7 +147,7 @@ class NationalObjective(models.Model):
     code = models.CharField(max_length=16)
     title = models.CharField(max_length=512,
                              verbose_name="Title")
-    description = models.TextField(verbose_name="Description")
+    description = tinymce_models.HTMLField(verbose_name="Description")
     parent = models.ForeignKey('self',
                                 null=True,
                                 blank=True,

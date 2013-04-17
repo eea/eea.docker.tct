@@ -23,6 +23,7 @@ urlpatterns = patterns('',
 
     url(r'^i18n/', include('django.conf.urls.i18n')),
 
+
     # URLs for mapping form
 
     url(r'^goals/title$',
@@ -65,9 +66,13 @@ urlpatterns = patterns('',
             'nbsap.views.get_national_objective_title',
             name='objective_title'),
 
+    # othe URLs
+    url(r'^tinymce/', include('tinymce.urls')),
+
+
     # authentication URLs
     url(r'^accounts/login/$', 'django.contrib.auth.views.login', name='login'),
-    url(r'^accounts/logout/$', 'django.contrib.auth.views.logout_then_login', name='logout'),
+    url(r'^accounts/logout/$', 'nbsap.views.logout_view', name='logout'),
 
     # administration URLs
     url(r'^administration/objectives/$',
