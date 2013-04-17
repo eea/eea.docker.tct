@@ -103,4 +103,6 @@ def restart():
 @choose_target
 def deploy():
     execute('install')
+    execute('drop')
+    execute('syncdb')
     execute('restart')
