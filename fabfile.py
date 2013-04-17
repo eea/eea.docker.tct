@@ -1,15 +1,14 @@
 from functools import wraps
 from fabric.api import *
 from fabric.contrib.files import exists
-from path import path as ppath
 
 
 env['nbsap_target_defs'] = {
     'staging': {
-        'host_string': 'edw@rom.edw.ro',
-        'nbsap_repo':     '/var/local/nbsap',
-        'nbsap_instance': '/var/local/nbsap/instance',
-        'nbsap_sandbox':  '/var/local/nbsap/sandbox',
+        'host_string': 'edw@whiterussian.edw.ro',
+        'nbsap_repo':     '/var/local/nbsap-staging',
+        'nbsap_sandbox':  '/var/local/nbsap-staging/sandbox',
+        'nbsap_instance': '/var/local/nbsap-staging',
     },
 }
 
@@ -53,15 +52,16 @@ def install():
         run("git reset incoming --hard")
 
     if not exists(env['nbsap_sandbox']):
-        run("virtualenv --no-site-packages '%(nbsap_sandbox)s'" % env)
+        run("virtualenv --no-site-packages --distribute '%(nbsap_sandbox)s'" % env)
         run("echo '*' > '%(nbsap_sandbox)s/.gitignore'" % env)
+
+    run("%(nbsap_sandbox)s/bin/pip install -U distribute" % env)
 
     run("%(nbsap_sandbox)s/bin/pip install "
         "-r %(nbsap_repo)s/requirements.txt"
         % env)
 
-    if not exists(env['nbsap_instance']):
-        run("mkdir -p '%s'" % env['nbsap_instance'])
+    run("%(nbsap_sandbox)s/bin/pip install -e %(nbsap_repo)s" % env)
 
 
 @task
