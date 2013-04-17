@@ -175,11 +175,6 @@ LOGGING = {
 # NBSAP special variables
 LOGIN_REDIRECT_URL = '/'
 
-try:
-    from local_settings import *
-except ImportError:
-    pass
-
 TINYMCE_DEFAULT_CONFIG = {
     "theme_advanced_buttons1": ("formatselect,"
                                 "separator, bold, italic, "
@@ -190,4 +185,9 @@ TINYMCE_DEFAULT_CONFIG = {
 }
 TINYMCE_SPELLCHECKER = False
 TINYMCE_COMPRESSOR = False
+
+try:
+    from local_settings import *
+except ImportError:
+    pass
 
