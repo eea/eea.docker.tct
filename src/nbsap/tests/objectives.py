@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.test.client import Client
 from django.utils import unittest
 from django.test import TestCase
@@ -23,7 +24,7 @@ class NationalObjectiveTestCase(TestCase):
         self.assertEqual(len(response.context['objectives']), 15)
 
     def test_view_national_objective(self):
-        """ Test the view of national objective 1 """
+        """ Test the view of national objective """
         response = self.client.get('/administration/objectives/1')
         self.assertEqual(response.status_code, 200)
         content = response.content
@@ -32,7 +33,7 @@ class NationalObjectiveTestCase(TestCase):
                          "Identify and monitor priority components of biodiversity in Belgium")
 
     def test_edit_national_objective(self):
-        """ Test editing national objective 1"""
+        """ Test editing national objective """
         mydata = {
             'language': 'en',
             'title': 'My new title',
@@ -44,8 +45,24 @@ class NationalObjectiveTestCase(TestCase):
 
         response = self.client.post('/administration/objectives/1/edit', mydata)
         edited_object = models.NationalObjective.objects.all().filter(id=1)[0]
-        self.assertEqual(edited_object.title, 'My new title')
-        self.assertEqual(edited_object.description, 'My new description')
+        self.assertEqual(edited_object.title, mydata['title'])
+        self.assertEqual(edited_object.description, mydata['description'])
+
+    def test_edit_with_encodings_national_objective(self):
+        """ Test editing encodings in national objective """
+        mydata = {
+            'language': 'en',
+            'title': 'My new title',
+            'description': u'ĂFKĐȘKŁFKOKR–KF:ŁĂȘĐKF–KFÂŁ:FJK–FFŁKJȘĂŁF'
+        }
+
+        response = self.client.get('/administration/objectives/1/edit')
+        self.assertEqual(response.status_code, 200)
+
+        response = self.client.post('/administration/objectives/1/edit', mydata)
+        edited_object = models.NationalObjective.objects.all().filter(id=1)[0]
+        self.assertEqual(edited_object.title, mydata['title'])
+        self.assertEqual(edited_object.description_en, mydata['description'])
 
     def test_add_national_objective(self):
         """ Test national objective adding """
@@ -59,8 +76,26 @@ class NationalObjectiveTestCase(TestCase):
 
         response = self.client.post('/administration/objectives/add/', mydata)
         added_object = models.NationalObjective.objects.all().filter(code='16')[0]
-        self.assertEqual(added_object.title, 'My new title')
-        self.assertEqual(added_object.description, 'My new description')
+        self.assertEqual(added_object.title, mydata['title'])
+        self.assertEqual(added_object.description, mydata['description'])
+
+        # clean the mess by deleting the objective
+        response = self.client.get('/administration/objectives/%s/delete' % (str(added_object.id)))
+
+    def test_add_with_encodings_national_objective(self):
+        """ Test national objective adding with encodings """
+        mydata = {
+            'language': 'en',
+            'title': 'My new title',
+            'description': u'ĂFKĐȘKŁFKOKR–KF:ŁĂȘĐKF–KFÂŁ:FJK–FFŁKJȘĂŁF'
+        }
+        response = self.client.get('/administration/objectives/add/')
+        self.assertEqual(response.status_code, 200)
+
+        response = self.client.post('/administration/objectives/add/', mydata)
+        added_object = models.NationalObjective.objects.all().filter(code='16')[0]
+        self.assertEqual(added_object.title, mydata['title'])
+        self.assertEqual(added_object.description, mydata['description'])
 
         # clean the mess by deleting the objective
         response = self.client.get('/administration/objectives/%s/delete' % (str(added_object.id)))
