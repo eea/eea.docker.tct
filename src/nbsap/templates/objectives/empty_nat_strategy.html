@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+{% load utils %}
+{% load markup %}
+{% include 'nav_tabs.html' %}
+
+<div class="tabbable tabs-left">
+
+  <label class="nav-header">Objectives</label>
+  <ul class="nav nav-tabs nav-stacked local-navigation">
+    {% for objective in objectives %}
+      <li {% if objective.code == current_objective.code %}class="active"{% endif %}>
+        <a href="{% url 'nat_strategy' code=objective.code %}" title="{{ objective.code }}">
+          Objective {{ objective.code }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <div class="tab-content homepage_view">
+    <p>No objectives found. Please define your National Strategy <a href="{% url 'list_national_objectives' %}">here</a>.
+  </div>
+</div>
+{% endblock %}

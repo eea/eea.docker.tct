@@ -6,6 +6,20 @@ from django.contrib.auth.decorators import login_required
 from nbsap import models
 from nbsap.forms import NationalObjectiveForm
 
+def nat_strategy(request, code=None):
+    if code is None:
+        return render(request, 'objectives/empty_nat_strategy.html')
+
+    current_objective = get_object_or_404(models.NationalObjective, code=code)
+    objectives = models.NationalObjective.objects.filter(parent=None).all()
+
+    current_objective.objectives_tree = current_objective.get_all_objectives()
+
+    return render(request, 'objectives/nat_strategy.html',
+                  {'objectives': objectives,
+                   'current_objective': current_objective,
+                  })
+
 
 @login_required
 def view_national_objective(request, pk):

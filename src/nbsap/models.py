@@ -188,6 +188,10 @@ class NationalObjective(models.Model):
         else:
             codes = [ ob.code for ob in
                       NationalObjective.objects.filter(parent=None).all() ]
+            # if empty national strategy table - reinitialize code values
+            if len(codes) == 0:
+                codes = ['0']
+
             codes.sort(key=lambda s: int(s))
             last_code = codes[-1]
             instance.code = '{0}'.format(int(last_code)+1)
