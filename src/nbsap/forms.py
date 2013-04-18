@@ -6,14 +6,15 @@ from django.shortcuts import get_object_or_404
 from tinymce.widgets import TinyMCE
 
 from pagedown.widgets import PagedownWidget
-from models import NationalStrategy, NationalObjective, NationalAction, AichiTarget, AichiGoal, EuAction, EuTarget
+from models import NationalStrategy, NationalObjective, NationalAction, \
+                   AichiTarget, AichiGoal, EuAction, EuTarget
 
 
 class NationalObjectiveForm(forms.Form):
     language = forms.ChoiceField(choices=settings.LANGUAGES)
     title = forms.CharField(widget=widgets.Textarea)
-    description = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 25}),
-                                                 required=False)
+    description = forms.CharField(
+        widget=TinyMCE(attrs={'cols': 80, 'rows': 25}), required=False)
 
     def __init__(self, *args, **kwargs):
 
@@ -25,7 +26,8 @@ class NationalObjectiveForm(forms.Form):
 
         if self.objective:
             title = getattr(self.objective, 'title_%s' % lang, None)
-            description = getattr(self.objective, 'description_%s' % lang, None)
+            description = getattr(self.objective,
+                                  'description_%s' % lang, None)
 
             self.fields['title'].initial = title
             self.fields['description'].initial = description
@@ -82,32 +84,32 @@ class NationalActionForm(forms.Form):
 
         return action
 
-class NationalObjectiveMappingForm(forms.Form):
+
+class NationalStrategyForm(forms.Form):
 
     def get_my_choices(string, mytype, goal=None):
-        return [ (element.pk, "%s %s" % (string, element.code.upper()))
-                  for element in mytype.objects.all() ]
+        return [(element.pk,
+                 "%s %s" % (string, element.code.upper())) for element in mytype.objects.all()]
 
     def get_element_by_pk(self, mytype, u_pk):
         return mytype.objects.filter(pk=int(u_pk)).all()[0]
 
     nat_objective = forms.ChoiceField(choices=get_my_choices('Objective',
-                                                  NationalObjective))
-
+                                                             NationalObjective))
     aichi_goal = forms.ChoiceField(choices=get_my_choices('Goal', AichiGoal))
-    aichi_target = forms.ChoiceField(choices=get_my_choices('Target', AichiTarget))
-    other_targets = forms.MultipleChoiceField(choices=get_my_choices('Target',AichiTarget),
+    aichi_target = forms.ChoiceField(choices=get_my_choices('Target',
+                                                            AichiTarget))
+    other_targets = forms.MultipleChoiceField(choices=get_my_choices('Target', AichiTarget),
                                               required=False)
 
     eu_targets = forms.MultipleChoiceField(choices=get_my_choices('Target', EuTarget),
                                            required=False)
-    eu_actions = forms.MultipleChoiceField(choices=get_my_choices('Action', EuAction), required=False)
-
+    eu_actions = forms.MultipleChoiceField(choices=get_my_choices('Action', EuAction),
+                                           required=False)
 
     def __init__(self, *args, **kwargs):
-
         self.strategy = kwargs.pop('strategy', None)
-        super(NationalObjectiveMappingForm, self).__init__(*args, **kwargs)
+        super(NationalStrategyForm, self).__init__(*args, **kwargs)
 
         if self.strategy:
             self.fields['nat_objective'].initial = self.strategy.objective.pk
@@ -117,14 +119,12 @@ class NationalObjectiveMappingForm(forms.Form):
             self.fields['eu_targets'].initial = [target.pk for target in self.strategy.eu_targets.all()]
             self.fields['eu_actions'].initial = [action.id for action in self.strategy.eu_actions.all()]
 
-
     def save(self):
-
         strategy = self.strategy or NationalStrategy()
-        nat_obj = self.get_element_by_pk(NationalObjective,
-                                         self.cleaned_data['nat_objective'])
-        aichi_targ = self.get_element_by_pk(AichiTarget,
-                                            self.cleaned_data['aichi_target'])
+        nat_obj = self.get_element_by_pk(
+            NationalObjective, self.cleaned_data['nat_objective'])
+        aichi_targ = self.get_element_by_pk(
+            AichiTarget, self.cleaned_data['aichi_target'])
 
         setattr(strategy, 'objective', nat_obj)
         setattr(strategy, 'relevant_target', aichi_targ)
@@ -135,7 +135,8 @@ class NationalObjectiveMappingForm(forms.Form):
         strategy.eu_actions.clear()
 
         for ucode in self.cleaned_data['other_targets']:
-            strategy.other_targets.add(get_object_or_404(AichiTarget, code=ucode))
+            strategy.other_targets.add(get_object_or_404(AichiTarget,
+                                                         code=ucode))
         for ucode in self.cleaned_data['eu_targets']:
             strategy.eu_targets.add(get_object_or_404(EuTarget, code=ucode))
         for ucode in self.cleaned_data['eu_actions']:
@@ -143,4 +144,3 @@ class NationalObjectiveMappingForm(forms.Form):
 
         strategy.save()
         return strategy
-

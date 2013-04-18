@@ -3,7 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 from nbsap import models
-from nbsap.forms import NationalObjectiveMappingForm
+from nbsap.forms import NationalStrategyForm
+
 
 def nat_strategy(request, code):
     current_objective = get_object_or_404(models.NationalObjective, code=code)
@@ -13,47 +14,49 @@ def nat_strategy(request, code):
 
     return render(request, 'mapping/nat_strategy.html',
                   {'objectives': objectives,
-                   'current_objective': current_objective,
-                  })
+                  'current_objective': current_objective,
+                   })
+
 
 @login_required
-def edit_mapping(request, pk=None):
+def edit_national_strategy(request, pk=None):
     if pk:
         strategy = get_object_or_404(models.NationalStrategy, pk=pk)
-        template  = 'mapping/edit_mapping.html'
+        template = 'mapping/edit_national_strategy.html'
     else:
         strategy = None
-        template = 'mapping/add_mapping.html'
+        template = 'mapping/add_national_strategy.html'
 
     if request.method == 'POST':
-        form = NationalObjectiveMappingForm(request.POST,
-                                     strategy=strategy)
+        form = NationalStrategyForm(request.POST,
+                                    strategy=strategy)
         if form.is_valid():
             form.save()
             if pk:
                 messages.success(request, 'Saved changes')
             else:
                 messages.success(request, 'Objects succesfuly added.')
-            return redirect('mapping_national_objectives')
+            return redirect('list_national_strategy')
     else:
-        form = NationalObjectiveMappingForm(strategy=strategy)
+        form = NationalStrategyForm(strategy=strategy)
     return render(request, template,
                   {'form': form,
-                   'strategy': strategy,
-                  })
+                  'strategy': strategy,
+                   })
+
 
 @login_required
-def delete_mapping(request, strategy=None):
+def delete_national_strategy(request, strategy=None):
     strategy = get_object_or_404(models.NationalStrategy, pk=strategy)
     strategy.delete()
-    messages.success(request, 'Strategy successfully deleted.')
-    return redirect('mapping_national_objectives')
+    messages.success(request, 'Mapping successfully deleted.')
+    return redirect('list_national_strategy')
+
 
 @login_required
-def mapping_national_objectives(request):
+def list_national_strategy(request):
     strategies = models.NationalStrategy.objects.all()
 
-    return render(request, 'mapping/admin_mapping.html',
-                  {'strategies' : strategies,
-                  })
-
+    return render(request, 'mapping/list_national_strategy.html',
+                  {'strategies': strategies,
+                   })

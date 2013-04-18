@@ -20,10 +20,10 @@
   </p>
 {% endif %}
 
-<form style="margin-top: 25px" action="/administration/mapping/add" method="post">
+<form style="margin-top: 25px" action="{% url 'edit_national_strategy' %}" method="post">
   <div class="form-actions">
     <button type="submit" class="btn btn-primary">Save</button>
-    <a href="{% url 'mapping_national_objectives'%}" class="btn" type="button">Cancel</a>
+    <a href="{% url 'list_national_strategy' %}" class="btn" type="button">Cancel</a>
   </div>
 
   <div class="control-group row">
@@ -83,7 +83,7 @@
 
   <div class="form-actions">
     <button type="submit" class="btn btn-primary">Save</button>
-    <a href="{% url 'mapping_national_objectives' %}" class="btn" type="button">Cancel</a>
+    <a href="{% url 'list_national_strategy' %}" class="btn" type="button">Cancel</a>
   </div>
 
 </form>
@@ -137,37 +137,34 @@
   $('select[name=other_targets]').on('change', function () {
       var option = $(this).serialize();
       var text = $(this).parents('.control-group').find('.other_target_text');
-      var output = "";
       var args = option.split("other_targets=");
       args = args.map(function(x) {return parseInt(x)});
       args = args.filter(Number);
       var url = "{% url 'aichi_target_title' pk=1%}";
+      text.html('');
 
-      for (nr in args){
-        $.get(url.replace('1',args[nr]), function(data) {
+      $.each(args, function(i,arg) {
+        $.get(url.replace('1',arg), function(data) {
         data = $.parseJSON(data)[0];
-        output += '<h5>Target ' + data.code + '</h5><p>' + data.value + '</p>';
-          text.html(output);
+        text.append('<h5>Target ' + data.code + '</h5><p>' + data.value + '</p>');
         });
-      }
+      });
   }).change();
 
   $('select[name=eu_targets]').on('change', function () {
      var option = $(this).serialize();
      var text = $(this).parents('.control-group').find('.eu_target_text');
-
-     var output = "";
      var args = option.split("eu_targets=");
+
      args = args.map(function(x) {return parseInt(x)});
      args = args.filter(Number);
-
+     text.html('');
      var url = "{% url 'eu_target_title' pk=1%}";
-     for (nr in args){
-       $.get(url.replace('1',args[nr]), function(data) {
-       output += '<p>' + data + '</p>';
-       text.html(output);
-        });
-      }
+     $.each(args, function(i, arg) {
+       $.get(url.replace('1',arg), function(data) {
+       text.append('<p>' + data + '</p>');
+      });
+    });
  }).change();
 
   $('select[name=eu_targets]').on('change', function() {
@@ -175,14 +172,14 @@
     var args = option.split("eu_targets=");
     args = args.map(function(x) {return parseInt(x)});
     args = args.filter(Number);
-    console.log(option);
+
     var url = "{% url 'target_action' pk=1%}";
     $('select[name=eu_actions]').html('');
     $.each(args, function(i, arg) {
       $.get(url.replace('1',arg), function(data) {
         data = $.parseJSON(data);
         $.each(data, function (i, d) {
-          var html = $('<option />').attr('value', d.pk).text(d.value);
+          var html = $('<option />').attr('value', d.id).text(d.value);
           $('select[name=eu_actions]').append(html);
        });
       });
@@ -193,18 +190,16 @@
     var option = $(this).serialize();
     var text = $(this).parents('.control-group').find('.actions_text');
 
-    var output = "";
     var args = option.split("eu_actions=");
     args = args.map(function(x) {return parseInt(x)});
     args = args.filter(Number);
-
+    text.html('');
     var url = "{% url 'action_title' pk=1%}";
-      for (nr in args){
-        $.get(url.replace('1',args[nr]), function(data) {
-        output += '<p>' + data + '</p>';
-          text.html(output);
+      $.each(args, function(i, arg){
+        $.get(url.replace('1',arg), function(data) {
+          text.append('<p>' + data + '</p>');
         });
-      }
+      });
   }).change();
 
 

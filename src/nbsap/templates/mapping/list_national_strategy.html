@@ -22,7 +22,7 @@
 
 <div class="add-button">
   <a class="btn btn-small btn-primary add"
-     href="{% url 'edit_mapping' %}">Add Mapping</a>
+     href="{% url 'edit_national_strategy' %}">Add Mapping</a>
 </div>
 
 <table class="table table-bordered table-striped objectives_listing">
@@ -76,11 +76,11 @@
       </td>
       <td style="text-align: center;">
         <a class="btn btn-mini btn-primary add"
-            href="{% url 'edit_mapping' pk=strategy.pk %}">Edit</a>
+            href="{% url 'edit_national_strategy' pk=strategy.pk %}">Edit</a>
       </td>
       <td style="text-align: center;">
         <a class="btn btn-mini btn-danger"
-           href="{% url 'delete_mapping' strategy=strategy.pk %}">Delete</a>
+           href="{% url 'delete_national_strategy' strategy=strategy.pk %}">Delete</a>
       </td>
     </tr>
   {% endfor %}
@@ -99,7 +99,7 @@
   <script>
 
     $(document).ready(function() {
-      $('.messages').delay(2000).fadeOut();
+      $('.messages').delay(1000).fadeOut();
       $('.objectives_listing').dataTable({
           "sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
           "bStateSave": true,

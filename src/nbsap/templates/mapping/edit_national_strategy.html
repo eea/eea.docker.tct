@@ -20,10 +20,10 @@
   </p>
 {% endif %}
 
-<form style="margin-top: 25px" action="" method="post">
+<form style="margin-top: 25px" action="{% url 'edit_national_strategy' pk=strategy.id %}" method="post">
   <div class="form-actions">
     <button type="submit" class="btn btn-primary">Save</button>
-    <a href="{% url 'mapping_national_objectives' %}" class="btn" type="button">Cancel</a>
+    <a href="{% url 'list_national_strategy' %}" class="btn" type="button">Cancel</a>
   </div>
 
   <div class="control-group row">
@@ -83,7 +83,7 @@
 
   <div class="form-actions">
     <button type="submit" class="btn btn-primary">Save</button>
-    <a href="{% url 'mapping_national_objectives' %}" class="btn" type="button">Cancel</a>
+    <a href="{% url 'list_national_strategy' %}" class="btn" type="button">Cancel</a>
   </div>
 
 </form>
@@ -116,7 +116,7 @@
       $('select[name=aichi_target]').html('');
       $.each(data.targets, function(i,t) {
         var html = $('<option />').attr('value', t.pk).text('Target ' + t.value);
-          $('select[name=aichi_target]').append(html);
+        $('select[name=aichi_target]').append(html);
       });
       $('select[name=aichi_target]').change();
     });
@@ -126,6 +126,7 @@
     var option = $(this).val();
     var text =  $(this).parents('.control-group').find('.target_text');
     var url = "{% url 'aichi_target_title' pk=1%}";
+
     url = url.replace('1', option);
     $.get(url, function (data) {
       data = $.parseJSON(data)[0];
@@ -152,51 +153,52 @@
   }).change();
 
   $('select[name=eu_targets]').on('change', function () {
-     var option = $(this).serialize();
-     var text = $(this).parents('.control-group').find('.eu_target_text');
-
-     var output = "";
-     var args = option.split("eu_targets=");
-     args = args.map(function(x) {return parseInt(x)});
-     args = args.filter(Number);
-     text.html('');
-     var url = "{% url 'eu_target_title' pk=1%}";
-     $.each(args, function(i, arg){
-       $.get(url.replace('1',arg), function(data) {
-       output += '<p>' + data + '</p>';
-       text.html(output);
-        });
-      });
- }).change();
-
-  $('select[name=eu_targets]').on('change', function() {
     var option = $(this).serialize();
+    var text = $(this).parents('.control-group').find('.eu_target_text');
+
     var args = option.split("eu_targets=");
     args = args.map(function(x) {return parseInt(x)});
     args = args.filter(Number);
 
-    var url = "{% url 'target_action' pk=1%}";
-    $('select[name=eu_actions]').html('');
+    var options = $('select[name=eu_actions]').find('option:selected');
+    var url = "{% url 'eu_target_title' pk=1%}";
+    var action_url = "{% url 'target_action' pk=1%}";
 
-    $.each(args, function(i, arg) {
-      $.get(url.replace('1',arg), function(data) {
+    var eu_actions = $('select[name=eu_actions]');
+    eu_actions.html('');
+    text.html('');
+
+    $.each(args, function(i, arg){
+       $.get(url.replace('1',arg), function(data) {
+         text.append('<p>'+ data + '</p>');
+       });
+
+       $.get(action_url.replace('1',arg), function(data) {
         data = $.parseJSON(data);
         $.each(data, function (i, d) {
-
           var html = $('<option />').attr('value', d.id).text(d.value);
-          $('select[name=eu_actions]').append(html);
+          var action_text =  eu_actions.parents('.control-group').find('.actions_text');
+
+          $.each(options, function(j, o) {
+            if (o.value == d.id){
+              html = $('<option />').attr('value',d.id).attr('selected', 'selected').text(d.value);
+              $.get("{% url 'action_title' pk=1%}".replace('1', d.id), function(action_data) {
+                action_text.append('<p>' + action_data + '</p>');
+              });
+            }
+          });
+
+        eu_actions.append(html);
         });
       });
     });
-    $('select[name=eu_actions]').trigger('liszt:updated');
+  eu_actions.change();
+
   }).change();
 
   $('select[name=eu_actions]').on('change', function () {
     var option = $(this).serialize();
-
     var text = $(this).parents('.control-group').find('.actions_text');
-
-    var output = "";
     var args = option.split("eu_actions=");
     args = args.map(function(x) {return parseInt(x)});
     args = args.filter(Number);
