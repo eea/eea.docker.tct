@@ -32,8 +32,10 @@
     <th class="goal">Goal</th>
     <th class="">Most Relevant Targets</th>
     <th>Other Relevant Targets</th>
-    <th>EU Targets</th>
-    <th>EU Actions</th>
+    {% if EU_STRATEGY %}
+        <th>EU Targets</th>
+        <th>EU Actions</th>
+    {% endif %}
     <th>Edit</th>
     <th>Delete</th>
   </thead>
@@ -58,22 +60,24 @@
              {% endfor %}
          {% endif %}
       </td>
-      <td>
-         {% if strategy.eu_targets.all %}
-           {% for eu_target in strategy.eu_targets.all %}
-             <a href="">{{ eu_target.code }}</a>
-             {% if not forloop.last %},{% endif %}
-           {% endfor %}
-         {% endif %}
-      </td>
-      <td>
-         {% if strategy.eu_actions.all %}
-           {% for action in strategy.eu_actions.all %}
-             <a href="">Action {{ action.code }}</a>
-             {% if not forloop.last %},{% endif %}
-           {% endfor %}
-         {% endif %}
-      </td>
+      {% if EU_STRATEGY %}
+          <td>
+             {% if strategy.eu_targets.all %}
+               {% for eu_target in strategy.eu_targets.all %}
+                 <a href="">{{ eu_target.code }}</a>
+                 {% if not forloop.last %},{% endif %}
+               {% endfor %}
+             {% endif %}
+          </td>
+          <td>
+             {% if strategy.eu_actions.all %}
+               {% for action in strategy.eu_actions.all %}
+                 <a href="">Action {{ action.code }}</a>
+                 {% if not forloop.last %},{% endif %}
+               {% endfor %}
+             {% endif %}
+          </td>
+      {% endif %}
       <td style="text-align: center;">
         <a class="btn btn-mini btn-primary add"
             href="{% url 'edit_national_strategy' pk=strategy.pk %}">Edit</a>

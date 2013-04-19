@@ -291,15 +291,19 @@ class NationalStrategy(models.Model):
                                            blank=True,
                                            verbose_name="Other AICHI targets",
                                            related_name="other_targets_national_strategy")
-    eu_targets = models.ManyToManyField(EuTarget,
-                                        null=True,
-                                        blank=True,
-                                        verbose_name="EU targets",
-                                        related_name="national_strategy")
-    eu_actions = models.ManyToManyField(EuAction,
-                                        null=True,
-                                        blank=True,
-                                        verbose_name="Eu related actions",
-                                        related_name="national_strategy")
+
+    from django.conf import settings
+    if settings.EU_STRATEGY:
+        eu_targets = models.ManyToManyField(EuTarget,
+                                            null=True,
+                                            blank=True,
+                                            verbose_name="EU targets",
+                                            related_name="national_strategy")
+        eu_actions = models.ManyToManyField(EuAction,
+                                            null=True,
+                                            blank=True,
+                                            verbose_name="Eu related actions",
+                                            related_name="national_strategy")
+
 
 pre_save.connect(NationalObjective.pre_save_objective_code, sender=NationalObjective)
