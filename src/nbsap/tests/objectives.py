@@ -118,8 +118,8 @@ class NationalObjectiveTestCase(TestCase):
             # delete operation not working properly
             self.assertEqual(1,2)
 
-    def test_404_when_add_after_empty_database(self):
-        """ Test 404 page when adding objective after table is empty """
+    def test_404_when_add_after_empty_database_in_nationalstrategy(self):
+        """ Test 404 page in homepage National Strategy when adding objective after table is empty """
 
         # clean all objectives
         objectives = models.NationalObjective.objects.all()
@@ -131,6 +131,45 @@ class NationalObjectiveTestCase(TestCase):
 
         # test empty-proper-message on national strategy homepage
         response = self.client.get("/objectives")
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('No objectives found.', response.content)
+
+        # add an sample objective
+        mydata = {
+            'language': 'en',
+            'title': 'My new title',
+            'description': 'My new description'
+        }
+        response = self.client.post('/administration/objectives/add/', mydata)
+
+        # test successfull adding
+        objectives = models.NationalObjective.objects.all()
+        self.assertEqual(len(objectives), 1)
+        objective = objectives[0]
+        self.assertEqual(objective.title, mydata['title'])
+        self.assertEqual(objective.description, mydata['description'])
+
+        # test view of newly added objective
+        response = self.client.get('/administration/objectives/%s' % str(objective.id))
+        self.assertIn(mydata['title'], response.content)
+        self.assertIn(mydata['description'], response.content)
+
+        # cleanup the mess
+        response = self.client.get('/administration/objectives/%s/delete' % (str(objective.id)))
+
+    def test_404_when_add_after_empty_database_in_implementation(self):
+        """ Test 404 page in homepage Implementation when adding objective after table is empty """
+
+        # clean all objectives
+        objectives = models.NationalObjective.objects.all()
+        for objective in objectives:
+            objective.delete()
+
+        objectives = models.NationalObjective.objects.all()
+        self.assertEqual(len(objectives), 0)
+
+        # test empty-proper-message on national strategy homepage
+        response = self.client.get("/implementation")
         self.assertEqual(response.status_code, 200)
         self.assertIn('No objectives found.', response.content)
 

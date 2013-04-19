@@ -21,6 +21,24 @@ def nat_strategy(request, code=None):
                   })
 
 
+def implementation(request, code=None):
+    if code is None:
+        # render same template used for empty national strategy
+        return render(request, 'objectives/empty_nat_strategy.html')
+
+    current_objective = get_object_or_404(models.NationalObjective, code=code)
+    objectives = models.NationalObjective.objects.filter(parent=None).all()
+
+    current_objective.actions_tree = []
+
+    for objective in current_objective.get_all_objectives():
+        for action in objective.actions.all():
+            current_objective.actions_tree.append(action)
+    return render(request, 'implementation.html',
+                  {'current_objective': current_objective,
+                   'objectives': objectives,
+                  })
+
 @login_required
 def view_national_objective(request, pk):
     objective = get_object_or_404(models.NationalObjective, pk=pk)

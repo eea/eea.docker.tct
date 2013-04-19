@@ -8,7 +8,7 @@ urlpatterns = patterns('',
     url(r'^$', 'nbsap.views.goals', {'code': 'a'}, name='goals'),
     url(r'^goals/(?P<code>[\w\-]+)$', 'nbsap.views.goals', name='goals'),
 
-    url(r'^implementation$', 'nbsap.views.implementation', {'code' : '1'}, name='implementation'),
+    url(r'^implementation$', 'nbsap.views.implementation', name='implementation'),
     url(r'^implementation/(?P<code>[\w\-]+)$', 'nbsap.views.implementation', name='implementation'),
 
     url(r'^eu_targets$', 'nbsap.views.eu_targets', {'code': '1'}, name='eu_targets'),
