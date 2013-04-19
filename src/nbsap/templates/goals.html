@@ -60,7 +60,7 @@
     <div class="element_field" id="{{ target.code }}">
       <h2>{% trans "Target" %} {{ target.code }}: {{ target.description }}</h2>
 
-      {% if target.eu_aichi_strategy.all %}
+      {% if target.eu_aichi_strategy.all and EU_STRATEGY %}
       <label>{% trans "Mapping with EU targets" %}:</label>
       <div class="well">
         <ul>
