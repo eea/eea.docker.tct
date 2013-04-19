@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import ugettext_lazy as _
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 
 from nbsap import models
 from nbsap.forms import NationalActionForm
@@ -59,4 +60,6 @@ def delete_national_action(request, objective, pk=None):
     action.delete()
     messages.success(request, 'Action successfully deleted.')
     return redirect('view_national_objective', pk=objective)
+
+
 

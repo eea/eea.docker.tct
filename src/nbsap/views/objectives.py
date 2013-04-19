@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import ugettext_lazy as _
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 
 from nbsap import models
 from nbsap.forms import NationalObjectiveForm
@@ -119,3 +120,9 @@ def delete_national_objective(request, pk):
     else:
         return redirect('list_national_objectives')
 
+def get_national_objective_title(request, pk=None):
+    if not pk:
+        return HttpResponse('Object not found')
+
+    objective = get_object_or_404(models.NationalObjective, pk=pk)
+    return HttpResponse('Objective ' + objective.code + ': ' + objective.title)

@@ -1,0 +1,209 @@
+{% extends 'layout.html' %}
+
+{% block extra_head %}
+
+  <style>
+    .controls textarea{width: 100%;}
+    .controls textarea#id_title {height: 54px;}
+  </style>
+
+  {{ form.media }}
+{% endblock %}
+
+{% block content %}
+
+<h1 class="small"> Mapping National Objectives</h1>
+
+{% if form.errors %}
+  <p style="color: red;">
+    Please correct the error {{ form.errors }} below.
+  </p>
+{% endif %}
+
+<form style="margin-top: 25px" action="{% url 'edit_national_strategy' %}" method="post">
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a href="{% url 'list_national_strategy' %}" class="btn" type="button">Cancel</a>
+  </div>
+
+  <div class="control-group row">
+    <label class="control-label span2" for="nat_objective">National Objective</label>
+    <div class="controls span3"> {{ form.nat_objective }}
+    </div>
+    <div class="objective_text span7">
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="control-group row">
+    <label class="control-label span2" for="aichi_goal">AICHI Strategic Goal</label>
+    <div class="controls span3"> {{ form.aichi_goal }}
+    </div>
+    <div class="goal_text span7">
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="control-group row">
+    <label class="control-label span2" for="aichi_target">Relevant AICHI Target</label>
+    <div class="controls span3"> {{ form.aichi_target }}
+    </div>
+    <div class="target_text span7">
+    </div>
+  </div>
+
+  <div class="control-group row">
+    <label class="control-label span2" for="other_targets">Other AICHI Targets</label>
+    <div class="controls span3"> {{ form.other_targets }}
+    </div>
+    <div class="other_target_text span7">
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="control-group row">
+    <label class="control-label span2">EU Targets</label>
+    <div class="controls span3"> {{ form.eu_targets }}
+    </div>
+    <div class="eu_target_text span7">
+    </div>
+  </div>
+
+  <div class="control-group row">
+    <label class="control-label span2">EU Actions</label>
+    <div class="controls span3"> {{ form.eu_actions }}
+    </div>
+    <div class="actions_text span7">
+    </div>
+
+  </div>
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a href="{% url 'list_national_strategy' %}" class="btn" type="button">Cancel</a>
+  </div>
+
+</form>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+  $(function () {
+
+  $('select[name=nat_objective]').on('change', function () {
+      var option = parseInt($(this).val());
+      var text = $(this).parents('.control-group').find('.objective_text');
+      var url = "{% url 'objective_title' pk=1%}".replace('1', option)
+      $.get(url, function (data) {
+        text.html('<p>' + data + '</p>');
+        });
+      }).change();
+
+
+  $('select[name=aichi_goal]').on('change', function () {
+      var option = $(this).val();
+      var text = $(this).parents('.control-group').find('.goal_text');
+      var url = "{% url 'goal_title' pk=1%}".replace('1', option)
+      $.get(url, function (data) {
+        data = $.parseJSON(data)[0];
+
+        text.html('<p>' + data.goal + '</p>');
+        $('select[name=aichi_target]').html('');
+        $.each(data.targets, function(i,t) {
+           var html = $('<option />').attr('value', t.pk).text('Target ' + t.value);
+           $('select[name=aichi_target]').append(html);
+        });
+        $('select[name=aichi_target]').change();
+      });
+  }).change();
+
+  $('select[name=aichi_target]').on('change', function () {
+      var option = $(this).val();
+      var text =  $(this).parents('.control-group').find('.target_text');
+      var url = "{% url 'aichi_target_title' pk=1%}";
+      url = url.replace('1', option);
+      $.get(url, function (data) {
+        data = $.parseJSON(data)[0];
+
+        text.html('<p>' + data.value + '</p>');
+        });
+     }).change();
+
+  $('select[name=other_targets]').on('change', function () {
+      var option = $(this).serialize();
+      var text = $(this).parents('.control-group').find('.other_target_text');
+      var args = option.split("other_targets=");
+      args = args.map(function(x) {return parseInt(x)});
+      args = args.filter(Number);
+      var url = "{% url 'aichi_target_title' pk=1%}";
+      text.html('');
+
+      $.each(args, function(i,arg) {
+        $.get(url.replace('1',arg), function(data) {
+        data = $.parseJSON(data)[0];
+        text.append('<h5>Target ' + data.code + '</h5><p>' + data.value + '</p>');
+        });
+      });
+  }).change();
+
+  $('select[name=eu_targets]').on('change', function () {
+     var option = $(this).serialize();
+     var text = $(this).parents('.control-group').find('.eu_target_text');
+     var args = option.split("eu_targets=");
+
+     args = args.map(function(x) {return parseInt(x)});
+     args = args.filter(Number);
+     text.html('');
+     var url = "{% url 'eu_target_title' pk=1%}";
+     $.each(args, function(i, arg) {
+       $.get(url.replace('1',arg), function(data) {
+       text.append('<p>' + data + '</p>');
+      });
+    });
+ }).change();
+
+  $('select[name=eu_targets]').on('change', function() {
+    var option = $(this).serialize();
+    var args = option.split("eu_targets=");
+    args = args.map(function(x) {return parseInt(x)});
+    args = args.filter(Number);
+
+    var url = "{% url 'target_action' pk=1%}";
+    $('select[name=eu_actions]').html('');
+    $.each(args, function(i, arg) {
+      $.get(url.replace('1',arg), function(data) {
+        data = $.parseJSON(data);
+        $.each(data, function (i, d) {
+          var html = $('<option />').attr('value', d.id).text(d.value);
+          $('select[name=eu_actions]').append(html);
+       });
+      });
+    });
+  }).change();
+
+  $('select[name=eu_actions]').on('change', function () {
+    var option = $(this).serialize();
+    var text = $(this).parents('.control-group').find('.actions_text');
+
+    var args = option.split("eu_actions=");
+    args = args.map(function(x) {return parseInt(x)});
+    args = args.filter(Number);
+    text.html('');
+    var url = "{% url 'action_title' pk=1%}";
+      $.each(args, function(i, arg){
+        $.get(url.replace('1',arg), function(data) {
+          text.append('<p>' + data + '</p>');
+        });
+      });
+  }).change();
+
+
+
+});
+</script>
+{% endblock %}

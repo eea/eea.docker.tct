@@ -23,8 +23,52 @@ urlpatterns = patterns('',
 
     url(r'^i18n/', include('django.conf.urls.i18n')),
 
+
+    # URLs for mapping form
+
+    url(r'^goals/title$',
+            'nbsap.views.get_goal_title',
+            name='goal_title'),
+    url(r'^goals/title/(?P<pk>[\w\-]+)$',
+            'nbsap.views.get_goal_title',
+            name='goal_title'),
+
+     url(r'^actions/title$',
+            'nbsap.views.get_action_title',
+            name='action_title'),
+    url(r'^actions/title/(?P<pk>[\w\-]+)$',
+            'nbsap.views.get_action_title',
+            name='action_title'),
+
+    url(r'^eu_targets/title$',
+            'nbsap.views.get_eu_target_title',
+            name='eu_target_title'),
+    url(r'^eu_targets/title/(?P<pk>[\w\-]+)$',
+            'nbsap.views.get_eu_target_title',
+            name='eu_target_title'),
+    url(r'^eu_targets/actions/(?P<pk>[\w\-]+)$',
+            'nbsap.views.get_actions_for_target',
+            name='target_action'),
+
+
+
+    url(r'^aichi_targets/title$',
+            'nbsap.views.get_aichi_target_title',
+            name='aichi_target_title'),
+    url(r'^aichi_targets/title/(?P<pk>[\w\-]+)$',
+            'nbsap.views.get_aichi_target_title',
+            name='aichi_target_title'),
+
+   url(r'^objectives/title$',
+            'nbsap.views.get_national_objective_title',
+            name='objective_title'),
+    url(r'^objectives/title/(?P<pk>[\w\-]+)$',
+            'nbsap.views.get_national_objective_title',
+            name='objective_title'),
+
     # othe URLs
     url(r'^tinymce/', include('tinymce.urls')),
+
 
     # authentication URLs
     url(r'^accounts/login/$', 'django.contrib.auth.views.login', name='login'),
@@ -76,6 +120,18 @@ urlpatterns = patterns('',
             name='delete_national_action'),
 
     url(r'^administration/mapping/$',
-            'nbsap.views.mapping_national_objectives',
-            name='mapping_national_objectives'),
+            'nbsap.views.list_national_strategy',
+            name='list_national_strategy'),
+
+    url(r'^administration/mapping/add$',
+            'nbsap.views.edit_national_strategy',
+            name='edit_national_strategy'),
+
+    url(r'^administration/mapping/(?P<pk>[\w\-]+)/add$',
+            'nbsap.views.edit_national_strategy',
+            name='edit_national_strategy'),
+
+    url(r'^administration/mapping/(?P<strategy>[\w\-]+)/delete$',
+            'nbsap.views.delete_national_strategy',
+            name='delete_national_strategy'),
 )

@@ -8,8 +8,9 @@
     <a href="{% url 'list_national_objectives' %}">National Strategy</a>
   </li>
 
-  <li class="{% active request '^/administration/mapping/[\w\-]+' %}">
-    <a href="{% url 'list_national_objectives' %}">Mapping</a>
+  <li class="{% active request '^/administration/mapping/[\w\-]+' %}
+             {% active request '^/administration/mapping/$' %}">
+    <a href="{% url 'list_national_strategy' %}">Mapping</a>
   </li>
 
 </ul>

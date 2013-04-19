@@ -48,13 +48,13 @@
       </ul>
       {% endif %}
        </div>
-      
-      <label>Mapping with Aichi Strategy</label> 
+
+      <label>Mapping with Aichi Strategy</label>
       <div class ="well">
         {% if current_target.eu_aichi_strategy %}
         <ul>
-          {% for strategy in current_target.eu_aichi_strategy.all %}  
-            {% for aichi_target in strategy.aichi_targets.all %}             
+          {% for strategy in current_target.eu_aichi_strategy.all %}
+            {% for aichi_target in strategy.aichi_targets.all %}
               <li>
                 <a href = "{% url 'goals' code=aichi_target.get_parent_goal.code %}#{{aichi_target.code}}">Target {{aichi_target.code}}</a>
               </li>
@@ -79,17 +79,22 @@
               <ul>
                 {% for strategy in action.national_strategy.all %}
                   <li>
+                    {% if strategy.objective.parent %}
                     <a href="{% url 'nat_strategy' code=strategy.objective.parent.code %}#{{ strategy.objective.code }}">Objective {{strategy.objective.code}}: {{ strategy.objective.title }} {{ strategy.objective.parent.code }}
                     </a>
+                    {% else %}
+                    <a href="{% url 'nat_strategy' code=strategy.objective.code %}">Objective {{strategy.objective.code}}: {{ strategy.objective.title }} {{ strategy.objective.code }}
+                    </a>
+                    {% endif %}
                   </li>
-                {% endfor %} 
+                {% endfor %}
               </ul>
             {% else %}
               <span>No data available</span>
             {% endif %}
           </div>
         </div>
-        
+
       </div>
       {% endfor %}
 
