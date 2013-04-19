@@ -6,9 +6,11 @@
     <a href="{% url 'goals' %}">Aichi</a>
   </li>
 
+  {% if EU_STRATEGY %}
   <li class="{% active request '^/eu_targets' %}">
     <a href="{% url 'eu_targets' %}">EU Strategy</a>
   </li>
+  {% endif %}
 
   <li class="{% active request '^/objectives' %}">
     <a href="{% url 'nat_strategy' %}">National Strategy</a>

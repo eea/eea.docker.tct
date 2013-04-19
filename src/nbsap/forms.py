@@ -2,7 +2,7 @@ from django import forms
 from django.conf import settings
 from django.forms import widgets
 from django.shortcuts import get_object_or_404
-
+from django.conf import settings
 from tinymce.widgets import TinyMCE
 
 from pagedown.widgets import PagedownWidget
@@ -102,10 +102,11 @@ class NationalStrategyForm(forms.Form):
     other_targets = forms.MultipleChoiceField(choices=get_my_choices('Target', AichiTarget),
                                               required=False)
 
-    eu_targets = forms.MultipleChoiceField(choices=get_my_choices('Target', EuTarget),
-                                           required=False)
-    eu_actions = forms.MultipleChoiceField(choices=get_my_choices('Action', EuAction),
-                                           required=False)
+    if settings.EU_STRATEGY:
+        eu_targets = forms.MultipleChoiceField(choices=get_my_choices('Target', EuTarget),
+                                               required=False)
+        eu_actions = forms.MultipleChoiceField(choices=get_my_choices('Action', EuAction),
+                                               required=False)
 
     def __init__(self, *args, **kwargs):
         self.strategy = kwargs.pop('strategy', None)
@@ -116,8 +117,9 @@ class NationalStrategyForm(forms.Form):
             self.fields['aichi_goal'].initial = self.strategy.relevant_target.get_parent_goal().pk
             self.fields['aichi_target'].initial = self.strategy.relevant_target.pk
             self.fields['other_targets'].initial = [target.pk for target in self.strategy.other_targets.all()]
-            self.fields['eu_targets'].initial = [target.pk for target in self.strategy.eu_targets.all()]
-            self.fields['eu_actions'].initial = [action.id for action in self.strategy.eu_actions.all()]
+            if settings.EU_STRATEGY:
+                self.fields['eu_targets'].initial = [target.pk for target in self.strategy.eu_targets.all()]
+                self.fields['eu_actions'].initial = [action.id for action in self.strategy.eu_actions.all()]
 
     def save(self):
         strategy = self.strategy or NationalStrategy()
@@ -131,16 +133,18 @@ class NationalStrategyForm(forms.Form):
         strategy.save()
 
         strategy.other_targets.clear()
-        strategy.eu_targets.clear()
-        strategy.eu_actions.clear()
+        if settings.EU_STRATEGY:
+            strategy.eu_targets.clear()
+            strategy.eu_actions.clear()
 
         for ucode in self.cleaned_data['other_targets']:
             strategy.other_targets.add(get_object_or_404(AichiTarget,
                                                          code=ucode))
-        for ucode in self.cleaned_data['eu_targets']:
-            strategy.eu_targets.add(get_object_or_404(EuTarget, code=ucode))
-        for ucode in self.cleaned_data['eu_actions']:
-            strategy.eu_actions.add(get_object_or_404(EuAction, pk=ucode))
+        if settings.EU_STRATEGY:
+            for ucode in self.cleaned_data['eu_targets']:
+                strategy.eu_targets.add(get_object_or_404(EuTarget, code=ucode))
+            for ucode in self.cleaned_data['eu_actions']:
+                strategy.eu_actions.add(get_object_or_404(EuAction, pk=ucode))
 
         strategy.save()
         return strategy

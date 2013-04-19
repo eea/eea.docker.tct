@@ -64,6 +64,7 @@
 
   <hr>
 
+  {% if EU_STRATEGY %}
   <div class="control-group row">
     <label class="control-label span2">EU Targets</label>
     <div class="controls span3"> {{ form.eu_targets }}
@@ -78,8 +79,8 @@
     </div>
     <div class="actions_text span7">
     </div>
-
   </div>
+  {% endif %}
 
   <div class="form-actions">
     <button type="submit" class="btn btn-primary">Save</button>

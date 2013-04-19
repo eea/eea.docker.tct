@@ -82,8 +82,9 @@
 
       {% include 'mapping/nat_strategy_aichi_mapping.html' %}
 
-      {% include 'mapping/nat_strategy_eu_mapping.html' %}
-
+      {% if EU_STRATEGY %}
+          {% include 'mapping/nat_strategy_eu_mapping.html' %}
+      {% endif %}
       {% if subobj.actions.all %}
         <label>Related actions:</label>
         {% for action in subobj.actions.all %}

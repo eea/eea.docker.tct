@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
 from django.http import HttpResponse
+from django.template import Template, context, RequestContext
+from django.shortcuts import render_to_response
 import json
 
 from nbsap import models
@@ -15,11 +17,13 @@ def goals(request, code):
 
     paginator = Paginator(indicators_list, 20)
 
-    return render(request, 'goals.html',
-                  {'goals': goals,
-                   'current_goal': current_goal,
-                   'indicators_pages': get_indicators_pages(paginator),
-                  })
+    return render_to_response('goals.html',
+                              context_instance=RequestContext(request, {
+                                'goals': goals,
+                                'current_goal': current_goal,
+                                'indicators_pages': get_indicators_pages(paginator),
+                              })
+    )
 
 
 def get_goal_title(request, pk=None):

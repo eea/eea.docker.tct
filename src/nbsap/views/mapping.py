@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.template import Template, context, RequestContext
+from django.shortcuts import render_to_response
 
 from nbsap import models
 from nbsap.forms import NationalStrategyForm
@@ -27,10 +29,12 @@ def edit_national_strategy(request, pk=None):
             return redirect('list_national_strategy')
     else:
         form = NationalStrategyForm(strategy=strategy)
-    return render(request, template,
-                  {'form': form,
-                  'strategy': strategy,
-                   })
+    return render_to_response(template,
+                              context_instance=RequestContext(request, {
+                                'form': form,
+                                'strategy': strategy,
+                              })
+    )
 
 
 @login_required
@@ -45,6 +49,8 @@ def delete_national_strategy(request, strategy=None):
 def list_national_strategy(request):
     strategies = models.NationalStrategy.objects.all()
 
-    return render(request, 'mapping/list_national_strategy.html',
-                  {'strategies': strategies,
-                   })
+    return render_to_response('mapping/list_national_strategy.html',
+                              context_instance=RequestContext(request, {
+                                'strategies': strategies,
+                                })
+    )
