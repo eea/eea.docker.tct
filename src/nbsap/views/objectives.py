@@ -7,8 +7,12 @@ from nbsap import models
 from nbsap.forms import NationalObjectiveForm
 
 def nat_strategy(request, code=None):
-    if code is None:
+    objectives = models.NationalObjective.objects.all()
+    if len(objectives) == 0:
         return render(request, 'objectives/empty_nat_strategy.html')
+
+    if code is None:
+        code = objectives[0].code
 
     current_objective = get_object_or_404(models.NationalObjective, code=code)
     objectives = models.NationalObjective.objects.filter(parent=None).all()
@@ -22,9 +26,12 @@ def nat_strategy(request, code=None):
 
 
 def implementation(request, code=None):
-    if code is None:
-        # render same template used for empty national strategy
+    objectives = models.NationalObjective.objects.all()
+    if len(objectives) == 0:
         return render(request, 'objectives/empty_nat_strategy.html')
+
+    if code is None:
+        code = objectives[0].code
 
     current_objective = get_object_or_404(models.NationalObjective, code=code)
     objectives = models.NationalObjective.objects.filter(parent=None).all()

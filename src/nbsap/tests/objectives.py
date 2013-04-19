@@ -196,5 +196,122 @@ class NationalObjectiveTestCase(TestCase):
         # cleanup the mess
         response = self.client.get('/administration/objectives/%s/delete' % (str(objective.id)))
 
+    def test_nat_strategy_empty_database_no_code(self):
+        """ Test the <empty database, no code given> use case """
+        # clean all objectives
+        objectives = models.NationalObjective.objects.all()
+        for objective in objectives:
+            objective.delete()
+
+        objectives = models.NationalObjective.objects.all()
+        self.assertEqual(len(objectives), 0)
+
+        response = self.client.get('/objectives')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('No objectives found.', response.content)
+
+    def test_nat_strategy_empty_database_wrong_code(self):
+        """ Test the <empty database, wrong code given> use case """
+        # clean all objectives
+        objectives = models.NationalObjective.objects.all()
+        for objective in objectives:
+            objective.delete()
+
+        objectives = models.NationalObjective.objects.all()
+        self.assertEqual(len(objectives), 0)
+
+        # test a wrong code
+        response = self.client.get('/objectives/100')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('No objectives found.', response.content)
+
+    def test_nat_strategy_full_database_no_code(self):
+        """ Test the <full database, no code given> use case """
+        objectives = models.NationalObjective.objects.all()
+        self.assertNotEqual(len(objectives), 0)
+
+        # test no code given
+        response = self.client.get('/objectives')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('In principle, the entire wealt', response.content)
+
+    def test_nat_strategy_pate_full_database_good_code(self):
+        """ Test the <full database, good code given> use case """
+        objectives = models.NationalObjective.objects.all()
+        self.assertNotEqual(len(objectives), 0)
+
+        # test a good code
+        response = self.client.get('/objectives/5')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('s biodiversity touches upon ', response.content)
+
+    def test_nat_strategy_page_full_database_wrong_code(self):
+        """ Test the <full database, wrong code given> use case """
+        objectives = models.NationalObjective.objects.all()
+        self.assertNotEqual(len(objectives), 0)
+
+        # test a good code
+        response = self.client.get('/objectives/100')
+        self.assertEqual(response.status_code, 404)
+
+    def test_implementation_page_empty_database_no_code(self):
+        """ Test the <empty database, no code given> use case """
+        # clean all objectives
+        objectives = models.NationalObjective.objects.all()
+        for objective in objectives:
+            objective.delete()
+
+        objectives = models.NationalObjective.objects.all()
+        self.assertEqual(len(objectives), 0)
+
+        response = self.client.get('/implementation')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('No objectives found.', response.content)
+
+    def test_implementation_page_empty_database_wrong_code(self):
+        """ Test the <empty database, wrong code given> use case """
+        # clean all objectives
+        objectives = models.NationalObjective.objects.all()
+        for objective in objectives:
+            objective.delete()
+
+        objectives = models.NationalObjective.objects.all()
+        self.assertEqual(len(objectives), 0)
+
+        # test a wrong code
+        response = self.client.get('/implementation/100')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('No objectives found.', response.content)
+
+    def test_implementation_page_full_database_no_code(self):
+        """ Test the <full database, no code given> use case """
+        objectives = models.NationalObjective.objects.all()
+        self.assertNotEqual(len(objectives), 0)
+
+        # test no code given
+        response = self.client.get('/implementation')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('One of its program is the Monito', response.content)
+
+    def test_implementation_page_full_database_good_code(self):
+        """ Test the <full database, good code given> use case """
+        objectives = models.NationalObjective.objects.all()
+        self.assertNotEqual(len(objectives), 0)
+
+        # test a good code
+        response = self.client.get('/implementation/5')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('rawing up of preparations for the m', response.content)
+
+    def test_implementation_page_full_database_wrong_code(self):
+        """ Test the <full database, wrong code given> use case """
+        objectives = models.NationalObjective.objects.all()
+        self.assertNotEqual(len(objectives), 0)
+
+        # test a good code
+        response = self.client.get('/implementation/100')
+        self.assertEqual(response.status_code, 404)
+
+
     def tearDown(self):
          self.user.delete()
