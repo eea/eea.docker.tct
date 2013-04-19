@@ -2,7 +2,7 @@
 {% block content %}
 
 {% if messages %}
-<div class="massages alert alert-succes">
+<div class="messages alert alert-success">
 {% for message in messages %}
   <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
 {% endfor %}
@@ -79,8 +79,8 @@
             href="{% url 'edit_national_strategy' pk=strategy.pk %}">Edit</a>
       </td>
       <td style="text-align: center;">
-        <a class="btn btn-mini btn-danger"
-           href="{% url 'delete_national_strategy' strategy=strategy.pk %}">Delete</a>
+        <a class="btn btn-mini btn-danger" href="{% url 'delete_national_strategy' strategy=strategy.pk %}">
+          Delete</a>
       </td>
     </tr>
   {% endfor %}
@@ -93,7 +93,7 @@
 {% block scripts %}
 
   {% assets "js_admin" %}
-    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+     <script type="text/javascript" src="{{ ASSET_URL }}"></script>
   {% endassets %}
 
   <script>
@@ -104,23 +104,17 @@
           "sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
           "bStateSave": true,
           "iDisplayLength": 10,
-          "sPaginationType": "bootstrap",
-          "oLanguage": {
-            "sLengthMenu": 'Display _MENU_ mappings per page',
-            "sInfo": 'Showing _START_ to _END_ of _TOTAL_ mappings',
-            "sZeroRecords": "No matching mappings found"},
       });
+      console.log($('.messages'));
     });
 
     $(".btn-danger").on("click", function (e) {
       e.preventDefault();
       if(confirm('Are you sure you want to delete this mapping?')) {
-      console.log($(this).attr("href"));
         $.ajax({
           "url": $(this).attr("href"),
           "type": "DELETE",
           "success": function (data) {
-          console.log(data.status);
           window.location = "/administration/mapping/";
           }
         });
