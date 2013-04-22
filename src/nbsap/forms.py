@@ -87,39 +87,53 @@ class NationalActionForm(forms.Form):
 
 class NationalStrategyForm(forms.Form):
 
-    def get_my_choices(string, mytype, goal=None):
+    def get_my_choices(string, mytype):
         return [(element.pk,
                  "%s %s" % (string, element.code.upper())) for element in mytype.objects.all()]
+
+    def get_choices(self, string, mytype):
+        return [(element.pk,
+                 "%s %s" % (string, element.code.upper())) for element in mytype.objects.all()]
+
 
     def get_element_by_pk(self, mytype, u_pk):
         return mytype.objects.filter(pk=int(u_pk)).all()[0]
 
-    nat_objective = forms.ChoiceField(choices=get_my_choices('Objective',
-                                                             NationalObjective))
-    aichi_goal = forms.ChoiceField(choices=get_my_choices('Goal', AichiGoal))
-    aichi_target = forms.ChoiceField(choices=get_my_choices('Target',
-                                                            AichiTarget))
-    other_targets = forms.MultipleChoiceField(choices=get_my_choices('Target', AichiTarget),
-                                              required=False)
+    nat_objective = forms.ChoiceField(choices=[])
+    aichi_goal = forms.ChoiceField(choices=[])
+    aichi_target = forms.ChoiceField(choices=[])
+    other_targets = forms.MultipleChoiceField(choices=[], required=False)
 
     if settings.EU_STRATEGY:
-        eu_targets = forms.MultipleChoiceField(choices=get_my_choices('Target', EuTarget),
-                                               required=False)
-        eu_actions = forms.MultipleChoiceField(choices=get_my_choices('Action', EuAction),
-                                               required=False)
+        eu_targets = forms.MultipleChoiceField(choices=[], required=False)
+        eu_actions = forms.MultipleChoiceField(choices=[], required=False)
 
     def __init__(self, *args, **kwargs):
         self.strategy = kwargs.pop('strategy', None)
         super(NationalStrategyForm, self).__init__(*args, **kwargs)
 
+        self.fields['nat_objective'].choices = self.get_choices('Objective',
+                                                                NationalObjective)
+        self.fields['aichi_goal'].choices = self.get_choices('Goal',
+                                                             AichiGoal)
+        self.fields['aichi_target'].choices = self.get_choices('Target',
+                                                               AichiTarget)
+        self.fields['other_targets'].choices = self.get_choices('Target',
+                                                                AichiTarget)
+        if settings.EU_STRATEGY:
+            self.fields['eu_targets'].choices = self.get_choices('Target',
+                                                                 EuTarget)
+            self.fields['eu_actions'].choices = self.get_choices('Action',
+                                                                 EuAction)
         if self.strategy:
-            self.fields['nat_objective'].initial = self.strategy.objective.pk
+            self.fields['nat_objective'].initial = self.strategy.objective.id
             self.fields['aichi_goal'].initial = self.strategy.relevant_target.get_parent_goal().pk
-            self.fields['aichi_target'].initial = self.strategy.relevant_target.pk
-            self.fields['other_targets'].initial = [target.pk for target in self.strategy.other_targets.all()]
+            self.fields['aichi_target'].initial = self.strategy.relevant_target.id
+            self.fields['other_targets'].initial = [target.id for target in self.strategy.other_targets.all()]
             if settings.EU_STRATEGY:
-                self.fields['eu_targets'].initial = [target.pk for target in self.strategy.eu_targets.all()]
+                self.fields['eu_targets'].initial = [target.id for target in self.strategy.eu_targets.all()]
                 self.fields['eu_actions'].initial = [action.id for action in self.strategy.eu_actions.all()]
+
 
     def save(self):
         strategy = self.strategy or NationalStrategy()
