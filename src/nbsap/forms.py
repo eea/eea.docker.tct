@@ -6,8 +6,8 @@ from django.conf import settings
 from tinymce.widgets import TinyMCE
 
 from pagedown.widgets import PagedownWidget
-from models import NationalStrategy, NationalObjective, NationalAction, \
-                   AichiTarget, AichiGoal, EuAction, EuTarget
+from models import AichiGoal, AichiTarget, EuAction, EuTarget, \
+                   NationalStrategy, NationalObjective, NationalAction
 
 
 class NationalObjectiveForm(forms.Form):
@@ -53,7 +53,8 @@ class NationalObjectiveForm(forms.Form):
 
 class NationalActionForm(forms.Form):
     language = forms.ChoiceField(choices=settings.LANGUAGES)
-    description = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 25}))
+    description = forms.CharField(widget=TinyMCE(attrs={'cols': 80,
+                                                        'rows': 25}))
 
     def __init__(self, *args, **kwargs):
 
@@ -87,14 +88,9 @@ class NationalActionForm(forms.Form):
 
 class NationalStrategyForm(forms.Form):
 
-    def get_my_choices(string, mytype):
-        return [(element.pk,
-                 "%s %s" % (string, element.code.upper())) for element in mytype.objects.all()]
-
     def get_choices(self, string, mytype):
         return [(element.pk,
                  "%s %s" % (string, element.code.upper())) for element in mytype.objects.all()]
-
 
     def get_element_by_pk(self, mytype, u_pk):
         return mytype.objects.filter(pk=int(u_pk)).all()[0]
@@ -133,7 +129,6 @@ class NationalStrategyForm(forms.Form):
             if settings.EU_STRATEGY:
                 self.fields['eu_targets'].initial = [target.id for target in self.strategy.eu_targets.all()]
                 self.fields['eu_actions'].initial = [action.id for action in self.strategy.eu_actions.all()]
-
 
     def save(self):
         strategy = self.strategy or NationalStrategy()
