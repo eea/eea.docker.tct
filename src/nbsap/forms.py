@@ -86,6 +86,43 @@ class NationalActionForm(forms.Form):
         return action
 
 
+class AichiGoalForm(forms.Form):
+    language = forms.ChoiceField(choices=settings.LANGUAGES)
+    description = forms.CharField(widget=TinyMCE(attrs={'cols': 80,
+                                                        'rows': 25}))
+    title = forms.CharField(widget=widgets.Textarea)
+
+    def __init__(self, *args, **kwargs):
+
+        self.goal = kwargs.pop('goal', None)
+        lang = kwargs.pop('lang', None)
+
+        super(AichiGoalForm, self).__init__(*args, **kwargs)
+
+        description = getattr(self.goal, 'description_%s' %lang, None)
+        title = getattr(self.goal, 'title')
+
+        self.fields['description'].initial = description
+        self.fields['language'].initial = lang
+        self.fields['title'].initial = title
+
+    def save(self):
+        goal = self.goal or AichiGoal()
+        lang = self.cleaned_data['language']
+        description = self.cleaned_data['description']
+        title = self.cleaned_data['title']
+
+        setattr(goal, 'description_%s' % lang, description)
+        setattr(goal, 'code', self.goal.code)
+        setattr(goal, 'title_%s' % lang, self.goal.title)
+        goal.save()
+
+     #   for ucode in self.cleaned_data['targets']:
+     #       goal.targets.add(get_object_or_404(AichiTarget, code=ucode))
+        goal.save()
+
+        return goal
+
 class NationalStrategyForm(forms.Form):
 
     def get_choices(self, string, mytype):

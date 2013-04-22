@@ -46,12 +46,14 @@
       <td>
         <a href="{% url 'view_national_objective' pk=strategy.objective.pk %}">{{ strategy.objective.code }}</a>
       </td>
+      {% with strategy.relevant_target as target %}
       <td>
-         <a href="">{{ strategy.relevant_target.get_parent_goal.code|title }}</a>
+        <a href="{% url 'edit_goal' code=target.get_parent_goal.code %}">{{ target.get_parent_goal.code|title }}</a>
       </td>
       <td>
-         <a href="">{{ strategy.relevant_target.code }} </a>
+         <a href="">{{ target.code }} </a>
       </td>
+      {% endwith %}
       <td>
          {% if strategy.other_targets.all %}
              {% for target in strategy.other_targets.all %}
@@ -109,7 +111,6 @@
           "bStateSave": true,
           "iDisplayLength": 10,
       });
-      console.log($('.messages'));
     });
 
     $(".btn-danger").on("click", function (e) {

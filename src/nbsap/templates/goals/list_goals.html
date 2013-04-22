@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+{% if messages %}
+<div class="messages alert alert-success">
+{% for message in messages %}
+    <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+{% endfor %}
+</div>
+{% endif %}
+
+{% load assets %}
+<style>
+#DataTables_Table_0_previous {
+    margin-right: 10px;
+}
+</style>
+
+{% include 'admin_nav_tabs.html' %}
+
+<table class="table table-bordered table-striped goals_listing">
+
+  <thead>
+    <th style="width:10px;">ID</th>
+    <th>Goal</th>
+  </thead>
+
+  <tbody>
+  {% for goal in goals %}
+    <tr>
+      <td>{{ goal.code }}</td>
+      <td>
+        <a href="{% url 'edit_goal' code=goal.code %}">{{ goal.title }}</a>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+
+</table>
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+    $(document).ready(function() {
+      $('.messages').delay(1000).fadeOut();
+    });
+</script>
+
+{% endblock scripts %}

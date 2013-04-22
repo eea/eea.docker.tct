@@ -134,4 +134,16 @@ urlpatterns = patterns('',
     url(r'^administration/mapping/(?P<strategy>[\w\-]+)/delete$',
             'nbsap.views.delete_national_strategy',
             name='delete_national_strategy'),
+
+    url(r'^administration/goals/$',
+            'nbsap.views.list_goals',
+            name='list_goals'),
+
+    url(r'^administration/goals/(?P<code>[\w\-]+)/edit$',
+            'nbsap.views.edit_goal',
+            name='edit_goal'),
+
+    url(r'^admininstration/goals/(?P<code>[\w\-]+)/delete$',
+            'nbsap.views.delete_goal',
+            name='delete_goal'),
 )

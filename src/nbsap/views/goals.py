@@ -1,11 +1,15 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.template import Template, context, RequestContext
 from django.shortcuts import render_to_response
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+
 import json
 
 from nbsap import models
+from nbsap.forms import AichiGoalForm
 
 from indicators import get_indicators_pages
 
@@ -42,4 +46,41 @@ def get_aichi_target_title(request, pk=None):
     target = get_object_or_404(models.AichiTarget, pk=pk)
     return HttpResponse(json.dumps([{'code': target.code, 'value':target.description}]))
 
+@login_required
+def delete_goal(request, code=None):
+    goal = get_object_or_404(models.AichiGoal, pk=code)
+  #  goal.delete()
+    messages.success(request, 'Goal successfully deleted.')
 
+    return redirect('list_national_strategy')
+
+@login_required
+def edit_goal(request, code=None):
+    goal = get_object_or_404(models.AichiGoal, pk=code)
+
+    lang = request.GET.get('lang', 'en')
+
+    if request.method == 'POST':
+        form = AichiGoalForm(request.POST, goal=goal, lang=lang)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Saved changes.')
+            return redirect('list_goals')
+        else:
+            form = None
+    else:
+        form = AichiGoalForm(goal=goal, lang=lang)
+
+    return render(request, 'goals/edit_goals.html',
+                  {'form': form,
+                   'goal': goal,
+                   'lang': lang,
+                  })
+
+@login_required
+def list_goals(request):
+    goals = models.AichiGoal.objects.all()
+
+    return render(request, 'goals/list_goals.html',
+                  {'goals': goals,
+                  })
