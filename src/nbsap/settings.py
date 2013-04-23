@@ -188,6 +188,8 @@ TINYMCE_DEFAULT_CONFIG = {
 }
 TINYMCE_SPELLCHECKER = False
 TINYMCE_COMPRESSOR = False
+TINYMCE_JS_URL = '/static/js/tiny_mce/tiny_mce.js'
+TINYMCE_JS_ROOT = '/static/js/tiny_mce'
 
 try:
     from local_settings import *
