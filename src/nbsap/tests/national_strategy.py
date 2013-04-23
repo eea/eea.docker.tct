@@ -2,6 +2,7 @@ from django.test.client import Client
 from django.utils import unittest
 from django.test import TestCase
 from django.contrib.auth.models import User
+from django.conf import settings
 
 from nbsap import models
 
@@ -90,17 +91,19 @@ class NationalStrategyTestCase(TestCase):
 
         for target in added_strategy.other_targets.all():
             self.assertIn(target.id, mydata['other_targets'])
-        for target in added_strategy.eu_targets.all():
-            self.assertIn(target.id, mydata['eu_targets'])
-        for target in added_strategy.eu_actions.all():
-            self.assertIn(target.id, mydata['eu_actions'])
-
         self.assertEqual(len(added_strategy.other_targets.all()),
                          len(mydata['other_targets']))
-        self.assertEqual(len(added_strategy.eu_targets.all()),
-                         len(mydata['eu_targets']))
-        self.assertEqual(len(added_strategy.eu_actions.all()),
-                         len(mydata['eu_actions']))
+
+        if settings.EU_STRATEGY:
+            for target in added_strategy.eu_targets.all():
+                self.assertIn(target.id, mydata['eu_targets'])
+            for target in added_strategy.eu_actions.all():
+                self.assertIn(target.id, mydata['eu_actions'])
+
+            self.assertEqual(len(added_strategy.eu_targets.all()),
+                             len(mydata['eu_targets']))
+            self.assertEqual(len(added_strategy.eu_actions.all()),
+                             len(mydata['eu_actions']))
 
 
 
@@ -153,17 +156,19 @@ class NationalStrategyTestCase(TestCase):
 
         for target in strategy.other_targets.all():
             self.assertIn(target.id, mydata['other_targets'])
-        for target in strategy.eu_targets.all():
-            self.assertIn(target.id, mydata['eu_targets'])
-        for target in strategy.eu_actions.all():
-            self.assertIn(target.id, mydata['eu_actions'])
-
         self.assertEqual(len(strategy.other_targets.all()),
                          len(mydata['other_targets']))
-        self.assertEqual(len(strategy.eu_targets.all()),
-                         len(mydata['eu_targets']))
-        self.assertEqual(len(strategy.eu_actions.all()),
-                         len(mydata['eu_actions']))
+
+        if settings.EU_STRATEGY:
+            for target in strategy.eu_targets.all():
+                self.assertIn(target.id, mydata['eu_targets'])
+            for target in strategy.eu_actions.all():
+                self.assertIn(target.id, mydata['eu_actions'])
+
+            self.assertEqual(len(strategy.eu_targets.all()),
+                             len(mydata['eu_targets']))
+            self.assertEqual(len(strategy.eu_actions.all()),
+                             len(mydata['eu_actions']))
 
     def test_edit_national_strategy_with_required_fields(self):
         mydata = {
@@ -185,8 +190,10 @@ class NationalStrategyTestCase(TestCase):
         self.assertEqual(strategy.relevant_target.id, mydata['aichi_target'])
 
         self.assertEqual(len(strategy.other_targets.all()), 0)
-        self.assertEqual(len(strategy.eu_targets.all()), 0)
-        self.assertEqual(len(strategy.eu_actions.all()), 0)
+
+        if settings.EU_STRATEGY:
+            self.assertEqual(len(strategy.eu_targets.all()), 0)
+            self.assertEqual(len(strategy.eu_actions.all()), 0)
 
 
 
