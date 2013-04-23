@@ -69,7 +69,7 @@ def install():
 def start():
     run("/usr/local/bin/start-stop-daemon --start --background "
         "--pidfile %(nbsap_instance)s/fcgi.pid --make-pidfile "
-        "--exec %(nbsap_sandbox)s/bin/python %(nbsap_repo)s/manage.py fcgi"
+        "--exec %(nbsap_sandbox)s/bin/python %(nbsap_repo)s/manage.py runserver"
         % env, pty=False)
 
 
