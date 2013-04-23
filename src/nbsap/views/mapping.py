@@ -25,7 +25,7 @@ def edit_national_strategy(request, pk=None):
             if pk:
                 messages.success(request, 'Saved changes')
             else:
-                messages.success(request, 'Objects succesfuly added.')
+                messages.success(request, 'Mapping successfully added.')
             return redirect('list_national_strategy')
     else:
         form = NationalStrategyForm(strategy=strategy)

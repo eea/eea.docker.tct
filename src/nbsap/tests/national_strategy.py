@@ -33,8 +33,11 @@ class NationalStrategyTestCase(TestCase):
         response = self.client.get('/administration/mapping/add')
         self.assertEqual(response.status_code, 200)
 
-        response = self.client.post('/administration/mapping/add', mydata)
-        self.assertEqual(response.status_code, 302)
+        response = self.client.post('/administration/mapping/add',
+                                    mydata,
+                                    follow= True)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("Mapping successfully added", response.content)
 
         strategies = models.NationalStrategy.objects.all()
         added_strategy = strategies[len(strategies)- 1]
@@ -50,8 +53,13 @@ class NationalStrategyTestCase(TestCase):
             'aichi_goal': 'b',
             'aichi_target': 4
         }
-        response = self.client.post('/administration/mapping/add', mydata)
-        self.assertEqual(response.status_code, 302)
+        response = self.client.post('/administration/mapping/add',
+                                    mydata,
+                                    follow= True)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("Mapping successfully added", response.content)
+
+
         strategies = models.NationalStrategy.objects.all()
         added_strategy = strategies[len(strategies) - 1]
         self.assertFalse(added_strategy.relevant_target.get_parent_goal().code  ==  mydata['aichi_goal'])
@@ -66,8 +74,11 @@ class NationalStrategyTestCase(TestCase):
             'eu_actions': [36]
         }
 
-        response = self.client.post('/administration/mapping/add', mydata)
-        self.assertEqual(response.status_code, 302)
+        response = self.client.post('/administration/mapping/add',
+                                    mydata,
+                                    follow= True)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("Mapping successfully added", response.content)
 
         strategies = models.NationalStrategy.objects.all()
         added_strategy = strategies[len(strategies)- 1]
@@ -102,8 +113,10 @@ class NationalStrategyTestCase(TestCase):
             'eu_targets': [4],
             'eu_actions': [36]
         }
-        response = self.client.post('/administration/mapping/add', mydata)
-        self.assertEqual(response.status_code, 302)
+        response = self.client.post('/administration/mapping/add',
+                                    mydata,
+                                    follow=True)
+        self.assertEqual(response.status_code, 200)
 
         strategies = models.NationalStrategy.objects.all()
         added_strategy = strategies[len(strategies)- 1]
@@ -128,7 +141,11 @@ class NationalStrategyTestCase(TestCase):
         response = self.client.get('/administration/mapping/1/add')
         self.assertEqual(response.status_code, 200)
 
-        response = self.client.post('/administration/mapping/1/add', mydata)
+        response = self.client.post('/administration/mapping/1/add',
+                                    mydata,
+                                    follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("Saved changes", response.content)
 
         strategy = models.NationalStrategy.objects.all().filter(id=1)[0]
         self.assertEqual(strategy.objective.id, mydata['nat_objective'])
@@ -157,7 +174,11 @@ class NationalStrategyTestCase(TestCase):
         response = self.client.get('/administration/mapping/1/add')
         self.assertEqual(response.status_code, 200)
 
-        response = self.client.post('/administration/mapping/1/add', mydata)
+        response = self.client.post('/administration/mapping/1/add',
+                                    mydata,
+                                    follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("Saved changes", response.content)
 
         strategy = models.NationalStrategy.objects.all().filter(id=1)[0]
         self.assertEqual(strategy.objective.id, mydata['nat_objective'])
