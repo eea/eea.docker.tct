@@ -12,22 +12,24 @@
 
 {% block content %}
 
-<h1 class="small"> Mapping National Objectives</h1>
+{% load i18n %}
+
+<h1 class="small">{% trans "Mapping National Objectives" %}</h1>
 
 {% if form.errors %}
   <p style="color: red;">
-    Please correct the error below: {{ form.errors }}
+    {% blocktrans with form.errors|pluralize as errors %}Please correct the error {{ errors }} below.{% endblocktrans %}
   </p>
 {% endif %}
 
 <form style="margin-top: 25px" action="{% url 'edit_national_strategy' pk=strategy.id %}" method="post">
   <div class="form-actions">
-    <button type="submit" class="btn btn-primary">Save</button>
-    <a href="{% url 'list_national_strategy' %}" class="btn" type="button">Cancel</a>
+    <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
+    <a href="{% url 'list_national_strategy' %}" class="btn" type="button">{% trans "Cancel" %}</a>
   </div>
 
   <div class="control-group row">
-    <label class="control-label span2" for="nat_objective">National Objective</label>
+    <label class="control-label span2" for="nat_objective">{% trans "National Objective" %}</label>
     <div class="controls span3"> {{ form.nat_objective }}
     </div>
     <div class="objective_text span7">
@@ -37,7 +39,7 @@
   <hr>
 
   <div class="control-group row">
-    <label class="control-label span2" for="aichi_goal">AICHI Strategic Goal</label>
+    <label class="control-label span2" for="aichi_goal">{% trans "AICHI Strategic Goal" %}</label>
     <div class="controls span3"> {{ form.aichi_goal }}
     </div>
     <div class="goal_text span7">
@@ -47,7 +49,7 @@
   <hr>
 
   <div class="control-group row">
-    <label class="control-label span2" for="aichi_target">Relevant AICHI Target</label>
+    <label class="control-label span2" for="aichi_target">{% trans "Relevant AICHI Target" %}</label>
     <div class="controls span3"> {{ form.aichi_target }}
     </div>
     <div class="target_text span7">
@@ -55,7 +57,7 @@
   </div>
 
   <div class="control-group row">
-    <label class="control-label span2" for="other_targets">Other AICHI Targets</label>
+    <label class="control-label span2" for="other_targets">{% trans "Other AICHI Targets" %}</label>
     <div class="controls span3"> {{ form.other_targets }}
     </div>
     <div class="other_target_text span7">
@@ -64,8 +66,9 @@
 
   <hr>
 
+  {% if EU_STRATEGY %}
   <div class="control-group row">
-    <label class="control-label span2">EU Targets</label>
+    <label class="control-label span2">{% trans "EU Targets" %}</label>
     <div class="controls span3"> {{ form.eu_targets }}
     </div>
     <div class="eu_target_text span7">
@@ -73,17 +76,18 @@
   </div>
 
   <div class="control-group row">
-    <label class="control-label span2">EU Actions</label>
+    <label class="control-label span2">{% trans "EU Actions" %}</label>
     <div class="controls span3"> {{ form.eu_actions }}
     </div>
     <div class="actions_text span7">
     </div>
 
   </div>
+  {% endif %}
 
   <div class="form-actions">
-    <button type="submit" class="btn btn-primary">Save</button>
-    <a href="{% url 'list_national_strategy' %}" class="btn" type="button">Cancel</a>
+    <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
+    <a href="{% url 'list_national_strategy' %}" class="btn" type="button">{% trans "Cancel" %}</a>
   </div>
 
 </form>

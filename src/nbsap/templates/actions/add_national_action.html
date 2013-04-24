@@ -1,5 +1,7 @@
 {% extends 'layout.html' %}
 
+{% load i18n %}
+
 {% block extra_head %}
 
   <style>
@@ -14,23 +16,23 @@
 
 {% block content %}
 
-<h1 class="small">Add action</h1>
+<h1 class="small">{% trans "Add action" %}</h1>
 
 {% if form.errors %}
   <p style="color: red;">
-      Please correct the error{{ form.errors|pluralize }} below.
+    {% blocktrans with form.errors|pluralize as errors %}Please correct the error {{ errors }} below.{% endblocktrans %}
   </p>
 {% endif %}
 
 <form action="" method="post">
 
   <div class="form-actions">
-    <button type="submit" class="btn btn-primary">Save</button>
-    <a href="{% url 'view_national_objective' pk=objective.pk %}" class="btn" type="button">Cancel</a>
+    <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
+    <a href="{% url 'view_national_objective' pk=objective.pk %}" class="btn" type="button">{% trans "Cancel" %}</a>
   </div>
 
   <div class="control-group">
-    <label class="control-label" for="language">Language</label>
+    <label class="control-label" for="language">{% trans "Language" %}</label>
     <div class="controls">
       {{ form.language }}
     </div>
@@ -41,7 +43,7 @@
       <div class="language-container">
 
         <div class="control-group">
-          <label class="control-label" for="description">Description</label>
+          <label class="control-label" for="description">{% trans "Description" %}</label>
           <div class="controls">
             {{ form.description }}
             {{ form.description.errors }}
@@ -53,8 +55,8 @@
   </div>
 
   <div class="form-actions">
-    <button type="submit" class="btn btn-primary">Save</button>
-    <a href="{% url 'view_national_objective' pk=objective.pk %}" class="btn" type="button">Cancel</a>
+    <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
+    <a href="{% url 'view_national_objective' pk=objective.pk %}" class="btn" type="button">{% trans "Cancel" %}</a>
   </div>
 
 </form>
