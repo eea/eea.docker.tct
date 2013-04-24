@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-24 11:29+0300\n"
+"POT-Creation-Date: 2013-04-24 12:54+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -95,7 +95,10 @@ msgstr ""
 
 #: templates/goals.html:23 templates/goals.html.py:39
 #: templates/mapping/list_national_strategy.html:34
+#: templates/mapping/nat_action_aichi_mapping.html:12
 #: templates/mapping/nat_action_aichi_mapping.html:15
+#: templates/mapping/nat_strategy_aichi_mapping.html:11
+#: templates/mapping/nat_strategy_aichi_mapping.html:14
 msgid "Goal"
 msgstr ""
 
@@ -106,6 +109,9 @@ msgstr ""
 #: templates/goals.html:52 templates/goals.html.py:61 templates/goals.html:71
 #: templates/mapping/nat_action_aichi_mapping.html:25
 #: templates/mapping/nat_action_aichi_mapping.html:39
+#: templates/mapping/nat_strategy_aichi_mapping.html:25
+#: templates/mapping/nat_strategy_aichi_mapping.html:40
+#: templates/mapping/nat_strategy_eu_mapping.html:16
 msgid "Target"
 msgstr ""
 
@@ -156,7 +162,8 @@ msgstr ""
 
 #: templates/implementation.html:35 templates/implementation.html.py:45
 #: templates/actions/view_national_action.html:9
-#: templates/mapping/list_national_strategy.html:79
+#: templates/mapping/list_national_strategy.html:80
+#: templates/mapping/nat_strategy_eu_mapping.html:30
 #: templates/objectives/nat_strategy.html:64
 #: templates/objectives/view_national_objective.html:89
 msgid "Action"
@@ -171,7 +178,8 @@ msgid "show less"
 msgstr ""
 
 #: templates/implementation.html:64
-msgid "No actions found."
+#: templates/objectives/view_national_objective.html:96
+msgid "No actions found"
 msgstr ""
 
 #: templates/layout.html:29 templates/actions/add_national_action.html:35
@@ -251,14 +259,14 @@ msgstr ""
 
 #: templates/actions/view_national_action.html:19
 #: templates/mapping/list_national_strategy.html:41
-#: templates/mapping/list_national_strategy.html:87
+#: templates/mapping/list_national_strategy.html:88
 #: templates/objectives/view_national_objective.html:33
 msgid "Edit"
 msgstr ""
 
 #: templates/actions/view_national_action.html:22
 #: templates/mapping/list_national_strategy.html:42
-#: templates/mapping/list_national_strategy.html:91
+#: templates/mapping/list_national_strategy.html:92
 #: templates/objectives/view_national_objective.html:36
 msgid "Delete"
 msgstr ""
@@ -316,29 +324,42 @@ msgstr ""
 msgid "Other Relevant Targets"
 msgstr ""
 
-#: templates/mapping/list_national_strategy.html:120
+#: templates/mapping/list_national_strategy.html:122
 msgid "Are you sure you want to delete this mapping?"
 msgstr ""
 
 #: templates/mapping/nat_action_aichi_mapping.html:3
+#: templates/mapping/nat_strategy_aichi_mapping.html:3
 msgid "Mapping with AICHI"
 msgstr ""
 
-#: templates/mapping/nat_action_aichi_mapping.html:12
-msgid "Goal:"
-msgstr ""
-
 #: templates/mapping/nat_action_aichi_mapping.html:22
+#: templates/mapping/nat_strategy_aichi_mapping.html:21
 msgid "Most relevant AICHI target"
 msgstr ""
 
 #: templates/mapping/nat_action_aichi_mapping.html:33
-msgid "Other relevant AICHI targets:"
+#: templates/mapping/nat_strategy_aichi_mapping.html:33
+msgid "Other relevant AICHI targets"
 msgstr ""
 
 #: templates/mapping/nat_action_aichi_mapping.html:51
 #: templates/mapping/nat_action_aichi_mapping.html:56
-msgid "No data available."
+#: templates/mapping/nat_strategy_aichi_mapping.html:53
+#: templates/mapping/nat_strategy_eu_mapping.html:42
+msgid "No data available"
+msgstr ""
+
+#: templates/mapping/nat_strategy_eu_mapping.html:3
+msgid "Mapping with EU"
+msgstr ""
+
+#: templates/mapping/nat_strategy_eu_mapping.html:13
+msgid "Targets"
+msgstr ""
+
+#: templates/mapping/nat_strategy_eu_mapping.html:27
+msgid "Related EU actions"
 msgstr ""
 
 #: templates/objectives/add_national_objectives.html:19
@@ -411,10 +432,6 @@ msgstr ""
 
 #: templates/objectives/view_national_objective.html:79
 msgid "Actions"
-msgstr ""
-
-#: templates/objectives/view_national_objective.html:96
-msgid "No actions"
 msgstr ""
 
 #: views/indicators.py:12
