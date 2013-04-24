@@ -13,7 +13,7 @@
     </li>
     {% for objective in objectives %}
       <li {% if objective.code == current_objective.code %}class="active"{% endif %}>
-        <a href="{% url 'implementation' code=objective.code %}">{% trans "Objective"%}{{ objective.code }}
+        <a href="{% url 'implementation' code=objective.code %}">{% trans "Objective"%} {{ objective.code }}
         </a>
       </li>
     {% endfor %}
