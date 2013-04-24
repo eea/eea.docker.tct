@@ -43,7 +43,7 @@
 
             {% if user.is_authenticated %}
             <li>
-                <a href="{% url 'list_national_objectives' %}"><i class="icon-wrench icon-black"></i>Admin</a>
+                <a href="{% url 'list_national_objectives' %}"><i class="icon-wrench icon-black"></i>{% trans "Admin" %}</a>
            </li>
            <li>
                 <a href="{% url 'logout' %}?next_page=/">Logout</a>

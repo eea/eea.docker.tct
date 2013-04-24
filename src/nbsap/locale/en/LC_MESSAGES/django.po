@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-24 12:54+0300\n"
+"POT-Creation-Date: 2013-04-24 14:14+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -85,8 +85,90 @@ msgstr ""
 msgid "Dutch"
 msgstr ""
 
-#: templates/eu_targets.html:102 templates/implementation.html:59
-msgid "back to top"
+#: templates/admin_nav_tabs.html:4
+msgid "Back to AICHI"
+msgstr ""
+
+#: templates/admin_nav_tabs.html:9
+msgid "Goals"
+msgstr ""
+
+#: templates/admin_nav_tabs.html:14 templates/nav_tabs.html:17
+msgid "National Strategy"
+msgstr ""
+
+#: templates/admin_nav_tabs.html:18
+msgid "Mapping"
+msgstr ""
+
+#: templates/eu_targets.html:8 templates/mapping/add_national_strategy.html:72
+#: templates/mapping/edit_national_strategy.html:71
+#: templates/mapping/list_national_strategy.html:38
+msgid "EU Targets"
+msgstr ""
+
+#: templates/eu_targets.html:13 templates/eu_targets.html.py:21
+#: templates/eu_targets.html:60 templates/goals.html:52
+#: templates/goals.html.py:61 templates/goals.html:71
+#: templates/mapping/nat_action_aichi_mapping.html:25
+#: templates/mapping/nat_action_aichi_mapping.html:39
+#: templates/mapping/nat_strategy_aichi_mapping.html:25
+#: templates/mapping/nat_strategy_aichi_mapping.html:40
+#: templates/mapping/nat_strategy_eu_mapping.html:16
+msgid "Target"
+msgstr ""
+
+#: templates/eu_targets.html:25 templates/objectives/nat_strategy.html:29
+msgid "Table of contents"
+msgstr ""
+
+#: templates/eu_targets.html:29 templates/implementation.html:64
+#: templates/objectives/view_national_objective.html:96
+msgid "No actions found"
+msgstr ""
+
+#: templates/eu_targets.html:45 templates/implementation.html:35
+#: templates/implementation.html.py:45
+#: templates/actions/view_national_action.html:9
+#: templates/mapping/list_national_strategy.html:80
+#: templates/mapping/nat_strategy_eu_mapping.html:30
+#: templates/objectives/nat_strategy.html:64
+#: templates/objectives/view_national_objective.html:89
+msgid "Action"
+msgstr ""
+
+#: templates/eu_targets.html:53
+msgid "Mapping with Aichi Strategy"
+msgstr ""
+
+#: templates/eu_targets.html:66 templates/eu_targets.html.py:96
+#: templates/mapping/nat_action_aichi_mapping.html:51
+#: templates/mapping/nat_action_aichi_mapping.html:56
+#: templates/mapping/nat_strategy_aichi_mapping.html:53
+#: templates/mapping/nat_strategy_eu_mapping.html:42
+msgid "No data available"
+msgstr ""
+
+#: templates/eu_targets.html:77
+msgid "Mapping with National Strategy"
+msgstr ""
+
+#: templates/eu_targets.html:85 templates/eu_targets.html.py:89
+#: templates/goals.html:87 templates/implementation.html:16
+#: templates/mapping/list_national_strategy.html:33
+#: templates/objectives/empty_nat_strategy.html:17
+#: templates/objectives/list_national_objectives.html:44
+#: templates/objectives/nat_strategy.html:16
+#: templates/objectives/nat_strategy.html:23
+#: templates/objectives/nat_strategy.html:48
+#: templates/objectives/nat_strategy.html:73
+#: templates/objectives/view_national_objective.html:18
+#: templates/objectives/view_national_objective.html:59
+msgid "Objective"
+msgstr ""
+
+#: templates/eu_targets.html:105
+msgid "'back to top"
 msgstr ""
 
 #: templates/goals.html:19
@@ -106,34 +188,12 @@ msgstr ""
 msgid "Indicators"
 msgstr ""
 
-#: templates/goals.html:52 templates/goals.html.py:61 templates/goals.html:71
-#: templates/mapping/nat_action_aichi_mapping.html:25
-#: templates/mapping/nat_action_aichi_mapping.html:39
-#: templates/mapping/nat_strategy_aichi_mapping.html:25
-#: templates/mapping/nat_strategy_aichi_mapping.html:40
-#: templates/mapping/nat_strategy_eu_mapping.html:16
-msgid "Target"
-msgstr ""
-
 #: templates/goals.html:64
 msgid "Mapping with EU targets"
 msgstr ""
 
 #: templates/goals.html:81
 msgid "Maping with National Strategy"
-msgstr ""
-
-#: templates/goals.html:87 templates/implementation.html:16
-#: templates/mapping/list_national_strategy.html:33
-#: templates/objectives/empty_nat_strategy.html:17
-#: templates/objectives/list_national_objectives.html:44
-#: templates/objectives/nat_strategy.html:16
-#: templates/objectives/nat_strategy.html:23
-#: templates/objectives/nat_strategy.html:48
-#: templates/objectives/nat_strategy.html:73
-#: templates/objectives/view_national_objective.html:18
-#: templates/objectives/view_national_objective.html:59
-msgid "Objective"
 msgstr ""
 
 #: templates/goals.html:95
@@ -160,15 +220,6 @@ msgstr ""
 msgid "Actions related to Objective"
 msgstr ""
 
-#: templates/implementation.html:35 templates/implementation.html.py:45
-#: templates/actions/view_national_action.html:9
-#: templates/mapping/list_national_strategy.html:80
-#: templates/mapping/nat_strategy_eu_mapping.html:30
-#: templates/objectives/nat_strategy.html:64
-#: templates/objectives/view_national_objective.html:89
-msgid "Action"
-msgstr ""
-
 #: templates/implementation.html:48 templates/objectives/nat_strategy.html:77
 msgid "show more"
 msgstr ""
@@ -177,9 +228,8 @@ msgstr ""
 msgid "show less"
 msgstr ""
 
-#: templates/implementation.html:64
-#: templates/objectives/view_national_objective.html:96
-msgid "No actions found"
+#: templates/implementation.html:59
+msgid "back to top"
 msgstr ""
 
 #: templates/layout.html:29 templates/actions/add_national_action.html:35
@@ -187,6 +237,22 @@ msgstr ""
 #: templates/objectives/add_national_objectives.html:39
 #: templates/objectives/edit_national_objective.html:39
 msgid "Language"
+msgstr ""
+
+#: templates/layout.html:46
+msgid "Admin"
+msgstr ""
+
+#: templates/nav_tabs.html:7
+msgid "Aichi"
+msgstr ""
+
+#: templates/nav_tabs.html:12
+msgid "EU Strategy"
+msgstr ""
+
+#: templates/nav_tabs.html:21
+msgid "Implementation"
 msgstr ""
 
 #: templates/actions/add_national_action.html:19
@@ -296,12 +362,6 @@ msgstr ""
 msgid "Other AICHI Targets"
 msgstr ""
 
-#: templates/mapping/add_national_strategy.html:72
-#: templates/mapping/edit_national_strategy.html:71
-#: templates/mapping/list_national_strategy.html:38
-msgid "EU Targets"
-msgstr ""
-
 #: templates/mapping/add_national_strategy.html:80
 #: templates/mapping/edit_national_strategy.html:79
 #: templates/mapping/list_national_strategy.html:39
@@ -341,13 +401,6 @@ msgstr ""
 #: templates/mapping/nat_action_aichi_mapping.html:33
 #: templates/mapping/nat_strategy_aichi_mapping.html:33
 msgid "Other relevant AICHI targets"
-msgstr ""
-
-#: templates/mapping/nat_action_aichi_mapping.html:51
-#: templates/mapping/nat_action_aichi_mapping.html:56
-#: templates/mapping/nat_strategy_aichi_mapping.html:53
-#: templates/mapping/nat_strategy_eu_mapping.html:42
-msgid "No data available"
 msgstr ""
 
 #: templates/mapping/nat_strategy_eu_mapping.html:3
@@ -399,10 +452,6 @@ msgstr ""
 #: templates/objectives/view_national_objective.html:48
 #: templates/objectives/view_national_objective.html:78
 msgid "Code"
-msgstr ""
-
-#: templates/objectives/nat_strategy.html:29
-msgid "Table of contents"
 msgstr ""
 
 #: templates/objectives/nat_strategy.html:33
