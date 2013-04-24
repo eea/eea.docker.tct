@@ -85,10 +85,10 @@ def edit_national_objective(request, pk=None, parent=None):
                                      parent_objective=parent_objective)
         if form.is_valid():
             form.save()
-            if template.split('_', 1)[0] == 'add':
-                messages.success(request, 'Objective successfully added.')
-            elif template.split('_', 1)[0] == 'edit':
-                messages.success(request, 'Saved changes.')
+            if pk:
+                 messages.success(request, 'Saved changes.')
+            else:
+                 messages.success(request, 'Objective successfully added.')
 
             if parent_objective:
                 return redirect('view_national_objective',

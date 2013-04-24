@@ -43,7 +43,8 @@
   <tbody>
   {% for strategy in strategies %}
     <tr>
-      <td>
+      <div class="st" code = strategy.id style="display:none"></div>
+      <td class="strategy" code=strategy.id>
         <a href="{% url 'view_national_objective' pk=strategy.objective.pk %}">{{ strategy.objective.code }}</a>
       </td>
       {% with strategy.relevant_target as target %}
@@ -85,7 +86,7 @@
             href="{% url 'edit_national_strategy' pk=strategy.pk %}">Edit</a>
       </td>
       <td style="text-align: center;">
-        <a class="btn btn-mini btn-danger" href="{% url 'delete_national_strategy' strategy=strategy.pk %}">
+        <a class="btn btn-mini btn-danger" href="" code={{ strategy.id }}>
           Delete</a>
       </td>
     </tr>
@@ -115,12 +116,13 @@
 
     $(".btn-danger").on("click", function (e) {
       e.preventDefault();
+      var id = $(this).attr('code');
       if(confirm('Are you sure you want to delete this mapping?')) {
         $.ajax({
           "url": $(this).attr("href"),
           "type": "DELETE",
           "success": function (data) {
-          window.location = "/administration/mapping/";
+          window.location = "{% url 'delete_national_strategy' strategy=1 %}".replace('1',id);
           }
         });
       }

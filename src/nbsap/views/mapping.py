@@ -40,6 +40,7 @@ def edit_national_strategy(request, pk=None):
 @login_required
 def delete_national_strategy(request, strategy=None):
     strategy = get_object_or_404(models.NationalStrategy, pk=strategy)
+#    import pdb; pdb.set_trace()
     strategy.delete()
     messages.success(request, 'Mapping successfully deleted.')
     return redirect('list_national_strategy')
