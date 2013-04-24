@@ -31,9 +31,9 @@
               <ul class="dropdown-menu">
               {% for lang in LANGUAGES %}
                 <li>
-                  <form name="setLang{{ lang.1 }}" action="/i18n/setlang/" method="POST">
-                    <input name="next" type="hidden" value="/" />
-                    <input type="hidden" name="language" value="{{ lang.0 }}" />
+                  <form name="setLang{{ lang.1 }}" action="{% url 'set_language' %}" method="POST">
+                    <input name="next" type="hidden" value="{{ redirect_to }}" />
+                    <input name="language" type="hidden" value="{{ lang.0 }}" />
                     <a href="#" onclick="document.setLang{{ lang.1 }}.submit();return false;">{{ lang.1 }}</a>
                   </form>
                 </li>
