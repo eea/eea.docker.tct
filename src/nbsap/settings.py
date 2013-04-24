@@ -100,7 +100,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages',
     'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.i18n',
-    'nbsap.context_processors.eu_strategy',
+    'nbsap.context_processors.nbsap_admin',
 )
 
 # List of callables that know how to import templates from various sources.
