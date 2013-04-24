@@ -4,7 +4,6 @@ wsgiref==0.1.2
 cssmin==0.1.4
 argparse==1.2.1
 django-transmeta==0.6.10
-django-pagedown==0.0.3
 django-appconf==0.6
 django-staticfiles==1.2.1
 django-tinymce==1.5.1

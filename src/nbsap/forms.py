@@ -5,7 +5,6 @@ from django.shortcuts import get_object_or_404
 from django.conf import settings
 from tinymce.widgets import TinyMCE
 
-from pagedown.widgets import PagedownWidget
 from models import AichiGoal, AichiTarget, EuAction, EuTarget, \
                    NationalStrategy, NationalObjective, NationalAction
 

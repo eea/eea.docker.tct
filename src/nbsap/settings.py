@@ -141,7 +141,6 @@ INSTALLED_APPS = (
     'django_assets',
     'transmeta',
     'django.contrib.markup',
-    'pagedown',
     'tinymce',
     'nbsap',
 )

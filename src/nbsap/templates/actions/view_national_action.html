@@ -1,24 +1,25 @@
 {% extends 'layout.html' %}
-{% block content %}
 
-{% load markup %}
+{% load i18n %}
+
+{% block content %}
 
 {% include 'admin_nav_tabs.html' %}
 
-<h1 class="small">Action {{ action.code }}: {{ action.title }}</h1>
+<h1 class="small">{% trans "Action" %} {{ action.code }}: {{ action.title }}</h1>
 
 <div class="btn-toolbar">
   <div class="btn-group">
 
     <a class="btn btn-success btn-small"
        href="{% url 'view_national_objective' pk=objective.pk %}">
-       <i class="icon-white icon-arrow-left"></i> Back</a>
+       <i class="icon-white icon-arrow-left"></i> {% trans "Back" %}</a>
 
     <a class="btn edit btn-small"
-       href="{% url 'edit_national_action' objective=objective.pk pk=action.pk %}">Edit</a>
+       href="{% url 'edit_national_action' objective=objective.pk pk=action.pk %}">{% trans "Edit" %}</a>
 
     <a class="btn btn-danger edit btn-small">
-       <i class="icon-white icon-trash"></i> Delete</a>
+       <i class="icon-white icon-trash"></i> {% trans "Delete" %}</a>
   </div>
 </div>
 

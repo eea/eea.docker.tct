@@ -1,19 +1,19 @@
 {% extends 'layout.html'%}
 {% block content %}
 
+{% load i18n %}
 {% load utils %}
-{% load markup %}
 {% include 'nav_tabs.html' %}
 
 <div class="tabbable tabs-left">
 
   <ul class="nav nav-tabs nav-stacked local-navigation">
     <li>
-      <label class="nav-header">Actions related to</label>
+      <label class="nav-header">{% trans "Actions related to" %}</label>
     </li>
     {% for objective in objectives %}
       <li {% if objective.code == current_objective.code %}class="active"{% endif %}>
-        <a href="{% url 'implementation' code=objective.code %}">Objective {{ objective.code }}
+        <a href="{% url 'implementation' code=objective.code %}">{% trans "Objective"%}{{ objective.code }}
         </a>
       </li>
     {% endfor %}
@@ -21,7 +21,7 @@
 
   <div class="tab-content homepage_view">
 
-    <h1>Actions related to Objective {{ current_objective.code }}: {{ current_objective.title }} </h1>
+    <h1>{% trans "Actions related to Objective"%} {{ current_objective.code }}: {{ current_objective.title }} </h1>
 
     <div class="row">
       {% if current_objective.actions_tree %}
@@ -32,7 +32,7 @@
                    rel='tooltip'
                    data-placement='right'
                    data-original-title="{{ action.description }}">
-                   Action {{ action.code }}</a>
+                   {% trans "Action"%} {{ action.code }}</a>
               </li>
           {% endfor %}
         </ul>
@@ -42,26 +42,26 @@
       {% if current_objective.actions_tree %}
         {% for action in current_objective.actions_tree %}
         <div class="element_field" id="{{action.code}}">
-          <h2>Action {{ action.code }}</h2>
+          <h2>{% trans "Action" %} {{ action.code }}</h2>
           <div class="snippet">
             {{ action.description|truncatechars:510|safe }}
-            <a class="more">{{_('show more')}}</a>
+            <a class="more">{% trans "show more"%}</a>
           </div>
           <div class="full">
           {{ action.description|safe }}
 
           {% include 'mapping/nat_action_aichi_mapping.html' %}
 
-          <a class="less"> {{_('show less')}}</a>
+          <a class="less"> {% trans "show less" %}</a>
           </div>
         </div>
         <div class="row between-subobj">
-          <a class="pull-right" href="#top">{{_('back to top')}}</a>
+          <a class="pull-right" href="#top">{% trans "back to top"%}</a>
         </div>
 
         {% endfor %}
       {% else %}
-        <span>No actions found. </span>
+        <span>{% trans "No actions found." %} </span>
       {% endif %}
     </div>
   </div>
