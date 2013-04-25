@@ -722,8 +722,11 @@ body {
 	color: #014E46;
 }
 
-.navbar .nav > li.language-menu > a {
-	padding: 10px 5px 0px;
+.navbar .nav form.language-menu {
+    margin: 0;
+}
+
+.navbar .nav form.language-menu > a {
 	color: #014E46;
 	text-transform: uppercase;
 }

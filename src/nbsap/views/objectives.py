@@ -96,7 +96,7 @@ def edit_national_objective(request, pk=None, parent=None):
                                 pk=parent_objective.pk)
             elif objective:
               return redirect('view_national_objective',
-                                pk=objective.parent.pk)
+                                pk=objective.pk)
             else:
                 return redirect('list_national_objectives')
     else:
