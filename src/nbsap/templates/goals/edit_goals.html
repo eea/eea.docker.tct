@@ -11,7 +11,7 @@
 {% block content %}
 
 {% load i18n %}
-
+{% get_current_language as lang %}
 <h1 class="small">{% trans "Edit goal" %}{{ goal.code|title }}</h1>
 
     {% if form.errors %}

@@ -33,7 +33,7 @@
     <tr>
       <td>{{ goal.code }}</td>
       <td>
-        <a href="{% url 'edit_goal' code=goal.code %}?lang={{lang_code}}">{{ goal.title }}</a>
+        <a href="{% url 'edit_goal' code=goal.code %}">{{ goal.title }}</a>
       </td>
     </tr>
   {% endfor %}

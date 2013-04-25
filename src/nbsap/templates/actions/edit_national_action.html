@@ -16,7 +16,7 @@
 {% endblock %}
 
 {% block content %}
-
+    {% get_current_language as lang %}
     <h1 class="small">{% trans "Edit action" %}</h1>
 
     {% if form.errors %}

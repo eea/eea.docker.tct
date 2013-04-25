@@ -19,7 +19,7 @@
 
 
 {% block content %}
-
+    {% get_current_language as lang %}
   <h1 class="small">{% trans "Edit objective" %} {{ objective.code }}</h1>
 
   {% if form.errors %}

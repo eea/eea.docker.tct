@@ -77,7 +77,7 @@ def edit_national_objective(request, pk=None, parent=None):
         objective = None
         template = 'objectives/add_national_objectives.html'
 
-    lang = request.GET.get('lang', 'en')
+    lang = request.LANGUAGE_CODE
 
     if request.method == 'POST':
         form = NationalObjectiveForm(request.POST,
@@ -102,7 +102,6 @@ def edit_national_objective(request, pk=None, parent=None):
     return render(request, template,
                   {'form': form,
                    'objective': objective,
-                   'lang': lang,
                    # used by add_national_objective.html Cancel button
                    'parent': parent_objective,
                   })

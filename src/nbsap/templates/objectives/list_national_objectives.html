@@ -4,6 +4,8 @@
 
 {% block content %}
 
+{% get_current_language as lang_code %}
+
 {% if messages %}
 <div class="messages alert alert-success">
 {% for message in messages %}
@@ -25,7 +27,8 @@
 
 <div class="add-button">
   <a class="btn btn-small btn-primary add"
-     href="{% url 'edit_national_objective' %}">{% trans "Add objective" %}</a>
+     href="{% url 'edit_national_objective' %}">{% trans "Add objective" %}
+  </a>
 </div>
 
 <table class="table table-bordered table-striped objectives_listing">
