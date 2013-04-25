@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-24 16:24+0300\n"
+"POT-Creation-Date: 2013-04-25 11:39+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -167,8 +167,9 @@ msgstr ""
 msgid "Objective"
 msgstr ""
 
-#: templates/eu_targets.html:105
-msgid "'back to top"
+#: templates/eu_targets.html:105 templates/goals.html:126
+#: templates/implementation.html:59
+msgid "Back to top"
 msgstr ""
 
 #: templates/goals.html:19
@@ -209,10 +210,6 @@ msgstr ""
 msgid "Other relevant indicators"
 msgstr ""
 
-#: templates/goals.html:126
-msgid "Back to top"
-msgstr ""
-
 #: templates/implementation.html:12
 msgid "Actions related to"
 msgstr ""
@@ -227,10 +224,6 @@ msgstr ""
 
 #: templates/implementation.html:55 templates/objectives/nat_strategy.html:81
 msgid "show less"
-msgstr ""
-
-#: templates/implementation.html:59
-msgid "back to top"
 msgstr ""
 
 #: templates/layout.html:29 templates/actions/add_national_action.html:35

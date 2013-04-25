@@ -3,12 +3,11 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-24 16:24+0300\n"
+"POT-Creation-Date: 2013-04-25 11:39+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,94 +19,93 @@ msgstr ""
 
 #: models.py:31
 msgid "Operational Indicator"
-msgstr ""
+msgstr "Operational Indicator"
 
 #: models.py:34
 msgid "Communication Question"
-msgstr ""
+msgstr "Communicatie Question"
 
 #: models.py:37
 msgid "Headline Indicator"
-msgstr ""
+msgstr "Headline Indicator"
 
 #: models.py:40
 msgid "Indicator Sub-topics"
-msgstr ""
+msgstr "Indicator Sub-onderwerpen"
 
 #: models.py:43
 msgid "Operational Classification"
-msgstr ""
+msgstr "Operationele Classificatie"
 
 #: models.py:46
 msgid "Status of development"
-msgstr ""
+msgstr "Stand van deze ontwikkeling"
 
 #: models.py:49
 msgid "Sensitivity (can it be used to make assessment by 2015?)"
-msgstr ""
+msgstr "Gevoeligheid (kan het worden gebruikt om de beoordeling te maken in 2015?)"
 
 #: models.py:55
 msgid "Scale (global, regional, national, sub-national)"
-msgstr ""
+msgstr "Schaal (mondiaal, regionaal, nationaal, sub-nationale)"
 
 #: models.py:59
 msgid "Scientific Validity"
-msgstr ""
+msgstr "Wetenschappelijke Geldigheid"
 
 #: models.py:64
 msgid "How easy can it be communicated?"
-msgstr ""
+msgstr "Hoe makkelijk kan het worden gecommuniceerd?"
 
 #: models.py:69
 msgid "Data Sources"
-msgstr ""
+msgstr "Gegevens Sources"
 
 #: models.py:75
 msgid "Who's responsible for measuring?"
-msgstr ""
+msgstr "Wie is verantwoordelijk voor het meten?"
 
 #: models.py:78
 msgid "Other conventions/processes using indicator"
-msgstr ""
+msgstr "Andere verdragen / processen met behulp van indicator"
 
 #: models.py:83
 msgid "Related Links"
-msgstr ""
+msgstr "Related Links"
 
 #: settings.py:43
 msgid "English"
-msgstr ""
+msgstr "Engels"
 
 #: settings.py:44
 msgid "French"
-msgstr ""
+msgstr "Frans"
 
 #: settings.py:45
 msgid "Dutch"
-msgstr ""
+msgstr "Nederlands "
 
 #: templates/admin_nav_tabs.html:4
 msgid "Back to AICHI"
-msgstr ""
+msgstr "Terug naar AICHI"
 
 #: templates/admin_nav_tabs.html:9
 msgid "Goals"
-msgstr ""
+msgstr "Doelen"
 
 #: templates/admin_nav_tabs.html:14 templates/nav_tabs.html:17
-#, fuzzy
 msgid "National Strategy"
-msgstr "2"
+msgstr "Nationale Strategie"
 
 #: templates/admin_nav_tabs.html:18
 msgid "Mapping"
-msgstr ""
+msgstr "Mapping"
 
 #: templates/eu_targets.html:8 templates/mapping/add_national_strategy.html:72
 #: templates/mapping/edit_national_strategy.html:71
 #: templates/mapping/list_national_strategy.html:38
 msgid "EU Targets"
-msgstr ""
+msgstr "EU Doelen"
 
 #: templates/eu_targets.html:13 templates/eu_targets.html.py:21
 #: templates/eu_targets.html:60 templates/goals.html:52
@@ -118,17 +116,16 @@ msgstr ""
 #: templates/mapping/nat_strategy_aichi_mapping.html:40
 #: templates/mapping/nat_strategy_eu_mapping.html:16
 msgid "Target"
-msgstr ""
+msgstr "Doel"
 
 #: templates/eu_targets.html:25 templates/objectives/nat_strategy.html:29
 msgid "Table of contents"
-msgstr ""
+msgstr "Inhoudsopgave"
 
 #: templates/eu_targets.html:29 templates/implementation.html:64
 #: templates/objectives/view_national_objective.html:96
-#, fuzzy
 msgid "No actions found"
-msgstr "2"
+msgstr "Geen acties gevonden"
 
 #: templates/eu_targets.html:45 templates/implementation.html:35
 #: templates/implementation.html.py:45
@@ -138,11 +135,11 @@ msgstr "2"
 #: templates/objectives/nat_strategy.html:64
 #: templates/objectives/view_national_objective.html:89
 msgid "Action"
-msgstr "2"
+msgstr "Actie"
 
 #: templates/eu_targets.html:53
 msgid "Mapping with Aichi Strategy"
-msgstr ""
+msgstr "Het in kaart brengen met Aichi Strategie"
 
 #: templates/eu_targets.html:66 templates/eu_targets.html.py:96
 #: templates/mapping/nat_action_aichi_mapping.html:51
@@ -150,11 +147,11 @@ msgstr ""
 #: templates/mapping/nat_strategy_aichi_mapping.html:53
 #: templates/mapping/nat_strategy_eu_mapping.html:42
 msgid "No data available"
-msgstr ""
+msgstr "Geen gegevens beschikbaar"
 
 #: templates/eu_targets.html:77
 msgid "Mapping with National Strategy"
-msgstr ""
+msgstr "Het in kaart brengen met de nationale strategie"
 
 #: templates/eu_targets.html:85 templates/eu_targets.html.py:89
 #: templates/goals.html:87 templates/implementation.html:16
@@ -168,15 +165,16 @@ msgstr ""
 #: templates/objectives/view_national_objective.html:18
 #: templates/objectives/view_national_objective.html:59
 msgid "Objective"
-msgstr ""
+msgstr "Doelstelling"
 
-#: templates/eu_targets.html:105
-msgid "'back to top"
-msgstr ""
+#: templates/eu_targets.html:105 templates/goals.html:126
+#: templates/implementation.html:59
+msgid "Back to top"
+msgstr "Terug naar Boven"
 
 #: templates/goals.html:19
 msgid "AICHI Goals"
-msgstr ""
+msgstr "AICHI Goals"
 
 #: templates/goals.html:23 templates/goals.html.py:39
 #: templates/goals/list_goals.html:28
@@ -186,55 +184,47 @@ msgstr ""
 #: templates/mapping/nat_strategy_aichi_mapping.html:11
 #: templates/mapping/nat_strategy_aichi_mapping.html:14
 msgid "Goal"
-msgstr ""
+msgstr "doel"
 
 #: templates/goals.html:28
 msgid "Indicators"
-msgstr ""
+msgstr "Indicatoren"
 
 #: templates/goals.html:64
 msgid "Mapping with EU targets"
-msgstr ""
+msgstr "Het in kaart brengen met de EU-doelstellingen"
 
 #: templates/goals.html:81
 msgid "Maping with National Strategy"
-msgstr ""
+msgstr "Maping met Nationale Strategie"
 
 #: templates/goals.html:95
 msgid "Most relevant indicators"
-msgstr ""
+msgstr "Meest relevante indicatoren"
 
 #: templates/goals.html:101 templates/goals.html.py:116
 msgid "Indicator"
-msgstr ""
+msgstr "Indicator"
 
 #: templates/goals.html:110
 msgid "Other relevant indicators"
-msgstr ""
-
-#: templates/goals.html:126
-msgid "Back to top"
-msgstr ""
+msgstr "Andere relevante indicatoren"
 
 #: templates/implementation.html:12
 msgid "Actions related to"
-msgstr "2"
+msgstr "Acties met betrekking tot"
 
 #: templates/implementation.html:24
 msgid "Actions related to Objective"
-msgstr "2"
+msgstr "Acties voor doelstelling"
 
 #: templates/implementation.html:48 templates/objectives/nat_strategy.html:77
 msgid "show more"
-msgstr "2"
+msgstr "Meer..."
 
 #: templates/implementation.html:55 templates/objectives/nat_strategy.html:81
 msgid "show less"
-msgstr "2"
-
-#: templates/implementation.html:59
-msgid "back to top"
-msgstr ""
+msgstr "Minder tonen"
 
 #: templates/layout.html:29 templates/actions/add_national_action.html:35
 #: templates/actions/edit_national_action.html:36
@@ -242,29 +232,28 @@ msgstr ""
 #: templates/objectives/add_national_objectives.html:39
 #: templates/objectives/edit_national_objective.html:39
 msgid "Language"
-msgstr "2"
+msgstr "Taal"
 
 #: templates/layout.html:46
 msgid "Admin"
-msgstr ""
+msgstr "Admin"
 
 #: templates/nav_tabs.html:7
 msgid "Aichi"
-msgstr ""
+msgstr "Aichi"
 
 #: templates/nav_tabs.html:12
 msgid "EU Strategy"
-msgstr ""
+msgstr "EU-strategie"
 
 #: templates/nav_tabs.html:21
 msgid "Implementation"
-msgstr ""
+msgstr "Uitvoering"
 
 #: templates/actions/add_national_action.html:19
 #: templates/objectives/view_national_objective.html:30
-#, fuzzy
 msgid "Add action"
-msgstr "2"
+msgstr "Actie toe te voegen"
 
 #: templates/actions/add_national_action.html:23
 #: templates/actions/edit_national_action.html:24
@@ -275,7 +264,7 @@ msgstr "2"
 #: templates/objectives/edit_national_objective.html:27
 #, python-format
 msgid "Please correct the error %(errors)s below."
-msgstr ""
+msgstr "Corrigeer de fout %(errors)s hieronder."
 
 #: templates/actions/add_national_action.html:30
 #: templates/actions/add_national_action.html:58
@@ -291,7 +280,7 @@ msgstr ""
 #: templates/objectives/edit_national_objective.html:34
 #: templates/objectives/edit_national_objective.html:85
 msgid "Save"
-msgstr ""
+msgstr "Opslaan"
 
 #: templates/actions/add_national_action.html:31
 #: templates/actions/add_national_action.html:59
@@ -309,7 +298,7 @@ msgstr ""
 #: templates/objectives/edit_national_objective.html:35
 #: templates/objectives/edit_national_objective.html:86
 msgid "Cancel"
-msgstr ""
+msgstr "Ann."
 
 #: templates/actions/add_national_action.html:46
 #: templates/actions/edit_national_action.html:47
@@ -317,210 +306,195 @@ msgstr ""
 #: templates/objectives/add_national_objectives.html:58
 #: templates/objectives/edit_national_objective.html:58
 msgid "Description"
-msgstr ""
+msgstr "Omschrijving"
 
 #: templates/actions/edit_national_action.html:20
-#, fuzzy
 msgid "Edit action"
-msgstr "2"
+msgstr "Actie bewerken"
 
 #: templates/actions/edit_national_action.html:59
 #: templates/goals/edit_goals.html:62
 #: templates/objectives/edit_national_objective.html:75
 msgid "Original description in English"
-msgstr ""
+msgstr "Originele beschrijving in het Engels"
 
 #: templates/actions/view_national_action.html:16
 #: templates/objectives/view_national_objective.html:24
 msgid "Back"
-msgstr ""
+msgstr "Vorige"
 
 #: templates/actions/view_national_action.html:19
 #: templates/mapping/list_national_strategy.html:41
 #: templates/mapping/list_national_strategy.html:88
 #: templates/objectives/view_national_objective.html:33
 msgid "Edit"
-msgstr ""
+msgstr "Wijzigen"
 
 #: templates/actions/view_national_action.html:22
 #: templates/mapping/list_national_strategy.html:42
 #: templates/mapping/list_national_strategy.html:92
 #: templates/objectives/view_national_objective.html:36
 msgid "Delete"
-msgstr ""
+msgstr "Verwijder"
 
 #: templates/goals/edit_goals.html:15
-#, fuzzy
 msgid "Edit goal"
-msgstr "2"
+msgstr "Doel te bewerken"
 
 #: templates/goals/edit_goals.html:37
 #: templates/objectives/add_national_objectives.html:50
 #: templates/objectives/edit_national_objective.html:50
 #: templates/objectives/list_national_objectives.html:35
 msgid "Title"
-msgstr ""
+msgstr "Titel"
 
 #: templates/goals/edit_goals.html:57
 #: templates/objectives/edit_national_objective.html:70
 msgid "Original title in English"
-msgstr ""
+msgstr "Originele titel in het Engels"
 
 #: templates/goals/list_goals.html:27
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #: templates/mapping/add_national_strategy.html:17
 #: templates/mapping/edit_national_strategy.html:17
 msgid "Mapping National Objectives"
-msgstr ""
+msgstr "Mapping Nationale Doelstellingen"
 
 #: templates/mapping/add_national_strategy.html:33
 #: templates/mapping/edit_national_strategy.html:32
-#, fuzzy
 msgid "National Objective"
-msgstr "2"
+msgstr "Nationale Doelstelling"
 
 #: templates/mapping/add_national_strategy.html:43
 #: templates/mapping/edit_national_strategy.html:42
 msgid "AICHI Strategic Goal"
-msgstr ""
+msgstr "AICHI Strategic Goal"
 
 #: templates/mapping/add_national_strategy.html:53
 #: templates/mapping/edit_national_strategy.html:52
 msgid "Relevant AICHI Target"
-msgstr ""
+msgstr "Relevante AICHI Target"
 
 #: templates/mapping/add_national_strategy.html:61
 #: templates/mapping/edit_national_strategy.html:60
 msgid "Other AICHI Targets"
-msgstr ""
+msgstr "Andere AICHI Doelen"
 
 #: templates/mapping/add_national_strategy.html:80
 #: templates/mapping/edit_national_strategy.html:79
 #: templates/mapping/list_national_strategy.html:39
-#, fuzzy
 msgid "EU Actions"
-msgstr "2"
+msgstr "EU Acties"
 
 #: templates/mapping/list_national_strategy.html:23
 msgid "Mappings of National Objectives to Aichi and EU targets"
-msgstr ""
+msgstr "Toewijzingen van Nationale Doelstellingen voor Aichi en EU-doelstellingen"
 
 #: templates/mapping/list_national_strategy.html:27
 msgid "Add Mapping"
-msgstr ""
+msgstr "Voeg Mapping"
 
 #: templates/mapping/list_national_strategy.html:35
 msgid "Most Relevant Targets"
-msgstr ""
+msgstr "Meest relevant Doelen"
 
 #: templates/mapping/list_national_strategy.html:36
 msgid "Other Relevant Targets"
-msgstr ""
+msgstr "Andere relevante Doelen"
 
 #: templates/mapping/list_national_strategy.html:122
 msgid "Are you sure you want to delete this mapping?"
-msgstr ""
+msgstr "Weet u zeker dat u deze matrix verwijderen?"
 
 #: templates/mapping/nat_action_aichi_mapping.html:3
 #: templates/mapping/nat_strategy_aichi_mapping.html:3
 msgid "Mapping with AICHI"
-msgstr ""
+msgstr "Het in kaart brengen met AICHI"
 
 #: templates/mapping/nat_action_aichi_mapping.html:22
 #: templates/mapping/nat_strategy_aichi_mapping.html:21
 msgid "Most relevant AICHI target"
-msgstr ""
+msgstr "Meest relevante AICHI doel"
 
 #: templates/mapping/nat_action_aichi_mapping.html:33
 #: templates/mapping/nat_strategy_aichi_mapping.html:33
 msgid "Other relevant AICHI targets"
-msgstr ""
+msgstr "Andere relevante AICHI doelen"
 
 #: templates/mapping/nat_strategy_eu_mapping.html:3
 msgid "Mapping with EU"
-msgstr ""
+msgstr "Het in kaart brengen met de EU-"
 
 #: templates/mapping/nat_strategy_eu_mapping.html:13
 msgid "Targets"
-msgstr ""
+msgstr "Doelen"
 
 #: templates/mapping/nat_strategy_eu_mapping.html:27
-#, fuzzy
 msgid "Related EU actions"
-msgstr "2"
+msgstr "Gerelateerde EU-acties"
 
 #: templates/objectives/add_national_objectives.html:19
 #: templates/objectives/list_national_objectives.html:28
 msgid "Add objective"
-msgstr ""
+msgstr "Objectieve voegen"
 
 #: templates/objectives/edit_national_objective.html:23
-#, fuzzy
 msgid "Edit objective"
-msgstr "2"
+msgstr "Objectieve bewerken"
 
 #: templates/objectives/empty_nat_strategy.html:12
 #: templates/objectives/nat_strategy.html:11
 #: templates/objectives/view_national_objective.html:49
-#, fuzzy
 msgid "Objectives"
-msgstr "2"
+msgstr "Doelstellingen"
 
 #: templates/objectives/empty_nat_strategy.html:24
 msgid "No objectives found. Please define your National Strategy"
-msgstr ""
+msgstr "Geen doelen gevonden. Definieer uw Nationale Strategie"
 
 #: templates/objectives/empty_nat_strategy.html:24
 msgid "here"
-msgstr ""
+msgstr "hier"
 
 #: templates/objectives/list_national_objectives.html:34
 #: templates/objectives/view_national_objective.html:48
 #: templates/objectives/view_national_objective.html:78
 msgid "Code"
-msgstr ""
+msgstr "Code"
 
 #: templates/objectives/nat_strategy.html:33
-#, fuzzy
 msgid "No sub-objectives found"
-msgstr "2"
+msgstr "Geen subdoelstellingen gevonden"
 
 #: templates/objectives/nat_strategy.html:58
-#, fuzzy
 msgid "No related actions found"
-msgstr "2"
+msgstr "Geen gerelateerde acties gevonden"
 
 #: templates/objectives/nat_strategy.html:90
 msgid "Related actions"
-msgstr ""
+msgstr "Samenhang"
 
 #: templates/objectives/nat_strategy.html:93
 #: templates/objectives/view_national_objective.html:90
-#, fuzzy
 msgid "Actions related to objective"
-msgstr "2"
+msgstr "Acties met betrekking tot objectieve"
 
 #: templates/objectives/view_national_objective.html:27
 msgid "Add sub-objective"
-msgstr ""
+msgstr "Voeg subdoelstelling"
 
 #: templates/objectives/view_national_objective.html:66
-#, fuzzy
 msgid "No objectives"
-msgstr "2"
+msgstr "Geen doelstellingen"
 
 #: templates/objectives/view_national_objective.html:79
-#, fuzzy
 msgid "Actions"
-msgstr "2"
+msgstr "Acties"
 
 #: views/indicators.py:12
 #, python-format
 msgid "%(start)s to %(end)s"
-msgstr ""
+msgstr "%(start)s naar %(end)s"
 
-#, fuzzy
-#~ msgid "No actions"
-#~ msgstr "2"
