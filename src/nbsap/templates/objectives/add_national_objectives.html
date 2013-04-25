@@ -16,6 +16,9 @@
 
 {% block content %}
 
+{% include 'admin_nav_tabs.html' %}
+{% include 'objectives/objectives_breadcrumb.html' with objective=parent %}
+
 <h1 class="small">{% trans "Add objective" %}</h1>
 
 <hr />

@@ -44,7 +44,7 @@ class AichiIndicator(models.Model):
                                       max_length=255)
 
     status = models.TextField(_('Status of development'),
-                              blank=True) #????
+                              blank=True)
 
     sensitivity = models.CharField(_('Sensitivity (can it be used to make assessment by 2015?)'),
                                    max_length=3,
@@ -220,6 +220,12 @@ class NationalObjective(models.Model):
             return self
         else:
             return self.parent.get_root_parent()
+
+    def get_parents(self):
+        yield self
+        if self.parent is not None:
+            for obj in self.parent.get_parents():
+                yield obj
 
 
 class EuAction(models.Model):

@@ -19,7 +19,12 @@
 
 
 {% block content %}
-    {% get_current_language as lang %}
+
+  {% include 'admin_nav_tabs.html' %}
+  {% include 'objectives/objectives_breadcrumb.html' %}
+
+
+  {% get_current_language as lang %}
   <h1 class="small">{% trans "Edit objective" %} {{ objective.code }}</h1>
   <hr>
 
