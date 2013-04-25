@@ -179,29 +179,29 @@ $(function () {
     text.html('');
 
     $.each(args, function(i, arg){
-       $.get(url.replace('1',arg), function(data) {
-         text.append('<p>'+ data + '</p>');
-       });
+      $.get(url.replace('1',arg), function(data) {
+        text.append('<p>'+ data + '</p>');
+      });
 
-       $.get(action_url.replace('1',arg), function(data) {
-       data = $.parseJSON(data);
-       $.each(data, function (i, d) {
-         var html = $('<option />').attr('value', d.id).text(d.value);
-         var action_text =  eu_actions.parents('.control-group').find('.actions_text');
+      $.get(action_url.replace('1',arg), function(data) {
+        data = $.parseJSON(data);
+        $.each(data, function (i, d) {
+          var html = $('<option />').attr('value', d.id).text(d.value);
+          var action_text =  eu_actions.parents('.control-group').find('.actions_text');
 
-         $.each(options, function(j, o) {
-           if (o.value == d.id){
-             html = $('<option />').attr('value',d.id).attr('selected', 'selected').text(d.value);
-             $.get("{% url 'action_title' pk=1%}".replace('1', d.id), function(action_data) {
-               action_text.append('<p>' + action_data + '</p>');
-             });
-           }
-         });
-         eu_actions.append(html);
-         eu_actions.trigger('liszt:updated');
-       });
-     });
-   });
+          $.each(options, function(j, o) {
+            if (o.value == d.id){
+              html = $('<option />').attr('value',d.id).attr('selected', 'selected').text(d.value);
+              $.get("{% url 'action_title' pk=1%}".replace('1', d.id), function(action_data) {
+                action_text.append('<p>' + action_data + '</p>');
+              });
+            }
+          });
+          eu_actions.append(html);
+          eu_actions.trigger('liszt:updated');
+        });
+      });
+    });
 
     eu_actions.change();
   }).change();

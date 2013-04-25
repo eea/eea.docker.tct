@@ -175,6 +175,8 @@ class NationalStrategyForm(forms.Form):
         if settings.EU_STRATEGY:
             self.fields['eu_targets'].choices = self.get_choices('Target',
                                                                  EuTarget)
+            self.fields['eu_actions'].choices = self.get_choices('Action',
+                                                                 EuAction)
 
         if self.strategy:
             self.fields['nat_objective'].initial = self.strategy.objective.id
