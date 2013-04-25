@@ -222,6 +222,12 @@ class NationalObjective(models.Model):
         else:
             return self.parent.get_root_parent()
 
+    def get_parents(self):
+        yield self
+        if self.parent is not None:
+            for obj in self.parent.get_parents():
+                yield obj
+
 
 class EuAction(models.Model):
     __metaclass__ = TransMeta
