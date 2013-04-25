@@ -148,7 +148,7 @@
         {{ indicator|field_verbose_name:"status" }}
       </td>
       <td>
-        {{ indicator.status }}
+        {{ indicator.status|safe }}
       </td>
     </tr>
     {% endif %}
