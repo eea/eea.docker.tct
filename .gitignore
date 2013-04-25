@@ -11,4 +11,3 @@ sandbox_py27/*
 .webassets-cache
 gen
 local_settings.py
-django-chosen
