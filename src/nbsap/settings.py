@@ -143,6 +143,7 @@ INSTALLED_APPS = (
     'django.contrib.markup',
     'tinymce',
     'nbsap',
+    'chosen',
 )
 
 # A sample logging configuration. The only tangible logging

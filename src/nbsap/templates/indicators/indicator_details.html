@@ -142,6 +142,17 @@
     </tr>
     {% endif %}
 
+    {% if indicator.status %}
+    <tr>
+      <td class="span4 indicator_field">
+        {{ indicator|field_verbose_name:"status" }}
+      </td>
+      <td>
+        {{ indicator.status }}
+      </td>
+    </tr>
+    {% endif %}
+
     {% if indicator.requirements %}
     <tr>
       <td class="span4 indicator_field">

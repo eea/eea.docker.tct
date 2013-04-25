@@ -70,7 +70,8 @@ class AichiIndicator(models.Model):
                                max_length=255,
                                blank=True)
 
-    requirements = models.TextField(blank=True)
+    requirements = models.TextField(_('Requirements'),
+                                    blank=True)
 
     measurer = models.TextField(_('Who\'s responsible for measuring?'),
                                 blank=True)

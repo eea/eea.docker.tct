@@ -4,6 +4,8 @@ from django.forms import widgets
 from django.shortcuts import get_object_or_404
 from django.conf import settings
 from tinymce.widgets import TinyMCE
+from chosen import forms as chosenforms
+
 
 from models import AichiGoal, AichiTarget, EuAction, EuTarget, \
                    NationalStrategy, NationalObjective, NationalAction
@@ -125,9 +127,19 @@ class AichiGoalForm(forms.Form):
 
 class NationalStrategyForm(forms.Form):
 
-    def get_choices(self, string, mytype):
-        return [(element.pk,
+    def comp(self, title):
+        code = title[1].split()[1]
+        to_list = code.split('.')
+
+        return [int(el) for el in to_list]
+
+    def get_choices(self, string, mytype, isString=False):
+        result = [(element.pk,
                  "%s %s" % (string, element.code.upper())) for element in mytype.objects.all()]
+
+        if isString:
+            return sorted(result, key = lambda x: x[1].split()[1])
+        return sorted(result, key=self.comp)
 
     def get_element_by_pk(self, mytype, u_pk):
         return mytype.objects.filter(pk=int(u_pk)).all()[0]
@@ -135,11 +147,17 @@ class NationalStrategyForm(forms.Form):
     nat_objective = forms.ChoiceField(choices=[])
     aichi_goal = forms.ChoiceField(choices=[])
     aichi_target = forms.ChoiceField(choices=[])
-    other_targets = forms.MultipleChoiceField(choices=[], required=False)
+    other_targets = chosenforms.ChosenMultipleChoiceField(choices=[],
+                                                          required=False,
+                                                          overlay="Select target...")
 
     if settings.EU_STRATEGY:
-        eu_targets = forms.MultipleChoiceField(choices=[], required=False)
-        eu_actions = forms.MultipleChoiceField(choices=[], required=False)
+        eu_targets = chosenforms.ChosenMultipleChoiceField(choices=[],
+                                                           required=False,
+                                                           overlay="Select EU target...")
+        eu_actions = chosenforms.ChosenMultipleChoiceField(choices=[],
+                                                           required=False,
+                                                           overlay="Select EU actions...")
 
     def __init__(self, *args, **kwargs):
         self.strategy = kwargs.pop('strategy', None)
@@ -148,7 +166,8 @@ class NationalStrategyForm(forms.Form):
         self.fields['nat_objective'].choices = self.get_choices('Objective',
                                                                 NationalObjective)
         self.fields['aichi_goal'].choices = self.get_choices('Goal',
-                                                             AichiGoal)
+                                                             AichiGoal,
+                                                             isString=True)
         self.fields['aichi_target'].choices = self.get_choices('Target',
                                                                AichiTarget)
         self.fields['other_targets'].choices = self.get_choices('Target',
@@ -156,8 +175,7 @@ class NationalStrategyForm(forms.Form):
         if settings.EU_STRATEGY:
             self.fields['eu_targets'].choices = self.get_choices('Target',
                                                                  EuTarget)
-            self.fields['eu_actions'].choices = self.get_choices('Action',
-                                                                 EuAction)
+
         if self.strategy:
             self.fields['nat_objective'].initial = self.strategy.objective.id
             self.fields['aichi_goal'].initial = self.strategy.relevant_target.get_parent_goal().pk
