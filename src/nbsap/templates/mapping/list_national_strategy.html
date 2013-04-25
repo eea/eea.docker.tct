@@ -3,13 +3,6 @@
 
 {% load i18n %}
 
-{% if messages %}
-<div class="messages alert alert-success">
-{% for message in messages %}
-  <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
-{% endfor %}
-</div>
-{% endif %}
 
 {% load assets %}
 <style>
@@ -19,6 +12,13 @@
 </style>
 
 {% include 'admin_nav_tabs.html' %}
+{% if messages %}
+<div class="messages alert alert-success">
+{% for message in messages %}
+  <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+{% endfor %}
+</div>
+{% endif %}
 
 <h1 class="small">{% trans "Mappings of National Objectives to Aichi and EU targets" %}</h1>
 

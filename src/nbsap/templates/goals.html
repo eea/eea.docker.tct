@@ -4,6 +4,8 @@
 {% load i18n %}
 {% load utils %}
 
+{% include 'nav_tabs.html' %}
+
 {% if messages %}
 <div class="messages alert alert-success">
 {% for message in messages %}
@@ -12,7 +14,6 @@
 </div>
 {% endif %}
 
-{% include 'nav_tabs.html' %}
 <div class="tabbable tabs-left">
 
   <ul class="nav nav-tabs nav-stacked local-navigation">

@@ -4,14 +4,6 @@
 {% load i18n %}
 {% get_current_language as lang_code %}
 
-{% if messages %}
-<div class="messages alert alert-success">
-{% for message in messages %}
-    <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
-{% endfor %}
-</div>
-{% endif %}
-
 {% load assets %}
 <style>
 #DataTables_Table_0_previous {
@@ -20,6 +12,15 @@
 </style>
 
 {% include 'admin_nav_tabs.html' %}
+
+{% if messages %}
+<div class="messages alert alert-success">
+{% for message in messages %}
+    <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+{% endfor %}
+</div>
+{% endif %}
+
 
 <table class="table table-bordered table-striped goals_listing">
 
