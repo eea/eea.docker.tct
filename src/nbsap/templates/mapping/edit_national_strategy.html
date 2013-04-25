@@ -1,13 +1,16 @@
 {% extends 'layout.html' %}
 
 {% block extra_head %}
-
   <style>
     .controls textarea{width: 100%;}
     .controls textarea#id_title {height: 54px;}
   </style>
 
+  <script src='/static/js/jquery-1.7.1.min.js'></script>
+  <script src='/static/js/jquery-ui-1.8.18.custom.min.js'></script>
+
   {{ form.media }}
+
 {% endblock %}
 
 {% block content %}
@@ -95,8 +98,11 @@
 {% endblock %}
 
 {% block scripts %}
-
 <script>
+
+$(".chzn-select").chosen();
+
+
 $(function () {
 
   $('select[name=nat_objective]').on('change', function () {
@@ -165,6 +171,7 @@ $(function () {
     args = args.filter(Number);
 
     var options = $('select[name=eu_actions]').find('option:selected');
+    console.log(options);
     var url = "{% url 'eu_target_title' pk=1%}";
     var action_url = "{% url 'target_action' pk=1%}";
 
@@ -193,11 +200,11 @@ $(function () {
           });
 
         eu_actions.append(html);
+        eu_actions.trigger('liszt:updated');
         });
       });
     });
   eu_actions.change();
-
   }).change();
 
   $('select[name=eu_actions]').on('change', function () {

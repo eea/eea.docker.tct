@@ -6,6 +6,8 @@
     .controls textarea{width: 100%;}
     .controls textarea#id_title {height: 54px;}
   </style>
+  <script src='/static/js/jquery-1.7.1.min.js'></script>
+  <script src='/static/js/jquery-ui-1.8.18.custom.min.js'></script>
 
   {{ form.media }}
 {% endblock %}
@@ -95,59 +97,63 @@
 {% endblock %}
 
 {% block scripts %}
-
 <script>
-  $(function () {
+
+$(".chzn-select").chosen();
+
+
+$(function () {
 
   $('select[name=nat_objective]').on('change', function () {
-      var option = parseInt($(this).val());
-      var text = $(this).parents('.control-group').find('.objective_text');
-      var url = "{% url 'objective_title' pk=1%}".replace('1', option)
-      $.get(url, function (data) {
-        text.html('<p>' + data + '</p>');
-        });
-      }).change();
+    var option = parseInt($(this).val());
+    var text = $(this).parents('.control-group').find('.objective_text');
+    var url = "{% url 'objective_title' pk=1%}".replace('1', option)
+    $.get(url, function (data) {
+      text.html('<p>' + data + '</p>');
+    });
+  }).change();
 
 
   $('select[name=aichi_goal]').on('change', function () {
-      var option = $(this).val();
-      var text = $(this).parents('.control-group').find('.goal_text');
-      var url = "{% url 'goal_title' pk=1%}".replace('1', option)
-      $.get(url, function (data) {
-        data = $.parseJSON(data)[0];
+    var option = $(this).val();
+    var text = $(this).parents('.control-group').find('.goal_text');
+    var url = "{% url 'goal_title' pk=1%}".replace('1', option)
+    $.get(url, function (data) {
+      data = $.parseJSON(data)[0];
 
-        text.html('<p>' + data.goal + '</p>');
-        $('select[name=aichi_target]').html('');
-        $.each(data.targets, function(i,t) {
-           var html = $('<option />').attr('value', t.pk).text('Target ' + t.value);
-           $('select[name=aichi_target]').append(html);
-        });
-        $('select[name=aichi_target]').change();
+      text.html('<p>' + data.goal + '</p>');
+      $('select[name=aichi_target]').html('');
+      $.each(data.targets, function(i,t) {
+        var html = $('<option />').attr('value', t.pk).text('Target ' + t.value);
+        $('select[name=aichi_target]').append(html);
       });
+      $('select[name=aichi_target]').change();
+    });
   }).change();
 
   $('select[name=aichi_target]').on('change', function () {
-      var option = $(this).val();
-      var text =  $(this).parents('.control-group').find('.target_text');
-      var url = "{% url 'aichi_target_title' pk=1%}";
-      url = url.replace('1', option);
-      $.get(url, function (data) {
-        data = $.parseJSON(data)[0];
+    var option = $(this).val();
+    var text =  $(this).parents('.control-group').find('.target_text');
+    var url = "{% url 'aichi_target_title' pk=1%}";
 
-        text.html('<p>' + data.value + '</p>');
-        });
-     }).change();
+    url = url.replace('1', option);
+    $.get(url, function (data) {
+      data = $.parseJSON(data)[0];
+
+      text.html('<p>' + data.value + '</p>');
+    });
+  }).change();
 
   $('select[name=other_targets]').on('change', function () {
       var option = $(this).serialize();
       var text = $(this).parents('.control-group').find('.other_target_text');
+      var output = "";
       var args = option.split("other_targets=");
       args = args.map(function(x) {return parseInt(x)});
       args = args.filter(Number);
       var url = "{% url 'aichi_target_title' pk=1%}";
       text.html('');
-
-      $.each(args, function(i,arg) {
+      $.each(args, function(i, arg) {
         $.get(url.replace('1',arg), function(data) {
         data = $.parseJSON(data)[0];
         text.append('<h5>Target ' + data.code + '</h5><p>' + data.value + '</p>');
@@ -156,58 +162,67 @@
   }).change();
 
   $('select[name=eu_targets]').on('change', function () {
-     var option = $(this).serialize();
-     var text = $(this).parents('.control-group').find('.eu_target_text');
-     var args = option.split("eu_targets=");
-
-     args = args.map(function(x) {return parseInt(x)});
-     args = args.filter(Number);
-     text.html('');
-     var url = "{% url 'eu_target_title' pk=1%}";
-     $.each(args, function(i, arg) {
-       $.get(url.replace('1',arg), function(data) {
-       text.append('<p>' + data + '</p>');
-      });
-    });
- }).change();
-
-  $('select[name=eu_targets]').on('change', function() {
     var option = $(this).serialize();
+    var text = $(this).parents('.control-group').find('.eu_target_text');
+
     var args = option.split("eu_targets=");
     args = args.map(function(x) {return parseInt(x)});
     args = args.filter(Number);
 
-    var url = "{% url 'target_action' pk=1%}";
-    $('select[name=eu_actions]').html('');
-    $.each(args, function(i, arg) {
-      $.get(url.replace('1',arg), function(data) {
-        data = $.parseJSON(data);
-        $.each(data, function (i, d) {
-          var html = $('<option />').attr('value', d.id).text(d.value);
-          $('select[name=eu_actions]').append(html);
+    var options = $('select[name=eu_actions]').find('option:selected');
+    var url = "{% url 'eu_target_title' pk=1%}";
+    var action_url = "{% url 'target_action' pk=1%}";
+
+    var eu_actions = $('select[name=eu_actions]');
+    eu_actions.html('');
+    text.html('');
+
+    $.each(args, function(i, arg){
+       $.get(url.replace('1',arg), function(data) {
+         text.append('<p>'+ data + '</p>');
        });
-      });
-    });
+
+       $.get(action_url.replace('1',arg), function(data) {
+       data = $.parseJSON(data);
+       $.each(data, function (i, d) {
+         var html = $('<option />').attr('value', d.id).text(d.value);
+         var action_text =  eu_actions.parents('.control-group').find('.actions_text');
+
+         $.each(options, function(j, o) {
+           if (o.value == d.id){
+             html = $('<option />').attr('value',d.id).attr('selected', 'selected').text(d.value);
+             $.get("{% url 'action_title' pk=1%}".replace('1', d.id), function(action_data) {
+               action_text.append('<p>' + action_data + '</p>');
+             });
+           }
+         });
+         eu_actions.append(html);
+         eu_actions.trigger('liszt:updated');
+       });
+     });
+   });
+
+    eu_actions.change();
   }).change();
 
   $('select[name=eu_actions]').on('change', function () {
     var option = $(this).serialize();
     var text = $(this).parents('.control-group').find('.actions_text');
-
     var args = option.split("eu_actions=");
     args = args.map(function(x) {return parseInt(x)});
     args = args.filter(Number);
     text.html('');
     var url = "{% url 'action_title' pk=1%}";
-      $.each(args, function(i, arg){
+    $.each(args, function(i, arg) {
         $.get(url.replace('1',arg), function(data) {
-          text.append('<p>' + data + '</p>');
+        text.append('<p>' + data + '</p>');
         });
       });
   }).change();
 
-
-
 });
+
+
 </script>
 {% endblock %}
+
