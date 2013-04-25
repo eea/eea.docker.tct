@@ -5,18 +5,7 @@
 {% block content %}
 
 {% include 'admin_nav_tabs.html' %}
-
-<ul class="breadcrumb">
-  <li>
-    <a href="{% url 'list_national_objectives' %}">{% trans "Objectives" %}</a>
-    <span class="divider">/</span>
-  </li>
-  <li>
-    <a href="{% url 'view_national_objective' pk=objective.pk %}">{% trans "Objective" %} {{ objective.pk }}</a>
-    <span class="divider">/</span>
-  </li>
-  <li class="active">{% trans "View action" %} {{ action.code }}</li>
-</ul>
+{% include 'actions/actions_breadcrumb.html' %}
 
 <h1 class="small">{% trans "Action" %} {{ action.code }}: {{ action.title }}</h1>
 
