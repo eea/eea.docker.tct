@@ -37,9 +37,9 @@ def edit_national_action(request, objective, pk=None):
                                   objective=objective)
         if form.is_valid():
             form.save()
-            if template.split('_', 1)[0] == 'add':
+            if not pk:
                 messages.success(request, 'Action successfully added.')
-            elif template.split('_', 1)[0] == 'edit':
+            else:
                 messages.success(request, 'Saved changes.')
             return redirect('view_national_objective', pk=objective.pk)
     else:
