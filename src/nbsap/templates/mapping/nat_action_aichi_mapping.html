@@ -9,7 +9,7 @@
       {% for  strategy in objective.objective_national_strategy.all %}
         {% with strategy.relevant_target.get_parent_goal as goal %}
           <li>
-            <span class="mapping-header">{% trans "Goal:" %}</span>
+            <span class="mapping-header">{% trans "Goal" %}:</span>
             <span>
               <a href="{% url 'goals' code=goal.code %}" title="{{ goal.code|upper }}">
                 <strong>{% trans "Goal" %} {{ goal.code|upper }}:</strong> {{ goal.description|safe }}
@@ -30,7 +30,7 @@
 
           {%if strategy.other_targets.all %}
             <li>
-              <span class="mapping-header">{% trans "Other relevant AICHI targets:" %}</span>
+              <span class="mapping-header">{% trans "Other relevant AICHI targets" %}:</span>
                 <ul class="other-targets">
                   {% for target in strategy.other_targets.all %}
                     <li>
@@ -48,11 +48,11 @@
         {% endwith %}
       {% endfor %}
     {% else %}
-      <span>{% trans "No data available." %}</span>
+      <span>{% trans "No data available" %}.</span>
     {% endif %}
   {% endfor %}
   </ul>
   {% else %}
-    <span>{% trans "No data available." %}</span>
+    <span>{% trans "No data available" %}.</span>
   {% endif %}
 </div>

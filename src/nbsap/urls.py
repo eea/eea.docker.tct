@@ -143,7 +143,4 @@ urlpatterns = patterns('',
             'nbsap.views.edit_goal',
             name='edit_goal'),
 
-    url(r'^admininstration/goals/(?P<code>[\w\-]+)/delete$',
-            'nbsap.views.delete_goal',
-            name='delete_goal'),
 )

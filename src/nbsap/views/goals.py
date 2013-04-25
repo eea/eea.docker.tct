@@ -46,19 +46,12 @@ def get_aichi_target_title(request, pk=None):
     target = get_object_or_404(models.AichiTarget, pk=pk)
     return HttpResponse(json.dumps([{'code': target.code, 'value':target.description}]))
 
-@login_required
-def delete_goal(request, code=None):
-    goal = get_object_or_404(models.AichiGoal, pk=code)
-  #  goal.delete()
-    messages.success(request, 'Goal successfully deleted.')
-
-    return redirect('list_national_strategy')
 
 @login_required
 def edit_goal(request, code=None):
     goal = get_object_or_404(models.AichiGoal, pk=code)
 
-    lang = request.GET.get('lang', 'en')
+    lang = request.LANGUAGE_CODE
 
     if request.method == 'POST':
         form = AichiGoalForm(request.POST, goal=goal, lang=lang)
@@ -74,7 +67,6 @@ def edit_goal(request, code=None):
     return render(request, 'goals/edit_goals.html',
                   {'form': form,
                    'goal': goal,
-                   'lang': lang,
                   })
 
 @login_required

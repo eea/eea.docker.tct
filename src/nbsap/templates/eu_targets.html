@@ -1,15 +1,16 @@
 {% extends 'layout.html' %}
 {% block content %}
 
+{% load i18n %}
 {% include 'nav_tabs.html' %}
 
 <div class="tabbable tabs-left">
-  <label class="nav-header">EU Targets</label>
+  <label class="nav-header">{% trans "EU Targets" %}</label>
   <ul class="nav nav-tabs nav-stacked local-navigation">
     {% for target in targets %}
     <li {% if target.pk == current_target.pk %}class="active"{% endif %}>
       <a href="{% url 'eu_targets' code=target.code %}" title="{{ target.code }}">
-        Target {{ target.code }}
+        {% trans "Target" %} {{ target.code }}
       </a>
     </li>
     {% endfor %}
@@ -17,15 +18,15 @@
 
   <div class="tab-content homepage_view" >
 
-    <h1>Target {{ current_target.code }}: {{ current_target.title }}</h1>
+    <h1>{% trans "Target" %} {{ current_target.code }}: {{ current_target.title }}</h1>
     <div class="element_field objective-description">{{ current_target.body }}</div>
 
     <div class="row">
-      <label>Table of contents:</label>
+      <label>{% trans "Table of contents"%}:</label>
 
       {% if not current_target.actions_tree|length %}
       <ul class="span2">
-        <li>No actions found</li>
+        <li>{% trans "No actions found" %}</li>
       </ul>
       {% endif %}
 
@@ -41,7 +42,7 @@
              rel="tooltip"
              data-placement="right"
              data-original-title="{{ action.description }}">
-             Action {{ action.code }}
+             {% trans "Action" %} {{ action.code }}
           </a>
         </li>
         {% endfor %}
@@ -49,20 +50,20 @@
       {% endif %}
        </div>
 
-      <label>Mapping with Aichi Strategy</label>
+      <label>{% trans "Mapping with Aichi Strategy" %}</label>
       <div class ="well">
         {% if current_target.eu_aichi_strategy %}
         <ul>
           {% for strategy in current_target.eu_aichi_strategy.all %}
             {% for aichi_target in strategy.aichi_targets.all %}
               <li>
-                <a href = "{% url 'goals' code=aichi_target.get_parent_goal.code %}#{{aichi_target.code}}">Target {{aichi_target.code}}</a>
+                <a href = "{% url 'goals' code=aichi_target.get_parent_goal.code %}#{{aichi_target.code}}">{% trans "Target"%} {{aichi_target.code}}</a>
               </li>
             {% endfor %}
           {% endfor %}
         </ul>
         {% else %}
-          <span>No data available.</span>
+          <span>{% trans "No data available" %}.</span>
         {% endif %}
       </div>
 
@@ -73,24 +74,26 @@
 
         <div>
           {{ action.description }}
-          <label>Mapping with National Strategy</label>
+          <label>{% trans "Mapping with National Strategy" %}</label>
           <div class="row well">
             {% if action.national_strategy.all %}
               <ul>
                 {% for strategy in action.national_strategy.all %}
                   <li>
                     {% if strategy.objective.parent %}
-                    <a href="{% url 'nat_strategy' code=strategy.objective.parent.code %}#{{ strategy.objective.code }}">Objective {{strategy.objective.code}}: {{ strategy.objective.title }} {{ strategy.objective.parent.code }}
+                    <a href="{% url 'nat_strategy'
+                    code=strategy.objective.parent.code %}#{{ strategy.objective.code }}">{% trans "Objective" %} {{strategy.objective.code}}: {{ strategy.objective.title }} {{ strategy.objective.parent.code }}
                     </a>
                     {% else %}
-                    <a href="{% url 'nat_strategy' code=strategy.objective.code %}">Objective {{strategy.objective.code}}: {{ strategy.objective.title }} {{ strategy.objective.code }}
+                    <a href="{% url 'nat_strategy' code=strategy.objective.code
+                    %}">{% trans "Objective" %} {{strategy.objective.code}}: {{ strategy.objective.title }} {{ strategy.objective.code }}
                     </a>
                     {% endif %}
                   </li>
                 {% endfor %}
               </ul>
             {% else %}
-              <span>No data available</span>
+              <span>{% trans "No data available" %}</span>
             {% endif %}
           </div>
         </div>
@@ -99,7 +102,7 @@
       {% endfor %}
 
       <div class="row between-subobj">
-        <a class="pull-right" href="#top">{{_('back to top')}}</a>
+        <a class="pull-right" href="#top">{% trans "Back to top" %}</a>
       </div>
 
     </div>

@@ -1,0 +1,19 @@
+{% load i18n %}
+
+<ul class="breadcrumb">
+  <li>
+    <a href="{% url 'list_national_objectives' %}">{% trans "Objectives" %}</a>
+    <span class="divider">/</span>
+  </li>
+  {% for obj in objective.get_parents reversed %}
+  {% if not forloop.last %}
+    <li>
+      <a href="{% url 'view_national_objective' pk=obj.pk %}">{% trans "Objective" %} {{ obj.code }}</a>
+      <span class="divider">/</span>
+    </li>
+  {% else %}
+    <li class="active">{% trans "Objective" %} {{ obj.code }}</li>
+  {% endif %}
+  {% endfor %}
+  <li>
+</ul>

@@ -32,7 +32,8 @@ class NationalObjectiveForm(forms.Form):
 
             self.fields['title'].initial = title
             self.fields['description'].initial = description
-            self.fields['language'].initial = lang
+
+        self.fields['language'].initial = lang
 
     def save(self):
 

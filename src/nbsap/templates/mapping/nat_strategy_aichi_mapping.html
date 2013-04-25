@@ -1,4 +1,6 @@
-<label>Mapping with AICHI:</label>
+{% load i18n %}
+
+<label>{% trans "Mapping with AICHI" %}:</label>
 <div class="row well">
   {% if subobj.objective_national_strategy.all %}
     <ul class="mapping-list">
@@ -6,21 +8,21 @@
 
       {% with strategy.relevant_target.get_parent_goal as goal %}
         <li>
-          <span class="mapping-header">Goal:</span>
+          <span class="mapping-header">{% trans "Goal" %}:</span>
           <span>
             <a href="{% url 'goals' code=goal.code %}" title="{{ goal.code|upper }}">
-              <strong>Goal {{ goal.code|upper }}</strong>: {{ goal.description|safe }}
+              <strong>{% trans "Goal" %} {{ goal.code|upper }}</strong>: {{ goal.description|safe }}
             </a>
           </span>
         </li>
 
         {% with strategy.relevant_target as target %}
         <li>
-          <span class="mapping-header">Most relevant AICHI target:</span>
+          <span class="mapping-header">{% trans "Most relevant AICHI target" %}:</span>
           <span>
             <a href="{% url 'goals' code=goal.code %}#{{ target.code }}"
                title="{{ target.code }}">
-              <strong>Target {{ target.code }}</strong>: {{ target.description|safe }}
+              <strong>{% trans "Target" %} {{ target.code }}</strong>: {{ target.description|safe }}
             </a>
           </span>
         </li>
@@ -28,14 +30,14 @@
 
         {% if strategy.other_targets.all %}
         <li>
-          <span class="mapping-header">Other relevant AICHI targets:</span>
+          <span class="mapping-header">{% trans "Other relevant AICHI targets" %}:</span>
           <ul class="other-targets">
             {% for target in strategy.other_targets.all %}
             <li>
               <span>
                 <a href="{% url 'goals' code=goal.code %}#{{ target.code }}"
                    title="{{ target.code }}">
-                  <strong>Target {{ target.code }}</strong>: {{ target.description|safe }}
+                  <strong>{% trans "Target" %} {{ target.code }}</strong>: {{ target.description|safe }}
                 </a>
               </span>
             </li>
@@ -48,7 +50,6 @@
     {% endfor %}
     </ul>
   {% else %}
-    <span>No data available.</span>
+    <span>{% trans "No data available" %}.</span>
   {% endif %}
 </div>
-

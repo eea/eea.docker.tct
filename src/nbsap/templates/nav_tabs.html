@@ -1,23 +1,24 @@
 {% load utils %}
+{% load i18n %}
 
 <ul class="nav nav-tabs">
 
   <li class="{% active request '^/$' %} {% active request '^/indicators' %}{% active request '^/goals' %}">
-    <a href="{% url 'goals' %}">Aichi</a>
+    <a href="{% url 'goals' %}">{% trans "Aichi" %}</a>
   </li>
 
   {% if EU_STRATEGY %}
   <li class="{% active request '^/eu_targets' %}">
-    <a href="{% url 'eu_targets' %}">EU Strategy</a>
+    <a href="{% url 'eu_targets' %}">{% trans "EU Strategy" %}</a>
   </li>
   {% endif %}
 
   <li class="{% active request '^/objectives' %}">
-    <a href="{% url 'nat_strategy' %}">National Strategy</a>
+    <a href="{% url 'nat_strategy' %}">{% trans "National Strategy" %}</a>
   </li>
 
   <li class="{% active request '^/implementation' %}">
-    <a href="{% url 'implementation' %}">Implementation</a>
+    <a href="{% url 'implementation' %}">{% trans "Implementation" %}</a>
   </li>
 
 </ul>

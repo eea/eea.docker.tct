@@ -21,7 +21,6 @@ def view_national_action(request, objective, pk):
 @login_required
 def edit_national_action(request, objective, pk=None):
     objective = get_object_or_404(models.NationalObjective, pk=objective)
-    lang = request.GET.get('lang', 'en')
 
     if pk:
         action = get_object_or_404(models.NationalAction, pk=pk)
@@ -29,6 +28,8 @@ def edit_national_action(request, objective, pk=None):
     else:
         action = None
         template = 'actions/add_national_action.html'
+
+    lang = request.LANGUAGE_CODE
 
     if request.method == 'POST':
         form = NationalActionForm(request.POST,
@@ -49,7 +50,6 @@ def edit_national_action(request, objective, pk=None):
     return render(request, template,
                   {'form': form,
                    'action': action,
-                   'lang': lang,
                    'objective': objective,
                   })
 
@@ -60,6 +60,3 @@ def delete_national_action(request, objective, pk=None):
     action.delete()
     messages.success(request, 'Action successfully deleted.')
     return redirect('view_national_objective', pk=objective)
-
-
-

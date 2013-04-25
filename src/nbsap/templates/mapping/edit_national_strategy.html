@@ -1,4 +1,5 @@
 {% extends 'layout.html' %}
+{% load i18n %}
 
 {% block extra_head %}
   <style>
@@ -14,8 +15,7 @@
 {% endblock %}
 
 {% block content %}
-
-{% load i18n %}
+{% include 'admin_nav_tabs.html' %}
 
 <h1 class="small">{% trans "Mapping National Objectives" %}</h1>
 

@@ -16,7 +16,12 @@
 
 {% block content %}
 
+{% include 'admin_nav_tabs.html' %}
+{% include 'objectives/objectives_breadcrumb.html' with objective=parent %}
+
 <h1 class="small">{% trans "Add objective" %}</h1>
+
+<hr />
 
 {% if form.errors %}
   <p style="color: red;">
@@ -25,15 +30,6 @@
 {% endif %}
 
 <form action="" method="post">
-
-  <div class="form-actions">
-    <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
-    {% if parent %}
-        <a href="{% url 'view_national_objective' pk=parent.pk %}" class="btn" type="button">{% trans "Cancel" %}</a>
-    {% else %}
-        <a href="{% url 'list_national_objectives' %}" class="btn" type="button">{% trans "Cancel" %}</a>
-    {% endif %}
-  </div>
 
   <div class="control-group">
     <label class="control-label" for="language">{% trans "Language" %}</label>

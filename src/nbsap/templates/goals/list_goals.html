@@ -1,6 +1,9 @@
 {% extends 'layout.html' %}
 {% block content %}
 
+{% load i18n %}
+{% get_current_language as lang_code %}
+
 {% if messages %}
 <div class="messages alert alert-success">
 {% for message in messages %}
@@ -21,8 +24,8 @@
 <table class="table table-bordered table-striped goals_listing">
 
   <thead>
-    <th style="width:10px;">ID</th>
-    <th>Goal</th>
+    <th style="width:10px;">{% trans "ID" %}</th>
+    <th>{% trans "Goal" %}</th>
   </thead>
 
   <tbody>

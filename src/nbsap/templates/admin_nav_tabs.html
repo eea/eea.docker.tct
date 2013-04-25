@@ -1,21 +1,21 @@
 {% load utils %}
+{% load i18n %}
 
-<a class="pull-right btn btn-mini" href="{% url 'goals' %}">Back to AICHI</a>
+<a class="pull-right btn btn-mini" href="{% url 'goals' %}">{% trans "Back to AICHI" %}</a>
 <ul class="nav nav-tabs">
 
   <li class="{% active request '^/administration/goals/[\w\-]+' %}
              {% active request '^/administration/goals/$' %}">
-    <a href="{% url 'list_goals' %}">Goals</a>
+    <a href="{% url 'list_goals' %}">{% trans "Goals" %}</a>
   </li>
 
   <li class="{% active request '^/administration/objectives/[\w\-]+' %}
              {% active request '^/administration/$' %}">
-    <a href="{% url 'list_national_objectives' %}">National Strategy</a>
-  </li>
+    <a href="{% url 'list_national_objectives' %}">{% trans "National Strategy" %}</a> </li>
 
   <li class="{% active request '^/administration/mapping/[\w\-]+' %}
              {% active request '^/administration/mapping/$' %}">
-    <a href="{% url 'list_national_strategy' %}">Mapping</a>
+    <a href="{% url 'list_national_strategy' %}">{% trans "Mapping" %}</a>
   </li>
 
 </ul>
