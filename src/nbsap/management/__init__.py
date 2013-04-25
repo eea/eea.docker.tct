@@ -28,12 +28,11 @@ def create_admin(app, created_models, verbosity, **kwargs):
             print 'Admin user is "admin" with password "q".'
             print '*' * 50
 
-
 def load_data(sender, **kwargs):
     if settings.EU_STRATEGY:
-        call_command('loaddata', 'full_initial_data.json')
+        call_command('loaddata', 'initial_data_eu_and_aichi.json')
     else:
-        call_command('loaddata', 'no_eu_initial_data.json')
+        call_command('loaddata', 'initial_data_aichi.json')
 
 
 signals.post_syncdb.connect(

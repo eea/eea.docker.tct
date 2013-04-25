@@ -13,8 +13,8 @@
       "sensitivity": "hig",
       "scales": [
         1,
-        4,
-        2
+        2,
+        4
       ],
       "question": "State \u2013 How is the state of biodiversity changing?",
       "validity": "med",
@@ -40,8 +40,8 @@
       "sensitivity": "hig",
       "scales": [
         1,
-        4,
-        2
+        2,
+        4
       ],
       "question": "State \u2013 How is the state of biodiversity changing?",
       "validity": "hig",
@@ -68,8 +68,8 @@
       "sensitivity": "hig",
       "scales": [
         1,
-        4,
-        2
+        2,
+        4
       ],
       "question": "State \u2013 How is the state of biodiversity changing?",
       "validity": "hig",
@@ -113,8 +113,8 @@
       "title": "Trends in the proportion of natural habitats converted",
       "sensitivity": "med",
       "scales": [
-        4,
-        2
+        2,
+        4
       ],
       "question": "State \u2013 How is the state of biodiversity changing?",
       "validity": "hig",
@@ -141,8 +141,8 @@
       "sensitivity": "med",
       "scales": [
         1,
-        4,
-        2
+        2,
+        4
       ],
       "question": "State \u2013 How is the state of biodiversity changing?",
       "validity": "med",
@@ -169,8 +169,8 @@
       "sensitivity": "hig",
       "scales": [
         1,
-        4,
-        2
+        2,
+        4
       ],
       "question": "State \u2013 How is the state of biodiversity changing?",
       "validity": "hig",
@@ -196,8 +196,8 @@
       "sensitivity": "hig",
       "scales": [
         1,
-        4,
-        2
+        2,
+        4
       ],
       "question": "State \u2013 How is the state of biodiversity changing?",
       "validity": "hig",
@@ -221,8 +221,8 @@
       "sensitivity": "med",
       "scales": [
         1,
-        4,
-        2
+        2,
+        4
       ],
       "question": "State \u2013 How is the state of biodiversity changing?",
       "validity": "hig",
@@ -249,8 +249,8 @@
       "sensitivity": "hig",
       "scales": [
         1,
-        4,
-        2
+        2,
+        4
       ],
       "question": "State \u2013 How is the state of biodiversity changing?",
       "validity": "med",
@@ -274,8 +274,8 @@
       "sensitivity": "med",
       "scales": [
         1,
-        4,
-        2
+        2,
+        4
       ],
       "question": "State \u2013 How is the state of biodiversity changing?",
       "validity": "med",
@@ -299,8 +299,8 @@
       "sensitivity": "",
       "scales": [
         1,
-        4,
-        2
+        2,
+        4
       ],
       "question": "Pressures and underlying causes - Why are we losing biodiversity?",
       "validity": "",
@@ -324,8 +324,8 @@
       "sensitivity": "hig",
       "scales": [
         1,
-        4,
-        2
+        2,
+        4
       ],
       "question": "Pressures and underlying causes - Why are we losing biodiversity?",
       "validity": "hig",
@@ -349,8 +349,8 @@
       "sensitivity": "hig",
       "scales": [
         1,
-        4,
-        2
+        2,
+        4
       ],
       "question": "Pressures and underlying causes - Why are we losing biodiversity?",
       "validity": "hig",
@@ -374,8 +374,8 @@
       "sensitivity": "",
       "scales": [
         1,
-        4,
-        2
+        2,
+        4
       ],
       "question": "Pressures and underlying causes - Why are we losing biodiversity?",
       "validity": "",
@@ -424,8 +424,8 @@
       "sensitivity": "hig",
       "scales": [
         1,
-        4,
-        2
+        2,
+        4
       ],
       "question": "Pressures and underlying causes - Why are we losing biodiversity?",
       "validity": "hig",
@@ -493,8 +493,8 @@
       "sensitivity": "hig",
       "scales": [
         1,
-        4,
-        2
+        2,
+        4
       ],
       "question": "Pressures and underlying causes - Why are we losing biodiversity?",
       "validity": "hig",
@@ -518,8 +518,8 @@
       "sensitivity": "",
       "scales": [
         1,
-        4,
-        2
+        2,
+        4
       ],
       "question": "Pressures and underlying causes - Why are we losing biodiversity?",
       "validity": "med",
@@ -545,8 +545,8 @@
       "sensitivity": "hig",
       "scales": [
         1,
-        4,
-        2
+        2,
+        4
       ],
       "question": "Pressures and underlying causes - Why are we losing biodiversity?",
       "validity": "hig",
@@ -574,8 +574,8 @@
       "sensitivity": "hig",
       "scales": [
         1,
-        4,
-        2
+        2,
+        4
       ],
       "question": "Pressures and underlying causes - Why are we losing biodiversity?",
       "validity": "hig",
@@ -601,8 +601,8 @@
       "sensitivity": "",
       "scales": [
         1,
-        4,
-        2
+        2,
+        4
       ],
       "question": "Pressures and underlying causes - Why are we losing biodiversity?",
       "validity": "",
@@ -625,8 +625,8 @@
       "title": "Trends in area, frequency, and/or intensity of destructive fishing practices",
       "sensitivity": "",
       "scales": [
-        4,
-        2
+        2,
+        4
       ],
       "question": "Pressures and underlying causes - Why are we losing biodiversity?",
       "validity": "",
@@ -653,9 +653,9 @@
       "sensitivity": "hig",
       "scales": [
         1,
-        4,
         2,
-        3
+        3,
+        4
       ],
       "question": "Pressures and underlying causes - Why are we losing biodiversity?",
       "validity": "hig",
@@ -704,8 +704,8 @@
       "sensitivity": "hig",
       "scales": [
         1,
-        4,
-        2
+        2,
+        4
       ],
       "question": "Pressures and underlying causes - Why are we losing biodiversity?",
       "validity": "hig",
@@ -752,8 +752,8 @@
       "sensitivity": "hig",
       "scales": [
         1,
-        4,
-        2
+        2,
+        4
       ],
       "question": "Pressures and underlying causes - Why are we losing biodiversity?",
       "validity": "hig",
@@ -801,8 +801,8 @@
       "sensitivity": "hig",
       "scales": [
         1,
-        4,
-        2
+        2,
+        4
       ],
       "question": "Pressures and underlying causes - Why are we losing biodiversity?",
       "validity": "hig",
@@ -826,8 +826,8 @@
       "sensitivity": "hig",
       "scales": [
         1,
-        4,
-        2
+        2,
+        4
       ],
       "question": "Pressures and underlying causes - Why are we losing biodiversity?",
       "validity": "hig",
@@ -899,8 +899,8 @@
       "sensitivity": "hig",
       "scales": [
         1,
-        4,
-        2
+        2,
+        4
       ],
       "question": "Pressures and underlying causes - Why are we losing biodiversity?",
       "validity": "med",
@@ -973,8 +973,8 @@
       "sensitivity": "",
       "scales": [
         1,
-        4,
-        2
+        2,
+        4
       ],
       "question": "Pressures and underlying causes - Why are we losing biodiversity?",
       "validity": "",
@@ -1000,8 +1000,8 @@
       "sensitivity": "hig",
       "scales": [
         1,
-        4,
-        2
+        2,
+        4
       ],
       "question": "Pressures and underlying causes - Why are we losing biodiversity?",
       "validity": "hig",
@@ -1027,8 +1027,8 @@
       "sensitivity": "",
       "scales": [
         1,
-        4,
-        2
+        2,
+        4
       ],
       "question": "Pressures and underlying causes - Why are we losing biodiversity?",
       "validity": "",
@@ -1052,8 +1052,8 @@
       "sensitivity": "",
       "scales": [
         1,
-        4,
-        2
+        2,
+        4
       ],
       "question": "Pressures and underlying causes - Why are we losing biodiversity?",
       "validity": "",
@@ -1077,8 +1077,8 @@
       "sensitivity": "",
       "scales": [
         1,
-        4,
-        2
+        2,
+        4
       ],
       "question": "Pressures and underlying causes - Why are we losing biodiversity?",
       "validity": "",
@@ -1285,9 +1285,9 @@
       "sensitivity": "hig",
       "scales": [
         1,
-        4,
         2,
-        3
+        3,
+        4
       ],
       "question": "Benefits - What are the implications of biodiversity loss?",
       "validity": "hig",
@@ -1359,9 +1359,9 @@
       "sensitivity": "hig",
       "scales": [
         1,
-        4,
         2,
-        3
+        3,
+        4
       ],
       "question": "Benefits - What are the implications of biodiversity loss?",
       "validity": "med",
@@ -1408,9 +1408,9 @@
       "sensitivity": "med",
       "scales": [
         1,
-        4,
         2,
-        3
+        3,
+        4
       ],
       "question": "Benefits - What are the implications of biodiversity loss?",
       "validity": "low",
@@ -1504,9 +1504,9 @@
       "sensitivity": "hig",
       "scales": [
         1,
-        4,
         2,
-        3
+        3,
+        4
       ],
       "question": "Benefits - What are the implications of biodiversity loss?",
       "validity": "med",
@@ -1553,8 +1553,8 @@
       "sensitivity": "hig",
       "scales": [
         1,
-        4,
-        2
+        2,
+        4
       ],
       "question": "Benefits - What are the implications of biodiversity loss?",
       "validity": "hig",
@@ -1578,9 +1578,9 @@
       "sensitivity": "hig",
       "scales": [
         1,
-        4,
         2,
-        3
+        3,
+        4
       ],
       "question": "Benefits - What are the implications of biodiversity loss?",
       "validity": "hig",
@@ -1734,8 +1734,8 @@
       "sensitivity": "hig",
       "scales": [
         1,
-        4,
-        2
+        2,
+        4
       ],
       "question": "Responses - What do we do about biodiversity loss?",
       "validity": "med",
@@ -1779,9 +1779,9 @@
       "title": "Trends in implementation of National Biodiversity Strategies and Action Plans, including development, comprehensiveness, adoption and implementation",
       "sensitivity": "med",
       "scales": [
-        4,
         2,
-        3
+        3,
+        4
       ],
       "question": "Responses - What do we do about biodiversity loss?",
       "validity": "med",
@@ -1805,9 +1805,9 @@
       "sensitivity": "",
       "scales": [
         1,
-        4,
         2,
-        3
+        3,
+        4
       ],
       "question": "Responses - What do we do about biodiversity loss?",
       "validity": "",
@@ -1831,9 +1831,9 @@
       "sensitivity": "",
       "scales": [
         1,
-        4,
         2,
-        3
+        3,
+        4
       ],
       "question": "Responses - What do we do about biodiversity loss?",
       "validity": "",
@@ -1857,9 +1857,9 @@
       "sensitivity": "hig",
       "scales": [
         1,
-        4,
         2,
-        3
+        3,
+        4
       ],
       "question": "Responses - What do we do about biodiversity loss?",
       "validity": "med",
@@ -1885,8 +1885,8 @@
       "sensitivity": "hig",
       "scales": [
         1,
-        4,
-        2
+        2,
+        4
       ],
       "question": "Responses - What do we do about biodiversity loss?",
       "validity": "",
@@ -1994,8 +1994,8 @@
       "sensitivity": "hig",
       "scales": [
         1,
-        4,
-        2
+        2,
+        4
       ],
       "question": "Responses - What do we do about biodiversity loss?",
       "validity": "hig",
@@ -2039,8 +2039,8 @@
       "title": "Trends in proportion  of depleted target and bycatch species with recovery plans",
       "sensitivity": "",
       "scales": [
-        4,
-        2
+        2,
+        4
       ],
       "question": "Responses - What do we do about biodiversity loss?",
       "validity": "",
@@ -2131,9 +2131,9 @@
       "sensitivity": "hig",
       "scales": [
         1,
-        4,
         2,
-        3
+        3,
+        4
       ],
       "question": "Responses - What do we do about biodiversity loss?",
       "validity": "med",
@@ -2178,8 +2178,8 @@
       "sensitivity": "hig",
       "scales": [
         1,
-        4,
-        2
+        2,
+        4
       ],
       "question": "Responses - What do we do about biodiversity loss?",
       "validity": "hig",
@@ -2203,9 +2203,9 @@
       "sensitivity": "hig",
       "scales": [
         1,
-        4,
         2,
-        3
+        3,
+        4
       ],
       "question": "Responses - What do we do about biodiversity loss?",
       "validity": "hig",
@@ -2254,9 +2254,9 @@
       "sensitivity": "hig",
       "scales": [
         1,
-        4,
         2,
-        3
+        3,
+        4
       ],
       "question": "Responses - What do we do about biodiversity loss?",
       "validity": "hig",
@@ -2283,9 +2283,9 @@
       "sensitivity": "hig",
       "scales": [
         1,
-        4,
         2,
-        3
+        3,
+        4
       ],
       "question": "Responses - What do we do about biodiversity loss?",
       "validity": "hig",
@@ -2309,9 +2309,9 @@
       "sensitivity": "hig",
       "scales": [
         1,
-        4,
         2,
-        3
+        3,
+        4
       ],
       "question": "Responses - What do we do about biodiversity loss?",
       "validity": "hig",
@@ -2335,9 +2335,9 @@
       "sensitivity": "hig",
       "scales": [
         1,
-        4,
         2,
-        3
+        3,
+        4
       ],
       "question": "Responses - What do we do about biodiversity loss?",
       "validity": "hig",
