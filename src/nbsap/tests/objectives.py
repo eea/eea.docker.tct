@@ -43,7 +43,12 @@ class NationalObjectiveTestCase(TestCase):
         response = self.client.get('/administration/objectives/1/edit')
         self.assertEqual(response.status_code, 200)
 
-        response = self.client.post('/administration/objectives/1/edit', mydata)
+        response = self.client.post('/administration/objectives/1/edit',
+                                    mydata,
+                                    follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("Saved changes", response.content)
+
         edited_object = models.NationalObjective.objects.all().filter(id=1)[0]
         self.assertEqual(edited_object.title, mydata['title'])
         self.assertEqual(edited_object.description, mydata['description'])
@@ -59,7 +64,12 @@ class NationalObjectiveTestCase(TestCase):
         response = self.client.get('/administration/objectives/1/edit')
         self.assertEqual(response.status_code, 200)
 
-        response = self.client.post('/administration/objectives/1/edit', mydata)
+        response = self.client.post('/administration/objectives/1/edit',
+                                    mydata,
+                                    follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("Saved changes", response.content)
+
         edited_object = models.NationalObjective.objects.all().filter(id=1)[0]
         self.assertEqual(edited_object.title, mydata['title'])
         self.assertEqual(edited_object.description_en, mydata['description'])
@@ -74,7 +84,12 @@ class NationalObjectiveTestCase(TestCase):
         response = self.client.get('/administration/objectives/add/')
         self.assertEqual(response.status_code, 200)
 
-        response = self.client.post('/administration/objectives/add/', mydata)
+        response = self.client.post('/administration/objectives/add/',
+                                    mydata,
+                                    follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("Objective successfully added", response.content)
+
         added_object = models.NationalObjective.objects.all().filter(code='16')[0]
         self.assertEqual(added_object.title, mydata['title'])
         self.assertEqual(added_object.description, mydata['description'])
@@ -92,7 +107,12 @@ class NationalObjectiveTestCase(TestCase):
         response = self.client.get('/administration/objectives/add/')
         self.assertEqual(response.status_code, 200)
 
-        response = self.client.post('/administration/objectives/add/', mydata)
+        response = self.client.post('/administration/objectives/add/',
+                                    mydata,
+                                    follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("Objective successfully added", response.content)
+
         added_object = models.NationalObjective.objects.all().filter(code='16')[0]
         self.assertEqual(added_object.title, mydata['title'])
         self.assertEqual(added_object.description, mydata['description'])

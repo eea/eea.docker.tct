@@ -40,7 +40,12 @@ class NationalActionTestCase(TestCase):
         response = self.client.get('/administration/objectives/16/actions/1/edit')
         self.assertEqual(response.status_code, 200)
 
-        response = self.client.post('/administration/objectives/16/actions/1/edit', mydata)
+        response = self.client.post('/administration/objectives/16/actions/1/edit',
+                                    mydata,
+                                    follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("Saved changes", response.content)
+
         edited_object = models.NationalAction.objects.all().filter(id=1)[0]
         self.assertEqual(edited_object.description, mydata['description'])
 
@@ -54,7 +59,12 @@ class NationalActionTestCase(TestCase):
         response = self.client.get('/administration/objectives/16/actions/1/edit')
         self.assertEqual(response.status_code, 200)
 
-        response = self.client.post('/administration/objectives/16/actions/1/edit', mydata)
+        response = self.client.post('/administration/objectives/16/actions/1/edit',
+                                    mydata,
+                                    follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("Saved changes", response.content)
+
         edited_object = models.NationalAction.objects.all().filter(id=1)[0]
         self.assertEqual(edited_object.description, mydata['description'])
 
@@ -85,7 +95,12 @@ class NationalActionTestCase(TestCase):
         response = self.client.get('/administration/objectives/101/actions/add')
         self.assertEqual(response.status_code, 200)
 
-        self.client.post('/administration/objectives/101/actions/add', mydata['action'])
+        response = self.client.post('/administration/objectives/101/actions/add',
+                                    mydata['action'],
+                                    follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("Action successfully added", response.content)
+
         added_action = models.NationalAction.objects.filter(id=78)[0]
         self.assertEqual(added_action.description, mydata['action']['description'])
 
@@ -125,7 +140,12 @@ class NationalActionTestCase(TestCase):
         response = self.client.get('/administration/objectives/%s/actions/add' % objective_id)
         self.assertEqual(response.status_code, 200)
 
-        self.client.post('/administration/objectives/%s/actions/add' % objective_id, mydata['action'])
+        response = self.client.post('/administration/objectives/%s/actions/add' % objective_id,
+                                    mydata['action'],
+                                    follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("Action successfully added", response.content)
+
         added_action = models.NationalAction.objects.filter(code=16)[0]
         self.assertEqual(added_action.description, mydata['action']['description'])
 

@@ -160,7 +160,11 @@ class NationalSubobjectiveTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
         response = self.client.post('/administration/objectives/16/edit',
-                                    mydata['subobjective'])
+                                    mydata['subobjective'],
+                                    follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("Saved changes", response.content)
+
         _object = models.NationalObjective.objects.all().filter(id=16)[0]
         self.assertEqual(_object.title, mydata['subobjective']['title'])
         self.assertEqual(_object.description, mydata['subobjective']['description'])
@@ -184,7 +188,11 @@ class NationalSubobjectiveTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
         response = self.client.post('/administration/objectives/16/edit',
-                                    mydata['subobjective'])
+                                    mydata['subobjective'],
+                                    follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("Saved changes", response.content)
+
         _object = models.NationalObjective.objects.all().filter(id=16)[0]
         self.assertEqual(_object.title, mydata['subobjective']['title'])
         self.assertEqual(_object.description, mydata['subobjective']['description'])
