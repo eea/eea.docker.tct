@@ -1,27 +1,48 @@
 {% extends "layout.html" %}
+{% load i18n %}
 
 {% block content %}
 
 {% if messages %}
-<div class="messages alert alert-success">
-{% for message in messages %}
-    <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
-{% endfor %}
-</div>
+  <div class="messages alert alert-success">
+  {% for message in messages %}
+      <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+  {% endfor %}
+  </div>
 {% endif %}
 
 {% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
+  <p>{% trans "Your username and password didn't match. Please try again." %}</p>
 {% endif %}
 
-<h1 class="small">Login</h1>
-<form class="well form-inline"method="post" action="{% url 'django.contrib.auth.views.login' %}">
-    {% csrf_token %}
-    <input id="id_username" class="span3" placeholder="Username" name="username" type="text">
-    <input id="id_password" class="span2" placeholder="Password" name="password" type="password">
-    <button type="submit" class="btn">Sign in</button>
-    <input type="hidden" name="next" value="{{ next }}" />
-</form>
+<div class="span11">
+  <form class="form-inline"method="post" action="{% url 'django.contrib.auth.views.login' %}">
+    <fieldset>
+      <legend>{% trans "Existing Users Login" %}</legend>
+      <div class="control-group">
+        <label class="control-label" for="inputIcon">{% trans "Username" %}</label>
+        <div class="controls">
+          <div class="input-prepend">
+            <span class="add-on"><i class="icon-user"></i></span>
+            <input id="id_username" class="span2" name="username" type="text">
+          </div>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="inputIcon">{% trans "Password" %}</label>
+        <div class="controls">
+          <div class="input-prepend">
+            <span class="add-on"><i class="icon-lock"></i></span>
+            <input id="id_password" class="span2" name="password" type="password">
+          </div>
+        </div>
+      </div>
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{ next }}" />
+      <button type="submit" class="btn btn-primary">{% trans "Login" %}</button>
+    </fieldset>
+  </form>
+</div>
 
 {% endblock %}
 
