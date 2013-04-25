@@ -44,7 +44,7 @@ class AichiIndicator(models.Model):
                                       max_length=255)
 
     status = models.TextField(_('Status of development'),
-                              blank=True) #????
+                              blank=True)
 
     sensitivity = models.CharField(_('Sensitivity (can it be used to make assessment by 2015?)'),
                                    max_length=3,
@@ -70,7 +70,8 @@ class AichiIndicator(models.Model):
                                max_length=255,
                                blank=True)
 
-    requirements = models.TextField(blank=True)
+    requirements = models.TextField(_('Requirements'),
+                                    blank=True)
 
     measurer = models.TextField(_('Who\'s responsible for measuring?'),
                                 blank=True)
