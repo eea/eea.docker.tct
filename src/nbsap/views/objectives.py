@@ -65,6 +65,7 @@ def list_national_objectives(request):
 
 @login_required
 def edit_national_objective(request, pk=None, parent=None):
+
     if parent:
         parent_objective = get_object_or_404(models.NationalObjective, pk=parent)
     else:
@@ -93,6 +94,9 @@ def edit_national_objective(request, pk=None, parent=None):
             if parent_objective:
                 return redirect('view_national_objective',
                                 pk=parent_objective.pk)
+            elif objective:
+              return redirect('view_national_objective',
+                                pk=objective.parent.pk)
             else:
                 return redirect('list_national_objectives')
     else:
@@ -102,7 +106,6 @@ def edit_national_objective(request, pk=None, parent=None):
     return render(request, template,
                   {'form': form,
                    'objective': objective,
-                   # used by add_national_objective.html Cancel button
                    'parent': parent_objective,
                   })
 
