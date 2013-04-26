@@ -1,3 +1,5 @@
+import os.path
+
 from functools import wraps
 from fabric.api import *
 from fabric.contrib.files import exists
@@ -6,9 +8,13 @@ from fabric.contrib.files import exists
 env['nbsap_target_defs'] = {
     'staging': {
         'host_string': 'edw@whiterussian.edw.ro',
-        'nbsap_repo':     '/var/local/nbsap-staging',
-        'nbsap_sandbox':  '/var/local/nbsap-staging/sandbox',
-        'nbsap_instance': '/var/local/nbsap-staging',
+        'nbsap_repo':     '/var/local/nbsap-new',
+        'nbsap_sandbox':  '/var/local/nbsap-new/sandbox',
+        'nbsap_instance': '/var/local/nbsap-new',
+        ###
+        'project_root': '/var/local/nbsap-new',
+        'virtualenv': 'virtualenv',
+        'python': '/var/local/nbsap-new/sandbox/bin/python',
     },
 }
 
@@ -35,14 +41,6 @@ def choose_target(func):
 
 @task
 @choose_target
-def ssh():
-    open_shell("cd '%(nbsap_repo)s' && "
-               "source '%(nbsap_sandbox)s'/bin/activate"
-               % env)
-
-
-@task
-@choose_target
 def install():
     if not exists("%(nbsap_repo)s/.git" % env):
         run("git init '%(nbsap_repo)s'" % env)
@@ -64,45 +62,37 @@ def install():
     run("%(nbsap_sandbox)s/bin/pip install -e %(nbsap_repo)s" % env)
 
 
-@task
-@choose_target
-def start():
-    run("/usr/local/bin/start-stop-daemon --start --background "
-        "--pidfile %(nbsap_instance)s/fcgi.pid --make-pidfile "
-        "--exec %(nbsap_sandbox)s/bin/python %(nbsap_repo)s/manage.py runserver"
-        % env, pty=False)
-
-
-@task
-@choose_target
-def stop():
-    run("/usr/local/bin/start-stop-daemon --stop --retry 3 --oknodo "
-        "--pidfile %(nbsap_instance)s/fcgi.pid" % env)
-
-
-@task
-@choose_target
-def drop():
-    run("%(nbsap_sandbox)s/bin/python %(nbsap_repo)s/manage.py drop" % env)
-
-
-@task
-@choose_target
-def syncdb():
-    run("%(nbsap_sandbox)s/bin/python %(nbsap_repo)s/manage.py syncdb" % env)
+def supervisor(root, command):
+    run('%s/bin/supervisorctl %s' %
+        (root, root, command))
 
 
 @task
 @choose_target
 def restart():
-    execute('stop')
-    execute('start')
+    supervisor(env['project_root'], "restart nbsap")
+
+
+@task
+@choose_target
+def status():
+    supervisor(env['project_root'],"status")
+
+
+@task
+@choose_target
+def start():
+    supervisor(env['project_root'],"start nbsap")
+
+
+@task
+@choose_target
+def stop():
+    supervisor(env['project_root'],"stop nbsap")
 
 
 @task
 @choose_target
 def deploy():
     execute('install')
-    execute('drop')
-    execute('syncdb')
     execute('restart')
