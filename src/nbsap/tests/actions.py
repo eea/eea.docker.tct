@@ -1,4 +1,4 @@
--*- coding: utf-8 -*client.-
+#-*- coding: utf-8 -*client.-
 from django.test.client import Client
 from django.utils import unittest
 from django.test import TestCase
