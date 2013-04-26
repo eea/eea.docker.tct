@@ -34,7 +34,6 @@ def load_data(sender, **kwargs):
     else:
         call_command('loaddata', 'initial_data_aichi.json')
 
-
 signals.post_syncdb.connect(
     create_admin,
     sender=auth_models,

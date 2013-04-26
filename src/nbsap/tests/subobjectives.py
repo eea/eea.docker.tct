@@ -5,16 +5,25 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 
 from nbsap import models
+from django.conf import settings
 
 class NationalSubobjectiveTestCase(TestCase):
-    fixtures = ['initial_data.json',]
+    fixtures = ['be_actions.json', 'be_objectives.json', ]
+
+    def __init__(self, *args, **kwargs):
+        if settings.EU_STRATEGY:
+            self.fixtures.append('be_mapping_with_eu.json')
+        else:
+            self.fixtures.append('be_mapping_no_eu.json')
+
+        super(NationalSubobjectiveTestCase, self).__init__(*args, **kwargs)
 
     def setUp(self):
         # create a user to test with
-        self.user = User.objects.create_user('admin', 'admin@admin.com', 'q')
+        self.user = User.objects.create_user('test_admin', 'test@admin.com', 'q')
         self.client = Client()
         # blind call to set user info on session
-        call = self.client.post('/accounts/login/', {'username': 'admin',
+        call = self.client.post('/accounts/login/', {'username': 'test_admin',
                                                      'password': 'q'})
     def test_recursive_subobjectives(self):
         """ Test national subobjective operations recursively """
