@@ -170,13 +170,17 @@ $(function () {
     args = args.map(function(x) {return parseInt(x)});
     args = args.filter(Number);
 
+    var eu_actions = $('select[name=eu_actions]');
+    eu_actions.html('');
+    if(args.length == 0) {
+      eu_actions.trigger('liszt:updated');
+    }
+
     var options = $('select[name=eu_actions]').find('option:selected');
     console.log(options);
     var url = "{% url 'eu_target_title' pk=1%}";
     var action_url = "{% url 'target_action' pk=1%}";
 
-    var eu_actions = $('select[name=eu_actions]');
-    eu_actions.html('');
     text.html('');
 
     $.each(args, function(i, arg){
