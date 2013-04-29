@@ -93,6 +93,26 @@ def stop():
 
 @task
 @choose_target
+def drop():
+    run("%(nbsap_sandbox)s/bin/python %(nbsap_repo)s/manage.py drop" % env)
+
+
+@task
+@choose_target
+def syncdb():
+    run("%(nbsap_sandbox)s/bin/python %(nbsap_repo)s/manage.py syncdb" % env)
+
+
+@task
+@choose_target
+def build():
+    execute('install')
+    execute('drop')
+    execute('syncdb')
+
+
+@task
+@choose_target
 def deploy():
     execute('install')
     execute('stop')
