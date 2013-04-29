@@ -3,6 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from transmeta import TransMeta
 
 from nbsap import models
 from nbsap.forms import NationalObjectiveForm
@@ -87,9 +88,9 @@ def edit_national_objective(request, pk=None, parent=None):
         if form.is_valid():
             form.save()
             if pk:
-                 messages.success(request, 'Saved changes.')
+                 messages.success(request, _('Saved changes') + "")
             else:
-                 messages.success(request, 'Objective successfully added.')
+                 messages.success(request, _('Objective successfully added.') + "")
 
             if parent_objective:
                 return redirect('view_national_objective',
@@ -115,8 +116,7 @@ def delete_national_objective(request, pk):
     objective = get_object_or_404(models.NationalObjective, pk=pk)
     parent = objective.parent
     objective.delete()
-    messages.success(request, 'Objective successfully deleted.')
-
+    messages.success(request, _('Objective successfully deleted.') + "")
     if parent:
         return redirect('view_national_objective', pk=parent.pk)
     else:

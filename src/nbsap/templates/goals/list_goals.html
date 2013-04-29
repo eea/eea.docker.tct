@@ -32,7 +32,7 @@
   <tbody>
   {% for goal in goals %}
     <tr>
-      <td>{{ goal.code }}</td>
+      <td class="index">{{ goal.code }}</td>
       <td>
         <a href="{% url 'edit_goal' code=goal.code %}">{{ goal.title }}</a>
       </td>
@@ -48,6 +48,11 @@
 <script>
     $(document).ready(function() {
       $('.messages').delay(1000).fadeOut();
+      var index = $('.index');
+      //console.log(index);
+      $.each(index, function(i, d) {
+          d.innerHTML = i + 1;
+      });
     });
 </script>
 

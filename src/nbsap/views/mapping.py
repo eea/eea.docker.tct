@@ -7,6 +7,9 @@ from django.shortcuts import render_to_response
 from nbsap import models
 from nbsap.forms import NationalStrategyForm
 
+from django.utils.translation import ugettext_lazy as _
+
+
 
 @login_required
 def edit_national_strategy(request, pk=None):
@@ -23,9 +26,9 @@ def edit_national_strategy(request, pk=None):
         if form.is_valid():
             form.save()
             if pk:
-                messages.success(request, 'Saved changes')
+                messages.success(request, _('Saved changes') + "")
             else:
-                messages.success(request, 'Mapping successfully added.')
+                messages.success(request, _('Mapping successfully added.') + "")
             return redirect('list_national_strategy')
     else:
         form = NationalStrategyForm(strategy=strategy)
@@ -40,9 +43,8 @@ def edit_national_strategy(request, pk=None):
 @login_required
 def delete_national_strategy(request, strategy=None):
     strategy = get_object_or_404(models.NationalStrategy, pk=strategy)
-#    import pdb; pdb.set_trace()
     strategy.delete()
-    messages.success(request, 'Mapping successfully deleted.')
+    messages.success(request, _('Mapping successfully deleted.') + "")
     return redirect('list_national_strategy')
 
 

@@ -38,9 +38,9 @@ def edit_national_action(request, objective, pk=None):
         if form.is_valid():
             form.save()
             if not pk:
-                messages.success(request, 'Action successfully added.')
+                messages.success(request, _('Action successfully added.') + "")
             else:
-                messages.success(request, 'Saved changes.')
+                messages.success(request,  _('Saved changes.') + "")
             return redirect('view_national_objective', pk=objective.pk)
     else:
         form = NationalActionForm(action=action,
@@ -58,5 +58,5 @@ def edit_national_action(request, objective, pk=None):
 def delete_national_action(request, objective, pk=None):
     action = get_object_or_404(models.NationalAction, pk=pk)
     action.delete()
-    messages.success(request, 'Action successfully deleted.')
+    messages.success(request, _('Action successfully deleted.') + "")
     return redirect('view_national_objective', pk=objective)

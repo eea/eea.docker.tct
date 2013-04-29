@@ -39,7 +39,7 @@
 
   $(".btn-danger").on("click", function (e) {
     e.preventDefault();
-    if(confirm('Are you sure you want to delete this action?')) {
+    if(confirm( " {% trans 'Are you sure you want to delete this action?' %}" )) {
       $.ajax({
         "url": $(this).attr("href"),
         "type": "DELETE",
