@@ -144,6 +144,7 @@ INSTALLED_APPS = (
     'tinymce',
     'nbsap',
     'chosen',
+    'gunicorn',
 )
 
 # A sample logging configuration. The only tangible logging

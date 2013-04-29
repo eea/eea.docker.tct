@@ -63,8 +63,8 @@ def install():
 
 
 def supervisor(root, command):
-    run('%s/bin/supervisorctl %s' %
-        (root, root, command))
+    run('%s/sandbox/bin/supervisorctl %s' %
+        (root, command))
 
 
 @task
@@ -95,4 +95,5 @@ def stop():
 @choose_target
 def deploy():
     execute('install')
-    execute('restart')
+    execute('stop')
+    execute('start')
