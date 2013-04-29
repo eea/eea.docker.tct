@@ -10,4 +10,3 @@ sandbox_py27/*
 /build
 .webassets-cache
 gen
-instance/local_settings.py
