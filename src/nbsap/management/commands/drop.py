@@ -26,6 +26,6 @@ class Command(NoArgsCommand):
         db.commit()
 
         print "Granting privileges ..."
-        cursor.execute("grant all on nbsap.* to nbsap@localhost identified by 'nbsap';")
+        cursor.execute("grant all on %s.* to nbsap@localhost identified by 'nbsap';" % (settings.DATABASES['default']['NAME']))
         db.commit()
         print 'Successfully granted privileges.'
