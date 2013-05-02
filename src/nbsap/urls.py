@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from django.views.generic import RedirectView
 
 from django.contrib import admin
 admin.autodiscover()
@@ -23,6 +24,7 @@ urlpatterns = patterns('',
 
     url(r'^i18n/', include('django.conf.urls.i18n')),
 
+    url(r'^favicon\.ico$', RedirectView.as_view(url='/static/favicon.ico')),
 
     # URLs for mapping form
 
