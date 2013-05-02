@@ -11,6 +11,22 @@ env['nbsap_target_defs'] = {
         'nbsap_repo':     '/var/local/nbsap-django',
         'nbsap_sandbox':  '/var/local/nbsap-django/sandbox',
         'nbsap_instance': '/var/local/nbsap-django',
+        'nbsap_clients': [
+            'burundi',
+            'cameroun',
+            'benin',
+            'niger',
+            'madagascar',
+            'rdc',
+            'burkinafaso',
+            'cotedivoire',
+            'comifac',
+            'algerie',
+            'cbd',
+            'maroc',
+            'training'
+        ]
+
     },
 }
 
@@ -71,25 +87,14 @@ def restart():
 
 @task
 @choose_target
+def restart_all():
+    # restart main NBSAP machine
+    execute('restart')
+    for country in env['nbsap_clients']:
+        supervisor(env['nbsap_repo'], "restart nbsap-%s" % country)
+
+
+@task
+@choose_target
 def status():
     supervisor(env['nbsap_repo'],"status")
-
-
-@task
-@choose_target
-def start():
-    supervisor(env['nbsap_repo'],"start nbsap")
-
-
-@task
-@choose_target
-def stop():
-    supervisor(env['nbsap_repo'],"stop nbsap")
-
-
-@task
-@choose_target
-def deploy():
-    execute('install')
-    execute('stop')
-    execute('start')
