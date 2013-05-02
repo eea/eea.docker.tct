@@ -7,14 +7,10 @@ from fabric.contrib.files import exists
 
 env['nbsap_target_defs'] = {
     'staging': {
-        'host_string': 'edw@whiterussian.edw.ro',
-        'nbsap_repo':     '/var/local/nbsap-new',
-        'nbsap_sandbox':  '/var/local/nbsap-new/sandbox',
-        'nbsap_instance': '/var/local/nbsap-new',
-        ###
-        'project_root': '/var/local/nbsap-new',
-        'virtualenv': 'virtualenv',
-        'python': '/var/local/nbsap-new/sandbox/bin/python',
+        'host_string': 'edw@rom.edw.ro',
+        'nbsap_repo':     '/var/local/nbsap-django',
+        'nbsap_sandbox':  '/var/local/nbsap-django/sandbox',
+        'nbsap_instance': '/var/local/nbsap-django',
     },
 }
 
@@ -50,7 +46,7 @@ def install():
         run("git reset incoming --hard")
 
     if not exists(env['nbsap_sandbox']):
-        run("virtualenv --no-site-packages --distribute '%(nbsap_sandbox)s'" % env)
+        run("virtualenv -p /var/local/python27/bin/python --no-site-packages '%(nbsap_sandbox)s'" % env)
         run("echo '*' > '%(nbsap_sandbox)s/.gitignore'" % env)
 
     run("%(nbsap_sandbox)s/bin/pip install -U distribute" % env)
@@ -70,25 +66,25 @@ def supervisor(root, command):
 @task
 @choose_target
 def restart():
-    supervisor(env['project_root'], "restart nbsap")
+    supervisor(env['nbsap_repo'], "restart nbsap")
 
 
 @task
 @choose_target
 def status():
-    supervisor(env['project_root'],"status")
+    supervisor(env['nbsap_repo'],"status")
 
 
 @task
 @choose_target
 def start():
-    supervisor(env['project_root'],"start nbsap")
+    supervisor(env['nbsap_repo'],"start nbsap")
 
 
 @task
 @choose_target
 def stop():
-    supervisor(env['project_root'],"stop nbsap")
+    supervisor(env['nbsap_repo'],"stop nbsap")
 
 
 @task
