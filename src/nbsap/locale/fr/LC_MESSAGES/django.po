@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-29 15:30+0300\n"
+"POT-Creation-Date: 2013-05-03 16:43+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -534,6 +534,10 @@ msgstr "Modifications enregistrées"
 #: views/actions.py:61
 msgid "Action successfully deleted."
 msgstr "Action supprimée"
+
+#: views/auth.py:8
+msgid "Successfully logged out"
+msgstr "Deconnecté avec succès"
 
 #: views/indicators.py:12
 #, python-format
