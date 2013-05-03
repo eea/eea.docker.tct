@@ -21,6 +21,9 @@ class NationalActionTestCase(TestCase):
     def setUp(self):
         # create a user to test with
         self.user = User.objects.create_user('test_admin', 'test@admin.com', 'q')
+        self.user.is_staff = True
+        self.user.save()
+
         self.client = Client()
         # blind call to set user info on session
         call = self.client.post('/accounts/login/', {'username': 'test_admin',

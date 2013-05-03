@@ -21,6 +21,9 @@ class NationalStrategyTestCase(TestCase):
     def setUp(self):
         self.user = User.objects.create_user('test_admin', 'test@admin.com', 'q')
         self.client = Client()
+        self.user.is_staff = True
+        self.user.save()
+
         call = self.client.post('/accounts/login/', {'username': 'test_admin',
                                                      'password': 'q'})
 
