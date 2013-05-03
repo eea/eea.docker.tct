@@ -147,6 +147,7 @@ INSTALLED_APPS = (
     'chosen',
     'raven.contrib.django',
     'gunicorn',
+    'rosetta'
 )
 
 # A sample logging configuration. The only tangible logging

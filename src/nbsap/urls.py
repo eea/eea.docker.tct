@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.views.generic import RedirectView
+from django.conf import settings
 
 from django.contrib import admin
 admin.autodiscover()
@@ -24,10 +25,11 @@ urlpatterns = patterns('',
 
     url(r'^i18n/', include('django.conf.urls.i18n')),
 
+    # Django generic view classes
     url(r'^favicon\.ico$', RedirectView.as_view(url='/static/favicon.ico')),
 
-    # URLs for mapping form
 
+    # URLs for mapping form
     url(r'^goals/title$',
             'nbsap.views.get_goal_title',
             name='goal_title'),
@@ -146,3 +148,10 @@ urlpatterns = patterns('',
             name='edit_goal'),
 
 )
+
+# Django Rosetta support for translation
+if 'rosetta' in settings.INSTALLED_APPS:
+    urlpatterns += patterns('',
+            url(r'^translate/', include('rosetta.urls')),
+                )
+

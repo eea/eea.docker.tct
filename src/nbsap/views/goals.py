@@ -3,7 +3,7 @@ from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.template import Template, context, RequestContext
 from django.shortcuts import render_to_response
-from django.contrib.auth.decorators import login_required
+from auth import auth_required
 from django.contrib import messages
 
 import json
@@ -47,7 +47,7 @@ def get_aichi_target_title(request, pk=None):
     return HttpResponse(json.dumps([{'code': target.code, 'value':target.description}]))
 
 
-@login_required
+@auth_required
 def edit_goal(request, code=None):
     goal = get_object_or_404(models.AichiGoal, pk=code)
 
@@ -69,7 +69,7 @@ def edit_goal(request, code=None):
                    'goal': goal,
                   })
 
-@login_required
+@auth_required
 def list_goals(request):
     goals = models.AichiGoal.objects.all()
 

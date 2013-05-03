@@ -1,14 +1,15 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import ugettext_lazy as _
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 
 from nbsap import models
 from nbsap.forms import NationalActionForm
 
+from auth import auth_required
 
-@login_required
+
+@auth_required
 def view_national_action(request, objective, pk):
     objective = get_object_or_404(models.NationalObjective, pk=objective)
     action = get_object_or_404(models.NationalAction, pk=pk)
@@ -18,7 +19,7 @@ def view_national_action(request, objective, pk):
                   })
 
 
-@login_required
+@auth_required
 def edit_national_action(request, objective, pk=None):
     objective = get_object_or_404(models.NationalObjective, pk=objective)
 
@@ -54,7 +55,7 @@ def edit_national_action(request, objective, pk=None):
                   })
 
 
-@login_required
+@auth_required
 def delete_national_action(request, objective, pk=None):
     action = get_object_or_404(models.NationalAction, pk=pk)
     action.delete()

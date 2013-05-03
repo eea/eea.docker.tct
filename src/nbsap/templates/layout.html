@@ -42,9 +42,15 @@
             </li>
 
             {% if user.is_authenticated %}
-            <li>
-                <a href="{% url 'list_national_objectives' %}"><i class="icon-wrench icon-black"></i>{% trans "Admin" %}</a>
-           </li>
+                {% if user.is_staff %}
+                <li>
+                    <a href="{% url 'list_national_objectives' %}"><i class="icon-wrench icon-black"></i>{% trans "Admin" %}</a>
+               </li>
+               {% endif %}
+           <li>
+                <a href="#"><i class="icon-user"></i>{{user.username}}</a>
+            </li>
+
            <li>
                 <a href="{% url 'logout' %}?next_page=/">Logout</a>
             </li>
