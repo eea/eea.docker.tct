@@ -1,17 +1,16 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.template import Template, context, RequestContext
 from django.shortcuts import render_to_response
+from django.utils.translation import ugettext_lazy as _
 
 from nbsap import models
 from nbsap.forms import NationalStrategyForm
 
-from django.utils.translation import ugettext_lazy as _
+from auth import auth_required
 
 
-
-@login_required
+@auth_required
 def edit_national_strategy(request, pk=None):
     if pk:
         strategy = get_object_or_404(models.NationalStrategy, pk=pk)
@@ -40,7 +39,7 @@ def edit_national_strategy(request, pk=None):
     )
 
 
-@login_required
+@auth_required
 def delete_national_strategy(request, strategy=None):
     strategy = get_object_or_404(models.NationalStrategy, pk=strategy)
     strategy.delete()
@@ -48,7 +47,7 @@ def delete_national_strategy(request, strategy=None):
     return redirect('list_national_strategy')
 
 
-@login_required
+@auth_required
 def list_national_strategy(request):
     strategies = models.NationalStrategy.objects.all()
 

@@ -1,12 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import ugettext_lazy as _
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from transmeta import TransMeta
 
 from nbsap import models
 from nbsap.forms import NationalObjectiveForm
+
+from auth import auth_required
 
 def nat_strategy(request, code=None):
     objectives = models.NationalObjective.objects.all()
@@ -48,7 +49,8 @@ def implementation(request, code=None):
                    'objectives': objectives,
                   })
 
-@login_required
+
+@auth_required
 def view_national_objective(request, pk):
     objective = get_object_or_404(models.NationalObjective, pk=pk)
     return render(request, 'objectives/view_national_objective.html',
@@ -56,7 +58,7 @@ def view_national_objective(request, pk):
                   })
 
 
-@login_required
+@auth_required
 def list_national_objectives(request):
     objectives = models.NationalObjective.objects.filter(parent=None).all()
     return render(request, 'objectives/list_national_objectives.html',
@@ -64,7 +66,7 @@ def list_national_objectives(request):
                   })
 
 
-@login_required
+@auth_required
 def edit_national_objective(request, pk=None, parent=None):
 
     if parent:
@@ -111,7 +113,7 @@ def edit_national_objective(request, pk=None, parent=None):
                   })
 
 
-@login_required
+@auth_required
 def delete_national_objective(request, pk):
     objective = get_object_or_404(models.NationalObjective, pk=pk)
     parent = objective.parent
