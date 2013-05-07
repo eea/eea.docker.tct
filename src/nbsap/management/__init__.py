@@ -22,7 +22,7 @@ def create_admin(app, created_models, verbosity, **kwargs):
             print '*' * 50
             assert auth_models.User.objects.create_superuser('admin',
                                                              'admin@example.com',
-                                                             'q')
+                                                             'qC@rn3l')
         else:
             print '*' * 50
             print 'Admin user is "admin" with password "q".'
