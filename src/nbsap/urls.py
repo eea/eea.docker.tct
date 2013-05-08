@@ -75,7 +75,7 @@ urlpatterns = patterns('',
 
 
     # authentication URLs
-    url(r'^accounts/login/$', 'django.contrib.auth.views.login', name='login'),
+    url(r'^accounts/login/$', 'nbsap.views.login_view', name='login'),
     url(r'^accounts/logout/$', 'nbsap.views.logout_view', name='logout'),
 
     # administration URLs
