@@ -11,5 +11,6 @@ def nbsap_admin(request):
 
     return {
         'EU_STRATEGY': getattr(settings, 'EU_STRATEGY', ''),
+        'SITE_HEADER': getattr(settings, 'SITE_HEADER', ''),
         'redirect_to': redirect_to,
     }
