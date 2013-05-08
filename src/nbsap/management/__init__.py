@@ -13,8 +13,8 @@ def create_admin(app, created_models, verbosity, **kwargs):
             print '*' * 50
             print 'Creating admin user "admin" with password "qC@rn3l"'
             print '*' * 50
-            assert auth_models.User.objects.create_superuser('jadmin',
-                                                             'jadmin@example.com',
+            assert auth_models.User.objects.create_superuser('admin',
+                                                             'admin@example.com',
                                                              'qC@rn3l')
         else:
             print '*' * 50
