@@ -7,26 +7,10 @@ from fabric.contrib.files import exists
 
 env['nbsap_target_defs'] = {
     'staging': {
-        'host_string': 'edw@rom.edw.ro',
-        'nbsap_repo':     '/var/local/nbsap-django',
-        'nbsap_sandbox':  '/var/local/nbsap-django/sandbox',
-        'nbsap_instance': '/var/local/nbsap-django',
-        'nbsap_clients': [
-            'burundi',
-            'cameroun',
-            'benin',
-            'niger',
-            'madagascar',
-            'rdc',
-            'burkinafaso',
-            'cotedivoire',
-            'comifac',
-            'algerie',
-            'cbd',
-            'maroc',
-            'training'
-        ]
-
+        'host_string': 'user@host',
+        'nbsap_repo':     '/var/local/project-root',
+        'nbsap_sandbox':  '/var/local/project-root/sandbox',
+        'nbsap_instance': '/var/local/project-root',
     },
 }
 
@@ -83,15 +67,6 @@ def supervisor(root, command):
 @choose_target
 def restart():
     supervisor(env['nbsap_repo'], "restart nbsap")
-
-
-@task
-@choose_target
-def restart_all():
-    # restart main NBSAP machine
-    execute('restart')
-    for country in env['nbsap_clients']:
-        supervisor(env['nbsap_repo'], "restart nbsap-%s" % country)
 
 
 @task
