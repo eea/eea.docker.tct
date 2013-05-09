@@ -10,7 +10,7 @@ def nbsap_admin(request):
         redirect_to = '/'
 
     return {
-        'EU_STRATEGY': getattr(settings, 'EU_STRATEGY', ''),
-        'SITE_HEADER': getattr(settings, 'SITE_HEADER', ''),
+        'EU_STRATEGY': getattr(settings, 'EU_STRATEGY', False),
+        'SITE_HEADER': getattr(settings, 'SITE_HEADER', 'NBSAP'),
         'redirect_to': redirect_to,
     }

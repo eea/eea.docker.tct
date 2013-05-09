@@ -8,17 +8,17 @@ from django.core.management import call_command
 def create_admin(app, created_models, verbosity, **kwargs):
     if settings.DEBUG:
         try:
-            auth_models.User.objects.get(username='jadmin')
+            auth_models.User.objects.get(username='admin')
         except auth_models.User.DoesNotExist:
             print '*' * 50
-            print 'Creating admin user "admin" with password "qC@rn3l"'
+            print 'Creating admin user "admin" with password "admin"'
             print '*' * 50
             assert auth_models.User.objects.create_superuser('admin',
                                                              'admin@example.com',
-                                                             'qC@rn3l')
+                                                             'admin')
         else:
             print '*' * 50
-            print 'Admin user is "jadmin" with password "qC@rn3l".'
+            print 'Admin user is "admin" with password "admin".'
             print '*' * 50
 
 def load_data(sender, **kwargs):
