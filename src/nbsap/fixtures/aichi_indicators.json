@@ -1257,7 +1257,7 @@
       "requirements": "1. crop area, crop production; 2. CUE fish stock; 3. NDVI; 4. recreation days",
       "links": [],
       "classification": "Priority to be developed at global level and sub-global level",
-      "title": "Trends in economic and non-economic values value of selected ecosystem services",
+      "title": "Trends in economic and non-economic values of selected ecosystem services",
       "sensitivity": "",
       "scales": [
         1,
@@ -1827,7 +1827,7 @@
       "requirements": "",
       "links": [],
       "classification": "For consideration at sub-global level",
-      "title": "Trends in identification, assessment and establishment and strengthening of incentives that reward positive contribution to biodiversity and ecosystem services penalize adverse impacts",
+      "title": "Trends in identification, assessment and establishment and strengthening of incentives that reward positive contribution to biodiversity and ecosystem services and penalize adverse impacts",
       "sensitivity": "",
       "scales": [
         1,
@@ -1948,7 +1948,7 @@
       "requirements": "",
       "links": [],
       "classification": "For consideration at sub-global level",
-      "title": "Trends in integration of biodiversity and ecosystem service values into integrated in sectoral and development policies",
+      "title": "Trends in integration of biodiversity and ecosystem service values into sectoral and development policies",
       "sensitivity": "",
       "scales": [],
       "question": "Responses - What do we do about biodiversity loss?",
@@ -2081,7 +2081,7 @@
       "requirements": "Integration, safeguarding (PIC, EIA, ABS, IP &amp; documentation) &amp; participation.",
       "links": [],
       "classification": "Priority to be developed at global level and sub-global level",
-      "title": "Trends in degree to which traditional knowledge and practices are respected through: full integration, participation and safeguards in national implementation of the Strategic Plan",
+      "title": "Trends in which traditional knowledge and practices are respected through their full integration, safeguards and the full and effective participation of indigenous and local communities in the national implementation of the Strategic Plan",
       "sensitivity": "",
       "scales": [
         1
@@ -2305,7 +2305,7 @@
       "requirements": "Connectivity: matrix ecosystem type relative to PA ecosystems; transboundary areas; flyway locations; riparian areas. Integration: source-sink dynamics (esp. Marine); adjacent land use and tenure; movements of wide-ranging species; disturbance regimes (fire; hydrology). All especially relevant in the context of climate change adaptation (gradients).",
       "links": [],
       "classification": "Priority to be developed at global level and sub-global level",
-      "title": "Trends in the connectivity of protected  and other area based approaches integrated into land and sea scapes",
+      "title": "Trends in the connectivity of protected areas and other area based approaches integrated into landscapes and seascapes",
       "sensitivity": "hig",
       "scales": [
         1,
@@ -2371,6 +2371,34 @@
       "sources": "",
       "ease_of_communication": "hig",
       "measurer": "Tbd (CBD Secretariat/UNEP?)"
+    }
+  },
+  {
+    "pk": 99,
+    "model": "nbsap.aichiindicator",
+    "fields": {
+      "status": "Available globally. The extent of protected areas provides a measure of absolute area protected.",
+      "requirements": "PA location, boundaries, geographic area (ha), IUCN management category and establishment date",
+      "links": [
+      34
+      ],
+      "classification": "Priority and ready for use globally",
+      "title": "Trends in coverage of protected areas",
+      "sensitivity": "hig",
+      "scales": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "question": "Responses - What do we do about biodiversity loss?",
+      "validity": "hig",
+      "conventions": "UN MDGs",
+      "sub_indicator": "Trends in protected areas coverage, representation and condition",
+      "head_indicator": "Trends in coverage, condition, representativeness and effectiveness of protected areas",
+      "sources": "WDPA and national sources",
+      "ease_of_communication": "hig",
+      "measurer": "National protected area agencies"
     }
   }
 ]
