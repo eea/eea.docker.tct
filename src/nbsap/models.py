@@ -110,6 +110,7 @@ class AichiTarget(models.Model):
         return self.goals.all()[0]
 
     class Meta:
+        ordering = ['code']
         translate = ('description',)
 
 
@@ -243,6 +244,7 @@ class SEBIIndicator(models.Model):
         return 'SEBI {0}: {1}'.format(self.code, self.title)
 
     class Meta:
+        verbose_name_plural = 'SEBI indicators'
         ordering = ['code']
         translate = ('title',)
 
@@ -258,6 +260,7 @@ class EuAction(models.Model):
                                 related_name='children')
 
     class Meta:
+        verbose_name_plural = 'EU actions'
         translate = ('description',)
 
     def __unicode__(self):
@@ -288,6 +291,8 @@ class EuIndicator(models.Model):
         return self.title
 
     class Meta:
+        verbose_name_plural = 'EU indicators'
+        ordering = ['title_en']
         translate = ('title',)
 
 
@@ -307,6 +312,7 @@ class EuTarget(models.Model):
         return 'Target {0}: {1}'.format(self.code, self.title)
 
     class Meta:
+        verbose_name_plural = 'EU targets'
         ordering = ['code']
         translate = ('title', 'description',)
 
@@ -324,6 +330,7 @@ class EuAichiStrategy(models.Model):
     get_targets.short_description = 'AICHI targets'
 
     class Meta:
+        verbose_name_plural = 'EU-Aichi mappings'
         ordering = ['eu_target']
 
 
@@ -353,5 +360,7 @@ class NationalStrategy(models.Model):
                                             verbose_name="Eu related actions",
                                             related_name="national_strategy")
 
+    class Meta:
+        verbose_name_plural = 'National strategy mappings'
 
 pre_save.connect(NationalObjective.pre_save_objective_code, sender=NationalObjective)
