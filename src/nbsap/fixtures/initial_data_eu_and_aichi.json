@@ -2983,6 +2983,34 @@
         "pk" : 96,
         "model" : "nbsap.aichiindicator",
         "fields" : {
+            "status" : "Connectivity: good for forest and wetlands; minimal for other ecosystems incl. Marine. Integration: some national datasets e.g. wide-ranging species, fire; but no global aggregation or synthesis",
+            "requirements" : "Connectivity: matrix ecosystem type relative to PA ecosystems; transboundary areas; flyway locations; riparian areas. Integration: source-sink dynamics (esp. Marine); adjacent land use and tenure; movements of wide-ranging species; disturbance regimes (fire; hydrology). All especially relevant in the context of climate change adaptation (gradients).",
+            "links" : [
+
+            ],
+            "classification" : "Priority to be developed at global level and sub-global level",
+            "title" : "Trends in the connectivity of protected and other area based approaches integrated into land and sea scapes",
+            "sensitivity" : "hig",
+            "scales" : [
+                1,
+                2,
+                3,
+                4
+            ],
+            "question" : "Responses - What do we do about biodiversity loss?",
+            "validity" : "hig",
+            "conventions" : "",
+            "sub_indicator" : "Trends in protected areas coverage, representation and condition",
+            "head_indicator" : "Trends in coverage, condition, representativeness and effectiveness of protected areas",
+            "sources" : "Satellite data for forests; national datasets for others",
+            "ease_of_communication" : "hig",
+            "measurer" : "BirdLife InteR, National and others"
+        }
+    },
+    {
+        "pk" : 97,
+        "model" : "nbsap.aichiindicator",
+        "fields" : {
             "status" : "Toolkit for ecosystem service evaluation being developed and implemented at Important Bird Areas (many of which are Protected Areas) by BirdLife InteR, National. Coverage likely to expand but remain patchy at a global scale over next decade.",
             "requirements" : "Various",
             "links" : [
@@ -3008,7 +3036,7 @@
         }
     },
     {
-        "pk" : 97,
+        "pk" : 98,
         "model" : "nbsap.aichiindicator",
         "fields" : {
             "status" : "New indicators. Some elements well developed (e.g. ODA).  Included in Resource Management. Strategy. Need to avoid double-accounting. ",
@@ -3034,6 +3062,34 @@
         }
     },
     {
+      "pk": 99,
+      "model": "nbsap.aichiindicator",
+      "fields": {
+        "status": "Available globally. The extent of protected areas provides a measure of absolute area protected.",
+        "requirements": "PA location, boundaries, geographic area (ha), IUCN management category and establishment date",
+        "links": [
+        34
+        ],
+        "classification": "Priority and ready for use globally",
+        "title": "Trends in coverage of protected areas",
+        "sensitivity": "hig",
+        "scales": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "question": "Responses - What do we do about biodiversity loss?",
+        "validity": "hig",
+        "conventions": "UN MDGs",
+        "sub_indicator": "Trends in protected areas coverage, representation and condition",
+        "head_indicator": "Trends in coverage, condition, representativeness and effectiveness of protected areas",
+        "sources": "WDPA and national sources",
+        "ease_of_communication": "hig",
+        "measurer": "National protected area agencies"
+      }
+    },
+    {
         "pk" : 1,
         "model" : "nbsap.aichitarget",
         "fields" : {
@@ -3042,7 +3098,7 @@
                 73,
                 75,
                 88,
-                96
+                97
             ],
             "description_en" : "By 2020, at the latest, people are aware of the values of biodiversity and the steps they can take to conserve and use it sustainably.",
             "description_nl" : "",
@@ -3072,8 +3128,8 @@
                 82,
                 83,
                 88,
-                96,
-                97
+                97,
+                98
             ],
             "description_en" : "By 2020, at the latest, biodiversity values have been integrated into national and local development and poverty reduction strategies and planning processes and are being incorporated into national accounting, as appropriate, and reporting systems.",
             "description_nl" : "",
@@ -3097,7 +3153,7 @@
                 78,
                 79,
                 83,
-                97
+                98
             ],
             "description_en" : "By 2020, at the latest, incentives, including subsidies, harmful to biodiversity are eliminated, phased out or reformed in order to minimize or avoid negative impacts, and positive incentives for the conservation and sustainable use of biodiversity are developed and applied, consistent and in harmony with the Convention and other relevant international obligations, taking into account national socio economic conditions.",
             "description_nl" : "",
@@ -3182,7 +3238,9 @@
                 93,
                 94,
                 95,
-                96
+                96,
+                97,
+                99
             ],
             "description_en" : "By 2020, the rate of loss of all natural habitats, including forests, is at least halved and where feasible brought close to zero, and degradation and fragmentation is significantly reduced.",
             "description_nl" : "",
@@ -3222,7 +3280,9 @@
                 93,
                 94,
                 95,
-                96
+                96,
+                97,
+                99
             ],
             "description_en" : "By 2020 all fish and invertebrate stocks and aquatic plants are managed and harvested sustainably, legally and applying ecosystem based approaches, so that overfishing is avoided, recovery plans and measures are in place for all depleted species, fisheries have no significant adverse impacts on threatened species and vulnerable ecosystems and the impacts of fisheries on stocks, species and ecosystems are within safe ecological limits.",
             "description_nl" : "",
@@ -3272,7 +3332,9 @@
                 93,
                 94,
                 95,
-                96
+                96,
+                97,
+                99
             ],
             "description_en" : "By 2020 areas under agriculture, aquaculture and forestry are managed sustainably, ensuring conservation of biodiversity.",
             "description_nl" : "",
@@ -3301,7 +3363,9 @@
                 73,
                 93,
                 94,
-                95
+                95,
+                96,
+                99
             ],
             "description_en" : "By 2020, pollution, including from excess nutrients, has been brought to levels that are not detrimental to ecosystem function and biodiversity",
             "description_nl" : "",
@@ -3333,7 +3397,9 @@
                 73,
                 93,
                 94,
-                95
+                95,
+                96,
+                99
             ],
             "description_en" : "By 2020, invasive alien species and pathways are identified and prioritized, priority species are controlled or eradicated, and measures are in place to manage pathways to prevent their introduction and establishment.",
             "description_nl" : "",
@@ -3383,7 +3449,9 @@
                 93,
                 94,
                 95,
-                96
+                96,
+                97,
+                99
             ],
             "description_en" : "By 2015, the multiple anthropogenic pressures on coral reefs, and other vulnerable ecosystems impacted by climate change or ocean acidification are minimized, so as to maintain their integrity and functioning.",
             "description_nl" : "",
@@ -3420,7 +3488,9 @@
                 93,
                 94,
                 95,
-                96
+                96,
+                97,
+                99
             ]
         }
     },
@@ -3460,7 +3530,9 @@
                 93,
                 94,
                 95,
-                96
+                96,
+                97,
+                99
             ],
             "description_en" : "By 2020 the extinction of known threatened species has been prevented and their conservation status, particularly of those most in decline, has been improved and sustained.",
             "description_nl" : "",
@@ -3486,7 +3558,9 @@
                 93,
                 94,
                 95,
-                96
+                96,
+                97,
+                99
             ],
             "description_en" : "By 2020, the genetic diversity of cultivated plants and farmed and domesticated animals and of wild relatives, including other socio-economically as well as culturally valuable species, is maintained, and strategies have been developed and implemented for minimizing genetic erosion and safeguarding their genetic diversity.",
             "description_nl" : "",
@@ -3541,7 +3615,9 @@
                 94,
                 95,
                 96,
-                97
+                97,
+                98,
+                99
             ],
             "description_en" : "By 2020, ecosystems that provide essential services, including services related to water, and contribute to health, livelihoods and well-being, are restored and safeguarded, taking into account the needs of women, indigenous and local communities, and the poor and vulnerable.",
             "description_nl" : "",
@@ -3599,7 +3675,9 @@
                 94,
                 95,
                 96,
-                97
+                97,
+                98,
+                99
             ],
             "description_en" : "By 2020, ecosystem resilience and the contribution of biodiversity to carbon stocks has been enhanced, through conservation and restoration, including restoration of at least 15 per cent of degraded ecosystems, thereby contributing to climate change mitigation and adaptation and to combating desertification.",
             "description_nl" : "",
@@ -3619,7 +3697,7 @@
                 10,
                 11,
                 73,
-                97
+                98
             ],
             "description_en" : "By 2015, the Nagoya Protocol on Access to Genetic Resources and the Fair and Equitable Sharing of Benefits Arising from their Utilization is in force and operational, consistent with national legislation.",
             "description_nl" : "",
@@ -3641,7 +3719,7 @@
                 82,
                 86,
                 88,
-                97
+                98
             ],
             "description_en" : "By 2015 each Party has developed, adopted as a policy instrument, and has commenced implementing an effective, participatory and updated national biodiversity strategy and action plan.",
             "description_nl" : "",
@@ -3684,7 +3762,7 @@
                 76,
                 79,
                 87,
-                97
+                98
             ],
             "description_en" : "By 2020, knowledge, the science base and technologies relating to biodiversity, its values, functioning, status and trends, and the consequences of its loss, are improved, widely shared and transferred, and applied.",
             "description_nl" : "",
@@ -3705,13 +3783,13 @@
                 74,
                 75,
                 76,
-                96
+                97
             ],
             "description_en" : "By 2020, at the latest, the mobilization of financial resources for effectively implementing the Strategic Plan for Biodiversity 2011-2020 from all sources, and in accordance with the consolidated and agreed process in the Strategy for Resource Mobilization, should increase substantially from the current levels. This target will be subject to changes contingent to resource needs assessments to be developed and reported by Parties.",
             "description_nl" : "",
             "description_fr" : "D\u2019ici \u00e0 2020 au plus tard, la mobilisation des ressources \nfinanci\u00e8res n\u00e9cessaires \u00e0 la mise en \u0153uvre effective du Plan strat\u00e9-\ngique 2011-2020 pour la diversit\u00e9 biologique de toutes les sources et \nconform\u00e9ment au m\u00e9canisme consolid\u00e9 et convenu de la Strat\u00e9gie de \nmobilisation des ressources, aura augment\u00e9 consid\u00e9rablement par \nrapport aux niveaux actuels. Cet objectif fera l\u2019objet de modifications \nen fonction des \u00e9valuations des besoins de ressources que les Parties \ndoivent effectuer et notifier",
             "indicators" : [
-                97
+                98
             ]
         }
     },
@@ -3803,6 +3881,292 @@
             "description_nl" : "",
             "description_fr" : "Renforcer la mise en \u0153uvre au moyen d\u2019une \nplanification participative, de la gestion des connaissances et du \nrenforcement des capacit\u00e9s",
             "title_fr" : "But strat\u00e9gique E"
+        }
+    },
+    {
+        "pk" : 1,
+        "model" : "nbsap.sebiindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/abundance-and-distribution-of-selected-species/abundance-and-distribution-of-selected",
+            "title_nl" : "",
+            "code" : "001",
+            "title_en" : "Abundance and distribution of selected species",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 2,
+        "model" : "nbsap.sebiindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/species-of-european-interest/species-of-european-interest-assessment",
+            "title_nl" : "",
+            "code" : "003",
+            "title_en" : "Conservation status of species of European interest",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 3,
+        "model" : "nbsap.sebiindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/red-list-index-for-european-species/red-list-index-for-european",
+            "title_nl" : "",
+            "code" : "002",
+            "title_en" : "Red List Index for European marine species",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 4,
+        "model" : "nbsap.sebiindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/ecosystem-coverage/ecosystem-coverage-assessment-published-may-2010",
+            "title_nl" : "",
+            "code" : "004",
+            "title_en" : "Ecosystem coverage",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 5,
+        "model" : "nbsap.sebiindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/habitats-of-european-interest/habitats-of-european-interest-assessment",
+            "title_nl" : "",
+            "code" : "005",
+            "title_en" : "Conservation status of habitats of European interest",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 6,
+        "model" : "nbsap.sebiindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/livestock-genetic-diversity/livestock-genetic-diversity-assessment-published",
+            "title_nl" : "",
+            "code" : "006",
+            "title_en" : "Livestock genetic diversity",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 7,
+        "model" : "nbsap.sebiindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/nationally-designated-protected-areas/nationally-designated-protected-areas-assessment-1",
+            "title_nl" : "",
+            "code" : "007",
+            "title_en" : "Nationally designated protected areas",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 8,
+        "model" : "nbsap.sebiindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/sites-designated-under-the-eu/sites-designated-under-the-eu",
+            "title_nl" : "",
+            "code" : "008",
+            "title_en" : "Sites designated under the EU Habitats and Birds Directives",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 9,
+        "model" : "nbsap.sebiindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/critical-load-exceedance-for-nitrogen/critical-load-exceedance-for-nitrogen",
+            "title_nl" : "",
+            "code" : "009",
+            "title_en" : "Critical load excedance for nitrogen",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 10,
+        "model" : "nbsap.sebiindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/invasive-alien-species-in-europe/invasive-alien-species-in-europe",
+            "title_nl" : "",
+            "code" : "010",
+            "title_en" : "Impact invasive alien species in Europe",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 11,
+        "model" : "nbsap.sebiindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/impact-of-climate-change-on/impact-of-climate-change-on",
+            "title_nl" : "",
+            "code" : "011",
+            "title_en" : "Impact of CC on bird populations",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 12,
+        "model" : "nbsap.sebiindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/marine-trophic-index-of-european-seas/marine-trophic-index-of-european",
+            "title_nl" : "",
+            "code" : "012",
+            "title_en" : "Marine trophic index of European seas",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 13,
+        "model" : "nbsap.sebiindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/fragmentation-of-natural-and-semi/fragmentation-of-natural-and-semi",
+            "title_nl" : "",
+            "code" : "013",
+            "title_en" : "Fragmentation of natural and semi-natural areas",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 14,
+        "model" : "nbsap.sebiindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/nutrients-in-transitional-coastal-and-1/nutrients-in-transitional-coastal-and",
+            "title_nl" : "",
+            "code" : "015",
+            "title_en" : "Nutrients in transitional, coastal and marine waters",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 15,
+        "model" : "nbsap.sebiindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/freshwater-quality/freshwater-quality-assessment-published-may-2010",
+            "title_nl" : "",
+            "code" : "016",
+            "title_en" : "Freshwater quality",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 16,
+        "model" : "nbsap.sebiindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/forest-growing-stock-increment-and-fellings/forest-growing-stock-increment-and",
+            "title_nl" : "",
+            "code" : "017",
+            "title_en" : "Forest: growing stock, increment and fellings",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 17,
+        "model" : "nbsap.sebiindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/forest-deadwood/forest-deadwood-assessment-published-may-2010",
+            "title_nl" : "",
+            "code" : "018",
+            "title_en" : "Forest: deadwood",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 18,
+        "model" : "nbsap.sebiindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/agriculture-nitrogen-balance/agriculture-nitrogen-balance-assessment-published",
+            "title_nl" : "",
+            "code" : "019",
+            "title_en" : "Agriculture: nitrogen balance",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 19,
+        "model" : "nbsap.sebiindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/agriculture-area-under-management-practices/agriculture-area-under-management-practices",
+            "title_nl" : "",
+            "code" : "020",
+            "title_en" : "Agriculture: area under management practices potentially supporting biodiversity",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 20,
+        "model" : "nbsap.sebiindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/fisheries-european-commercial-fish-stocks/fisheries-european-commercial-fish-stocks",
+            "title_nl" : "",
+            "code" : "021",
+            "title_en" : "Fisheries: European commercial fish stocks",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 21,
+        "model" : "nbsap.sebiindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/ecological-footprint-of-european-countries/ecological-footprint-of-european-countries",
+            "title_nl" : "",
+            "code" : "023",
+            "title_en" : "Ecological footprint of EU countries",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 22,
+        "model" : "nbsap.sebiindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/patent-applications-based-on-genetic-resources/patent-applications-based-on-genetic",
+            "title_nl" : "",
+            "code" : "024",
+            "title_en" : "Patent applications based on genetic resources",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 23,
+        "model" : "nbsap.sebiindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/financing-biodiversity-management/financing-biodiversity-management-assessment-published",
+            "title_nl" : "",
+            "code" : "025",
+            "title_en" : "Financing biodiversity management",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 24,
+        "model" : "nbsap.sebiindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/public-awareness/public-awareness-assessment-published-may-2010",
+            "title_nl" : "",
+            "code" : "026",
+            "title_en" : "Public awareness",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 25,
+        "model" : "nbsap.sebiindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/aquaculture-effluent-water-quality-from/aquaculture-effluent-water-quality-from",
+            "title_nl" : "",
+            "code" : "022",
+            "title_en" : "Aquaculture: effluent water quality from finfish farms",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 26,
+        "model" : "nbsap.sebiindicator",
+        "fields" : {
+            "url" : "",
+            "title_nl" : "",
+            "code" : "014",
+            "title_en" : "Fragmentation of river systems (in development)",
+            "title_fr" : ""
         }
     },
     {
