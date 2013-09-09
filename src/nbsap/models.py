@@ -126,6 +126,7 @@ class AichiGoal(models.Model):
         return self.title
 
     class Meta:
+        ordering = ['code']
         translate = ('title', 'description',)
 
 
@@ -229,6 +230,23 @@ class NationalObjective(models.Model):
                 yield obj
 
 
+class SEBIIndicator(models.Model):
+    __metaclass__ = TransMeta
+
+    code = models.CharField(max_length=16)
+    title = models.CharField(max_length=512,
+                             verbose_name="Title")
+    url = models.URLField(null=True,
+                          blank=True)
+
+    def __unicode__(self):
+        return 'SEBI {0}: {1}'.format(self.code, self.title)
+
+    class Meta:
+        ordering = ['code']
+        translate = ('title',)
+
+
 class EuAction(models.Model):
     __metaclass__ = TransMeta
 
@@ -260,6 +278,19 @@ class EuAction(models.Model):
         return r
 
 
+class EuIndicator(models.Model):
+    __metaclass__ = TransMeta
+
+    title = models.CharField(max_length=512,
+                             verbose_name="Title")
+
+    def __unicode__(self):
+        return self.title
+
+    class Meta:
+        translate = ('title',)
+
+
 class EuTarget(models.Model):
     __metaclass__ = TransMeta
 
@@ -269,11 +300,14 @@ class EuTarget(models.Model):
     description = models.TextField(verbose_name="Description")
     actions = models.ManyToManyField(EuAction,
                                      related_name="target")
+    indicators = models.ManyToManyField(EuIndicator,
+                                     related_name="indicator")
 
     def __unicode__(self):
-        return 'Target %s' % self.code
+        return 'Target {0}: {1}'.format(self.code, self.title)
 
     class Meta:
+        ordering = ['code']
         translate = ('title', 'description',)
 
 
@@ -284,6 +318,13 @@ class EuAichiStrategy(models.Model):
     aichi_targets = models.ManyToManyField(AichiTarget,
                                            verbose_name="Aichi targets",
                                            related_name="eu_aichi_strategy")
+
+    def get_targets(self):
+       return ', '.join([obj.code for obj in self.aichi_targets.all()])
+    get_targets.short_description = 'AICHI targets'
+
+    class Meta:
+        ordering = ['eu_target']
 
 
 class NationalStrategy(models.Model):
