@@ -284,6 +284,9 @@ class EuAction(models.Model):
 class EuIndicator(models.Model):
     __metaclass__ = TransMeta
 
+    code = models.CharField(max_length=25,
+                            null=True,
+                            blank=True)
     title = models.CharField(max_length=512,
                              verbose_name="Title")
 
