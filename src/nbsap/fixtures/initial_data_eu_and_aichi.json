@@ -3888,7 +3888,7 @@
         "model" : "nbsap.euindicator",
         "fields" : {
             "code" : "",
-            "parent" : null,
+            "parent" : [],
             "url" : "",
             "title_nl" : "",
             "title_en" : "Trends and/or Change of Conservation status",
@@ -3901,7 +3901,7 @@
         "model" : "nbsap.euindicator",
         "fields" : {
             "code" : "",
-            "parent" : null,
+            "parent" : [],
             "url" : "",
             "title_nl" : "",
             "title_en" : "Trends in and/or Change ecosystems surface areas",
@@ -3914,7 +3914,7 @@
         "model" : "nbsap.euindicator",
         "fields" : {
             "code" : "",
-            "parent" : null,
+            "parent" : [],
             "url" : "",
             "title_nl" : "",
             "title_en" : "Trends in and/or Change of Conservation status per MAES ecosystem",
@@ -3927,7 +3927,7 @@
         "model" : "nbsap.euindicator",
         "fields" : {
             "code" : "",
-            "parent" : null,
+            "parent" : [],
             "url" : "",
             "title_nl" : "",
             "title_en" : "Ecological conditions and/or Pressures on ecosystems",
@@ -3940,7 +3940,7 @@
         "model" : "nbsap.euindicator",
         "fields" : {
             "code" : "",
-            "parent" : null,
+            "parent" : [],
             "url" : "",
             "title_nl" : "",
             "title_en" : "Maintenance of ecosystems (or responses)",
@@ -3953,7 +3953,7 @@
         "model" : "nbsap.euindicator",
         "fields" : {
             "code" : "",
-            "parent" : null,
+            "parent" : [],
             "url" : "",
             "title_nl" : "",
             "title_en" : "Restoration of ecosystems",
@@ -3966,7 +3966,7 @@
         "model" : "nbsap.euindicator",
         "fields" : {
             "code" : "",
-            "parent" : null,
+            "parent" : [],
             "url" : "",
             "title_nl" : "",
             "title_en" : "Ecosystem services",
@@ -3979,7 +3979,7 @@
         "model" : "nbsap.euindicator",
         "fields" : {
             "code" : "",
-            "parent" : null,
+            "parent" : [],
             "url" : "",
             "title_nl" : "",
             "title_en" : "Trends of selected species relevant for agricultural lands in EU",
@@ -3992,7 +3992,7 @@
         "model" : "nbsap.euindicator",
         "fields" : {
             "code" : "",
-            "parent" : null,
+            "parent" : [],
             "url" : "",
             "title_nl" : "",
             "title_en" : "Agricultural genetic diversity",
@@ -4005,7 +4005,7 @@
         "model" : "nbsap.euindicator",
         "fields" : {
             "code" : "",
-            "parent" : null,
+            "parent" : [],
             "url" : "",
             "title_nl" : "",
             "title_en" : "Trends of Ecological conditions and/or Pressures in agro-ecosystems",
@@ -4018,7 +4018,7 @@
         "model" : "nbsap.euindicator",
         "fields" : {
             "code" : "",
-            "parent" : null,
+            "parent" : [],
             "url" : "",
             "title_nl" : "",
             "title_en" : "Trends in good practices",
@@ -4031,7 +4031,7 @@
         "model" : "nbsap.euindicator",
         "fields" : {
             "code" : "",
-            "parent" : null,
+            "parent" : [],
             "url" : "",
             "title_nl" : "",
             "title_en" : "Trends of selected species relevant for forests in EU",
@@ -4044,7 +4044,7 @@
         "model" : "nbsap.euindicator",
         "fields" : {
             "code" : "",
-            "parent" : null,
+            "parent" : [],
             "url" : "",
             "title_nl" : "",
             "title_en" : "Forest genetic diversity",
@@ -4057,7 +4057,7 @@
         "model" : "nbsap.euindicator",
         "fields" : {
             "code" : "",
-            "parent" : null,
+            "parent" : [],
             "url" : "",
             "title_nl" : "",
             "title_en" : "Trends of Alien species and of Invasive Alien Species",
@@ -4070,7 +4070,7 @@
         "model" : "nbsap.euindicator",
         "fields" : {
             "code" : "",
-            "parent" : null,
+            "parent" : [],
             "url" : "",
             "title_nl" : "",
             "title_en" : "Information on  pathways",
@@ -4083,7 +4083,7 @@
         "model" : "nbsap.euindicator",
         "fields" : {
             "code" : "",
-            "parent" : null,
+            "parent" : [],
             "url" : "",
             "title_nl" : "",
             "title_en" : "Information on EU impact",
@@ -4096,7 +4096,7 @@
         "model" : "nbsap.euindicator",
         "fields" : {
             "code" : "",
-            "parent" : null,
+            "parent" : [],
             "url" : "",
             "title_nl" : "",
             "title_en" : "Information on  ressources mobilization",
@@ -4111,7 +4111,7 @@
             "url" : "http://www.eea.europa.eu/data-and-maps/indicators/abundance-and-distribution-of-selected-species/abundance-and-distribution-of-selected",
             "title_nl" : "",
             "code" : "001",
-            "parent" : null,
+            "parent" : [],
             "indicator_type" : "sebi",
             "title_en" : "Abundance and distribution of selected species",
             "title_fr" : ""
@@ -4125,7 +4125,7 @@
             "url" : "http://www.eea.europa.eu/data-and-maps/indicators/species-of-european-interest/species-of-european-interest-assessment",
             "title_nl" : "",
             "code" : "003",
-            "parent" : null,
+            "parent" : [],
             "indicator_type" : "sebi",
             "title_en" : "Conservation status of species of European interest",
             "title_fr" : ""
@@ -4138,7 +4138,7 @@
             "url" : "http://www.eea.europa.eu/data-and-maps/indicators/red-list-index-for-european-species/red-list-index-for-european",
             "title_nl" : "",
             "code" : "002",
-            "parent" : null,
+            "parent" : [],
             "indicator_type" : "sebi",
             "title_en" : "Red List Index for European marine species",
             "title_fr" : ""
@@ -4152,7 +4152,7 @@
             "title_nl" : "",
             "code" : "004",
             "indicator_type" : "sebi",
-            "parent" : null,
+            "parent" : [],
             "title_en" : "Ecosystem coverage",
             "title_fr" : ""
         }
@@ -4165,7 +4165,7 @@
             "title_nl" : "",
             "code" : "005",
             "indicator_type" : "sebi",
-            "parent" : null,
+            "parent" : [],
             "title_en" : "Conservation status of habitats of European interest",
             "title_fr" : ""
         }
@@ -4178,7 +4178,7 @@
             "title_nl" : "",
             "code" : "006",
             "indicator_type" : "sebi",
-            "parent" : null,
+            "parent" : [],
             "title_en" : "Livestock genetic diversity",
             "title_fr" : ""
         }
@@ -4191,7 +4191,7 @@
             "title_nl" : "",
             "code" : "007",
             "indicator_type" : "sebi",
-            "parent" : null,
+            "parent" : [],
             "title_en" : "Nationally designated protected areas",
             "title_fr" : ""
         }
@@ -4204,7 +4204,7 @@
             "title_nl" : "",
             "code" : "008",
             "indicator_type" : "sebi",
-            "parent" : null,
+            "parent" : [],
             "title_en" : "Sites designated under the EU Habitats and Birds Directives",
             "title_fr" : ""
         }
@@ -4217,7 +4217,7 @@
             "title_nl" : "",
             "code" : "009",
             "indicator_type" : "sebi",
-            "parent" : null,
+            "parent" : [],
             "title_en" : "Critical load excedance for nitrogen",
             "title_fr" : ""
         }
@@ -4230,7 +4230,7 @@
             "title_nl" : "",
             "code" : "010",
             "indicator_type" : "sebi",
-            "parent" : null,
+            "parent" : [],
             "title_en" : "Impact invasive alien species in Europe",
             "title_fr" : ""
         }
@@ -4243,7 +4243,7 @@
             "title_nl" : "",
             "code" : "011",
             "indicator_type" : "sebi",
-            "parent" : null,
+            "parent" : [],
             "title_en" : "Impact of CC on bird populations",
             "title_fr" : ""
         }
@@ -4256,7 +4256,7 @@
             "title_nl" : "",
             "code" : "012",
             "indicator_type" : "sebi",
-            "parent" : null,
+            "parent" : [],
             "title_en" : "Marine trophic index of European seas",
             "title_fr" : ""
         }
@@ -4269,7 +4269,7 @@
             "title_nl" : "",
             "code" : "013",
             "indicator_type" : "sebi",
-            "parent" : null,
+            "parent" : [],
             "title_en" : "Fragmentation of natural and semi-natural areas",
             "title_fr" : ""
         }
@@ -4282,7 +4282,7 @@
             "title_nl" : "",
             "code" : "015",
             "indicator_type" : "sebi",
-            "parent" : null,
+            "parent" : [],
             "title_en" : "Nutrients in transitional, coastal and marine waters",
             "title_fr" : ""
         }
@@ -4295,7 +4295,7 @@
             "title_nl" : "",
             "code" : "016",
             "indicator_type" : "sebi",
-            "parent" : null,
+            "parent" : [],
             "title_en" : "Freshwater quality",
             "title_fr" : ""
         }
@@ -4308,7 +4308,7 @@
             "title_nl" : "",
             "code" : "017",
             "indicator_type" : "sebi",
-            "parent" : null,
+            "parent" : [],
             "title_en" : "Forest: growing stock, increment and fellings",
             "title_fr" : ""
         }
@@ -4321,7 +4321,7 @@
             "title_nl" : "",
             "code" : "018",
             "indicator_type" : "sebi",
-            "parent" : null,
+            "parent" : [],
             "title_en" : "Forest: deadwood",
             "title_fr" : ""
         }
@@ -4334,7 +4334,7 @@
             "title_nl" : "",
             "code" : "019",
             "indicator_type" : "sebi",
-            "parent" : null,
+            "parent" : [],
             "title_en" : "Agriculture: nitrogen balance",
             "title_fr" : ""
         }
@@ -4347,7 +4347,7 @@
             "title_nl" : "",
             "code" : "020",
             "indicator_type" : "sebi",
-            "parent" : null,
+            "parent" : [],
             "title_en" : "Agriculture: area under management practices potentially supporting biodiversity",
             "title_fr" : ""
         }
@@ -4360,7 +4360,7 @@
             "title_nl" : "",
             "code" : "021",
             "indicator_type" : "sebi",
-            "parent" : null,
+            "parent" : [],
             "title_en" : "Fisheries: European commercial fish stocks",
             "title_fr" : ""
         }
@@ -4373,7 +4373,7 @@
             "title_nl" : "",
             "code" : "023",
             "indicator_type" : "sebi",
-            "parent" : null,
+            "parent" : [],
             "title_en" : "Ecological footprint of EU countries",
             "title_fr" : ""
         }
@@ -4386,7 +4386,7 @@
             "title_nl" : "",
             "code" : "024",
             "indicator_type" : "sebi",
-            "parent" : null,
+            "parent" : [],
             "title_en" : "Patent applications based on genetic resources",
             "title_fr" : ""
         }
@@ -4399,7 +4399,7 @@
             "title_nl" : "",
             "code" : "025",
             "indicator_type" : "sebi",
-            "parent" : null,
+            "parent" : [],
             "title_en" : "Financing biodiversity management",
             "title_fr" : ""
         }
@@ -4412,7 +4412,7 @@
             "title_nl" : "",
             "code" : "026",
             "indicator_type" : "sebi",
-            "parent" : null,
+            "parent" : [],
             "title_en" : "Public awareness",
             "title_fr" : ""
         }
@@ -4425,7 +4425,7 @@
             "title_nl" : "",
             "code" : "022",
             "indicator_type" : "sebi",
-            "parent" : null,
+            "parent" : [],
             "title_en" : "Aquaculture: effluent water quality from finfish farms",
             "title_fr" : ""
         }
@@ -4438,7 +4438,7 @@
             "title_nl" : "",
             "code" : "014",
             "indicator_type" : "sebi",
-            "parent" : null,
+            "parent" : [],
             "title_en" : "Fragmentation of river systems (in development)",
             "title_fr" : ""
         }
