@@ -293,10 +293,10 @@ class EuIndicator(models.Model):
                                      self.code,
                                      self.title)
 
-    def get_subindicators(self):
+    def get_indicators(self):
         return mark_safe(', <br>'.join([unicode(obj)
                 for obj in self.parent.all()]))
-    get_subindicators.short_description = 'parent'
+    get_indicators.short_description = 'relation'
 
     class Meta:
         verbose_name_plural = 'EU indicators'
