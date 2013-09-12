@@ -15,3 +15,4 @@ webassets==0.8
 raven==2.0.12.2
 supervisor==3.0b1
 gunicorn==0.17.4
+South==0.8.2
