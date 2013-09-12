@@ -319,6 +319,11 @@ class EuTarget(models.Model):
     def __unicode__(self):
         return 'Target {0}: {1}'.format(self.code, self.title)
 
+    def get_indicators(self):
+        return mark_safe(', <br>'.join([unicode(obj)
+                for obj in self.indicators.all()]))
+    get_indicators.short_description = 'EU Indicators'
+
     class Meta:
         verbose_name_plural = 'EU targets'
         ordering = ['code']
@@ -338,7 +343,7 @@ class EuIndicatorToAichiStrategy(models.Model):
     get_targets.short_description = 'AICHI targets'
 
     class Meta:
-        verbose_name_plural = 'EU indicators - Aichi mappings'
+        verbose_name_plural = 'Mappings: EU indicators to Aichi'
         ordering = ['eu_indicator']
 
 
@@ -355,7 +360,7 @@ class EuAichiStrategy(models.Model):
     get_targets.short_description = 'AICHI targets'
 
     class Meta:
-        verbose_name_plural = 'EU targets - Aichi mappings'
+        verbose_name_plural = ' Mappings: EU targets to Aichi'
         ordering = ['eu_target']
 
 
@@ -386,6 +391,6 @@ class NationalStrategy(models.Model):
                                             related_name="national_strategy")
 
     class Meta:
-        verbose_name_plural = 'National strategy mappings'
+        verbose_name_plural = ' Mappings: National strategy to AICHI&EU'
 
 pre_save.connect(NationalObjective.pre_save_objective_code, sender=NationalObjective)

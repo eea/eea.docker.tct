@@ -29,8 +29,11 @@ admin.site.register(NationalStrategy)
 admin.site.register(EuAction)
 
 class EuIndicatorAdmin(admin.ModelAdmin):
-    list_display = ('title', 'indicator_type', 'code', 'get_indicators')
+    list_display = ('__unicode__', 'indicator_type', 'get_indicators')
     list_filter = ('indicator_type',)
 admin.site.register(EuIndicator, EuIndicatorAdmin)
 
-admin.site.register(EuTarget)
+
+class EuTargetAdmin(admin.ModelAdmin):
+    list_display = ('__unicode__', 'get_indicators')
+admin.site.register(EuTarget, EuTargetAdmin)
