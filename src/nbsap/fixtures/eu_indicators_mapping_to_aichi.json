@@ -1,0 +1,180 @@
+[
+    {
+        "pk" : 1,
+        "model" : "nbsap.euindicatortoaichistrategy",
+        "fields" : {
+            "aichi_targets" : [
+                15,
+                5,
+                6,
+                7
+            ],
+            "eu_indicator" : 21
+        }
+    },
+    {
+        "pk" : 2,
+        "model" : "nbsap.euindicatortoaichistrategy",
+        "fields" : {
+            "aichi_targets" : [
+                11,
+                15,
+                5,
+                6,
+                7
+            ],
+            "eu_indicator" : 22
+        }
+    },
+    {
+        "pk" : 4,
+        "model" : "nbsap.euindicatortoaichistrategy",
+        "fields" : {
+            "aichi_targets" : [
+                8
+            ],
+            "eu_indicator" : 26
+        }
+    },
+    {
+        "pk" : 5,
+        "model" : "nbsap.euindicatortoaichistrategy",
+        "fields" : {
+            "aichi_targets" : [
+                11,
+                14,
+                5,
+                7
+            ],
+            "eu_indicator" : 30
+        }
+    },
+    {
+        "pk" : 6,
+        "model" : "nbsap.euindicatortoaichistrategy",
+        "fields" : {
+            "aichi_targets" : [
+                8
+            ],
+            "eu_indicator" : 32
+        }
+    },
+    {
+        "pk" : 7,
+        "model" : "nbsap.euindicatortoaichistrategy",
+        "fields" : {
+            "aichi_targets" : [
+                11,
+                5,
+                6,
+                7
+            ],
+            "eu_indicator" : 24
+        }
+    },
+    {
+        "pk" : 8,
+        "model" : "nbsap.euindicatortoaichistrategy",
+        "fields" : {
+            "aichi_targets" : [
+                5,
+                7
+            ],
+            "eu_indicator" : 18
+        }
+    },
+    {
+        "pk" : 9,
+        "model" : "nbsap.euindicatortoaichistrategy",
+        "fields" : {
+            "aichi_targets" : [
+                11,
+                5,
+                6,
+                7
+            ],
+            "eu_indicator" : 19
+        }
+    },
+    {
+        "pk" : 10,
+        "model" : "nbsap.euindicatortoaichistrategy",
+        "fields" : {
+            "aichi_targets" : [
+                3,
+                4,
+                7
+            ],
+            "eu_indicator" : 35
+        }
+    },
+    {
+        "pk" : 11,
+        "model" : "nbsap.euindicatortoaichistrategy",
+        "fields" : {
+            "aichi_targets" : [
+                3,
+                4,
+                7
+            ],
+            "eu_indicator" : 36
+        }
+    },
+    {
+        "pk" : 12,
+        "model" : "nbsap.euindicatortoaichistrategy",
+        "fields" : {
+            "aichi_targets" : [
+                3,
+                4,
+                7
+            ],
+            "eu_indicator" : 33
+        }
+    },
+    {
+        "pk" : 13,
+        "model" : "nbsap.euindicatortoaichistrategy",
+        "fields" : {
+            "aichi_targets" : [
+                3,
+                4,
+                7
+            ],
+            "eu_indicator" : 34
+        }
+    },
+    {
+        "pk" : 14,
+        "model" : "nbsap.euindicatortoaichistrategy",
+        "fields" : {
+            "aichi_targets" : [
+                3,
+                4,
+                6,
+                7
+            ],
+            "eu_indicator" : 37
+        }
+    },
+    {
+        "pk" : 15,
+        "model" : "nbsap.euindicatortoaichistrategy",
+        "fields" : {
+            "aichi_targets" : [
+                9
+            ],
+            "eu_indicator" : 27
+        }
+    },
+    {
+        "pk" : 16,
+        "model" : "nbsap.euindicatortoaichistrategy",
+        "fields" : {
+            "aichi_targets" : [
+                4
+            ],
+            "eu_indicator" : 38
+        }
+    }
+]

@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models.signals import pre_save
+from django.utils.safestring import mark_safe
 from transmeta import TransMeta
 from tinymce import models as tinymce_models
 
@@ -231,24 +232,6 @@ class NationalObjective(models.Model):
                 yield obj
 
 
-class SEBIIndicator(models.Model):
-    __metaclass__ = TransMeta
-
-    code = models.CharField(max_length=16)
-    title = models.CharField(max_length=512,
-                             verbose_name="Title")
-    url = models.URLField(null=True,
-                          blank=True)
-
-    def __unicode__(self):
-        return 'SEBI {0}: {1}'.format(self.code, self.title)
-
-    class Meta:
-        verbose_name_plural = 'SEBI indicators'
-        ordering = ['code']
-        translate = ('title',)
-
-
 class EuAction(models.Model):
     __metaclass__ = TransMeta
 
@@ -284,14 +267,36 @@ class EuAction(models.Model):
 class EuIndicator(models.Model):
     __metaclass__ = TransMeta
 
+    TYPES = (
+        ('eu', 'EU'),
+        ('sebi', 'SEBI'),
+    )
+
     code = models.CharField(max_length=25,
                             null=True,
                             blank=True)
     title = models.CharField(max_length=512,
                              verbose_name="Title")
+    url = models.URLField(null=True,
+                          blank=True)
+    indicator_type = models.CharField(_('Indicator type'),
+                                      max_length=4,
+                                      choices=TYPES,
+                                      blank=True)
+    parent = models.ManyToManyField('self',
+                                null=True,
+                                blank=True,
+                                related_name='children')
 
     def __unicode__(self):
-        return self.title
+        return '{0} {1}: {2}'.format(self.indicator_type.upper(),
+                                     self.code,
+                                     self.title)
+
+    def get_subindicators(self):
+        return mark_safe(', <br>'.join([unicode(obj)
+                for obj in self.parent.all()]))
+    get_subindicators.short_description = 'parent'
 
     class Meta:
         verbose_name_plural = 'EU indicators'
@@ -320,6 +325,23 @@ class EuTarget(models.Model):
         translate = ('title', 'description',)
 
 
+class EuIndicatorToAichiStrategy(models.Model):
+    eu_indicator = models.ForeignKey(EuIndicator,
+                                  verbose_name="EU Biodiversity Indicator",
+                                  related_name="eu_indicator_aichi_strategy")
+    aichi_targets = models.ManyToManyField(AichiTarget,
+                                           verbose_name="Aichi targets",
+                                           related_name="eu_indicator_aichi_strategy")
+
+    def get_targets(self):
+       return ', '.join([obj.code for obj in self.aichi_targets.all()])
+    get_targets.short_description = 'AICHI targets'
+
+    class Meta:
+        verbose_name_plural = 'EU indicators - Aichi mappings'
+        ordering = ['eu_indicator']
+
+
 class EuAichiStrategy(models.Model):
     eu_target = models.ForeignKey(EuTarget,
                                   verbose_name="EU Biodiversity Target",
@@ -333,7 +355,7 @@ class EuAichiStrategy(models.Model):
     get_targets.short_description = 'AICHI targets'
 
     class Meta:
-        verbose_name_plural = 'EU-Aichi mappings'
+        verbose_name_plural = 'EU targets - Aichi mappings'
         ordering = ['eu_target']
 
 

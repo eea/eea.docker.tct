@@ -20,10 +20,16 @@ class EuAichiStrategyAdmin(admin.ModelAdmin):
     list_display = ('eu_target', 'get_targets')
 admin.site.register(EuAichiStrategy, EuAichiStrategyAdmin)
 
+class EuIndicatorToAichiStrategyAdmin(admin.ModelAdmin):
+    list_display = ('eu_indicator', 'get_targets')
+admin.site.register(EuIndicatorToAichiStrategy, EuIndicatorToAichiStrategyAdmin)
+
 admin.site.register(NationalStrategy)
 
-admin.site.register(SEBIIndicator)
-
 admin.site.register(EuAction)
-admin.site.register(EuIndicator)
+
+class EuIndicatorAdmin(admin.ModelAdmin):
+    list_display = ('indicator_type', 'code', 'title', 'get_subindicators')
+admin.site.register(EuIndicator, EuIndicatorAdmin)
+
 admin.site.register(EuTarget)

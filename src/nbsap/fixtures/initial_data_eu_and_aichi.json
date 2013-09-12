@@ -3885,286 +3885,560 @@
     },
     {
         "pk" : 1,
-        "model" : "nbsap.sebiindicator",
+        "model" : "nbsap.euindicator",
         "fields" : {
-            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/abundance-and-distribution-of-selected-species/abundance-and-distribution-of-selected",
+            "code" : "",
+            "parent" : null,
+            "url" : "",
             "title_nl" : "",
-            "code" : "001",
-            "title_en" : "Abundance and distribution of selected species",
+            "title_en" : "Trends and/or Change of Conservation status",
+            "indicator_type" : "eu",
             "title_fr" : ""
         }
     },
     {
         "pk" : 2,
-        "model" : "nbsap.sebiindicator",
+        "model" : "nbsap.euindicator",
         "fields" : {
-            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/species-of-european-interest/species-of-european-interest-assessment",
+            "code" : "",
+            "parent" : null,
+            "url" : "",
             "title_nl" : "",
-            "code" : "003",
-            "title_en" : "Conservation status of species of European interest",
+            "title_en" : "Trends in and/or Change ecosystems surface areas",
+            "indicator_type" : "eu",
             "title_fr" : ""
         }
     },
     {
         "pk" : 3,
-        "model" : "nbsap.sebiindicator",
+        "model" : "nbsap.euindicator",
         "fields" : {
-            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/red-list-index-for-european-species/red-list-index-for-european",
+            "code" : "",
+            "parent" : null,
+            "url" : "",
             "title_nl" : "",
-            "code" : "002",
-            "title_en" : "Red List Index for European marine species",
+            "title_en" : "Trends in and/or Change of Conservation status per MAES ecosystem",
+            "indicator_type" : "eu",
             "title_fr" : ""
         }
     },
     {
         "pk" : 4,
-        "model" : "nbsap.sebiindicator",
+        "model" : "nbsap.euindicator",
         "fields" : {
-            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/ecosystem-coverage/ecosystem-coverage-assessment-published-may-2010",
+            "code" : "",
+            "parent" : null,
+            "url" : "",
             "title_nl" : "",
-            "code" : "004",
-            "title_en" : "Ecosystem coverage",
+            "title_en" : "Ecological conditions and/or Pressures on ecosystems",
+            "indicator_type" : "eu",
             "title_fr" : ""
         }
     },
     {
         "pk" : 5,
-        "model" : "nbsap.sebiindicator",
+        "model" : "nbsap.euindicator",
         "fields" : {
-            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/habitats-of-european-interest/habitats-of-european-interest-assessment",
+            "code" : "",
+            "parent" : null,
+            "url" : "",
             "title_nl" : "",
-            "code" : "005",
-            "title_en" : "Conservation status of habitats of European interest",
+            "title_en" : "Maintenance of ecosystems (or responses)",
+            "indicator_type" : "eu",
             "title_fr" : ""
         }
     },
     {
         "pk" : 6,
-        "model" : "nbsap.sebiindicator",
+        "model" : "nbsap.euindicator",
         "fields" : {
-            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/livestock-genetic-diversity/livestock-genetic-diversity-assessment-published",
+            "code" : "",
+            "parent" : null,
+            "url" : "",
             "title_nl" : "",
-            "code" : "006",
-            "title_en" : "Livestock genetic diversity",
+            "title_en" : "Restoration of ecosystems",
+            "indicator_type" : "eu",
             "title_fr" : ""
         }
     },
     {
         "pk" : 7,
-        "model" : "nbsap.sebiindicator",
+        "model" : "nbsap.euindicator",
         "fields" : {
-            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/nationally-designated-protected-areas/nationally-designated-protected-areas-assessment-1",
+            "code" : "",
+            "parent" : null,
+            "url" : "",
             "title_nl" : "",
-            "code" : "007",
-            "title_en" : "Nationally designated protected areas",
+            "title_en" : "Ecosystem services",
+            "indicator_type" : "eu",
             "title_fr" : ""
         }
     },
     {
         "pk" : 8,
-        "model" : "nbsap.sebiindicator",
+        "model" : "nbsap.euindicator",
         "fields" : {
-            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/sites-designated-under-the-eu/sites-designated-under-the-eu",
+            "code" : "",
+            "parent" : null,
+            "url" : "",
             "title_nl" : "",
-            "code" : "008",
-            "title_en" : "Sites designated under the EU Habitats and Birds Directives",
+            "title_en" : "Trends of selected species relevant for agricultural lands in EU",
+            "indicator_type" : "eu",
             "title_fr" : ""
         }
     },
     {
         "pk" : 9,
-        "model" : "nbsap.sebiindicator",
+        "model" : "nbsap.euindicator",
         "fields" : {
-            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/critical-load-exceedance-for-nitrogen/critical-load-exceedance-for-nitrogen",
+            "code" : "",
+            "parent" : null,
+            "url" : "",
             "title_nl" : "",
-            "code" : "009",
-            "title_en" : "Critical load excedance for nitrogen",
+            "title_en" : "Agricultural genetic diversity",
+            "indicator_type" : "eu",
             "title_fr" : ""
         }
     },
     {
         "pk" : 10,
-        "model" : "nbsap.sebiindicator",
+        "model" : "nbsap.euindicator",
         "fields" : {
-            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/invasive-alien-species-in-europe/invasive-alien-species-in-europe",
+            "code" : "",
+            "parent" : null,
+            "url" : "",
             "title_nl" : "",
-            "code" : "010",
-            "title_en" : "Impact invasive alien species in Europe",
+            "title_en" : "Trends of Ecological conditions and/or Pressures in agro-ecosystems",
+            "indicator_type" : "eu",
             "title_fr" : ""
         }
     },
     {
         "pk" : 11,
-        "model" : "nbsap.sebiindicator",
+        "model" : "nbsap.euindicator",
         "fields" : {
-            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/impact-of-climate-change-on/impact-of-climate-change-on",
+            "code" : "",
+            "parent" : null,
+            "url" : "",
             "title_nl" : "",
-            "code" : "011",
-            "title_en" : "Impact of CC on bird populations",
+            "title_en" : "Trends in good practices",
+            "indicator_type" : "eu",
             "title_fr" : ""
         }
     },
     {
         "pk" : 12,
-        "model" : "nbsap.sebiindicator",
+        "model" : "nbsap.euindicator",
         "fields" : {
-            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/marine-trophic-index-of-european-seas/marine-trophic-index-of-european",
+            "code" : "",
+            "parent" : null,
+            "url" : "",
             "title_nl" : "",
-            "code" : "012",
-            "title_en" : "Marine trophic index of European seas",
+            "title_en" : "Trends of selected species relevant for forests in EU",
+            "indicator_type" : "eu",
             "title_fr" : ""
         }
     },
     {
         "pk" : 13,
-        "model" : "nbsap.sebiindicator",
+        "model" : "nbsap.euindicator",
         "fields" : {
-            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/fragmentation-of-natural-and-semi/fragmentation-of-natural-and-semi",
+            "code" : "",
+            "parent" : null,
+            "url" : "",
             "title_nl" : "",
-            "code" : "013",
-            "title_en" : "Fragmentation of natural and semi-natural areas",
+            "title_en" : "Forest genetic diversity",
+            "indicator_type" : "eu",
             "title_fr" : ""
         }
     },
     {
         "pk" : 14,
-        "model" : "nbsap.sebiindicator",
+        "model" : "nbsap.euindicator",
         "fields" : {
-            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/nutrients-in-transitional-coastal-and-1/nutrients-in-transitional-coastal-and",
+            "code" : "",
+            "parent" : null,
+            "url" : "",
             "title_nl" : "",
-            "code" : "015",
-            "title_en" : "Nutrients in transitional, coastal and marine waters",
+            "title_en" : "Trends of Alien species and of Invasive Alien Species",
+            "indicator_type" : "eu",
             "title_fr" : ""
         }
     },
     {
         "pk" : 15,
-        "model" : "nbsap.sebiindicator",
+        "model" : "nbsap.euindicator",
         "fields" : {
-            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/freshwater-quality/freshwater-quality-assessment-published-may-2010",
+            "code" : "",
+            "parent" : null,
+            "url" : "",
             "title_nl" : "",
-            "code" : "016",
-            "title_en" : "Freshwater quality",
+            "title_en" : "Information on  pathways",
+            "indicator_type" : "eu",
             "title_fr" : ""
         }
     },
     {
         "pk" : 16,
-        "model" : "nbsap.sebiindicator",
+        "model" : "nbsap.euindicator",
         "fields" : {
-            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/forest-growing-stock-increment-and-fellings/forest-growing-stock-increment-and",
+            "code" : "",
+            "parent" : null,
+            "url" : "",
             "title_nl" : "",
-            "code" : "017",
-            "title_en" : "Forest: growing stock, increment and fellings",
+            "title_en" : "Information on EU impact",
+            "indicator_type" : "eu",
             "title_fr" : ""
         }
     },
     {
         "pk" : 17,
-        "model" : "nbsap.sebiindicator",
+        "model" : "nbsap.euindicator",
         "fields" : {
-            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/forest-deadwood/forest-deadwood-assessment-published-may-2010",
+            "code" : "",
+            "parent" : null,
+            "url" : "",
             "title_nl" : "",
-            "code" : "018",
-            "title_en" : "Forest: deadwood",
+            "title_en" : "Information on  ressources mobilization",
+            "indicator_type" : "eu",
             "title_fr" : ""
         }
     },
     {
         "pk" : 18,
-        "model" : "nbsap.sebiindicator",
+        "model" : "nbsap.euindicator",
         "fields" : {
-            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/agriculture-nitrogen-balance/agriculture-nitrogen-balance-assessment-published",
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/abundance-and-distribution-of-selected-species/abundance-and-distribution-of-selected",
             "title_nl" : "",
-            "code" : "019",
-            "title_en" : "Agriculture: nitrogen balance",
+            "code" : "001",
+            "parent" : null,
+            "indicator_type" : "sebi",
+            "title_en" : "Abundance and distribution of selected species",
             "title_fr" : ""
+
         }
     },
     {
         "pk" : 19,
-        "model" : "nbsap.sebiindicator",
+        "model" : "nbsap.euindicator",
         "fields" : {
-            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/agriculture-area-under-management-practices/agriculture-area-under-management-practices",
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/species-of-european-interest/species-of-european-interest-assessment",
             "title_nl" : "",
-            "code" : "020",
-            "title_en" : "Agriculture: area under management practices potentially supporting biodiversity",
+            "code" : "003",
+            "parent" : null,
+            "indicator_type" : "sebi",
+            "title_en" : "Conservation status of species of European interest",
             "title_fr" : ""
         }
     },
     {
         "pk" : 20,
-        "model" : "nbsap.sebiindicator",
+        "model" : "nbsap.euindicator",
         "fields" : {
-            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/fisheries-european-commercial-fish-stocks/fisheries-european-commercial-fish-stocks",
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/red-list-index-for-european-species/red-list-index-for-european",
             "title_nl" : "",
-            "code" : "021",
-            "title_en" : "Fisheries: European commercial fish stocks",
+            "code" : "002",
+            "parent" : null,
+            "indicator_type" : "sebi",
+            "title_en" : "Red List Index for European marine species",
             "title_fr" : ""
         }
     },
     {
         "pk" : 21,
-        "model" : "nbsap.sebiindicator",
+        "model" : "nbsap.euindicator",
         "fields" : {
-            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/ecological-footprint-of-european-countries/ecological-footprint-of-european-countries",
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/ecosystem-coverage/ecosystem-coverage-assessment-published-may-2010",
             "title_nl" : "",
-            "code" : "023",
-            "title_en" : "Ecological footprint of EU countries",
+            "code" : "004",
+            "indicator_type" : "sebi",
+            "parent" : null,
+            "title_en" : "Ecosystem coverage",
             "title_fr" : ""
         }
     },
     {
         "pk" : 22,
-        "model" : "nbsap.sebiindicator",
+        "model" : "nbsap.euindicator",
         "fields" : {
-            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/patent-applications-based-on-genetic-resources/patent-applications-based-on-genetic",
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/habitats-of-european-interest/habitats-of-european-interest-assessment",
             "title_nl" : "",
-            "code" : "024",
-            "title_en" : "Patent applications based on genetic resources",
+            "code" : "005",
+            "indicator_type" : "sebi",
+            "parent" : null,
+            "title_en" : "Conservation status of habitats of European interest",
             "title_fr" : ""
         }
     },
     {
         "pk" : 23,
-        "model" : "nbsap.sebiindicator",
+        "model" : "nbsap.euindicator",
         "fields" : {
-            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/financing-biodiversity-management/financing-biodiversity-management-assessment-published",
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/livestock-genetic-diversity/livestock-genetic-diversity-assessment-published",
             "title_nl" : "",
-            "code" : "025",
-            "title_en" : "Financing biodiversity management",
+            "code" : "006",
+            "indicator_type" : "sebi",
+            "parent" : null,
+            "title_en" : "Livestock genetic diversity",
             "title_fr" : ""
         }
     },
     {
         "pk" : 24,
-        "model" : "nbsap.sebiindicator",
+        "model" : "nbsap.euindicator",
         "fields" : {
-            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/public-awareness/public-awareness-assessment-published-may-2010",
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/nationally-designated-protected-areas/nationally-designated-protected-areas-assessment-1",
             "title_nl" : "",
-            "code" : "026",
-            "title_en" : "Public awareness",
+            "code" : "007",
+            "indicator_type" : "sebi",
+            "parent" : null,
+            "title_en" : "Nationally designated protected areas",
             "title_fr" : ""
         }
     },
     {
         "pk" : 25,
-        "model" : "nbsap.sebiindicator",
+        "model" : "nbsap.euindicator",
         "fields" : {
-            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/aquaculture-effluent-water-quality-from/aquaculture-effluent-water-quality-from",
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/sites-designated-under-the-eu/sites-designated-under-the-eu",
             "title_nl" : "",
-            "code" : "022",
-            "title_en" : "Aquaculture: effluent water quality from finfish farms",
+            "code" : "008",
+            "indicator_type" : "sebi",
+            "parent" : null,
+            "title_en" : "Sites designated under the EU Habitats and Birds Directives",
             "title_fr" : ""
         }
     },
     {
         "pk" : 26,
-        "model" : "nbsap.sebiindicator",
+        "model" : "nbsap.euindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/critical-load-exceedance-for-nitrogen/critical-load-exceedance-for-nitrogen",
+            "title_nl" : "",
+            "code" : "009",
+            "indicator_type" : "sebi",
+            "parent" : null,
+            "title_en" : "Critical load excedance for nitrogen",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 27,
+        "model" : "nbsap.euindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/invasive-alien-species-in-europe/invasive-alien-species-in-europe",
+            "title_nl" : "",
+            "code" : "010",
+            "indicator_type" : "sebi",
+            "parent" : null,
+            "title_en" : "Impact invasive alien species in Europe",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 28,
+        "model" : "nbsap.euindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/impact-of-climate-change-on/impact-of-climate-change-on",
+            "title_nl" : "",
+            "code" : "011",
+            "indicator_type" : "sebi",
+            "parent" : null,
+            "title_en" : "Impact of CC on bird populations",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 29,
+        "model" : "nbsap.euindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/marine-trophic-index-of-european-seas/marine-trophic-index-of-european",
+            "title_nl" : "",
+            "code" : "012",
+            "indicator_type" : "sebi",
+            "parent" : null,
+            "title_en" : "Marine trophic index of European seas",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 30,
+        "model" : "nbsap.euindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/fragmentation-of-natural-and-semi/fragmentation-of-natural-and-semi",
+            "title_nl" : "",
+            "code" : "013",
+            "indicator_type" : "sebi",
+            "parent" : null,
+            "title_en" : "Fragmentation of natural and semi-natural areas",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 31,
+        "model" : "nbsap.euindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/nutrients-in-transitional-coastal-and-1/nutrients-in-transitional-coastal-and",
+            "title_nl" : "",
+            "code" : "015",
+            "indicator_type" : "sebi",
+            "parent" : null,
+            "title_en" : "Nutrients in transitional, coastal and marine waters",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 32,
+        "model" : "nbsap.euindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/freshwater-quality/freshwater-quality-assessment-published-may-2010",
+            "title_nl" : "",
+            "code" : "016",
+            "indicator_type" : "sebi",
+            "parent" : null,
+            "title_en" : "Freshwater quality",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 33,
+        "model" : "nbsap.euindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/forest-growing-stock-increment-and-fellings/forest-growing-stock-increment-and",
+            "title_nl" : "",
+            "code" : "017",
+            "indicator_type" : "sebi",
+            "parent" : null,
+            "title_en" : "Forest: growing stock, increment and fellings",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 34,
+        "model" : "nbsap.euindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/forest-deadwood/forest-deadwood-assessment-published-may-2010",
+            "title_nl" : "",
+            "code" : "018",
+            "indicator_type" : "sebi",
+            "parent" : null,
+            "title_en" : "Forest: deadwood",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 35,
+        "model" : "nbsap.euindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/agriculture-nitrogen-balance/agriculture-nitrogen-balance-assessment-published",
+            "title_nl" : "",
+            "code" : "019",
+            "indicator_type" : "sebi",
+            "parent" : null,
+            "title_en" : "Agriculture: nitrogen balance",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 36,
+        "model" : "nbsap.euindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/agriculture-area-under-management-practices/agriculture-area-under-management-practices",
+            "title_nl" : "",
+            "code" : "020",
+            "indicator_type" : "sebi",
+            "parent" : null,
+            "title_en" : "Agriculture: area under management practices potentially supporting biodiversity",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 37,
+        "model" : "nbsap.euindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/fisheries-european-commercial-fish-stocks/fisheries-european-commercial-fish-stocks",
+            "title_nl" : "",
+            "code" : "021",
+            "indicator_type" : "sebi",
+            "parent" : null,
+            "title_en" : "Fisheries: European commercial fish stocks",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 38,
+        "model" : "nbsap.euindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/ecological-footprint-of-european-countries/ecological-footprint-of-european-countries",
+            "title_nl" : "",
+            "code" : "023",
+            "indicator_type" : "sebi",
+            "parent" : null,
+            "title_en" : "Ecological footprint of EU countries",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 39,
+        "model" : "nbsap.euindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/patent-applications-based-on-genetic-resources/patent-applications-based-on-genetic",
+            "title_nl" : "",
+            "code" : "024",
+            "indicator_type" : "sebi",
+            "parent" : null,
+            "title_en" : "Patent applications based on genetic resources",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 40,
+        "model" : "nbsap.euindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/financing-biodiversity-management/financing-biodiversity-management-assessment-published",
+            "title_nl" : "",
+            "code" : "025",
+            "indicator_type" : "sebi",
+            "parent" : null,
+            "title_en" : "Financing biodiversity management",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 41,
+        "model" : "nbsap.euindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/public-awareness/public-awareness-assessment-published-may-2010",
+            "title_nl" : "",
+            "code" : "026",
+            "indicator_type" : "sebi",
+            "parent" : null,
+            "title_en" : "Public awareness",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 42,
+        "model" : "nbsap.euindicator",
+        "fields" : {
+            "url" : "http://www.eea.europa.eu/data-and-maps/indicators/aquaculture-effluent-water-quality-from/aquaculture-effluent-water-quality-from",
+            "title_nl" : "",
+            "code" : "022",
+            "indicator_type" : "sebi",
+            "parent" : null,
+            "title_en" : "Aquaculture: effluent water quality from finfish farms",
+            "title_fr" : ""
+        }
+    },
+    {
+        "pk" : 43,
+        "model" : "nbsap.euindicator",
         "fields" : {
             "url" : "",
             "title_nl" : "",
             "code" : "014",
+            "indicator_type" : "sebi",
+            "parent" : null,
             "title_en" : "Fragmentation of river systems (in development)",
             "title_fr" : ""
         }
