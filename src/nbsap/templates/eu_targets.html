@@ -50,6 +50,35 @@
       {% endif %}
        </div>
 
+      <label>{% trans "EU indicators/sub-indicators" %}</label>
+      <div class ="well">
+        {% if current_target.indicators %}
+        <ul>
+          {% for indicator in current_target.indicators.all %}
+            <li>
+              {{ indicator.code }} {{indicator.title}}
+              {% if indicator.parent.all %}
+              <ul>
+              {% for sub in indicator.parent.all %}
+                <li>
+                  {% if sub.url %}
+                    <a href="{{ sub.url }}">
+                      {{ sub.indicator_type|upper }} {{ sub.code }}: {{sub.title}}</a>
+                  {% else %}
+                    {{ sub.code }} {{sub.title}}
+                  {% endif %}
+                  </li>
+              {% endfor %}
+              </ul>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+          <span>{% trans "No data available" %}.</span>
+        {% endif %}
+      </div>
+
       <label>{% trans "Mapping with Aichi Strategy" %}</label>
       <div class ="well">
         {% if current_target.eu_aichi_strategy %}

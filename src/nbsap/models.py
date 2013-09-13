@@ -300,7 +300,7 @@ class EuIndicator(models.Model):
 
     class Meta:
         verbose_name_plural = 'EU indicators'
-        ordering = ['title_en']
+        ordering = ['code']
         translate = ('title',)
 
 
