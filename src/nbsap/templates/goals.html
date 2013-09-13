@@ -78,6 +78,20 @@
       </div>
       {% endif %}
 
+      {%if target.relevant_target_national_strategy.all %}
+      <label>{% trans "Mapping with National Strategy" %}</label>
+      <div class="well">
+        <ul>
+          {% for strategy in target.relevant_target_national_strategy.all %}
+          <li>
+             <a href ="{% url 'nat_strategy' %}/{{strategy.objective.get_root_parent.code }}#{{strategy.objective.code}}">
+              {% trans "Objective" %} {{ strategy.objective.code }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+
       {% if target.eu_indicator_aichi_strategy.all and EU_STRATEGY %}
       <label>{% trans "Mapping with EU indicators" %}:</label>
       <div class="well">
@@ -100,23 +114,8 @@
       </div>
       {% endif %}
 
-
-      {%if target.relevant_target_national_strategy.all %}
-      <label>{% trans "Mapping with National Strategy" %}</label>
-      <div class="well">
-        <ul>
-          {% for strategy in target.relevant_target_national_strategy.all %}
-          <li>
-             <a href ="{% url 'nat_strategy' %}/{{strategy.objective.get_root_parent.code }}#{{strategy.objective.code}}">
-              {% trans "Objective" %} {{ strategy.objective.code }}</a>
-          </li>
-          {% endfor %}
-        </ul>
-      </div>
-      {% endif %}
-
       {% if target.indicators.all %}
-      <label>{% trans "Most relevant indicators" %}:</label>
+      <label>{% trans "Most relevant CBD indicators" %}:</label>
       <div class="well">
         <ul>
           {% for indicator in target.indicators.all %}
@@ -131,7 +130,7 @@
       {% endif %}
 
       {% if target.other_indicators.all %}
-      <label>{% trans "Other relevant indicators" %}:</label>
+      <label>{% trans "Other relevant CBD indicators" %}:</label>
       <div class="well">
         <ul>
           {% for indicator in target.other_indicators.all %}
