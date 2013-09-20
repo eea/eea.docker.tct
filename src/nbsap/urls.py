@@ -19,7 +19,7 @@ urlpatterns = patterns('',
     url(r'^indicators/$', 'nbsap.views.indicators', name='indicators'),
 
     url(r'^objectives$', 'nbsap.views.nat_strategy', name='nat_strategy'),
-    url(r'^objectives/(?P<code>[\w\-]+)$', 'nbsap.views.nat_strategy', name='nat_strategy'),
+    url(r'^objectives/(?P<code>[\w\.\-]+)$', 'nbsap.views.nat_strategy', name='nat_strategy'),
 
     url(r'^admin/', include(admin.site.urls)),
 
