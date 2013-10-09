@@ -43,6 +43,14 @@
       <div class="language-container">
 
         <div class="control-group">
+          <label class="control-label" for="title">{% trans "Title" %}</label>
+          <div class="controls">
+            {{ form.title }}
+            {{ form.title.errors }}
+          </div>
+        </div>
+
+        <div class="control-group">
           <label class="control-label" for="description">{% trans "Description" %}</label>
           <div class="controls">
             {{ form.description }}
@@ -56,6 +64,13 @@
     {% if lang != DEFAULT_LANGUAGE %}
     {% trans DEFAULT_LANGUAGE_LABEL as default_language_label %}
     <div class="span6 original-hideout">
+        <p class="original-title">
+            {% blocktrans with default_language_label as language %}Original title in {{ language }}{% endblocktrans %}
+        </p>
+        <div class="well">
+          {{ action.title_default }}
+        </div>
+
         <p class="original-description">
             {% blocktrans with default_language_label as language %}Original description in {{ language }}{% endblocktrans %}
         </p>

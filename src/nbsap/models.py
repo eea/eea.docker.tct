@@ -155,10 +155,11 @@ class NationalAction(models.Model):
     __metaclass__ = Translatable
 
     code = models.CharField(max_length=16)
+    title = models.CharField(verbose_name="Title", max_length=512)
     description = tinymce_models.HTMLField(verbose_name="Description")
 
     class Meta:
-        translate = ('description',)
+        translate = ('title', 'description',)
 
     def __unicode__(self):
         return self.code

@@ -55,6 +55,7 @@ class NationalObjectiveForm(forms.Form):
 
 class NationalActionForm(forms.Form):
     language = forms.ChoiceField(choices=settings.LANGUAGES)
+    title = forms.CharField(widget=widgets.Textarea)
     description = forms.CharField(widget=TinyMCE(attrs={'cols': 80,
                                                         'rows': 25}))
 
@@ -66,8 +67,10 @@ class NationalActionForm(forms.Form):
 
         super(NationalActionForm, self).__init__(*args, **kwargs)
 
+        title = getattr(self.action, 'title_%s' % lang, None)
         description = getattr(self.action, 'description_%s' % lang, None)
 
+        self.fields['title'].initial = title
         self.fields['description'].initial = description
         self.fields['language'].initial = lang
 
@@ -75,8 +78,10 @@ class NationalActionForm(forms.Form):
 
         action = self.action or NationalAction()
         lang = self.cleaned_data['language']
+        title = self.cleaned_data['title']
         description = self.cleaned_data['description']
 
+        setattr(action, 'title_%s' % lang, title)
         setattr(action, 'description_%s' % lang, description)
         setattr(action, 'code', self.objective.code)
 
