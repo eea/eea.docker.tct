@@ -2,7 +2,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import ugettext_lazy as _
 from django.contrib import messages
 from django.http import HttpResponse
+from django.conf import settings
 from transmeta import TransMeta
+import tablib
 
 from nbsap import models
 from nbsap.forms import NationalObjectiveForm
@@ -29,7 +31,29 @@ def nat_strategy(request, code=None):
 
 
 def nat_strategy_download(request):
-    raise NotImplementedError
+    eu_strategy = getattr(settings, 'EU_STRATEGY', False)
+    headers = ['Objective', 'Goal', 'Most Relevant Targets',
+               'Other Relevant Targets']
+    if eu_strategy:
+        headers.extend(['EU Targets', 'EU Actions'])
+    data = tablib.Dataset(headers=headers)
+
+    for strategy in models.NationalStrategy.objects.all():
+        target = strategy.relevant_target
+        row = [
+            strategy.objective.code,
+            target.get_parent_goal().code,
+            target.code,
+            ', '.join(t.code for t in strategy.other_targets.all()),
+        ]
+        if eu_strategy:
+            row.extend([
+                ', '.join(t.code for t in strategy.eu_targets.all()),
+                ', '.join(t.code for t in strategy.eu_actions.all()),
+            ])
+        data.append(row)
+
+    return HttpResponse(data.xlsx, content_type='application/vnd.ms-excel')
 
 
 def implementation(request, code=None):
