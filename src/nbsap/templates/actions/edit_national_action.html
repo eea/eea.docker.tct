@@ -57,7 +57,9 @@
 
     {% if lang != DEFAULT_LANGUAGE %}
     <div class="span6 original-hideout">
-      <p class="original-description">{% trans "Original description in English" %}</p>
+        <p class="original-description">
+            {% blocktrans with DEFAULT_LANGUAGE_LABEL as language %}Original description in {{ language }}{% endblocktrans %}
+        </p>
       <div class="well">
         {{ action.description_default|safe }}
       </div>
