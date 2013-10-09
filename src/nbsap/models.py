@@ -1,10 +1,29 @@
 from django.db import models
 from django.db.models.signals import pre_save
 from django.utils.safestring import mark_safe
+from django.conf import settings
 from transmeta import TransMeta
 from tinymce import models as tinymce_models
 
 from django.utils.translation import ugettext_lazy as _
+
+
+def getter_for_default_language(field_name):
+    def getter(self):
+        lang = settings.LANGUAGE_CODE
+        return getattr(self, '%s_%s' % (field_name, lang))
+    return getter
+
+
+class Translatable(TransMeta):
+
+    def __new__(cls, name, bases, attrs):
+        new_class = TransMeta.__new__(cls, name, bases, attrs)
+        for field in new_class._meta.translatable_fields:
+            setattr(new_class, field + '_default',
+                    property(getter_for_default_language(field)))
+        return new_class
+
 
 class Link(models.Model):
     title = models.CharField(max_length=512)
@@ -91,7 +110,7 @@ class AichiIndicator(models.Model):
 
 
 class AichiTarget(models.Model):
-    __metaclass__ = TransMeta
+    __metaclass__ = Translatable
 
     code = models.CharField(max_length=16)
     description = models.TextField(verbose_name="Description")
@@ -116,7 +135,7 @@ class AichiTarget(models.Model):
 
 
 class AichiGoal(models.Model):
-    __metaclass__ = TransMeta
+    __metaclass__ = Translatable
 
     code = models.CharField(max_length=1, primary_key=True)
     title = models.CharField(verbose_name="Title", max_length=512)
@@ -133,7 +152,7 @@ class AichiGoal(models.Model):
 
 
 class NationalAction(models.Model):
-    __metaclass__ = TransMeta
+    __metaclass__ = Translatable
 
     code = models.CharField(max_length=16)
     description = tinymce_models.HTMLField(verbose_name="Description")
@@ -146,7 +165,7 @@ class NationalAction(models.Model):
 
 class NationalObjective(models.Model):
 
-    __metaclass__ = TransMeta
+    __metaclass__ = Translatable
 
     code = models.CharField(max_length=16)
     title = models.CharField(max_length=512,
@@ -233,7 +252,7 @@ class NationalObjective(models.Model):
 
 
 class EuAction(models.Model):
-    __metaclass__ = TransMeta
+    __metaclass__ = Translatable
 
     code = models.CharField(max_length=16)
     description = models.TextField(verbose_name="Description")
@@ -265,7 +284,7 @@ class EuAction(models.Model):
 
 
 class EuIndicator(models.Model):
-    __metaclass__ = TransMeta
+    __metaclass__ = Translatable
 
     TYPES = (
         ('eu', 'EU'),
@@ -305,7 +324,7 @@ class EuIndicator(models.Model):
 
 
 class EuTarget(models.Model):
-    __metaclass__ = TransMeta
+    __metaclass__ = Translatable
 
     code = models.CharField(max_length=16)
     title = models.CharField(max_length=512,

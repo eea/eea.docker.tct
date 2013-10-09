@@ -3,7 +3,7 @@
 {% load i18n %}
 {% load assets %}
 
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8">
     <title>NBSAP</title>
@@ -31,10 +31,11 @@
               <ul class="dropdown-menu">
               {% for lang in LANGUAGES %}
                 <li>
-                  <form name="setLang{{ lang.1 }}" class="language-menu" action="{% url 'set_language' %}" method="POST">
-                    <input name="next" type="hidden" value="{{ redirect_to }}" />
+                  <form name="set_lang_{{ lang.0 }}" class="language-menu" action="{% url 'set_language' %}" method="POST">
+                    <input name="next" type="hidden"
+                           value="{{ request.get_full_path }}" />
                     <input name="language" type="hidden" value="{{ lang.0 }}" />
-                    <a href="#" onclick="document.setLang{{ lang.1 }}.submit();return false;">{{ lang.1 }}</a>
+                    <a href="#" onclick="document.set_lang_{{ lang.0 }}.submit();return false;">{{ lang.1 }}</a>
                   </form>
                 </li>
               {% endfor %}

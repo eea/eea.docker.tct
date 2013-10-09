@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-03 16:43+0300\n"
+"POT-Creation-Date: 2013-10-09 07:19-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,64 +17,68 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: models.py:31
+#: models.py:51
 msgid "Operational Indicator"
 msgstr ""
 
-#: models.py:34
+#: models.py:54
 msgid "Communication Question"
 msgstr ""
 
-#: models.py:37
+#: models.py:57
 msgid "Headline Indicator"
 msgstr ""
 
-#: models.py:40
+#: models.py:60
 msgid "Indicator Sub-topics"
 msgstr ""
 
-#: models.py:43
+#: models.py:63
 msgid "Operational Classification"
 msgstr ""
 
-#: models.py:46
+#: models.py:66
 msgid "Status of development"
 msgstr ""
 
-#: models.py:49
+#: models.py:69
 msgid "Sensitivity (can it be used to make assessment by 2015?)"
 msgstr ""
 
-#: models.py:55
+#: models.py:75
 msgid "Scale (global, regional, national, sub-national)"
 msgstr ""
 
-#: models.py:59
+#: models.py:79
 msgid "Scientific Validity"
 msgstr ""
 
-#: models.py:64
+#: models.py:84
 msgid "How easy can it be communicated?"
 msgstr ""
 
-#: models.py:69
+#: models.py:89
 msgid "Data Sources"
 msgstr ""
 
-#: models.py:73
+#: models.py:93
 msgid "Requirements"
 msgstr ""
 
-#: models.py:76
+#: models.py:96
 msgid "Who's responsible for measuring?"
 msgstr ""
 
-#: models.py:79
+#: models.py:99
 msgid "Other conventions/processes using indicator"
 msgstr ""
 
-#: models.py:84
+#: models.py:104
 msgid "Related Links"
+msgstr ""
+
+#: models.py:301
+msgid "Indicator type"
 msgstr ""
 
 #: settings.py:43
@@ -112,7 +116,7 @@ msgid "EU Targets"
 msgstr ""
 
 #: templates/eu_targets.html:13 templates/eu_targets.html.py:21
-#: templates/eu_targets.html:60 templates/goals.html:53
+#: templates/eu_targets.html:89 templates/goals.html:53
 #: templates/goals.html.py:62 templates/goals.html:72
 #: templates/mapping/nat_action_aichi_mapping.html:25
 #: templates/mapping/nat_action_aichi_mapping.html:39
@@ -143,10 +147,11 @@ msgid "Action"
 msgstr ""
 
 #: templates/eu_targets.html:53
-msgid "Mapping with Aichi Strategy"
+msgid "EU indicators/sub-indicators"
 msgstr ""
 
-#: templates/eu_targets.html:66 templates/eu_targets.html.py:96
+#: templates/eu_targets.html:78 templates/eu_targets.html.py:95
+#: templates/eu_targets.html:125
 #: templates/mapping/nat_action_aichi_mapping.html:51
 #: templates/mapping/nat_action_aichi_mapping.html:56
 #: templates/mapping/nat_strategy_aichi_mapping.html:53
@@ -154,11 +159,15 @@ msgstr ""
 msgid "No data available"
 msgstr ""
 
-#: templates/eu_targets.html:77
+#: templates/eu_targets.html:82
+msgid "Mapping with Aichi Strategy"
+msgstr ""
+
+#: templates/eu_targets.html:106 templates/goals.html:82
 msgid "Mapping with National Strategy"
 msgstr ""
 
-#: templates/eu_targets.html:85 templates/eu_targets.html.py:89
+#: templates/eu_targets.html:114 templates/eu_targets.html.py:118
 #: templates/goals.html:88 templates/implementation.html:16
 #: templates/actions/actions_breadcrumb.html:10
 #: templates/mapping/list_national_strategy.html:33
@@ -175,7 +184,7 @@ msgstr ""
 msgid "Objective"
 msgstr ""
 
-#: templates/eu_targets.html:105 templates/goals.html:127
+#: templates/eu_targets.html:134 templates/goals.html:149
 #: templates/implementation.html:59
 msgid "Back to top"
 msgstr ""
@@ -202,20 +211,20 @@ msgstr ""
 msgid "Mapping with EU targets"
 msgstr ""
 
-#: templates/goals.html:82
-msgid "Maping with National Strategy"
-msgstr ""
-
 #: templates/goals.html:96
-msgid "Most relevant indicators"
+msgid "Mapping with EU indicators"
 msgstr ""
 
-#: templates/goals.html:102 templates/goals.html.py:117
+#: templates/goals.html:118
+msgid "Most relevant CBD indicators"
+msgstr ""
+
+#: templates/goals.html:124 templates/goals.html.py:139
 msgid "Indicator"
 msgstr ""
 
-#: templates/goals.html:111
-msgid "Other relevant indicators"
+#: templates/goals.html:133
+msgid "Other relevant CBD indicators"
 msgstr ""
 
 #: templates/implementation.html:12
@@ -242,8 +251,8 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
-#: templates/layout.html:46
-msgid "Admin"
+#: templates/layout.html:48
+msgid "Administration"
 msgstr ""
 
 #: templates/nav_tabs.html:7
@@ -291,27 +300,27 @@ msgid "Description"
 msgstr ""
 
 #: templates/actions/add_national_action.html:57
-#: templates/actions/edit_national_action.html:70
-#: templates/goals/edit_goals.html:75
+#: templates/actions/edit_national_action.html:72
+#: templates/goals/edit_goals.html:79
 #: templates/mapping/add_national_strategy.html:31
 #: templates/mapping/add_national_strategy.html:92
 #: templates/mapping/edit_national_strategy.html:30
 #: templates/mapping/edit_national_strategy.html:92
 #: templates/objectives/add_national_objectives.html:66
-#: templates/objectives/edit_national_objective.html:86
+#: templates/objectives/edit_national_objective.html:90
 msgid "Save"
 msgstr ""
 
 #: templates/actions/add_national_action.html:58
-#: templates/actions/edit_national_action.html:71
-#: templates/goals/edit_goals.html:76
+#: templates/actions/edit_national_action.html:73
+#: templates/goals/edit_goals.html:80
 #: templates/mapping/add_national_strategy.html:32
 #: templates/mapping/add_national_strategy.html:93
 #: templates/mapping/edit_national_strategy.html:31
 #: templates/mapping/edit_national_strategy.html:93
 #: templates/objectives/add_national_objectives.html:68
 #: templates/objectives/add_national_objectives.html:70
-#: templates/objectives/edit_national_objective.html:87
+#: templates/objectives/edit_national_objective.html:91
 msgid "Cancel"
 msgstr ""
 
@@ -319,10 +328,11 @@ msgstr ""
 msgid "Edit action"
 msgstr ""
 
-#: templates/actions/edit_national_action.html:60
-#: templates/goals/edit_goals.html:65
-#: templates/objectives/edit_national_objective.html:76
-msgid "Original description in English"
+#: templates/actions/edit_national_action.html:61
+#: templates/goals/edit_goals.html:68
+#: templates/objectives/edit_national_objective.html:79
+#, python-format
+msgid "Original description in %(language)s"
 msgstr ""
 
 #: templates/actions/view_national_action.html:17
@@ -359,9 +369,10 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: templates/goals/edit_goals.html:60
-#: templates/objectives/edit_national_objective.html:71
-msgid "Original title in English"
+#: templates/goals/edit_goals.html:61
+#: templates/objectives/edit_national_objective.html:72
+#, python-format
+msgid "Original title in %(language)s"
 msgstr ""
 
 #: templates/goals/list_goals.html:28
@@ -522,20 +533,24 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: views/actions.py:41
+#: views/actions.py:42
 msgid "Action successfully added."
 msgstr ""
 
-#: views/actions.py:43
+#: views/actions.py:44
 msgid "Saved changes."
 msgstr ""
 
-#: views/actions.py:61
+#: views/actions.py:62
 msgid "Action successfully deleted."
 msgstr ""
 
-#: views/auth.py:8
+#: views/auth.py:14
 msgid "Successfully logged out"
+msgstr ""
+
+#: views/auth.py:22
+msgid "Successfully logged in"
 msgstr ""
 
 #: views/indicators.py:12
@@ -543,22 +558,22 @@ msgstr ""
 msgid "%(start)s to %(end)s"
 msgstr ""
 
-#: views/mapping.py:29 views/objectives.py:91
+#: views/mapping.py:28 views/objectives.py:93
 msgid "Saved changes"
 msgstr ""
 
-#: views/mapping.py:31
+#: views/mapping.py:30
 msgid "Mapping successfully added."
 msgstr ""
 
-#: views/mapping.py:47
+#: views/mapping.py:46
 msgid "Mapping successfully deleted."
 msgstr ""
 
-#: views/objectives.py:93
+#: views/objectives.py:95
 msgid "Objective successfully added."
 msgstr ""
 
-#: views/objectives.py:119
+#: views/objectives.py:121
 msgid "Objective successfully deleted."
 msgstr ""

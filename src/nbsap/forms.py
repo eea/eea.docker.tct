@@ -116,7 +116,7 @@ class AichiGoalForm(forms.Form):
 
         setattr(goal, 'description_%s' % lang, description)
         setattr(goal, 'code', self.goal.code)
-        setattr(goal, 'title_%s' % lang, self.goal.title)
+        setattr(goal, 'title_%s' % lang, title)
         goal.save()
 
      #   for ucode in self.cleaned_data['targets']:

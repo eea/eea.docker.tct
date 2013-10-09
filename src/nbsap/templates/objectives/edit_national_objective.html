@@ -66,16 +66,21 @@
         </div>
       </div>
 
-      {% if lang != 'en' %}
+      {% if lang != DEFAULT_LANGUAGE %}
+      {% trans DEFAULT_LANGUAGE_LABEL as default_language_label %}
       <div class="span6 original-hideout">
-        <p class="original-title">{% trans "Original title in English" %}</p>
+        <p class="original-title">
+            {% blocktrans with default_language_label as language %}Original title in {{ language }}{% endblocktrans %}
+        </p>
         <div class="well">
-          {{ objective.title_en }}
+          {{ objective.title_default }}
         </div>
 
-        <p class="original-description">{% trans "Original description in English" %}</p>
+        <p class="original-description">
+            {% blocktrans with default_language_label as language %}Original description in {{ language }}{% endblocktrans %}
+        </p>
         <div class="well">
-          {{ objective.description_en|safe }}
+          {{ objective.description_default|safe }}
         </div>
       </div>
       {% endif %}
