@@ -51,7 +51,7 @@ def get_aichi_target_title(request, pk=None):
 def edit_goal(request, code=None):
     goal = get_object_or_404(models.AichiGoal, pk=code)
 
-    lang = request.LANGUAGE_CODE
+    lang = request.GET.get('lang', request.LANGUAGE_CODE)
 
     if request.method == 'POST':
         form = AichiGoalForm(request.POST, goal=goal, lang=lang)
@@ -67,6 +67,7 @@ def edit_goal(request, code=None):
     return render(request, 'goals/edit_goals.html',
                   {'form': form,
                    'goal': goal,
+                   'lang': lang,
                   })
 
 @auth_required

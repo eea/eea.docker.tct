@@ -30,7 +30,7 @@ def edit_national_action(request, objective, pk=None):
         action = None
         template = 'actions/add_national_action.html'
 
-    lang = request.LANGUAGE_CODE
+    lang = request.GET.get('lang', request.LANGUAGE_CODE)
 
     if request.method == 'POST':
         form = NationalActionForm(request.POST,
@@ -52,6 +52,7 @@ def edit_national_action(request, objective, pk=None):
                   {'form': form,
                    'action': action,
                    'objective': objective,
+                   'lang': lang,
                   })
 
 

@@ -109,7 +109,7 @@ def edit_national_objective(request, pk=None, parent=None):
         objective = None
         template = 'objectives/add_national_objectives.html'
 
-    lang = request.LANGUAGE_CODE
+    lang = request.GET.get('lang', request.LANGUAGE_CODE)
 
     if request.method == 'POST':
         form = NationalObjectiveForm(request.POST,
@@ -138,6 +138,7 @@ def edit_national_objective(request, pk=None, parent=None):
                   {'form': form,
                    'objective': objective,
                    'parent': parent_objective,
+                   'lang': lang,
                   })
 
 
