@@ -102,7 +102,7 @@ class AichiGoalForm(forms.Form):
         super(AichiGoalForm, self).__init__(*args, **kwargs)
 
         description = getattr(self.goal, 'description_%s' %lang, None)
-        title = getattr(self.goal, 'title')
+        title = getattr(self.goal, 'title_%s' %lang, None)
 
         self.fields['description'].initial = description
         self.fields['language'].initial = lang
