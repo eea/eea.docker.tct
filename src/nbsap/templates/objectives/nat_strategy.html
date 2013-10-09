@@ -19,6 +19,10 @@
     {% endfor %}
   </ul>
 
+  <div class="download-container">
+    <a class="btn btn-small" href="{% url 'nat_strategy_download' %}">download xls</a>
+  </div>
+
   <div class="tab-content homepage_view">
     <h1>{% trans "Objective" %} {{ current_objective.code }}: {{ current_objective.title }}</h1>
     <div class="element_field objective-description">

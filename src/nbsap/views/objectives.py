@@ -28,6 +28,10 @@ def nat_strategy(request, code=None):
                   })
 
 
+def nat_strategy_download(request):
+    raise NotImplementedError
+
+
 def implementation(request, code=None):
     objectives = models.NationalObjective.objects.all()
     if len(objectives) == 0:
