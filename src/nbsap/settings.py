@@ -211,6 +211,10 @@ TINYMCE_COMPRESSOR = False
 TINYMCE_JS_URL = '/static/js/tiny_mce/tiny_mce.js'
 TINYMCE_JS_ROOT = '/static/js/tiny_mce'
 
+CSS_ASSETS = (
+    'css/style.css',
+)
+
 try:
     from local_settings import *
 except ImportError:

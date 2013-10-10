@@ -1,5 +1,5 @@
 from django_assets import Bundle, register
-
+from django.conf import settings
 
 JS_ASSETS = (
     'js/jquery-1.7.1.min.js',
@@ -24,8 +24,7 @@ CSS_ASSETS = (
     'css/bootstrap-ui/jquery.ui.1.8.16.ie.css',
     'css/uniform.default.css',
     'css/chosen.css',
-    'css/style.css',
-)
+) + settings.CSS_ASSETS
 
 
 js = Bundle(*JS_ASSETS, filters='jsmin', output='gen/packed.js')
