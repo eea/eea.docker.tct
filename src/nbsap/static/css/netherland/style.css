@@ -974,4 +974,7 @@ body .obj-id {
     width: 73px;
 }
 
-
+.download-container {
+    float: left;
+    clear: left;
+}
