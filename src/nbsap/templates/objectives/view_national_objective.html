@@ -88,7 +88,11 @@
         <td>
           <a href="{% url 'view_national_action' objective=objective.pk pk=action.pk %}"
            title="{% trans 'Action' %} {{ action.code }}">
-          {% trans "Actions related to objective" %} {{ objective.code }}</a>
+          {% if action.title %}
+            {{ action.title }}
+          {% else %}
+            {% trans "Actions related to objective" %} {{ objective.code }}
+          {% endif %}</a>
         </td>
       </tr>
     {% endfor %}

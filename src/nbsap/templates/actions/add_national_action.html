@@ -42,6 +42,14 @@
       <div class="language-container">
 
         <div class="control-group">
+          <label class="control-label" for="title">{% trans "Title" %}</label>
+          <div class="controls">
+            {{ form.title }}
+            {{ form.title.errors }}
+          </div>
+        </div>
+
+        <div class="control-group">
           <label class="control-label" for="description">{% trans "Description" %}</label>
           <div class="controls">
             {{ form.description }}
