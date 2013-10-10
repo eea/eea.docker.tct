@@ -734,47 +734,24 @@ body {
 
 /* footer */
 footer {
-    border-top: 0px;
-	margin: 0 auto;
-	background: white;
+    border-top: 0;
+    margin: 0 auto;
+    background: white;
+    padding-top: 10px;
 }
 
-footer ul {
-    width: 190px;
-}
-
-footer ul li {
-    display: inline-block;
-    margin-left: 3px;
-}
-
-footer .pull-left {
-    margin-top: 20px;
-	font-size: 10px;
-	margin-left: 128px;
-}
-
-footer .pull-left a {
-	color: #014E46;
-}
-
-footer p {
-    margin-right: 10px;
+footer .container {
+    border-top: 1px solid #014E46;
+    padding-top: 10px;
 }
 
 .museum-logo {
-    background: url('../logo_irscnb.png') no-repeat 85% 50%;
-    height: 70px;
+    background: url('../logo_irscnb.png') no-repeat center center;
     width: 94px;
+    height: 30px;
     text-indent: -9999px;
-}
-
-.CHM-logo {
-    background: url('../CHM_logo_45x70px.png') no-repeat;
-    height: 70px;
-    width: 45px;
-    text-indent: -9999px;
-	margin-left: 15px;
+    display: block;
+    margin-right: 150px;
 }
 
 .container.content {
