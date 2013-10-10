@@ -692,7 +692,8 @@ body {
 
 .navbar .nav > li > a {
     text-shadow: none;
-    color: #F1F1F1;
+    color: #FFF;
+    font-weight: bold;
 }
 
 .navbar .nav > li > a:hover {
