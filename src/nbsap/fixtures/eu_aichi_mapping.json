@@ -1,75 +1,75 @@
 [
   {
-    "pk": 1,
-    "model": "nbsap.euaichistrategy",
-    "fields": {
-      "aichi_targets": [
-        1,
-        11,
-        12
-      ],
-      "eu_target": 1
-    }
+      "pk" : 1,
+      "model" : "nbsap.euaichistrategy",
+      "fields" : {
+          "aichi_targets" : [
+              1,
+              11,
+              12
+          ],
+          "eu_target" : 1
+      }
   },
   {
-    "pk": 2,
-    "model": "nbsap.euaichistrategy",
-    "fields": {
-      "aichi_targets": [
-        8,
-        10,
-        14,
-        15
-      ],
-      "eu_target": 2
-    }
+      "pk" : 2,
+      "model" : "nbsap.euaichistrategy",
+      "fields" : {
+          "aichi_targets" : [
+              8,
+              10,
+              14,
+              15
+          ],
+          "eu_target" : 2
+      }
   },
   {
-    "pk": 3,
-    "model": "nbsap.euaichistrategy",
-    "fields": {
-      "aichi_targets": [
-        5,
-        7,
-        13
-      ],
-      "eu_target": 3
-    }
+      "pk" : 3,
+      "model" : "nbsap.euaichistrategy",
+      "fields" : {
+          "aichi_targets" : [
+              5,
+              7,
+              13
+          ],
+          "eu_target" : 3
+      }
   },
   {
-    "pk": 4,
-    "model": "nbsap.euaichistrategy",
-    "fields": {
-      "aichi_targets": [
-        6,
-        7,
-        10
-      ],
-      "eu_target": 4
-    }
+      "pk" : 4,
+      "model" : "nbsap.euaichistrategy",
+      "fields" : {
+          "aichi_targets" : [
+              6,
+              7,
+              10
+          ],
+          "eu_target" : 4
+      }
   },
   {
-    "pk": 5,
-    "model": "nbsap.euaichistrategy",
-    "fields": {
-      "aichi_targets": [
-        9
-      ],
-      "eu_target": 5
-    }
+      "pk" : 5,
+      "model" : "nbsap.euaichistrategy",
+      "fields" : {
+          "aichi_targets" : [
+              9
+          ],
+          "eu_target" : 5
+      }
   },
   {
-    "pk": 6,
-    "model": "nbsap.euaichistrategy",
-    "fields": {
-      "aichi_targets": [
-        2,
-        3,
-        16,
-        17,
-        20
-      ],
-      "eu_target": 6
-    }
+      "pk" : 6,
+      "model" : "nbsap.euaichistrategy",
+      "fields" : {
+          "aichi_targets" : [
+              2,
+              3,
+              16,
+              17,
+              20
+          ],
+          "eu_target" : 6
+      }
   }
 ]

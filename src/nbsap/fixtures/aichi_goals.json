@@ -1,92 +1,92 @@
 [
   {
-    "pk": "a",
-    "model": "nbsap.aichigoal",
-    "fields": {
-      "title_nl": "",
-      "title_en": "Strategic Goal A",
-      "description_en": "Address the underlying causes of biodiversity loss by mainstreaming biodiversity across government and society",
-      "title_fr": "But strat\u00e9gique A",
-      "description_nl": "",
-      "description_fr": "G\u00e9rer les causes sous-jacentes de l\u2019appauvrissement de la diversit\u00e9 biologique en int\u00e9grant la diversit\u00e9 biologique dans l\u2019ensemble du gouvernement et de la soci\u00e9t\u00e9",
-      "targets": [
-        1,
-        2,
-        3,
-        4
-      ]
-    }
+      "pk" : "a",
+      "model" : "nbsap.aichigoal",
+      "fields" : {
+          "title_nl" : "",
+          "title_en" : "Strategic Goal A",
+          "description_en" : "Address the underlying causes of biodiversity loss by mainstreaming biodiversity across government and society",
+          "targets" : [
+              1,
+              2,
+              3,
+              4
+          ],
+          "description_nl" : "",
+          "description_fr" : "G\u00e9rer les causes sous-jacentes de l\u2019appauvrissement de la diversit\u00e9 biologique en int\u00e9grant la diversit\u00e9 biologique dans l\u2019ensemble du gouvernement et de la soci\u00e9t\u00e9",
+          "title_fr" : "But strat\u00e9gique A"
+      }
   },
   {
-    "pk": "b",
-    "model": "nbsap.aichigoal",
-    "fields": {
-      "title_nl": "",
-      "title_en": "Strategic Goal B",
-      "description_en": "Reduce the direct pressures on biodiversity and promote sustainable use",
-      "title_fr": "But strat\u00e9gique B",
-      "description_nl": "",
-      "description_fr": "R\u00e9duire les pressions directes exerc\u00e9es \nsur la diversit\u00e9 biologique et encourager l\u2019utilisation durable",
-      "targets": [
-        5,
-        6,
-        7,
-        8,
-        9,
-        10
-      ]
-    }
+      "pk" : "b",
+      "model" : "nbsap.aichigoal",
+      "fields" : {
+          "title_nl" : "",
+          "title_en" : "Strategic Goal B",
+          "description_en" : "Reduce the direct pressures on biodiversity and promote sustainable use",
+          "targets" : [
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
+          ],
+          "description_nl" : "",
+          "description_fr" : "R\u00e9duire les pressions directes exerc\u00e9es \nsur la diversit\u00e9 biologique et encourager l\u2019utilisation durable",
+          "title_fr" : "But strat\u00e9gique B"
+      }
   },
   {
-    "pk": "c",
-    "model": "nbsap.aichigoal",
-    "fields": {
-      "title_nl": "",
-      "title_en": "Strategic Goal C",
-      "description_en": "To improve the status of biodiversity by safeguarding ecosystems, species and genetic diversity",
-      "title_fr": "But strat\u00e9gique C",
-      "description_nl": "",
-      "description_fr": "Am\u00e9liorer l\u2019\u00e9tat de la diversit\u00e9 biologique en \nsauvegardant les \u00e9cosyst\u00e8mes, les esp\u00e8ces et la diversit\u00e9 g\u00e9n\u00e9tique",
-      "targets": [
-        11,
-        12,
-        13
-      ]
-    }
+      "pk" : "c",
+      "model" : "nbsap.aichigoal",
+      "fields" : {
+          "title_nl" : "",
+          "title_en" : "Strategic Goal C",
+          "description_en" : "To improve the status of biodiversity by safeguarding ecosystems, species and genetic diversity",
+          "targets" : [
+              11,
+              12,
+              13
+          ],
+          "description_nl" : "",
+          "description_fr" : "Am\u00e9liorer l\u2019\u00e9tat de la diversit\u00e9 biologique en \nsauvegardant les \u00e9cosyst\u00e8mes, les esp\u00e8ces et la diversit\u00e9 g\u00e9n\u00e9tique",
+          "title_fr" : "But strat\u00e9gique C"
+      }
   },
   {
-    "pk": "d",
-    "model": "nbsap.aichigoal",
-    "fields": {
-      "title_nl": "",
-      "title_en": "Strategic Goal D",
-      "description_en": "Enhance the benefits to all from biodiversity and ecosystem services",
-      "title_fr": "But strat\u00e9gique D",
-      "description_nl": "",
-      "description_fr": "Renforcer les avantages retir\u00e9s pour tous de la \ndiversit\u00e9 biologique et des services fournis par les \u00e9cosyst\u00e8mes",
-      "targets": [
-        14,
-        15,
-        16
-      ]
-    }
+      "pk" : "d",
+      "model" : "nbsap.aichigoal",
+      "fields" : {
+          "title_nl" : "",
+          "title_en" : "Strategic Goal D",
+          "description_en" : "Enhance the benefits to all from biodiversity and ecosystem services",
+          "targets" : [
+              14,
+              15,
+              16
+          ],
+          "description_nl" : "",
+          "description_fr" : "Renforcer les avantages retir\u00e9s pour tous de la \ndiversit\u00e9 biologique et des services fournis par les \u00e9cosyst\u00e8mes",
+          "title_fr" : "But strat\u00e9gique D"
+      }
   },
   {
-    "pk": "e",
-    "model": "nbsap.aichigoal",
-    "fields": {
-      "title_nl": "",
-      "title_en": "Strategic Goal E",
-      "description_en": "Enhance implementation through participatory planning, knowledge management and capacity building",
-      "title_fr": "But strat\u00e9gique E",
-      "description_nl": "",
-      "description_fr": "Renforcer la mise en \u0153uvre au moyen d\u2019une \nplanification participative, de la gestion des connaissances et du \nrenforcement des capacit\u00e9s",
-      "targets": [
-        17,
-        18,
-        19,
-        20
-      ]
-    }
+      "pk" : "e",
+      "model" : "nbsap.aichigoal",
+      "fields" : {
+          "title_nl" : "",
+          "title_en" : "Strategic Goal E",
+          "description_en" : "Enhance implementation through participatory planning, knowledge management and capacity building",
+          "targets" : [
+              17,
+              18,
+              19,
+              20
+          ],
+          "description_nl" : "",
+          "description_fr" : "Renforcer la mise en \u0153uvre au moyen d\u2019une \nplanification participative, de la gestion des connaissances et du \nrenforcement des capacit\u00e9s",
+          "title_fr" : "But strat\u00e9gique E"
+      }
   }
 ]
