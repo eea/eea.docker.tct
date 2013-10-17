@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 
 from .base import BaseWebTest
 from .factories import StaffUserFactory
-from .factories import NationalObjectiveFactory
+from .factories import NationalObjectiveFactory, NationalActionFactory
 
 
 class NationalActionsTest(BaseWebTest):
@@ -12,17 +12,34 @@ class NationalActionsTest(BaseWebTest):
     def setUp(self):
         StaffUserFactory()
 
-    def test_list_national_actions(self):
-        NationalObjectiveFactory()
+    def test_list_national_objectives(self):
+        national_objective = NationalObjectiveFactory()
         resp = self.app.get(reverse('list_national_objectives'), user='staff')
         self.assertEqual(200, resp.status_code)
-        self.assertEqual(1, len(resp.pyquery('.table tr')))
+        trs = resp.pyquery('.table tr')
+        self.assertEqual(1, len(trs))
+        self.assertIn(national_objective.title, trs[0].text_content())
 
-#     def test_list_national_action(self):
-#         """ Listing National objective 1.1's actions """
-#
-#         self.assertEqual(response.status_code, 200)
-#         self.assertIn('Actions related to objective 1.1', response.content)
+    def test_view_national_objective(self):
+        national_objective = NationalObjectiveFactory()
+        url = reverse('view_national_objective', kwargs={'pk': national_objective.pk})
+        resp = self.app.get(url, user='staff')
+        self.assertEqual(200, resp.status_code)
+        title = resp.pyquery('#objective-title')
+        self.assertEqual(1, len(title))
+        expected_title = 'Objective {}: {}'.format(national_objective.code,
+                                                   national_objective.title)
+        self.assertEqual(expected_title, title[0].text_content())
+
+    def test_list_national_actions(self):
+        national_obj = NationalObjectiveFactory()
+        national_act = NationalActionFactory()
+        url = reverse('view_national_objective', kwargs={'pk': national_obj.pk})
+        resp = self.app.get(url, user='staff')
+        self.assertEqual(200, resp.status_code)
+        trs = resp.pyquery('table tr')
+        self.assertEqual(2, len(trs))
+        self.assertIn(national_act.title, trs[1].text_content())
 
 
 # class NationalActionTestCase(TestCase):

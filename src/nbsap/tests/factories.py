@@ -25,10 +25,9 @@ class NationalObjectiveFactory(factory.DjangoModelFactory):
 class NationalActionFactory(factory.DjangoModelFactory):
 
     FACTORY_FOR = 'nbsap.NationalAction'
-    FACTORY_DJANGO_GET_OR_CREATE = ('code', 'title', 'description')
 
-    code = 1
-    title = 'action1_title'
-    description = 'action1__description'
+    code = factory.Sequence(lambda n: '%d' % n)
+    title = factory.Sequence(lambda n: 'action%d_title_en' % n)
+    description = factory.Sequence(lambda n: 'action%d_description_en' % n)
 
 
