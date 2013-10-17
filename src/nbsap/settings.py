@@ -115,7 +115,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.locale.LocaleMiddleware',
-    'raven.contrib.django.middleware.Sentry404CatchMiddleware',
 )
 
 ASSETS_DEBUG = True
@@ -219,3 +218,6 @@ try:
     from local_settings import *
 except ImportError:
     pass
+
+if not DEBUG:
+    MIDDLEWARE_CLASSES += ('raven.contrib.django.middleware.Sentry404CatchMiddleware',)
