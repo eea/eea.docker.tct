@@ -17,6 +17,7 @@ class UserFactory(factory.DjangoModelFactory):
 
 
 class NationalObjectiveFactory(factory.DjangoModelFactory):
+
     FACTORY_FOR = 'nbsap.NationalObjective'
     FACTORY_DJANGO_GET_OR_CREATE = ('code', 'title_en', 'description_en')
 
@@ -26,6 +27,7 @@ class NationalObjectiveFactory(factory.DjangoModelFactory):
 
 
 class NationalActionFactory(factory.DjangoModelFactory):
+
     FACTORY_FOR = 'nbsap.NationalAction'
     FACTORY_DJANGO_GET_OR_CREATE = ('code', 'title', 'description')
 
