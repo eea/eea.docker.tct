@@ -139,6 +139,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django_assets',
+    'django_webtest',
     'transmeta',
     'django.contrib.markup',
     'tinymce',
