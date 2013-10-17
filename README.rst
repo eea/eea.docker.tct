@@ -77,7 +77,7 @@ NBSAP Quick Installation Guide
 
 MySQL Database deployment
 =====
-0.To set the database, check prerequisites and dependecies::
+0. To set the database, check prerequisites and dependecies::
 
 
 1. Then create and configure database as follows::
@@ -87,6 +87,8 @@ MySQL Database deployment
 
 2.  Allow Django to automatically create all tables by doing the following::
     ./instance/manage.py syncdb
+    ./instance/manage.py migrate
+    ./instance/manage.py load_fixtures
 
 
 

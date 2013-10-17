@@ -8,11 +8,6 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 LANGUAGE_CODE = 'en'
-LANGUAGES = (
-    ('en', ugettext('English')),
-    ('fr', ugettext('French')),
-    ('nl', ugettext('Dutch')),
-)
 
 # if your application is EU dependent
 EU_STRATEGY = False
