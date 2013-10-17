@@ -16,7 +16,7 @@ class NationalActionsTest(BaseWebTest):
         NationalObjectiveFactory()
         resp = self.app.get(reverse('list_national_objectives'), user='staff')
         self.assertEqual(200, resp.status_code)
-        self.assertEqual(1, len(resp.pyquery('table tr')))
+        self.assertEqual(1, len(resp.pyquery('.table tr')))
 
 #     def test_list_national_action(self):
 #         """ Listing National objective 1.1's actions """
