@@ -7,17 +7,16 @@ from .factories import StaffUserFactory
 from .factories import NationalObjectiveFactory
 
 
-class TestNationalActions(BaseWebTest):
+class NationalActionsTest(BaseWebTest):
 
     def setUp(self):
         StaffUserFactory()
 
     def test_list_national_actions(self):
         NationalObjectiveFactory()
-        resp = self.app.get(reverse('list_national_objectives'),
-                           user='staff@domain.com')
+        resp = self.app.get(reverse('list_national_objectives'), user='staff')
         self.assertEqual(200, resp.status_code)
-
+        self.assertEqual(1, len(resp.pyquery('table tr')))
 
 #     def test_list_national_action(self):
 #         """ Listing National objective 1.1's actions """
