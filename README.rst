@@ -57,30 +57,17 @@ NBSAP Quick Installation Guide
     pip install -e .
 
 
-4. Assuming the root of your project is ROOT_PROJECT, add the following lines in a ROOT_PROJECT/instance/local_settings.py file::
-
-    ASSETS_ROOT = 'ROOT_PROJECT/src/nbsap/static'
-    ALLOWED_HOSTS = ['localhost', '127.0.0.1']
-
-    # define your language preference
-    ugettext = lambda s: s
-    LANGUAGE_CODE = 'en'
-    LANGUAGES = (
-       ('en', ugettext('English')),
-       ('fr', ugettext('French')),
-       ('nl', ugettext('Dutch')),
-    )
-
-    # if your application is EU dependent
-    EU_STRATEGY = False
-    SITE_HEADER = 'Your site header'
+4. Setup local-settings.py::
+   Assuming the root of your project is ROOT_PROJECT, copy the follwing file ROOT_PROJECT/instance/local_settings.py.example to ROOT_PROJECT/instance/local_settings.py
 
 
-5. Run the tests to check the validity of your installation::
+5. Setup database - see section below::
+
+
+6. Run the tests to check the validity of your installation::
     ./instance/manage.py test nbsap
 
 
-6. Setup database - see section below::
 
 
 7. Run a test server(see http://127.0.0.1:8000 afterwards)::

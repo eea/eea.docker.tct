@@ -1,0 +1,31 @@
+ASSETS_ROOT = '~/apa/nbsap/src/nbsap/static'
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+
+# define your language preference
+ugettext = lambda s: s
+
+DEBUG = True
+TEMPLATE_DEBUG = DEBUG
+
+LANGUAGE_CODE = 'en'
+LANGUAGES = (
+    ('en', ugettext('English')),
+    ('fr', ugettext('French')),
+)
+
+# if your application is EU dependent
+EU_STRATEGY = False
+SITE_HEADER = 'Your site header'
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'nbsap',
+        'USER': 'nbsap',
+        'PASSWORD': 'nbsap',
+        'HOST': '',
+        'PORT': '',
+        'TEST_CHARSET': 'utf8',
+        'TEST_COLLATION': 'utf8_general_ci',
+    }
+}
