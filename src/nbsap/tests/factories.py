@@ -1,17 +1,14 @@
-# -*- coding: utf-8 -*-
 import factory
 from django.contrib.auth.models import User
-from django.contrib.auth.hashers import make_password
 
 
-class UserFactory(factory.DjangoModelFactory):
+class StaffUserFactory(factory.DjangoModelFactory):
 
     FACTORY_FOR = User
+    FACTORY_DJANGO_GET_OR_CREATE = ('username',)
 
-    username = 'johndoe'
-    email = 'jd@domain.com'
-    password = make_password('johndoe')
-
+    username = 'staff'
+    email = 'staff@domain.com'
     is_staff = True
     is_superuser = True
 
@@ -19,11 +16,10 @@ class UserFactory(factory.DjangoModelFactory):
 class NationalObjectiveFactory(factory.DjangoModelFactory):
 
     FACTORY_FOR = 'nbsap.NationalObjective'
-    FACTORY_DJANGO_GET_OR_CREATE = ('code', 'title_en', 'description_en')
 
-    code = 1
-    title_en = 'obj1_title_en'
-    description_en = 'obj1_description_en'
+    code = factory.Sequence(lambda n: '%d' % n)
+    title_en = factory.Sequence(lambda n: 'obj%d_title_en' % n)
+    description_en = factory.Sequence(lambda n: 'obj%d_description_en' % n)
 
 
 class NationalActionFactory(factory.DjangoModelFactory):

@@ -1,4 +1,4 @@
-# Django settings for nbsap project.
+import sys
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
@@ -221,3 +221,9 @@ except ImportError:
 
 if not DEBUG:
     MIDDLEWARE_CLASSES += ('raven.contrib.django.middleware.Sentry404CatchMiddleware',)
+
+if 'test' in sys.argv:
+    try:
+        from test_settings import *
+    except ImportError:
+        pass

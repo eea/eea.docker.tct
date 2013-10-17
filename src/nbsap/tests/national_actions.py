@@ -1,31 +1,22 @@
-# # -*- coding: utf-8 -*-
-# import pytest
-# from django.test import Client
-# from django.contrib.auth.models import User
-# from django.db import transaction
+# -*- coding: utf-8 -*-
+
+from django.core.urlresolvers import reverse
+
+from .base import BaseWebTest
+from .factories import StaffUserFactory
+from .factories import NationalObjectiveFactory
 
 
-# class TestNationalActions:
+class TestNationalActions(BaseWebTest):
 
-#     client = Client()
-#     pytestmark = pytest.mark.django_db
+    def setUp(self):
+        StaffUserFactory()
 
-    # def login_with_admin(self):
-    #     user = User.objects.create_user('admin',
-    #                                     'jd@example.com',
-    #                                     'admin')
-    #     user.is_staff = True
-    #     user.save()
-    #     login = self.client.login(username='admin', password='admin')
-
-    # def test_list_national_actions(self):
-    #     self.login_with_admin()
-    #     NationalObjectiveFactory()
-    #     #response = self.client.get('/administration/objectives/')
-    #     response = self.client.get('/objectives')
-    #     assert response.status_code == 200
-    #     import pdb; pdb.set_trace()
-
+    def test_list_national_actions(self):
+        NationalObjectiveFactory()
+        resp = self.app.get(reverse('list_national_objectives'),
+                           user='staff@domain.com')
+        self.assertEqual(200, resp.status_code)
 
 
 #     def test_list_national_action(self):
