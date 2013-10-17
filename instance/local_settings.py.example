@@ -1,4 +1,4 @@
-ASSETS_ROOT = '~/apa/nbsap/src/nbsap/static'
+ASSETS_ROOT = 'src/nbsap/static'
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # define your language preference
