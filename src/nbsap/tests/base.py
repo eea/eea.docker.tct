@@ -29,8 +29,12 @@ class BaseWebTest(WebTest):
         return data
 
 
-    def assertObjectInDatabase(self, model_name, **kwargs):
-        Model = get_model('nbsap', model_name)
+    def assertObjectInDatabase(self, model, **kwargs):
+        if isinstance(model, basestring):
+            Model = get_model('nbsap', model)
+        else:
+            Model = model
+
         if not Model:
             self.fail('Model {} does not exist'.format(model_name))
         try:
