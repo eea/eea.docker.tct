@@ -36,10 +36,10 @@ class BaseWebTest(WebTest):
             Model = model
 
         if not Model:
-            self.fail('Model {} does not exist'.format(model_name))
+            self.fail('Model {} does not exist'.format(model))
         try:
-            Model.objects.get(**kwargs)
+            return Model.objects.get(**kwargs)
         except Model.DoesNotExist:
             self.fail('Object "{}" with kwargs {} does not exist'.format(
-                model_name, str(kwargs)
+                model, str(kwargs)
             ))

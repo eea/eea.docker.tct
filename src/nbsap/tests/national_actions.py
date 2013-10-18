@@ -20,6 +20,24 @@ class NationalActionsTest(BaseWebTest):
         self.assertEqual(1, len(trs))
         self.assertIn(nat_obj.title, trs[0].text_content())
 
+    def test_add_national_objective(self):
+        nat_obj = NationalObjectiveFactory.build()
+        objective = {
+            'language': 'en',
+            'title': nat_obj.title_en,
+            'description': nat_obj.description_en,
+        }
+        url = reverse('edit_national_objective')
+        resp = self.app.get(url, user='staff')
+        self.assertEqual(200, resp.status_code)
+
+        form = resp.forms[3]
+        self.populate_fields(form, objective)
+        form.submit().follow()
+        nat_obj = self.assertObjectInDatabase('NationalObjective')
+        self.assertEqual(nat_obj.title_en, objective['title'])
+        self.assertEqual(nat_obj.description_en, objective['description'])
+
     def test_view_national_objective(self):
         nat_obj = NationalObjectiveFactory()
         url = reverse('view_national_objective', kwargs={'pk': nat_obj.pk})
@@ -82,7 +100,8 @@ class NationalActionsTest(BaseWebTest):
         self.populate_fields(form, data)
         form.submit().follow()
 
-        self.assertObjectInDatabase('NationalAction', pk=1)
+        nat_act = self.assertObjectInDatabase('NationalAction', pk=1)
+        self.assertEqual(data['title'], nat_act.title_en)
 
 # class NationalActionTestCase(TestCase):
 
