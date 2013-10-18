@@ -1,4 +1,5 @@
 from django.db.models import Model
+from django.db.models.loading import get_model
 
 from django_webtest import WebTest
 from webtest.forms import Select, MultipleSelect
@@ -26,3 +27,15 @@ class BaseWebTest(WebTest):
             if isinstance(v, Model):
                 data[k] = v.pk
         return data
+
+
+    def assertObjectInDatabase(self, model_name, **kwargs):
+        Model = get_model('nbsap', model_name)
+        if not Model:
+            self.fail('Model {} does not exist'.format(model_name))
+        try:
+            Model.objects.get(**kwargs)
+        except Model.DoesNotExist:
+            self.fail('Object "{}" with kwargs {} does not exist'.format(
+                model_name, str(kwargs)
+            ))

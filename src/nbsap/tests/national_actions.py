@@ -68,6 +68,22 @@ class NationalActionsTest(BaseWebTest):
         self.assertEqual(1, len(descriptions))
         self.assertIn(nat_act.description, descriptions[0].text_content())
 
+    def test_add_national_action(self):
+        nat_obj = NationalObjectiveFactory()
+        nat_act = NationalActionFactory.build()
+        url = reverse('edit_national_action', kwargs={'objective': nat_obj.pk})
+        data = {
+            'language': 'en',
+            'title': nat_act.title_en,
+            'description': nat_act.description_en,
+        }
+        resp = self.app.get(url, user='staff')
+        form = resp.forms['national-action-add']
+        self.populate_fields(form, data)
+        form.submit().follow()
+
+        self.assertObjectInDatabase('NationalAction', pk=1)
+
 # class NationalActionTestCase(TestCase):
 
 #     # def __init__(self, *args, **kwargs):
