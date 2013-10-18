@@ -22,6 +22,12 @@ class NationalObjectiveFactory(factory.DjangoModelFactory):
     description_en = factory.Sequence(lambda n: 'obj%d_description_en' % n)
 
 
+    @factory.post_generation
+    def parent(self, create, extracted, **kwargs):
+        if extracted:
+            self.parent = extracted
+
+
 class NationalActionFactory(factory.DjangoModelFactory):
 
     FACTORY_FOR = 'nbsap.NationalAction'

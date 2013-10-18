@@ -31,13 +31,23 @@ class NationalActionsTest(BaseWebTest):
                                                    national_objective.title)
         self.assertEqual(expected_title, title[0].text_content())
 
+    def test_list_national_sub_objectives(self):
+        nat_obj = NationalObjectiveFactory()
+        nat_sub_obj = NationalObjectiveFactory(parent=nat_obj)
+        url = reverse('view_national_objective', kwargs={'pk': nat_obj.pk})
+        resp = self.app.get(url, user='staff')
+        self.assertEqual(200, resp.status_code)
+        trs = resp.pyquery('.table tr')
+        self.assertEqual(2, len(trs))
+        self.assertIn(nat_sub_obj.title, trs[0].text_content())
+
     def test_list_national_actions(self):
         national_obj = NationalObjectiveFactory()
         national_act = NationalActionFactory()
         url = reverse('view_national_objective', kwargs={'pk': national_obj.pk})
         resp = self.app.get(url, user='staff')
         self.assertEqual(200, resp.status_code)
-        trs = resp.pyquery('table tr')
+        trs = resp.pyquery('.table tr')
         self.assertEqual(2, len(trs))
         self.assertIn(national_act.title, trs[1].text_content())
 
