@@ -1,4 +1,7 @@
+from django.db.models import Model
+
 from django_webtest import WebTest
+from webtest.forms import Select, MultipleSelect
 
 
 class BaseWebTest(WebTest):
