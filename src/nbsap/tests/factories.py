@@ -27,13 +27,19 @@ class NationalObjectiveFactory(factory.DjangoModelFactory):
         if extracted:
             self.parent = extracted
 
+    @factory.post_generation
+    def actions(self, create, extracted, **kwargs):
+        if extracted:
+            for action in extracted:
+                self.actions.add(action)
+
 
 class NationalActionFactory(factory.DjangoModelFactory):
 
     FACTORY_FOR = 'nbsap.NationalAction'
 
     code = factory.Sequence(lambda n: '%d' % n)
-    title = factory.Sequence(lambda n: 'action%d_title_en' % n)
-    description = factory.Sequence(lambda n: 'action%d_description_en' % n)
+    title_en = factory.Sequence(lambda n: 'action%d_title_en' % n)
+    description_en = factory.Sequence(lambda n: 'action%d_description_en' % n)
 
 

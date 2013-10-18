@@ -13,23 +13,23 @@ class NationalActionsTest(BaseWebTest):
         StaffUserFactory()
 
     def test_list_national_objectives(self):
-        national_objective = NationalObjectiveFactory()
+        nat_obj = NationalObjectiveFactory()
         resp = self.app.get(reverse('list_national_objectives'), user='staff')
         self.assertEqual(200, resp.status_code)
         trs = resp.pyquery('.table tr')
         self.assertEqual(1, len(trs))
-        self.assertIn(national_objective.title, trs[0].text_content())
+        self.assertIn(nat_obj.title, trs[0].text_content())
 
     def test_view_national_objective(self):
-        national_objective = NationalObjectiveFactory()
-        url = reverse('view_national_objective', kwargs={'pk': national_objective.pk})
+        nat_obj = NationalObjectiveFactory()
+        url = reverse('view_national_objective', kwargs={'pk': nat_obj.pk})
         resp = self.app.get(url, user='staff')
         self.assertEqual(200, resp.status_code)
-        title = resp.pyquery('#objective-title')
-        self.assertEqual(1, len(title))
-        expected_title = 'Objective {}: {}'.format(national_objective.code,
-                                                   national_objective.title)
-        self.assertEqual(expected_title, title[0].text_content())
+        titles = resp.pyquery('#objective-title')
+        self.assertEqual(1, len(titles))
+        expected_title = 'Objective {}: {}'.format(nat_obj.code,
+                                                   nat_obj.title)
+        self.assertEqual(expected_title, titles[0].text_content())
 
     def test_list_national_sub_objectives(self):
         nat_obj = NationalObjectiveFactory()
@@ -42,15 +42,31 @@ class NationalActionsTest(BaseWebTest):
         self.assertIn(nat_sub_obj.title, trs[0].text_content())
 
     def test_list_national_actions(self):
-        national_obj = NationalObjectiveFactory()
-        national_act = NationalActionFactory()
-        url = reverse('view_national_objective', kwargs={'pk': national_obj.pk})
+        nat_act = NationalActionFactory()
+        nat_obj = NationalObjectiveFactory(actions=(nat_act,))
+        url = reverse('view_national_objective', kwargs={'pk': nat_obj.pk})
         resp = self.app.get(url, user='staff')
         self.assertEqual(200, resp.status_code)
         trs = resp.pyquery('.table tr')
         self.assertEqual(2, len(trs))
-        self.assertIn(national_act.title, trs[1].text_content())
+        self.assertIn(nat_act.title, trs[1].text_content())
 
+    def test_view_national_action(self):
+        nat_act = NationalActionFactory()
+        nat_obj = NationalObjectiveFactory(actions=(nat_act,))
+        url = reverse('view_national_action', kwargs={'objective': nat_obj.pk,
+                                                      'pk': nat_act.pk})
+        resp = self.app.get(url, user='staff')
+        self.assertEqual(200, resp.status_code)
+        expected_title = 'Action {}: {}'.format(nat_act.code,
+                                                nat_act.title)
+        titles = resp.pyquery('#action-title')
+        self.assertEqual(1, len(titles))
+        self.assertEqual(expected_title, titles[0].text_content())
+
+        descriptions = resp.pyquery('div.admin-obj-description')
+        self.assertEqual(1, len(descriptions))
+        self.assertIn(nat_act.description, descriptions[0].text_content())
 
 # class NationalActionTestCase(TestCase):
 
