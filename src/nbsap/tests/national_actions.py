@@ -86,40 +86,6 @@ class NationalActionsTest(BaseWebTest):
 
 # class NationalActionTestCase(TestCase):
 
-#     # def __init__(self, *args, **kwargs):
-#     #     if settings.EU_STRATEGY:
-#     #         self.fixtures = ['be_mapping_with_eu.json']
-#     #     else:
-#     #         self.fixtures = ['be_mapping_no_eu.json']
-
-#     #     super(NationalActionTestCase, self).__init__(*args, **kwargs)
-
-#     def setUp(self):
-#         self.user = User.objects.create_user('admin',
-#                                              'jd@example.com',
-#                                             'admin')
-#         self.user.is_staff = True
-#         self.user.save()
-
-#         self.client = Client()
-#         # blind call to set user info on session
-#         call = self.client.post('/accounts/login/',
-#                                 {'username': 'test_admin',
-#                                  'password': 'q'})
-
-#     def test_list_national_action(self):
-#         """ Listing National objective 1.1's actions """
-#         response = self.client.get('/administration/objectives/16')
-#         self.assertEqual(response.status_code, 200)
-#         self.assertIn('Actions related to objective 1.1', response.content)
-
-#     def test_view_national_action(self):
-#         """ Test the view of national action """
-#         response = self.client.get('/administration/objectives/16/actions/1/')
-#         self.assertEqual(response.status_code, 200)
-#         content = response.content
-#         self.assertIn("Biological Evaluation Maps (BWK)", content)
-
 #     def test_edit_national_action(self):
 #         """ Test editing national action for objective's 1.1 """
 #         mydata = {
