@@ -34,9 +34,9 @@ class NationalActionsTest(BaseWebTest):
         form = resp.forms[3]
         self.populate_fields(form, objective)
         form.submit().follow()
-        nat_obj = self.assertObjectInDatabase('NationalObjective')
-        self.assertEqual(nat_obj.title_en, objective['title'])
-        self.assertEqual(nat_obj.description_en, objective['description'])
+        self.assertObjectInDatabase('NationalObjective',
+                                    title_en=nat_obj.title_en,
+                                    description_en=nat_obj.description_en)
 
     def test_view_national_objective(self):
         nat_obj = NationalObjectiveFactory()
@@ -100,8 +100,30 @@ class NationalActionsTest(BaseWebTest):
         self.populate_fields(form, data)
         form.submit().follow()
 
-        nat_act = self.assertObjectInDatabase('NationalAction', pk=1)
-        self.assertEqual(data['title'], nat_act.title_en)
+        self.assertObjectInDatabase('NationalAction', pk=1,
+                                    title_en=nat_act.title_en)
+
+    def test_edit_national_action(self):
+        nat_act = NationalActionFactory()
+        nat_obj = NationalObjectiveFactory(actions=(nat_act,))
+        url = reverse('edit_national_action', kwargs={
+            'objective': nat_obj.pk,
+            'pk': nat_act.pk,
+        })
+        data = {
+            'language': 'en',
+            'title': 'action_edited',
+            'description': 'description_edited',
+        }
+        resp = self.app.get(url, user='staff')
+        form = resp.forms['national-action-edit']
+        self.populate_fields(form, data)
+        form.submit().follow()
+
+        self.assertObjectInDatabase('NationalAction', pk=1,
+                                    title_en='action_edited',
+                                    description_en='description_edited')
+
 
 # class NationalActionTestCase(TestCase):
 
@@ -143,49 +165,6 @@ class NationalActionsTest(BaseWebTest):
 #         edited_object = models.NationalAction.objects.all().filter(id=1)[0]
 #         self.assertEqual(edited_object.description, mydata['description'])
 
-#     def test_add_national_action(self):
-#         """ Test national action adding """
-#         mydata = {
-#             'objective': {
-#                             'language': 'en',
-#                             'title': 'My new objective title',
-#                             'description': 'My new objective description'
-#             },
-#             'action': {
-#                         'language': 'en',
-#                         'description': 'My new action description'
-#                 }
-
-#         }
-#         # add an objective first
-#         response = self.client.get('/administration/objectives/add/')
-#         self.assertEqual(response.status_code, 200)
-
-#         response = self.client.post('/administration/objectives/add/', mydata['objective'])
-#         added_object = models.NationalObjective.objects.all().filter(code='16')[0]
-#         self.assertEqual(added_object.title, mydata['objective']['title'])
-#         self.assertEqual(added_object.description, mydata['objective']['description'])
-
-#         # secondly, add a specific action
-#         response = self.client.get('/administration/objectives/101/actions/add')
-#         self.assertEqual(response.status_code, 200)
-
-#         response = self.client.post('/administration/objectives/101/actions/add',
-#                                     mydata['action'],
-#                                     follow=True)
-#         self.assertEqual(response.status_code, 200)
-#         self.assertIn("Action successfully added", response.content)
-
-#         added_action = models.NationalAction.objects.filter(id=78)[0]
-#         self.assertEqual(added_action.description, mydata['action']['description'])
-
-
-#         # clean the mess by deleting the action
-#         action_id = str(added_action.id)
-#         response = self.client.get('/administration/objectives/101/actions/%s/delete' % action_id)
-
-#         # clean the mess by deleting the objective
-#         response = self.client.get('/administration/objectives/%s/delete' % (str(added_object.id)))
 
 #     def test_add_national_action_with_encodings(self):
 #         """ Test national action adding with encodings """
