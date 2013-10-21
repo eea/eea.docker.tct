@@ -94,7 +94,9 @@
         <label>{% trans "Related actions" %}:</label>
         {% for action in subobj.actions.all %}
           <div class="well">
-            <h2>{% trans "Actions related to objective" %} {{ action.code }}</h2>
+
+            <h2>{% trans "Actions related to objective" %}
+              {{ action.code }} {% if action.title %}({{ action.title }}){% endif %} </h2>
             {{ action.description|safe }}
           </div>
         {% endfor %}
