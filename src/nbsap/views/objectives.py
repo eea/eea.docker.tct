@@ -71,6 +71,7 @@ def implementation(request, code=None):
     for objective in current_objective.get_all_objectives():
         for action in objective.actions.all():
             current_objective.actions_tree.append(action)
+
     return render(request, 'implementation.html', {
         'current_objective': current_objective,
         'objectives': objectives,
