@@ -23,11 +23,14 @@ def nat_strategy(request, code=None):
     objectives = models.NationalObjective.objects.filter(parent=None).all()
 
     current_objective.objectives_tree = current_objective.get_all_objectives()
+    actions = [i for i in current_objective.actions.all()]
+    for subobj in current_objective.objectives_tree:
+        actions.extend([i for i in subobj.actions.all()])
 
     return render(request, 'objectives/nat_strategy.html',
                   {'objectives': objectives,
                    'current_objective': current_objective,
-                  })
+                   'actions': actions,})
 
 
 def nat_strategy_download(request):

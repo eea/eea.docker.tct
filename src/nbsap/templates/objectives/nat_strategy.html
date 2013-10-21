@@ -57,17 +57,14 @@
     </div>
 
     <div class="row">
-      <ul class="span2">
-        {% if not current_objective.actions %}
-          <li>{% trans "No related actions found" %}</li>
-        {% endif %}
-
-        {% for action in current_objective.actions.all %}
+      <ul>
+        {% for action in actions|sort_by_code %}
           <li>
-            <a href="#{{ action.id }}">
-              {% trans "Action" %} {{ action.id }}
-            </a>
+            <a href="#{{ action.id }}">Action {{ action.id }}
+              {% if action.title %}({{ action.title }}){% endif %}</a>
           </li>
+        {% empty %}
+          <li>No related actions found</li>
         {% endfor %}
       </ul>
     </div>
@@ -93,7 +90,7 @@
       {% if subobj.actions.all %}
         <label>{% trans "Related actions" %}:</label>
         {% for action in subobj.actions.all %}
-          <div class="well">
+          <div class="well" id="{{ action.id }}">
             {% if action.title %}
               <h2>{{ action.title }}</h2>
             {% else %}
