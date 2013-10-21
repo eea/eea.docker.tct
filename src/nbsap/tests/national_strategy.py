@@ -1,3 +1,28 @@
+# -*- coding: utf-8 -*-
+
+from django.core.urlresolvers import reverse
+
+from .base import BaseWebTest
+from .factories import StaffUserFactory
+from .factories import NationalStrategyFactory
+from .factories import AichiGoalFactory
+
+
+class NationalStrategyTest(BaseWebTest):
+
+    def setUp(self):
+        StaffUserFactory()
+
+    def test_list_national_strategies(self):
+        nat_strategy = NationalStrategyFactory()
+        aichi_goal = AichiGoalFactory(targets=(nat_strategy.relevant_target,))
+        resp = self.app.get(reverse('list_national_strategy'), user='staff')
+        self.assertEqual(200, resp.status_code)
+        tds = resp.pyquery('.table').find('tbody').find('td')
+        self.assertIn('1', tds[0].text_content())
+        self.assertIn('1', tds[1].text_content())
+
+
 # from django.test.client import Client
 # from django.utils import unittest
 # from django.test import TestCase
@@ -8,24 +33,6 @@
 # from django.conf import settings
 
 # class NationalStrategyTestCase(TestCase):
-#     fixtures = ['be_actions.json', 'be_objectives.json', ]
-
-#     def __init__(self, *args, **kwargs):
-#         if settings.EU_STRATEGY:
-#             self.fixtures.append('be_mapping_with_eu.json')
-#         else:
-#             self.fixtures.append('be_mapping_no_eu.json')
-
-#         super(NationalStrategyTestCase, self).__init__(*args, **kwargs)
-
-#     def setUp(self):
-#         self.user = User.objects.create_user('test_admin', 'test@admin.com', 'q')
-#         self.client = Client()
-#         self.user.is_staff = True
-#         self.user.save()
-
-#         call = self.client.post('/accounts/login/', {'username': 'test_admin',
-#                                                      'password': 'q'})
 
 #     def test_list_national_strategies(self):
 #         response = self.client.get('/administration/mapping/')

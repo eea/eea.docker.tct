@@ -43,3 +43,38 @@ class NationalActionFactory(factory.DjangoModelFactory):
     description_en = factory.Sequence(lambda n: 'action%d_description_en' % n)
 
 
+class AichiGoalFactory(factory.DjangoModelFactory):
+
+    FACTORY_FOR = 'nbsap.AichiGoal'
+
+    code = factory.Sequence(lambda n: '%d' % n)
+    title_en = factory.Sequence(lambda n: 'obj%d_title_en' % n)
+    description_en = factory.Sequence(lambda n: 'obj%d_description_en' % n)
+
+    @factory.post_generation
+    def targets(self, create, extracted, **kwargs):
+        if extracted:
+            for target in extracted:
+                self.targets.add(target)
+
+
+class AichiTargetFactory(factory.DjangoModelFactory):
+
+    FACTORY_FOR = 'nbsap.AichiTarget'
+
+    code = factory.Sequence(lambda n: '%d' % n)
+    description_en = factory.Sequence(lambda n: 'action%d_description_en' % n)
+
+
+class NationalStrategyFactory(factory.DjangoModelFactory):
+
+    FACTORY_FOR = 'nbsap.NationalStrategy'
+
+    objective = factory.SubFactory(NationalObjectiveFactory)
+    relevant_target = factory.SubFactory(AichiTargetFactory)
+
+    @factory.post_generation
+    def other_targets(self, create, extracted, **kwargs):
+        if extracted:
+            for target in extracted:
+                self.other_targets.add(target)
