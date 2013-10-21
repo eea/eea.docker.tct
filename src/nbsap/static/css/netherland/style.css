@@ -635,7 +635,8 @@ body {
     border-radius: 0px;
     -moz-border-radius: 0px;
     -webkit-border-radius: 0px;
-    background: url('header.png') no-repeat 0% 3%
+    background: url('header.png') no-repeat 0% 3%;
+    filter: none;
 }
 
 .navbar {
