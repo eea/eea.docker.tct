@@ -4,6 +4,16 @@ body {
     font-family: Arial, sans-serif !important;
 }
 
+/* ie 8 fixes */
+body .container\0,
+body  .navbar-static-top .container\0,
+body  .navbar-fixed-top .container\0,
+body  .navbar-fixed-bottom .container\0,
+footer\0 {
+  width: 93.5%;
+  max-width: 1158px;
+}
+
 hgroup {
     margin-bottom: 15px;
 }
