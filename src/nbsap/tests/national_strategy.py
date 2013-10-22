@@ -4,8 +4,8 @@ from django.core.urlresolvers import reverse
 
 from .base import BaseWebTest
 from .factories import StaffUserFactory
-from .factories import NationalStrategyFactory
-from .factories import AichiGoalFactory
+from .factories import NationalStrategyFactory, NationalObjectiveFactory
+from .factories import AichiGoalFactory, AichiTargetFactory
 
 
 class NationalStrategyTest(BaseWebTest):
@@ -18,9 +18,31 @@ class NationalStrategyTest(BaseWebTest):
         aichi_goal = AichiGoalFactory(targets=(nat_strategy.relevant_target,))
         resp = self.app.get(reverse('list_national_strategy'), user='staff')
         self.assertEqual(200, resp.status_code)
+
         tds = resp.pyquery('.table').find('tbody').find('td')
-        self.assertIn('1', tds[0].text_content())
-        self.assertIn('1', tds[1].text_content())
+        target = nat_strategy.relevant_target
+        objective = nat_strategy.objective
+        self.assertIn(objective.code, tds[0].text_content())
+        self.assertIn(target.code, tds[1].text_content())
+
+    def test_add_national_strategy(self):
+        aichi_target = AichiTargetFactory()
+        aichi_goal = AichiGoalFactory(targets=(aichi_target,))
+        nat_objective = NationalObjectiveFactory()
+
+        data = {
+            'nat_objective': nat_objective.pk,
+            'aichi_goal': aichi_goal.pk,
+            'aichi_target': aichi_target.pk,
+        }
+
+        resp = self.app.get(reverse('edit_national_strategy'), user='staff')
+        form = resp.forms['national-strategy-add']
+        self.populate_fields(form, data)
+        form.submit().follow()
+        self.assertObjectInDatabase('NationalStrategy', pk=1,
+                                    objective=nat_objective,
+                                    relevant_target=aichi_target)
 
 
 # from django.test.client import Client
@@ -34,38 +56,6 @@ class NationalStrategyTest(BaseWebTest):
 
 # class NationalStrategyTestCase(TestCase):
 
-#     def test_list_national_strategies(self):
-#         response = self.client.get('/administration/mapping/')
-#         self.assertEqual(response.status_code, 200)
-#         self.assertEqual(len(response.context['strategies']), 47)
-#         content = response.content
-#         self.assertIn("Delete", content)
-#         self.assertIn("Add Mapping", content)
-#         self.assertIn("Edit", content)
-
-#     def test_add_national_strategy_only_with_required_fields(self):
-#         mydata = {
-#             'nat_objective': 2,
-#             'aichi_goal': 'a',
-#             'aichi_target': 4
-#         }
-
-#         response = self.client.get('/administration/mapping/add')
-#         self.assertEqual(response.status_code, 200)
-
-#         response = self.client.post('/administration/mapping/add',
-#                                     mydata,
-#                                     follow= True)
-#         self.assertEqual(response.status_code, 200)
-#         self.assertIn("Mapping successfully added", response.content)
-
-#         strategies = models.NationalStrategy.objects.all()
-#         added_strategy = strategies[len(strategies)- 1]
-#         self.assertEqual(added_strategy.objective.id, mydata['nat_objective'])
-#         self.assertEqual(added_strategy.relevant_target.id,
-#                          mydata['aichi_target'])
-#         self.assertEqual(added_strategy.relevant_target.get_parent_goal().code,
-#                          mydata['aichi_goal'])
 
 #     def test_add_national_strategy_only_with_incorrect_goal(self):
 #         mydata = {
