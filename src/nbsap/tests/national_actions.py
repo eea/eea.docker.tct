@@ -22,7 +22,7 @@ class NationalActionsTest(BaseWebTest):
 
     def test_add_national_objective(self):
         nat_obj = NationalObjectiveFactory.build()
-        objective = {
+        data = {
             'language': 'en',
             'title': nat_obj.title_en,
             'description': nat_obj.description_en,
@@ -32,11 +32,72 @@ class NationalActionsTest(BaseWebTest):
         self.assertEqual(200, resp.status_code)
 
         form = resp.forms['national-objective-add']
-        self.populate_fields(form, objective)
+        self.populate_fields(form, data)
         form.submit().follow()
-        self.assertObjectInDatabase('NationalObjective',
+        self.assertObjectInDatabase('NationalObjective', pk=1,
                                     title_en=nat_obj.title_en,
                                     description_en=nat_obj.description_en)
+
+    def test_add_national_objective_with_encodings(self):
+        nat_obj = NationalObjectiveFactory.build()
+        data = {
+            'language': 'en',
+            'title': nat_obj.title_en,
+            'description': 'ĂFKĐȘKŁFKOKR–KF:ŁĂȘĐKF–KFÂŁ:FJK–FFŁKJȘĂŁF',
+        }
+        url = reverse('edit_national_objective')
+        resp = self.app.get(url, user='staff')
+        self.assertEqual(200, resp.status_code)
+
+        form = resp.forms['national-objective-add']
+        self.populate_fields(form, data)
+        form.submit().follow()
+        self.assertObjectInDatabase('NationalObjective', pk=1,
+                                    title_en=nat_obj.title_en,
+                                    description_en=data['description'])
+
+    def test_edit_national_objective(self):
+        nat_obj = NationalObjectiveFactory()
+        data = {
+            'language': 'en',
+            'title': 'Title edited',
+            'description': 'Description edited',
+        }
+        url = reverse('edit_national_objective', kwargs={'pk': nat_obj.pk})
+        resp = self.app.get(url, user='staff')
+        self.assertEqual(200, resp.status_code)
+
+        form = resp.forms['national-objective-edit']
+        self.populate_fields(form, data)
+        form.submit().follow()
+        self.assertObjectInDatabase('NationalObjective', pk=1,
+                                    title_en=data['title'],
+                                    description_en=data['description'])
+
+    def test_edit_national_objective_with_encodings(self):
+        nat_obj = NationalObjectiveFactory()
+        data = {
+            'language': 'en',
+            'title': 'Title edited',
+            'description': 'ĂFKĐȘKŁFKOKR–KF:ŁĂȘĐKF–KFÂŁ:FJK–FFŁKJȘĂŁF',
+        }
+        url = reverse('edit_national_objective', kwargs={'pk': nat_obj.pk})
+        resp = self.app.get(url, user='staff')
+        self.assertEqual(200, resp.status_code)
+
+        form = resp.forms['national-objective-edit']
+        self.populate_fields(form, data)
+        form.submit().follow()
+        self.assertObjectInDatabase('NationalObjective', pk=1,
+                                    title_en=data['title'],
+                                    description_en=data['description'])
+
+    def test_delete_national_objective(self):
+        nat_obj = NationalObjectiveFactory()
+        url = reverse('delete_national_objective', kwargs={'pk': nat_obj.pk})
+        resp = self.app.get(url, user='staff').follow()
+        with self.assertRaises(AssertionError):
+            self.assertObjectInDatabase('NationalObjective', pk=1)
 
     def test_view_national_objective(self):
         nat_obj = NationalObjectiveFactory()
