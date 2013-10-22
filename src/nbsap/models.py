@@ -164,11 +164,12 @@ class NationalAction(models.Model):
     def __unicode__(self):
         return self.code
 
+
 class NationalObjective(models.Model):
 
     __metaclass__ = Translatable
 
-    code = models.CharField(max_length=16)
+    code = models.CharField(max_length=16, unique=True)
     title = models.CharField(max_length=512,
                              verbose_name="Title")
     description = tinymce_models.HTMLField(verbose_name="Description")
