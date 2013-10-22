@@ -51,7 +51,11 @@
                </li>
                {% endif %}
            <li>
-                <a href="#"><i class="icon-user"></i>{{user.username}}</a>
+                {% if user.is_staff %}
+                  <a href="{% url 'admin:index' %}"><i class="icon-user"></i>{{ user.username }}</a>
+                {% else %}
+                  <a style="cursor: default;"><i class="icon-user"></i>{{ user.username }}</a>
+                {% endif %}
             </li>
 
            <li>
