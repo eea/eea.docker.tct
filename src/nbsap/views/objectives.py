@@ -7,7 +7,7 @@ from transmeta import TransMeta
 import tablib
 
 from nbsap import models
-from nbsap.forms import NationalObjectiveForm
+from nbsap.forms import NationalObjectiveForm, NationalObjectiveEditForm
 
 from auth import auth_required
 
@@ -92,9 +92,9 @@ def view_national_objective(request, pk):
 @auth_required
 def list_national_objectives(request):
     objectives = models.NationalObjective.objects.filter(parent=None).all()
-    return render(request, 'objectives/list_national_objectives.html',
-                  {'objectives': objectives,
-                  })
+    return render(request, 'objectives/list_national_objectives.html',{
+        'objectives': objectives,
+    })
 
 
 @auth_required
@@ -107,16 +107,17 @@ def edit_national_objective(request, pk=None, parent=None):
     if pk:
         objective = get_object_or_404(models.NationalObjective, pk=pk)
         template = 'objectives/edit_national_objective.html'
+        FormClass = NationalObjectiveEditForm
     else:
         objective = None
         template = 'objectives/add_national_objectives.html'
+        FormClass = NationalObjectiveForm
 
     lang = request.GET.get('lang', request.LANGUAGE_CODE)
 
     if request.method == 'POST':
-        form = NationalObjectiveForm(request.POST,
-                                     objective=objective,
-                                     parent_objective=parent_objective)
+        form = FormClass(request.POST, objective=objective,
+                         parent_objective=parent_objective)
         if form.is_valid():
             form.save()
             if pk:
@@ -133,15 +134,13 @@ def edit_national_objective(request, pk=None, parent=None):
             else:
                 return redirect('list_national_objectives')
     else:
-        form = NationalObjectiveForm(objective=objective, lang=lang)
-
-
-    return render(request, template,
-                  {'form': form,
-                   'objective': objective,
-                   'parent': parent_objective,
-                   'lang': lang,
-                  })
+        form = FormClass(objective=objective, lang=lang)
+    return render(request, template,{
+        'form': form,
+        'objective': objective,
+        'parent': parent_objective,
+        'lang': lang,
+    })
 
 
 @auth_required

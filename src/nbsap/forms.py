@@ -3,12 +3,13 @@ from django.conf import settings
 from django.forms import widgets
 from django.shortcuts import get_object_or_404
 from django.conf import settings
+from django.core.exceptions import ValidationError
+
 from tinymce.widgets import TinyMCE
 from chosen import forms as chosenforms
 
-
-from models import AichiGoal, AichiTarget, EuAction, EuTarget, \
-                   NationalStrategy, NationalObjective, NationalAction
+from nbsap.models import AichiGoal, AichiTarget, EuAction, EuTarget
+from nbsap.models import NationalStrategy, NationalObjective, NationalAction
 
 
 class NationalObjectiveForm(forms.Form):
@@ -29,28 +30,44 @@ class NationalObjectiveForm(forms.Form):
             title = getattr(self.objective, 'title_%s' % lang, None)
             description = getattr(self.objective,
                                   'description_%s' % lang, None)
-
             self.fields['title'].initial = title
             self.fields['description'].initial = description
-
+            if 'code' in self.fields:
+                self.fields['code'].initial = self.objective.code
         self.fields['language'].initial = lang
 
     def save(self):
-
         objective = self.objective or NationalObjective()
         lang = self.cleaned_data['language']
         title = self.cleaned_data['title']
         description = self.cleaned_data['description']
+        code = self.cleaned_data.get('code', None)
 
         setattr(objective, 'title_%s' % lang, title)
         setattr(objective, 'description_%s' % lang, description)
 
         if self.parent_objective:
             objective.parent = self.parent_objective
-
+        if code:
+            objective.code = code
         objective.save()
-
         return objective
+
+
+class NationalObjectiveEditForm(NationalObjectiveForm):
+
+    code = forms.CharField(max_length=16)
+
+    def clean_code(self):
+        code = self.cleaned_data['code']
+        if code == self.objective.code:
+            return code
+        try:
+            NationalObjective.objects.get(code=code)
+            raise ValidationError('Code already exists.')
+        except NationalObjective.DoesNotExist:
+            pass
+        return code
 
 
 class NationalActionForm(forms.Form):
@@ -75,7 +92,6 @@ class NationalActionForm(forms.Form):
         self.fields['language'].initial = lang
 
     def save(self):
-
         action = self.action or NationalAction()
         lang = self.cleaned_data['language']
         title = self.cleaned_data['title']
@@ -87,9 +103,7 @@ class NationalActionForm(forms.Form):
 
         action.save()
         action.objective = [self.objective]
-
         action.save()
-
         return action
 
 

@@ -60,6 +60,7 @@ class NationalObjectiveTest(BaseWebTest):
         nat_obj = NationalObjectiveFactory()
         data = {
             'language': 'en',
+            'code': nat_obj.code,
             'title': 'Title edited',
             'description': 'Description edited',
         }
@@ -74,10 +75,33 @@ class NationalObjectiveTest(BaseWebTest):
                                     title_en=data['title'],
                                     description_en=data['description'])
 
+    def test_edit_national_objective_fail_code(self):
+        nat_obj = NationalObjectiveFactory()
+        nat_obj_2 = NationalObjectiveFactory()
+        data = {
+            'language': 'en',
+            'code': nat_obj_2.code,
+            'title': 'Title edited',
+            'description': 'Description edited',
+        }
+        url = reverse('edit_national_objective', kwargs={'pk': nat_obj.pk})
+        resp = self.app.get(url, user='staff')
+        self.assertEqual(200, resp.status_code)
+
+        form = resp.forms['national-objective-edit']
+        self.populate_fields(form, data)
+        resp = form.submit()
+        self.assertEqual(200, resp.status_code)
+        with self.assertRaises(AssertionError):
+            self.assertObjectInDatabase('NationalObjective', pk=1,
+                                        title_en=data['title'],
+                                        description_en=data['description'])
+
     def test_edit_national_objective_with_encodings(self):
         nat_obj = NationalObjectiveFactory()
         data = {
             'language': 'en',
+            'code': nat_obj.code,
             'title': 'Title edited',
             'description': 'ĂFKĐȘKŁFKOKR–KF:ŁĂȘĐKF–KFÂŁ:FJK–FFŁKJȘĂŁF',
         }

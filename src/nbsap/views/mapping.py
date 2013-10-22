@@ -28,8 +28,8 @@ def edit_national_strategy(request, pk=None):
             else:
                 messages.success(request, _('Mapping successfully added.') + "")
             return redirect('list_national_strategy')
-
-    form = NationalStrategyForm(strategy=strategy)
+    else:
+        form = NationalStrategyForm(strategy=strategy)
     return render(request, template, {'form': form, 'strategy': strategy})
 
 
