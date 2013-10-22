@@ -96,7 +96,6 @@ def list_national_objectives(request):
 
 @auth_required
 def edit_national_objective(request, pk=None, parent=None):
-
     if parent:
         parent_objective = get_object_or_404(models.NationalObjective, pk=parent)
     else:

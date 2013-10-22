@@ -20,10 +20,10 @@ class NationalStrategyTest(BaseWebTest):
         self.assertEqual(200, resp.status_code)
 
         tds = resp.pyquery('.table').find('tbody').find('td')
-        target = nat_strategy.relevant_target
         objective = nat_strategy.objective
+        goal = nat_strategy.relevant_target.get_parent_goal()
         self.assertIn(objective.code, tds[0].text_content())
-        self.assertIn(target.code, tds[1].text_content())
+        self.assertIn(goal.code, tds[1].text_content())
 
     def test_add_national_strategy(self):
         aichi_target = AichiTargetFactory()
@@ -35,7 +35,6 @@ class NationalStrategyTest(BaseWebTest):
             'aichi_goal': aichi_goal.pk,
             'aichi_target': aichi_target.pk,
         }
-
         resp = self.app.get(reverse('edit_national_strategy'), user='staff')
         form = resp.forms['national-strategy-add']
         self.populate_fields(form, data)
@@ -43,6 +42,23 @@ class NationalStrategyTest(BaseWebTest):
         self.assertObjectInDatabase('NationalStrategy', pk=1,
                                     objective=nat_objective,
                                     relevant_target=aichi_target)
+
+    def test_add_national_strategy_fail(self):
+        aichi_target = AichiTargetFactory()
+        nat_objective = NationalObjectiveFactory()
+
+        data = {
+            'nat_objective': nat_objective.pk,
+            'aichi_goal': 'invalid_pk',
+            'aichi_target': aichi_target.pk,
+        }
+        resp = self.app.get(reverse('edit_national_strategy'), user='staff')
+        form = resp.forms['national-strategy-add']
+        self.populate_fields(form, data)
+        resp = form.submit()
+        self.assertEqual(200, resp.status_code)
+        with self.assertRaises(AssertionError):
+            self.assertObjectInDatabase('NationalStrategy', pk=1)
 
 
 # from django.test.client import Client

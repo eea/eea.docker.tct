@@ -47,11 +47,13 @@
     <tr>
       <div class="st" code = strategy.id style="display:none"></div>
       <td class="strategy" code=strategy.id>
-        <a href="{% url 'view_national_objective' pk=strategy.objective.pk %}">{{ strategy.objective.code }}</a>
+        <a href="{% url 'view_national_objective' pk=strategy.objective.pk %}">
+          {{ strategy.objective.code }}</a>
       </td>
       {% with strategy.relevant_target as target %}
       <td>
-        <a href="{% url 'edit_goal' code=target.get_parent_goal.code %}">{{ target.get_parent_goal.code|title }}</a>
+        <a href="{% url 'edit_goal' code=target.get_parent_goal.code %}">
+          {{ target.get_parent_goal.code|title }}</a>
       </td>
       <td>
          <a href="">{{ target.code }} </a>

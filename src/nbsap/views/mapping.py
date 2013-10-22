@@ -20,8 +20,7 @@ def edit_national_strategy(request, pk=None):
         template = 'mapping/add_national_strategy.html'
 
     if request.method == 'POST':
-        form = NationalStrategyForm(request.POST,
-                                    strategy=strategy)
+        form = NationalStrategyForm(request.POST, strategy=strategy)
         if form.is_valid():
             form.save()
             if pk:
@@ -29,14 +28,9 @@ def edit_national_strategy(request, pk=None):
             else:
                 messages.success(request, _('Mapping successfully added.') + "")
             return redirect('list_national_strategy')
-    else:
-        form = NationalStrategyForm(strategy=strategy)
-    return render_to_response(template,
-                              context_instance=RequestContext(request, {
-                                'form': form,
-                                'strategy': strategy,
-                              })
-    )
+
+    form = NationalStrategyForm(strategy=strategy)
+    return render(request, template, {'form': form, 'strategy': strategy})
 
 
 @auth_required
@@ -50,9 +44,6 @@ def delete_national_strategy(request, strategy=None):
 @auth_required
 def list_national_strategy(request):
     strategies = models.NationalStrategy.objects.all()
-
-    return render_to_response('mapping/list_national_strategy.html',
-                              context_instance=RequestContext(request, {
-                                'strategies': strategies,
-                                })
-    )
+    return render(request, 'mapping/list_national_strategy.html',{
+        'strategies': strategies
+    })

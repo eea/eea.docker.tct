@@ -31,7 +31,7 @@ class NationalActionsTest(BaseWebTest):
         resp = self.app.get(url, user='staff')
         self.assertEqual(200, resp.status_code)
 
-        form = resp.forms[3]
+        form = resp.forms['national-objective-add']
         self.populate_fields(form, objective)
         form.submit().follow()
         self.assertObjectInDatabase('NationalObjective',
