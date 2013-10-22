@@ -159,4 +159,5 @@ class ObjectivesTest(BaseWebTest):
         self.assertEqual(1, len(actions))
         action_title = actions.find('h2')
         self.assertEqual(1, len(action_title))
-        self.assertEqual('Action 1', action_title[0].text_content())
+        self.assertIn('Action 1', action_title[0].text_content())
+        self.assertIn('(action1_title_en)', action_title[0].text_content())
