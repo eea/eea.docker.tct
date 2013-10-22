@@ -45,7 +45,7 @@
       <td>
         <a href="{% url 'view_national_objective' pk=objective.pk %}"
            title="{% trans 'Objective' %} {{ objective.code }}">
-          {{ objective.title }}</a>
+          {{ objective.title|default:objective.code }}</a>
       </td>
     </tr>
   {% endfor %}
