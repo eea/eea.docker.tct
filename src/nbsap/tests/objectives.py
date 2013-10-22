@@ -7,10 +7,103 @@ from .factories import NationalObjectiveFactory, NationalActionFactory
 from .factories import StaffUserFactory
 
 
-class ObjectivesTest(BaseWebTest):
+class NationalObjectiveTest(BaseWebTest):
 
     def setUp(self):
         StaffUserFactory()
+
+    def test_list_national_objectives(self):
+        nat_obj = NationalObjectiveFactory()
+        resp = self.app.get(reverse('list_national_objectives'), user='staff')
+        self.assertEqual(200, resp.status_code)
+        trs = resp.pyquery('.table tr')
+        self.assertEqual(1, len(trs))
+        self.assertIn(nat_obj.title, trs[0].text_content())
+
+    def test_add_national_objective(self):
+        nat_obj = NationalObjectiveFactory.build()
+        data = {
+            'language': 'en',
+            'title': nat_obj.title_en,
+            'description': nat_obj.description_en,
+        }
+        url = reverse('edit_national_objective')
+        resp = self.app.get(url, user='staff')
+        self.assertEqual(200, resp.status_code)
+
+        form = resp.forms['national-objective-add']
+        self.populate_fields(form, data)
+        form.submit().follow()
+        self.assertObjectInDatabase('NationalObjective', pk=1,
+                                    title_en=nat_obj.title_en,
+                                    description_en=nat_obj.description_en)
+
+    def test_add_national_objective_with_encodings(self):
+        nat_obj = NationalObjectiveFactory.build()
+        data = {
+            'language': 'en',
+            'title': nat_obj.title_en,
+            'description': 'ĂFKĐȘKŁFKOKR–KF:ŁĂȘĐKF–KFÂŁ:FJK–FFŁKJȘĂŁF',
+        }
+        url = reverse('edit_national_objective')
+        resp = self.app.get(url, user='staff')
+        self.assertEqual(200, resp.status_code)
+
+        form = resp.forms['national-objective-add']
+        self.populate_fields(form, data)
+        form.submit().follow()
+        self.assertObjectInDatabase('NationalObjective', pk=1,
+                                    title_en=nat_obj.title_en,
+                                    description_en=data['description'])
+
+    def test_edit_national_objective(self):
+        nat_obj = NationalObjectiveFactory()
+        data = {
+            'language': 'en',
+            'title': 'Title edited',
+            'description': 'Description edited',
+        }
+        url = reverse('edit_national_objective', kwargs={'pk': nat_obj.pk})
+        resp = self.app.get(url, user='staff')
+        self.assertEqual(200, resp.status_code)
+
+        form = resp.forms['national-objective-edit']
+        self.populate_fields(form, data)
+        form.submit().follow()
+        self.assertObjectInDatabase('NationalObjective', pk=1,
+                                    title_en=data['title'],
+                                    description_en=data['description'])
+
+    def test_edit_national_objective_with_encodings(self):
+        nat_obj = NationalObjectiveFactory()
+        data = {
+            'language': 'en',
+            'title': 'Title edited',
+            'description': 'ĂFKĐȘKŁFKOKR–KF:ŁĂȘĐKF–KFÂŁ:FJK–FFŁKJȘĂŁF',
+        }
+        url = reverse('edit_national_objective', kwargs={'pk': nat_obj.pk})
+        resp = self.app.get(url, user='staff')
+        self.assertEqual(200, resp.status_code)
+
+        form = resp.forms['national-objective-edit']
+        self.populate_fields(form, data)
+        form.submit().follow()
+        self.assertObjectInDatabase('NationalObjective', pk=1,
+                                    title_en=data['title'],
+                                    description_en=data['description'])
+
+    def test_delete_national_objective(self):
+        nat_obj = NationalObjectiveFactory()
+        url = reverse('delete_national_objective', kwargs={'pk': nat_obj.pk})
+        resp = self.app.get(url, user='staff').follow()
+        with self.assertRaises(AssertionError):
+            self.assertObjectInDatabase('NationalObjective', pk=1)
+
+
+class ObjectivesTest(BaseWebTest):
+
+    def setUp(self):
+        NationalActionFactory.reset_sequence()
 
     def test_list_objectives(self):
         nat_obj = NationalObjectiveFactory()
