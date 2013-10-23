@@ -144,3 +144,40 @@ i18n deployment
 
 2.3 Restart testing server::
     ./instance/manage.py runserver
+
+
+Create new nbsap instance
+=========================
+
+1. Create instance folder::
+    sudo su - edw
+    cd /var/local/nbsap-django/
+    mkdir instance_<country>
+
+2. Copy config files::
+    cp /var/local/nbsap-django/local_settings.py.example /var/local/nbsap-django/instance_<country>/local_settings.py
+    cp /var/local/nbsap-django/manage.py /var/local/nbsap-django/instance_<country>/manage.py
+    # edit database info in local_settings.py
+    vim /var/local/nbsap-django/instance_<country>/manage.py
+
+3. Create database::
+    mysql -u root -p
+    mysql> create database nbsap_<country> DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+    mysql> grant all on nbsap_<country>.* to nbsap@localhost identified by 'nbsap';
+
+4. Create tables::
+    # activate virtualenv
+    . /var/local/nbsap-django/sandbox/bin/activate
+    ./var/local/nbsap-django/instance_<country>/manage.py syncdb
+    ./var/local/nbsap-django/instance_<country>/manage.py migrate
+
+5. Start process using supervisor::
+    # edit supervisord.conf based on /var/local/nbsap-django/supervisord.conf.sample
+    vim /var/local/nbsap-django/sandbox/supervisord.conf
+    supervisorctl
+    supervisorctl> reread
+    supervisorctl> update
+
+6. Configure apache::
+    # edit apache conf file as root
+    vim /etc/httpd/conf.d/nbsap.conf
