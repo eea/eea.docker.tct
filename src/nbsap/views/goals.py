@@ -30,6 +30,13 @@ def goals(request, code):
     )
 
 
+def eu_target_nat_strategy_export_preview(request, target_id):
+    target = get_object_or_404(models.AichiTarget, pk=target_id)
+    return render(request, 'objectives/nat_strategy_export_preview.html', {
+        'target': target,
+    })
+
+
 def get_goal_title(request, pk=None):
     if not pk:
         return HttpResponse('Goal not found')

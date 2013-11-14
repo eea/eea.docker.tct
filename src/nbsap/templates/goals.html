@@ -1,4 +1,17 @@
 {% extends 'layout.html' %}
+
+
+{% block extra_head %}
+  <style type="text/css">
+    .nat_strategy_export_container {
+      position: absolute;
+      right: 16px;
+      top: 14px;
+    }
+  </style>
+{% endblock %}
+
+
 {% block content %}
 
 {% load i18n %}
@@ -78,9 +91,14 @@
       </div>
       {% endif %}
 
-      {%if target.relevant_target_national_strategy.all %}
+      {% if target.relevant_target_national_strategy.all %}
       <label>{% trans "Mapping with National Strategy" %}</label>
-      <div class="well">
+      <div class="well" style="position: relative;">
+        <div class="nat_strategy_export_container">
+          <a href="{% url 'nat_strategy_export_preview' target_id=target.pk %}"
+             data-target="#nat_strategy_export_modal"
+             data-toggle="modal"
+             class="btn btn-small">{% trans "Export" %}</a></div>
         <ul>
           {% for strategy in target.relevant_target_national_strategy.all %}
           <li>
@@ -153,6 +171,19 @@
   </div>
 </div>
 {% endblock %}
+
+
+{% block footer %}
+
+  <div tabindex="-1" class="modal hide" id="nat_strategy_export_modal" aria-hidden="true">
+    <div style="padding-bottom: 5px;" class="modal-body"></div>
+    <div class="modal-footer">
+      <a aria-hidden="true" class="btn" data-dismiss="modal">Close</a>
+    </div>
+  </div>
+
+{% endblock %}
+
 
 {% block scripts %}
 <script>

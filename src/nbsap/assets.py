@@ -7,9 +7,7 @@ JS_ASSETS = (
     'js/chosen.jquery.js',
     'js/jquery.utils.js',
     'js/uri.js',
-    'bootstrap/js/bootstrap-collapse.js',
-    'bootstrap/js/bootstrap-dropdown.js',
-    'bootstrap/js/bootstrap-tooltip.js',
+    'bootstrap/js/bootstrap.js',
 )
 
 JS_ADMIN_ASSETS = (
