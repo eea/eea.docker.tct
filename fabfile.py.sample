@@ -5,6 +5,61 @@ from fabric.api import *
 from fabric.contrib.files import exists
 
 
+COUNTRIES = [('andorra', 'Andorra'),
+ ('albania', 'Albania'),
+ ('armenia', 'Armenia'),
+ ('austria', 'Austria'),
+ ('azerbaijan', 'Azerbaijan'),
+ ('bosnia_herzegovina', 'Bosnia'),
+ ('belgium', 'Belgium'),
+ ('bulgaria', 'Bulgaria'),
+ ('belarus', 'Belarus'),
+ ('switzerland', 'Switzerland'),
+ ('cyprus', 'Cyprus'),
+ ('czech', 'Czech'),
+ ('germany', 'Germany'),
+ ('european_community', 'European'),
+ ('estonia', 'Estonia'),
+ ('spain', 'Spain'),
+ ('finland', 'Finland'),
+ ('france', 'France'),
+ ('united_kingdom', 'United'),
+ ('georgia', 'Georgia'),
+ ('gibraltar', 'Gibraltar'),
+ ('greece', 'Greece'),
+ ('croatia', 'Croatia'),
+ ('hungary', 'Hungary'),
+ ('ireland', 'Ireland'),
+ ('iceland', 'Iceland'),
+ ('italy', 'Italy'),
+ ('kyrgyzstan', 'Kyrgyzstan'),
+ ('kazakhstan', 'Kazakhstan'),
+ ('liechtenstein', 'Liechtenstein'),
+ ('lithuania', 'Lithuania'),
+ ('luxembourg', 'Luxembourg'),
+ ('latvia', 'Latvia'),
+ ('monaco', 'Monaco'),
+ ('moldova', 'Moldova'),
+ ('montenegro', 'Montenegro'),
+ ('macedonia', 'Macedonia'),
+ ('malta', 'Malta'),
+ ('norway', 'Norway'),
+ ('poland', 'Poland'),
+ ('portugal', 'Portugal'),
+ ('romania', 'Romania'),
+ ('serbia', 'Serbia'),
+ ('russia', 'Russia'),
+ ('sweden', 'Sweden'),
+ ('slovenia', 'Slovenia'),
+ ('slovakia', 'Slovakia'),
+ ('tajikistan', 'Tajikistan'),
+ ('turkmenistan', 'Turkmenistan'),
+ ('turkey', 'Turkey'),
+ ('ukraine', 'Ukraine'),
+ ('uzbekistan', 'Uzbekistan'),
+ ('kosovo', 'Kosovo')]
+
+
 env['nbsap_target_defs'] = {
     'staging': {
         'host_string': 'user@host',
@@ -73,3 +128,21 @@ def restart():
 @choose_target
 def status():
     supervisor(env['nbsap_repo'],"status")
+
+
+@task
+@choose_target
+def syncdb():
+    data = dict(env)
+    for c in COUNTRIES:
+        data['country'] = c[0]
+        run("%(nbsap_sandbox)s/bin/python "
+            "%(nbsap_repo)s/instance_%(country)s/manage.py syncdb"
+            % data)
+        run("%(nbsap_sandbox)s/bin/python "
+            "%(nbsap_repo)s/instance_%(country)s/manage.py migrate"
+            % data)
+        run("%(nbsap_sandbox)s/bin/python "
+            "%(nbsap_repo)s/instance_%(country)s/manage.py load_fixtures"
+            % data)
+
