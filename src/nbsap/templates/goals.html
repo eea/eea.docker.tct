@@ -1,5 +1,6 @@
 {% extends 'layout.html' %}
-
+{% load i18n %}
+{% load utils %}
 
 {% block extra_head %}
   <style type="text/css">
@@ -8,14 +9,17 @@
       right: 16px;
       top: 14px;
     }
+    .modal-inside-footer {
+      position: absolute;
+      margin-left: -16px;
+      width: 531px;
+      bottom: 0;
+    }
   </style>
 {% endblock %}
 
 
 {% block content %}
-
-{% load i18n %}
-{% load utils %}
 
 {% include 'nav_tabs.html' %}
 
@@ -177,9 +181,6 @@
 
   <div tabindex="-1" class="modal hide" id="nat_strategy_export_modal" aria-hidden="true">
     <div style="padding-bottom: 5px;" class="modal-body"></div>
-    <div class="modal-footer">
-      <a aria-hidden="true" class="btn" data-dismiss="modal">Close</a>
-    </div>
   </div>
 
 {% endblock %}

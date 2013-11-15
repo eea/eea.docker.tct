@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     url(r'^eu_targets$', 'nbsap.views.eu_targets', {'code': '1'}, name='eu_targets'),
     url(r'^eu_targets/(?P<code>[\w\-]+)$', 'nbsap.views.eu_targets', name='eu_targets'),
     url(r'^eu_targets/(?P<target_id>[\w\-]+)/objectives/export/preview/$', 'nbsap.views.eu_target_nat_strategy_export_preview', name='nat_strategy_export_preview'),
+    url(r'^eu_targets/(?P<target_id>[\w\-]+)/objectives/export/$', 'nbsap.views.eu_target_nat_strategy_export', name='nat_strategy_export'),
 
     url(r'^indicators/$', 'nbsap.views.indicators', name='indicators'),
 

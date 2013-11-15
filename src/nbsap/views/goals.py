@@ -1,17 +1,18 @@
+import json
+from cStringIO import StringIO
+
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.template import Template, context, RequestContext
+from django.template.loader import render_to_string
 from django.shortcuts import render_to_response
-from auth import auth_required
 from django.contrib import messages
 
-import json
-
 from nbsap import models
-from nbsap.forms import AichiGoalForm
-
 from indicators import get_indicators_pages
+from auth import auth_required
+from nbsap.forms import AichiGoalForm
 
 
 def goals(request, code):
@@ -35,6 +36,17 @@ def eu_target_nat_strategy_export_preview(request, target_id):
     return render(request, 'objectives/nat_strategy_export_preview.html', {
         'target': target,
     })
+
+
+def eu_target_nat_strategy_export(request, target_id):
+    target = get_object_or_404(models.AichiTarget, pk=target_id)
+    template = 'objectives/nat_strategy_export_preview.html'
+    contents = StringIO(render_to_string(template, {
+        'target': target, 'download': True
+    }))
+    resp = HttpResponse(contents.getvalue(), content_type='application/msword')
+    resp['Content-Disposition'] = 'attachment; filename=nat_strategy.doc'
+    return resp
 
 
 def get_goal_title(request, pk=None):

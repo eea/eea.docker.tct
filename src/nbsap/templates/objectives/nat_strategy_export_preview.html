@@ -3,6 +3,7 @@
 
 {% block content %}
 
+  <div class="modal-inside-body">
   {% if target.relevant_target_national_strategy.all %}
     {% for strategy in target.relevant_target_national_strategy.all %}
       <h3>{% trans "Objective" %} {{ strategy.objective.code }}</h3>
@@ -11,6 +12,15 @@
       </div>
     {% endfor %}
 
+  {% endif %}
+  </div>
+
+  {% if not download %}
+  <div class="modal-footer modal-inside-footer">
+    <a href="{% url 'nat_strategy_export' target_id=target.id %}" class="btn btn-primary">
+      Download</a>
+    <a class="btn" data-dismiss="modal">Close</a>
+  </div>
   {% endif %}
 
 {% endblock %}
