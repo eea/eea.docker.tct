@@ -8,6 +8,7 @@ JS_ASSETS = (
     'js/jquery.utils.js',
     'js/uri.js',
     'bootstrap/js/bootstrap.js',
+    'js/main.js',
 )
 
 JS_ADMIN_ASSETS = (
