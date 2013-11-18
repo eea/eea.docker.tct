@@ -140,9 +140,9 @@ def syncdb():
             "%(nbsap_repo)s/instance_%(country)s/manage.py syncdb"
             % data)
         run("%(nbsap_sandbox)s/bin/python "
-            "%(nbsap_repo)s/instance_%(country)s/manage.py migrate"
+            "%(nbsap_repo)s/instance_%(country)s/manage.py load_fixtures"
             % data)
         run("%(nbsap_sandbox)s/bin/python "
-            "%(nbsap_repo)s/instance_%(country)s/manage.py load_fixtures"
+            "%(nbsap_repo)s/instance_%(country)s/manage.py loaddata users"
             % data)
 
