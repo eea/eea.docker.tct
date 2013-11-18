@@ -9,11 +9,10 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         for fixture in ('scales', 'aichi_links', 'aichi_indicators',
-                        'aichi_targets', 'aichi_goals'):
+                        'aichi_targets', 'aichi_goals', 'users'):
             call_command('loaddata', fixture)
 
         if settings.EU_STRATEGY:
             for fixture in ('eu_actions', 'eu_targets', 'eu_aichi_mapping',
-                            'eu_indicators', 'eu_aichi_indicators_mapping',
-                            'users'):
+                            'eu_indicators', 'eu_aichi_indicators_mapping',):
                 call_command('loaddata', fixture)
