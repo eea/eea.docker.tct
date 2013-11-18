@@ -1,88 +1,121 @@
 [
-  {
-      "pk" : 1,
-      "model" : "nbsap.eutarget",
-      "fields" : {
-          "code" : "1",
-          "title_en" : "Fully implement the Birds and Habitats Directives",
-          "description_en" : "To halt the deterioration in the status of all species and habitats covered by EU nature legislation and achieve a significant and measurable improvement in their status so that, by 2020, compared to current assessments: (i) 100% more habitat assessments and 50% more species assessments under the Habitats Directive show an improved conservation status; and (ii) 50% more species assessments under the Birds Directive show a secure or improved status.",
-          "actions" : [
-              1,
-              2,
-              3,
-              4
-          ]
-      }
-  },
-  {
-      "pk" : 2,
-      "model" : "nbsap.eutarget",
-      "fields" : {
-          "code" : "2",
-          "title_en" : "Maintain and restore ecosystems and their services",
-          "description_en" : "By 2020, ecosystems and their services are maintained and enhanced by establishing green infrastructure and restoring at least 15 % of degraded ecosystems.",
-          "actions" : [
-              14,
-              16,
-              19
-          ]
-      }
-  },
-  {
-      "pk" : 3,
-      "model" : "nbsap.eutarget",
-      "fields" : {
-          "code" : "3",
-          "title_en" : "Increase the contribution of agriculture and forestry to maintaining and enhancing biodiversity",
-          "description_en" : "3A) Agriculture: By 2020, maximise areas under agriculture across grasslands, arable land and permanent crops that are covered by biodiversity-related measures under the CAP so as to ensure the conservation of biodiversity and to bring about a measurable improvement(1) in the conservation status of species and habitats that depend on or are affected by agriculture and in the provision of ecosystem services as compared to the EU2010 Baseline, thus contributing to enhance sustainable management.\r\n\r\n3B) Forests: By 2020, Forest Management Plans or equivalent instruments, in line with Sustainable Forest Management (SFM)30, are in place for all forests that are publicly owned and for forest holdings above a certain size(2) (to be defined by the Member States or regions and communicated in their Rural Development Programmes) that receive funding under the EU Rural Development Policy so as to bring about a measurable improvement(1) in the conservation status of species and habitats that depend on or are affected by forestry and in the provision of related ecosystem services as compared to the EU 2010 Baseline.\r\n\r\n(1) For both targets, improvement is to be measured against the quantified enhancement targets for the conservation status of species and habitats of EU interest in Target 1 and the restoration of degraded ecosystems under target 2. (2) For smaller forest holdings, Member States may provide additional incentives to encourage the adoption of Management Plans or equivalent instruments that are in line with SFM.",
-          "actions" : [
-              22,
-              25,
-              28,
-              30,
-              33
-          ]
-      }
-  },
-  {
-      "pk" : 4,
-      "model" : "nbsap.eutarget",
-      "fields" : {
-          "code" : "4",
-          "title_en" : "Ensure the sustainable use of fisheries resources",
-          "description_en" : "Achieve Maximum Sustainable Yield (MSY) by 2015. Achieve a population age and size distribution indicative of a healthy stock, through fisheries management with no significant adverse impacts on other stocks, species and ecosystems, in support of achieving Good Environmental Status by 2020, as required under the Marine Strategy Framework Directive",
-          "actions" : [
-              35,
-              39
-          ]
-      }
-  },
-  {
-      "pk" : 5,
-      "model" : "nbsap.eutarget",
-      "fields" : {
-          "code" : "5",
-          "title_en" : "Combat invasive alien species",
-          "description_en" : "By 2020, Invasive Alien Species (IAS) and their pathways are identified and prioritised, priority species are controlled or eradicated, and pathways are managed to prevent the introduction and establishment of new IAS.",
-          "actions" : [
-              42,
-              44
-          ]
-      }
-  },
-  {
-      "pk" : 6,
-      "model" : "nbsap.eutarget",
-      "fields" : {
-          "code" : "6",
-          "title_en" : "Help avert global biodiversity loss",
-          "description_en" : "By 2020, the EU has stepped up its contribution to averting global biodiversity loss.",
-          "actions" : [
-              46,
-              50,
-              53,
-              55
-          ]
-      }
-  }
+{
+    "pk": 1,
+    "model": "nbsap.eutarget",
+    "fields": {
+        "code": "1",
+        "title_en": "Fully implement the Birds and Habitats Directives",
+        "description_en": "To halt the deterioration in the status of all species and habitats covered by EU nature legislation and achieve a significant and measurable improvement in their status so that, by 2020, compared to current assessments: (i) 100% more habitat assessments and 50% more species assessments under the Habitats Directive show an improved conservation status; and (ii) 50% more species assessments under the Birds Directive show a secure or improved status.",
+        "actions": [
+            1,
+            2,
+            3,
+            4
+        ],
+        "indicators": [
+            1
+        ]
+    }
+},
+{
+    "pk": 2,
+    "model": "nbsap.eutarget",
+    "fields": {
+        "code": "2",
+        "title_en": "Maintain and restore ecosystems and their services",
+        "description_en": "By 2020, ecosystems and their services are maintained and enhanced by establishing green infrastructure and restoring at least 15 % of degraded ecosystems.",
+        "actions": [
+            14,
+            16,
+            19
+        ],
+        "indicators": [
+            4,
+            7,
+            3,
+            1,
+            6,
+            5
+        ]
+    }
+},
+{
+    "pk": 3,
+    "model": "nbsap.eutarget",
+    "fields": {
+        "code": "3",
+        "title_en": "Increase the contribution of agriculture and forestry to maintaining and enhancing biodiversity",
+        "description_en": "3A) Agriculture: By 2020, maximise areas under agriculture across grasslands, arable land and permanent crops that are covered by biodiversity-related measures under the CAP so as to ensure the conservation of biodiversity and to bring about a measurable improvement(1) in the conservation status of species and habitats that depend on or are affected by agriculture and in the provision of ecosystem services as compared to the EU2010 Baseline, thus contributing to enhance sustainable management.\r\n\r\n3B) Forests: By 2020, Forest Management Plans or equivalent instruments, in line with Sustainable Forest Management (SFM)30, are in place for all forests that are publicly owned and for forest holdings above a certain size(2) (to be defined by the Member States or regions and communicated in their Rural Development Programmes) that receive funding under the EU Rural Development Policy so as to bring about a measurable improvement(1) in the conservation status of species and habitats that depend on or are affected by forestry and in the provision of related ecosystem services as compared to the EU 2010 Baseline.\r\n\r\n(1) For both targets, improvement is to be measured against the quantified enhancement targets for the conservation status of species and habitats of EU interest in Target 1 and the restoration of degraded ecosystems under target 2. (2) For smaller forest holdings, Member States may provide additional incentives to encourage the adoption of Management Plans or equivalent instruments that are in line with SFM.",
+        "actions": [
+            22,
+            25,
+            28,
+            30,
+            33
+        ],
+        "indicators": [
+            9,
+            13,
+            3,
+            12,
+            11,
+            45,
+            10,
+            44
+        ]
+    }
+},
+{
+    "pk": 4,
+    "model": "nbsap.eutarget",
+    "fields": {
+        "code": "4",
+        "title_en": "Ensure the sustainable use of fisheries resources",
+        "description_en": "Achieve Maximum Sustainable Yield (MSY) by 2015. Achieve a population age and size distribution indicative of a healthy stock, through fisheries management with no significant adverse impacts on other stocks, species and ecosystems, in support of achieving Good Environmental Status by 2020, as required under the Marine Strategy Framework Directive",
+        "actions": [
+            35,
+            39
+        ],
+        "indicators": [
+            45,
+            10
+        ]
+    }
+},
+{
+    "pk": 5,
+    "model": "nbsap.eutarget",
+    "fields": {
+        "code": "5",
+        "title_en": "Combat invasive alien species",
+        "description_en": "By 2020, Invasive Alien Species (IAS) and their pathways are identified and prioritised, priority species are controlled or eradicated, and pathways are managed to prevent the introduction and establishment of new IAS.",
+        "actions": [
+            42,
+            44
+        ],
+        "indicators": [
+            15,
+            14
+        ]
+    }
+},
+{
+    "pk": 6,
+    "model": "nbsap.eutarget",
+    "fields": {
+        "code": "6",
+        "title_en": "Help avert global biodiversity loss",
+        "description_en": "By 2020, the EU has stepped up its contribution to averting global biodiversity loss.",
+        "actions": [
+            46,
+            50,
+            53,
+            55
+        ],
+        "indicators": [
+            17,
+            16
+        ]
+    }
+}
 ]
