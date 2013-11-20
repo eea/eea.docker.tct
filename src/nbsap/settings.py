@@ -215,6 +215,10 @@ CSS_ASSETS = (
     'css/style.css',
 )
 
+
+ASSETS_ROOT = '/var/local/nbsap-django/src/nbsap/static'
+
+
 try:
     from local_settings import *
 except ImportError:
@@ -222,6 +226,7 @@ except ImportError:
 
 if not DEBUG:
     MIDDLEWARE_CLASSES += ('raven.contrib.django.middleware.Sentry404CatchMiddleware',)
+    SENTRY_DSN = 'http://e58d6f13a36d419d81c1d1e44e5e2519:d67d512c5f4343c0aebcdca30bc64871@sentry.mojito.edw.ro/16'
 
 if 'test' in sys.argv:
     try:

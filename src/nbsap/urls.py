@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     # homepage URLs
     url(r'^$', 'nbsap.views.goals', {'code': 'a'}, name='goals'),
     url(r'^goals/(?P<code>[\w\-]+)$', 'nbsap.views.goals', name='goals'),
+    url(r'^crashme$', 'nbsap.views.crashme', name='crashme'),
 
     url(r'^implementation$', 'nbsap.views.implementation', name='implementation'),
     url(r'^implementation/(?P<code>[\w\-]+)$', 'nbsap.views.implementation', name='implementation'),
