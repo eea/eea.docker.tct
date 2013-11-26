@@ -36,18 +36,21 @@
     <a class="btn btn-danger edit btn-small">
        <i class="icon-white icon-trash"></i> {% trans "Delete" %}</a>
   </div>
+  {% if objective.children.all %}
+    <a class="btn btn-small" href="#subobjectives"><i class="icon-arrow-down"></i>{{ objective.children.all|length }} {% trans "Sub-objectives" %} </a>
+  {% endif %}
 </div>
 
 <div class="admin-obj-description">
   {{ objective.description|safe }}
 </div>
 
-<div class="property_list">
+<div class="property_list" id="subobjectives">
   <table class="table table-bordered table-striped">
 
     <thead>
       <th class="span1">{% trans "Code" %}</th>
-      <th>{% trans "Objectives" %}</th>
+      <th>{% trans "Sub-objectives" %}</th>
     </thead>
 
     <tbody>
