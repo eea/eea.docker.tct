@@ -1000,3 +1000,15 @@ body .obj-id {
     float: left;
     clear: left;
 }
+
+.demosite {
+    position: relative;
+    background: #ddd;
+    color: #333,
+}
+
+.demosite p {
+    font-size: 14px;
+    text-align: center;
+    font-weight:bold;
+}
