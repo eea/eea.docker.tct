@@ -5,3 +5,4 @@ from eu_strategy import *
 from mapping import *
 from actions import *
 from auth import *
+from .page import *

@@ -18,4 +18,8 @@
     <a href="{% url 'list_national_strategy' %}">{% trans "Mapping" %}</a>
   </li>
 
+  <li class="{% active request '^/administration/pages' %}">
+    <a href="{% url 'admin_pages' %}">{% trans "Intro Pages" %}</a>
+  </li>
+
 </ul>

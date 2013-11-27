@@ -151,6 +151,9 @@ urlpatterns = patterns('',
             'nbsap.views.edit_goal',
             name='edit_goal'),
 
+    url(r'^administration/pages$', 'nbsap.views.admin_pages', name='admin_pages'),
+    url(r'^administration/page/(?P<handle>[\w\-]+)/edit$', 'nbsap.views.admin_page', name='admin_page'),
+
 )
 
 # Django Rosetta support for translation
