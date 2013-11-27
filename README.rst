@@ -173,6 +173,7 @@ Create new nbsap instance
 5. Start process using supervisor::
     # edit supervisord.conf based on /var/local/nbsap-django/supervisord.conf.sample
     vim /var/local/nbsap-django/sandbox/supervisord.conf
+    supervisord
     supervisorctl
     supervisorctl> reread
     supervisorctl> update
