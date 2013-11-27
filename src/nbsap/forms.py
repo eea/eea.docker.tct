@@ -10,9 +10,11 @@ from chosen import forms as chosenforms
 
 from nbsap.models import AichiGoal, AichiTarget, EuAction, EuTarget
 from nbsap.models import NationalStrategy, NationalObjective, NationalAction
+from nbsap.models import NbsapPage
 
 
 class NationalObjectiveForm(forms.Form):
+
     language = forms.ChoiceField(choices=settings.LANGUAGES)
     title = forms.CharField(widget=widgets.Textarea)
     description = forms.CharField(
@@ -233,3 +235,30 @@ class NationalStrategyForm(forms.Form):
 
         strategy.save()
         return strategy
+
+
+class NbsapPageForm(forms.Form):
+
+    lang = forms.ChoiceField(choices=settings.LANGUAGES)
+    title = forms.CharField()
+    description = forms.CharField(required=False)
+
+    def __init__(self, *args, **kwargs):
+        lang = kwargs.pop('lang', None)
+        self.page = kwargs.pop('page')
+        super(NbsapPageForm, self).__init__(*args, **kwargs)
+
+        title = getattr(self.page, 'title_%s' % lang, None)
+        description = getattr(self.page, 'description_%s' % lang, None)
+
+        self.fields['title'].initial = title
+        self.fields['description'].initial = description
+        self.fields['lang'].initial = lang
+
+    def save(self):
+        lang = self.cleaned_data['lang']
+        setattr(self.page, 'title_%s' % lang, self.cleaned_data['title'])
+        setattr(self.page, 'description_%s' % lang, self.cleaned_data['description'])
+        self.page.save()
+        return self.page
+

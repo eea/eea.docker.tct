@@ -37,3 +37,6 @@ admin.site.register(EuIndicator, EuIndicatorAdmin)
 class EuTargetAdmin(admin.ModelAdmin):
     list_display = ('__unicode__', 'get_indicators')
 admin.site.register(EuTarget, EuTargetAdmin)
+
+
+admin.site.register(NbsapPage)

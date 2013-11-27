@@ -414,4 +414,21 @@ class NationalStrategy(models.Model):
     class Meta:
         verbose_name_plural = ' Mappings: National strategy to AICHI&EU'
 
+
+class NbsapPage(models.Model):
+
+    __metaclass__ = Translatable
+
+    handle = models.CharField(max_length=32)
+    title = models.CharField(max_length=128, verbose_name='Title')
+    body = models.TextField(blank=True, verbose_name='Body')
+
+    class Meta:
+        translate = ('title', 'body',)
+
+    def __unicode__(self):
+        return self.handle
+
+
+
 pre_save.connect(NationalObjective.pre_save_objective_code, sender=NationalObjective)
