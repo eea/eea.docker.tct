@@ -39,6 +39,14 @@
       </div>
     </div>
 
+    <div class="control-group">
+      <label class="control-label" for="{{ form.description.auto_id }}">
+        {{ form.description.label }}</label>
+      <div class="controls">
+        {{ form.description }}
+      </div>
+    </div>
+
     <div class="form-actions">
       {% url 'admin_pages' as page_url %}
       <button type="submit" class="btn btn-primary">Save</button>

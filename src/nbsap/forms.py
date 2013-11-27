@@ -241,7 +241,7 @@ class NbsapPageForm(forms.Form):
 
     lang = forms.ChoiceField(choices=settings.LANGUAGES)
     title = forms.CharField()
-    description = forms.CharField(required=False)
+    description = forms.CharField(required=False, widget=widgets.Textarea)
 
     def __init__(self, *args, **kwargs):
         lang = kwargs.pop('lang', None)
