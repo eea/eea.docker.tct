@@ -45,7 +45,7 @@
       {% else %}
 
       <ul class="span2">
-        {% for objective in current_objective.objectives_tree %}
+        {% for objective in current_objective.objectives_tree|sort_by_code %}
         {% if forloop.counter0|divisibleby:"2" and not forloop.first %}
       </ul>
       <ul class="span2">
