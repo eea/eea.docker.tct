@@ -1001,14 +1001,8 @@ body .obj-id {
     clear: left;
 }
 
-.demosite {
+.demosite .alert {
     position: relative;
-    background: #ddd;
-    color: #333,
-}
-
-.demosite p {
-    font-size: 14px;
     text-align: center;
-    font-weight:bold;
+    margin-bottom: 0px;
 }

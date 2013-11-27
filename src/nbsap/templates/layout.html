@@ -24,7 +24,10 @@
     <div class="navbar">
       <div class="navbar-inner">
         <div class="demosite">
-            <p>Attention! This is a demo site thus not yet official content.</p>
+            <div class="alert">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Attention! </strong>This is a demo site thus not yet official content.
+            </div>
         </div>
         <div class="container">
           <a class="brand" href="{% url 'goals' %}">{% trans SITE_HEADER %}</a>
