@@ -21,8 +21,6 @@
 
 <h1 class="small">{% trans "Add objective" %}</h1>
 
-<hr />
-
 {% if form.errors %}
   <p style="color: red;">
     {% blocktrans with form.errors|pluralize as errors %}Please correct the error {{ errors }} below.{% endblocktrans %}
