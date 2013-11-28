@@ -21,8 +21,6 @@
 
 <h1 class="small">{% trans "Add objective" %}</h1>
 
-<hr />
-
 {% if form.errors %}
   <p style="color: red;">
     {% blocktrans with form.errors|pluralize as errors %}Please correct the error {{ errors }} below.{% endblocktrans %}
@@ -30,6 +28,16 @@
 {% endif %}
 
 <form action="" method="post" id="national-objective-add">
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
+    {% if parent %}
+        {% url 'view_national_objective' pk=parent.pk as cancel_url %}
+    {% else %}
+        {% url 'list_national_objectives' as cancel_url %}
+    {% endif %}
+    <a href="{{ cancel_url }}" class="btn" type="button">{% trans "Cancel" %}</a>
+  </div>
 
   <div class="control-group">
     <label class="control-label" for="language">{% trans "Language" %}</label>

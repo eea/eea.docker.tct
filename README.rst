@@ -39,7 +39,7 @@ NBSAP Quick Installation Guide
 
 1. Clone the repository::
 
-    git clone git@mojito.edw.ro:nbsap.git nbsap
+    git clone git@github.com:eea/nbsap.git nbsap
     cd nbsap
 
 
@@ -58,7 +58,7 @@ NBSAP Quick Installation Guide
 
 
 4. Setup local-settings.py::
-   Assuming the root of your project is ROOT_PROJECT, copy the follwing file ROOT_PROJECT/instance/local_settings.py.example to ROOT_PROJECT/instance/local_settings.py
+   Assuming the root of your project is ROOT_PROJECT, copy the following file ROOT_PROJECT/instance/local_settings.py.example to ROOT_PROJECT/instance/local_settings.py
 
 
 5. Setup database - see section below::
@@ -87,7 +87,6 @@ MySQL Database deployment
 
 2.  Allow Django to automatically create all tables by doing the following::
     ./instance/manage.py syncdb
-    ./instance/manage.py migrate
     ./instance/manage.py load_fixtures
 
 
@@ -174,6 +173,7 @@ Create new nbsap instance
 5. Start process using supervisor::
     # edit supervisord.conf based on /var/local/nbsap-django/supervisord.conf.sample
     vim /var/local/nbsap-django/sandbox/supervisord.conf
+    supervisord
     supervisorctl
     supervisorctl> reread
     supervisorctl> update

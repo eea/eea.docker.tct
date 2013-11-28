@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from django.views.generic import RedirectView
+from django.views.generic import RedirectView, TemplateView
 from django.conf import settings
 
 from django.contrib import admin
@@ -33,6 +33,8 @@ urlpatterns = patterns('',
     # Django generic view classes
     url(r'^favicon\.ico$', RedirectView.as_view(url='/static/favicon.ico')),
 
+    # Disallow search engines to index data
+    url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
 
     # URLs for mapping form
     url(r'^goals/title$',

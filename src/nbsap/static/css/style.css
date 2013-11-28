@@ -1000,3 +1000,15 @@ body .obj-id {
     float: left;
     clear: left;
 }
+
+.demosite .alert {
+    position: relative;
+    text-align: center;
+    margin-bottom: 0px;
+}
+
+.view-objective {
+    margin-top: 15px;
+    font-size: 15px;
+    margin-left: 5px;
+}

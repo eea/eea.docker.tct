@@ -17,37 +17,47 @@
 {% endif %}
 
 <h1 class="small" id="objective-title">{% trans "Objective" %} {{ objective.code }}: {{ objective.title }}</h1>
+<div class="row">
+    <div class="span4">
+        <div class="btn-toolbar">
+          <div class="btn-group">
 
-<div class="btn-toolbar">
-  <div class="btn-group">
+            <a class="btn btn-success btn-small"
+               href="{% url 'list_national_objectives' %}"><i class="icon-white icon-arrow-left"></i> {% trans "Back" %}</a>
 
-    <a class="btn btn-success btn-small"
-       href="{% url 'list_national_objectives' %}"><i class="icon-white icon-arrow-left"></i> {% trans "Back" %}</a>
+            <a class="btn btn-small"
+               href="{% url 'edit_national_objective' parent=objective.pk %}">{% trans "Add sub-objective" %}</a>
 
-    <a class="btn btn-small"
-       href="{% url 'edit_national_objective' parent=objective.pk %}">{% trans "Add sub-objective" %}</a>
+            <a class="btn edit btn-small"
+               href="{% url 'edit_national_action' objective=objective.pk %}">{% trans "Add action" %}</a>
 
-    <a class="btn edit btn-small"
-       href="{% url 'edit_national_action' objective=objective.pk %}">{% trans "Add action" %}</a>
+            <a class="btn edit btn-small"
+               href="{% url 'edit_national_objective' pk=objective.pk %}">{% trans "Edit" %}</a>
 
-    <a class="btn edit btn-small"
-       href="{% url 'edit_national_objective' pk=objective.pk %}">{% trans "Edit" %}</a>
-
-    <a class="btn btn-danger edit btn-small">
-       <i class="icon-white icon-trash"></i> {% trans "Delete" %}</a>
-  </div>
+            <a class="btn btn-danger edit btn-small">
+               <i class="icon-white icon-trash"></i> {% trans "Delete" %}</a>
+          </div>
+        </div>
+    </div>
+    <div class="span4">
+        <div class="view-objective">
+            {% if objective.children.all %}
+              <a href="#subobjectives">(<i class="icon-arrow-down"></i>{{ objective.children.count }} {% trans "sub-objectives" %} )</a>
+            {% endif %}
+        </div>
+    </div>
 </div>
 
 <div class="admin-obj-description">
   {{ objective.description|safe }}
 </div>
 
-<div class="property_list">
+<div class="property_list" id="subobjectives">
   <table class="table table-bordered table-striped">
 
     <thead>
       <th class="span1">{% trans "Code" %}</th>
-      <th>{% trans "Objectives" %}</th>
+      <th>{% trans "Sub-objectives" %}</th>
     </thead>
 
     <tbody>

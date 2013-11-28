@@ -1,7 +1,7 @@
 {% load utils %}
 {% load i18n %}
 
-<a class="pull-right btn btn-mini" href="{% url 'goals' %}">{% trans "Back to AICHI" %}</a>
+<a class="pull-right btn btn-success btn-mini" href="{% url 'goals' %}">{% trans "Exit from administration" %}</a>
 <ul class="nav nav-tabs">
 
   <li class="{% active request '^/administration/goals/[\w\-]+' %}
