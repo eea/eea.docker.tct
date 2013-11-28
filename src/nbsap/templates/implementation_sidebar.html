@@ -1,9 +1,11 @@
 {% load i18n %}
 
 <ul class="nav nav-tabs nav-stacked local-navigation">
+  {% if is_empty_page %}
   <li {% if not current_objective %} class="active" {% endif %}>
     <a href="{% url 'implementation_page' %}">{% trans "Intro" %}</a>
   </li>
+  {% endif %}
   <li style="margin-top: 10px;">
     <label class="nav-header">{% trans "Actions related to" %}</label>
   </li>

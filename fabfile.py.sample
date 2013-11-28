@@ -8,17 +8,24 @@ from fabric.contrib.files import exists
 COUNTRIES = [('andorra', 'Andorra'),
  ('albania', 'Albania'),
  ('armenia', 'Armenia'),
+ ('algerie', 'Algerie'),
  ('austria', 'Austria'),
  ('azerbaijan', 'Azerbaijan'),
  ('bosnia_herzegovina', 'Bosnia'),
- ('belgium', 'Belgium'),
  ('bulgaria', 'Bulgaria'),
+ ('burkinafaso', 'Burkinafaso'),
+ ('benin', 'Benin'),
+ ('burundi', 'Burundi'),
  ('belarus', 'Belarus'),
  ('switzerland', 'Switzerland'),
  ('cyprus', 'Cyprus'),
+ ('cbd', 'cbd'),
+ ('comifac', 'comifac'),
+ ('cotedivoire', 'Cotedivoire'),
+ ('cameroun', 'Cameroun'),
  ('czech', 'Czech'),
+ ('denmark', 'Denmark'),
  ('germany', 'Germany'),
- ('european_community', 'European'),
  ('estonia', 'Estonia'),
  ('spain', 'Spain'),
  ('finland', 'Finland'),
@@ -42,13 +49,18 @@ COUNTRIES = [('andorra', 'Andorra'),
  ('moldova', 'Moldova'),
  ('montenegro', 'Montenegro'),
  ('macedonia', 'Macedonia'),
+ ('madagascar', 'Madagascar'),
  ('malta', 'Malta'),
+ ('maroc', 'Maroc'),
  ('norway', 'Norway'),
+ ('niger', 'Niger'),
+ ('netherlands', 'Netherlands'),
  ('poland', 'Poland'),
  ('portugal', 'Portugal'),
  ('romania', 'Romania'),
  ('serbia', 'Serbia'),
  ('russia', 'Russia'),
+ ('rdc', 'Rdc'),
  ('sweden', 'Sweden'),
  ('slovenia', 'Slovenia'),
  ('slovakia', 'Slovakia'),
@@ -57,8 +69,8 @@ COUNTRIES = [('andorra', 'Andorra'),
  ('turkey', 'Turkey'),
  ('ukraine', 'Ukraine'),
  ('uzbekistan', 'Uzbekistan'),
- ('kosovo', 'Kosovo')]
-
+ ('kosovo', 'Kosovo'),
+ ('training', 'Training'),]
 
 env['nbsap_target_defs'] = {
     'staging': {
@@ -130,6 +142,7 @@ def status():
     supervisor(env['nbsap_repo'],"status")
 
 
+
 @task
 @choose_target
 def syncdb():
@@ -139,10 +152,10 @@ def syncdb():
         run("%(nbsap_sandbox)s/bin/python "
             "%(nbsap_repo)s/instance_%(country)s/manage.py syncdb"
             % data)
-        run("%(nbsap_sandbox)s/bin/python "
-            "%(nbsap_repo)s/instance_%(country)s/manage.py load_fixtures"
-            % data)
-        run("%(nbsap_sandbox)s/bin/python "
-            "%(nbsap_repo)s/instance_%(country)s/manage.py loaddata users"
-            % data)
+        # run("%(nbsap_sandbox)s/bin/python "
+        #     "%(nbsap_repo)s/instance_%(country)s/manage.py load_fixtures"
+        #     % data)
 
+        run("%(nbsap_sandbox)s/bin/python "
+            "%(nbsap_repo)s/instance_%(country)s/manage.py loaddata pages"
+            % data)

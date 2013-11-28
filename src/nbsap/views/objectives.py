@@ -75,9 +75,14 @@ def implementation(request, code=None):
         for action in objective.actions.all():
             current_objective.actions_tree.append(action)
 
+    lang = request.LANGUAGE_CODE
+    data = {'body_%s' % lang: ''}
+    is_empty_page = models.NbsapPage.objects.filter(handle='implementation') \
+                          .exclude(**data).exists()
     return render(request, 'implementation.html', {
         'current_objective': current_objective,
         'objectives': objectives,
+        'is_empty_page': is_empty_page,
     })
 
 
@@ -85,6 +90,7 @@ def implementation_page(request):
     page = get_object_or_404(models.NbsapPage, handle='implementation')
     objectives = models.NationalObjective.objects.filter(parent=None).all()
     return render(request, 'implementation_page.html', {
+        'is_empty_page': True,
         'page': page,
         'objectives': objectives,
     })
