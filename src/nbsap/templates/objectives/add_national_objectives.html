@@ -32,10 +32,11 @@
   <div class="form-actions">
     <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
     {% if parent %}
-        <a href="{% url 'view_national_objective' pk=parent.pk %}" class="btn" type="button">{% trans "Cancel" %}</a>
+        {% url 'view_national_objective' pk=parent.pk as cancel_url %}
     {% else %}
-        <a href="{% url 'list_national_objectives' %}" class="btn" type="button">{% trans "Cancel" %}</a>
+        {% url 'list_national_objectives' as cancel_url %}
     {% endif %}
+    <a href="{{ cancel_url }}" class="btn" type="button">{% trans "Cancel" %}</a>
   </div>
 
   <div class="control-group">
