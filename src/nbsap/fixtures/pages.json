@@ -4,12 +4,8 @@
     "model": "nbsap.nbsappage",
     "fields": {
         "handle": "implementation",
-        "body_fr": "",
-        "title_nl": "",
         "title_en": "Introduction",
-        "body_nl": "",
-        "body_en": "",
-        "title_fr": ""
+        "body_en": ""
     }
 }
 ]
