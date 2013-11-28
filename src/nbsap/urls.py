@@ -12,7 +12,7 @@ urlpatterns = patterns('',
     url(r'^crashme$', 'nbsap.views.crashme', name='crashme'),
 
     url(r'^implementation$', 'nbsap.views.implementation', name='implementation'),
-    url(r'^implementation/inro$', 'nbsap.views.implementation_page', name='implementation_page'),
+    url(r'^implementation/intro$', 'nbsap.views.implementation_page', name='implementation_page'),
     url(r'^implementation/(?P<code>[\w\-]+)$', 'nbsap.views.implementation', name='implementation'),
 
     url(r'^eu_targets$', 'nbsap.views.eu_targets', {'code': '1'}, name='eu_targets'),
