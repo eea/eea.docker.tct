@@ -2,6 +2,10 @@
 
 {% load i18n %}
 
+{% block title %}
+    <title>NBSAP - {% trans "Edit objective " %}{{ objective.code }}</title>
+{% endblock %}
+
 {% block extra_head %}
 
   <style>

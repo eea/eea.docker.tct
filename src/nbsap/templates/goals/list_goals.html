@@ -1,7 +1,12 @@
 {% extends 'layout.html' %}
-{% block content %}
 
 {% load i18n %}
+{% block title %}
+    <title>NBSAP - {% trans "List goals" %}</title>
+{% endblock %}
+
+{% block content %}
+
 {% get_current_language as lang_code %}
 
 {% load assets %}

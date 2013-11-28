@@ -2,6 +2,10 @@
 
 {% load i18n %}
 
+{% block title %}
+    <title>NBSAP - {% trans "Action" %} {{ action.code }}: {{ action.title }}</title>
+{% endblock %}
+
 {% block content %}
 
 {% include 'admin_nav_tabs.html' %}

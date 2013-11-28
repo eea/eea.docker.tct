@@ -1,5 +1,10 @@
 {% extends 'layout.html' %}
 
+{% load i18n %}
+{% block title %}
+    <title>NBSAP - {% trans "Edit goal" %} {{ goal.code|title }}</title>
+{% endblock %}
+
 {% block extra_head %}
   <style>
     .controls textarea{width: 100%;}
@@ -9,8 +14,6 @@
 {% endblock %}
 
 {% block content %}
-
-{% load i18n %}
 
 <h1 class="small">{% trans "Edit goal" %} {{ goal.code|title }}</h1>
 

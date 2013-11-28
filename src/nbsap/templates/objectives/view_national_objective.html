@@ -2,6 +2,10 @@
 
 {% load i18n %}
 
+{% block title %}
+    <title>NBSAP - {% trans "Objective" %} {{ objective.code }}: {{objective.title }}</title>
+{% endblock %}
+
 {% block content %}
 
 
