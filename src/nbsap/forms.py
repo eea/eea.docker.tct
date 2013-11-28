@@ -1,3 +1,5 @@
+import re
+
 from django import forms
 from django.conf import settings
 from django.forms import widgets
@@ -13,6 +15,12 @@ from nbsap.models import AichiGoal, AichiTarget, EuAction, EuTarget
 from nbsap.models import NationalStrategy, NationalObjective, NationalAction
 from nbsap.models import NbsapPage
 
+
+RE_CODE = re.compile('(\d*\.*)*\d$')
+
+def validate_code(value):
+    if not RE_CODE.match(value):
+        raise ValidationError(_('%s is not a valid code. (Ex: 1.1)') % value)
 
 class NationalObjectiveForm(forms.Form):
 
@@ -59,7 +67,7 @@ class NationalObjectiveForm(forms.Form):
 
 class NationalObjectiveEditForm(NationalObjectiveForm):
 
-    code = forms.CharField(max_length=16)
+    code = forms.CharField(max_length=16, validators=[validate_code])
 
     def clean_code(self):
         code = self.cleaned_data['code']
