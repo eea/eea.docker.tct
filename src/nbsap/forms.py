@@ -4,6 +4,7 @@ from django.forms import widgets
 from django.shortcuts import get_object_or_404
 from django.conf import settings
 from django.core.exceptions import ValidationError
+from django.utils.translation import ugettext_lazy as _
 
 from tinymce.widgets import TinyMCE
 from chosen import forms as chosenforms
@@ -239,9 +240,10 @@ class NationalStrategyForm(forms.Form):
 
 class NbsapPageForm(forms.Form):
 
-    lang = forms.ChoiceField(choices=settings.LANGUAGES)
-    title = forms.CharField()
-    description = forms.CharField(required=False, widget=widgets.Textarea)
+    lang = forms.ChoiceField(choices=settings.LANGUAGES, label=_('Language'))
+    title = forms.CharField(label=_('Title'))
+    body = forms.CharField(required=False, label=_('Body'),
+                           widget=TinyMCE(attrs={'cols': 80, 'rows': 25}))
 
     def __init__(self, *args, **kwargs):
         lang = kwargs.pop('lang', None)
@@ -249,16 +251,16 @@ class NbsapPageForm(forms.Form):
         super(NbsapPageForm, self).__init__(*args, **kwargs)
 
         title = getattr(self.page, 'title_%s' % lang, None)
-        description = getattr(self.page, 'description_%s' % lang, None)
+        body = getattr(self.page, 'body_%s' % lang, None)
 
         self.fields['title'].initial = title
-        self.fields['description'].initial = description
+        self.fields['body'].initial = body
         self.fields['lang'].initial = lang
 
     def save(self):
         lang = self.cleaned_data['lang']
         setattr(self.page, 'title_%s' % lang, self.cleaned_data['title'])
-        setattr(self.page, 'description_%s' % lang, self.cleaned_data['description'])
+        setattr(self.page, 'body_%s' % lang, self.cleaned_data['body'])
         self.page.save()
         return self.page
 

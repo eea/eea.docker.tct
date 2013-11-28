@@ -81,6 +81,15 @@ def implementation(request, code=None):
     })
 
 
+def implementation_page(request):
+    page = get_object_or_404(models.NbsapPage, handle='implementation')
+    objectives = models.NationalObjective.objects.filter(parent=None).all()
+    return render(request, 'implementation_page.html', {
+        'page': page,
+        'objectives': objectives,
+    })
+
+
 @auth_required
 def view_national_objective(request, pk):
     objective = get_object_or_404(models.NationalObjective, pk=pk)

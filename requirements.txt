@@ -16,3 +16,4 @@ supervisor==3.0b1
 gunicorn==0.17.4
 South==0.8.2
 tablib==0.9.11
+django-widget-tweaks==1.3

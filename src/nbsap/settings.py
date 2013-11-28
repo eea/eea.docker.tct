@@ -140,6 +140,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django_assets',
     'django_webtest',
+    'widget_tweaks',
     'transmeta',
     'django.contrib.markup',
     'tinymce',

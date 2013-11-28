@@ -7,18 +7,7 @@
 
 <div class="tabbable tabs-left">
 
-  <ul class="nav nav-tabs nav-stacked local-navigation">
-    <li>
-      <label class="nav-header">{% trans "Actions related to" %}</label>
-    </li>
-    {% for objective in objectives %}
-      <li {% if objective.code == current_objective.code %}class="active"{% endif %}>
-        <a href="{% url 'implementation' code=objective.code %}">
-          {% trans "Objective"%} {{ objective.code }}
-        </a>
-      </li>
-    {% endfor %}
-  </ul>
+  {% include "implementation_sidebar.html" %}
 
   <div class="tab-content homepage_view">
 

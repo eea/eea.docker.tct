@@ -1,0 +1,42 @@
+{% extends 'layout.html'%}
+{% block content %}
+
+{% load i18n %}
+{% load utils %}
+{% include 'nav_tabs.html' %}
+
+<div class="tabbable tabs-left">
+
+  {% include "implementation_sidebar.html" %}
+
+  <div class="tab-content homepage_view">
+    <h1>{{ page.title }}</h1>
+    {{ page.body }}
+  </div>
+</div>
+
+{% endblock content %}
+
+{% block scripts %}
+<script>
+$(function () {
+  $('.more').on('click', function() {
+    var parents = $(this).parents('.element_field');
+    var snippet = parents.find('.snippet');
+    var full = parents.find('.full');
+
+    snippet.hide();
+    full.show();
+  });
+  $('.less').on('click', function() {
+    var parents = $(this).parents('.element_field');
+    var snippet = parents.find('.snippet');
+    var full = parents.find('.full');
+
+    full.hide();
+    snippet.show();
+  });
+});
+
+</script>
+{% endblock scripts %}

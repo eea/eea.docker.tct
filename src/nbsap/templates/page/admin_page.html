@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% load i18n %}
+{% load widget_tweaks %}
 
 
 {% block scripts %}
@@ -21,6 +22,14 @@
 
   {% include 'admin_nav_tabs.html' %}
 
+  {% if messages %}
+    <div class="messages alert alert-success">
+      {% for message in messages %}
+        {{ message }}
+      {% endfor %}
+    </div>
+  {% endif %}
+
   <form method="POST" class="form-horizontal">
 
     <div class="control-group">
@@ -35,15 +44,16 @@
       <label class="control-label" for="{{ form.title.auto_id }}">
         {{ form.title.label }}</label>
       <div class="controls">
-        {{ form.title }}
+        {% render_field form.title class='input-xxlarge' autofocus='autofocus' %}
+        <div class="text-error">{{ form.title.errors.0 }}</div>
       </div>
     </div>
 
     <div class="control-group">
-      <label class="control-label" for="{{ form.description.auto_id }}">
-        {{ form.description.label }}</label>
+      <label class="control-label" for="{{ form.body.auto_id }}">
+        {{ form.body.label }}</label>
       <div class="controls">
-        {{ form.description }}
+        {% render_field form.body class='input-xxlarge' autofocus='autofocus' rows='5' %}
       </div>
     </div>
 
