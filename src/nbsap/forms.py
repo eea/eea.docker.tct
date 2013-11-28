@@ -18,8 +18,8 @@ class NationalObjectiveForm(forms.Form):
 
     language = forms.ChoiceField(choices=settings.LANGUAGES)
     title = forms.CharField(widget=widgets.Textarea)
-    description = forms.CharField(
-        widget=TinyMCE(attrs={'cols': 80, 'rows': 25}), required=False)
+    description = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 25}),
+                                  required=False)
 
     def __init__(self, *args, **kwargs):
 
