@@ -1,6 +1,7 @@
 {% extends 'layout.html' %}
 
 {% load i18n %}
+{% load utils %}
 
 {% block title %}
     <title>NBSAP - {% trans "Objective" %} {{ objective.code }}: {{objective.title }}</title>
@@ -45,8 +46,11 @@
     </div>
     <div class="span4">
         <div class="view-objective">
-            {% if objective.children.all %}
-              <a href="#subobjectives">(<i class="icon-arrow-down"></i>{{ objective.children.count }} {% trans "sub-objectives" %} )</a>
+            {% if objective.children.exists %}
+                {% assign objective.children.count as total %}
+                {% blocktrans with total_pluralized=total|pluralize %}
+                    <a href="#subobjectives">(<i class="icon-arrow-down"></i> {{ total }} sub-objective{{total_pluralized }})</a>
+                {% endblocktrans %}
             {% endif %}
         </div>
     </div>
