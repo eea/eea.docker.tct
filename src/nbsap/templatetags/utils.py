@@ -10,6 +10,7 @@ def active(request, pattern):
         return 'active'
     return ''
 
+
 def get_field_verbose_name(instance, arg):
     return instance._meta.get_field(arg).verbose_name
 register.filter('field_verbose_name', get_field_verbose_name)
@@ -31,3 +32,8 @@ key = register.filter('get_page', get_page)
 @register.filter('sort_by_code')
 def sort_by_code(value):
     return sorted(value, key=lambda i: map(int, i.code.split('.')))
+
+
+@register.assignment_tag
+def assign(value):
+    return value
