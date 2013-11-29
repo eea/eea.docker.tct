@@ -754,6 +754,12 @@ body {
 .nav-tabs > li > a {
 	color: #014E46;
 }
+.nav-tabs > li {
+    border-bottom: 1px solid #014E46;
+}
+.nav-tabs > li.active {
+    border-bottom: 1px solid #fff;
+}
 
 .navbar .nav form.language-menu {
     margin: 0;
