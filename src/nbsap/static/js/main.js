@@ -1,6 +1,5 @@
 $(function () {
-   $('.change-lang').on('click', function (e) {
-        e.preventDefault()
-        $(this).parents('form').submit();
+   $('.change-lang').on('click', function () {
+        $(this).parent().find('form').submit();
    });
 });

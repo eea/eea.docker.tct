@@ -161,7 +161,5 @@ urlpatterns = patterns('',
 
 # Django Rosetta support for translation
 if 'rosetta' in settings.INSTALLED_APPS:
-    urlpatterns += patterns('',
-            url(r'^translate/', include('rosetta.urls')),
-                )
+    urlpatterns += patterns('', url(r'^translate/', include('rosetta.urls')),)
 

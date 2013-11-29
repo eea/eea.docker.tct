@@ -715,10 +715,11 @@ body {
 
 .navbar .nav.top-menu {
     margin-top: -7px;
-	font-size: 11px;
+	font-size: 12px;
 }
 
 .navbar .nav > li > a {
+    padding-bottom: 2px;
     text-shadow: none;
 }
 
@@ -748,12 +749,6 @@ body {
 .navbar .nav form.language-menu {
     margin: 0;
 }
-
-.navbar .nav form.language-menu > a {
-	color: #014E46;
-	text-transform: uppercase;
-}
-
 
 /* footer */
 footer {
@@ -1005,6 +1000,7 @@ body .obj-id {
     position: relative;
     text-align: center;
     margin-bottom: 0px;
+    z-index: 1000;
 }
 
 .view-objective {
