@@ -82,8 +82,9 @@ class NationalObjectiveEditForm(NationalObjectiveForm):
 
 
 class NationalActionForm(forms.Form):
+
     language = forms.ChoiceField(choices=settings.LANGUAGES)
-    title = forms.CharField(widget=widgets.Textarea)
+    title = forms.CharField(widget=widgets.Textarea, required=False)
     description = forms.CharField(widget=TinyMCE(attrs={'cols': 80,
                                                         'rows': 25}))
 

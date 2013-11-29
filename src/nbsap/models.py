@@ -155,7 +155,7 @@ class NationalAction(models.Model):
     __metaclass__ = Translatable
 
     code = models.CharField(max_length=16)
-    title = models.CharField(verbose_name="Title", max_length=512)
+    title = models.CharField(verbose_name="Title", max_length=512, blank=True)
     description = tinymce_models.HTMLField(verbose_name="Description")
 
     class Meta:
