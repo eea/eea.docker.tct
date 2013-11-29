@@ -252,7 +252,7 @@ class NbsapPageForm(forms.Form):
     lang = forms.ChoiceField(choices=settings.LANGUAGES, label=_('Language'))
     title = forms.CharField(label=_('Title'))
     body = forms.CharField(required=False, label=_('Body'),
-                           widget=TinyMCE(attrs={'cols': 80, 'rows': 25}))
+                           widget=TinyMCE(attrs={'cols': 80, 'rows': 15}))
 
     def __init__(self, *args, **kwargs):
         lang = kwargs.pop('lang', None)
