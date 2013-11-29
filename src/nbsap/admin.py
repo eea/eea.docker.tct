@@ -40,3 +40,4 @@ admin.site.register(EuTarget, EuTargetAdmin)
 
 
 admin.site.register(NbsapPage)
+admin.site.register(NavbarLink)

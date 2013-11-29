@@ -430,5 +430,14 @@ class NbsapPage(models.Model):
         return self.handle
 
 
+class NavbarLink(models.Model):
+
+    name = models.CharField(max_length=12)
+    title = models.CharField(max_length=64, blank=True)
+    url = models.URLField()
+
+    def __unicode__(self):
+        return self.name
+
 
 pre_save.connect(NationalObjective.pre_save_objective_code, sender=NationalObjective)

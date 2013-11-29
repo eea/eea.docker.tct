@@ -727,6 +727,15 @@ body {
     color: #444;
 }
 
+.navbar .nav .navbar-link {
+    position: relative;
+    right: 7px;
+}
+.navbar .nav .navbar-last-link {
+    border-right: 1px solid #ddd;
+}
+
+
 .navbar .nav li.dropdown .dropdown-toggle .caret,
 .navbar .nav li.dropdown.open .caret {
     border-top-color: #000;

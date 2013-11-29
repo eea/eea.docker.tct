@@ -101,6 +101,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.i18n',
     'nbsap.context_processors.nbsap_admin',
+    'nbsap.context_processors.nbsap_navbar_link',
 )
 
 # List of callables that know how to import templates from various sources.
