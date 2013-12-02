@@ -1,4 +1,5 @@
 import re
+from BeautifulSoup import BeautifulSoup
 
 from django import forms
 from django.conf import settings
@@ -14,6 +15,7 @@ from chosen import forms as chosenforms
 from nbsap.models import AichiGoal, AichiTarget, EuAction, EuTarget
 from nbsap.models import NationalStrategy, NationalObjective, NationalAction
 from nbsap.models import NbsapPage
+from nbsap.utils import remove_tags
 
 
 RE_CODE = re.compile('(\d+\.)*\d+$')
@@ -21,6 +23,14 @@ RE_CODE = re.compile('(\d+\.)*\d+$')
 def validate_code(value):
     if not RE_CODE.match(value):
         raise ValidationError(_('%s is not a valid code. (Ex: 1.1)') % value)
+
+
+class TextCleanedHtml(forms.CharField):
+
+    def to_python(self, value):
+        value = super(TextCleanedHtml, self).to_python(value)
+        return remove_tags(BeautifulSoup(value).prettify())
+
 
 class NationalObjectiveForm(forms.Form):
 
@@ -251,7 +261,7 @@ class NbsapPageForm(forms.Form):
 
     lang = forms.ChoiceField(choices=settings.LANGUAGES, label=_('Language'))
     title = forms.CharField(label=_('Title'))
-    body = forms.CharField(required=False, label=_('Body'),
+    body = TextCleanedHtml(required=False, label=_('Body'),
                            widget=TinyMCE(attrs={'cols': 80, 'rows': 15}))
 
     def __init__(self, *args, **kwargs):
