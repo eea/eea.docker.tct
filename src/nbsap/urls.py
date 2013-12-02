@@ -13,7 +13,7 @@ urlpatterns = patterns('',
 
     url(r'^implementation$', 'nbsap.views.implementation', name='implementation'),
     url(r'^implementation/intro$', 'nbsap.views.implementation_page', name='implementation_page'),
-    url(r'^implementation/(?P<code>[\w\-]+)$', 'nbsap.views.implementation', name='implementation'),
+    url(r'^implementation/(?P<code>((\d+\.)*\d+$))$', 'nbsap.views.implementation', name='implementation'),
 
     url(r'^eu_targets$', 'nbsap.views.eu_targets', {'code': '1'}, name='eu_targets'),
     url(r'^eu_targets/(?P<code>[\w\-]+)$', 'nbsap.views.eu_targets', name='eu_targets'),

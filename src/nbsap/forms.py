@@ -16,7 +16,7 @@ from nbsap.models import NationalStrategy, NationalObjective, NationalAction
 from nbsap.models import NbsapPage
 
 
-RE_CODE = re.compile('(\d*\.*)*\d$')
+RE_CODE = re.compile('(\d+\.)*\d+$')
 
 def validate_code(value):
     if not RE_CODE.match(value):
