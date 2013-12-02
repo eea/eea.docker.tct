@@ -56,15 +56,6 @@
       </a>
     </li>
     {% endfor %}
-
-    <label class="nav-header">{% trans "Indicators" %}</label>
-    {% for page,value in indicators_pages.items %}
-    <li>
-      <a href="{% url 'indicators' %}?page={{ page }}">
-        {{ value }}
-      </a>
-    </li>
-    {% endfor %}
   </ul>
 
   <div class="tab-content homepage_view">
