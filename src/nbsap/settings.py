@@ -163,7 +163,7 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'simple': {
-            'format': '%(levelname)s %(messages)s'
+            'format': '%(levelname)s %(message)s'
         },
     },
     'filters': {
