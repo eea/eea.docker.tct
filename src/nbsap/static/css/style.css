@@ -1025,3 +1025,36 @@ body .obj-id {
 }
 
 .errorlist {color: red;}
+
+.big-modal {
+  margin: -250px 0 0 -400px;
+  width: 800px;
+}
+
+.big-modal .modal-inside-footer {
+  width: 771px;
+}
+
+.fullsize-modal {
+    margin: -250px 0 0 -489px;
+    height: 550px;
+    width: 990px;
+}
+.fullsize-modal .modal-inside-footer {
+  width: 961px;
+}
+.fullsize-modal .modal-body {
+    max-height: 471px;
+}
+
+.nat_strategy_export_container {
+  position: absolute;
+  right: 16px;
+  top: 14px;
+}
+.modal-inside-footer {
+  position: absolute;
+  margin-left: -16px;
+  width: 531px;
+  bottom: 0;
+}

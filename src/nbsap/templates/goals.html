@@ -6,32 +6,6 @@
     <title>NBSAP - {% trans "Goals homepage" %}</title>
 {% endblock %}
 
-{% block extra_head %}
-  <style type="text/css">
-
-    #nat_strategy_export_modal {
-      margin: -250px 0 0 -400px;
-      width: 800px;
-    }
-
-    #nat_strategy_export_modal .modal-inside-footer {
-      width: 771px;
-    }
-
-    .nat_strategy_export_container {
-      position: absolute;
-      right: 16px;
-      top: 14px;
-    }
-    .modal-inside-footer {
-      position: absolute;
-      margin-left: -16px;
-      width: 531px;
-      bottom: 0;
-    }
-  </style>
-{% endblock %}
-
 
 {% block content %}
 
@@ -147,7 +121,8 @@
         <ul>
           {% for indicator in target.indicators.all %}
           <li>
-            <a href="{% url 'indicators' %}?page={{ indicator.id|get_page }}#{{ indicator.id }}">
+            <a href="{% url 'indicator' pk=indicator.pk %}"
+               data-target="#indicator_modal" data-toggle="modal">
               {% trans "Indicator" %} {{indicator.id}}: {{ indicator.title }}
             </a>
           </li>
@@ -162,7 +137,8 @@
         <ul>
           {% for indicator in target.other_indicators.all %}
           <li>
-            <a href="{% url 'indicators' %}?page={{ indicator.id|get_page }}#{{ indicator.id }}">
+            <a href="{% url 'indicator' pk=indicator.pk %}"
+               data-target="#indicator_modal" data-toggle="modal">
               {% trans "Indicator" %} {{indicator.id}}: {{ indicator.title }}
             </a>
           </li>
@@ -184,7 +160,11 @@
 
 {% block footer %}
 
-  <div tabindex="-1" class="modal hide" id="nat_strategy_export_modal" aria-hidden="true">
+  <div tabindex="-1" class="modal hide big-modal" id="nat_strategy_export_modal" aria-hidden="true">
+    <div style="padding-bottom: 5px;" class="modal-body"></div>
+  </div>
+
+  <div tabindex="-1" class="modal hide fullsize-modal" id="indicator_modal" aria-hidden="true">
     <div style="padding-bottom: 5px;" class="modal-body"></div>
   </div>
 
