@@ -1,5 +1,5 @@
 import re
-from BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup
 
 from django import forms
 from django.conf import settings
