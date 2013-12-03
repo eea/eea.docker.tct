@@ -5,7 +5,6 @@ from django import forms
 from django.conf import settings
 from django.forms import widgets
 from django.shortcuts import get_object_or_404
-from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
@@ -14,11 +13,11 @@ from chosen import forms as chosenforms
 
 from nbsap.models import AichiGoal, AichiTarget, EuAction, EuTarget
 from nbsap.models import NationalStrategy, NationalObjective, NationalAction
-from nbsap.models import NbsapPage
 from nbsap.utils import remove_tags
 
 
 RE_CODE = re.compile('(\d+\.)*\d+$')
+
 
 def validate_code(value):
     if not RE_CODE.match(value):
@@ -37,8 +36,9 @@ class NationalObjectiveForm(forms.Form):
 
     language = forms.ChoiceField(choices=settings.LANGUAGES)
     title = forms.CharField(widget=widgets.Textarea)
-    description = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 25}),
-                                  required=False)
+    description = forms.CharField(
+        widget=TinyMCE(attrs={'cols': 80, 'rows': 25}),
+        required=False)
 
     def __init__(self, *args, **kwargs):
 
@@ -143,8 +143,8 @@ class AichiGoalForm(forms.Form):
 
         super(AichiGoalForm, self).__init__(*args, **kwargs)
 
-        description = getattr(self.goal, 'description_%s' %lang, None)
-        title = getattr(self.goal, 'title_%s' %lang, None)
+        description = getattr(self.goal, 'description_%s' % lang, None)
+        title = getattr(self.goal, 'title_%s' % lang, None)
 
         self.fields['description'].initial = description
         self.fields['language'].initial = lang
@@ -164,8 +164,8 @@ class AichiGoalForm(forms.Form):
      #   for ucode in self.cleaned_data['targets']:
      #       goal.targets.add(get_object_or_404(AichiTarget, code=ucode))
         goal.save()
-
         return goal
+
 
 class NationalStrategyForm(forms.Form):
 
@@ -176,11 +176,11 @@ class NationalStrategyForm(forms.Form):
         return [int(el) for el in to_list]
 
     def get_choices(self, string, mytype, isString=False):
-        result = [(element.pk,
-                 "%s %s" % (string, element.code.upper())) for element in mytype.objects.all()]
+        result = [(element.pk, "%s %s" % (string, element.code.upper()))
+                  for element in mytype.objects.all()]
 
         if isString:
-            return sorted(result, key = lambda x: x[1].split()[1])
+            return sorted(result, key=lambda x: x[1].split()[1])
         return sorted(result, key=self.comp)
 
     def get_element_by_pk(self, mytype, u_pk):
