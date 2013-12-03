@@ -4,11 +4,6 @@
 <a class="pull-right btn btn-success btn-mini" href="{% url 'goals' %}">{% trans "Exit from administration" %}</a>
 <ul class="nav nav-tabs">
 
-  <li class="{% active request '^/administration/goals/[\w\-]+' %}
-             {% active request '^/administration/goals/$' %}">
-    <a href="{% url 'list_goals' %}">{% trans "Goals" %}</a>
-  </li>
-
   <li class="{% active request '^/administration/objectives/[\w\-]+' %}
              {% active request '^/administration/$' %}">
     <a href="{% url 'list_national_objectives' %}">{% trans "National Strategy" %}</a> </li>

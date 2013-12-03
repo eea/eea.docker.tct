@@ -147,14 +147,6 @@ urlpatterns = patterns('',
             'nbsap.views.delete_national_strategy',
             name='delete_national_strategy'),
 
-    url(r'^administration/goals/$',
-            'nbsap.views.list_goals',
-            name='list_goals'),
-
-    url(r'^administration/goals/(?P<code>[\w\-]+)/edit$',
-            'nbsap.views.edit_goal',
-            name='edit_goal'),
-
     url(r'^administration/pages$', 'nbsap.views.admin_pages', name='admin_pages'),
     url(r'^administration/page/(?P<handle>[\w\-]+)/edit$', 'nbsap.views.admin_page', name='admin_page'),
 

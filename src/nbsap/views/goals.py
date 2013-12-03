@@ -64,35 +64,3 @@ def get_aichi_target_title(request, pk=None):
 
     target = get_object_or_404(models.AichiTarget, pk=pk)
     return HttpResponse(json.dumps([{'code': target.code, 'value':target.description}]))
-
-
-@auth_required
-def edit_goal(request, code=None):
-    goal = get_object_or_404(models.AichiGoal, pk=code)
-
-    lang = request.GET.get('lang', request.LANGUAGE_CODE)
-
-    if request.method == 'POST':
-        form = AichiGoalForm(request.POST, goal=goal, lang=lang)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Saved changes.')
-            return redirect('list_goals')
-        else:
-            form = None
-    else:
-        form = AichiGoalForm(goal=goal, lang=lang)
-
-    return render(request, 'goals/edit_goals.html',
-                  {'form': form,
-                   'goal': goal,
-                   'lang': lang,
-                  })
-
-@auth_required
-def list_goals(request):
-    goals = models.AichiGoal.objects.all()
-
-    return render(request, 'goals/list_goals.html',
-                  {'goals': goals,
-                  })

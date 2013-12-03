@@ -55,7 +55,7 @@
       </td>
       {% with strategy.relevant_target as target %}
       <td>
-        <a href="{% url 'edit_goal' code=target.get_parent_goal.code %}">
+        <a href="{% url 'goals' code=target.get_parent_goal.code %}">
           {{ target.get_parent_goal.code|title }}</a>
       </td>
       <td>
