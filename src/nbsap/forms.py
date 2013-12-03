@@ -22,7 +22,8 @@ RE_CODE = re.compile('(\d+\.)*\d+$')
 
 def validate_code(value):
     if not RE_CODE.match(value):
-        raise ValidationError(_('%s is not a valid code. (Ex: 1.1)') % value)
+        raise ValidationError(_('%(code)s is not a valid code. (Ex: 1.1)') %
+                              {'code': value})
 
 
 class TextCleanedHtml(forms.CharField):
