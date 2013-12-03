@@ -1,0 +1,17 @@
+[
+{
+    "pk": 1,
+    "model": "auth.group",
+    "fields": {
+        "name": "translator",
+        "permissions": [
+            34,
+            35,
+            36,
+            58,
+            59,
+            60
+        ]
+    }
+}
+]
