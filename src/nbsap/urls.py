@@ -21,6 +21,7 @@ urlpatterns = patterns('',
     url(r'^eu_targets/(?P<target_id>[\w\-]+)/objectives/export/$', 'nbsap.views.eu_target_nat_strategy_export', name='nat_strategy_export'),
 
     url(r'^indicators/$', 'nbsap.views.indicators', name='indicators'),
+    url(r'^indicator/(?P<pk>(\d+))$', 'nbsap.views.indicator', name='indicator'),
 
     url(r'^objectives$', 'nbsap.views.nat_strategy', name='nat_strategy'),
     url(r'^objectives\.xlsx$', 'nbsap.views.nat_strategy_download', name='nat_strategy_download'),

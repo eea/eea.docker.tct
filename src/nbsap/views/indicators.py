@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.utils.translation import ugettext_lazy as _
 
@@ -16,7 +16,6 @@ def get_indicators_pages(paginator):
 
 
 def indicators(request):
-
     goals = models.AichiGoal.objects.order_by('code').all()
     indicators_list = models.AichiIndicator.objects.all()
 
@@ -42,3 +41,12 @@ def indicators(request):
                    'page': int(page),
                   })
 
+
+def indicator(request, pk):
+    indicator = get_object_or_404(models.AichiIndicator, pk=pk)
+    indicator.relevant_target_ob = indicator.relevant_target.all()[0]
+    indicator.strategic_goal_ob = indicator.relevant_target_ob.goals.all()[0]
+    indicator.other_targets_list = indicator.other_targets.all()
+    return render(request, 'indicators/indicator_details.html', {
+        'indicator': indicator,
+    })
