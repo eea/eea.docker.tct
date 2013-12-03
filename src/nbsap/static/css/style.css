@@ -757,6 +757,9 @@ body {
 .nav-tabs > li {
     border-bottom: 1px solid #014E46;
 }
+.nav-tabs > li:last-child {
+    border-bottom: none;
+}
 .nav-tabs > li.active {
     border-bottom: 1px solid #fff;
 }
