@@ -135,13 +135,13 @@ class AichiTarget(models.Model):
 
 
 class AichiGoal(models.Model):
+
     __metaclass__ = Translatable
 
     code = models.CharField(max_length=1, primary_key=True)
     title = models.CharField(verbose_name="Title", max_length=512)
-    description = models.TextField(verbose_name="Description")
-    targets = models.ManyToManyField(AichiTarget,
-                                     related_name="goals")
+    description = tinymce_models.HTMLField(verbose_name="Description")
+    targets = models.ManyToManyField(AichiTarget, related_name="goals")
 
     def __unicode__(self):
         return self.title
@@ -386,6 +386,7 @@ class EuAichiStrategy(models.Model):
 
 
 class NationalStrategy(models.Model):
+
     objective = models.ForeignKey(NationalObjective,
                                   verbose_name="National Objective",
                                   related_name="objective_national_strategy")
