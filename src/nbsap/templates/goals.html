@@ -33,7 +33,7 @@
   </ul>
 
   <div class="tab-content homepage_view">
-    <h1>{% trans "Goal" %} {{ current_goal.code|upper }}: {{ current_goal.description }}</h1>
+    <h1>{% trans "AICHI Goal" %} {{ current_goal.code|upper }}: {{ current_goal.description }}</h1>
     <div class="row">
       <ul class="span2">
         {% for target in current_goal.targets.all %}
@@ -65,7 +65,7 @@
             {% with strategy.eu_target as eu_target %}
             <li>
               <a href="{% url 'eu_targets' code=eu_target.code %}" title="{{ eu_target.code }}">
-                {% trans "Target" %} {{ eu_target.code }}: {{ eu_target.title }}
+                {% trans "EU Target" %} {{ eu_target.code }}: {{ eu_target.title }}
               </a>
             </li>
             {% endwith %}

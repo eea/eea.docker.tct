@@ -10,7 +10,7 @@
       {% if strategy.eu_targets.all %}
         {% for target in strategy.eu_targets.all %}
           <li>
-            <span class="mapping-header">{% trans "Targets" %}:</span>
+            <span class="mapping-header">{% trans "EU Targets" %}:</span>
             <span>
               <a href="{% url 'eu_targets' code=target.code %}" title="{{ target.code }}">
                 <strong>{% trans "Target" %} {{ target.code }}</strong>: {{ target.title }}
