@@ -139,7 +139,7 @@ class AichiGoal(models.Model):
     __metaclass__ = Translatable
 
     code = models.CharField(max_length=1, primary_key=True)
-    title = models.CharField(verbose_name="Title", max_length=512)
+    title = models.TextField(verbose_name="Title", max_length=512)
     description = tinymce_models.HTMLField(verbose_name="Description")
     targets = models.ManyToManyField(AichiTarget, related_name="goals")
 
@@ -155,7 +155,7 @@ class NationalAction(models.Model):
     __metaclass__ = Translatable
 
     code = models.CharField(max_length=16)
-    title = models.CharField(verbose_name="Title", max_length=512, blank=True)
+    title = models.TextField(verbose_name="Title", max_length=512, blank=True)
     description = tinymce_models.HTMLField(verbose_name="Description")
 
     class Meta:
@@ -170,7 +170,7 @@ class NationalObjective(models.Model):
     __metaclass__ = Translatable
 
     code = models.CharField(max_length=16, unique=True)
-    title = models.CharField(max_length=512,
+    title = models.TextField(max_length=512,
                              verbose_name="Title")
     description = tinymce_models.HTMLField(verbose_name="Description")
     parent = models.ForeignKey('self',
@@ -296,7 +296,7 @@ class EuIndicator(models.Model):
     code = models.CharField(max_length=25,
                             null=True,
                             blank=True)
-    title = models.CharField(max_length=512,
+    title = models.TextField(max_length=512,
                              verbose_name="Title")
     url = models.URLField(null=True,
                           blank=True)
@@ -329,7 +329,7 @@ class EuTarget(models.Model):
     __metaclass__ = Translatable
 
     code = models.CharField(max_length=16)
-    title = models.CharField(max_length=512,
+    title = models.TextField(max_length=512,
                              verbose_name="Title")
     description = models.TextField(verbose_name="Description")
     actions = models.ManyToManyField(EuAction,
