@@ -11,3 +11,4 @@ sandbox_py27/*
 .webassets-cache
 gen
 fabfile.py
+*~
