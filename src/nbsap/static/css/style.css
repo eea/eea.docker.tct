@@ -621,6 +621,15 @@ div.element_field {
 	margin-bottom: 0;
 }
 
+.alert.alert-warning p {
+  margin-bottom: 0;
+}
+
+.exit-admin {
+  margin-top: 10px;
+  margin-right: 5px;
+}
+
 /*.navbar-inner .container {
 	height: 99px;
 }
@@ -663,10 +672,10 @@ div.element_field {
 		padding-right: 10px;
   }
 
-	.navbar-inner .container {
+	/*.navbar-inner .container {
 		background: url('024.jpg') no-repeat 166% -73%;
 		width: 940px;
-	}
+	}*/
 
 	.navbar .brand {
 		width: 35%;
@@ -745,12 +754,12 @@ footer {
 }
 
 .museum-logo {
-  background: url('logo_irscnb.png') no-repeat center center;
+  background: url('../logo_irscnb.png') no-repeat center center;
   width: 94px;
   height: 30px;
   text-indent: -9999px;
   display: block;
-  margin-right: 150px;
+  margin-right: 10px;
 }
 
 .container.content {
@@ -937,6 +946,7 @@ h2 p {
 h1.small {
 	font-size: 24px;
 	line-height: 27px;
+	padding-left: 10px;
 }
 
 .admin-obj-description,
@@ -1028,4 +1038,136 @@ body .obj-id {
 
 
 
+
+/* GENERIC THEME */
+body {
+  padding: 0px;
+	font-family: Arial, sans-serif;
+  background: url("../landscape.png") 0% 0% no-repeat; /* header photo is taken from http://www.publicdomainpictures.net/view-image.php?image=26775&picture=autumn-forest&jazyk=EN , 
+  please use your own photo instead. The photo size should be 1920x200px */
+}
+
+.navbar-inner {
+  box-shadow: 0px 0px;
+}
+
+.navbar-inner,
+.container.content {
+  background: none;
+}
+
+.navbar-inner .container {
+  background: none;
+}
+
+.navbar .nav > li > a {
+  color: #fff;
+}
+
+.navbar .nav li.dropdown .dropdown-toggle .caret, 
+.navbar .nav li.dropdown.open .caret {
+  border-top-color: rgb(255, 255, 255);
+}
+
+.navbar .brand {
+  color: rgb(255, 255, 255);
+  text-shadow: rgb(0, 0, 0) 1px 1px 3px;
+  font-size: 26px;
+  line-height: 30px;
+  width: 100%;
+  background: rgba(0, 0, 0, 0);
+  padding-left: 0;
+  padding-top: 10px;
+  margin-top: 5px;
+  margin-left: 0;
+}
+
+.site-logo img {
+  margin: 0px auto;
+  width: 45px;
+  padding:10px;
+  padding-left: 56px;
+}
+
+.dropdown-menu {
+  min-width: 60px;
+}
+
+.tabbable { 
+  background: rgb(255, 255, 255);
+}
+
+
+/* global menu */
+.nav-tabs {
+  margin-bottom: 0;
+  border-bottom: 0px;
+}
+
+.global-menu,
+.navbar .nav.top-menu {
+  background-color: rgb(61, 58, 46);
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.site-logo {
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  background: #fff url("../CHM_logo_45x70px.png") 49% 49% no-repeat;
+  height: 70px;
+  padding-top: 10px;
+}
+
+.global-menu.nav-tabs > .active > a, 
+.global-menu.nav-tabs > .active > a:hover {
+  border: 0px;
+  background: transparent;
+  color: rgb(248, 207, 102);
+}
+
+.global-menu.nav-tabs > li {
+  border-bottom: 0px;
+  padding: 4px 0px;
+}
+
+.global-menu.nav-tabs > li.active {
+  border-bottom: 0px;
+  background: url("../arrow.png") 50% 100% no-repeat;
+}
+
+.global-menu.nav-tabs > li > a {
+  color: rgb(255, 255, 255);
+  border: 0px;
+  text-transform: uppercase;
+}
+
+.nav > li > a:hover {
+  background-color: transparent;
+  border: 0px;
+  color: rgb(248, 207, 102);
+}
+
+.navbar .top-menu.nav > li > a:hover {
+  color: rgb(248, 207, 102);
+}
+
+.navbar .nav li.dropdown .dropdown-toggle .caret:hover, 
+.navbar .nav li.dropdown.open .caret:hover {
+  border-top-color: rgb(248, 207, 102);
+}
+
+
+/* content */
+.sign-in form {
+  background: #fff;
+  padding: 0px 20px;
+}
+
+
+/* footer */
+footer .container {
+  border-top: 1px solid #555;
+  padding-top: 10px;
+}
+/* end generic theme */
 

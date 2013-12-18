@@ -13,11 +13,15 @@
     <![endif]-->
 
     <!--[if IE 8]>    
-      <link rel="stylesheet" href="./static/css/ie8.css" />
+      {% assets "ie8_css" %}
+        <link rel="stylesheet" href="{{ ASSET_URL }}" />
+      {% endassets %}
     <![endif]-->
   
     <!--[if IE 9]>    
-      <link rel="stylesheet" href="./static/css/ie9.css" />
+      {% assets "ie9_css" %}
+        <link rel="stylesheet" href="{{ ASSET_URL }}" />
+      {% endassets %}
     <![endif]-->
 
     {% assets "css" %}
@@ -38,8 +42,16 @@
             </div>
         </div>
         <div class="container">
-          <a class="brand" href="{% url 'goals' %}">{% trans SITE_HEADER %}</a>
-          {% include "navbar.html" %}
+          <div class="row">
+            <div class="span2 site-logo">
+            </div>
+            <div class="span7 site-title">
+              <a class="brand" href="{% url 'goals' %}">{% trans SITE_HEADER %}</a>
+            </div>
+            <div class="span3 language-menu">
+              {% include "navbar.html" %}
+            </div>
+          </div>
         </div>
       </div>
     </div>

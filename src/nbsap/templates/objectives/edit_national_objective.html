@@ -27,88 +27,88 @@
   {% include 'admin_nav_tabs.html' %}
   {% include 'objectives/objectives_breadcrumb.html' %}
 
+  <div class="tabbable">
+    <h1 class="small">{% trans "Edit objective" %} {{ objective.code }}</h1>
 
-  <h1 class="small">{% trans "Edit objective" %} {{ objective.code }}</h1>
-
-  {% if form.errors %}
-    <p style="color: red;">
-      {% blocktrans with form.errors|pluralize as errors %}Please correct the error {{ errors }} below.{% endblocktrans %}
-    </p>
-  {% endif %}
-
-  <form action="" method="post" id="national-objective-edit">
-
-    <div class="form-actions">
-      <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
-      <a href="{% url 'view_national_objective' pk=objective.pk %}" class="btn" type="button">{% trans "Cancel" %}</a>
-    </div>
-
-    <div class="control-group">
-      <label class="control-label" for="language">{% trans "Language" %}</label>
-      <div class="controls">
-        {{ form.language }}
-      </div>
-    </div>
-
-    {% if form.code %}
-      <div class="control-group">
-        <label class="control-label" for="code">{% trans "Code" %}</label>
-        <div class="controls">
-          {{ form.code }}
-          {{ form.code.errors }}
-        </div>
-      </div>
+    {% if form.errors %}
+      <p style="color: red;">
+        {% blocktrans with form.errors|pluralize as errors %}Please correct the error {{ errors }} below.{% endblocktrans %}
+      </p>
     {% endif %}
 
-    <div class="row">
-      <div class="span6">
-        <div class="language-container">
+    <form action="" method="post" id="national-objective-edit">
 
-          <div class="control-group">
-            <label class="control-label" for="title">{% trans "Title" %}</label>
-            <div class="controls">
-              {{ form.title }}
-              {{ form.title.errors }}
-            </div>
-          </div>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
+        <a href="{% url 'view_national_objective' pk=objective.pk %}" class="btn" type="button">{% trans "Cancel" %}</a>
+      </div>
 
-          <div class="control-group">
-            <label class="control-label" for="description">{% trans "Description" %}</label>
-            <div class="controls">
-              {{ form.description }}
-              {{ form.description.errors }}
-            </div>
-          </div>
-
+      <div class="control-group">
+        <label class="control-label" for="language">{% trans "Language" %}</label>
+        <div class="controls">
+          {{ form.language }}
         </div>
       </div>
 
-      {% if lang != DEFAULT_LANGUAGE %}
-      {% trans DEFAULT_LANGUAGE_LABEL as default_language_label %}
-      <div class="span6 original-hideout">
-        <p class="original-title">
-            {% blocktrans with default_language_label as language %}Original title in {{ language }}{% endblocktrans %}
-        </p>
-        <div class="well">
-          {{ objective.title_default }}
+      {% if form.code %}
+        <div class="control-group">
+          <label class="control-label" for="code">{% trans "Code" %}</label>
+          <div class="controls">
+            {{ form.code }}
+            {{ form.code.errors }}
+          </div>
         </div>
-
-        <p class="original-description">
-            {% blocktrans with default_language_label as language %}Original description in {{ language }}{% endblocktrans %}
-        </p>
-        <div class="well">
-          {{ objective.description_default|safe }}
-        </div>
-      </div>
       {% endif %}
 
-    </div>
+      <div class="row">
+        <div class="span6">
+          <div class="language-container">
 
-    <div class="form-actions">
-      <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
-      <a href="{% url 'view_national_objective' pk=objective.pk %}" class="btn" type="button">{% trans "Cancel" %}</a>
-    </div>
+            <div class="control-group">
+              <label class="control-label" for="title">{% trans "Title" %}</label>
+              <div class="controls">
+                {{ form.title }}
+                {{ form.title.errors }}
+              </div>
+            </div>
 
-  </form>
+            <div class="control-group">
+              <label class="control-label" for="description">{% trans "Description" %}</label>
+              <div class="controls">
+                {{ form.description }}
+                {{ form.description.errors }}
+              </div>
+            </div>
 
+          </div>
+        </div>
+
+        {% if lang != DEFAULT_LANGUAGE %}
+        {% trans DEFAULT_LANGUAGE_LABEL as default_language_label %}
+        <div class="span6 original-hideout">
+          <p class="original-title">
+              {% blocktrans with default_language_label as language %}Original title in {{ language }}{% endblocktrans %}
+          </p>
+          <div class="well">
+            {{ objective.title_default }}
+          </div>
+
+          <p class="original-description">
+              {% blocktrans with default_language_label as language %}Original description in {{ language }}{% endblocktrans %}
+          </p>
+          <div class="well">
+            {{ objective.description_default|safe }}
+          </div>
+        </div>
+        {% endif %}
+
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
+        <a href="{% url 'view_national_objective' pk=objective.pk %}" class="btn" type="button">{% trans "Cancel" %}</a>
+      </div>
+
+    </form>
+  </div>
 {% endblock %}

@@ -3,6 +3,7 @@
 
 body .navbar-inner {
   filter: none;
+  background: transparent;
 }
 
 body .container, 
@@ -29,20 +30,31 @@ body  .navbar-fixed-bottom .container {
 }
 
 .tooltip.in {
-	filter: alpha(opacity=95);
+	filter:alpha(opacity=95);
 }
 
 .navbar-inner .span2 {
   width: 170px;
 }
 
-.navbar-inner .span8 {
-  width: 770px;
+.navbar-inner .span7 {
+  width: 670px;
+}
+
+.navbar-inner .span3 {
+  width: 270px;
+}
+
+#DataTables_Table_0_wrapper .span6 {
+  width: 569px;
+}
+
+.sign-in .span12 {
+  width: 1170px;
 }
 
 body .global-menu, 
-body .navbar .nav.top-menu, 
-body .site-logo {
-  background: url("semi-transparent-background.png") repeat-x;
+body .navbar .nav.top-menu {
+  background: url("../semi-transparent-background.png") repeat-x;
 }
 

@@ -34,39 +34,41 @@
     </div>
   {% endif %}
 
-  <form method="POST">
+  <div class="tabbable">
+    <h1 class="small">Edit page</h1>
+    <form method="POST">
 
-    <div class="control-group">
-      <label class="control-label" for="{{ form.lang.auto_id }}">
-        {{ form.lang.label }}</label>
-      <div class="controls">
-        {{ form.lang }}
+      <div class="control-group">
+        <label class="control-label" for="{{ form.lang.auto_id }}">
+          {{ form.lang.label }}</label>
+        <div class="controls">
+          {{ form.lang }}
+        </div>
       </div>
-    </div>
 
-    <div class="control-group">
-      <label class="control-label" for="{{ form.title.auto_id }}">
-        {{ form.title.label }}</label>
-      <div class="controls">
-        {% render_field form.title class='input-xxlarge' autofocus='autofocus' %}
-        <div class="text-error">{{ form.title.errors.0 }}</div>
+      <div class="control-group">
+        <label class="control-label" for="{{ form.title.auto_id }}">
+          {{ form.title.label }}</label>
+        <div class="controls">
+          {% render_field form.title class='input-xxlarge' autofocus='autofocus' %}
+          <div class="text-error">{{ form.title.errors.0 }}</div>
+        </div>
       </div>
-    </div>
 
-    <div class="control-group">
-      <label class="control-label" for="{{ form.body.auto_id }}">
-        {{ form.body.label }}</label>
-      <div class="controls">
-        {% render_field form.body class='input-xxlarge' autofocus='autofocus' %}
+      <div class="control-group">
+        <label class="control-label" for="{{ form.body.auto_id }}">
+          {{ form.body.label }}</label>
+        <div class="controls">
+          {% render_field form.body class='input-xxlarge' autofocus='autofocus' %}
+        </div>
       </div>
-    </div>
 
-    <div class="form-actions">
-      {% url 'admin_pages' as pages_url %}
-      <button type="submit" class="btn btn-primary">Save</button>
-      <a href="{{ pages_url }}" class="btn">Cancel</a>
-    </div>
+      <div class="form-actions">
+        {% url 'admin_pages' as pages_url %}
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="{{ pages_url }}" class="btn">Cancel</a>
+      </div>
 
-  </form>
-
+    </form>
+  </div>
 {% endblock %}
