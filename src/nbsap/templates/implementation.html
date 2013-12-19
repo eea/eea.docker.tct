@@ -16,7 +16,12 @@
   {% include "implementation_sidebar.html" %}
 
   <div class="tab-content homepage_view">
-
+    <div class="demosite">
+      <div class="alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Attention! </strong>This is a demo site thus not yet official content.
+      </div>
+    </div>
     <h1>{% trans "Actions related to Objective"%} {{ current_objective.code }}: {{ current_objective.title }} </h1>
 
     <div class="row">
