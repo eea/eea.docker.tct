@@ -12,6 +12,18 @@
       <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
+    <!--[if IE 8]>    
+      {% assets "ie8_css" %}
+        <link rel="stylesheet" href="{{ ASSET_URL }}" />
+      {% endassets %}
+    <![endif]-->
+  
+    <!--[if IE 9]>    
+      {% assets "ie9_css" %}
+        <link rel="stylesheet" href="{{ ASSET_URL }}" />
+      {% endassets %}
+    <![endif]-->
+
     {% assets "css" %}
       <link rel="stylesheet" href="{{ ASSET_URL }}" />
     {% endassets %}
@@ -30,8 +42,16 @@
             </div>
         </div>
         <div class="container">
-          <a class="brand" href="{% url 'goals' %}">{% trans SITE_HEADER %}</a>
-          {% include "navbar.html" %}
+          <div class="row">
+            <div class="span2 site-logo">
+            </div>
+            <div class="span7 site-title">
+              <a class="brand" href="{% url 'goals' %}">{% trans SITE_HEADER %}</a>
+            </div>
+            <div class="span3 language-menu">
+              {% include "navbar.html" %}
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -43,7 +63,7 @@
 
     {% block layout_footer %}
     <footer>
-      <div class="container">
+      <div class="container footer">
         <div class="pull-right">
           <a href="#" class="museum-logo">museum.be logo</a>
         </div>

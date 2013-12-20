@@ -23,84 +23,86 @@
 </div>
 {% endif %}
 
-<h1 class="small">{% trans "Mappings of National Objectives to Aichi and EU targets" %}</h1>
+<div class="tabbable">
+  <h1 class="small">{% trans "Mappings of National Objectives to Aichi and EU targets" %}</h1>
 
-<div class="add-button">
-  <a class="btn btn-small btn-primary add"
-     href="{% url 'edit_national_strategy' %}">{% trans "Add Mapping" %}</a>
-</div>
+  <div class="add-button">
+    <a class="btn btn-small btn-primary add"
+       href="{% url 'edit_national_strategy' %}">{% trans "Add Mapping" %}</a>
+  </div>
 
-<table class="table table-bordered table-striped objectives_listing">
+  <table class="table table-bordered table-striped objectives_listing">
 
-  <thead>
-    <th class="obj-id">{% trans "Objective"%}</th>
-    <th class="goal">{% trans "Goal" %}</th>
-    <th class="">{% trans "Most Relevant Targets" %}</th>
-    <th>{% trans "Other Relevant Targets" %}</th>
-    {% if EU_STRATEGY %}
-        <th>{% trans "EU Targets" %}</th>
-        <th>{% trans "EU Actions" %}</th>
-    {% endif %}
-    <th>{% trans "Edit" %}</th>
-    <th>{% trans "Delete" %}</th>
-  </thead>
-
-  <tbody>
-  {% for strategy in strategies %}
-    <tr>
-      <div class="st" code = strategy.id style="display:none"></div>
-      <td class="strategy" code=strategy.id>
-        <a href="{% url 'view_national_objective' pk=strategy.objective.pk %}">
-          {{ strategy.objective.code }}</a>
-      </td>
-      {% with strategy.relevant_target as target %}
-      <td>
-        <a href="{% url 'goals' code=target.get_parent_goal.code %}">
-          {{ target.get_parent_goal.code|title }}</a>
-      </td>
-      <td>
-         <a href="">{{ target.code }} </a>
-      </td>
-      {% endwith %}
-      <td>
-         {% if strategy.other_targets.all %}
-             {% for target in strategy.other_targets.all %}
-               <a href="">{{ target.code }}</a>
-               {% if not forloop.last %},{% endif %}
-             {% endfor %}
-         {% endif %}
-      </td>
+    <thead>
+      <th class="obj-id">{% trans "Objective"%}</th>
+      <th class="goal">{% trans "Goal" %}</th>
+      <th class="">{% trans "Most Relevant Targets" %}</th>
+      <th>{% trans "Other Relevant Targets" %}</th>
       {% if EU_STRATEGY %}
-          <td>
-             {% if strategy.eu_targets.all %}
-               {% for eu_target in strategy.eu_targets.all %}
-                 <a href="">{{ eu_target.code }}</a>
-                 {% if not forloop.last %},{% endif %}
-               {% endfor %}
-             {% endif %}
-          </td>
-          <td>
-             {% if strategy.eu_actions.all %}
-               {% for action in strategy.eu_actions.all %}
-                 <a href="">{% trans "Action" %} {{ action.code }}</a>
-                 {% if not forloop.last %},{% endif %}
-               {% endfor %}
-             {% endif %}
-          </td>
+          <th>{% trans "EU Targets" %}</th>
+          <th>{% trans "EU Actions" %}</th>
       {% endif %}
-      <td style="text-align: center;">
-        <a class="btn btn-mini btn-primary add"
-            href="{% url 'edit_national_strategy' pk=strategy.pk %}">{% trans "Edit" %}</a>
-      </td>
-      <td style="text-align: center;">
-        <a class="btn btn-mini btn-danger" href="" code={{strategy.id }}>
-          {% trans "Delete" %}</a>
-      </td>
-    </tr>
-  {% endfor %}
-  </tbody>
+      <th>{% trans "Edit" %}</th>
+      <th>{% trans "Delete" %}</th>
+    </thead>
 
-</table>
+    <tbody>
+    {% for strategy in strategies %}
+      <tr>
+        <div class="st" code = strategy.id style="display:none"></div>
+        <td class="strategy" code=strategy.id>
+          <a href="{% url 'view_national_objective' pk=strategy.objective.pk %}">
+            {{ strategy.objective.code }}</a>
+        </td>
+        {% with strategy.relevant_target as target %}
+        <td>
+          <a href="{% url 'goals' code=target.get_parent_goal.code %}">
+            {{ target.get_parent_goal.code|title }}</a>
+        </td>
+        <td>
+           <a href="">{{ target.code }} </a>
+        </td>
+        {% endwith %}
+        <td>
+           {% if strategy.other_targets.all %}
+               {% for target in strategy.other_targets.all %}
+                 <a href="">{{ target.code }}</a>
+                 {% if not forloop.last %},{% endif %}
+               {% endfor %}
+           {% endif %}
+        </td>
+        {% if EU_STRATEGY %}
+            <td>
+               {% if strategy.eu_targets.all %}
+                 {% for eu_target in strategy.eu_targets.all %}
+                   <a href="">{{ eu_target.code }}</a>
+                   {% if not forloop.last %},{% endif %}
+                 {% endfor %}
+               {% endif %}
+            </td>
+            <td>
+               {% if strategy.eu_actions.all %}
+                 {% for action in strategy.eu_actions.all %}
+                   <a href="">{% trans "Action" %} {{ action.code }}</a>
+                   {% if not forloop.last %},{% endif %}
+                 {% endfor %}
+               {% endif %}
+            </td>
+        {% endif %}
+        <td style="text-align: center;">
+          <a class="btn btn-mini btn-primary add"
+              href="{% url 'edit_national_strategy' pk=strategy.pk %}">{% trans "Edit" %}</a>
+        </td>
+        <td style="text-align: center;">
+          <a class="btn btn-mini btn-danger" href="" code={{strategy.id }}>
+            {% trans "Delete" %}</a>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+
+  </table>
+</div>
 {% endblock %}
 
 

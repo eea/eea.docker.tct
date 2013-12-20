@@ -16,36 +16,40 @@
 {% endif %}
 
 {% if form.errors %}
-  <p>{% trans "Your username and password didn't match. Please try again." %}</p>
+  <div class="alert alert-warning">
+    <p>{% trans "Your username and password didn't match. Please try again." %}</p>
+  </div>
 {% endif %}
 
-<div class="span11">
-  <form class="form-inline"method="post" action="{% url 'login' %}">
-    <fieldset>
-      <legend>{% trans "Existing Users Login" %}</legend>
-      <div class="control-group">
-        <label class="control-label" for="inputIcon">{% trans "Username" %}</label>
-        <div class="controls">
-          <div class="input-prepend">
-            <span class="add-on"><i class="icon-user"></i></span>
-            <input id="id_username" class="span2" name="username" type="text">
+<div class="row sign-in">
+  <div class="span12">
+    <form class="form-inline" method="post" action="{% url 'login' %}">
+      <fieldset>
+        <legend>{% trans "Existing Users Login" %}</legend>
+        <div class="control-group">
+          <label class="control-label" for="inputIcon">{% trans "Username" %}</label>
+          <div class="controls">
+            <div class="input-prepend">
+              <span class="add-on"><i class="icon-user"></i></span>
+              <input id="id_username" class="span2" name="username" type="text">
+            </div>
           </div>
         </div>
-      </div>
-      <div class="control-group">
-        <label class="control-label" for="inputIcon">{% trans "Password" %}</label>
-        <div class="controls">
-          <div class="input-prepend">
-            <span class="add-on"><i class="icon-lock"></i></span>
-            <input id="id_password" class="span2" name="password" type="password">
+        <div class="control-group">
+          <label class="control-label" for="inputIcon">{% trans "Password" %}</label>
+          <div class="controls">
+            <div class="input-prepend">
+              <span class="add-on"><i class="icon-lock"></i></span>
+              <input id="id_password" class="span2" name="password" type="password">
+            </div>
           </div>
         </div>
-      </div>
-      {% csrf_token %}
-      <input type="hidden" name="next" value="{{ next }}" />
-      <button type="submit" class="btn btn-primary">{% trans "Login" %}</button>
-    </fieldset>
-  </form>
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}" />
+        <button type="submit" class="btn btn-primary">{% trans "Login" %}</button>
+      </fieldset>
+    </form>
+  </div>
 </div>
 
 {% endblock %}
