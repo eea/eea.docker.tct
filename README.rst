@@ -168,7 +168,7 @@ Create new nbsap instance
     # activate virtualenv
     . /var/local/nbsap-django/sandbox/bin/activate
     ./var/local/nbsap-django/instance_<country>/manage.py syncdb
-    ./var/local/nbsap-django/instance_<country>/manage.py migrate
+    ./var/local/nbsap-django/instance_<country>/manage.py load_fixtures
 
 5. Start process using supervisor::
     # edit supervisord.conf based on /var/local/nbsap-django/supervisord.conf.sample
