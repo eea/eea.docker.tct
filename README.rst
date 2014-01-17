@@ -157,7 +157,7 @@ Create new nbsap instance
     cp /var/local/nbsap-django/local_settings.py.example /var/local/nbsap-django/instance_<country>/local_settings.py
     cp /var/local/nbsap-django/manage.py /var/local/nbsap-django/instance_<country>/manage.py
     # edit database info in local_settings.py
-    vim /var/local/nbsap-django/instance_<country>/manage.py
+    vim /var/local/nbsap-django/instance_<country>/local_settings.py
 
 3. Create database::
     mysql -u root -p
