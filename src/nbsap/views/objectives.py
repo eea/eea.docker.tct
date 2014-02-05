@@ -20,7 +20,7 @@ def nat_strategy(request, code=None):
         code = objectives[0].code
 
     current_objective = get_object_or_404(models.NationalObjective, code=code)
-    objectives = models.NationalObjective.objects.filter(parent=None).all()
+    objectives = models.NationalObjective.objects.filter(parent=None).order_by('id').all()
 
     current_objective.objectives_tree = current_objective.get_all_objectives()
     actions = [i for i in current_objective.actions.all()]
