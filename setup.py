@@ -17,6 +17,6 @@ setup(
 
     install_requires=[
         'django == 1.5.1',
-        'mysql-python == 1.2.4',
+        'mysql-python == 1.2.5',
     ]
 )
