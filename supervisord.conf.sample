@@ -1,6 +1,6 @@
 [program:nbsap]
 directory=PROJECT_ROOT/
-command=PROJECT_ROOT/sandbox/bin/python PROJECT_ROOT/manage.py run_gunicorn --bind=127.0.0.1:7000 --workers=2 --log-file=PROJECT_ROOT/gunicorn.log
+command=PROJECT_ROOT/sandbox/bin/python PROJECT_ROOT/instance/manage.py run_gunicorn --bind=127.0.0.1:7000 --workers=2 --log-file=PROJECT_ROOT/gunicorn.log
 autostart=true
 autorestart=true
 redirect_stderr=true
