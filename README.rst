@@ -122,6 +122,7 @@ Tune Apache to proxy-pass and serve static files for the app::
 Build staging
 -------------
 ::
+
   # copy and adjust env dict in fabfile.py.sample
   # then define own Fabric file
   $ cp fabfile.py.sample fabfile.py
