@@ -1,5 +1,5 @@
 ===============================================
-NBSAP Quick Installation Guide for TODO
+Quick Installation Guide for NBSAP platform
 ===============================================
 
 .. contents ::
@@ -26,7 +26,7 @@ elements from AICHI) in the purpose of building it.
 Prerequisites - System packages
 -------------------------------
 These should be installed by the sysadmin (needs root)
-This buildout was tested on linux (debian based and RHEL based)
+This buildout was tested on RHEL based-linux.
 
 RHEL based systems
 ~~~~~~~~~~~~~~~~~
@@ -41,35 +41,49 @@ Bring out puias repo for python 2.7::
 
 Copy the following lines into the above mentioned file::
   [PUIAS_6_computational]
+
   name=PUIAS computational Base $releasever - $basearch
+
   mirrorlist=http://puias.math.ias.edu/data/puias/computational/$releasever/$basearch/mirrorlist
+
   #baseurl=http://puias.math.ias.edu/data/puias/computational/$releasever/$basearch
+
   gpgcheck=1
+
   gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-puias
 
 Download and import the Repo GPG key::
   $ cd /etc/pki/rpm-gpg/
+
   $ wget -q http://springdale.math.ias.edu/data/puias/6/x86_64/os/RPM-GPG-KEY-puias
+
   $ rpm --import RPM-GPG-KEY-puias
 
 Install python packages::
   $ sudo bash
+
   $ yum install python27 python27-devel python27-libs python27-setuptools git
+
   $ yum install mysql-devel mysql-server
+
   $ service mysqld restart
+
   $ easy_install-2.7 virtualenv
 
 Product directory
 ~~~~~~~~~~~~~~~~
 ::
   $ mkdir -p /var/local/nbsap
+
   $ chown -R [USER]:[USER] /var/local/nbsap
+
   $ exit
 
 Build production
 ----------------
 Copy and adjust env dict in fabfile.py.sample::
   # then define own Fabric file
+
   $ cp fabfile.py.sample fabfile.py
 
 Deploy code on remote host::
@@ -84,20 +98,32 @@ Prepare database on remote machine::
 
 Configure supervisord on remote machine::
   $ cp supervisord.conf.sample production-venv/supervisord.conf
+
   # edit production-venv/supervisord.conf with corresponding PROJECT_ROOT path
+
   $ supervisord
+
   # double check system is running with no errors
+
   $ supervisorctl
 
 Tune Apache to proxy-pass and serve static files for the app::
   # Add the following entry to http conf files
+
   #    <VirtualHost *:80>
+
   #      ServerName nbsap...
+
   #      Alias /static/admin /var/local/nbsap/django/production-venv/lib/python2.7/site-packages/django/contrib/admin/static/admin
+
   #      Alias /static /var/local/nbsap/django/src/nbsap/static
+
   #      ProxyPass /static !
+
   #      ProxyPass / http://localhost:[PORT]/
+
   #      ProxyPassReverse / http://localhost:[PORT]/
+
   #    </VirtualHost>
 
 
@@ -105,6 +131,7 @@ Build staging
 -------------
 Copy and adjust env dict in fabfile.py.sample::
   # then define own Fabric file
+
   $ cp fabfile.py.sample fabfile.py
 
 Deploy code on remote host::
@@ -119,34 +146,55 @@ Prepare database on remote machine::
 
 Configure supervisord on remote machine::
   $ cp supervisord.conf.sample staging-venv/supervisord.conf
+
   # edit staging-venv/supervisord.conf with corresponding PROJECT_ROOT path
+
   $ supervisord
+
   # double check system is running with no errors
+
   $ supervisorctl
 
 Tune Apache to proxy-pass and serve static files for the app::
   # Add the following entry to http conf files
+
   #    <VirtualHost *:80>
+
   #      ServerName nbsap...
+
   #      Alias /static/admin /var/local/nbsap/django/staging-venv/lib/python2.7/site-packages/django/contrib/admin/static/admin
+
   #      Alias /static /var/local/nbsap/django/src/nbsap/static
+
   #      ProxyPass /static !
+
   #      ProxyPass / http://localhost:[PORT]/
+
   #      ProxyPassReverse / http://localhost:[PORT]/
+
   #    </VirtualHost>
 
 Build devel
 -------------
 ::
   $ cd /var/local/nbsap
+
   $ git clone https://github.com/eea/nbsap.git django
+
   $ cd django
+
   $ virtualenv-2.7 --no-site-packages sandbox
+
   $ echo '*' > sandbox/.gitignore
+
   $ . sandbox/bin/activate
+
   $ pip install -U distribute
+
   $ pip install -r requirements.txt
+
   $ pip install -e .
+
   $ cp instance/local_settings.py.example instance/local_settings.py
 
 Select preferred languages::
@@ -162,6 +210,7 @@ Tune up manage.py script::
 
 Continue build devel by syncing database model and loading fixtures::
   $ ./instance/manage.py syncdb
+
   $ ./instance/manage.py load_fixtures
 
 Run the tests to check the validity of your installation::
@@ -177,33 +226,43 @@ Translation files
 For translations there are two methods.
 
 1. Manual translation
+
 Run over the entire source tree and pull out all strings marked for translation::
   $ cd src/nbsap
   $ django-admin.py makemessages -a
 
-
-Edit <msgstr> for each <msgid> in nbsap/locale/_LANGUAGE_/LC_MESSAGE/django.po
+Edit <msgstr> for each <msgid> in nbsap/locale/_LANGUAGE_/LC_MESSAGE/django.po::
 
 Compile .po file created with previous command::
     cd src/nbsap
-    django-admin.py compilemessages
 
+    django-admin.py compilemessages
 
 Restart server::
   # if devel mode
+
   $ ./instance/manage.py runserver
+
   # otherwise
+
   $ supervisorctl
+
   supervisor> restart nbsap
 
 2. Automatic translation::
 
   # make sure 'DEBUG=True' in instance/local_settings.py
+
   # automatically generate an admin user when starting server
+
   $ ./instance/manage.py runserver
+
   # surf over [HOST]:[PORT]/translate to use Rosetta tool for translation
+
   # complete the forms within the correct translations
+
   # restart server when ready
+
   $ ./instance/manage.py runserver
 
 
@@ -215,8 +274,8 @@ The project owner is Franz Daffner (franz.daffner at eaa.europa.eu)
 Other people involved in this project are::
  - Cornel Nițu (cornel.nitu at eaudeweb.ro)
  - Miruna Bădescu (miruna.badescu at eaudeweb.ro)
- - Mihai Tabara (mihai.tabara at eaudeweb.ro)
- - Dragos Catarahia (dragos.catarahia at eaudeweb.ro)
+ - Mihai Tabără (mihai.tabara at eaudeweb.ro)
+ - Dragoș Catarahia (dragos.catarahia at eaudeweb.ro)
 
 
 =========
