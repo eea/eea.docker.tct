@@ -79,8 +79,9 @@ Product directory
 
 Build production
 ----------------
-Copy and adjust env dict in fabfile.py.sample::
+::
 
+  # copy and adjust env dict in fabfile.py.sample
   # then define own Fabric file
   $ cp fabfile.py.sample fabfile.py
 
@@ -120,8 +121,8 @@ Tune Apache to proxy-pass and serve static files for the app::
 
 Build staging
 -------------
-Copy and adjust env dict in fabfile.py.sample::
-
+::
+  # copy and adjust env dict in fabfile.py.sample
   # then define own Fabric file
   $ cp fabfile.py.sample fabfile.py
 
@@ -229,10 +230,11 @@ Restart server::
   $ supervisorctl
   supervisor> restart nbsap
 
-2. Automatic translation::
+2. Automatic translation
 
-  # make sure 'DEBUG=True' in instance/local_settings.py
-  # automatically generate an admin user when starting server
+Make sure 'DEBUG=True' in instance/local_settings.py so that an admin user is
+automatically generated when starting sever::
+
   $ ./instance/manage.py runserver
   # surf over [HOST]:[PORT]/translate to use Rosetta tool for translation
   # complete the forms within the correct translations
