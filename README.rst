@@ -1,183 +1,250 @@
-Product owner:
--------
-    * Franz Daffner
-    * franz.daffner@eea.europa.eu
+===============================================
+NBSAP Quick Installation Guide for TODO
+===============================================
 
-Min. hardware resources
--------
+.. contents ::
 
-    * [CPU] Single Core >= 2.5 GHz
-    * [RAM] 1024 MB
-    * [Hard disc] current necessary < 1 GB
-    * [Hard disc] 6 months forecast <= 20 GB
-    * [NIC] 100 Mbit
+Following this readme will create an isolated environment for running NBSAP platform.
+There are three configurations available for running this buildout::
+  1. production (production)
+  2. testing (staging)
+  3. development (devel)
 
-About
--------
-National Biodiversity Strategies and Action Plan (or simply NBSAP)
-is a platform for organizing the implementation of a country's
+Project name and whereabouts
+----------------------------
+The project name is National Biodiversity Strategies and Action Plan (or simply NBSAP).
+It is a platform for organizing the implementation of a country's
 national biodiversity strategy after AICHI (and by case after EU Strategy).
 It consists of two panels each corresponding an operation: viewing and editing.
-
 The first panel allows anyone to overview the aichi goals, targets and
 indicators along with national strategy mappings (the way a country develops its
 own strategy in terms of objectives and actions) and its implementation.
-
 The second panel(Admin), authentication-available only, allows an user to actually define
 the national strategy. (e.g. add/modify/delete an objective, action or even
 elements from AICHI) in the purpose of building it.
 
+Prerequisites - System packages
+-------------------------------
+These should be installed by the sysadmin (needs root)
+This buildout was tested on linux (debian based and RHEL based)
+
+RHEL based systems
+~~~~~~~~~~~~~~~~~
+We will need pip to install some python related packages for versions greater
+than the python shipped with RHEL 6.5. We will also need additional repos: PUIAS
+
+Install prerequisites::
+  $ yum install openssl-devel vim wget
+
+Bring out puias repo for python 2.7::
+  $ touch /etc/yum.repos.d/puias-computational.repo
+
+Copy the following lines into the above mentioned file::
+  [PUIAS_6_computational]
+  name=PUIAS computational Base $releasever - $basearch
+  mirrorlist=http://puias.math.ias.edu/data/puias/computational/$releasever/$basearch/mirrorlist
+  #baseurl=http://puias.math.ias.edu/data/puias/computational/$releasever/$basearch
+  gpgcheck=1
+  gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-puias
+
+Download and import the Repo GPG key::
+  $ cd /etc/pki/rpm-gpg/
+  $ wget -q http://springdale.math.ias.edu/data/puias/6/x86_64/os/RPM-GPG-KEY-puias
+  $ rpm --import RPM-GPG-KEY-puias
+
+Install python packages::
+  $ sudo bash
+  $ yum install python27 python27-devel python27-libs python27-setuptools git
+  $ yum install mysql-devel mysql-server
+  $ service mysqld restart
+  $ easy_install-2.7 virtualenv
+
+Product directory
+~~~~~~~~~~~~~~~~
+::
+  $ mkdir -p /var/local/nbsap
+  $ chown -R [USER]:[USER] /var/local/nbsap
+  $ exit
+
+Build production
+----------------
+Copy and adjust env dict in fabfile.py.sample::
+  # then define own Fabric file
+  $ cp fabfile.py.sample fabfile.py
+
+Deploy code on remote host::
+  $ fab install target=production
+
+Login on remote machine::
+  # activate production-venv virtualenv
+
+Prepare database on remote machine::
+  mysql> create database nbsap DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+  mysql> grant all on nbsap.* to nbsap@localhost identified by 'nbsap';
+
+Configure supervisord on remote machine::
+  $ cp supervisord.conf.sample production-venv/supervisord.conf
+  # edit production-venv/supervisord.conf with corresponding PROJECT_ROOT path
+  $ supervisord
+  # double check system is running with no errors
+  $ supervisorctl
+
+Tune Apache to proxy-pass and serve static files for the app::
+  # Add the following entry to http conf files
+  #    <VirtualHost *:80>
+  #      ServerName nbsap...
+  #      Alias /static/admin /var/local/nbsap/django/production-venv/lib/python2.7/site-packages/django/contrib/admin/static/admin
+  #      Alias /static /var/local/nbsap/django/src/nbsap/static
+  #      ProxyPass /static !
+  #      ProxyPass / http://localhost:[PORT]/
+  #      ProxyPassReverse / http://localhost:[PORT]/
+  #    </VirtualHost>
 
 
-NBSAP Quick Installation Guide
-=====
-0. Prerequisites packages if missing::
+Build staging
+-------------
+Copy and adjust env dict in fabfile.py.sample::
+  # then define own Fabric file
+  $ cp fabfile.py.sample fabfile.py
 
-    python-setuptools python-dev mysql-server libmysqlclient-dev virtualenv
-    Python 2.7.3 - compiled or by native system
+Deploy code on remote host::
+  $ fab install
 
+Login on remote machine::
+  # activate staging-venv virtualenv
 
-1. Clone the repository::
+Prepare database on remote machine::
+  mysql> create database nbsap DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+  mysql> grant all on nbsap.* to nbsap@localhost identified by 'nbsap';
 
-    git clone git@github.com:eea/nbsap.git nbsap
-    cd nbsap
+Configure supervisord on remote machine::
+  $ cp supervisord.conf.sample staging-venv/supervisord.conf
+  # edit staging-venv/supervisord.conf with corresponding PROJECT_ROOT path
+  $ supervisord
+  # double check system is running with no errors
+  $ supervisorctl
 
+Tune Apache to proxy-pass and serve static files for the app::
+  # Add the following entry to http conf files
+  #    <VirtualHost *:80>
+  #      ServerName nbsap...
+  #      Alias /static/admin /var/local/nbsap/django/staging-venv/lib/python2.7/site-packages/django/contrib/admin/static/admin
+  #      Alias /static /var/local/nbsap/django/src/nbsap/static
+  #      ProxyPass /static !
+  #      ProxyPass / http://localhost:[PORT]/
+  #      ProxyPassReverse / http://localhost:[PORT]/
+  #    </VirtualHost>
 
-2. Create & activate a virtual environment (with Pyhon 2.7.3)::
+Build devel
+-------------
+::
+  $ cd /var/local/nbsap
+  $ git clone https://github.com/eea/nbsap.git django
+  $ cd django
+  $ virtualenv-2.7 --no-site-packages sandbox
+  $ echo '*' > sandbox/.gitignore
+  $ . sandbox/bin/activate
+  $ pip install -U distribute
+  $ pip install -r requirements.txt
+  $ pip install -e .
+  $ cp instance/local_settings.py.example instance/local_settings.py
 
-    virtualenv --no-site-packages sandbox
-    echo '*' > sandbox/.gitignore
-    . sandbox/bin/activate
+Select preferred languages::
+  # edit instance/local_settings.py and filter the preferred languages
 
+Prepare database::
+  mysql> create database nbsap DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+  mysql> grant all on nbsap.* to nbsap@localhost identified by 'nbsap';
 
-3. Install dependecies & others::
+Tune up manage.py script::
+  The first line should define the python executable used to run the script. This should be the path to your virtualenv's python. In this particular case it should be:
+  #!/var/local/nbsap/django/sandbox/bin/python
 
-    pip install -U distribute
-    pip install -r requirements.txt
-    pip install -e .
+Continue build devel by syncing database model and loading fixtures::
+  $ ./instance/manage.py syncdb
+  $ ./instance/manage.py load_fixtures
 
+Run the tests to check the validity of your installation::
+  $ ./instance/manage.py test nbsap
 
-4. Setup local-settings.py::
-   Assuming the root of your project is ROOT_PROJECT, copy the following file ROOT_PROJECT/instance/local_settings.py.example to ROOT_PROJECT/instance/local_settings.py
-
-
-5. Setup database - see section below::
-
-
-6. Run the tests to check the validity of your installation::
-    ./instance/manage.py test nbsap
-
-
-
-
-7. Run a test server(see http://127.0.0.1:8000 afterwards)::
-    ./instance/manage.py runserver
-
-
-
-MySQL Database deployment
-=====
-0. To set the database, check prerequisites and dependecies::
-
-
-1. Then create and configure database as follows::
-    create database nbsap DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
-    grant all on nbsap.* to nbsap@localhost identified by 'nbsap';
-
-
-2.  Allow Django to automatically create all tables by doing the following::
-    ./instance/manage.py syncdb
-    ./instance/manage.py load_fixtures
-
-
-
-Production deployment
-=====
-0. Copy and adjust env dict in fabfile.py.sample::
-
-1.1. Deploy code on remote host::
-    fab install
-
-1.2. Login on remote machine and activate the sandbox::
+Start running development server::
+  $ ./instance/manage.py runserver
 
 
-1.3 Setup the database as above
-
-2. Configure supervisord.conf (see sample) in root::
-
-
-3. Start supervisor daemon(make sure to have its conf file in path - e.g. place it in sandbox)::
-    supervisord
-
-4. Use supervisor controller to control the application::
-    supervisorctl
-
-
-i18n deployment
-=====
-0. For translations there are two methods.
+=================
+Translation files
+=================
+For translations there are two methods.
 
 1. Manual translation
-1.1 Run over the entire source tree and pull out all strings marked for translation::
-    cd src/nbsap
-    django-admin.py makemessages -a
+Run over the entire source tree and pull out all strings marked for translation::
+  $ cd src/nbsap
+  $ django-admin.py makemessages -a
 
 
-1.2 Edit <msgstr> for each <msgid> in nbsap/locale/_LANGUAGE_/LC_MESSAGE/django.po
+Edit <msgstr> for each <msgid> in nbsap/locale/_LANGUAGE_/LC_MESSAGE/django.po
 
-
-1.3 Compile .po file created with previous command::
+Compile .po file created with previous command::
     cd src/nbsap
     django-admin.py compilemessages
 
 
-1.4 Restart testing server::
-    ./instance/manage.py runserver
+Restart server::
+  # if devel mode
+  $ ./instance/manage.py runserver
+  # otherwise
+  $ supervisorctl
+  supervisor> restart nbsap
 
 2. Automatic translation::
-2.1 Make sure 'DEBUG = True' in the instance/local_settings.py - to automatically generate an admin user
 
-2.1 Surf over http://127.0.0.1:8000/translate to use Rosetta tool for translation
+  # make sure 'DEBUG=True' in instance/local_settings.py
+  # automatically generate an admin user when starting server
+  $ ./instance/manage.py runserver
+  # surf over [HOST]:[PORT]/translate to use Rosetta tool for translation
+  # complete the forms within the correct translations
+  # restart server when ready
+  $ ./instance/manage.py runserver
 
-2.2 Complete the forms within the correct translations
 
-2.3 Restart testing server::
-    ./instance/manage.py runserver
+========
+Contacts
+========
+The project owner is Franz Daffner (franz.daffner at eaa.europa.eu)
+
+Other people involved in this project are::
+ - Cornel Nițu (cornel.nitu at eaudeweb.ro)
+ - Miruna Bădescu (miruna.badescu at eaudeweb.ro)
+ - Mihai Tabara (mihai.tabara at eaudeweb.ro)
+ - Dragos Catarahia (dragos.catarahia at eaudeweb.ro)
 
 
-Create new nbsap instance
-=========================
+=========
+Resources
+=========
+Minimum requirements:
+ * [CPU] Single Core >= 2.5 GHz
+ * [RAM] 2048 MB
+ * [Hard disc] current necessary < 1 GB
+ * [Hard disc] 6 months forecast <= 10 GB
+ * [NIC] 100 Mbit
 
-1. Create instance folder::
-    sudo su - edw
-    cd /var/local/nbsap-django/
-    mkdir instance_<country>
 
-2. Copy config files::
-    cp /var/local/nbsap-django/local_settings.py.example /var/local/nbsap-django/instance_<country>/local_settings.py
-    cp /var/local/nbsap-django/manage.py /var/local/nbsap-django/instance_<country>/manage.py
-    # edit database info in local_settings.py
-    vim /var/local/nbsap-django/instance_<country>/local_settings.py
+=====================
+Copyright and license
+=====================
+Copyright 2007 European Environment Agency (EEA)
 
-3. Create database::
-    mysql -u root -p
-    mysql> create database nbsap_<country> DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
-    mysql> grant all on nbsap_<country>.* to nbsap@localhost identified by 'nbsap';
+Licensed under the EUPL, Version 1.1 or – as soon they will be approved
+by the European Commission - subsequent versions of the EUPL (the "Licence");
 
-4. Create tables::
-    # activate virtualenv
-    . /var/local/nbsap-django/sandbox/bin/activate
-    ./var/local/nbsap-django/instance_<country>/manage.py syncdb
-    ./var/local/nbsap-django/instance_<country>/manage.py load_fixtures
+You may not use this work except in compliance with the Licence.
 
-5. Start process using supervisor::
-    # edit supervisord.conf based on /var/local/nbsap-django/supervisord.conf.sample
-    vim /var/local/nbsap-django/sandbox/supervisord.conf
-    supervisord
-    supervisorctl
-    supervisorctl> reread
-    supervisorctl> update
+You may obtain a copy of the Licence at:
+https://joinup.ec.europa.eu/software/page/eupl/licence-eupl
 
-6. Configure apache::
-    # edit apache conf file as root
-    vim /etc/httpd/conf.d/nbsap.conf
+Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+See the Licence for the specific language governing permissions and limitations under the Licence.
+

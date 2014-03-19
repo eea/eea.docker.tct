@@ -76,8 +76,14 @@ env['nbsap_target_defs'] = {
     'staging': {
         'host_string': 'user@host',
         'nbsap_repo':     '/var/local/project-root',
-        'nbsap_sandbox':  '/var/local/project-root/sandbox',
-        'nbsap_instance': '/var/local/project-root',
+        'nbsap_sandbox':  '/var/local/project-root/staging-venv',
+        'nbsap_instance': '/var/local/project-root/instance',
+    },
+    'production': {
+        'host_string': 'user@host',
+        'nbsap_repo':     '/var/local/project-root',
+        'nbsap_sandbox':  '/var/local/project-root/production-venv',
+        'nbsap_instance': '/var/local/project-root/instance',
     },
 }
 
