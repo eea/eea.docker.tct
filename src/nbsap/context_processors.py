@@ -8,6 +8,7 @@ def nbsap_admin(request):
     return {
         'EU_STRATEGY': getattr(settings, 'EU_STRATEGY', False),
         'SITE_HEADER': getattr(settings, 'SITE_HEADER', 'NBSAP'),
+        'WARNING_MESSAGE': getattr(settings, 'WARNING_MESSAGE', ''),
         'DEFAULT_LANGUAGE': default_lang,
         'DEFAULT_LANGUAGE_LABEL': dict(settings.LANGUAGES)[default_lang],
     }

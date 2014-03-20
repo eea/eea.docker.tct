@@ -14,7 +14,7 @@ a {
   cursor: pointer;
 }
 
-input, 
+input,
 textarea {
   color: #333 !important;
 }
@@ -174,7 +174,7 @@ dl.phrases dd {
 .breadcrumb {
   overflow: hidden;
 }
-.breadcrumb, 
+.breadcrumb,
 .breadcrumb li {
   list-style-type: none !important;
 }
@@ -727,7 +727,7 @@ div.element_field {
 
 /*.nav-tabs {
 	border-bottom: 1px solid #014E46;
-} 
+}
 
 .nav-tabs > li > a {
 	color: #014E46;
@@ -1047,7 +1047,7 @@ body .obj-id {
 body {
   padding: 0px;
 	font-family: Arial, sans-serif;
-  background: url("../landscape.png") 0% 0% no-repeat; /* header photo is taken from http://www.publicdomainpictures.net/view-image.php?image=26775&picture=autumn-forest&jazyk=EN , 
+  background: url("../landscape.png") 0% 0% no-repeat; /* header photo is taken from http://www.publicdomainpictures.net/view-image.php?image=26775&picture=autumn-forest&jazyk=EN ,
   please use your own photo instead. The photo size should be 1920x200px */
 }
 
@@ -1068,7 +1068,7 @@ body {
   color: #fff;
 }
 
-.navbar .nav li.dropdown .dropdown-toggle .caret, 
+.navbar .nav li.dropdown .dropdown-toggle .caret,
 .navbar .nav li.dropdown.open .caret {
   border-top-color: rgb(255, 255, 255);
 }
@@ -1097,7 +1097,7 @@ body {
   min-width: 60px;
 }
 
-.tabbable { 
+.tabbable {
   background: rgb(255, 255, 255);
 }
 
@@ -1122,7 +1122,7 @@ body {
   padding-top: 10px;
 }
 
-.global-menu.nav-tabs > .active > a, 
+.global-menu.nav-tabs > .active > a,
 .global-menu.nav-tabs > .active > a:hover {
   border: 0px;
   background: transparent;
@@ -1155,13 +1155,39 @@ body {
   color: rgb(248, 207, 102);
 }
 
-.navbar .nav li.dropdown .dropdown-toggle .caret:hover, 
+.navbar .nav li.dropdown .dropdown-toggle .caret:hover,
 .navbar .nav li.dropdown.open .caret:hover {
   border-top-color: rgb(248, 207, 102);
 }
 
 
 /* content */
+.warning-demo {
+  margin-bottom: 0;
+  margin-top: 32px;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+}
+
+.exclamation-demo {
+  float:left;
+  margin-right: 10px;
+  font-size: 24px;
+  line-height: 24px;
+  display: block;
+  font-weight: bold;
+  padding: 6px;
+  border: 2px solid #c09853;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  background-color: rgba(192, 152, 83, 0.2);
+}
+
 .sign-in form {
   background: #fff;
   padding: 0px 20px;

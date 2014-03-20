@@ -12,13 +12,13 @@
       <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <!--[if IE 8]>    
+    <!--[if IE 8]>
       {% assets "ie8_css" %}
         <link rel="stylesheet" href="{{ ASSET_URL }}" />
       {% endassets %}
     <![endif]-->
-  
-    <!--[if IE 9]>    
+
+    <!--[if IE 9]>
       {% assets "ie9_css" %}
         <link rel="stylesheet" href="{{ ASSET_URL }}" />
       {% endassets %}
@@ -52,6 +52,14 @@
     {% endblock %}
 
     <div class="container content">
+      {% if WARNING_MESSAGE %}
+      <div class="alert alert-warning warning-demo">
+        <div style="exclamation-demo">!</div>
+          {{ if WARNING_MESSAGE }}
+        </div>
+      </div>
+      {% endif %}
+
       {% block content %}{% endblock %}
     </div>
 
