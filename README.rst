@@ -106,17 +106,28 @@ Configure supervisord on remote machine::
   # double check system is running with no errors
   $ supervisorctl
 
+Tune Django to serve static files::
+
+ $ cd /var/local/project-root
+ $ mkdir static
+ $ echo "STATIC_ROOT = '/var/local/project-root/static'" >> instance/local_settings.py
+ $ ./instance/manage.py collectstatic --noinput
+
 Tune Apache to proxy-pass and serve static files for the app::
 
   # Add the following entry to http conf files
   #    <VirtualHost *:80>
   #      ServerName nbsap...
-  #      Alias /static/admin /var/local/nbsap/django/production-venv/lib/python2.7/site-packages/django/contrib/admin/static/admin
-  #      Alias /static /var/local/nbsap/django/src/nbsap/static
+  #      Alias /static /var/local/project-root/static
   #      ProxyPass /static !
   #      ProxyPass / http://localhost:[PORT]/
   #      ProxyPassReverse / http://localhost:[PORT]/
   #    </VirtualHost>
+
+
+Restart Apache to load new changes::
+
+  $ service httpd reload
 
 
 Build staging
@@ -148,17 +159,29 @@ Configure supervisord on remote machine::
   # double check system is running with no errors
   $ supervisorctl
 
+Tune Django to serve static files::
+
+ $ cd /var/local/project-root
+ $ mkdir static
+ $ echo "STATIC_ROOT = '/var/local/project-root/static'" >> instance/local_settings.py
+ $ ./instance/manage.py collectstatic --noinput
+
 Tune Apache to proxy-pass and serve static files for the app::
 
   # Add the following entry to http conf files
   #    <VirtualHost *:80>
   #      ServerName nbsap...
-  #      Alias /static/admin /var/local/nbsap/django/staging-venv/lib/python2.7/site-packages/django/contrib/admin/static/admin
-  #      Alias /static /var/local/nbsap/django/src/nbsap/static
+  #      Alias /static /var/local/project-root/static
   #      ProxyPass /static !
   #      ProxyPass / http://localhost:[PORT]/
   #      ProxyPassReverse / http://localhost:[PORT]/
   #    </VirtualHost>
+
+
+Restart Apache to load new changes::
+
+  $ service httpd reload
+
 
 
 Build devel
