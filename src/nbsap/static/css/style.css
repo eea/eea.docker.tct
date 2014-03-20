@@ -1164,29 +1164,11 @@ body {
 /* content */
 .warning-demo {
   margin-bottom: 0;
-  margin-top: 32px;
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
   border-radius: 0px;
 }
 
-.exclamation-demo {
-  float:left;
-  margin-right: 10px;
-  font-size: 24px;
-  line-height: 24px;
-  display: block;
-  font-weight: bold;
-  padding: 6px;
-  border: 2px solid #c09853;
-  width: 24px;
-  height: 24px;
-  text-align: center;
-  border-radius: 50%;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  background-color: rgba(192, 152, 83, 0.2);
-}
 
 .sign-in form {
   background: #fff;
