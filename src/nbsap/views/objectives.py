@@ -12,6 +12,7 @@ from nbsap.forms import NationalObjectiveForm, NationalObjectiveEditForm
 from auth import auth_required
 
 def nat_strategy(request, code=None):
+
     objectives = models.NationalObjective.objects.all()
     if len(objectives) == 0:
         return render(request, 'objectives/empty_nat_strategy.html')

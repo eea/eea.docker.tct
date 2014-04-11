@@ -14,7 +14,7 @@
 
   <label class="nav-header">{% trans "Objectives" %}</label>
   <ul class="nav nav-tabs nav-stacked local-navigation">
-    {% for objective in objectives %}
+    {% for objective in objectives|sort_by_code %}
       <li {% if objective.code == current_objective.code %}class="active"{% endif %}>
         <a href="{% url 'nat_strategy' code=objective.code %}" title="{{ objective.code }}">
           {% trans "Objective" %} {{ objective.code }}
