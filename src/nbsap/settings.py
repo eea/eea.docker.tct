@@ -105,6 +105,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.i18n',
     'nbsap.context_processors.nbsap_admin',
     'nbsap.context_processors.nbsap_navbar_link',
+    'nbsap.context_processors.google_analytics',
 )
 
 # List of callables that know how to import templates from various sources.
@@ -223,7 +224,7 @@ CSS_ASSETS = (
 
 
 ASSETS_ROOT = '/var/local/nbsap-django/src/nbsap/static'
-
+WARNING_MESSAGE = 'Demo data based on the Biodiversity Strategy 2006-2016 and the third national report from Belgium - NOT UPDATED AND NOT REFLECTING the actual SITUATION IN BELGIUM'
 
 try:
     from local_settings import *
