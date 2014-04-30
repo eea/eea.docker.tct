@@ -1,3 +1,4 @@
+{% load utils %}
 {% load i18n %}
 
 <ul class="nav nav-tabs nav-stacked local-navigation">
@@ -9,7 +10,7 @@
   <li style="margin-top: 10px;">
     <label class="nav-header">{% trans "Actions related to" %}</label>
   </li>
-  {% for objective in objectives %}
+  {% for objective in objectives|sort_by_code %}
     <li {% if objective.code == current_objective.code %}class="active"{% endif %}>
       <a href="{% url 'implementation' code=objective.code %}">
         {% trans "Objective"%} {{ objective.code }}
