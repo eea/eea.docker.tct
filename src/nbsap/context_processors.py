@@ -16,3 +16,12 @@ def nbsap_admin(request):
 
 def nbsap_navbar_link(request):
     return {'navbar_links': NavbarLink.objects.all()}
+
+
+def google_analytics(request):
+    ga_prop_id = getattr(settings, 'GOOGLE_ANALYTICS_PROPERTY_ID', False)
+    if not settings.DEBUG and ga_prop_id:
+        return {
+            'GOOGLE_ANALYTICS_PROPERTY_ID': ga_prop_id,
+        }
+    return {}
