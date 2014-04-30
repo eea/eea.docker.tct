@@ -224,7 +224,7 @@ CSS_ASSETS = (
 
 
 ASSETS_ROOT = '/var/local/nbsap-django/src/nbsap/static'
-WARNING_MESSAGE = 'Demo data based on the Biodiversity Strategy 2006-2016 and the third national report from Belgium - NOT UPDATED AND NOT REFLECTING the actual SITUATION IN BELGIUM'
+
 
 try:
     from local_settings import *
