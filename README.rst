@@ -87,7 +87,7 @@ Build production
 
 Deploy code on remote host::
 
-  $ fab install target=production
+  $ fab install:target=production
 
 Login on remote machine::
 
