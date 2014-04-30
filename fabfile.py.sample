@@ -74,16 +74,19 @@ COUNTRIES = [('andorra', 'Andorra'),
 
 env['nbsap_target_defs'] = {
     'staging': {
-        'host_string': 'user@host',
-        'nbsap_repo':     '/var/local/project-root',
-        'nbsap_sandbox':  '/var/local/project-root/staging-venv',
-        'nbsap_instance': '/var/local/project-root/instance',
+        'host_string': 'edw@nbsap.eaudeweb.ro',
+        'nbsap_repo':     '/var/local/nbsap-staging',
+        'nbsap_sandbox':  '/var/local/nbsap-staging/sandbox',
+        'nbsap_instance': '/var/local/nbsap-staging',
+        'supervisor_process': 'nbsap-staging',
+
     },
     'production': {
-        'host_string': 'user@host',
-        'nbsap_repo':     '/var/local/project-root',
-        'nbsap_sandbox':  '/var/local/project-root/production-venv',
-        'nbsap_instance': '/var/local/project-root/instance',
+        'host_string': 'edw@nbsap.eaudeweb.ro',
+        'nbsap_repo':     '/var/local/nbsap-django',
+        'nbsap_sandbox':  '/var/local/nbsap-django/sandbox',
+        'nbsap_instance': '/var/local/nbsap-django/instance',
+        'supervisor_process': 'nbsap',
     },
 }
 
@@ -139,7 +142,7 @@ def supervisor(root, command):
 @task
 @choose_target
 def restart():
-    supervisor(env['nbsap_repo'], "restart nbsap")
+    supervisor(env['nbsap_repo'], "restart %s" % env['supervisor_process'])
 
 
 @task
