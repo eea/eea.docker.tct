@@ -225,7 +225,6 @@ CSS_ASSETS = (
 
 ASSETS_ROOT = '/var/local/nbsap-django/src/nbsap/static'
 
-
 try:
     from local_settings import *
 except ImportError:
