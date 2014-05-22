@@ -67,16 +67,27 @@
     </div>
 
     <div class="row">
-      <ul>
-        {% for action in actions|sort_by_code %}
-          <li>
-            <a href="#{{ action.id }}">Action {{ action.id }}
-              {% if action.title %}({{ action.title }}){% endif %}</a>
-          </li>
-        {% empty %}
-          <li>No related actions found</li>
+      {% for obj_actions in actions_by_objectives %}
+        {% for obj, actions in obj_actions.items %}
+        <label>
+          {% trans "Actions related with objective" %} {{ obj }}:</label>
+          <ul>
+          {% for action in actions %}
+            <li>
+              <a href="#{{ action.id }}">
+                {% if action.title %}
+                  {{ action.title }}
+                {% else %}
+                  {{ action.description|slice:":50"|safe }}
+                {% endif %}
+              </a>
+            </li>
+          {% endfor %}
+          </ul>
         {% endfor %}
-      </ul>
+      {% empty %}
+        <p>No related actions found</p>
+      {% endfor %}
     </div>
 
     {% for subobj in current_objective.objectives_tree %}
