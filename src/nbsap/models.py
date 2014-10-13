@@ -188,19 +188,15 @@ class NationalObjective(models.Model):
         return self.title
 
     @staticmethod
-    def pre_save_objective_code(**kwargs):
+    def pre_save_objective_code_on_create(instance):
+        """Logic executed before saving a new Objective instance.
 
-        if kwargs['raw'] is True:
-            return  #ignore when loading initial_data
-
-        instance = kwargs['instance']
-
-        if instance.code:
-            return  #ignore on edit
-
+        Set the next code for the objective.
+        """
         if instance.parent:
             codes = [ ob.code for ob in instance.parent.children.all() if ob ]
-            #if parent objective has children the increment the last childen's code
+            # if parent objective has children the increment the last childen's
+            # code
             if codes:
                 codes.sort(key=lambda x: [int(y) for y in x.split('.')])
                 parts = codes[-1].split('.')
@@ -220,6 +216,40 @@ class NationalObjective(models.Model):
             codes.sort(key=lambda s: int(s))
             last_code = codes[-1]
             instance.code = '{0}'.format(int(last_code)+1)
+
+    @staticmethod
+    def pre_save_objective_code_on_edit(instance):
+        """Logic executed before editing an Objective instance.
+
+        Update the code for every child and sub-objective to match
+        the parent objective.
+        """
+        for child in instance.children.all():
+            if not child:
+                continue
+
+            parts = child.code.split('.')
+            suffix_code = parts[-1]
+            child.code = '{0}.{1}'.format(instance.code, suffix_code)
+            child.save()
+
+        # update the action code for each child action
+        for action in instance.actions.all():
+            action.code = instance.code
+            action.save()
+
+    @staticmethod
+    def pre_save_objective_code(**kwargs):
+
+        if kwargs['raw'] is True:
+            return  #ignore when loading initial_data
+
+        instance = kwargs['instance']
+
+        if instance.code:
+            NationalObjective.pre_save_objective_code_on_edit(instance)
+        else:
+            NationalObjective.pre_save_objective_code_on_create(instance)
 
     def get_all_objectives(self):
         #we should use https://github.com/django-mptt/django-mptt/

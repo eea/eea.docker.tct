@@ -75,6 +75,34 @@ class NationalObjectiveTest(BaseWebTest):
                                     title_en=data['title'],
                                     description_en=data['description'])
 
+    def test_edit_national_objective_code(self):
+        nat_obj = NationalObjectiveFactory()
+        nat_subobj = NationalObjectiveFactory(parent=nat_obj)
+        edited_code = '42'
+        data = {
+            'language': nat_obj.language,
+            'code': edited_code,
+            'title': nat_obj.title,
+            'description': nat_obj.description,
+        }
+        url = reverse('edit_national_objective', kwargs={'pk': nat_obj.pk})
+        resp = self.app.get(url, user='staff')
+        self.assertEqual(200, resp.status_code)
+
+        form = resp.forms['national-objective-edit']
+        self.populate_fields(form, data)
+        form.submit().follow()
+        self.assertObjectInDatabase('NationalObjective', pk=1,
+                                    title_en=data['title'],
+                                    description_en=data['description'],
+                                    code=edited_code)
+
+        self.assertObjectInDatabase('NationalObjective', pk=2,
+                                    title_en=data['title'],
+                                    description_en=data['description'],
+                                    code='{0}.1'.format(edited_code),
+                                    parent=nat_obj)
+
     def test_edit_national_objective_fail_code(self):
         nat_obj = NationalObjectiveFactory()
         nat_obj_2 = NationalObjectiveFactory()
