@@ -77,10 +77,11 @@ class NationalObjectiveTest(BaseWebTest):
 
     def test_edit_national_objective_code(self):
         nat_obj = NationalObjectiveFactory()
-        nat_subobj = NationalObjectiveFactory(parent=nat_obj)
+        old_code = '1.1'
+        nat_subobj = NationalObjectiveFactory(parent=nat_obj, code=old_code)
         edited_code = '42'
         data = {
-            'language': nat_obj.language,
+            'language': 'en',
             'code': edited_code,
             'title': nat_obj.title,
             'description': nat_obj.description,
@@ -98,8 +99,8 @@ class NationalObjectiveTest(BaseWebTest):
                                     code=edited_code)
 
         self.assertObjectInDatabase('NationalObjective', pk=2,
-                                    title_en=data['title'],
-                                    description_en=data['description'],
+                                    title_en=nat_subobj.title_en,
+                                    description_en=nat_subobj.description_en,
                                     code='{0}.1'.format(edited_code),
                                     parent=nat_obj)
 
