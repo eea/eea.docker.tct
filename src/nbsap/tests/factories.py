@@ -1,5 +1,8 @@
 import factory
+
+from nbsap import models
 from django.contrib.auth.models import User
+from django.db.models.signals import pre_save
 
 
 class StaffUserFactory(factory.DjangoModelFactory):
@@ -32,6 +35,16 @@ class NationalObjectiveFactory(factory.DjangoModelFactory):
         if extracted:
             for action in extracted:
                 self.actions.add(action)
+
+    @classmethod
+    def _generate(cls, create, attrs):
+        """Override the default _generate() to disable the pre-save signal."""
+        pre_save.disconnect(models.NationalObjective.pre_save_objective_code,
+                            models.NationalObjective)
+        obj = super(NationalObjectiveFactory, cls)._generate(create, attrs)
+        pre_save.connect(models.NationalObjective.pre_save_objective_code,
+                         models.NationalObjective)
+        return obj
 
 
 class NationalActionFactory(factory.DjangoModelFactory):
