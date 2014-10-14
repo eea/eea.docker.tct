@@ -75,7 +75,8 @@ class NationalObjectiveTest(BaseWebTest):
                                     title_en=data['title'],
                                     description_en=data['description'])
 
-    def test_edit_national_objective_code(self):
+    def test_edit_national_objective_code_updates_subobjective_code(self):
+        """Test code prefix of subobjective is changed on parent code edit."""
         nat_obj = NationalObjectiveFactory()
         old_code = '1.1'
         nat_subobj = NationalObjectiveFactory(parent=nat_obj, code=old_code)
