@@ -78,8 +78,7 @@ class NationalObjectiveTest(BaseWebTest):
     def test_edit_national_objective_code_updates_subobjective_code(self):
         """Test code prefix of subobjective is changed on parent code edit."""
         nat_obj = NationalObjectiveFactory()
-        old_code = '1.1'
-        nat_subobj = NationalObjectiveFactory(parent=nat_obj, code=old_code)
+        nat_subobj = NationalObjectiveFactory(parent=nat_obj, code='1.1')
         edited_code = '42'
         data = {
             'language': 'en',
@@ -95,6 +94,8 @@ class NationalObjectiveTest(BaseWebTest):
         self.populate_fields(form, data)
         form.submit().follow()
 
+        # Prefix should be changed from 1 to 42 in order to match the
+        # new parent code.
         self.assertObjectInDatabase('NationalObjective', pk=2,
                                     title_en=nat_subobj.title_en,
                                     description_en=nat_subobj.description_en,
