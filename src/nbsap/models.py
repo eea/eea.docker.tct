@@ -225,9 +225,6 @@ class NationalObjective(models.Model):
         the parent objective.
         """
         for child in instance.children.all():
-            if not child:
-                continue
-
             parts = child.code.split('.')
             suffix_code = parts[-1]
             child.code = '{0}.{1}'.format(instance.code, suffix_code)
