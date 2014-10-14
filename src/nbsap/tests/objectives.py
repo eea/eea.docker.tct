@@ -94,10 +94,6 @@ class NationalObjectiveTest(BaseWebTest):
         form = resp.forms['national-objective-edit']
         self.populate_fields(form, data)
         form.submit().follow()
-        self.assertObjectInDatabase('NationalObjective', pk=1,
-                                    title_en=data['title'],
-                                    description_en=data['description'],
-                                    code=edited_code)
 
         self.assertObjectInDatabase('NationalObjective', pk=2,
                                     title_en=nat_subobj.title_en,
