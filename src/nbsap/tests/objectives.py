@@ -101,6 +101,30 @@ class NationalObjectiveTest(BaseWebTest):
                                     code='{0}.1'.format(edited_code),
                                     parent=nat_obj)
 
+    def test_edit_national_objective_code_updates_action_code(self):
+        """Test action code is changed on parent code edit."""
+        nat_act = NationalActionFactory()
+        nat_obj = NationalObjectiveFactory(actions=(nat_act,))
+        edited_code = '42'
+        data = {
+            'language': 'en',
+            'code': edited_code,
+            'title': nat_obj.title,
+            'description': nat_obj.description,
+        }
+        url = reverse('edit_national_objective', kwargs={'pk': nat_obj.pk})
+        resp = self.app.get(url, user='staff')
+        self.assertEqual(200, resp.status_code)
+
+        form = resp.forms['national-objective-edit']
+        self.populate_fields(form, data)
+        form.submit().follow()
+
+        self.assertObjectInDatabase('NationalAction', pk=1,
+                                    title_en=nat_act.title_en,
+                                    description_en=nat_act.description_en,
+                                    code=edited_code)
+
     def test_edit_national_objective_fail_code(self):
         nat_obj = NationalObjectiveFactory()
         nat_obj_2 = NationalObjectiveFactory()
