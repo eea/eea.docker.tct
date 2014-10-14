@@ -188,7 +188,7 @@ class NationalObjective(models.Model):
         return self.title
 
     @staticmethod
-    def pre_save_objective_code_on_create(instance):
+    def _pre_save_objective_code_on_create(instance):
         """Logic executed before saving a new Objective instance.
 
         Set the next code for the objective.
@@ -218,7 +218,7 @@ class NationalObjective(models.Model):
             instance.code = '{0}'.format(int(last_code)+1)
 
     @staticmethod
-    def pre_save_objective_code_on_edit(instance):
+    def _pre_save_objective_code_on_edit(instance):
         """Logic executed before editing an Objective instance.
 
         Update the code for every child and sub-objective to match
@@ -244,9 +244,9 @@ class NationalObjective(models.Model):
         instance = kwargs['instance']
 
         if instance.code:
-            NationalObjective.pre_save_objective_code_on_edit(instance)
+            NationalObjective._pre_save_objective_code_on_edit(instance)
         else:
-            NationalObjective.pre_save_objective_code_on_create(instance)
+            NationalObjective._pre_save_objective_code_on_create(instance)
 
     def get_all_objectives(self):
         #we should use https://github.com/django-mptt/django-mptt/
