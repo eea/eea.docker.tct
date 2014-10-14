@@ -224,11 +224,11 @@ class NationalObjective(models.Model):
         Update the code for every child and sub-objective to match
         the parent objective.
         """
-        for child in instance.children.all():
-            parts = child.code.split('.')
+        for objective in instance.children.all():
+            parts = objective.code.split('.')
             suffix_code = parts[-1]
-            child.code = '{0}.{1}'.format(instance.code, suffix_code)
-            child.save()
+            objective.code = '{0}.{1}'.format(instance.code, suffix_code)
+            objective.save()
 
         # update the action code for each child action
         for action in instance.actions.all():
