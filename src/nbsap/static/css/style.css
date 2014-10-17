@@ -1183,3 +1183,12 @@ footer .container {
 }
 /* end generic theme */
 
+
+.info-header {
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.info-header > ul {
+  list-style: none;
+}

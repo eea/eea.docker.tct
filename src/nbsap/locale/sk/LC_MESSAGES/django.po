@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-03 04:09-0600\n"
+"POT-Creation-Date: 2014-10-17 17:53+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,14 +18,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: forms.py:25
+#: forms.py:24
 #, python-format
 msgid "%(code)s is not a valid code. (Ex: 1.1)"
 msgstr ""
 
 #: forms.py:263 templates/actions/add_national_action.html:42
 #: templates/actions/edit_national_action.html:43
-#: templates/goals/edit_goals.html:34
 #: templates/objectives/add_national_objectives.html:47
 #: templates/objectives/edit_national_objective.html:47
 msgid "Language"
@@ -33,10 +32,9 @@ msgstr ""
 
 #: forms.py:264 templates/actions/add_national_action.html:53
 #: templates/actions/edit_national_action.html:54
-#: templates/goals/edit_goals.html:45
 #: templates/objectives/add_national_objectives.html:58
 #: templates/objectives/edit_national_objective.html:68
-#: templates/objectives/list_national_objectives.html:42
+#: templates/objectives/list_national_objectives.html:45
 msgid "Title"
 msgstr ""
 
@@ -104,19 +102,19 @@ msgstr ""
 msgid "Related Links"
 msgstr ""
 
-#: models.py:303
+#: models.py:330
 msgid "Indicator type"
 msgstr ""
 
-#: settings.py:43
+#: settings.py:46
 msgid "English"
 msgstr ""
 
-#: settings.py:44
+#: settings.py:47
 msgid "French"
 msgstr ""
 
-#: settings.py:45
+#: settings.py:48
 msgid "Dutch"
 msgstr ""
 
@@ -124,56 +122,53 @@ msgstr ""
 msgid "Exit from administration"
 msgstr ""
 
-#: templates/admin_nav_tabs.html:9
-msgid "Goals"
-msgstr ""
-
-#: templates/admin_nav_tabs.html:14 templates/nav_tabs.html:17
+#: templates/admin_nav_tabs.html:9 templates/nav_tabs.html:17
 #: templates/mapping/nat_strategy.html:6
 msgid "National Strategy"
 msgstr ""
 
-#: templates/admin_nav_tabs.html:18
+#: templates/admin_nav_tabs.html:13
 msgid "Mapping"
 msgstr ""
 
-#: templates/admin_nav_tabs.html:22
+#: templates/admin_nav_tabs.html:17
 msgid "Intro Page"
 msgstr ""
 
 #: templates/eu_targets.html:5 templates/eu_targets.html.py:13
-#: templates/mapping/add_national_strategy.html:80
-#: templates/mapping/edit_national_strategy.html:79
-#: templates/mapping/list_national_strategy.html:41
+#: templates/mapping/add_national_strategy.html:81
+#: templates/mapping/edit_national_strategy.html:80
+#: templates/mapping/list_national_strategy.html:42
+#: templates/mapping/nat_strategy_eu_mapping.html:13
 msgid "EU Targets"
 msgstr ""
 
-#: templates/eu_targets.html:18 templates/eu_targets.html.py:26
-#: templates/eu_targets.html:94 templates/goals.html:49
-#: templates/goals.html.py:58 templates/goals.html:68
+#: templates/eu_targets.html:18 templates/eu_targets.html.py:94
 #: templates/mapping/nat_action_aichi_mapping.html:25
 #: templates/mapping/nat_action_aichi_mapping.html:39
-#: templates/mapping/nat_strategy_aichi_mapping.html:25
-#: templates/mapping/nat_strategy_aichi_mapping.html:40
 #: templates/mapping/nat_strategy_eu_mapping.html:16
 msgid "Target"
+msgstr ""
+
+#: templates/eu_targets.html:26 templates/goals.html:85
+msgid "EU Target"
 msgstr ""
 
 #: templates/eu_targets.html:30 templates/objectives/nat_strategy.html:43
 msgid "Table of contents"
 msgstr ""
 
-#: templates/eu_targets.html:34 templates/implementation.html:63
+#: templates/eu_targets.html:34 templates/implementation.html:62
 #: templates/objectives/view_national_objective.html:116
 msgid "No actions found"
 msgstr ""
 
-#: templates/eu_targets.html:50 templates/implementation.html:31
-#: templates/implementation.html.py:42
+#: templates/eu_targets.html:50 templates/implementation.html:30
+#: templates/implementation.html.py:41
 #: templates/actions/actions_breadcrumb.html:14
 #: templates/actions/view_national_action.html:6
 #: templates/actions/view_national_action.html:14
-#: templates/mapping/list_national_strategy.html:85
+#: templates/mapping/list_national_strategy.html:86
 #: templates/mapping/nat_strategy_eu_mapping.html:30
 #: templates/objectives/view_national_objective.html:108
 msgid "Action"
@@ -196,20 +191,20 @@ msgstr ""
 msgid "Mapping with Aichi Strategy"
 msgstr ""
 
-#: templates/eu_targets.html:111 templates/goals.html:78
+#: templates/eu_targets.html:111 templates/goals.html:95
 msgid "Mapping with National Strategy"
 msgstr ""
 
 #: templates/eu_targets.html:119 templates/eu_targets.html.py:123
-#: templates/goals.html:89 templates/implementation_sidebar.html:15
+#: templates/goals.html:106 templates/implementation_sidebar.html:16
 #: templates/actions/actions_breadcrumb.html:10
-#: templates/mapping/list_national_strategy.html:36
+#: templates/mapping/list_national_strategy.html:37
 #: templates/objectives/empty_nat_strategy.html:21
-#: templates/objectives/list_national_objectives.html:51
+#: templates/objectives/list_national_objectives.html:54
 #: templates/objectives/nat_strategy.html:20
 #: templates/objectives/nat_strategy.html:31
 #: templates/objectives/nat_strategy.html:62
-#: templates/objectives/nat_strategy.html:84
+#: templates/objectives/nat_strategy.html:95
 #: templates/objectives/nat_strategy_export_preview.html:9
 #: templates/objectives/objectives_breadcrumb.html:11
 #: templates/objectives/objectives_breadcrumb.html:15
@@ -219,8 +214,8 @@ msgstr ""
 msgid "Objective"
 msgstr ""
 
-#: templates/eu_targets.html:139 templates/goals.html:152
-#: templates/implementation.html:58
+#: templates/eu_targets.html:139 templates/goals.html:169
+#: templates/implementation.html:57
 msgid "Back to top"
 msgstr ""
 
@@ -232,38 +227,75 @@ msgstr ""
 msgid "AICHI Goals"
 msgstr ""
 
-#: templates/goals.html:29 templates/goals.html.py:36
-#: templates/goals/list_goals.html:34
-#: templates/mapping/list_national_strategy.html:37
+#: templates/goals.html:29 templates/mapping/list_national_strategy.html:38
 #: templates/mapping/nat_action_aichi_mapping.html:12
 #: templates/mapping/nat_action_aichi_mapping.html:15
-#: templates/mapping/nat_strategy_aichi_mapping.html:11
-#: templates/mapping/nat_strategy_aichi_mapping.html:14
 msgid "Goal"
 msgstr ""
 
-#: templates/goals.html:61
+#: templates/goals.html:42
+msgid "What is The 2020 Target Cross-linking Tool?"
+msgstr ""
+
+#: templates/goals.html:43
+msgid ""
+"A solution for multiple target reporting (Aichi targets, EU biodiversity "
+"strategy and other reporting obligations)"
+msgstr ""
+
+#: templates/goals.html:44
+msgid ""
+"A stand alone application - free of charge - to be completely “owned” by "
+"user countries"
+msgstr ""
+
+#: templates/goals.html:46
+msgid "Available in national and English languages"
+msgstr ""
+
+#: templates/goals.html:47
+msgid "Ready with Aichi targets and EU targets already integrated in English"
+msgstr ""
+
+#: templates/goals.html:48
+msgid "For further info contact EEA (Rania.Spyropoulou at eea.europa.eu)"
+msgstr ""
+
+#: templates/goals.html:53 templates/mapping/add_national_strategy.html:52
+#: templates/mapping/edit_national_strategy.html:51
+#: templates/mapping/nat_strategy_aichi_mapping.html:11
+#: templates/mapping/nat_strategy_aichi_mapping.html:14
+msgid "AICHI Goal"
+msgstr ""
+
+#: templates/goals.html:66 templates/goals.html.py:75
+#: templates/mapping/nat_strategy_aichi_mapping.html:25
+#: templates/mapping/nat_strategy_aichi_mapping.html:40
+msgid "AICHI Target"
+msgstr ""
+
+#: templates/goals.html:78
 msgid "Mapping with EU targets"
 msgstr ""
 
-#: templates/goals.html:84
+#: templates/goals.html:101
 msgid "details"
 msgstr ""
 
-#: templates/goals.html:97
+#: templates/goals.html:114
 msgid "Mapping with EU indicators"
 msgstr ""
 
-#: templates/goals.html:119
+#: templates/goals.html:136
 msgid "Most relevant CBD indicators"
 msgstr ""
 
-#: templates/goals.html:126 templates/goals.html.py:142
+#: templates/goals.html:143 templates/goals.html.py:159
 #: templates/indicators/indicator_details.html:4
 msgid "Indicator"
 msgstr ""
 
-#: templates/goals.html:135
+#: templates/goals.html:152
 msgid "Other relevant CBD indicators"
 msgstr ""
 
@@ -271,23 +303,23 @@ msgstr ""
 msgid "Implementation homepage"
 msgstr ""
 
-#: templates/implementation.html:20
+#: templates/implementation.html:19
 msgid "Actions related to Objective"
 msgstr ""
 
-#: templates/implementation.html:47 templates/objectives/nat_strategy.html:88
+#: templates/implementation.html:46 templates/objectives/nat_strategy.html:99
 msgid "show more"
 msgstr ""
 
-#: templates/implementation.html:54 templates/objectives/nat_strategy.html:92
+#: templates/implementation.html:53 templates/objectives/nat_strategy.html:103
 msgid "show less"
 msgstr ""
 
-#: templates/implementation_sidebar.html:6
+#: templates/implementation_sidebar.html:7
 msgid "Intro"
 msgstr ""
 
-#: templates/implementation_sidebar.html:10
+#: templates/implementation_sidebar.html:11
 msgid "Actions related to"
 msgstr ""
 
@@ -334,9 +366,8 @@ msgstr ""
 
 #: templates/actions/add_national_action.html:30
 #: templates/actions/edit_national_action.html:31
-#: templates/goals/edit_goals.html:22
-#: templates/mapping/add_national_strategy.html:29
-#: templates/mapping/edit_national_strategy.html:28
+#: templates/mapping/add_national_strategy.html:30
+#: templates/mapping/edit_national_strategy.html:29
 #: templates/objectives/add_national_objectives.html:30
 #: templates/objectives/edit_national_objective.html:35
 #, python-format
@@ -347,11 +378,10 @@ msgstr ""
 #: templates/actions/add_national_action.html:73
 #: templates/actions/edit_national_action.html:38
 #: templates/actions/edit_national_action.html:94
-#: templates/goals/edit_goals.html:29 templates/goals/edit_goals.html.py:85
-#: templates/mapping/add_national_strategy.html:36
-#: templates/mapping/add_national_strategy.html:97
-#: templates/mapping/edit_national_strategy.html:35
-#: templates/mapping/edit_national_strategy.html:97
+#: templates/mapping/add_national_strategy.html:37
+#: templates/mapping/add_national_strategy.html:98
+#: templates/mapping/edit_national_strategy.html:36
+#: templates/mapping/edit_national_strategy.html:98
 #: templates/objectives/add_national_objectives.html:37
 #: templates/objectives/add_national_objectives.html:78
 #: templates/objectives/edit_national_objective.html:42
@@ -363,11 +393,10 @@ msgstr ""
 #: templates/actions/add_national_action.html:74
 #: templates/actions/edit_national_action.html:39
 #: templates/actions/edit_national_action.html:95
-#: templates/goals/edit_goals.html:30 templates/goals/edit_goals.html.py:86
-#: templates/mapping/add_national_strategy.html:37
-#: templates/mapping/add_national_strategy.html:98
-#: templates/mapping/edit_national_strategy.html:36
-#: templates/mapping/edit_national_strategy.html:98
+#: templates/mapping/add_national_strategy.html:38
+#: templates/mapping/add_national_strategy.html:99
+#: templates/mapping/edit_national_strategy.html:37
+#: templates/mapping/edit_national_strategy.html:99
 #: templates/objectives/add_national_objectives.html:43
 #: templates/objectives/add_national_objectives.html:80
 #: templates/objectives/add_national_objectives.html:82
@@ -378,7 +407,6 @@ msgstr ""
 
 #: templates/actions/add_national_action.html:61
 #: templates/actions/edit_national_action.html:62
-#: templates/goals/edit_goals.html:53
 #: templates/objectives/add_national_objectives.html:66
 #: templates/objectives/edit_national_objective.html:76
 msgid "Description"
@@ -390,14 +418,12 @@ msgid "Edit action"
 msgstr ""
 
 #: templates/actions/edit_national_action.html:76
-#: templates/goals/edit_goals.html:67
 #: templates/objectives/edit_national_objective.html:90
 #, python-format
 msgid "Original title in %(language)s"
 msgstr ""
 
 #: templates/actions/edit_national_action.html:83
-#: templates/goals/edit_goals.html:74
 #: templates/objectives/edit_national_objective.html:97
 #, python-format
 msgid "Original description in %(language)s"
@@ -409,15 +435,15 @@ msgid "Back"
 msgstr ""
 
 #: templates/actions/view_national_action.html:24
-#: templates/mapping/list_national_strategy.html:44
-#: templates/mapping/list_national_strategy.html:93
+#: templates/mapping/list_national_strategy.html:45
+#: templates/mapping/list_national_strategy.html:94
 #: templates/objectives/view_national_objective.html:40
 msgid "Edit"
 msgstr ""
 
 #: templates/actions/view_national_action.html:27
-#: templates/mapping/list_national_strategy.html:45
-#: templates/mapping/list_national_strategy.html:97
+#: templates/mapping/list_national_strategy.html:46
+#: templates/mapping/list_national_strategy.html:98
 #: templates/objectives/view_national_objective.html:43
 msgid "Delete"
 msgstr ""
@@ -426,54 +452,37 @@ msgstr ""
 msgid "Are you sure you want to delete this action?"
 msgstr ""
 
-#: templates/goals/edit_goals.html:5 templates/goals/edit_goals.html.py:18
-msgid "Edit goal"
-msgstr ""
-
-#: templates/goals/list_goals.html:5
-msgid "List goals"
-msgstr ""
-
-#: templates/goals/list_goals.html:33
-msgid "ID"
-msgstr ""
-
-#: templates/indicators/indicators.html:6
-msgid "Indicators"
+#: templates/admin/base_site.html:4
+msgid "Django site admin"
 msgstr ""
 
 #: templates/mapping/add_national_strategy.html:5
 msgid "Add national strategy"
 msgstr ""
 
-#: templates/mapping/add_national_strategy.html:24
-#: templates/mapping/edit_national_strategy.html:24
+#: templates/mapping/add_national_strategy.html:25
+#: templates/mapping/edit_national_strategy.html:25
 msgid "Mapping National Objectives"
 msgstr ""
 
-#: templates/mapping/add_national_strategy.html:41
-#: templates/mapping/edit_national_strategy.html:40
+#: templates/mapping/add_national_strategy.html:42
+#: templates/mapping/edit_national_strategy.html:41
 msgid "National Objective"
 msgstr ""
 
-#: templates/mapping/add_national_strategy.html:51
-#: templates/mapping/edit_national_strategy.html:50
-msgid "AICHI Strategic Goal"
+#: templates/mapping/add_national_strategy.html:62
+#: templates/mapping/edit_national_strategy.html:61
+msgid "Most relevant AICHI Target"
 msgstr ""
 
-#: templates/mapping/add_national_strategy.html:61
-#: templates/mapping/edit_national_strategy.html:60
-msgid "Relevant AICHI Target"
-msgstr ""
-
-#: templates/mapping/add_national_strategy.html:69
-#: templates/mapping/edit_national_strategy.html:68
+#: templates/mapping/add_national_strategy.html:70
+#: templates/mapping/edit_national_strategy.html:69
 msgid "Other AICHI Targets"
 msgstr ""
 
-#: templates/mapping/add_national_strategy.html:88
-#: templates/mapping/edit_national_strategy.html:87
-#: templates/mapping/list_national_strategy.html:42
+#: templates/mapping/add_national_strategy.html:89
+#: templates/mapping/edit_national_strategy.html:88
+#: templates/mapping/list_national_strategy.html:43
 msgid "EU Actions"
 msgstr ""
 
@@ -485,23 +494,23 @@ msgstr ""
 msgid "List national strategies"
 msgstr ""
 
-#: templates/mapping/list_national_strategy.html:26
+#: templates/mapping/list_national_strategy.html:27
 msgid "Mappings of National Objectives to Aichi and EU targets"
 msgstr ""
 
-#: templates/mapping/list_national_strategy.html:30
+#: templates/mapping/list_national_strategy.html:31
 msgid "Add Mapping"
 msgstr ""
 
-#: templates/mapping/list_national_strategy.html:38
+#: templates/mapping/list_national_strategy.html:39
 msgid "Most Relevant Targets"
 msgstr ""
 
-#: templates/mapping/list_national_strategy.html:39
+#: templates/mapping/list_national_strategy.html:40
 msgid "Other Relevant Targets"
 msgstr ""
 
-#: templates/mapping/list_national_strategy.html:127
+#: templates/mapping/list_national_strategy.html:129
 msgid "Are you sure you want to delete this mapping?"
 msgstr ""
 
@@ -524,17 +533,13 @@ msgstr ""
 msgid "Mapping with EU"
 msgstr ""
 
-#: templates/mapping/nat_strategy_eu_mapping.html:13
-msgid "Targets"
-msgstr ""
-
 #: templates/mapping/nat_strategy_eu_mapping.html:27
 msgid "Related EU actions"
 msgstr ""
 
 #: templates/objectives/add_national_objectives.html:6
 #: templates/objectives/add_national_objectives.html:26
-#: templates/objectives/list_national_objectives.html:34
+#: templates/objectives/list_national_objectives.html:37
 msgid "Add objective"
 msgstr ""
 
@@ -547,7 +552,7 @@ msgid "Edit objective"
 msgstr ""
 
 #: templates/objectives/edit_national_objective.html:55
-#: templates/objectives/list_national_objectives.html:41
+#: templates/objectives/list_national_objectives.html:44
 #: templates/objectives/view_national_objective.html:67
 #: templates/objectives/view_national_objective.html:97
 msgid "Code"
@@ -577,11 +582,15 @@ msgstr ""
 msgid "No sub-objectives found"
 msgstr ""
 
-#: templates/objectives/nat_strategy.html:101
+#: templates/objectives/nat_strategy.html:73
+msgid "Actions related with objective"
+msgstr ""
+
+#: templates/objectives/nat_strategy.html:112
 msgid "Related actions"
 msgstr ""
 
-#: templates/objectives/nat_strategy.html:107
+#: templates/objectives/nat_strategy.html:118
 #: templates/objectives/view_national_objective.html:109
 msgid "Actions related to objective"
 msgstr ""
@@ -619,23 +628,23 @@ msgstr ""
 msgid "Login page"
 msgstr ""
 
-#: templates/registration/login.html:19
+#: templates/registration/login.html:20
 msgid "Your username and password didn't match. Please try again."
 msgstr ""
 
-#: templates/registration/login.html:25
+#: templates/registration/login.html:28
 msgid "Existing Users Login"
 msgstr ""
 
-#: templates/registration/login.html:27
+#: templates/registration/login.html:30
 msgid "Username"
 msgstr ""
 
-#: templates/registration/login.html:36
+#: templates/registration/login.html:39
 msgid "Password"
 msgstr ""
 
-#: templates/registration/login.html:46
+#: templates/registration/login.html:49
 msgid "Login"
 msgstr ""
 
@@ -664,7 +673,7 @@ msgstr ""
 msgid "%(start)s to %(end)s"
 msgstr ""
 
-#: views/mapping.py:27 views/objectives.py:139
+#: views/mapping.py:27 views/objectives.py:147
 msgid "Saved changes"
 msgstr ""
 
@@ -676,11 +685,11 @@ msgstr ""
 msgid "Mapping successfully deleted."
 msgstr ""
 
-#: views/objectives.py:141
+#: views/objectives.py:149
 msgid "Objective successfully added."
 msgstr ""
 
-#: views/objectives.py:166
+#: views/objectives.py:174
 msgid "Objective successfully deleted."
 msgstr ""
 

@@ -3,6 +3,7 @@ from cStringIO import StringIO
 
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
+from django.conf import settings
 from django.http import HttpResponse
 from django.template import Template, context, RequestContext
 from django.template.loader import render_to_string
@@ -21,12 +22,14 @@ def goals(request, code):
     indicators_list = models.AichiIndicator.objects.all()
 
     paginator = Paginator(indicators_list, 20)
+    info_header = getattr(settings, 'INFO_HEADER', False)
 
     return render_to_response('goals.html',
                               context_instance=RequestContext(request, {
                                 'goals': goals,
                                 'current_goal': current_goal,
                                 'indicators_pages': get_indicators_pages(paginator),
+                                'info_header': info_header,
                               })
     )
 
