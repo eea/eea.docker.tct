@@ -1072,7 +1072,7 @@ body {
 }
 
 .navbar .brand {
-  color: rgb(255, 255, 255);
+/*  color: rgb(255, 255, 255); */
   text-shadow: rgb(0, 0, 0) 1px 1px 3px;
   font-size: 26px;
   line-height: 30px;
