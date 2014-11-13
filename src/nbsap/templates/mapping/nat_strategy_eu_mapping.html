@@ -24,9 +24,7 @@
           {% with action.get_target as eu_target %}
           <span class="mapping-header">{% trans "Related EU actions" %}:</span>
           <span>
-            <a href="{% url 'eu_targets' code=eu_target.code %}#{{ action.code }}" title="{{ action.code }}">
-              <strong>{% trans "Action" %} {{ action.code }}</strong>: {{ action.description|safe }}
-            </a>
+              <label class="action">{% trans "Action" %} {{ action.code }}:</label>{{ action.description|safe }}
           </span>
           {% endwith %}
         </li>
