@@ -12,9 +12,7 @@
           <li>
             <span class="mapping-header">{% trans "EU Targets" %}:</span>
             <span>
-              <a href="{% url 'eu_targets' code=target.code %}" title="{{ target.code }}">
-                <strong>{% trans "Target" %} {{ target.code }}</strong>: {{ target.title }}
-              </a>
+              <label class="target">{% trans "Target" %} {{ target.code }}:</label>{{ target.title }}
             </span>
           </li>
         {% endfor %}
