@@ -819,10 +819,6 @@ footer .nav > li > a:hover {
 .nav.nav-tabs.nav-stacked {
   padding: 19px 0px 0px;
   margin-bottom: 20px;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
-  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
-  border-right: 1px solid #DDD;
 }
 
 .nav-tabs.nav-stacked > li > a {
@@ -830,6 +826,7 @@ footer .nav > li > a:hover {
   -moz-border-radius: 0;
   border-radius: 0;
   border: 0px;
+  border-right: 1px solid #DDD;
 }
 
 .local-navigation.nav-tabs > li > a,
