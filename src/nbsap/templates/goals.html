@@ -20,9 +20,8 @@
 {% endif %}
 
 <div class="tabbable tabs-left">
-
+  <label class="nav-header">{% trans "AICHI Goals" %}</label>
   <ul class="nav nav-tabs nav-stacked local-navigation">
-    <label class="nav-header">{% trans "AICHI Goals" %}</label>
     {% for goal in goals %}
     <li {% if goal.code == current_goal.code %}class="active"{% endif %}>
       <a href="{% url 'goals' code=goal.code %}" title="{{ goal.code|upper }}"</a>
