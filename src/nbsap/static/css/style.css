@@ -1142,6 +1142,9 @@ body {
 .global-menu.nav-tabs > li > a {
   color: rgb(255, 255, 255);
   border: 0px;
+}
+
+.uppercase {
   text-transform: uppercase;
 }
 
