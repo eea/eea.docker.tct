@@ -10,9 +10,7 @@
         <li>
           <span class="mapping-header">{% trans "AICHI Goal" %}:</span>
           <span>
-            <a href="{% url 'goals' code=goal.code %}" title="{{ goal.code|upper }}">
-              <strong>{% trans "AICHI Goal" %} {{ goal.code|upper }}</strong>: {{ goal.description|safe }}
-            </a>
+            <label class="goal">{% trans "AICHI Goal" %} {{ goal.code|upper }}:</label>{{ goal.description|safe }}
           </span>
         </li>
 

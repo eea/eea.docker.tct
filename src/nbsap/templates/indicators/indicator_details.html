@@ -28,9 +28,7 @@
         Strategic Goal
       </td>
       <td>
-        <a href="{% url 'goals' code=indicator.strategic_goal_ob.code %}"
-           title="{{ indicator.strategic_goal_ob.code|upper }}">
-          Goal {{ indicator.strategic_goal_ob.code|upper }}</a>:
+        <label class="goal">Goal {{ indicator.strategic_goal_ob.code|upper }}:</label>
         <br />
         {{ indicator.strategic_goal_ob.description }}
       </td>
