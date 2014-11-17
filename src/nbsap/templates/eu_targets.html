@@ -91,7 +91,7 @@
           {% for strategy in current_target.eu_aichi_strategy.all %}
             {% for aichi_target in strategy.aichi_targets.all %}
               <li>
-                <a href = "{% url 'goals' code=aichi_target.get_parent_goal.code %}#{{aichi_target.code}}">{% trans "Target"%} {{aichi_target.code}}</a>
+                <label class="target">{% trans "AICHI Target"%}</label> {{aichi_target.code}}
               </li>
             {% endfor %}
           {% endfor %}

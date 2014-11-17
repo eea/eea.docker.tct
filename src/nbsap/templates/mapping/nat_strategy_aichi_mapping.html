@@ -10,9 +10,7 @@
         <li>
           <span class="mapping-header">{% trans "AICHI Goal" %}:</span>
           <span>
-            <a href="{% url 'goals' code=goal.code %}" title="{{ goal.code|upper }}">
-              <strong>{% trans "AICHI Goal" %} {{ goal.code|upper }}</strong>: {{ goal.description|safe }}
-            </a>
+            <label class="goal">{% trans "AICHI Goal" %} {{ goal.code|upper }}:</label>{{ goal.description|safe }}
           </span>
         </li>
 
@@ -20,10 +18,7 @@
         <li>
           <span class="mapping-header">{% trans "Most relevant AICHI target" %}:</span>
           <span>
-            <a href="{% url 'goals' code=goal.code %}#{{ target.code }}"
-               title="{{ target.code }}">
-              <strong>{% trans "AICHI Target" %} {{ target.code }}</strong>: {{ target.description|safe }}
-            </a>
+            <label class="target">{% trans "AICHI Target" %} {{ target.code }}:</label>{{ target.description|safe }}
           </span>
         </li>
         {% endwith %}
@@ -35,10 +30,7 @@
             {% for target in strategy.other_targets.all %}
             <li>
               <span>
-                <a href="{% url 'goals' code=goal.code %}#{{ target.code }}"
-                   title="{{ target.code }}">
-                  <strong>{% trans "AICHI Target" %} {{ target.code }}</strong>: {{ target.description|safe }}
-                </a>
+                <label class="target">{% trans "AICHI Target" %} {{ target.code }}:</label>{{ target.description|safe }}
               </span>
             </li>
             {% endfor %}

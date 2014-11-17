@@ -28,9 +28,7 @@
         Strategic Goal
       </td>
       <td>
-        <a href="{% url 'goals' code=indicator.strategic_goal_ob.code %}"
-           title="{{ indicator.strategic_goal_ob.code|upper }}">
-          Goal {{ indicator.strategic_goal_ob.code|upper }}</a>:
+        <label class="goal">Goal {{ indicator.strategic_goal_ob.code|upper }}:</label>
         <br />
         {{ indicator.strategic_goal_ob.description }}
       </td>
@@ -59,8 +57,7 @@
         Most Relevant Aichi Target
       </td>
       <td>
-        <a href="{% url 'goals' code=indicator.relevant_target_ob.goals.all.0.code %}#{{ indicator.relevant_target_ob.code }}">
-          Target {{ indicator.relevant_target_ob.code }}</a>:
+        <label class="target">Target {{ indicator.relevant_target_ob.code }}:</label>
         <br />
         {{ indicator.relevant_target_ob.description }}
       </td>
@@ -74,8 +71,7 @@
         <ul>
         {% for target in indicator.other_targets_list %}
           <li>
-            <a href="{% url 'goals' code=target.goals.all.0.code %}#{{ target.code }}">
-              Target {{ target.code }}</a>:
+            <label class="target">Target {{ target.code }}:</label>
             <br />
             {{ target.description }}
           </li>

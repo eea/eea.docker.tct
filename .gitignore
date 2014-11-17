@@ -12,3 +12,4 @@ sandbox_py27/*
 gen
 fabfile.py
 *~
+sandbox/*
