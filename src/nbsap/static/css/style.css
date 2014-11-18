@@ -880,6 +880,11 @@ h2 p {
   display: inline;
 }
 
+.target,
+.goal {
+  font-weight: bold;
+}
+
 
 /* Indicators */
 .indicator_field {
