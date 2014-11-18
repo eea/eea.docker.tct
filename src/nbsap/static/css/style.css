@@ -881,7 +881,7 @@ h2 p {
 }
 
 
-/* Indicators page */
+/* Indicators */
 .indicator_field {
   color: #777;
 }
@@ -895,6 +895,17 @@ h2 p {
 .indicator_table ul,
 .indicator_view ul {
 	list-style-type: square;
+}
+
+.indicator_table td {
+  background: #FFF;
+  border-bottom: 1px solid #DDD;
+}
+
+.table-striped tbody tr:nth-child(odd) td,
+.table-striped tbody tr:nth-child(odd) th,
+.indicator_table tr:nth-child(odd) .span8 {
+  background: #EEE;
 }
 
 
@@ -1052,6 +1063,7 @@ body .obj-id {
 
 .fullsize-modal .modal-body {
   max-height: 471px;
+  font-size: 12px;
 }
 
 .nat_strategy_export_container {
@@ -1065,6 +1077,13 @@ body .obj-id {
   margin-left: -16px;
   width: 531px;
   bottom: 0;
+}
+
+.modal h3 {
+  line-height: 1.3;
+  color: #555;
+  margin-left: 50px;
+  margin-right: 50px;
 }
 
 
