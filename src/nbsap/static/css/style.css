@@ -770,8 +770,7 @@ footer {
 }
 
 .container.content {
-  padding-top: 25px;
-	/*background: #fff;*/
+  padding-top: 15px;
 	padding-left: 5px;
 	padding-right: 10px;
 }
@@ -1214,5 +1213,9 @@ body {
 
 .alert {
   margin-bottom: 10px;
+}
+
+.messages p {
+  margin: 0;
 }
 /* end generic theme */

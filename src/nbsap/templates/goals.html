@@ -9,8 +9,6 @@
 
 {% block content %}
 
-{% include 'nav_tabs.html' %}
-
 {% if messages %}
 <div class="messages alert alert-success">
 {% for message in messages %}
@@ -18,6 +16,8 @@
 {% endfor %}
 </div>
 {% endif %}
+
+{% include 'nav_tabs.html' %}
 
 <div class="tabbable tabs-left">
   <label class="nav-header">{% trans "AICHI Goals" %}</label>
