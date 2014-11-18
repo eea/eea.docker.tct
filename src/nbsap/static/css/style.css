@@ -188,6 +188,8 @@ textarea {
 .breadcrumb {
   background: #FFF;
   font-size: 12px;
+  padding-left: 0;
+  margin-bottom: 5px;
 }
 
 .breadcrumb li {
@@ -1123,7 +1125,7 @@ body {
 
 .tabbable {
   background: rgb(255, 255, 255);
-  padding: 10px;
+  padding: 10px 20px;
 }
 
 .tabbable.tabs-left {
