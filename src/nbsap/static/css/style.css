@@ -185,9 +185,9 @@ textarea {
   overflow: hidden;
 }
 
-.breadcrumb,
-.breadcrumb li {
-  list-style-type: none !important;
+.breadcrumb {
+  background: #FFF;
+  font-size: 12px;
 }
 
 .breadcrumb li {
