@@ -56,7 +56,7 @@
       </div>
 
       <div class="post-toc">
-        <label>{% trans "EU indicators/sub-indicators" %}</label>
+        <label>{% trans "EU indicators/sub-indicators" %}:</label>
         <div class ="well">
           {% if current_target.indicators %}
           <ul>
@@ -85,7 +85,7 @@
           {% endif %}
         </div>
 
-        <label>{% trans "Mapping with Aichi Strategy" %}</label>
+        <label>{% trans "Mapping with Aichi Strategy" %}:</label>
         <div class ="well">
           {% if current_target.eu_aichi_strategy %}
           <ul>
@@ -109,7 +109,7 @@
         <h2>Action {{ action.code }}: {{ action.description }}</h2>
 
         <div>
-          <label>{% trans "Mapping with National Strategy" %}</label>
+          <label>{% trans "Mapping with National Strategy" %}:</label>
           <div class="row well">
             {% if action.national_strategy.all %}
               <ul>

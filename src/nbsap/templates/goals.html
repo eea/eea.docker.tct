@@ -92,7 +92,7 @@
       {% endif %}
 
       {% if target.relevant_target_national_strategy.all %}
-      <label>{% trans "Mapping with National Strategy" %}</label>
+      <label>{% trans "Mapping with National Strategy" %}:</label>
       <div class="well" style="position: relative;">
         <div class="nat_strategy_export_container">
           <a href="{% url 'nat_strategy_export_preview' target_id=target.pk %}"

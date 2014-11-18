@@ -824,6 +824,11 @@ footer .container {
   color: #555;
 }
 
+.tab-content ul ul {
+  list-style-type: circle;
+  color: #555;
+}
+
 .well ul,
 .snippet ul,
 .full ul {
@@ -899,10 +904,6 @@ h2 p {
 
 .element_field label {
 	margin-top: 15px;
-}
-
-.row.between-subobj {
-	border-bottom: 1px dashed #bbb;
 }
 
 .more,
