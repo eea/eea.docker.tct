@@ -3,11 +3,6 @@ hgroup {
   margin-bottom: 15px;
 }
 
-footer p {
-  margin-bottom: 0;
-  color: #555;
-}
-
 a {
   cursor: pointer;
 }
@@ -760,6 +755,11 @@ footer {
   padding: 35px 0 36px;
 }
 
+footer p {
+  margin-bottom: 0;
+  color: #555;
+}
+
 .museum-logo {
   background: url('../logo_irscnb.png') no-repeat center center;
   width: 94px;
@@ -780,7 +780,7 @@ footer .nav > li > a:hover {
 }
 
 footer .container {
-  border-top: 1px solid #555;
+  border-top: 2px dotted #DDD;
   padding-top: 10px;
 }
 
@@ -1041,6 +1041,7 @@ body .obj-id {
   right: 16px;
   top: 14px;
 }
+
 .modal-inside-footer {
   position: absolute;
   margin-left: -16px;
@@ -1116,6 +1117,17 @@ body {
 .sign-in legend {
   background-color: rgb(61, 58, 46);
   background-color: rgba(0, 0, 0, 0.6);
+}
+
+.global-menu,
+.sign-in legend {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.navbar .nav.top-menu {
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
 }
 
 .site-logo {
