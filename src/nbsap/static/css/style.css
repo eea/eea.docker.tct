@@ -1253,7 +1253,6 @@ body {
 
 .nav > li > a:hover {
   background-color: transparent;
-  border: 0px;
   color: #05B256;
 }
 
