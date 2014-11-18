@@ -1071,6 +1071,14 @@ body .obj-id {
   font-size: 12px;
 }
 
+.modal-body {
+  padding-bottom: 10px;
+}
+
+.big-modal .modal-inside-body {
+  padding: 15px;
+}
+
 .nat_strategy_export_container {
   position: absolute;
   right: 16px;
@@ -1089,6 +1097,10 @@ body .obj-id {
   color: #555;
   margin-left: 50px;
   margin-right: 50px;
+}
+
+.big-modal h3 {
+  margin-left: 0;
 }
 
 
