@@ -940,13 +940,20 @@ h2 p {
   font-weight: bold;
   line-height: 18px;
   color: #444;
-  text-transform: uppercase;
   margin-bottom: 0px !important;
 }
 
 .mapping-list li p {
   display: inline;
   font-size: 11px;
+}
+
+.mapping-description {
+  margin-left: 20px;
+}
+
+.other-targets {
+  margin-left: 40px;
 }
 
 
