@@ -788,7 +788,7 @@ footer .nav > li > a:hover {
 }
 
 footer .container {
-  border-top: 2px dotted #DDD;
+  border-top: 1px solid #DDD;
   padding-top: 10px;
 }
 
