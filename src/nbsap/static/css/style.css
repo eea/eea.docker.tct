@@ -675,7 +675,6 @@ textarea {
   }
 }
 
-
 @media (max-width: 1024px) {
 	.navbar-inner,
 	.container.content,
@@ -698,7 +697,6 @@ textarea {
 		width: 330px;
 	}
 }
-
 
 .navbar .nav.top-menu {
   margin-top: -7px;
@@ -830,6 +828,7 @@ footer .container {
 .nav.nav-tabs.nav-stacked {
   padding: 0;
   margin-bottom: 20px;
+  border-left: 1px solid #DDD;
 }
 
 .nav-tabs.nav-stacked > li > a {
@@ -838,6 +837,14 @@ footer .container {
   border-radius: 0;
   border: 0px;
   border-right: 1px solid #DDD;
+}
+
+.nav-tabs.nav-stacked > li:first-child > a {
+  border-top-left-radius: 0;
+}
+
+.nav-tabs.nav-stacked > li:last-child > a {
+  border-bottom-left-radius: 0;
 }
 
 .local-navigation.nav-tabs > li > a,
