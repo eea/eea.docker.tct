@@ -92,40 +92,42 @@
       {% endfor %}
     </div>
 
-    {% for subobj in current_objective.objectives_tree %}
-    <div class="element_field" id="{{ subobj.code }}">
-      <h2>{% trans "Objective" %} {{ subobj.code }}: {{ subobj.title }}</h2>
+    <div class="subobjectives">
+      {% for subobj in current_objective.objectives_tree %}
+      <div class="element_field" id="{{ subobj.code }}">
+        <h2>{% trans "Objective" %} {{ subobj.code }}: {{ subobj.title }}</h2>
 
-      <div class="snippet">
-        {{ subobj.description|truncatechars:510|safe }}
-        <a class="more">{% trans "show more" %}</a>
+        <div class="snippet">
+          {{ subobj.description|truncatechars:510|safe }}
+          <a class="more">{% trans "show more" %}</a>
+        </div>
+        <div class="full">
+          {{ subobj.description|safe }}
+          <a class="less">{% trans "show less" %}</a>
+        </div>
+
+        {% include 'mapping/nat_strategy_aichi_mapping.html' %}
+
+        {% if EU_STRATEGY %}
+            {% include 'mapping/nat_strategy_eu_mapping.html' %}
+        {% endif %}
+        {% if subobj.actions.all %}
+          <label>{% trans "Related actions" %}:</label>
+          {% for action in subobj.actions.all %}
+            <div class="well" id="{{ action.id }}">
+              {% if action.title %}
+                <h2>{{ action.title }}</h2>
+              {% else %}
+                <h2> {% trans "Actions related to objective" %} {{ action.code }} </h2>
+              {% endif %}
+              {{ action.description|safe }}
+            </div>
+          {% endfor %}
+        {% endif %}
+
       </div>
-      <div class="full">
-        {{ subobj.description|safe }}
-        <a class="less">{% trans "show less" %}</a>
-      </div>
-
-      {% include 'mapping/nat_strategy_aichi_mapping.html' %}
-
-      {% if EU_STRATEGY %}
-          {% include 'mapping/nat_strategy_eu_mapping.html' %}
-      {% endif %}
-      {% if subobj.actions.all %}
-        <label>{% trans "Related actions" %}:</label>
-        {% for action in subobj.actions.all %}
-          <div class="well" id="{{ action.id }}">
-            {% if action.title %}
-              <h2>{{ action.title }}</h2>
-            {% else %}
-              <h2> {% trans "Actions related to objective" %} {{ action.code }} </h2>
-            {% endif %}
-            {{ action.description|safe }}
-          </div>
-        {% endfor %}
-      {% endif %}
-
+      {% endfor %}
     </div>
-    {% endfor %}
 
   </div>
 </div>

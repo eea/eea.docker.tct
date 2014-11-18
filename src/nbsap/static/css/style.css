@@ -956,6 +956,10 @@ h2 p {
   margin-left: 40px;
 }
 
+.subobjectives .snippet {
+  margin-left: 5px;
+}
+
 
 /* admin pages */
 .original-description,
