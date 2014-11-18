@@ -788,13 +788,13 @@ footer .container {
 /* AICHI page */
 .goals h1 {
   padding: 22px;
-  border: 2px dotted #999;
+  border: 2px dotted #777;
   border-radius: 6px;
 }
 
 .goals h2 {
-  padding: 10px;
-  border: 2px dotted #BBB;
+  padding: 15px;
+  border: 2px dotted #999;
   border-radius: 6px;
 }
 
@@ -813,19 +813,34 @@ footer .container {
   color: #555;
 }
 
+.well ul,
+.snippet ul,
+.full ul {
+  list-style-type: disc;
+}
+
 .tab-content .element_field,
 .tab-content .row {
   margin-left: 30px;
 }
 
 .tab-content .toc {
-  margin-left: 15px;
+  margin-left: 20px;
 }
 
-.well ul,
-.snippet ul,
-.full ul {
-  list-style-type: disc;
+.tab-content .element_field label,
+.tab-content .element_field .well {
+  margin-left: 50px;
+}
+
+.tab-content .well {
+  background: #FFF;
+  padding: 10px;
+  box-shadow: none;
+}
+
+.tab-content .well ul {
+  margin-bottom: 0;
 }
 
 .target-description {
@@ -1004,7 +1019,7 @@ body .obj-id {
 .nat_strategy_export_container {
   position: absolute;
   right: 16px;
-  top: 14px;
+  top: 7px;
 }
 
 .modal-inside-footer {
