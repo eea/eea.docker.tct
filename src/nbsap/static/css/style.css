@@ -801,7 +801,7 @@ footer .container {
 .tabbable .nav-header {
   padding: 15px 15px;
   font-size: 26px;
-  color: #D39A06;
+  color: #039749;
   text-transform: none;
   font-weight: normal;
   margin-left: 135px;
@@ -837,6 +837,7 @@ footer .container {
   background: #FFF;
   padding: 10px;
   box-shadow: none;
+  font-size: 12px;
 }
 
 .tab-content .well ul {
@@ -1186,7 +1187,7 @@ body {
 .global-menu.nav-tabs > .active > a:hover {
   border: 0px;
   background: transparent;
-  color: rgb(248, 207, 102);
+  color: #05B256;
 }
 
 .global-menu.nav-tabs > li {
@@ -1211,7 +1212,7 @@ body {
 .nav > li > a:hover {
   background-color: transparent;
   border: 0px;
-  color: rgb(248, 207, 102);
+  color: #05B256;
 }
 
 .navbar .top-menu.nav > li > a:hover {
