@@ -969,9 +969,12 @@ h2 p {
 }
 
 h1.small {
-	font-size: 24px;
-	line-height: 27px;
-	padding-left: 10px;
+	padding: 15px 0;
+  font-size: 26px;
+  color: #039749;
+  text-transform: none;
+  font-weight: normal;
+  margin-top: 15px;
 }
 
 .admin-obj-description,
@@ -1120,6 +1123,11 @@ body {
 
 .tabbable {
   background: rgb(255, 255, 255);
+  padding: 10px;
+}
+
+.tabbable.tabs-left {
+  padding: 0;
 }
 
 
