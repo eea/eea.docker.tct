@@ -181,7 +181,8 @@ textarea {
   padding: 0;
 }
 
-.breadcrumb {
+.breadcrumb,
+.attachement-container {
   overflow: hidden;
 }
 
@@ -192,10 +193,6 @@ textarea {
 
 .breadcrumb li {
   float: left;
-}
-
-.attachement-container {
-  overflow: hidden;
 }
 
 .attachement-container .title {
@@ -320,16 +317,15 @@ textarea {
   padding: 3px 0;
 }
 
-.file-input-container {
+.file-input-container,
+.file-input-container iframe,
+.hide,
+.hidden {
   display: none;
 }
 
 .file-input-container input[type="file"] {
   font-size: 12px;
-}
-
-.file-input-container iframe {
-  display: none;
 }
 
 .sep {
@@ -365,10 +361,6 @@ textarea {
   text-decoration: none;
   display: block;
   cursor: pointer;
-}
-
-.hide {
-  display: none;
 }
 
 .actions {
@@ -438,10 +430,7 @@ textarea {
   display: none !important;
 }
 
-.people-listing tr .checkbox {
-  display: none;
-}
-
+.people-listing tr .checkbox,
 .people-listing tr .save_attendance {
   display: none;
 }
@@ -607,9 +596,6 @@ textarea {
   color: #888;
 }
 
-.hidden {
-  display: none;
-}
 
 /* overwrite from bootstrap */
 .tooltip {
@@ -1024,7 +1010,9 @@ body .obj-id {
   margin-left: 5px;
 }
 
-.errorlist {color: red;}
+.errorlist {
+  color: red;
+}
 
 .big-modal {
   margin: -250px 0 0 -400px;
@@ -1075,10 +1063,7 @@ body {
 }
 
 .navbar-inner,
-.container.content {
-  background: none;
-}
-
+.container.content,
 .navbar-inner .container {
   background: none;
 }
