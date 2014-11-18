@@ -50,7 +50,7 @@
     {% endif %}
 
     <h1>{% trans "AICHI Goal" %} {{ current_goal.code|upper }}: {{ current_goal.description }}</h1>
-    <div class="row">
+    <div class="row toc">
       <ul class="span2">
         {% for target in current_goal.targets.all %}
         {% if forloop.counter0|divisibleby:"2" and not forloop.first %}

@@ -787,15 +787,15 @@ footer .container {
 
 /* AICHI page */
 .goals h1 {
-  padding: 20px;
-  border: 2px dotted #AAA;
+  padding: 22px;
+  border: 2px dotted #999;
   border-radius: 6px;
 }
 
-.nav-tabs.nav-stacked > li.active > a,
-.nav-tabs.nav-stacked > li > a:hover {
-  background: #08C;
-  color: #fff;
+.goals h2 {
+  padding: 10px;
+  border: 2px dotted #BBB;
+  border-radius: 6px;
 }
 
 .tabbable .nav-header {
@@ -808,72 +808,24 @@ footer .container {
   margin-top: 15px;
 }
 
-.nav li + .nav-header:last-of-type {
-  margin-top: 40px;
-}
-
-.tabs-left > .nav-tabs {
-  border-right: 0px;
-}
-
-.homepage_view label {
-  color: #777;
-}
-
 .tab-content ul {
   list-style-type: square;
   color: #555;
+}
+
+.tab-content .element_field,
+.tab-content .row {
+  margin-left: 30px;
+}
+
+.tab-content .toc {
+  margin-left: 15px;
 }
 
 .well ul,
 .snippet ul,
 .full ul {
   list-style-type: disc;
-}
-
-.tabs-left > .nav-tabs {
-  margin-right: 25px;
-}
-
-.nav.nav-tabs.nav-stacked {
-  padding: 0;
-  margin-top: 8px;
-  margin-bottom: 20px;
-  border-left: 1px solid #DDD;
-}
-
-.nav-tabs.nav-stacked > li > a {
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  border-radius: 0;
-  border: 0px;
-  border-right: 1px solid #DDD;
-}
-
-.nav-tabs.nav-stacked > li:first-child > a {
-  border-top-left-radius: 0;
-}
-
-.nav-tabs.nav-stacked > li:last-child > a {
-  border-bottom-left-radius: 0;
-}
-
-.local-navigation.nav-tabs > li > a,
-.local-navigation.nav-tabs > li > a:hover {
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-}
-
-.local-navigation.nav-tabs > .active > a,
-.local-navigation.nav-tabs > .active > a:hover {
-  border: 0px;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-}
-
-.tabs-left > .nav-tabs > li > a,
-.tabs-right > .nav-tabs > li > a {
-  margin-bottom: 0px; /* overrides bootstrap.css 3519 */
 }
 
 .target-description {
@@ -1063,12 +1015,16 @@ body .obj-id {
 }
 
 
-/* GENERIC THEME */
+/* content */
 body {
   padding: 0px;
 	font-family: Arial, sans-serif;
   background: url("../landscape.png") 0% 0% no-repeat; /* header photo is taken from http://www.publicdomainpictures.net/view-image.php?image=26775&picture=autumn-forest&jazyk=EN ,
   please use your own photo instead. The photo size should be 1920x200px */
+}
+
+.homepage_view label {
+  color: #777;
 }
 
 .navbar-inner {
@@ -1120,10 +1076,70 @@ body {
 
 
 /* global menu */
+.nav-tabs.nav-stacked > li.active > a,
+.nav-tabs.nav-stacked > li > a:hover {
+  background: #08C;
+  color: #fff;
+}
+
+.nav li + .nav-header:last-of-type {
+  margin-top: 40px;
+}
+
+.tabs-left > .nav-tabs {
+  border-right: 0px;
+}
+
 .nav-tabs {
   margin-bottom: 0;
   border-bottom: 0px;
 }
+
+.tabs-left > .nav-tabs {
+  margin-right: 25px;
+}
+
+.nav.nav-tabs.nav-stacked {
+  padding: 0;
+  margin-top: 8px;
+  margin-bottom: 20px;
+  border-left: 1px solid #DDD;
+}
+
+.nav-tabs.nav-stacked > li > a {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  border: 0px;
+  border-right: 1px solid #DDD;
+}
+
+.nav-tabs.nav-stacked > li:first-child > a {
+  border-top-left-radius: 0;
+}
+
+.nav-tabs.nav-stacked > li:last-child > a {
+  border-bottom-left-radius: 0;
+}
+
+.local-navigation.nav-tabs > li > a,
+.local-navigation.nav-tabs > li > a:hover {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+.local-navigation.nav-tabs > .active > a,
+.local-navigation.nav-tabs > .active > a:hover {
+  border: 0px;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+.tabs-left > .nav-tabs > li > a,
+.tabs-right > .nav-tabs > li > a {
+  margin-bottom: 0px; /* overrides bootstrap.css 3519 */
+}
+
 
 .global-menu,
 .navbar .nav.top-menu,
