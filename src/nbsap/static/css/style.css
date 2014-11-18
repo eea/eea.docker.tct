@@ -3,6 +3,10 @@ hgroup {
   margin-bottom: 15px;
 }
 
+label {
+  display: inline;
+}
+
 a {
   cursor: pointer;
 }
@@ -10,6 +14,10 @@ a {
 input,
 textarea {
   color: #333 !important;
+}
+
+* :empty {
+  display: none;
 }
 
 
@@ -785,14 +793,17 @@ footer .container {
 }
 
 
-/* AICHI page */
-.goals h1 {
+/* AICHI page,
+  EU Targets page */
+.goals h1,
+.targets h1 {
   padding: 22px;
   border: 2px dotted #777;
   border-radius: 6px;
 }
 
-.goals h2 {
+.goals h2,
+.targets h2 {
   padding: 15px;
   border: 2px dotted #999;
   border-radius: 6px;
@@ -824,8 +835,13 @@ footer .container {
   margin-left: 30px;
 }
 
-.tab-content .toc {
+.tab-content .toc,
+.post-toc {
   margin-left: 20px;
+}
+
+.toc label {
+  display: block;
 }
 
 .tab-content .element_field label,
