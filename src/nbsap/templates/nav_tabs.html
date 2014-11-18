@@ -4,7 +4,7 @@
 <ul class="nav nav-tabs global-menu">
 
   <li class="{% active request '^/$' %} {% active request '^/indicators' %}{% active request '^/goals' %}">
-    <a href="{% url 'goals' %}">{% trans "Aichi" %}</a>
+    <a href="{% url 'goals' %}" class="uppercase">{% trans "Aichi" %}</a>
   </li>
 
   {% if EU_STRATEGY %}
