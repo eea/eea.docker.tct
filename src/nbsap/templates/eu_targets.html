@@ -21,12 +21,12 @@
     {% endfor %}
   </ul>
 
-  <div class="tab-content homepage_view" >
+  <div class="tab-content homepage_view targets">
 
     <h1>{% trans "EU Target" %} {{ current_target.code }}: {{ current_target.title }}</h1>
     <div class="element_field objective-description">{{ current_target.body }}</div>
 
-    <div class="row">
+    <div class="row toc">
       <label>{% trans "Table of contents"%}:</label>
 
       {% if not current_target.actions_tree|length %}
@@ -53,62 +53,63 @@
         {% endfor %}
       </ul>
       {% endif %}
-       </div>
-
-      <label>{% trans "EU indicators/sub-indicators" %}</label>
-      <div class ="well">
-        {% if current_target.indicators %}
-        <ul>
-          {% for indicator in current_target.indicators.all %}
-            <li>
-              {{ indicator.code }} {{indicator.title}}
-              {% if indicator.parent.all %}
-              <ul>
-              {% for sub in indicator.parent.all %}
-                <li>
-                  {% if sub.url %}
-                    <a href="{{ sub.url }}">
-                      {{ sub.indicator_type|upper }} {{ sub.code }}: {{sub.title}}</a>
-                  {% else %}
-                    {{ sub.code }} {{ sub.title }}
-                  {% endif %}
-                  </li>
-              {% endfor %}
-              </ul>
-              {% endif %}
-            </li>
-          {% endfor %}
-        </ul>
-        {% else %}
-          <span>{% trans "No data available" %}.</span>
-        {% endif %}
       </div>
 
-      <label>{% trans "Mapping with Aichi Strategy" %}</label>
-      <div class ="well">
-        {% if current_target.eu_aichi_strategy %}
-        <ul>
-          {% for strategy in current_target.eu_aichi_strategy.all %}
-            {% for aichi_target in strategy.aichi_targets.all %}
+      <div class="post-toc">
+        <label>{% trans "EU indicators/sub-indicators" %}:</label>
+        <div class ="well">
+          {% if current_target.indicators %}
+          <ul>
+            {% for indicator in current_target.indicators.all %}
               <li>
-                <label class="target">{% trans "AICHI Target"%}</label> {{aichi_target.code}}
+                {{ indicator.code }} {{indicator.title}}
+                {% if indicator.parent.all %}
+                <ul>
+                {% for sub in indicator.parent.all %}
+                  <li>
+                    {% if sub.url %}
+                      <a href="{{ sub.url }}">
+                        {{ sub.indicator_type|upper }} {{ sub.code }}: {{sub.title}}</a>
+                    {% else %}
+                      {{ sub.code }} {{ sub.title }}
+                    {% endif %}
+                    </li>
+                {% endfor %}
+                </ul>
+                {% endif %}
               </li>
             {% endfor %}
-          {% endfor %}
-        </ul>
-        {% else %}
-          <span>{% trans "No data available" %}.</span>
-        {% endif %}
+          </ul>
+          {% else %}
+            <span>{% trans "No data available" %}.</span>
+          {% endif %}
+        </div>
+
+        <label>{% trans "Mapping with Aichi Strategy" %}:</label>
+        <div class ="well">
+          {% if current_target.eu_aichi_strategy %}
+          <ul>
+            {% for strategy in current_target.eu_aichi_strategy.all %}
+              {% for aichi_target in strategy.aichi_targets.all %}
+                <li>
+                  <label class="target">{% trans "AICHI Target"%}</label> {{aichi_target.code}}
+                </li>
+              {% endfor %}
+            {% endfor %}
+          </ul>
+          {% else %}
+            <span>{% trans "No data available" %}.</span>
+          {% endif %}
+        </div>
       </div>
 
-      <div>
+      <div class="target-actions">
       {% for action in current_target.actions_tree %}
       <div class="element_field" id="{{ action.code }}">
-        <h2>Action {{ action.code }}</h2>
+        <h2>Action {{ action.code }}: {{ action.description }}</h2>
 
         <div>
-          {{ action.description }}
-          <label>{% trans "Mapping with National Strategy" %}</label>
+          <label>{% trans "Mapping with National Strategy" %}:</label>
           <div class="row well">
             {% if action.national_strategy.all %}
               <ul>

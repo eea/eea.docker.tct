@@ -3,9 +3,8 @@ hgroup {
   margin-bottom: 15px;
 }
 
-footer p {
-  margin-bottom: 0;
-  color: #555;
+label {
+  display: inline;
 }
 
 a {
@@ -522,16 +521,18 @@ textarea {
   padding-top: 44px;
 }
 
-.homepage_view h1 {
+.tab-content h1 {
   font-size: 18px;
-  line-height: 27px;
-  border-bottom: 1px solid #CCC;
+  font-weight: normal;
+  line-height: 1.3;
+  color: #555;
 }
 
-.homepage_view h2 {
+.tab-content h2 {
   font-size: 14px;
-  line-height: 18px;
-  border-bottom: 1px solid #CCC;
+  font-weight: normal;
+  line-height: 1.3;
+  color: #555;
 }
 
 .homepage_view h3 {
@@ -680,7 +681,6 @@ textarea {
   }
 }
 
-
 @media (max-width: 1024px) {
 	.navbar-inner,
 	.container.content,
@@ -703,7 +703,6 @@ textarea {
 		width: 330px;
 	}
 }
-
 
 .navbar .nav.top-menu {
   margin-top: -7px;
@@ -760,6 +759,11 @@ footer {
   padding: 35px 0 36px;
 }
 
+footer p {
+  margin-bottom: 0;
+  color: #555;
+}
+
 .museum-logo {
   background: url('../logo_irscnb.png') no-repeat center center;
   width: 94px;
@@ -770,8 +774,7 @@ footer {
 }
 
 .container.content {
-  padding-top: 25px;
-	/*background: #fff;*/
+  padding-top: 15px;
 	padding-left: 5px;
 	padding-right: 10px;
 }
@@ -781,87 +784,89 @@ footer .nav > li > a:hover {
 }
 
 footer .container {
-  border-top: 1px solid #555;
+  border-top: 1px solid #DDD;
   padding-top: 10px;
 }
 
 
-/* AICHI page */
-.nav-tabs.nav-stacked > li.active > a,
-.nav-tabs.nav-stacked > li > a:hover {
-  background: #08C;
-  color: #fff;
+/* AICHI page,
+  EU Targets page,
+  National Strategy */
+.goals h1,
+.targets h1,
+.national-strategy h1 {
+  padding: 22px;
+  border: 2px dotted #777;
+  border-radius: 6px;
+}
+
+.goals h2,
+.targets h2,
+.national-strategy h2 {
+  padding: 15px;
+  border: 2px dotted #999;
+  border-radius: 6px;
 }
 
 .tabbable .nav-header {
   padding: 15px 15px;
   font-size: 26px;
+  color: #039749;
   text-transform: none;
   font-weight: normal;
   margin-left: 135px;
   margin-top: 15px;
 }
 
-.nav li + .nav-header:last-of-type {
-  margin-top: 40px;
+.tab-content ul {
+  list-style-type: square;
+  color: #555;
 }
 
-.tabs-left > .nav-tabs {
-  border-right: 0px;
-}
-
-.homepage_view label {
-  color: #777;
-}
-
-.homepage_view ul {
+.tab-content ul ul {
   list-style-type: circle;
+  color: #555;
 }
 
 .well ul,
 .snippet ul,
 .full ul {
-  list-style-type: square;
+  list-style-type: disc;
 }
 
-.tabs-left > .nav-tabs {
-  margin-right: 25px;
+.tab-content .element_field,
+.tab-content .row,
+.pre-toc {
+  margin-left: 30px;
 }
 
-.nav.nav-tabs.nav-stacked {
-  padding: 0;
-  margin-bottom: 20px;
+.tab-content .toc,
+.post-toc {
+  margin-left: 20px;
 }
 
-.nav-tabs.nav-stacked > li > a {
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  border-radius: 0;
-  border: 0px;
-  border-right: 1px solid #DDD;
+.toc label {
+  display: block;
 }
 
-.local-navigation.nav-tabs > li > a,
-.local-navigation.nav-tabs > li > a:hover {
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
+.tab-content .element_field label,
+.tab-content .element_field .well {
+  margin-left: 50px;
 }
 
-.local-navigation.nav-tabs > .active > a,
-.local-navigation.nav-tabs > .active > a:hover {
-  border: 0px;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
+.tab-content .well {
+  background: #FFF;
+  padding: 10px;
+  box-shadow: none;
+  font-size: 12px;
 }
 
-.tabs-left > .nav-tabs > li > a,
-.tabs-right > .nav-tabs > li > a {
-  margin-bottom: 0px; /* overrides bootstrap.css 3519 */
+.tab-content .pre-toc .well {
+  margin-left: 0;
 }
 
-.homepage_view h1,
-.homepage_view h2 {
-  border-bottom: 0px;
+.tab-content .well ul {
+  margin-bottom: 0;
 }
 
 .target-description {
@@ -898,15 +903,11 @@ h2 p {
 }
 
 .element_field.objective-description {
-  padding: 0px 19px 10px 0px;
+  padding: 0;
 }
 
 .element_field label {
 	margin-top: 15px;
-}
-
-.row.between-subobj {
-	border-bottom: 1px dashed #bbb;
 }
 
 .more,
@@ -939,13 +940,24 @@ h2 p {
   font-weight: bold;
   line-height: 18px;
   color: #444;
-  text-transform: uppercase;
   margin-bottom: 0px !important;
 }
 
 .mapping-list li p {
   display: inline;
   font-size: 11px;
+}
+
+.mapping-description {
+  margin-left: 20px;
+}
+
+.other-targets {
+  margin-left: 40px;
+}
+
+.subobjectives .snippet {
+  margin-left: 5px;
 }
 
 
@@ -1040,8 +1052,9 @@ body .obj-id {
 .nat_strategy_export_container {
   position: absolute;
   right: 16px;
-  top: 14px;
+  top: 7px;
 }
+
 .modal-inside-footer {
   position: absolute;
   margin-left: -16px;
@@ -1050,12 +1063,16 @@ body .obj-id {
 }
 
 
-/* GENERIC THEME */
+/* content */
 body {
   padding: 0px;
 	font-family: Arial, sans-serif;
   background: url("../landscape.png") 0% 0% no-repeat; /* header photo is taken from http://www.publicdomainpictures.net/view-image.php?image=26775&picture=autumn-forest&jazyk=EN ,
   please use your own photo instead. The photo size should be 1920x200px */
+}
+
+.homepage_view label {
+  color: #777;
 }
 
 .navbar-inner {
@@ -1107,16 +1124,87 @@ body {
 
 
 /* global menu */
+.nav-tabs.nav-stacked > li.active > a,
+.nav-tabs.nav-stacked > li > a:hover {
+  background: #08C;
+  color: #fff;
+}
+
+.nav li + .nav-header:last-of-type {
+  margin-top: 40px;
+}
+
+.tabs-left > .nav-tabs {
+  border-right: 0px;
+}
+
 .nav-tabs {
   margin-bottom: 0;
   border-bottom: 0px;
 }
+
+.tabs-left > .nav-tabs {
+  margin-right: 25px;
+}
+
+.nav.nav-tabs.nav-stacked {
+  padding: 0;
+  margin-top: 8px;
+  margin-bottom: 20px;
+  border-left: 1px solid #DDD;
+}
+
+.nav-tabs.nav-stacked > li > a {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  border: 0px;
+  border-right: 1px solid #DDD;
+}
+
+.nav-tabs.nav-stacked > li:first-child > a {
+  border-top-left-radius: 0;
+}
+
+.nav-tabs.nav-stacked > li:last-child > a {
+  border-bottom-left-radius: 0;
+}
+
+.local-navigation.nav-tabs > li > a,
+.local-navigation.nav-tabs > li > a:hover {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+.local-navigation.nav-tabs > .active > a,
+.local-navigation.nav-tabs > .active > a:hover {
+  border: 0px;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+.tabs-left > .nav-tabs > li > a,
+.tabs-right > .nav-tabs > li > a {
+  margin-bottom: 0px; /* overrides bootstrap.css 3519 */
+}
+
 
 .global-menu,
 .navbar .nav.top-menu,
 .sign-in legend {
   background-color: rgb(61, 58, 46);
   background-color: rgba(0, 0, 0, 0.6);
+}
+
+.global-menu,
+.sign-in legend {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.navbar .nav.top-menu {
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
 }
 
 .site-logo {
@@ -1131,7 +1219,7 @@ body {
 .global-menu.nav-tabs > .active > a:hover {
   border: 0px;
   background: transparent;
-  color: rgb(248, 207, 102);
+  color: #05B256;
 }
 
 .global-menu.nav-tabs > li {
@@ -1156,7 +1244,7 @@ body {
 .nav > li > a:hover {
   background-color: transparent;
   border: 0px;
-  color: rgb(248, 207, 102);
+  color: #05B256;
 }
 
 .navbar .top-menu.nav > li > a:hover {
@@ -1214,5 +1302,9 @@ body {
 
 .alert {
   margin-bottom: 10px;
+}
+
+.messages p {
+  margin: 0;
 }
 /* end generic theme */

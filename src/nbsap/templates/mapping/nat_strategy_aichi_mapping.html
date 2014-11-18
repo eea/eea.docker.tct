@@ -9,16 +9,16 @@
       {% with strategy.relevant_target.get_parent_goal as goal %}
         <li>
           <span class="mapping-header">{% trans "AICHI Goal" %}:</span>
-          <span>
-            <label class="goal">{% trans "AICHI Goal" %} {{ goal.code|upper }}:</label>{{ goal.description|safe }}
+          <span class="mapping-description">
+            <label class="goal">{% trans "AICHI Goal" %} {{ goal.code|upper }}:</label> {{ goal.description|safe }}
           </span>
         </li>
 
         {% with strategy.relevant_target as target %}
         <li>
           <span class="mapping-header">{% trans "Most relevant AICHI target" %}:</span>
-          <span>
-            <label class="target">{% trans "AICHI Target" %} {{ target.code }}:</label>{{ target.description|safe }}
+          <span class="mapping-description">
+            <label class="target">{% trans "AICHI Target" %} {{ target.code }}:</label> {{ target.description|safe }}
           </span>
         </li>
         {% endwith %}
@@ -30,7 +30,7 @@
             {% for target in strategy.other_targets.all %}
             <li>
               <span>
-                <label class="target">{% trans "AICHI Target" %} {{ target.code }}:</label>{{ target.description|safe }}
+                <label class="target">{% trans "AICHI Target" %} {{ target.code }}:</label> {{ target.description|safe }}
               </span>
             </li>
             {% endfor %}

@@ -27,19 +27,21 @@
     <a class="btn btn-small" href="{% url 'nat_strategy_download' %}">download strategy</a>
   </div>
 
-  <div class="tab-content homepage_view">
+  <div class="tab-content homepage_view national-strategy">
     <h1>{% trans "Objective" %} {{ current_objective.code }}: {{ current_objective.title }}</h1>
     <div class="element_field objective-description">
       {{ current_objective.description|safe }}
     </div>
 
-    {% include 'mapping/nat_strategy_aichi_mapping.html' with subobj=current_objective %}
+    <div class="pre-toc">
+      {% include 'mapping/nat_strategy_aichi_mapping.html' with subobj=current_objective %}
 
-    {% if EU_STRATEGY %}
-        {% include 'mapping/nat_strategy_eu_mapping.html' with subobj=current_objective %}
-    {% endif %}
+      {% if EU_STRATEGY %}
+          {% include 'mapping/nat_strategy_eu_mapping.html' with subobj=current_objective %}
+      {% endif %}
+    </div>
 
-    <div class="row">
+    <div class="row toc">
       <label>{% trans "Table of contents" %}:</label>
 
       {% if not current_objective.objectives_tree|length %}
@@ -66,7 +68,7 @@
       {% endif %}
     </div>
 
-    <div class="row">
+    <div class="row post-toc">
       {% for obj_actions in actions_by_objectives %}
         {% for obj, actions in obj_actions.items %}
         <label>
@@ -90,40 +92,42 @@
       {% endfor %}
     </div>
 
-    {% for subobj in current_objective.objectives_tree %}
-    <div class="element_field" id="{{ subobj.code }}">
-      <h2>{% trans "Objective" %} {{ subobj.code }}: {{ subobj.title }}</h2>
+    <div class="subobjectives">
+      {% for subobj in current_objective.objectives_tree %}
+      <div class="element_field" id="{{ subobj.code }}">
+        <h2>{% trans "Objective" %} {{ subobj.code }}: {{ subobj.title }}</h2>
 
-      <div class="snippet">
-        {{ subobj.description|truncatechars:510|safe }}
-        <a class="more">{% trans "show more" %}</a>
+        <div class="snippet">
+          {{ subobj.description|truncatechars:510|safe }}
+          <a class="more">{% trans "show more" %}</a>
+        </div>
+        <div class="full">
+          {{ subobj.description|safe }}
+          <a class="less">{% trans "show less" %}</a>
+        </div>
+
+        {% include 'mapping/nat_strategy_aichi_mapping.html' %}
+
+        {% if EU_STRATEGY %}
+            {% include 'mapping/nat_strategy_eu_mapping.html' %}
+        {% endif %}
+        {% if subobj.actions.all %}
+          <label>{% trans "Related actions" %}:</label>
+          {% for action in subobj.actions.all %}
+            <div class="well" id="{{ action.id }}">
+              {% if action.title %}
+                <h2>{{ action.title }}</h2>
+              {% else %}
+                <h2> {% trans "Actions related to objective" %} {{ action.code }} </h2>
+              {% endif %}
+              {{ action.description|safe }}
+            </div>
+          {% endfor %}
+        {% endif %}
+
       </div>
-      <div class="full">
-        {{ subobj.description|safe }}
-        <a class="less">{% trans "show less" %}</a>
-      </div>
-
-      {% include 'mapping/nat_strategy_aichi_mapping.html' %}
-
-      {% if EU_STRATEGY %}
-          {% include 'mapping/nat_strategy_eu_mapping.html' %}
-      {% endif %}
-      {% if subobj.actions.all %}
-        <label>{% trans "Related actions" %}:</label>
-        {% for action in subobj.actions.all %}
-          <div class="well" id="{{ action.id }}">
-            {% if action.title %}
-              <h2>{{ action.title }}</h2>
-            {% else %}
-              <h2> {% trans "Actions related to objective" %} {{ action.code }} </h2>
-            {% endif %}
-            {{ action.description|safe }}
-          </div>
-        {% endfor %}
-      {% endif %}
-
+      {% endfor %}
     </div>
-    {% endfor %}
 
   </div>
 </div>
