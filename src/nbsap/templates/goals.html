@@ -72,7 +72,7 @@
 
     {% for target in current_goal.targets.all %}
     <div class="element_field" id="{{ target.code }}">
-      <h2>{% trans "AICHI Target" %} {{ target.code }}: {{ target.description }}</h2>
+      <h2><span class="target">{% trans "AICHI Target" %} {{ target.code }}</span>: {{ target.description }}</h2>
 
       {% if target.eu_aichi_strategy.all and EU_STRATEGY %}
       <label>{% trans "Mapping with EU targets" %}:</label>

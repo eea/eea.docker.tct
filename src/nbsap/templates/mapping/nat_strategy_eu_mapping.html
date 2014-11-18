@@ -12,7 +12,7 @@
           <li>
             <span class="mapping-header">{% trans "EU Targets" %}:</span>
             <span class="mapping-description">
-              <label class="target">{% trans "Target" %} {{ target.code }}:</label>{{ target.title }}
+              <label class="target">{% trans "Target" %} {{ target.code }}:</label> {{ target.title }}
             </span>
           </li>
         {% endfor %}
@@ -24,7 +24,7 @@
           {% with action.get_target as eu_target %}
           <span class="mapping-header">{% trans "Related EU actions" %}:</span>
           <span class="mapping-description">
-              <label class="action">{% trans "Action" %} {{ action.code }}:</label>{{ action.description|safe }}
+              <label class="action">{% trans "Action" %} {{ action.code }}:</label> {{ action.description|safe }}
           </span>
           {% endwith %}
         </li>

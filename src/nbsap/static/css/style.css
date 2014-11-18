@@ -881,7 +881,9 @@ h2 p {
 }
 
 .target,
-.goal {
+.goal,
+.action,
+.subobj {
   font-weight: bold;
 }
 
@@ -954,10 +956,7 @@ h2 p {
 }
 
 .mapping-header {
-  font-size: 11px;
-  font-weight: bold;
   line-height: 18px;
-  color: #444;
   margin-bottom: 0px !important;
 }
 
