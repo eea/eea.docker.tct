@@ -793,10 +793,12 @@ footer .container {
 
 /* AICHI page,
   EU Targets page,
-  National Strategy */
+  National Strategy,
+  Implementation */
 .goals h1,
 .targets h1,
-.national-strategy h1 {
+.national-strategy h1,
+.implem-actions h1 {
   padding: 22px;
   border: 2px dotted #777;
   border-radius: 6px;
@@ -804,10 +806,16 @@ footer .container {
 
 .goals h2,
 .targets h2,
-.national-strategy h2 {
+.national-strategy h2,
+.implem-actions h2 {
   padding: 15px;
   border: 2px dotted #999;
   border-radius: 6px;
+}
+
+.well h2 {
+  border: 0;
+  padding: 0;
 }
 
 .tabbable .nav-header {
@@ -973,7 +981,8 @@ h2 p {
   margin-left: 40px;
 }
 
-.subobjectives .snippet {
+.subobjectives .snippet,
+.actions-listing .snippet {
   margin-left: 5px;
 }
 

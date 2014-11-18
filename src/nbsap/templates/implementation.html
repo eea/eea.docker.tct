@@ -15,11 +15,12 @@
 
   {% include "implementation_sidebar.html" %}
 
-  <div class="tab-content homepage_view">
-    <h1>{% trans "Actions related to Objective"%} {{ current_objective.code }}: {{ current_objective.title }} </h1>
+  <div class="tab-content homepage_view implem-actions">
+    <h1>{% trans "Actions related to Objective"%} {{ current_objective.code }} ({{ current_objective.title }})</h1>
 
-    <div class="row">
+    <div class="row toc">
       {% if current_objective.actions_tree %}
+        <label>{% trans "Table of contents"%}:</label>
         <ul>
           {% for action in current_objective.actions_tree|sort_by_code %}
               <li>
@@ -33,8 +34,9 @@
           {% endfor %}
         </ul>
       {% endif %}
-      </div>
-      <div class="row">
+    </div>
+
+    <div class="actions-listing">
       {% if current_objective.actions_tree %}
         {% for action in current_objective.actions_tree|sort_by_code %}
         <div class="element_field" id="{{action.code}}">
