@@ -27,19 +27,21 @@
     <a class="btn btn-small" href="{% url 'nat_strategy_download' %}">download strategy</a>
   </div>
 
-  <div class="tab-content homepage_view">
+  <div class="tab-content homepage_view national-strategy">
     <h1>{% trans "Objective" %} {{ current_objective.code }}: {{ current_objective.title }}</h1>
     <div class="element_field objective-description">
       {{ current_objective.description|safe }}
     </div>
 
-    {% include 'mapping/nat_strategy_aichi_mapping.html' with subobj=current_objective %}
+    <div class="pre-toc">
+      {% include 'mapping/nat_strategy_aichi_mapping.html' with subobj=current_objective %}
 
-    {% if EU_STRATEGY %}
-        {% include 'mapping/nat_strategy_eu_mapping.html' with subobj=current_objective %}
-    {% endif %}
+      {% if EU_STRATEGY %}
+          {% include 'mapping/nat_strategy_eu_mapping.html' with subobj=current_objective %}
+      {% endif %}
+    </div>
 
-    <div class="row">
+    <div class="row toc">
       <label>{% trans "Table of contents" %}:</label>
 
       {% if not current_objective.objectives_tree|length %}
@@ -66,7 +68,7 @@
       {% endif %}
     </div>
 
-    <div class="row">
+    <div class="row post-toc">
       {% for obj_actions in actions_by_objectives %}
         {% for obj, actions in obj_actions.items %}
         <label>

@@ -16,10 +16,6 @@ textarea {
   color: #333 !important;
 }
 
-* :empty {
-  display: none;
-}
-
 
 /* DataTables with Twitter Boostrap v2
    http://datatables.net/blog/Twitter_Bootstrap_2
@@ -794,16 +790,19 @@ footer .container {
 
 
 /* AICHI page,
-  EU Targets page */
+  EU Targets page,
+  National Strategy */
 .goals h1,
-.targets h1 {
+.targets h1,
+.national-strategy h1 {
   padding: 22px;
   border: 2px dotted #777;
   border-radius: 6px;
 }
 
 .goals h2,
-.targets h2 {
+.targets h2,
+.national-strategy h2 {
   padding: 15px;
   border: 2px dotted #999;
   border-radius: 6px;
@@ -836,7 +835,8 @@ footer .container {
 }
 
 .tab-content .element_field,
-.tab-content .row {
+.tab-content .row,
+.pre-toc {
   margin-left: 30px;
 }
 
@@ -859,6 +859,10 @@ footer .container {
   padding: 10px;
   box-shadow: none;
   font-size: 12px;
+}
+
+.tab-content .pre-toc .well {
+  margin-left: 0;
 }
 
 .tab-content .well ul {
@@ -899,7 +903,7 @@ h2 p {
 }
 
 .element_field.objective-description {
-  padding: 0px 19px 10px 0px;
+  padding: 0;
 }
 
 .element_field label {
