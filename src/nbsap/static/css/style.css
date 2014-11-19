@@ -185,9 +185,11 @@ textarea {
   overflow: hidden;
 }
 
-.breadcrumb,
-.breadcrumb li {
-  list-style-type: none !important;
+.breadcrumb {
+  background: #FFF;
+  font-size: 12px;
+  padding-left: 0;
+  margin-bottom: 5px;
 }
 
 .breadcrumb li {
@@ -878,8 +880,13 @@ h2 p {
   display: inline;
 }
 
+.target,
+.goal {
+  font-weight: bold;
+}
 
-/* Indicators page */
+
+/* Indicators */
 .indicator_field {
   color: #777;
 }
@@ -893,6 +900,17 @@ h2 p {
 .indicator_table ul,
 .indicator_view ul {
 	list-style-type: square;
+}
+
+.indicator_table td {
+  background: #FFF;
+  border-bottom: 1px solid #DDD;
+}
+
+.table-striped tbody tr:nth-child(odd) td,
+.table-striped tbody tr:nth-child(odd) th,
+.indicator_table tr:nth-child(odd) .span8 {
+  background: #EEE;
 }
 
 
@@ -969,9 +987,12 @@ h2 p {
 }
 
 h1.small {
-	font-size: 24px;
-	line-height: 27px;
-	padding-left: 10px;
+	padding: 15px 0;
+  font-size: 26px;
+  color: #039749;
+  text-transform: none;
+  font-weight: normal;
+  margin-top: 15px;
 }
 
 .admin-obj-description,
@@ -1047,6 +1068,15 @@ body .obj-id {
 
 .fullsize-modal .modal-body {
   max-height: 471px;
+  font-size: 12px;
+}
+
+.modal-body {
+  padding-bottom: 10px;
+}
+
+.big-modal .modal-inside-body {
+  padding: 15px;
 }
 
 .nat_strategy_export_container {
@@ -1060,6 +1090,17 @@ body .obj-id {
   margin-left: -16px;
   width: 531px;
   bottom: 0;
+}
+
+.modal h3 {
+  line-height: 1.3;
+  color: #555;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.big-modal h3 {
+  margin-left: 0;
 }
 
 
@@ -1120,6 +1161,11 @@ body {
 
 .tabbable {
   background: rgb(255, 255, 255);
+  padding: 10px 20px;
+}
+
+.tabbable.tabs-left {
+  padding: 0;
 }
 
 
@@ -1243,7 +1289,6 @@ body {
 
 .nav > li > a:hover {
   background-color: transparent;
-  border: 0px;
   color: #05B256;
 }
 
