@@ -939,12 +939,9 @@ h2 p {
 
 .more,
 .less {
-  padding: 2px 4px;
-  background-color: #F7F7F9;
-  border: 1px solid #ccc;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
+  display: inline-block;
+  margin-bottom: 20px;
+  font-weight: normal;
 }
 
 .well .mapping-list {

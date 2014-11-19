@@ -45,14 +45,14 @@
           </h2>
           <div class="snippet">
             {{ action.description|truncatechars:510|safe }}
-            <a class="more">{% trans "show more"%}</a>
+            <a class="more badge">{% trans "show more"%}</a>
           </div>
           <div class="full">
           {{ action.description|safe }}
 
           {% include 'mapping/nat_action_aichi_mapping.html' %}
 
-          <a class="less"> {% trans "show less" %}</a>
+          <a class="less badge badge-success"> {% trans "show less" %}</a>
           </div>
         </div>
         <div class="row between-subobj">
