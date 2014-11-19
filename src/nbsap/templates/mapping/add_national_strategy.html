@@ -31,7 +31,7 @@
     {% endif %}
 
     <form style="margin-top: 25px" action="{% url 'edit_national_strategy' %}" method="post"
-          id="national-strategy-add">
+          id="national-strategy-add" class="add-form">
       <div class="form-actions up">
         <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
         <a href="{% url 'list_national_strategy' %}" class="btn" type="button">{% trans "Cancel" %}</a>
