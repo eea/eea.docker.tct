@@ -95,15 +95,15 @@
       <div class="subobjectives">
         {% for subobj in current_objective.objectives_tree %}
         <div class="element_field" id="{{ subobj.code }}">
-          <h2>{% trans "Objective" %} {{ subobj.code }}: {{ subobj.title }}</h2>
+          <h2><span class="subobj">{% trans "Objective" %} {{ subobj.code }}</span>: {{ subobj.title }}</h2>
 
           <div class="snippet">
             {{ subobj.description|truncatechars:510|safe }}
-            <a class="more">{% trans "show more" %}</a>
+            <a class="more badge">{% trans "show more" %}</a>
           </div>
           <div class="full">
             {{ subobj.description|safe }}
-            <a class="less">{% trans "show less" %}</a>
+            <a class="less badge badge-success">{% trans "show less" %}</a>
           </div>
 
           {% include 'mapping/nat_strategy_aichi_mapping.html' %}

@@ -92,7 +92,7 @@
             {% for strategy in current_target.eu_aichi_strategy.all %}
               {% for aichi_target in strategy.aichi_targets.all %}
                 <li>
-                  <label class="target">{% trans "AICHI Target"%}</label> {{aichi_target.code}}
+                  <label>{% trans "AICHI Target"%} {{aichi_target.code}}</label>
                 </li>
               {% endfor %}
             {% endfor %}
@@ -106,7 +106,7 @@
       <div class="target-actions">
       {% for action in current_target.actions_tree %}
       <div class="element_field" id="{{ action.code }}">
-        <h2>Action {{ action.code }}: {{ action.description }}</h2>
+        <h2><span class="action">Action {{ action.code }}</span>: {{ action.description }}</h2>
 
         <div>
           <label>{% trans "Mapping with National Strategy" %}:</label>
@@ -137,7 +137,7 @@
       {% endfor %}
 
       <div class="row between-subobj">
-        <a class="pull-right" href="#top">{% trans "Back to top" %}</a>
+        <a class="pull-right label label-info" href="#top">{% trans "Back to top" %}</a>
       </div>
 
     </div>

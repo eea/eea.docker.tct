@@ -793,10 +793,12 @@ footer .container {
 
 /* AICHI page,
   EU Targets page,
-  National Strategy */
+  National Strategy,
+  Implementation */
 .goals h1,
 .targets h1,
-.national-strategy h1 {
+.national-strategy h1,
+.implem-actions h1 {
   padding: 22px;
   border: 2px dotted #777;
   border-radius: 6px;
@@ -804,10 +806,16 @@ footer .container {
 
 .goals h2,
 .targets h2,
-.national-strategy h2 {
+.national-strategy h2,
+.implem-actions h2 {
   padding: 15px;
   border: 2px dotted #999;
   border-radius: 6px;
+}
+
+.well h2 {
+  border: 0;
+  padding: 0;
 }
 
 .tabbable .nav-header {
@@ -881,10 +889,16 @@ h2 p {
 }
 
 .target,
-.goal {
+.goal,
+.action,
+.subobj {
   font-weight: bold;
 }
 
+
+.well label {
+  font-size: 12px;
+}
 
 /* Indicators */
 .indicator_field {
@@ -915,11 +929,6 @@ h2 p {
 
 
 /* Objectives page */
-.full {
-  padding: 5px;
-  margin-top: 5px;
-}
-
 .element_field.objective-description {
   padding: 0;
 }
@@ -930,12 +939,9 @@ h2 p {
 
 .more,
 .less {
-  padding: 2px 4px;
-  background-color: #F7F7F9;
-  border: 1px solid #ccc;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
+  display: inline-block;
+  margin-bottom: 20px;
+  font-weight: normal;
 }
 
 .well .mapping-list {
@@ -954,10 +960,7 @@ h2 p {
 }
 
 .mapping-header {
-  font-size: 11px;
-  font-weight: bold;
   line-height: 18px;
-  color: #444;
   margin-bottom: 0px !important;
 }
 
@@ -974,8 +977,9 @@ h2 p {
   margin-left: 40px;
 }
 
-.subobjectives .snippet {
-  margin-left: 5px;
+.tab-content .snippet,
+.tab-content .full {
+  margin-left: 50px;
 }
 
 

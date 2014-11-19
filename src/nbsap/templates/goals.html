@@ -9,169 +9,169 @@
 
 {% block content %}
 
-{% if messages %}
-<div class="messages alert alert-success">
-{% for message in messages %}
-    <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
-{% endfor %}
-</div>
-{% endif %}
-
-{% include 'nav_tabs.html' %}
-
-<div class="tabbable tabs-left">
-  <label class="nav-header">{% trans "AICHI Goals" %}</label>
-  <ul class="nav nav-tabs nav-stacked local-navigation">
-    {% for goal in goals %}
-    <li {% if goal.code == current_goal.code %}class="active"{% endif %}>
-      <a href="{% url 'goals' code=goal.code %}" title="{{ goal.code|upper }}"</a>
-        {% trans "Goal" %} {{ goal.code | upper }}
-      </a>
-    </li>
+  {% if messages %}
+    <div class="messages alert alert-success">
+    {% for message in messages %}
+        <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
     {% endfor %}
-  </ul>
-
-  <div class="tab-content homepage_view goals">
-    {% if info_header %}
-    <div class="alert alert-info alert-dismissible info-header" role="alert">
-      <button type="button" class="close" data-dismiss="alert">
-        <span aria-hidden="true">&times;</span>
-      </button>
-      <ul>
-        <h1>{% trans "What is The 2020 Target Cross-linking Tool?" %}</h1>
-        <li>* {% trans "A solution for multiple target reporting (Aichi targets, EU biodiversity strategy and other reporting obligations)" %}</li>
-        <li>* {% trans "A stand alone application - free of charge - to be completely “owned” by user countries" %}
-        </li>
-        <li>* {% trans "Available in national and English languages" %}</li>
-        <li>* {% trans "Ready with Aichi targets and EU targets already integrated in English" %}</li>
-        <h2>{% trans "For further info contact EEA (Rania.Spyropoulou at eea.europa.eu)" %}</h2>
-      </ul>
     </div>
-    {% endif %}
+  {% endif %}
 
-    <h1>{% trans "AICHI Goal" %} {{ current_goal.code|upper }}: {{ current_goal.description }}</h1>
-    <div class="row toc">
-      <label>{% trans "Table of contents"%}:</label>
-      <ul class="span2">
-        {% for target in current_goal.targets.all %}
-        {% if forloop.counter0|divisibleby:"2" and not forloop.first %}
-      </ul>
-      <ul class="span2">
-        {% endif %}
-        <li>
-          <a href="{% url 'goals' code=current_goal.code %}#{{target.code}}"
-             rel="tooltip"
-             data-placement="right"
-             data-original-title="{{ target.description }}">
-             {% trans "AICHI Target" %} {{ target.code }}
-          </a>
-        </li>
-        {% endfor %}
-      </ul>
-    </div>
+  {% include 'nav_tabs.html' %}
 
-    {% for target in current_goal.targets.all %}
-    <div class="element_field" id="{{ target.code }}">
-      <h2>{% trans "AICHI Target" %} {{ target.code }}: {{ target.description }}</h2>
+  <div class="tabbable tabs-left">
+    <label class="nav-header">{% trans "AICHI Goals" %}</label>
+    <ul class="nav nav-tabs nav-stacked local-navigation">
+      {% for goal in goals %}
+      <li {% if goal.code == current_goal.code %}class="active"{% endif %}>
+        <a href="{% url 'goals' code=goal.code %}" title="{{ goal.code|upper }}"</a>
+          {% trans "Goal" %} {{ goal.code | upper }}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
 
-      {% if target.eu_aichi_strategy.all and EU_STRATEGY %}
-      <label>{% trans "Mapping with EU targets" %}:</label>
-      <div class="well">
+    <div class="tab-content homepage_view goals">
+      {% if info_header %}
+      <div class="alert alert-info alert-dismissible info-header" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span>
+        </button>
         <ul>
-          {% for strategy in target.eu_aichi_strategy.all %}
-            {% with strategy.eu_target as eu_target %}
+          <h1>{% trans "What is The 2020 Target Cross-linking Tool?" %}</h1>
+          <li>* {% trans "A solution for multiple target reporting (Aichi targets, EU biodiversity strategy and other reporting obligations)" %}</li>
+          <li>* {% trans "A stand alone application - free of charge - to be completely “owned” by user countries" %}
+          </li>
+          <li>* {% trans "Available in national and English languages" %}</li>
+          <li>* {% trans "Ready with Aichi targets and EU targets already integrated in English" %}</li>
+          <h2>{% trans "For further info contact EEA (Rania.Spyropoulou at eea.europa.eu)" %}</h2>
+        </ul>
+      </div>
+      {% endif %}
+
+      <h1>{% trans "AICHI Goal" %} {{ current_goal.code|upper }}: {{ current_goal.description }}</h1>
+      <div class="row toc">
+        <label>{% trans "Table of contents"%}:</label>
+        <ul class="span2">
+          {% for target in current_goal.targets.all %}
+          {% if forloop.counter0|divisibleby:"2" and not forloop.first %}
+        </ul>
+        <ul class="span2">
+          {% endif %}
+          <li>
+            <a href="{% url 'goals' code=current_goal.code %}#{{target.code}}"
+               rel="tooltip"
+               data-placement="right"
+               data-original-title="{{ target.description }}">
+               {% trans "AICHI Target" %} {{ target.code }}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      {% for target in current_goal.targets.all %}
+      <div class="element_field" id="{{ target.code }}">
+        <h2><span class="target">{% trans "AICHI Target" %} {{ target.code }}</span>: {{ target.description }}</h2>
+
+        {% if target.eu_aichi_strategy.all and EU_STRATEGY %}
+        <label>{% trans "Mapping with EU targets" %}:</label>
+        <div class="well">
+          <ul>
+            {% for strategy in target.eu_aichi_strategy.all %}
+              {% with strategy.eu_target as eu_target %}
+              <li>
+                <a href="{% url 'eu_targets' code=eu_target.code %}" title="{{ eu_target.code }}">
+                  {% trans "EU Target" %} {{ eu_target.code }}: {{ eu_target.title }}
+                </a>
+              </li>
+              {% endwith %}
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+
+        {% if target.relevant_target_national_strategy.all %}
+        <label>{% trans "Mapping with National Strategy" %}:</label>
+        <div class="well" style="position: relative;">
+          <div class="nat_strategy_export_container">
+            <a href="{% url 'nat_strategy_export_preview' target_id=target.pk %}"
+               data-target="#nat_strategy_export_modal"
+               data-toggle="modal"
+               class="btn btn-small">{% trans "details" %}</a></div>
+          <ul>
+            {% for strategy in target.relevant_target_national_strategy.all %}
             <li>
-              <a href="{% url 'eu_targets' code=eu_target.code %}" title="{{ eu_target.code }}">
-                {% trans "EU Target" %} {{ eu_target.code }}: {{ eu_target.title }}
+               <a href ="{% url 'nat_strategy' %}/{{strategy.objective.get_root_parent.code }}#{{strategy.objective.code}}">
+                {% trans "Objective" %} {{ strategy.objective.code }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+
+        {% if target.eu_indicator_aichi_strategy.all and EU_STRATEGY %}
+        <label>{% trans "Mapping with EU indicators" %}:</label>
+        <div class="well">
+          <ul>
+            {% for strategy in target.eu_indicator_aichi_strategy.all %}
+              {% with strategy.eu_indicator as eu_indicator %}
+              <li>
+                {% if eu_indicator.url %}
+                  <a href="{{ eu_indicator.url }}" title="{{ eu_indicator.title }}">
+                    {{ eu_indicator.indicator_type|upper }}
+                    {{ eu_indicator.code }}: {{ eu_indicator.title }}
+                  </a>
+                {% else %}
+                  {{ eu_indicator.code }} {{ eu_indicator.title }}
+                {% endif %}
+              </li>
+              {% endwith %}
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+
+        {% if target.indicators.all %}
+        <label>{% trans "Most relevant CBD indicators" %}:</label>
+        <div class="well">
+          <ul>
+            {% for indicator in target.indicators.all %}
+            <li>
+              <a href="{% url 'indicator' pk=indicator.pk %}"
+                 data-target="#indicator_modal" data-toggle="modal">
+                {% trans "Indicator" %} {{indicator.id}}: {{ indicator.title }}
               </a>
             </li>
-            {% endwith %}
-          {% endfor %}
-        </ul>
-      </div>
-      {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
 
-      {% if target.relevant_target_national_strategy.all %}
-      <label>{% trans "Mapping with National Strategy" %}:</label>
-      <div class="well" style="position: relative;">
-        <div class="nat_strategy_export_container">
-          <a href="{% url 'nat_strategy_export_preview' target_id=target.pk %}"
-             data-target="#nat_strategy_export_modal"
-             data-toggle="modal"
-             class="btn btn-small">{% trans "details" %}</a></div>
-        <ul>
-          {% for strategy in target.relevant_target_national_strategy.all %}
-          <li>
-             <a href ="{% url 'nat_strategy' %}/{{strategy.objective.get_root_parent.code }}#{{strategy.objective.code}}">
-              {% trans "Objective" %} {{ strategy.objective.code }}</a>
-          </li>
-          {% endfor %}
-        </ul>
-      </div>
-      {% endif %}
-
-      {% if target.eu_indicator_aichi_strategy.all and EU_STRATEGY %}
-      <label>{% trans "Mapping with EU indicators" %}:</label>
-      <div class="well">
-        <ul>
-          {% for strategy in target.eu_indicator_aichi_strategy.all %}
-            {% with strategy.eu_indicator as eu_indicator %}
+        {% if target.other_indicators.all %}
+        <label>{% trans "Other relevant CBD indicators" %}:</label>
+        <div class="well">
+          <ul>
+            {% for indicator in target.other_indicators.all %}
             <li>
-              {% if eu_indicator.url %}
-                <a href="{{ eu_indicator.url }}" title="{{ eu_indicator.title }}">
-                  {{ eu_indicator.indicator_type|upper }}
-                  {{ eu_indicator.code }}: {{ eu_indicator.title }}
-                </a>
-              {% else %}
-                {{ eu_indicator.code }} {{ eu_indicator.title }}
-              {% endif %}
+              <a href="{% url 'indicator' pk=indicator.pk %}"
+                 data-target="#indicator_modal" data-toggle="modal">
+                {% trans "Indicator" %} {{indicator.id}}: {{ indicator.title }}
+              </a>
             </li>
-            {% endwith %}
-          {% endfor %}
-        </ul>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
       </div>
-      {% endif %}
 
-      {% if target.indicators.all %}
-      <label>{% trans "Most relevant CBD indicators" %}:</label>
-      <div class="well">
-        <ul>
-          {% for indicator in target.indicators.all %}
-          <li>
-            <a href="{% url 'indicator' pk=indicator.pk %}"
-               data-target="#indicator_modal" data-toggle="modal">
-              {% trans "Indicator" %} {{indicator.id}}: {{ indicator.title }}
-            </a>
-          </li>
-          {% endfor %}
-        </ul>
+      <div class="row">
+        <a class="pull-right label label-info" href="#top">{% trans "Back to top" %}</a>
       </div>
-      {% endif %}
 
-      {% if target.other_indicators.all %}
-      <label>{% trans "Other relevant CBD indicators" %}:</label>
-      <div class="well">
-        <ul>
-          {% for indicator in target.other_indicators.all %}
-          <li>
-            <a href="{% url 'indicator' pk=indicator.pk %}"
-               data-target="#indicator_modal" data-toggle="modal">
-              {% trans "Indicator" %} {{indicator.id}}: {{ indicator.title }}
-            </a>
-          </li>
-          {% endfor %}
-        </ul>
-      </div>
-      {% endif %}
+      {% endfor %}
     </div>
-
-    <div class="row">
-      <a class="pull-right" href="#top">{% trans "Back to top" %}</a>
-    </div>
-
-    {% endfor %}
   </div>
-</div>
 {% endblock %}
 
 
