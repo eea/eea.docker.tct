@@ -896,6 +896,10 @@ h2 p {
 }
 
 
+.well label {
+  font-size: 12px;
+}
+
 /* Indicators */
 .indicator_field {
   color: #777;
@@ -925,11 +929,6 @@ h2 p {
 
 
 /* Objectives page */
-.full {
-  padding: 5px;
-  margin-top: 5px;
-}
-
 .element_field.objective-description {
   padding: 0;
 }
@@ -981,9 +980,9 @@ h2 p {
   margin-left: 40px;
 }
 
-.subobjectives .snippet,
-.actions-listing .snippet {
-  margin-left: 5px;
+.tab-content .snippet,
+.tab-content .full {
+  margin-left: 50px;
 }
 
 
