@@ -25,9 +25,6 @@ textarea {
 .dataTables_length select { width: 75px; }
 .dataTables_filter label { float: right; }
 
-.dataTables_info,
-.dataTables_length { color: #999; }
-
 .dataTables_paginate { float: right; margin: 0; }
 .table { clear: both; margin-bottom: 6px !important; }
 
@@ -990,22 +987,33 @@ h2 p {
   margin-left: 0;
 }
 
-.objectives_listing {
+.view-objective table {
+  margin-left: 32px;
+}
+
+
+/* minimalist tables */
+.table.minimalist {
   width: 94.7%;
   border-bottom: 1px solid #999;
 }
 
-.objectives_listing td {
+.table.minimalist td {
   border: 0;
 }
 
-.objectives_listing th {
+.table.minimalist th {
   font-weight: normal;
   border-bottom: 2px solid #999;
 }
 
-.objectives_listing .obj-id {
+.table.minimalist .obj-id {
   min-width: 40px;
+}
+
+.dataTables_info,
+.dataTables_length {
+  color: #999;
 }
 
 
@@ -1063,7 +1071,7 @@ h1.small {
   z-index: 1000;
 }
 
-.view-objective {
+.view-objective-link {
   margin-top: 15px;
   font-size: 15px;
   margin-left: 5px;
