@@ -982,6 +982,11 @@ h2 p {
   margin-left: 50px;
 }
 
+.tab-content .objective-description .snippet,
+.tab-content .objective-description .full {
+  margin-left: 0;
+}
+
 
 /* admin pages */
 .original-description,
