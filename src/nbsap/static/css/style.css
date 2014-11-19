@@ -786,7 +786,7 @@ footer .nav > li > a:hover {
 }
 
 footer .container {
-  border-top: 1px solid #DDD;
+  border-top: 3px solid #DDD;
   padding-top: 10px;
 }
 
@@ -1124,6 +1124,15 @@ body .obj-id {
 
 .mapping-nat-obj .control-group {
   padding: 0 20px;
+}
+
+.mapping-nat-obj .other_target_text h5,
+.mapping-nat-obj .actions_text h5 {
+  margin-bottom: 3px;
+}
+
+.mapping-nat-obj .short-descrip {
+  font-size: 12px;
 }
 
 
