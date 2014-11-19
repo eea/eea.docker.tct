@@ -24,8 +24,6 @@
 
 {% block content %}
 
-  {% include 'admin_nav_tabs.html' %}
-
   {% if messages %}
     <div class="messages alert alert-success">
       {% for message in messages %}
@@ -33,6 +31,8 @@
       {% endfor %}
     </div>
   {% endif %}
+
+  {% include 'admin_nav_tabs.html' %}
 
   <div class="tabbable">
     <h1 class="small">Edit page</h1>
