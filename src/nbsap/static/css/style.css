@@ -895,10 +895,10 @@ h2 p {
   font-weight: bold;
 }
 
-
 .well label {
   font-size: 12px;
 }
+
 
 /* Indicators */
 .indicator_field {
@@ -1110,6 +1110,20 @@ body .obj-id {
 
 .big-modal h3 {
   margin-left: 0;
+}
+
+.mapping-nat-obj .form-actions {
+  padding: 5px 20px 10px;
+  background: #FFF;
+}
+
+.mapping-nat-obj .form-actions.up {
+  border-top: 0;
+  border-bottom: 1px solid #E5E5E5;
+}
+
+.mapping-nat-obj .control-group {
+  padding: 0 20px;
 }
 
 
