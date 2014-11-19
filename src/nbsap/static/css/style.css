@@ -24,7 +24,10 @@ textarea {
 .dataTables_length label { float: left; text-align: left; }
 .dataTables_length select { width: 75px; }
 .dataTables_filter label { float: right; }
-.dataTables_info { padding-top: 8px; }
+
+.dataTables_info,
+.dataTables_length { color: #999; }
+
 .dataTables_paginate { float: right; margin: 0; }
 .table { clear: both; margin-bottom: 6px !important; }
 
@@ -581,7 +584,7 @@ textarea {
 }
 
 .add {
-  margin-bottom: 15px;
+  margin-bottom: 30px;
 }
 
 .modal-backdrop {
@@ -928,7 +931,7 @@ h2 p {
 }
 
 
-/* Objectives page */
+/* Objectives */
 .element_field.objective-description {
   padding: 0;
 }
@@ -987,6 +990,24 @@ h2 p {
   margin-left: 0;
 }
 
+.objectives_listing {
+  width: 94.7%;
+  border-bottom: 1px solid #999;
+}
+
+.objectives_listing td {
+  border: 0;
+}
+
+.objectives_listing th {
+  font-weight: normal;
+  border-bottom: 2px solid #999;
+}
+
+.objectives_listing .obj-id {
+  min-width: 40px;
+}
+
 
 /* admin pages */
 .original-description,
@@ -1023,10 +1044,6 @@ h1.small {
 #wmd-button-row-nl.btn-toolbar,
 #wmd-button-row-en.btn-toolbar {
 	margin-left: 0px;
-}
-
-body .obj-id {
-	width: 20px;
 }
 
 .obj-lang1,
