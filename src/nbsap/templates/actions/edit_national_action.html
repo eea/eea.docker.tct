@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block title %}
-    <title>NBSAP - {% trans "Edit action" %} {{ action.code }}</title>
+    <title>NBSAP - {% trans "Edit Action" %} {{ action.code }}</title>
 {% endblock %}
 
 {% block extra_head %}
@@ -23,9 +23,9 @@
 
   {% include 'admin_nav_tabs.html' %}
 
-  <div class="tabbable">
+  <div class="tabbable edit-action">
     {% include 'actions/actions_breadcrumb.html' %}
-    <h1 class="small">{% trans "Edit action" %}</h1>
+    <h1 class="small">{% trans "Edit Action" %} {{ action.code }}</h1>
 
     {% if form.errors %}
       <p style="color: red;">
@@ -33,9 +33,9 @@
       </p>
     {% endif %}
 
-    <form action="" method="post" id="national-action-edit">
+    <form action="" method="post" id="national-action-edit" class="edit-form">
 
-      <div class="form-actions">
+      <div class="form-actions up">
         <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
         <a href="{% url 'view_national_objective' pk=objective.pk %}" class="btn" type="button">{% trans "Cancel" %}</a>
       </div>
