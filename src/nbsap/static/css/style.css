@@ -875,7 +875,9 @@ footer .container {
   font-size: 12px;
 }
 
-.tab-content .pre-toc .well {
+.tab-content .pre-toc .well,
+.tab-content.implem-actions .element_field .well,
+.tab-content.implem-actions .element_field label {
   margin-left: 0;
 }
 
