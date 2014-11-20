@@ -30,7 +30,14 @@
     <div class="tab-content homepage_view national-strategy">
       <h1>{% trans "Objective" %} {{ current_objective.code }}: {{ current_objective.title }}</h1>
       <div class="element_field objective-description">
-        {{ current_objective.description|safe }}
+        <div class="snippet">
+          {{ current_objective.description|truncatechars:510|safe }}
+          <a class="more badge">{% trans "show more" %}</a>
+        </div>
+        <div class="full">
+          {{ current_objective.description|safe }}
+          <a class="less badge badge-success">{% trans "show less" %}</a>
+        </div>
       </div>
 
       <div class="pre-toc">
@@ -125,6 +132,9 @@
             {% endfor %}
           {% endif %}
 
+        </div>
+        <div class="row between-subobj">
+          <a class="pull-right label label-info" href="#top">{% trans "Back to top"%}</a>
         </div>
         {% endfor %}
       </div>

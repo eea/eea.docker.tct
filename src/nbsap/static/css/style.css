@@ -24,7 +24,7 @@ textarea {
 .dataTables_length label { float: left; text-align: left; }
 .dataTables_length select { width: 75px; }
 .dataTables_filter label { float: right; }
-.dataTables_info { padding-top: 8px; }
+
 .dataTables_paginate { float: right; margin: 0; }
 .table { clear: both; margin-bottom: 6px !important; }
 
@@ -581,7 +581,11 @@ textarea {
 }
 
 .add {
-  margin-bottom: 15px;
+  margin-bottom: 30px;
+}
+
+table .add {
+  margin-bottom: 0;
 }
 
 .modal-backdrop {
@@ -786,7 +790,7 @@ footer .nav > li > a:hover {
 }
 
 footer .container {
-  border-top: 1px solid #DDD;
+  border-top: 3px solid #DDD;
   padding-top: 10px;
 }
 
@@ -871,7 +875,9 @@ footer .container {
   font-size: 12px;
 }
 
-.tab-content .pre-toc .well {
+.tab-content .pre-toc .well,
+.tab-content.implem-actions .element_field .well,
+.tab-content.implem-actions .element_field label {
   margin-left: 0;
 }
 
@@ -895,10 +901,10 @@ h2 p {
   font-weight: bold;
 }
 
-
 .well label {
   font-size: 12px;
 }
+
 
 /* Indicators */
 .indicator_field {
@@ -928,7 +934,7 @@ h2 p {
 }
 
 
-/* Objectives page */
+/* Objectives */
 .element_field.objective-description {
   padding: 0;
 }
@@ -982,6 +988,40 @@ h2 p {
   margin-left: 50px;
 }
 
+.tab-content .objective-description .snippet,
+.tab-content .objective-description .full {
+  margin-left: 0;
+}
+
+.view-objective table {
+  margin-left: 32px;
+}
+
+
+/* minimalist tables */
+.table.minimalist {
+  width: 94.7%;
+  border-bottom: 1px solid #999;
+}
+
+.table.minimalist td {
+  border: 0;
+}
+
+.table.minimalist th {
+  font-weight: normal;
+  border-bottom: 2px solid #999;
+}
+
+.table.minimalist .obj-id {
+  min-width: 40px;
+}
+
+.dataTables_info,
+.dataTables_length {
+  color: #999;
+}
+
 
 /* admin pages */
 .original-description,
@@ -1020,10 +1060,6 @@ h1.small {
 	margin-left: 0px;
 }
 
-body .obj-id {
-	width: 20px;
-}
-
 .obj-lang1,
 .obj-lang2 {
 	width: 73px;
@@ -1041,7 +1077,7 @@ body .obj-id {
   z-index: 1000;
 }
 
-.view-objective {
+.view-objective-link {
   margin-top: 15px;
   font-size: 15px;
   margin-left: 5px;
@@ -1076,7 +1112,7 @@ body .obj-id {
 }
 
 .modal-body {
-  padding-bottom: 10px;
+  padding-bottom: 45px;
 }
 
 .big-modal .modal-inside-body {
@@ -1105,6 +1141,32 @@ body .obj-id {
 
 .big-modal h3 {
   margin-left: 0;
+}
+
+.add-form .form-actions,
+.edit-form .form-actions {
+  padding: 5px 20px 10px;
+  background: #FFF;
+}
+
+.add-form .up,
+.edit-form .up {
+  border-top: 0;
+  border-bottom: 1px solid #E5E5E5;
+}
+
+.add-form .control-group,
+.edit-form .control-group {
+  padding: 0 20px;
+}
+
+.mapping-nat-obj .other_target_text h5,
+.mapping-nat-obj .actions_text h5 {
+  margin-bottom: 3px;
+}
+
+.mapping-nat-obj .short-descrip {
+  font-size: 12px;
 }
 
 

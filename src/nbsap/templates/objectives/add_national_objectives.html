@@ -33,9 +33,9 @@
       </p>
     {% endif %}
 
-    <form action="" method="post" id="national-objective-add">
+    <form action="" method="post" id="national-objective-add" class="add-form">
 
-      <div class="form-actions">
+      <div class="form-actions up">
         <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
         {% if parent %}
             {% url 'view_national_objective' pk=parent.pk as cancel_url %}
