@@ -1141,17 +1141,20 @@ h1.small {
   margin-left: 0;
 }
 
-.add-form .form-actions {
+.add-form .form-actions,
+.edit-form .form-actions {
   padding: 5px 20px 10px;
   background: #FFF;
 }
 
-.add-form .up {
+.add-form .up,
+.edit-form .up {
   border-top: 0;
   border-bottom: 1px solid #E5E5E5;
 }
 
-.add-form .control-group {
+.add-form .control-group,
+.edit-form .control-group {
   padding: 0 20px;
 }
 
