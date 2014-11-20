@@ -4,7 +4,7 @@
 {% load i18n %}
 
 {% block title %}
-    <title>NBSAP - {% trans "National strategy homepage" %}</title>
+    <title>NBSAP - {% trans "National Strategy: Objectives" %}</title>
 {% endblock %}
 
 {% block content %}
@@ -12,7 +12,7 @@
 
   <div class="tabbable tabs-left">
 
-    <label class="nav-header">{% trans "Objectives" %}</label>
+    <label class="nav-header">{% trans "National Strategy: Objectives" %}</label>
     <ul class="nav nav-tabs nav-stacked local-navigation">
       {% for objective in objectives|sort_by_code %}
         <li {% if objective.code == current_objective.code %}class="active"{% endif %}>
