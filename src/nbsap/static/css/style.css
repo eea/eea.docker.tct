@@ -584,6 +584,10 @@ textarea {
   margin-bottom: 30px;
 }
 
+table .add {
+  margin-bottom: 0;
+}
+
 .modal-backdrop {
   opacity: 0.2;
 }

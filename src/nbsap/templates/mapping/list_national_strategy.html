@@ -24,7 +24,7 @@
 </div>
 {% endif %}
 
-<div class="tabbable">
+<div class="tabbable list-nat-strategy">
   <h1 class="small">{% trans "Mappings of National Objectives to Aichi and EU targets" %}</h1>
 
   <div class="add-button">
@@ -32,7 +32,7 @@
        href="{% url 'edit_national_strategy' %}">{% trans "Add Mapping" %}</a>
   </div>
 
-  <table class="table table-bordered table-striped objectives_listing">
+  <table class="table table-striped objectives_listing minimalist">
 
     <thead>
       <th class="obj-id">{% trans "Objective"%}</th>
@@ -118,7 +118,7 @@
     $(document).ready(function() {
       $('.messages').delay(1000).fadeOut();
       $('.objectives_listing').dataTable({
-          "sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
+          "sDom": "<'row'<'span5'l><'span6'f>r>t<'row'<'span5'i><'span6'p>>",
           "bStateSave": true,
           "iDisplayLength": 10,
       });
