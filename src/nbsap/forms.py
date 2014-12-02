@@ -36,7 +36,7 @@ class NationalObjectiveForm(forms.Form):
 
     language = forms.ChoiceField(choices=settings.LANGUAGES)
     title = forms.CharField(widget=widgets.Textarea)
-    description = forms.CharField(
+    description = TextCleanedHtml(
         widget=TinyMCE(attrs={'cols': 80, 'rows': 25}),
         required=False)
 
@@ -96,8 +96,8 @@ class NationalActionForm(forms.Form):
 
     language = forms.ChoiceField(choices=settings.LANGUAGES)
     title = forms.CharField(widget=widgets.Textarea, required=False)
-    description = forms.CharField(widget=TinyMCE(attrs={'cols': 80,
-                                                        'rows': 25}))
+    description = TextCleanedHtml(
+        widget=TinyMCE(attrs={'cols': 80,'rows': 25}))
 
     def __init__(self, *args, **kwargs):
 
@@ -132,8 +132,8 @@ class NationalActionForm(forms.Form):
 
 class AichiGoalForm(forms.Form):
     language = forms.ChoiceField(choices=settings.LANGUAGES)
-    description = forms.CharField(widget=TinyMCE(attrs={'cols': 80,
-                                                        'rows': 25}))
+    description = TextCleanedHtml(
+        widget=TinyMCE(attrs={'cols': 80, 'rows': 25}))
     title = forms.CharField(widget=widgets.Textarea)
 
     def __init__(self, *args, **kwargs):

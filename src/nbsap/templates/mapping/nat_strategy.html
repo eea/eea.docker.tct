@@ -78,7 +78,7 @@
       <h2>Objective {{ subobj.code }}: {{ subobj.title }}</h2>
 
       <div class="snippet">
-        {{ subobj.description|truncatechars:510|safe }}
+        {{ subobj.description|striptags|truncatechars:510|safe }}
         <a class="more">show more</a>
       </div>
       <div class="full">
