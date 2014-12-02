@@ -164,6 +164,14 @@ class NationalAction(models.Model):
     def __unicode__(self):
         return self.code
 
+    @property
+    def first_objective(self):
+        try:
+            return self.objective.get()
+        except (NationalAction.DoesNotExists,
+                NationalAction.MultipleObjectsReturned):
+            return None
+
 
 class NationalObjective(models.Model):
 

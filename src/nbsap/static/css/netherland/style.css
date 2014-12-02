@@ -2,6 +2,7 @@ body {
     background: #B8CA91;
 }
 .navbar {
+    margin-bottom: -15px!important;
 }
 .navbar .brand {
     width: 47%;
