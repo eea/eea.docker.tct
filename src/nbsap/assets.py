@@ -23,6 +23,7 @@ CSS_ASSETS = (
     'css/bootstrap-ui/jquery.ui.1.8.16.ie.css',
     'css/uniform.default.css',
     'css/chosen.css',
+    'css/style.css',
 ) + settings.CSS_ASSETS
 
 IE8_CSS_ASSETS = (

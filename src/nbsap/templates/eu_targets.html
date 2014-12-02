@@ -106,7 +106,7 @@
       <div class="target-actions">
       {% for action in current_target.actions_tree %}
       <div class="element_field" id="{{ action.code }}">
-        <h2><span class="action">Action {{ action.code }}</span>: {{ action.description }}</h2>
+        <h2><span class="action">{% trans "Action" %} {{ action.code }}</span>: {{ action.description }}</h2>
 
         <div>
           <label>{% trans "Mapping with National Strategy" %}:</label>

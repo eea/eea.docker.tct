@@ -24,7 +24,8 @@
     </ul>
 
     <div class="download-container">
-      <a class="btn btn-small" href="{% url 'nat_strategy_download' %}">download strategy</a>
+      <a class="btn btn-small" href="{% url 'nat_strategy_download' %}">
+        {% trans "download strategy" %}</a>
     </div>
 
     <div class="tab-content homepage_view national-strategy">
@@ -79,7 +80,7 @@
         {% for obj_actions in actions_by_objectives %}
           {% for obj, actions in obj_actions.items %}
           <label>
-            {% trans "Actions related with objective" %} {{ obj }}:</label>
+            {% trans "Actions related with objective" %} {{ obj.code }}:</label>
             <ul>
             {% for action in actions %}
               <li>
@@ -100,44 +101,62 @@
       </div>
 
       <div class="subobjectives">
-        {% for subobj in current_objective.objectives_tree %}
-        <div class="element_field" id="{{ subobj.code }}">
-          <h2><span class="subobj">{% trans "Objective" %} {{ subobj.code }}</span>: {{ subobj.title }}</h2>
 
-          <div class="snippet">
-            {{ subobj.description|striptags|truncatechars:510|safe }}
-            <a class="more badge">{% trans "show more" %}</a>
-          </div>
-          <div class="full">
-            {{ subobj.description|safe }}
-            <a class="less badge badge-success">{% trans "show less" %}</a>
-          </div>
+      {% for obj_actions in actions_by_objectives %}
+        {% for subobj, actions in obj_actions.items %}
 
-          {% include 'mapping/nat_strategy_aichi_mapping.html' %}
+          <div class="element_field" id="{{ subobj.code }}">
 
-          {% if EU_STRATEGY %}
-              {% include 'mapping/nat_strategy_eu_mapping.html' %}
-          {% endif %}
-          {% if subobj.actions.all %}
-            <label>{% trans "Related actions" %}:</label>
-            {% for action in subobj.actions.all %}
-              <div class="well" id="{{ action.id }}">
-                {% if action.title %}
-                  <h2>{{ action.title }}</h2>
-                {% else %}
-                  <h2> {% trans "Actions related to objective" %} {{ action.code }} </h2>
-                {% endif %}
-                {{ action.description|safe }}
-              </div>
-            {% endfor %}
-          {% endif %}
+            <h2>
+              <span class="subobj">
+                {% trans "Objective" %} {{ subobj.code }}</span>:
+                {{ subobj.title }}
+            </h2>
 
-        </div>
-        <div class="row between-subobj">
-          <a class="pull-right label label-info" href="#top">{% trans "Back to top"%}</a>
-        </div>
+            <div class="snippet">
+              {{ subobj.description|striptags|truncatechars:510|safe }}
+              <a class="more badge">{% trans "show more" %}</a>
+            </div> {# /snippet #}
+            <div class="full">
+              {{ subobj.description|safe }}
+              <a class="less badge badge-success">
+                {% trans "show less" %}</a>
+            </div> {# /full #}
+
+            {% include 'mapping/nat_strategy_aichi_mapping.html' %}
+
+            {% if EU_STRATEGY %}
+                {% include 'mapping/nat_strategy_eu_mapping.html' %}
+            {% endif %}
+
+            {% if actions %}
+
+              <label>{% trans "Related actions" %}:</label>
+
+              {% for action in actions %}
+                <div class="well" id="{{ action.id }}">
+                  {% if action.title %}
+                    <h2>{{ action.title }}</h2>
+                  {% else %}
+                    <h2> {% trans "Actions related to objective" %} {{ action.code }} </h2>
+                  {% endif %}
+                  {{ action.description|safe }}
+                </div>
+              {% endfor %}
+
+            {% endif %}
+
+          </div> {# /element_field #}
+
+          <div class="row between-subobj">
+            <a class="pull-right label label-info" href="#top">
+              {% trans "Back to top"%}</a>
+          </div> {# /between-subobj #}
+
         {% endfor %}
-      </div>
+      {% endfor %}
+
+      </div> {# /subobjectives #}
 
     </div>
   </div>

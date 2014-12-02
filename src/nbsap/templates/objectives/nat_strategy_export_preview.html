@@ -18,8 +18,9 @@
   {% if not download %}
   <div class="modal-footer modal-inside-footer">
     <a href="{% url 'nat_strategy_export' target_id=target.id %}" class="btn btn-primary">
-      Export</a>
-    <a class="btn" data-dismiss="modal">Close</a>
+      {% trans "Export" %}</a>
+    <a class="btn" data-dismiss="modal">
+      {% trans "Close" %}</a>
   </div>
   {% endif %}
 

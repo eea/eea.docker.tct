@@ -27,12 +27,12 @@ def nat_strategy(request, code=None):
     current_objective.objectives_tree = current_objective.get_all_objectives()
     actions = [i for i in current_objective.actions.all()]
     if actions:
-        obj_actions.append({current_objective.code: actions})
+        obj_actions.append({current_objective: actions})
 
     for subobj in current_objective.objectives_tree:
         actions = [i for i in subobj.actions.all()]
         if actions:
-            obj_actions.append({subobj.code: actions})
+            obj_actions.append({subobj: actions})
 
     return render(request, 'objectives/nat_strategy.html',
                   {'objectives': objectives,

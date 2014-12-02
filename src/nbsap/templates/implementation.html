@@ -28,8 +28,10 @@
                    rel='tooltip'
                    data-placement='right'
                    data-original-title="{{ action.description }}">
-                   {% trans "Action"%} {{ action.code }}
-                   {% if action.title %}({{ action.title }}){% endif %}</a>
+                   {% trans "Action"%} {{ action.code }}</a>
+                {% if action.title and action.first_objective %}
+                  <a href="{% url 'nat_strategy' code=action.first_objective.code  %}">({{ action.title }})</a>
+                {% endif %}
               </li>
           {% endfor %}
         </ul>
