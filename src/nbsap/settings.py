@@ -218,10 +218,7 @@ TINYMCE_COMPRESSOR = False
 TINYMCE_JS_URL = '/static/js/tiny_mce/tiny_mce.js'
 TINYMCE_JS_ROOT = '/static/js/tiny_mce'
 
-CSS_ASSETS = (
-    'css/style.css',
-)
-
+CSS_ASSETS = ()
 
 ASSETS_ROOT = '/var/local/nbsap-django/src/nbsap/static'
 
