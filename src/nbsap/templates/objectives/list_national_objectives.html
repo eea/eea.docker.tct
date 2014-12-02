@@ -31,7 +31,9 @@
       </div>
     {% endif %}
 
-    <h1 class="small">National Strategy: List National Objectives</h1>
+    <h1 class="small">
+      {% trans "National Strategy" %}: {% trans "List National Objectives" %}
+    </h1>
     <div class="add-button">
       <a class="btn btn-small btn-primary add"
          href="{% url 'edit_national_objective' %}">{% trans "Add objective" %}

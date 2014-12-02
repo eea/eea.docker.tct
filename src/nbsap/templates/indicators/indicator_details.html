@@ -25,10 +25,10 @@
 
     <tr class="row">
       <td class="span3 offset1 indicator_field">
-        Strategic Goal
+        {% trans "Strategic Goal" %}
       </td>
       <td class="span8">
-        <label class="goal">Goal {{ indicator.strategic_goal_ob.code|upper }}:</label>
+        <label class="goal">{% trans "Goal" %} {{ indicator.strategic_goal_ob.code|upper }}:</label>
         <br />
         {{ indicator.strategic_goal_ob.description }}
       </td>
@@ -54,10 +54,10 @@
 
     <tr class="row">
       <td class="span3 offset1 indicator_field">
-        Most Relevant Aichi Target
+        {% trans "Most Relevant Aichi Target" %}
       </td>
       <td class="span8">
-        <label class="target">Target {{ indicator.relevant_target_ob.code }}:</label>
+        <label class="target">{% trans "Target" %} {{ indicator.relevant_target_ob.code }}:</label>
         <br />
         {{ indicator.relevant_target_ob.description }}
       </td>
@@ -65,13 +65,13 @@
 
     <tr class="row">
       <td class="span3 offset1 indicator_field">
-        Other Relevant Aichi Targets
+        {% trans "Other Relevant Aichi Targets" %}
       </td>
       <td class="span8">
         <ul>
         {% for target in indicator.other_targets_list %}
           <li>
-            <label class="target">Target {{ target.code }}:</label>
+            <label class="target">{% trans "Target" %} {{ target.code }}:</label>
             <br />
             {{ target.description }}
           </li>
@@ -206,5 +206,5 @@
 </table>
 
 <div class="modal-footer modal-inside-footer">
-  <a class="btn" data-dismiss="modal">Close</a>
+  <a class="btn" data-dismiss="modal">{% trans "Close" %}</a>
 </div>
