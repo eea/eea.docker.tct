@@ -31,7 +31,7 @@
       <h1>{% trans "Objective" %} {{ current_objective.code }}: {{ current_objective.title }}</h1>
       <div class="element_field objective-description">
         <div class="snippet">
-          {{ current_objective.description|truncatechars:510|safe }}
+          {{ current_objective.description|striptags|truncatechars:510|safe }}
           <a class="more badge">{% trans "show more" %}</a>
         </div>
         <div class="full">
@@ -105,7 +105,7 @@
           <h2><span class="subobj">{% trans "Objective" %} {{ subobj.code }}</span>: {{ subobj.title }}</h2>
 
           <div class="snippet">
-            {{ subobj.description|truncatechars:510|safe }}
+            {{ subobj.description|striptags|truncatechars:510|safe }}
             <a class="more badge">{% trans "show more" %}</a>
           </div>
           <div class="full">
