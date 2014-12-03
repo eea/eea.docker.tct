@@ -88,7 +88,7 @@
         {% for strategy in current_target.eu_aichi_strategy.all %}
           {% for aichi_target in strategy.aichi_targets.all %}
             <li>
-              <label>{% trans "AICHI Target"%} {{aichi_target.code}}</label>
+              <a href="#to_do">{% trans "AICHI Target"%} {{aichi_target.code}}</a>
             </li>
           {% endfor %}
         {% endfor %}
@@ -112,12 +112,14 @@
             <li>
               {% if strategy.objective.parent %}
               <a href="{% url 'nat_strategy' code=strategy.objective.parent.code %}#{{ strategy.objective.code }}">
-                {% trans "Objective" %} {{strategy.objective.code}}: {{ strategy.objective.title }} {{ strategy.objective.parent.code }}
+                {% trans "Objective" %} {{strategy.objective.code}}
               </a>
+              <p>{{ strategy.objective.title }} {{ strategy.objective.parent.code }}</p>
               {% else %}
               <a href="{% url 'nat_strategy' code=strategy.objective.code%}">
-                {% trans "Objective" %} {{strategy.objective.code}}: {{ strategy.objective.title }} {{ strategy.objective.code }}
+                {% trans "Objective" %} {{strategy.objective.code}}
               </a>
+              <p>{{ strategy.objective.title }} {{ strategy.objective.code }}</p>
               {% endif %}
             </li>
           {% endfor %}
