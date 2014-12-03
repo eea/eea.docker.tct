@@ -5,69 +5,88 @@
     <title>NBSAP - {% trans "Implementation: Actions related to objectives" %}</title>
 {% endblock %}
 
-{% block content %}
-
 {% load i18n %}
 {% load utils %}
-{% include 'nav_tabs.html' %}
-
-<div class="tabbable tabs-left">
-
-  {% include "implementation_sidebar.html" %}
-
-  <div class="tab-content homepage_view implem-actions">
-    <h1>{% trans "Actions related to Objective"%} {{ current_objective.code }} ({{ current_objective.title }})</h1>
-
-    <div class="row toc">
-      {% if current_objective.actions_tree %}
-        <label>{% trans "Table of contents"%}:</label>
-        <ul>
-          {% for action in current_objective.actions_tree|sort_by_code %}
-              <li>
-                <a href="#{{action.code}}"
-                   rel='tooltip'
-                   data-placement='right'
-                   data-original-title="{{ action.description }}">
-                   {% trans "Action"%} {{ action.code }}</a>
-                {% if action.title and action.first_objective %}
-                  <a href="{% url 'nat_strategy' code=action.first_objective.code  %}">({{ action.title }})</a>
-                {% endif %}
-              </li>
-          {% endfor %}
-        </ul>
-      {% endif %}
-    </div>
-
-    <div class="actions-listing">
-      {% if current_objective.actions_tree %}
-        {% for action in current_objective.actions_tree|sort_by_code %}
-        <div class="element_field" id="{{action.code}}">
-          <h2>{% trans "Action" %} {{ action.code }}
-            {% if action.title %}({{ action.title }}){% endif %}
-          </h2>
-          <div class="snippet">
-            {{ action.description|striptags|truncatechars:510|safe }}
-            <a class="more badge">{% trans "show more"%}</a>
-          </div>
-          <div class="full">
-            {{ action.description|safe }}
-
-            {% include 'mapping/nat_action_aichi_mapping.html' %}
-
-            <a class="less badge badge-success"> {% trans "show less" %}</a>
-          </div>
-        </div>
 
 
-        {% endfor %}
-      <div class="text-right">
-        <a class="label label-info" href="#top">{% trans "Back to top" %}</a>
-      </div>
-      {% else %}
-        <span>{% trans "No actions found" %}.</span>
-      {% endif %}
-    </div>
+{% block navmenu %}
+  {% include 'nav_menu.html' %}
+{% endblock %}
+
+
+{% block sidebar %}
+<div class="sidebar">
+
+<h4 class="sidebar-title">{% trans "Related actions" %}</h4>
+<ul class="sidebar-menu">
+  {% if is_empty_page %}
+  <li {% if not current_objective %} class="active" {% endif %}>
+    <a href="{% url 'implementation_page' %}">{% trans "Intro" %}</a>
+  </li>
+  {% endif %}
+  {% for objective in objectives|sort_by_code %}
+  <li {% if objective.code == current_objective.code %}class="active"{% endif %}>
+    <a href="{% url 'implementation' code=objective.code %}">
+      {% trans "Objective"%} {{ objective.code }}
+    </a>
+  </li>
+  {% endfor %}
+</ul>
+
+</div>
+{% endblock %}
+
+{% block content %}
+
+  <h1 class="page-title">Implementation</h1>
+
+  <h1>{% trans "Actions related to Objective"%} {{ current_objective.code }} ({{ current_objective.title }})</h1>
+
+  <div class="toc">
+    {% if current_objective.actions_tree %}
+      <h5>{% trans "Table of contents"%}</h5>
+      <ul>
+      {% for action in current_objective.actions_tree|sort_by_code %}
+        <li>
+          <a href="#{{action.code}}"
+             rel='tooltip'
+             data-placement='right'
+             data-original-title="{{ action.description }}">
+             {% trans "Action"%} {{ action.code }}</a>
+        </li>
+      {% endfor %}
+      </ul>
+    {% endif %}
   </div>
+
+  {% if current_objective.actions_tree %}
+    {% for action in current_objective.actions_tree|sort_by_code %}
+    <div class="section" id="{{action.code}}">
+      <h2>{% trans "Action" %} {{ action.code }}
+        {% if action.title %}({{ action.title }}){% endif %}
+      </h2>
+      <div class="element_field">
+        <div class="snippet">
+          {{ action.description|striptags|truncatechars:510|safe }}
+          <a class="more">{% trans "show more"%}</a>
+        </div>
+        <div class="full">
+          <div class="html-content">{{ action.description|safe }}</div>
+
+          {% include 'mapping/nat_action_aichi_mapping.html' %}
+
+          <a class="less"> {% trans "show less" %}</a>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+
+  <div class="text-right">
+    <a href="#top">{% trans "Back to top" %}</a>
+  </div>
+  {% else %}
+    <p>{% trans "No actions found" %}.</p>
+  {% endif %}
 </div>
 
 {% endblock content %}

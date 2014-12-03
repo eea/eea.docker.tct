@@ -1,58 +1,49 @@
 {% load i18n %}
 
-<label>{% trans "Mapping with AICHI" %}</label>
-<div class="row well">
- {% if action.objective.all %}
-  <ul class="mapping-list">
-  {% for objective in action.objective.all %}
-    {% if objective.objective_national_strategy.all %}
-      {% for  strategy in objective.objective_national_strategy.all %}
+<div class="well">
+  <div class="well-title">{% trans "Mapping with AICHI" %}</div>
+  {% with strategies=action.objective.objective_national_strategy.all %}
+    {% if strategies|length %}
+
+    <h5>{% trans "Goals" %}</h5>
+    <ul>
+      {% for strategy in strategies %}
         {% with strategy.relevant_target.get_parent_goal as goal %}
-          <li>
-            <span class="mapping-header">{% trans "Goal" %}:</span>
-            <span>
-              <a href="{% url 'goals' code=goal.code %}" title="{{ goal.code|upper }}">
-                <strong>{% trans "Goal" %} {{ goal.code|upper }}:</strong> {{ goal.description|safe }}
-              </a>
-            </span>
-          </li>
-
-          {% with strategy.relevant_target as target %}
-            <li>
-              <span class="mapping-header">{% trans "Most relevant AICHI target" %}</span>
-              <span>
-                <a href="{% url 'goals' code=goal.code %}#{{target.code}}" title="{{ target.code }}">
-                  <strong>{% trans "Target" %} {{ target.id }}:</strong> {{ target.description|safe }}
-                </a>
-              </span>
-            </li>
-          {% endwith %}
-
-          {%if strategy.other_targets.all %}
-            <li>
-              <span class="mapping-header">{% trans "Other relevant AICHI targets" %}:</span>
-                <ul class="other-targets">
-                  {% for target in strategy.other_targets.all %}
-                    <li>
-                      <span>
-                        <a href="{% url 'goals' code=target.get_parent_goal.code %}#{{ target.code }}" title="{{ targe.code }}">
-                          <strong>{% trans "Target" %} {{ target.id }}:</strong>{{ target.description|safe }}
-                        </a>
-                      </span>
-                    </li>
-                  {% endfor %}
-              </span>
-            </li>
-          {% endif %}
-
+        <li>
+          <a href="{% url 'goals' code=goal.code %}" title="{{ goal.code|upper }}">{% trans "Goal" %} {{ goal.code|upper }}</a>
+          <p>{{ goal.description|safe }}</p>
+        </li>
         {% endwith %}
       {% endfor %}
+    </ul>
+
+    <h5>{% trans "Most relevant AICHI target" %}</h5>
+    <ul>
+      {% for strategy in strategies %}
+        {% with strategy.relevant_target as target %}
+        <li>
+          <a href="{% url 'goals' code=goal.code %}#{{target.code}}" title="{{ target.code }}">{% trans "Target" %} {{ target.id }}</a>
+          <p>{{ target.description|safe }}</p>
+        </li>
+        {% endwith %}
+      {% endfor %}
+    </ul>
+
+    <h5>{% trans "Other relevant AICHI targets" %}</h5>
+    <ul>
+      {% for strategy in strategies %}
+        {% with strategy.other_targets.all as target %}
+        <li>
+          <a href="{% url 'goals' code=target.get_parent_goal.code %}#{{ target.code }}" title="{{ targe.code }}">{% trans "Target" %} {{ target.id }}</a>
+          <p>{{ target.description|safe }}</p>
+        </li>
+        {% endwith %}
+      {% endfor %}
+    </ul>
+
     {% else %}
-      <span>{% trans "No data available" %}.</span>
+      <p>{% trans "No data available" %}.</p>
     {% endif %}
-  {% endfor %}
-  </ul>
-  {% else %}
-    <span>{% trans "No data available" %}.</span>
-  {% endif %}
+
+  {% endwith %}
 </div>

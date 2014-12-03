@@ -36,7 +36,6 @@
 
   <h1 class="page-title">{% trans 'National Strategy' %}</h1>
   <h1>{% trans "Objective" %} {{ current_objective.code }}: {{ current_objective.title }}</h1>
-
   <div class="element_field objective-description">
     <div class="snippet">
       {{ current_objective.description|striptags|truncatechars:510|safe }}
@@ -83,15 +82,17 @@
 
       <h2>{% trans "Objective" %} {{ subobj.code }}: {{ subobj.title }}</h2>
 
-      <div class="snippet">
-        {{ subobj.description|striptags|truncatechars:510|safe }}
-        <a class="more">{% trans "show more" %}</a>
-      </div> {# /snippet #}
-      <div class="full">
-        {{ subobj.description|safe }}
-        <a class="less">
-          {% trans "show less" %}</a>
-      </div> {# /full #}
+      <div class="element_field">
+        <div class="snippet">
+          {{ subobj.description|striptags|truncatechars:510|safe }}
+          <a class="more">{% trans "show more" %}</a>
+        </div> {# /snippet #}
+        <div class="full">
+          {{ subobj.description|safe }}
+          <a class="less">
+            {% trans "show less" %}</a>
+        </div> {# /full #}
+      </div>
 
       {% include 'mapping/nat_strategy_aichi_mapping.html' %}
 
@@ -100,32 +101,32 @@
         {% endif %}
 
         {% if actions %}
-
-          <label>{% trans "Related actions" %}:</label>
-
           {% for action in actions %}
             <div class="well" id="{{ action.id }}">
-              {% if action.title %}
-                <h2>{{ action.title }}</h2>
-              {% else %}
-                <h2> {% trans "Actions related to objective" %} {{ action.code }} </h2>
-              {% endif %}
-              {{ action.description|safe }}
-            </div>
-          {% endfor %}
-
+              <div class="well-title">
+                {% if action.title %}
+                  {{ action.title }}
+                {% else %}
+                  {% trans "Actions related to objective" %} {{ action.code }}
+                {% endif %}
+              </div>
+              <div class="html-content">
+                {{ action.description|safe }}
+              </div>
+            {% endfor %}
+          </div>
         {% endif %}
 
       </div> {# /element_field #}
 
-      <div class="row between-subobj">
-        <a class="pull-right label label-info" href="#top">
-          {% trans "Back to top"%}</a>
-      </div> {# /between-subobj #}
 
     {% endfor %}
   {% endfor %}
 
+  <div class="text-right">
+    <a href="#top">
+      {% trans "Back to top"%}</a>
+  </div>
 
 </div>
 {% endblock %}
@@ -135,8 +136,6 @@
   <script>
   $(function () {
     $("[rel=tooltip]").tooltip();
-
-
 
     $('.more').on('click', function() {
       var parents = $(this).parents('.element_field');

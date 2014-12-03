@@ -633,124 +633,30 @@ table .add {
 }
 
 @media (min-width: 1200px) {
-  .navbar-inner,
-  footer {
+  .container {
     width: 1170px;
-    padding-left: 5px;
-    padding-right: 10px;
   }
 }
 
-@media (max-width: 1200px) {
-  .navbar-inner,
-  footer {
+@media (max-width: 1199px) {
+  .container {
     width: 940px;
-    padding-left: 5px;
-    padding-right: 10px;
   }
 }
-
-@media (max-width: 1024px) {
-  .navbar-inner,
-  .container.content,
-  footer {
-    width: 940px;
-    padding-left: 5px;
-    padding-right: 10px;
-  }
-
-  /*.navbar-inner .container {
-    background: url('024.jpg') no-repeat 166% -73%;
-    width: 940px;
-  }*/
-
-  .navbar .brand {
-    width: 35%;
-  }
-
-  .login-container input {
-    width: 330px;
-  }
-}
-
-.navbar .nav.top-menu {
-  margin-top: -7px;
-  font-size: 12px;
-}
-
-.navbar .nav > li > a {
-  padding-bottom: 2px;
-  text-shadow: none;
-}
-
-.navbar .nav > li > a:hover {
-  color: #444;
-}
-
-.navbar .nav .navbar-link {
-  position: relative;
-  right: 7px;
-}
-
-.navbar .nav .navbar-last-link {
-  border-right: 1px solid #ddd;
-}
-
-.navbar .nav li.dropdown .dropdown-toggle .caret,
-.navbar .nav li.dropdown.open .caret {
-  border-top-color: #000;
-}
-
-.nav-tabs > .active > a,
-.nav-tabs > .active > a:hover {
-  border: 1px solid #014E46;
-  border-bottom-color: transparent;
-}
-
-.nav-tabs > li:last-child {
-  border-bottom: none;
-}
-
-.nav-tabs > li.active {
-  border-bottom: 1px solid #fff;
-}
-
-.navbar .nav form.language-menu {
-  margin: 0;
-}
-
 
 /* footer */
-footer {
-  border-top: 0;
-  margin: 0 auto;
-  background: white;
-  padding: 35px 0 36px;
-}
-
-footer p {
-  margin-bottom: 0;
-  color: #555;
+.footer {
+  border-top: 1px solid #eee;
+  color: gray;
 }
 
 .museum-logo {
   background: url('../logo_irscnb.png') no-repeat center center;
   width: 94px;
   height: 30px;
-  text-indent: -9999px;
   display: block;
   margin-right: 10px;
 }
-
-footer .nav > li > a:hover {
-  background-color: transparent;
-}
-
-footer .container {
-  border-top: 3px solid #DDD;
-  padding-top: 10px;
-}
-
 
 /* AICHI page,
   EU Targets page,
@@ -859,15 +765,6 @@ footer .container {
   margin-left: 40px;
 }
 
-.tab-content .snippet,
-.tab-content .full {
-  margin-left: 50px;
-}
-
-.tab-content .objective-description .snippet,
-.tab-content .objective-description .full {
-  margin-left: 0;
-}
 
 .view-objective table {
   margin-left: 32px;
@@ -1403,7 +1300,11 @@ h2 {
 
 .content {
   margin-top: 1em;
-  overflow: hidden;
+}
+.content:after {
+  content: '';
+  display: table;
+  clear: both;
 }
 
 .sidebar {
@@ -1429,11 +1330,7 @@ h2 {
 .toc ul {
   margin: auto;
   list-style: none;
-}
-.toc ul:after {
-  content: '';
-  display: table;
-  clear: both;
+  overflow: hidden;
 }
 
 .toc ul li {
@@ -1443,6 +1340,7 @@ h2 {
   float: left;
   width: 25%;
 }
+
 .toc ul li:before {
   content: "\2022 ";
 }
@@ -1543,4 +1441,25 @@ h2 {
 
 .modal {
   outline: none;
+}
+
+.full {
+  display: none;
+}
+
+
+.html-content h1 {
+  font-size: 20px;
+}
+
+.html-content h2 {
+  font-size: 18px;
+}
+
+.html-content h3 {
+  font-size: 16px;
+}
+
+.html-content h4 {
+  font-size: 14px;
 }
