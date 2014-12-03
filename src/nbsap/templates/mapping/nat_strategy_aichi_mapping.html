@@ -1,47 +1,45 @@
 {% load i18n %}
 
-<label>{% trans "Mapping with AICHI" %}:</label>
-<div class="row well">
+<div class="well">
+  <div class="well-title">{% trans "Mapping with AICHI" %}</div>
   {% if subobj.objective_national_strategy.all %}
-    <ul class="mapping-list">
     {% for strategy in subobj.objective_national_strategy.all %}
 
+      <h5>{% trans "AICHI Goal" %}</h5>
+      <ul>
       {% with strategy.relevant_target.get_parent_goal as goal %}
         <li>
-          <span class="mapping-header">{% trans "AICHI Goal" %}:</span>
-          <span class="mapping-description">
-            <label class="goal">{% trans "AICHI Goal" %} {{ goal.code|upper }}:</label> {{ goal.description|safe }}
+            <a href="#to_do">{% trans "AICHI Goal" %} {{ goal.code|upper }}</a>
+            {{ goal.description|safe }}
           </span>
         </li>
+      </ul>
 
+      <h5>{% trans "Most relevant AICHI target" %}</h5>
+      <ul>
         {% with strategy.relevant_target as target %}
         <li>
-          <span class="mapping-header">{% trans "Most relevant AICHI target" %}:</span>
-          <span class="mapping-description">
-            <label class="target">{% trans "AICHI Target" %} {{ target.code }}:</label> {{ target.description|safe }}
-          </span>
+            <a href="#to_do">{% trans "AICHI Target" %} {{ target.code }}:</a>
+            {{ target.description|safe }}
         </li>
         {% endwith %}
+      </ul>
 
-        {% if strategy.other_targets.all %}
+      {% if strategy.other_targets.all %}
+      <h5>{% trans "Other relevant AICHI targets" %}</h5>
+      <ul>
+        {% for target in strategy.other_targets.all %}
         <li>
-          <span class="mapping-header">{% trans "Other relevant AICHI targets" %}:</span>
-          <ul class="other-targets">
-            {% for target in strategy.other_targets.all %}
-            <li>
-              <span>
-                <label class="target">{% trans "AICHI Target" %} {{ target.code }}:</label> {{ target.description|safe }}
-              </span>
-            </li>
-            {% endfor %}
-          </ul>
+          <a href="#to_do">{% trans "AICHI Target" %} {{ target.code }}:</a>
+          {{ target.description|safe }}
         </li>
-        {% endif %}
+        {% endfor %}
+      </ul>
+      {% endif %}
 
       {% endwith %}
     {% endfor %}
-    </ul>
   {% else %}
-    <span>{% trans "No data available" %}.</span>
+    <p>{% trans "No data available" %}.</p>
   {% endif %}
 </div>

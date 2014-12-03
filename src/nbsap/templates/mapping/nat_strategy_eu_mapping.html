@@ -1,40 +1,40 @@
 {% load i18n %}
 
-<label>{% trans "Mapping with EU" %}:</label>
-<div class="row well">
+<div class="well">
+  <div class="well-title">{% trans "Mapping with EU" %}</div>
   {% if subobj.has_national_strategies %}
 
-    <ul class="mapping-list">
     {% for strategy in subobj.get_national_strategies %}
 
       {% if strategy.eu_targets.all %}
-        {% for target in strategy.eu_targets.all %}
-          <li>
-            <span class="mapping-header">{% trans "EU Targets" %}:</span>
-            <span class="mapping-description">
-              <label class="target">{% trans "Target" %} {{ target.code }}:</label> {{ target.title }}
-            </span>
-          </li>
-        {% endfor %}
+        <h5>{% trans "EU Targets" %}</h5>
+        <ul>
+          {% for target in strategy.eu_targets.all %}
+            <li>
+              <a href="#to_do">{% trans "Target" %} {{ target.code }}</a>
+              {{ target.title }}
+            </li>
+          {% endfor %}
+        </ul>
       {% endif %}
 
       {% if strategy.eu_actions.all %}
-        {% for action in strategy.eu_actions.all %}
-        <li>
-          {% with action.get_target as eu_target %}
-          <span class="mapping-header">{% trans "Related EU actions" %}:</span>
-          <span class="mapping-description">
-              <label class="action">{% trans "Action" %} {{ action.code }}:</label> {{ action.description|safe }}
-          </span>
-          {% endwith %}
-        </li>
-        {% endfor %}
+        <h5>{% trans "Related EU actions" %}</h5>
+        <ul>
+          {% for action in strategy.eu_actions.all %}
+            {% with action.get_target as eu_target %}
+            <li>
+              <a href="#to_do">{% trans "Action" %} {{ action.code }}</a>
+              {{ action.description|safe }}
+            </li>
+            {% endwith %}
+          {% endfor %}
+        </ul>
       {% endif %}
 
     {% endfor %}
-    </ul>
 
   {% else %}
-    <span>{% trans "No data available" %}.</span>
+    <p>{% trans "No data available" %}.</p>
   {% endif %}
 </div>
