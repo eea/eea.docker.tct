@@ -36,6 +36,7 @@
 
   <h1 class="page-title">{% trans 'National Strategy' %}</h1>
   <h1>{% trans "Objective" %} {{ current_objective.code }}: {{ current_objective.title }}</h1>
+
   <div class="element_field objective-description">
     <div class="snippet">
       {{ current_objective.description|striptags|truncatechars:510|safe }}
@@ -76,55 +77,23 @@
 </div>
 
 
-
-  <div class="row post-toc">
-    {% for obj_actions in actions_by_objectives %}
-      {% for obj, actions in obj_actions.items %}
-      <label>
-        {% trans "Actions related with objective" %} {{ obj.code }}:</label>
-        <ul>
-        {% for action in actions %}
-          <li>
-            <a href="#{{ action.id }}">
-              {% if action.title %}
-                {{ action.title }}
-              {% else %}
-                {{ action.description|slice:":50"|safe }}
-              {% endif %}
-            </a>
-          </li>
-        {% endfor %}
-        </ul>
-      {% endfor %}
-    {% empty %}
-      <p>No related actions found</p>
-    {% endfor %}
-  </div>
-
-  <div class="subobjectives">
-
   {% for obj_actions in actions_by_objectives %}
     {% for subobj, actions in obj_actions.items %}
+    <div class="section" id="{{ subobj.code }}">
 
-      <div class="element_field" id="{{ subobj.code }}">
+      <h2>{% trans "Objective" %} {{ subobj.code }}: {{ subobj.title }}</h2>
 
-        <h2>
-          <span class="subobj">
-            {% trans "Objective" %} {{ subobj.code }}</span>:
-            {{ subobj.title }}
-        </h2>
+      <div class="snippet">
+        {{ subobj.description|striptags|truncatechars:510|safe }}
+        <a class="more">{% trans "show more" %}</a>
+      </div> {# /snippet #}
+      <div class="full">
+        {{ subobj.description|safe }}
+        <a class="less">
+          {% trans "show less" %}</a>
+      </div> {# /full #}
 
-        <div class="snippet">
-          {{ subobj.description|striptags|truncatechars:510|safe }}
-          <a class="more badge">{% trans "show more" %}</a>
-        </div> {# /snippet #}
-        <div class="full">
-          {{ subobj.description|safe }}
-          <a class="less badge badge-success">
-            {% trans "show less" %}</a>
-        </div> {# /full #}
-
-        {% include 'mapping/nat_strategy_aichi_mapping.html' %}
+      {% include 'mapping/nat_strategy_aichi_mapping.html' %}
 
         {% if EU_STRATEGY %}
             {% include 'mapping/nat_strategy_eu_mapping.html' %}
@@ -157,7 +126,6 @@
     {% endfor %}
   {% endfor %}
 
-  </div> {# /subobjectives #}
 
 </div>
 {% endblock %}
@@ -167,6 +135,8 @@
   <script>
   $(function () {
     $("[rel=tooltip]").tooltip();
+
+
 
     $('.more').on('click', function() {
       var parents = $(this).parents('.element_field');
