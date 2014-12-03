@@ -1,6 +1,8 @@
 {% extends 'layout.html' %}
-
 {% load i18n %}
+{% load utils %}
+
+
 {% block title %}
   NBSAP - {% trans "EU Targets" %}
 {% endblock %}
@@ -9,6 +11,7 @@
 {% block navmenu %}
   {% include 'nav_menu.html' %}
 {% endblock %}
+
 
 {% block sidebar %}
 <div class="sidebar">
@@ -87,8 +90,10 @@
       <ul>
         {% for strategy in current_target.eu_aichi_strategy.all %}
           {% for aichi_target in strategy.aichi_targets.all %}
+            {% assign aichi_target.get_parent_goal as goal %}
             <li>
-              <a href="#to_do">{% trans "AICHI Target"%} {{aichi_target.code}}</a>
+              <a href="{% url 'goals' code=goal.code %}#{{ aichi_target.code }}">
+                {% trans "AICHI Target"%} {{ aichi_target.code }}</a>
             </li>
           {% endfor %}
         {% endfor %}
