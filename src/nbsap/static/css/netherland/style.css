@@ -1,44 +1,6 @@
-body {
-    background: #B8CA91;
+.header {
+    background: #B8CA91 url('header.png') top right no-repeat;
 }
-.navbar {
-    margin-bottom: -15px!important;
-}
-.navbar .brand {
-    width: 47%;
-    height: 50px;
-    margin-top: 5px;
-    margin-left: 0;
-    padding-left: 67px;
-    padding-top: 36px;
-    color: #014E46;
-    background: url('chm_logo.png') no-repeat 3% 72%;
-    text-shadow: none;
-}
-
-.museum-logo {
-    background: url('gov_logo.png') no-repeat center center;
-    width: 225px;
-    height: 75px;
-    text-indent: -9999px;
-    display: block;
-    border: 1px solid black;
-    margin-right: 150px;
-}
-
-.navbar-inner {
-    width: 1170px;
-    margin: 0 auto;
-    background: white;
-    padding: 0;
-    border: 0px;
-    border-radius: 0px;
-    -moz-border-radius: 0px;
-    -webkit-border-radius: 0px;
-    background: url('header.png') no-repeat 0% 3%;
-    filter: none;
-}
-
-.site-logo {
-    background: none;
+.account-menu {
+  background: transparent;
 }

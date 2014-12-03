@@ -27,7 +27,7 @@
   <h1 class="page-title">{% trans "Mapping National Objectives to AICHI and EU targets" %}</h1>
 
   <div class="action-bar">
-    <a class="btn btn-primary add"
+    <a class="btn btn-success add"
        href="{% url 'edit_national_strategy' %}">{% trans "Add Mapping" %}</a>
   </div>
 
@@ -90,7 +90,7 @@
             </td>
         {% endif %}
         <td style="text-align: center;">
-          <a class="btn btn-mini btn-primary add"
+          <a class="btn btn-mini btn-success add"
               href="{% url 'edit_national_strategy' pk=strategy.pk %}">{% trans "Edit" %}</a>
         </td>
         <td style="text-align: center;">

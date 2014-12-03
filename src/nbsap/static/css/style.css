@@ -125,6 +125,11 @@ textarea::-webkit-input-placeholder {
 }
 
 /* datatables */
+.dataTables_wrapper {
+  margin-top: 1em;
+  padding-top: 1em;
+  border-top: 1px solid #eee;
+}
 .dataTables_wrapper:after {
   content: '';
   display: table;
@@ -203,7 +208,7 @@ body {
 .header {
   margin-bottom: 2em;
   padding: 16px 0;
-  background-image: url("header.jpg") 0 0 no-repeat;
+  background: url("../header.png") 0 0 no-repeat;
 }
 
 .logo {
@@ -428,7 +433,6 @@ body {
   margin-top: 1em;
   margin-bottom: 1em;
   padding-bottom: 10px;
-  border-bottom: 1px solid #eee;
   /*border-radius: 4px;*/
   /*box-shadow: inset 0 0 3px 0 rgba(0,0,0,.2);*/
   /*background-color: #f2f2f2;*/

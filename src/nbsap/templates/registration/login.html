@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block title %}
-    <title>NBSAP - {% trans "Login page" %}</title>
+  NBSAP - {% trans "Login page" %}
 {% endblock %}
 
 {% block content %}
@@ -46,7 +46,7 @@
         </div>
         {% csrf_token %}
         <input type="hidden" name="next" value="{{ next }}" />
-        <button type="submit" class="btn btn-primary">{% trans "Login" %}</button>
+        <button type="submit" class="btn btn-success">{% trans "Login" %}</button>
       </fieldset>
     </form>
   </div>

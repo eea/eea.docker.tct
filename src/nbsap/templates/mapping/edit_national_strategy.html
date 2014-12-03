@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block title %}
-    <title>NBSAP - {% trans "Mapping National Objectives: Edit national strategy" %}</title>
+    NBSAP - {% trans "Mapping National Objectives: Edit national strategy" %}
 {% endblock %}
 
 {% block extra_head %}
@@ -92,7 +92,7 @@
     {% endif %}
 
     <div class="action-bar">
-      <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
+      <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
       <a href="{% url 'list_national_strategy' %}" class="btn" type="button">{% trans "Cancel" %}</a>
     </div>
 
