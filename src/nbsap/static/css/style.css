@@ -59,6 +59,19 @@
   display: block;
   width: 100%;
 }
+.chzn-choices .search-field {
+  height: 34px!important;
+}
+.chzn-choices .search-field input {
+
+  height: 100%!important;
+}
+.chzn-container input,
+.chzn-container select,
+.chzn-container textarea {
+  padding: 0;
+  border: 0;
+}
 input,
 select,
 textarea {

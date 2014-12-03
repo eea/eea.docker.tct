@@ -12,10 +12,13 @@ JS_ASSETS = (
 JS_ADMIN_ASSETS = (
     'js/lib/datatables/jquery.dataTables.min.js',
     'js/lib/datatables/DT_bootstrap.js',
+    'js/jquery.browser.min.js',
+    'js/chosen.jquery.js',
 )
 
 CSS_ASSETS = (
     'bootstrap/css/bootstrap.min.css',
+    'css/chosen.css',
     'css/style.css',
 ) + settings.CSS_ASSETS
 
