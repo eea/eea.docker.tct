@@ -5,25 +5,25 @@
   {% with strategies=subobj.objective_national_strategy.all %}
     {% if strategies|length %}
 
-    <h5>{% trans "AICHI Goal" %}</h5>
+    <h5>{% trans "AICHI Goals" %}</h5>
     <ul>
     {% for strategy in strategies %}
       {% with strategy.relevant_target.get_parent_goal as goal %}
         <li>
           <a href="#to_do">{% trans "AICHI Goal" %} {{ goal.code|upper }}</a>
-            {{ goal.description|safe }}
+          <p>{{ goal.description|safe }}</p>
         </li>
       {% endwith %}
     {% endfor %}
     </ul>
 
-    <h5>{% trans "Most relevant AICHI target" %}</h5>
+    <h5>{% trans "Most relevant AICHI targets" %}</h5>
     <ul>
     {% for strategy in strategies %}
       {% with strategy.relevant_target as target %}
         <li>
           <a href="#to_do">{% trans "AICHI Target" %} {{ target.code }}</a>
-            {{ target.description|safe }}
+          <p>{{ target.description|safe }}</p>
         </li>
       {% endwith %}
     {% endfor %}
@@ -35,7 +35,7 @@
       {% with strategy.other_targets.all as target %}
         <li>
           <a href="#to_do">{% trans "AICHI Target" %} {{ target.code }}</a>
-          {{ target.description|safe }}
+          <p>{{ target.description|safe }}</p>
         </li>
       {% endwith %}
     {% endfor %}

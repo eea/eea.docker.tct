@@ -6,7 +6,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    {% block title %}{% endblock %}
+    <title>{% block title %}{% endblock %}</title>
 
     <!--[if lte IE 8]>
       <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -70,7 +70,9 @@
     <footer class="footer">
       <div class="container">
         <div class="pull-right">
-          <a href="#" class="museum-logo">museum.be logo</a>
+          <a href="museum.be">
+            <img src="/static/logo_irscnb.png">
+          </a>
         </div>
       </div>
     </footer>

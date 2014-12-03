@@ -2,11 +2,11 @@
 {% load i18n %}
 
 {% block title %}
-    <title>NBSAP - {% trans "Mapping National Objectives: Add national strategy" %}</title>
+  NBSAP - {% trans "Mapping National Objectives: Add national strategy" %}
 {% endblock %}
 
-{% block extra_head %}
 
+{% block extra_head %}
   <style>
     .controls textarea{width: 100%;}
     .controls textarea#id_title {height: 54px;}
@@ -22,89 +22,88 @@
   {% include 'admin_nav_tabs.html' %}
 {% endblock %}
 
+
 {% block content %}
 
+  <h1 class="page-title">{% trans "Mapping National Objectives: Add national strategy" %}</h1>
 
-  <div class="tabbable mapping-nat-obj">
-    <h1 class="small">{% trans "Mapping National Objectives: Add national strategy" %}</h1>
+  {% if form.errors %}
+    <p style="color: red;">
+      {% blocktrans with form.errors|pluralize as errors %}Please correct the error {{ errors }} below.{% endblocktrans %}
+    </p>
+  {% endif %}
 
-    {% if form.errors %}
-      <p style="color: red;">
-        {% blocktrans with form.errors|pluralize as errors %}Please correct the error {{ errors }} below.{% endblocktrans %}
-      </p>
+  <form style="margin-top: 25px" action="{% url 'edit_national_strategy' %}" method="post"
+        id="national-strategy-add" class="add-form">
+    <div class="form-actions up">
+      <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
+      <a href="{% url 'list_national_strategy' %}" class="btn" type="button">{% trans "Cancel" %}</a>
+    </div>
+
+    <div class="control-group row">
+      <label class="control-label span2" for="nat_objective">{% trans "National Objective" %}</label>
+      <div class="controls span3"> {{ form.nat_objective }}
+      </div>
+      <div class="objective_text span7 offset2 short-descrip">
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="control-group row">
+      <label class="control-label span2" for="aichi_goal">{% trans "AICHI Goal"%}</label>
+      <div class="controls span3"> {{ form.aichi_goal }}
+      </div>
+      <div class="goal_text span7 offset2 short-descrip">
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="control-group row">
+      <label class="control-label span2" for="aichi_target">{% trans "Most relevant AICHI Target" %}</label>
+      <div class="controls span3"> {{ form.aichi_target }}
+      </div>
+      <div class="target_text span7 short-descrip">
+      </div>
+    </div>
+
+    <div class="control-group row">
+      <label class="control-label span2" for="other_targets">{% trans "Other AICHI Targets" %}</label>
+      <div class="controls span3"> {{ form.other_targets }}
+      </div>
+      <div class="other_target_text span7 offset2 short-descrip">
+      </div>
+    </div>
+
+    <hr>
+
+    {% if EU_STRATEGY %}
+    <div class="control-group row">
+      <label class="control-label span2">{% trans "EU Targets" %}</label>
+      <div class="controls span3"> {{ form.eu_targets }}
+      </div>
+      <div class="eu_target_text span7 offset2 short-descrip">
+      </div>
+    </div>
+
+    <div class="control-group row">
+      <label class="control-label span2">{% trans "EU Actions" %}</label>
+      <div class="controls span3"> {{ form.eu_actions }}
+      </div>
+      <div class="actions_text span7 offset2 short-descrip">
+      </div>
+    </div>
     {% endif %}
 
-    <form style="margin-top: 25px" action="{% url 'edit_national_strategy' %}" method="post"
-          id="national-strategy-add" class="add-form">
-      <div class="form-actions up">
-        <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
-        <a href="{% url 'list_national_strategy' %}" class="btn" type="button">{% trans "Cancel" %}</a>
-      </div>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
+      <a href="{% url 'list_national_strategy' %}" class="btn" type="button">{% trans "Cancel" %}</a>
+    </div>
 
-      <div class="control-group row">
-        <label class="control-label span2" for="nat_objective">{% trans "National Objective" %}</label>
-        <div class="controls span3"> {{ form.nat_objective }}
-        </div>
-        <div class="objective_text span7 offset2 short-descrip">
-        </div>
-      </div>
-
-      <hr>
-
-      <div class="control-group row">
-        <label class="control-label span2" for="aichi_goal">{% trans "AICHI Goal"%}</label>
-        <div class="controls span3"> {{ form.aichi_goal }}
-        </div>
-        <div class="goal_text span7 offset2 short-descrip">
-        </div>
-      </div>
-
-      <hr>
-
-      <div class="control-group row">
-        <label class="control-label span2" for="aichi_target">{% trans "Most relevant AICHI Target" %}</label>
-        <div class="controls span3"> {{ form.aichi_target }}
-        </div>
-        <div class="target_text span7 short-descrip">
-        </div>
-      </div>
-
-      <div class="control-group row">
-        <label class="control-label span2" for="other_targets">{% trans "Other AICHI Targets" %}</label>
-        <div class="controls span3"> {{ form.other_targets }}
-        </div>
-        <div class="other_target_text span7 offset2 short-descrip">
-        </div>
-      </div>
-
-      <hr>
-
-      {% if EU_STRATEGY %}
-      <div class="control-group row">
-        <label class="control-label span2">{% trans "EU Targets" %}</label>
-        <div class="controls span3"> {{ form.eu_targets }}
-        </div>
-        <div class="eu_target_text span7 offset2 short-descrip">
-        </div>
-      </div>
-
-      <div class="control-group row">
-        <label class="control-label span2">{% trans "EU Actions" %}</label>
-        <div class="controls span3"> {{ form.eu_actions }}
-        </div>
-        <div class="actions_text span7 offset2 short-descrip">
-        </div>
-      </div>
-      {% endif %}
-
-      <div class="form-actions">
-        <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
-        <a href="{% url 'list_national_strategy' %}" class="btn" type="button">{% trans "Cancel" %}</a>
-      </div>
-
-    </form>
-  </div>
+  </form>
 {% endblock %}
+
 
 {% block scripts %}
 <script>

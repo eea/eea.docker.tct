@@ -1,69 +1,69 @@
 {% extends 'layout.html' %}
 
 {% load i18n %}
+{% load assets %}
+
 
 {% block title %}
-    <title>NBSAP - {% trans "National Strategy: List National Objectives" %}</title>
+  NBSAP - {% trans "National Strategy: List National Objectives" %}
 {% endblock %}
+
 
 {% block navmenu %}
   {% include 'admin_nav_tabs.html' %}
 {% endblock %}
 
+
 {% block content %}
 
   {% get_current_language as lang_code %}
-
-  {% load assets %}
-
   <style>
   #DataTables_Table_0_previous {
       margin-right: 10px;
   }
   </style>
 
-  <div class="tabbable">
-    {% include 'objectives/objectives_breadcrumb.html' %}
 
-    {% if messages %}
-      <div class="messages alert alert-success">
-        {% for message in messages %}
-          <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
-        {% endfor %}
-      </div>
-    {% endif %}
+  {% include 'objectives/objectives_breadcrumb.html' %}
 
-    <h1 class="small">
-      {% trans "National Strategy" %}: {% trans "List National Objectives" %}
-    </h1>
-    <div class="add-button">
-      <a class="btn btn-small btn-primary add"
-         href="{% url 'edit_national_objective' %}">{% trans "Add objective" %}
-      </a>
-    </div>
-
-    <table class="table table-striped objectives_listing minimalist">
-
-      <thead>
-        <th class="obj-id">{% trans "Code" %}</th>
-        <th class="obj-title">{% trans "Title" %}</th>
-      </thead>
-
-      <tbody>
-      {% for objective in objectives %}
-        <tr>
-          <td>{{ objective.code }}</td>
-          <td>
-            <a href="{% url 'view_national_objective' pk=objective.pk %}"
-               title="{% trans 'Objective' %} {{ objective.code }}">
-              {{ objective.title|default:objective.code }}</a>
-          </td>
-        </tr>
+  {% if messages %}
+    <div class="messages alert alert-success">
+      {% for message in messages %}
+        <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
       {% endfor %}
-      </tbody>
+    </div>
+  {% endif %}
 
-    </table>
+  <h1 class="page-title">
+    {% trans "National Strategy" %}: {% trans "List National Objectives" %}
+  </h1>
+  <div class="add-button">
+    <a class="btn btn-small btn-primary add"
+       href="{% url 'edit_national_objective' %}">{% trans "Add objective" %}
+    </a>
   </div>
+
+  <table class="table table-striped objectives_listing minimalist">
+
+    <thead>
+      <th class="obj-id">{% trans "Code" %}</th>
+      <th class="obj-title">{% trans "Title" %}</th>
+    </thead>
+
+    <tbody>
+    {% for objective in objectives %}
+      <tr>
+        <td>{{ objective.code }}</td>
+        <td>
+          <a href="{% url 'view_national_objective' pk=objective.pk %}"
+             title="{% trans 'Objective' %} {{ objective.code }}">
+            {{ objective.title|default:objective.code }}</a>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+
+  </table>
 {% endblock %}
 
 {% block scripts %}

@@ -1,34 +1,30 @@
 {% extends 'layout.html' %}
 
+{% load i18n %}
+{% load assets %}
+
+
+{% block title %}
+  NBSAP - {% trans "Mapping National Objectives to AICHI and EU targets" %}
+{% endblock %}
+
+
 {% block navmenu %}
   {% include 'admin_nav_tabs.html' %}
 {% endblock %}
 
+
 {% block content %}
 
-{% load i18n %}
+  {% if messages %}
+  <div class="messages alert alert-success">
+  {% for message in messages %}
+    <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+  {% endfor %}
+  </div>
+  {% endif %}
 
-{% block title %}
-    <title>NBSAP - {% trans "Mapping National Objectives to AICHI and EU targets" %}</title>
-{% endblock %}
-
-{% load assets %}
-<style>
-#DataTables_Table_0_previous {
-    margin-right: 10px;
-}
-</style>
-
-{% if messages %}
-<div class="messages alert alert-success">
-{% for message in messages %}
-  <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
-{% endfor %}
-</div>
-{% endif %}
-
-<div class="tabbable list-nat-strategy">
-  <h1 class="small">{% trans "Mapping National Objectives to AICHI and EU targets" %}</h1>
+  <h1 class="page-title">{% trans "Mapping National Objectives to AICHI and EU targets" %}</h1>
 
   <div class="add-button">
     <a class="btn btn-small btn-primary add"
@@ -106,7 +102,6 @@
     </tbody>
 
   </table>
-</div>
 {% endblock %}
 
 

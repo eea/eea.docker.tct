@@ -1,14 +1,18 @@
 {% extends 'layout.html' %}
+
 {% load i18n %}
 {% load utils %}
 
+
 {% block title %}
-    <title>NBSAP - {% trans "AICHI Goals" %}</title>
+  NBSAP - {% trans "AICHI Goals" %}
 {% endblock %}
+
 
 {% block navmenu%}
   {% include 'nav_menu.html' %}
 {% endblock %}
+
 
 {% block sidebar %}
 <div class="sidebar">
@@ -23,8 +27,8 @@
     {% endfor %}
   </ul>
 </div>
-
 {% endblock %}
+
 
 {% block content %}
 

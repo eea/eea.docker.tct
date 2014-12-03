@@ -1,15 +1,18 @@
 {% extends 'layout.html' %}
 
 {% load i18n %}
+{% load utils %}
+
 
 {% block title %}
-    <title>NBSAP - {% trans "Empty set of National Strategies" %}</title>
+  NBSAP - {% trans "Empty set of National Strategies" %}
 {% endblock %}
-{% load utils %}
+
 
 {% block navmenu %}
   {% include 'nav_menu.html' %}
 {% endblock %}
+
 
 {% block sidebar %}
 <div class="sidebar">
@@ -28,10 +31,10 @@
 </div>
 {% endblock %}
 
-{% block content %}
 
-  <div class="tab-content homepage_view">
-    <p>{% trans "No objectives found. Please define your National Strategy" %} <a href="{% url 'list_national_objectives' %}">{% trans "here" %}</a>.
-  </div>
-</div>
+{% block content %}
+  <p>
+    {% trans "No objectives found. Please define your National Strategy" %}
+    <a href="{% url 'list_national_objectives' %}">{% trans "here" %}</a>.
+  </p>
 {% endblock %}

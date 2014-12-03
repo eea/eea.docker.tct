@@ -4,12 +4,14 @@
 {% load utils %}
 
 {% block title %}
-    <title>NBSAP - {% trans "Objective" %} {{ objective.code }}: {{objective.title }}</title>
+  NBSAP - {% trans "Objective" %} {{ objective.code }}: {{objective.title }}
 {% endblock %}
+
 
 {% block navmenu %}
   {% include 'admin_nav_tabs.html' %}
 {% endblock %}
+
 
 {% block content %}
 
@@ -21,111 +23,109 @@
   </div>
   {% endif %}
 
-  <div class="tabbable view-objective">
-    {% include 'objectives/objectives_breadcrumb.html' %}
+  {% include 'objectives/objectives_breadcrumb.html' %}
 
-    <h1 class="small" id="objective-title">{% trans "Objective" %} {{ objective.code }}: {{ objective.title }}</h1>
-    <div class="row">
-        <div class="span4">
-            <div class="btn-toolbar">
-              <div class="btn-group">
+  <h1 class="page-title">{% trans "Objective" %} {{ objective.code }}: {{ objective.title }}</h1>
+  <div class="row">
+      <div class="span4">
+          <div class="btn-toolbar">
+            <div class="btn-group">
 
-                <a class="btn btn-success btn-small"
-                   href="{% url 'list_national_objectives' %}"><i class="icon-white icon-arrow-left"></i> {% trans "Back" %}</a>
+              <a class="btn btn-success btn-small"
+                 href="{% url 'list_national_objectives' %}"><i class="icon-white icon-arrow-left"></i> {% trans "Back" %}</a>
 
-                <a class="btn btn-small"
-                   href="{% url 'edit_national_objective' parent=objective.pk %}">{% trans "Add sub-objective" %}</a>
+              <a class="btn btn-small"
+                 href="{% url 'edit_national_objective' parent=objective.pk %}">{% trans "Add sub-objective" %}</a>
 
-                <a class="btn edit btn-small"
-                   href="{% url 'edit_national_action' objective=objective.pk %}">{% trans "Add action" %}</a>
+              <a class="btn edit btn-small"
+                 href="{% url 'edit_national_action' objective=objective.pk %}">{% trans "Add action" %}</a>
 
-                <a class="btn edit btn-small"
-                   href="{% url 'edit_national_objective' pk=objective.pk %}">{% trans "Edit" %}</a>
+              <a class="btn edit btn-small"
+                 href="{% url 'edit_national_objective' pk=objective.pk %}">{% trans "Edit" %}</a>
 
-                <a class="btn btn-danger edit btn-small">
-                   <i class="icon-white icon-trash"></i> {% trans "Delete" %}</a>
-              </div>
+              <a class="btn btn-danger edit btn-small">
+                 <i class="icon-white icon-trash"></i> {% trans "Delete" %}</a>
             </div>
-        </div>
-        <div class="span4">
-            <div class="view-objective-link">
-                {% if objective.children.exists %}
-                    {% assign objective.children.count as total %}
-                    {% blocktrans with total_pluralized=total|pluralize %}
-                        <a href="#subobjectives">(<i class="icon-arrow-down"></i> {{ total }} sub-objective{{total_pluralized }})</a>
-                    {% endblocktrans %}
-                {% endif %}
-            </div>
-        </div>
-    </div>
-
-    <div class="admin-obj-description">
-      {{ objective.description|safe }}
-    </div>
-
-    <div class="property_list" id="subobjectives">
-      <table class="table table-striped minimalist">
-
-        <thead>
-          <th class="span1">{% trans "Code" %}</th>
-          <th>{% trans "Sub-objectives" %}</th>
-        </thead>
-
-        <tbody>
-        {% if objective.children.all %}
-        {% for subobj in objective.children.all %}
-          <tr>
-            <td>{{ subobj.code }}</td>
-            <td>
-              <a href="{% url 'view_national_objective' pk=subobj.pk %}"
-               title="{% trans 'Objective' %} {{ subobj.code }}">
-              {{ subobj.title }}</a>
-            </td>
-          </tr>
-        {% endfor %}
-        {% else %}
-          <tr>
-            <td colspan="2">{% trans "No objectives" %}</td>
-          </tr>
-        {% endif %}
-        </tbody>
-
-      </table>
-    </div>
-
-    <div class="property_list">
-      <table class="table table-striped minimalist">
-
-        <thead>
-          <th class="span1">{% trans "Code" %}</th>
-          <th>{% trans "Actions" %}</th>
-        </thead>
-
-        <tbody>
-        {% if objective.actions.all %}
-        {% for action in objective.actions.all %}
-          <tr>
-            <td>{{ action.code }}</td>
-            <td>
-              <a href="{% url 'view_national_action' objective=objective.pk pk=action.pk %}"
-               title="{% trans 'Action' %} {{ action.code }}">
-              {% trans "Actions related to objective" %} {{ objective.code }}
-              {% if action.title %}({{ action.title }}){% endif %}</a>
-            </td>
-          </tr>
-        {% endfor %}
-        {% else %}
-          <tr>
-            <td colspan="2">{% trans "No actions found" %}.</td>
-          </tr>
-        {% endif %}
-        </tbody>
-
-      </table>
-    </div>
+          </div>
+      </div>
+      <div class="span4">
+          <div class="view-objective-link">
+              {% if objective.children.exists %}
+                  {% assign objective.children.count as total %}
+                  {% blocktrans with total_pluralized=total|pluralize %}
+                      <a href="#subobjectives">(<i class="icon-arrow-down"></i> {{ total }} sub-objective{{total_pluralized }})</a>
+                  {% endblocktrans %}
+              {% endif %}
+          </div>
+      </div>
   </div>
 
+  <div class="admin-obj-description">
+    {{ objective.description|safe }}
+  </div>
+
+  <div class="property_list" id="subobjectives">
+    <table class="table table-striped minimalist">
+
+      <thead>
+        <th class="span1">{% trans "Code" %}</th>
+        <th>{% trans "Sub-objectives" %}</th>
+      </thead>
+
+      <tbody>
+      {% if objective.children.all %}
+      {% for subobj in objective.children.all %}
+        <tr>
+          <td>{{ subobj.code }}</td>
+          <td>
+            <a href="{% url 'view_national_objective' pk=subobj.pk %}"
+             title="{% trans 'Objective' %} {{ subobj.code }}">
+            {{ subobj.title }}</a>
+          </td>
+        </tr>
+      {% endfor %}
+      {% else %}
+        <tr>
+          <td colspan="2">{% trans "No objectives" %}</td>
+        </tr>
+      {% endif %}
+      </tbody>
+
+    </table>
+  </div>
+
+  <div class="property_list">
+    <table class="table table-striped minimalist">
+
+      <thead>
+        <th class="span1">{% trans "Code" %}</th>
+        <th>{% trans "Actions" %}</th>
+      </thead>
+
+      <tbody>
+      {% if objective.actions.all %}
+      {% for action in objective.actions.all %}
+        <tr>
+          <td>{{ action.code }}</td>
+          <td>
+            <a href="{% url 'view_national_action' objective=objective.pk pk=action.pk %}"
+             title="{% trans 'Action' %} {{ action.code }}">
+            {% trans "Actions related to objective" %} {{ objective.code }}
+            {% if action.title %}({{ action.title }}){% endif %}</a>
+          </td>
+        </tr>
+      {% endfor %}
+      {% else %}
+        <tr>
+          <td colspan="2">{% trans "No actions found" %}.</td>
+        </tr>
+      {% endif %}
+      </tbody>
+
+    </table>
+  </div>
 {% endblock %}
+
 
 {% block scripts %}
 <script>
