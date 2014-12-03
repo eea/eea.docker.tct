@@ -17,15 +17,15 @@
   <h1 class="page-title">{% trans "Action" %} {{ action.code }}: {{ action.title }}</h1>
 
   <div class="action-bar">
-    <a class="btn btn-success btn-small"
+    <a class="btn btn-success"
        href="{% url 'view_national_objective' pk=objective.pk %}">
-       <i class="icon-white icon-arrow-left"></i> {% trans "Back" %}</a>
+       <i class="glyphicon glyphicon-arrow-left"></i> {% trans "Back" %}</a>
 
-    <a class="btn edit btn-small"
+    <a class="btn btn-default edit"
        href="{% url 'edit_national_action' objective=objective.pk pk=action.pk %}">{% trans "Edit" %}</a>
 
-    <a class="btn btn-danger edit btn-small">
-       <i class="icon-white icon-trash"></i> {% trans "Delete" %}</a>
+    <a class="btn btn-danger edit">
+       <i class="glyphicon glyphicon-trash"></i> {% trans "Delete" %}</a>
   </div>
 
   <div class="admin-obj-description">

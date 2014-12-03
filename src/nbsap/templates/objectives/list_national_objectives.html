@@ -30,16 +30,16 @@
   <h1>{% trans "List National Objectives" %}</h1>
 
   <div class="action-bar">
-    <a class="btn btn-small btn-primary add"
+    <a class="btn btn-primary add"
        href="{% url 'edit_national_objective' %}">{% trans "Add objective" %}
     </a>
   </div>
 
-  <table class="table objectives_listing">
+  <table class="table">
 
     <thead>
-      <th class="obj-id">{% trans "Code" %}</th>
-      <th class="obj-title">{% trans "Title" %}</th>
+      <th>{% trans "Code" %}</th>
+      <th>{% trans "Title" %}</th>
     </thead>
 
     <tbody>

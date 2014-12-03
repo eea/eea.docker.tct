@@ -8,11 +8,6 @@
 
 
 {% block extra_head %}
-  <style>
-    .controls textarea{width: 100%;}
-    .controls textarea#id_title {height: 54px;}
-  </style>
-
   {{ form.media }}
 {% endblock %}
 
@@ -38,43 +33,35 @@
     </p>
   {% endif %}
 
-  <form action="" method="post" id="national-objective-edit" class="edit-form">
+  <form action="" method="post" id="national-objective-edit" class="form">
 
-    <div class="control-group">
-      <label class="control-label" for="language">{% trans "Language" %}</label>
-      <div class="controls">
-        {{ form.language }}
-      </div>
+    <div class="form-group">
+      <label for="language">{% trans "Language" %}</label>
+      {{ form.language }}
     </div>
 
     {% if form.code %}
-      <div class="control-group">
-        <label class="control-label" for="code">{% trans "Code" %}</label>
-        <div class="controls">
-          {{ form.code }}
-          {{ form.code.errors }}
-        </div>
+      <div class="form-group">
+        <label for="code">{% trans "Code" %}</label>
+        {{ form.code }}
+        {{ form.code.errors }}
       </div>
     {% endif %}
 
     <div class="row">
-      <div class="span6">
+      <div class="col-md-6">
         <div class="language-container">
 
-          <div class="control-group">
-            <label class="control-label" for="title">{% trans "Title" %}</label>
-            <div class="controls">
-              {{ form.title }}
-              {{ form.title.errors }}
-            </div>
+          <div class="form-group">
+            <label for="title">{% trans "Title" %}</label>
+            {{ form.title }}
+            {{ form.title.errors }}
           </div>
 
-          <div class="control-group">
-            <label class="control-label" for="description">{% trans "Description" %}</label>
-            <div class="controls">
-              {{ form.description }}
-              {{ form.description.errors }}
-            </div>
+          <div class="form-group">
+            <label for="description">{% trans "Description" %}</label>
+            {{ form.description }}
+            {{ form.description.errors }}
           </div>
 
         </div>
@@ -82,7 +69,7 @@
 
       {% if lang != DEFAULT_LANGUAGE %}
       {% trans DEFAULT_LANGUAGE_LABEL as default_language_label %}
-      <div class="span6 original-hideout">
+      <div class="col-md-6 original-hideout">
         <p class="original-title">
             {% blocktrans with default_language_label as language %}Original title in {{ language }}{% endblocktrans %}
         </p>
@@ -102,8 +89,8 @@
     </div>
 
     <div class="action-bar">
-      <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
-      <a href="{% url 'view_national_objective' pk=objective.pk %}" class="btn" type="button">{% trans "Cancel" %}</a>
+      <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
+      <a href="{% url 'view_national_objective' pk=objective.pk %}" class="btn btn-default" type="button">{% trans "Cancel" %}</a>
     </div>
 
   </form>
