@@ -6,7 +6,7 @@ $(function () {
    var indicator_modal = $('#indicator_modal');
    indicator_modal.on('hidden', function () {
      indicator_modal.data('modal', false);
-     indicator_modal.find('.modal-body').html('');
+     indicator_modal.html('');
    });
 
 });

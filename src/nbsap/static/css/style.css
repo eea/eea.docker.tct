@@ -1540,3 +1540,7 @@ h2 {
   text-decoration: none;
   background: #039749;
 }
+
+.modal {
+  outline: none;
+}

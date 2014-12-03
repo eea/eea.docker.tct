@@ -93,12 +93,12 @@
     {% endif %}
 
     {% if target.relevant_target_national_strategy.all %}
-    <div class="well" style="position: relative;">
+    <div class="well">
       <div class="well-title">
         <a href="{% url 'nat_strategy_export_preview' target_id=target.pk %}"
            data-target="#nat_strategy_export_modal"
            data-toggle="modal"
-           class="btn btn-small pull-right">{% trans "details" %}</a>
+           class="pull-right">{% trans "details" %}</a>
         {% trans "Mapping with National Strategy" %}
       </div>
       <ul>
@@ -176,11 +176,11 @@
 
 {% block footer %}
 
-  <div tabindex="-1" class="modal hide big-modal" id="nat_strategy_export_modal" aria-hidden="true">
+  <div class="modal hide big-modal" id="nat_strategy_export_modal" aria-hidden="true">
     <div class="modal-body"></div>
   </div>
 
-  <div tabindex="-1" class="modal hide fullsize-modal" id="indicator_modal" aria-hidden="true">
+  <div tabindex="-1" class="modal hide big-modal" id="indicator_modal" aria-hidden="true">
     <div class="modal-body"></div>
   </div>
 
