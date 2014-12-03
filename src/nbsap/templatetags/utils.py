@@ -37,3 +37,23 @@ def sort_by_code(value):
 @register.assignment_tag
 def assign(value):
     return value
+
+
+@register.assignment_tag
+def get_goals_for_strategies(strategies):
+    goals = set([s.relevant_target.get_parent_goal() for s in strategies])
+    return goals
+
+
+@register.assignment_tag
+def get_targets_for_strategies(strategies):
+    targets = set([s.relevant_target for s in strategies])
+    return targets
+
+
+@register.assignment_tag
+def get_other_targets_for_strategies(strategies):
+    targets = []
+    for s in strategies:
+        targets.extend([i for i in s.other_targets.all()])
+    return set(targets)
