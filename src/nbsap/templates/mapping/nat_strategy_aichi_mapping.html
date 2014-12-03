@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load utils %}
 
 <div class="well">
   <div class="well-title">{% trans "Mapping with AICHI" %}</div>
@@ -10,7 +11,8 @@
     {% for strategy in strategies %}
       {% with strategy.relevant_target.get_parent_goal as goal %}
         <li>
-          <a href="#to_do">{% trans "AICHI Goal" %} {{ goal.code|upper }}</a>
+          <a href="{% url 'goals' code=goal.code %}">
+          {% trans "AICHI Goal" %} {{ goal.code|upper }}</a>
           <p>{{ goal.description|safe }}</p>
         </li>
       {% endwith %}
@@ -21,8 +23,10 @@
     <ul>
     {% for strategy in strategies %}
       {% with strategy.relevant_target as target %}
+        {% assign target.get_parent_goal as goal %}
         <li>
-          <a href="#to_do">{% trans "AICHI Target" %} {{ target.code }}</a>
+          <a href="{% url 'goals' code=goal.code %}#{{ target.code }}">
+          {% trans "AICHI Target" %} {{ target.code }}</a>
           <p>{{ target.description|safe }}</p>
         </li>
       {% endwith %}
