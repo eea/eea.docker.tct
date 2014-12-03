@@ -24,8 +24,6 @@
 
 {% block content %}
 
-  {% include 'actions/actions_breadcrumb.html' %}
-
   <h1 class="page-title">{% trans "Add action" %}</h1>
 
   {% if form.errors %}
@@ -35,11 +33,6 @@
   {% endif %}
 
   <form action="" method="post" id="national-action-add" class="add-form">
-
-    <div class="form-actions up">
-      <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
-      <a href="{% url 'view_national_objective' pk=objective.pk %}" class="btn" type="button">{% trans "Cancel" %}</a>
-    </div>
 
     <div class="control-group">
       <label class="control-label" for="language">{% trans "Language" %}</label>
@@ -72,7 +65,7 @@
         </div>
       </div>
 
-      <div class="form-actions">
+      <div class="action-bar">
         <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
         <a href="{% url 'view_national_objective' pk=objective.pk %}" class="btn" type="button">{% trans "Cancel" %}</a>
       </div>

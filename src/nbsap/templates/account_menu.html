@@ -30,35 +30,20 @@
   </li>
 
   {% if user.is_authenticated %}
-    <li class="dropdown">
-
-      <a class="dropdown-toggle" data-toggle="dropdown">
-        {% trans 'Panel' %}<b class="caret"></b>
-      </a>
-
-      <ul class="dropdown-menu">
-        <li>
-          <a href="{% url 'list_national_objectives' %}">{% trans 'Mappings' %}</a>
-        </li>
-        {% if user.is_staff %}
-          <li>
-            <a href="{% url 'admin:index' %}" class="change-lang">{% trans 'Administration' %}</a>
-          </li>
-          <li>
-            <a href="{% url 'rosetta-home' %}">{% trans 'Translate' %}</a>
-          </li>
-        {% endif %}
-      </ul>
+    <li>
+      <a href="{% url 'list_national_objectives' %}">{% trans 'Mappings' %}</a>
     </li>
+    {% if user.is_staff %}
+      <li>
+        <a href="{% url 'admin:index' %}" class="change-lang">{% trans 'Administration' %}</a>
+      </li>
+      <li>
+        <a href="{% url 'rosetta-home' %}">{% trans 'Translate' %}</a>
+      </li>
+    {% endif %}
 
-    <li class="dropdown">
-      <a class="dropdown-toggle" data-toggle="dropdown">
-        <i class="icon-user icon-white"></i> <b class="caret"></b>
-      </a>
-      <ul class="dropdown-menu">
-        <li class="nav-header">{{ user }}</li>
-        <li><a href="{% url 'logout' %}">{% trans "Logout" %}</a></li>
-      </ul>
+    <li>
+      <a href="{% url 'logout' %}">{% trans "Logout" %}</a>
     </li>
 
   {% else %}

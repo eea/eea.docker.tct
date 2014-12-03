@@ -40,7 +40,7 @@
 <script>
 $(function () {
   $('.more').on('click', function() {
-    var parents = $(this).parents('.element_field');
+    var parents = $(this).parents('.summary');
     var snippet = parents.find('.snippet');
     var full = parents.find('.full');
 
@@ -48,7 +48,7 @@ $(function () {
     full.show();
   });
   $('.less').on('click', function() {
-    var parents = $(this).parents('.element_field');
+    var parents = $(this).parents('.summary');
     var snippet = parents.find('.snippet');
     var full = parents.find('.full');
 

@@ -61,6 +61,11 @@
   float: left!important;
 }
 
+[data-toggle]:hover,
+[role="button"]:hover {
+  cursor: pointer;
+}
+
 .modal-open {
   overflow: hidden;
 }
@@ -68,6 +73,8 @@
 .modal {
   outline: none;
 }
+
+/* datatables */
 
 /* base */
 h1 {
@@ -251,21 +258,8 @@ body {
     color: #fff;
   }
 
-.well {
-  padding: 10px;
-  background: transparent;
-  box-shadow: none;
-}
-  .well-title {
-    margin: -10px -10px 10px;
-    padding: 3px 10px;
-    font-size: 14px;
-    color: #777;
-    border-bottom: 1px solid #e3e3e3;
-  }
-
 .html-content {
-
+  padding: 10px;
 }
   .html-content h1 {
     font-size: 20px;
@@ -278,6 +272,22 @@ body {
   }
   .html-content h4 {
     font-size: 14px;
+  }
+
+.well {
+  padding: 10px;
+  background: transparent;
+  box-shadow: 0 0 3px 0 rgba(0,0,0,.1);
+}
+  .well-title {
+    margin: -10px -10px 10px;
+    padding: 3px 10px;
+    font-size: 14px;
+    color: #777;
+    border-bottom: 1px solid #e3e3e3;
+  }
+  .well .html-content {
+    margin: -10px;
   }
 
 .toc {
@@ -305,9 +315,25 @@ body {
     content: "\2022 ";
   }
 
-.full {
-  display: none;
+.action-bar {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: inset 0 0 3px 0 rgba(0,0,0,.2);
+  background-color: #f2f2f2;
 }
+
+.summary {
+  margin-bottom: 2em;
+}
+  .full {
+    display: none;
+  }
+  .less:hover,
+  .more:hover {
+    cursor: pointer;
+  }
 
 .errorlist {
   color: red;

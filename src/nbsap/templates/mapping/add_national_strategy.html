@@ -28,17 +28,13 @@
   <h1 class="page-title">{% trans "Mapping National Objectives: Add national strategy" %}</h1>
 
   {% if form.errors %}
-    <p style="color: red;">
+    <p>
       {% blocktrans with form.errors|pluralize as errors %}Please correct the error {{ errors }} below.{% endblocktrans %}
     </p>
   {% endif %}
 
-  <form style="margin-top: 25px" action="{% url 'edit_national_strategy' %}" method="post"
+  <form action="{% url 'edit_national_strategy' %}" method="post"
         id="national-strategy-add" class="add-form">
-    <div class="form-actions up">
-      <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
-      <a href="{% url 'list_national_strategy' %}" class="btn" type="button">{% trans "Cancel" %}</a>
-    </div>
 
     <div class="control-group row">
       <label class="control-label span2" for="nat_objective">{% trans "National Objective" %}</label>
@@ -96,7 +92,7 @@
     </div>
     {% endif %}
 
-    <div class="form-actions">
+    <div class="action-bar">
       <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
       <a href="{% url 'list_national_strategy' %}" class="btn" type="button">{% trans "Cancel" %}</a>
     </div>
@@ -107,9 +103,6 @@
 
 {% block scripts %}
 <script>
-
-$(".chzn-select").chosen();
-
 
 $(function () {
 

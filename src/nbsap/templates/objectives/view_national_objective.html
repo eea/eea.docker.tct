@@ -26,38 +26,29 @@
   {% include 'objectives/objectives_breadcrumb.html' %}
 
   <h1 class="page-title">{% trans "Objective" %} {{ objective.code }}: {{ objective.title }}</h1>
-  <div class="row">
-      <div class="span4">
-          <div class="btn-toolbar">
-            <div class="btn-group">
 
-              <a class="btn btn-success btn-small"
+  <div class="action-bar">
+    <a class="btn btn-success btn-small"
                  href="{% url 'list_national_objectives' %}"><i class="icon-white icon-arrow-left"></i> {% trans "Back" %}</a>
 
-              <a class="btn btn-small"
-                 href="{% url 'edit_national_objective' parent=objective.pk %}">{% trans "Add sub-objective" %}</a>
+    <a class="btn btn-small"
+       href="{% url 'edit_national_objective' parent=objective.pk %}">{% trans "Add sub-objective" %}</a>
 
-              <a class="btn edit btn-small"
-                 href="{% url 'edit_national_action' objective=objective.pk %}">{% trans "Add action" %}</a>
+    <a class="btn edit btn-small"
+       href="{% url 'edit_national_action' objective=objective.pk %}">{% trans "Add action" %}</a>
 
-              <a class="btn edit btn-small"
-                 href="{% url 'edit_national_objective' pk=objective.pk %}">{% trans "Edit" %}</a>
+    <a class="btn edit btn-small"
+       href="{% url 'edit_national_objective' pk=objective.pk %}">{% trans "Edit" %}</a>
 
-              <a class="btn btn-danger edit btn-small">
-                 <i class="icon-white icon-trash"></i> {% trans "Delete" %}</a>
-            </div>
-          </div>
-      </div>
-      <div class="span4">
-          <div class="view-objective-link">
-              {% if objective.children.exists %}
-                  {% assign objective.children.count as total %}
-                  {% blocktrans with total_pluralized=total|pluralize %}
-                      <a href="#subobjectives">(<i class="icon-arrow-down"></i> {{ total }} sub-objective{{total_pluralized }})</a>
-                  {% endblocktrans %}
-              {% endif %}
-          </div>
-      </div>
+    <a class="btn btn-danger edit btn-small">
+       <i class="icon-white icon-trash"></i> {% trans "Delete" %}</a>
+    {% if objective.children.exists %}
+      {% assign objective.children.count as total %}
+      {% blocktrans with total_pluralized=total|pluralize %}
+          <a href="#subobjectives">(<i class="icon-arrow-down"></i> {{ total }} sub-objective{{total_pluralized }})</a>
+      {% endblocktrans %}
+    {% endif %}
+  </div>
   </div>
 
   <div class="admin-obj-description">

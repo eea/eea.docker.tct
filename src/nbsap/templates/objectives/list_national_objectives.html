@@ -17,14 +17,6 @@
 {% block content %}
 
   {% get_current_language as lang_code %}
-  <style>
-  #DataTables_Table_0_previous {
-      margin-right: 10px;
-  }
-  </style>
-
-
-  {% include 'objectives/objectives_breadcrumb.html' %}
 
   {% if messages %}
     <div class="messages alert alert-success">
@@ -34,16 +26,16 @@
     </div>
   {% endif %}
 
-  <h1 class="page-title">
-    {% trans "National Strategy" %}: {% trans "List National Objectives" %}
-  </h1>
-  <div class="add-button">
+  <h1 class="page-title">{% trans "National Strategy" %}</h1>
+  <h1>{% trans "List National Objectives" %}</h1>
+
+  <div class="action-bar">
     <a class="btn btn-small btn-primary add"
        href="{% url 'edit_national_objective' %}">{% trans "Add objective" %}
     </a>
   </div>
 
-  <table class="table table-striped objectives_listing minimalist">
+  <table class="table objectives_listing">
 
     <thead>
       <th class="obj-id">{% trans "Code" %}</th>

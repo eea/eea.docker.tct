@@ -31,7 +31,7 @@
 
 {% block content %}
     <h1 class="page-title">{% trans "Objective" %} {{ current_objective.code }}: {{ current_objective.title }}</h1>
-    <div class="element_field objective-description">
+    <div class="summary">
       {{ current_objective.description|safe }}
     </div>
 
@@ -72,7 +72,7 @@
     <div class="section" id="{{ subobj.code }}">
       <h2>{% trans "Objective" %} {{ subobj.code }}: {{ subobj.title }}</h2>
 
-      <div class="element_field">
+      <div class="summary">
         <div class="snippet">
           {{ subobj.description|striptags|truncatechars:510|safe }}
           <a class="more">{% trans "show more" %}</a>
@@ -113,7 +113,7 @@
     $("[rel=tooltip]").tooltip();
 
     $('.more').on('click', function() {
-      var parents = $(this).parents('.element_field');
+      var parents = $(this).parents('.summary');
       var snippet = parents.find('.snippet');
       var full = parents.find('.full');
 
@@ -122,7 +122,7 @@
     });
 
     $('.less').on('click', function() {
-      var parents = $(this).parents('.element_field');
+      var parents = $(this).parents('.summary');
       var snippet = parents.find('.snippet');
       var full = parents.find('.full');
 
