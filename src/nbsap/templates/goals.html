@@ -102,8 +102,7 @@
     <div class="well">
       <div class="well-title">
         <a href="{% url 'nat_strategy_export_preview' target_id=target.pk %}"
-           data-target="#nat_strategy_export_modal"
-           data-toggle="modal"
+           data-modal="#nat_strategy_export_modal"
            class="pull-right">{% trans "details" %}</a>
         {% trans "Mapping with National Strategy" %}
       </div>
@@ -147,7 +146,7 @@
         {% for indicator in target.indicators.all %}
         <li>
           <a href="{% url 'indicator' pk=indicator.pk %}"
-             data-target="#indicator_modal" data-toggle="modal">
+             data-modal="#indicator_modal">
             {% trans "Indicator" %} {{indicator.id}}: {{ indicator.title }}
           </a>
         </li>
@@ -163,7 +162,7 @@
         {% for indicator in target.other_indicators.all %}
         <li>
           <a href="{% url 'indicator' pk=indicator.pk %}"
-             data-target="#indicator_modal" data-toggle="modal">
+             data-modal="#indicator_modal">
             {% trans "Indicator" %} {{indicator.id}}: {{ indicator.title }}
           </a>
         </li>
@@ -182,16 +181,10 @@
 {% endblock %}
 
 
-{% block footer %}
+{% block modal %}
+<div class="modal-window" id="nat_strategy_export_modal"></div>
 
-  <div class="modal hide big-modal" id="nat_strategy_export_modal" aria-hidden="true">
-    <div class="modal-body"></div>
-  </div>
-
-  <div tabindex="-1" class="modal hide big-modal" id="indicator_modal" aria-hidden="true">
-    <div class="modal-body"></div>
-  </div>
-
+<div class="modal-window" id="indicator_modal"></div>
 {% endblock %}
 
 

@@ -54,7 +54,6 @@
       </div>
     </div>
 
-    {% block layout_footer %}
     <footer class="footer">
       <div class="container">
         <div class="pull-right">
@@ -64,7 +63,14 @@
         </div>
       </div>
     </footer>
-    {% endblock %}
+
+    <div class="modal-container">
+      <div class="container">
+        {% block modal %}
+        {% endblock %}
+      </div>
+    </div>
+
 
     {% block head_scripts %}
 
@@ -75,7 +81,5 @@
     {% endblock %}
 
     {% block scripts %}{% endblock %}
-    {% block footer %}{% endblock %}
-
   </body>
 </html>

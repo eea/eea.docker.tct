@@ -32,7 +32,7 @@
   </div>
 
 
-  <table class="table table-striped objectives_listing minimalist">
+  <table class="table objectives_listing ">
 
     <thead>
       <th class="obj-id">{% trans "Objective"%}</th>
@@ -50,7 +50,6 @@
     <tbody>
     {% for strategy in strategies %}
       <tr>
-        <div class="st" code = strategy.id style="display:none"></div>
         <td class="strategy" code=strategy.id>
           <a href="{% url 'view_national_objective' pk=strategy.objective.pk %}">
             {{ strategy.objective.code }}</a>
@@ -117,7 +116,6 @@
     $(document).ready(function() {
       $('.messages').delay(1000).fadeOut();
       $('.objectives_listing').dataTable({
-          "sDom": "<'row'<'span5'l><'span6'f>r>t<'row'<'span5'i><'span6'p>>",
           "bStateSave": true,
           "iDisplayLength": 10,
       });

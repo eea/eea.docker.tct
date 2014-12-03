@@ -3,24 +3,26 @@
 
 {% block content %}
 
-
   {% if target.relevant_target_national_strategy.all %}
+  <div class="modal-mid">
     {% for strategy in target.relevant_target_national_strategy.all %}
     <div class="section">
       <h3>{% trans "Objective" %} {{ strategy.objective.code }}</h3>
       {{ strategy.objective.description|safe }}
     </div>
     {% endfor %}
-
+  </div>
   {% endif %}
 
   {% if not download %}
-  <div class="modal-footer modal-inside-footer">
-    <a href="{% url 'nat_strategy_export' target_id=target.id %}" class="btn btn-primary">
+  <div class="modal-bot text-center">
+    <a href="{% url 'nat_strategy_export' target_id=target.id %}" class="btn btn-success">
       {% trans "Export" %}</a>
-    <a class="btn" data-dismiss="modal">
+    <a class="btn btn-danger" data-modal="close">
       {% trans "Close" %}</a>
+
   </div>
+
   {% endif %}
 
 {% endblock %}
