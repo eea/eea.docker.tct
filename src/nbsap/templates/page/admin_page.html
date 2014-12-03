@@ -26,6 +26,9 @@
 
 {% endblock %}
 
+{% block navmenu %}
+  {% include 'admin_nav_tabs.html' %}
+{% endblock %}
 
 {% block content %}
 
@@ -36,8 +39,6 @@
       {% endfor %}
     </div>
   {% endif %}
-
-  {% include 'admin_nav_tabs.html' %}
 
   <div class="tabbable">
     <h1 class="small">Edit page</h1>

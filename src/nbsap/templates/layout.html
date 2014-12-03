@@ -36,24 +36,22 @@
   </head>
 
   <body>
-    {% block layout_header %}
-    <div class="navbar">
-      <div class="navbar-inner">
-        <div class="container">
-          <div class="row">
-            <div class="span2 site-logo">
-            </div>
-            <div class="span7 site-title">
-              <a class="brand" href="{% url 'goals' %}">{% trans SITE_HEADER %}</a>
-            </div>
-            <div class="span3 language-menu">
-              {% include "navbar.html" %}
-            </div>
-          </div>
+
+    <div class="header">
+      <div class="container">
+        <div class="logo img">
+          <img src="/static/CHM_logo_45x70px.png">
+        </div>
+
+        {% include "account_menu.html" %}
+
+        <h1 class="site-title"><a href="{% url 'goals' %}">{% trans SITE_HEADER %}</a></h1>
+
+        <div class="nav-container">
+          {% block navmenu %}{% endblock %}
         </div>
       </div>
     </div>
-    {% endblock %}
 
     <div class="container content">
       {% if WARNING_MESSAGE %}
@@ -62,7 +60,10 @@
       </div>
       {% endif %}
 
-      {% block content %}{% endblock %}
+      {% block sidebar %}{% endblock %}
+      <div class="main">
+        {% block content %}{% endblock %}
+      </div>
     </div>
 
     {% block layout_footer %}

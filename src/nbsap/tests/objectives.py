@@ -228,7 +228,7 @@ class ObjectivesTest(BaseWebTest):
         h1 = resp.pyquery('h1')
         h1_expected = 'Actions related to Objective %s: %s' % (nat_obj.code,
                                                                nat_obj.title)
-        actions = resp.pyquery('.element_field')
+        actions = resp.pyquery('.section')
         self.assertEqual(1, len(h1))
         self.assertEqual(h1_expected, h1[0].text_content().strip())
         self.assertEqual(1, len(actions))

@@ -1,0 +1,24 @@
+{% load utils %}
+{% load i18n %}
+
+<ul class="nav-menu">
+
+  <li>
+    <a class="{% active request '^/$' %} {% active request '^/indicators' %}{% active request '^/goals' %}" href="{% url 'goals' %}" class="uppercase">{% trans "Aichi" %}</a>
+  </li>
+
+  {% if EU_STRATEGY %}
+  <li>
+    <a class="{% active request '^/eu_targets' %}" href="{% url 'eu_targets' %}">{% trans "EU Strategy" %}</a>
+  </li>
+  {% endif %}
+
+  <li>
+    <a class="{% active request '^/objectives' %}" href="{% url 'nat_strategy' %}">{% trans "National Strategy" %}</a>
+  </li>
+
+  <li>
+    <a class="{% active request '^/implementation' %}" href="{% url 'implementation' %}">{% trans "Implementation" %}</a>
+  </li>
+
+</ul>

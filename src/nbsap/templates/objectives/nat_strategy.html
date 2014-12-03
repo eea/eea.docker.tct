@@ -7,21 +7,26 @@
     <title>NBSAP - {% trans "National Strategy: Objectives" %}</title>
 {% endblock %}
 
+{% block navmenu %}
+  {% include 'nav_menu.html' %}
+{% endblock %}
+
+{% block sidebar %}
+<div class="sidebar">
+  <h4 class="sidebar-title">{% trans "National Strategy: Objectives" %}</h4>
+  <ul class="sidebar-menu">
+    {% for objective in objectives|sort_by_code %}
+      <li {% if objective.code == current_objective.code %}class="active"{% endif %}>
+        <a href="{% url 'nat_strategy' code=objective.code %}" title="{{ objective.code }}">
+          {% trans "Objective" %} {{ objective.code }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}
+
 {% block content %}
-  {% include 'nav_tabs.html' %}
-
-  <div class="tabbable tabs-left">
-
-    <label class="nav-header">{% trans "National Strategy: Objectives" %}</label>
-    <ul class="nav nav-tabs nav-stacked local-navigation">
-      {% for objective in objectives|sort_by_code %}
-        <li {% if objective.code == current_objective.code %}class="active"{% endif %}>
-          <a href="{% url 'nat_strategy' code=objective.code %}" title="{{ objective.code }}">
-            {% trans "Objective" %} {{ objective.code }}
-          </a>
-        </li>
-      {% endfor %}
-    </ul>
 
     <div class="download-container">
       <a class="btn btn-small" href="{% url 'nat_strategy_download' %}">
@@ -49,32 +54,27 @@
         {% endif %}
       </div>
 
-      <div class="row toc">
-        <label>{% trans "Table of contents" %}:</label>
 
-        {% if not current_objective.objectives_tree|length %}
-        <ul class="span2">
-          <li>{% trans "No sub-objectives found" %}</li>
-        </ul>
-        {% else %}
+  <div class="toc">
+    <h5>{% trans "Table of contents" %}:</h5>
+    {% if current_objective.objectives_tree|length %}
+    <ul>
+      {% for objective in current_objective.objectives_tree|sort_by_code %}
+      <li>
+        <a href="#{{ objective.code }}"
+           rel="tooltip"
+           data-placement="right"
+           data-original-title="{{ objective.title }}">
+           {% trans "Objective" %} {{ objective.code }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+      <p>{% trans "No actions found" %}</p>
+    {% endif %}
+  </div>
 
-        <ul class="span2">
-          {% for objective in current_objective.objectives_tree|sort_by_code %}
-          {% if forloop.counter0|divisibleby:"2" and not forloop.first %}
-        </ul>
-        <ul class="span2">
-          {% endif %}
-          <li>
-            <a href="#{{ objective.code }}"
-               rel="tooltip"
-               data-placement="right"
-               data-original-title="{{ objective.title }}">
-               {% trans "Objective" %} {{ objective.code }}</a>
-          </li>
-          {% endfor %}
-        </ul>
-        {% endif %}
-      </div>
+
 
       <div class="row post-toc">
         {% for obj_actions in actions_by_objectives %}

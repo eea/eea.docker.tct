@@ -17,9 +17,13 @@
   {{ form.media }}
 {% endblock %}
 
+
+{% block navmenu %}
+  {% include 'admin_nav_tabs.html' %}
+{% endblock %}
+
 {% block content %}
 
-  {% include 'admin_nav_tabs.html' %}
 
   <div class="tabbable mapping-nat-obj">
     <h1 class="small">{% trans "Mapping National Objectives: Add national strategy" %}</h1>

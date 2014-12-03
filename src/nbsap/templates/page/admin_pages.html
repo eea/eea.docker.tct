@@ -5,6 +5,10 @@
     <title>NBSAP - {% trans "Edit Introduction page" %}</title>
 {% endblock %}
 
+{% block navmenu %}
+  {% include 'admin_nav_tabs.html' %}
+{% endblock %}
+
 {% block content %}
 
   {% if messages %}
@@ -14,8 +18,6 @@
       {% endfor %}
     </div>
   {% endif %}
-
-  {% include 'admin_nav_tabs.html' %}
 
   <div class="tabbable">
     <h1 class="small">{% trans "Edit Introduction page" %}</h1>

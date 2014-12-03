@@ -1,9 +1,9 @@
 {% load i18n %}
 
-<ul class="nav pull-right top-menu">
+<ul class="account-menu">
 
   {% for navbar_link in navbar_links %}
-    <li class="navbar-link {% if forloop.last %}navbar-last-link{% endif %}">
+    <li>
       <a href="{{ navbar_link.url }}" target="_blank" title="{{ navbar_link.title }}">
         {{ navbar_link }}</a>
     </li>

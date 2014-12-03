@@ -57,11 +57,12 @@
             <a class="less badge badge-success"> {% trans "show less" %}</a>
           </div>
         </div>
-        <div class="row between-subobj">
-          <a class="pull-right label label-info" href="#top">{% trans "Back to top"%}</a>
-        </div>
+
 
         {% endfor %}
+      <div class="text-right">
+        <a class="label label-info" href="#top">{% trans "Back to top" %}</a>
+      </div>
       {% else %}
         <span>{% trans "No actions found" %}.</span>
       {% endif %}

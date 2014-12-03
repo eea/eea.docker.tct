@@ -21,10 +21,11 @@
   <script src="/static/js/national_objective.js"></script>
 {% endblock %}
 
+{% block navmenu %}
+  {% include 'admin_nav_tabs.html' %}
+{% endblock %}
 
 {% block content %}
-
-  {% include 'admin_nav_tabs.html' %}
 
   <div class="tabbable edit-objective">
     {% include 'objectives/objectives_breadcrumb.html' %}

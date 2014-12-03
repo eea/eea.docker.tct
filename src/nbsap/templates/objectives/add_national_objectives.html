@@ -17,10 +17,11 @@
 
 {% endblock %}
 
+{% block navmenu %}
+  {% include 'admin_nav_tabs.html' %}
+{% endblock %}
 
 {% block content %}
-
-  {% include 'admin_nav_tabs.html' %}
 
   <div class="tabbable">
     {% include 'objectives/objectives_breadcrumb.html' with objective=parent %}

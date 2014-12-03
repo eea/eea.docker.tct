@@ -6,9 +6,11 @@
     <title>NBSAP - {% trans "Action" %} {{ action.code }}: {{ action.title }}</title>
 {% endblock %}
 
-{% block content %}
-
+{% block navmenu %}
   {% include 'admin_nav_tabs.html' %}
+{% endblock %}
+
+{% block content %}
 
   <div class="tabbable">
     {% include 'actions/actions_breadcrumb.html' %}

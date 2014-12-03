@@ -7,14 +7,15 @@
 {% endblock %}
 {% load utils %}
 
-{% block content %}
+{% block navmenu %}
+  {% include 'nav_menu.html' %}
+{% endblock %}
 
-{% include 'nav_tabs.html' %}
+{% block sidebar %}
+<div class="sidebar">
+  <h4>{% trans "Objectives" %}</h4>
 
-<div class="tabbable tabs-left">
-
-  <label class="nav-header">{% trans "Objectives" %}</label>
-  <ul class="nav nav-tabs nav-stacked local-navigation">
+  <ul>
     {% for objective in objectives %}
       <li {% if objective.code == current_objective.code %}class="active"{% endif %}>
         <a href="{% url 'nat_strategy' code=objective.code %}" title="{{ objective.code }}">
@@ -23,6 +24,11 @@
       </li>
     {% endfor %}
   </ul>
+
+</div>
+{% endblock %}
+
+{% block content %}
 
   <div class="tab-content homepage_view">
     <p>{% trans "No objectives found. Please define your National Strategy" %} <a href="{% url 'list_national_objectives' %}">{% trans "here" %}</a>.
