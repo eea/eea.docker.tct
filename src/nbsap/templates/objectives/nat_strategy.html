@@ -77,12 +77,13 @@
 {% endif %}
 </div>
 
+{% for obj_actions in actions_by_objectives %}
 
-  {% for obj_actions in actions_by_objectives %}
-    {% for subobj, actions in obj_actions.items %}
+  {% for subobj, actions in obj_actions.items %}
+
     <div class="section" id="{{ subobj.code }}">
-
-      <h2>{% trans "Objective" %} {{ subobj.code }}: {{ subobj.title }}</h2>
+      <h2>{% trans "Objective" %}
+           {{ subobj.code }}: {{ subobj.title }}</h2>
 
       <div class="summary">
         <div class="snippet">
@@ -94,43 +95,25 @@
           <a class="less">
             {% trans "show less" %}</a>
         </div> {# /full #}
-      </div>
-
-      {% include 'mapping/nat_strategy_aichi_mapping.html' %}
-
-        {% if EU_STRATEGY %}
-            {% include 'mapping/nat_strategy_eu_mapping.html' %}
-        {% endif %}
-
-        {% if actions %}
-          {% for action in actions %}
-            <div class="well" id="{{ action.id }}">
-              <div class="well-title">
-                {% if action.title %}
-                  {{ action.title }}
-                {% else %}
-                  {% trans "Actions related to objective" %} {{ action.code }}
-                {% endif %}
-              </div>
-              <div class="html-content">
-                {{ action.description|safe }}
-              </div>
-            {% endfor %}
-          </div>
-        {% endif %}
-
       </div> {# /summary #}
 
+      {% include 'mapping/nat_strategy_aichi_mapping.html' %}
+      {% if EU_STRATEGY %}
+        {% include 'mapping/nat_strategy_eu_mapping.html' %}
+      {% endif %}
 
-    {% endfor %}
+    </div> {# /summary #}
+
   {% endfor %}
 
-  <div class="text-right">
-    <a href="#top">
-      {% trans "Back to top"%}</a>
-  </div>
+{% endfor %}
 
+<div class="text-right">
+  <a href="#top">
+    {% trans "Back to top"%}</a>
 </div>
+
+
 {% endblock %}
 
 
