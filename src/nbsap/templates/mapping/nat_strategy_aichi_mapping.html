@@ -6,43 +6,45 @@
   {% with strategies=subobj.objective_national_strategy.all %}
     {% if strategies|length %}
 
-    {% get_goals_for_strategies strategies=strategies as goals %}
-    <h5>{% trans "AICHI Goals" %}</h5>
-    <ul>
-    {% for goal in goals %}
-      <li>
-        <a href="{% url 'goals' code=goal.code %}">
-        {% trans "AICHI Goal" %} {{ goal.code|upper }}</a>
-        <p>{{ goal.description|safe }}</p>
-      </li>
-    {% endfor %}
-    </ul>
+      {% get_goals_for_strategies strategies=strategies as goals %}
+      <h5>{% trans "AICHI Goals" %}</h5>
+      <ul>
+      {% for goal in goals %}
+        <li>
+          <a href="{% url 'goals' code=goal.code %}">
+          {% trans "AICHI Goal" %} {{ goal.code|upper }}</a>
+          <p>{{ goal.description|safe }}</p>
+        </li>
+      {% endfor %}
+      </ul>
 
-    {% get_targets_for_strategies strategies=strategies as targets %}
-    <h5>{% trans "Most relevant AICHI targets" %}</h5>
-    <ul>
-    {% for target in targets %}
-      {% assign target.get_parent_goal as goal %}
-      <li>
-        <a href="{% url 'goals' code=goal.code %}#{{ target.code }}">
-        {% trans "AICHI Target" %} {{ target.code }}</a>
-        <p>{{ target.description|safe }}</p>
-      </li>
-    {% endfor %}
-    </ul>
+      {% get_targets_for_strategies strategies=strategies as targets %}
+      <h5>{% trans "Most relevant AICHI targets" %}</h5>
+      <ul>
+      {% for target in targets %}
+        {% assign target.get_parent_goal as goal %}
+        <li>
+          <a href="{% url 'goals' code=goal.code %}#{{ target.code }}">
+          {% trans "AICHI Target" %} {{ target.code }}</a>
+          <p>{{ target.description|safe }}</p>
+        </li>
+      {% endfor %}
+      </ul>
 
-    {% get_other_targets_for_strategies strategies=strategies as other_targets %}
-    <h5>{% trans "Other relevant AICHI targets" %}</h5>
-    <ul>
-    {% for target in other_targets %}
-      {% assign target.get_parent_goal as goal %}
-      <li>
-        <a href="{% url 'goals' code=goal.code %}#{{ target.code }}">
-        {% trans "AICHI Target" %} {{ target.code }}</a>
-        <p>{{ target.description|safe }}</p>
-      </li>
-    {% endfor %}
-    </ul>
+      {% get_other_targets_for_strategies strategies=strategies as other_targets %}
+      {% if other_targets %}
+        <h5>{% trans "Other relevant AICHI targets" %}</h5>
+        <ul>
+        {% for target in other_targets %}
+          {% assign target.get_parent_goal as goal %}
+          <li>
+            <a href="{% url 'goals' code=goal.code %}#{{ target.code }}">
+            {% trans "AICHI Target" %} {{ target.code }}</a>
+            <p>{{ target.description|safe }}</p>
+          </li>
+        {% endfor %}
+        </ul>
+      {% endif %}
 
     {% else %}
       <p>{% trans "No data available" %}.</p>
