@@ -69,6 +69,11 @@ function Modal(container) {
             self.close();
         }
     });
+    $('.toc ul').columnlist({
+        size : 4,
+        'class' : 'column-list',
+        incrementClass : 'column-list-'
+    });
 }
 
 $(document).ready(function() {

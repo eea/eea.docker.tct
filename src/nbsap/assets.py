@@ -7,6 +7,7 @@ JS_ASSETS = (
     'js/uri.js',
     'bootstrap/js/bootstrap.min.js',
     'js/main.js',
+    'js/lib/jquery.columnlist.js',
 )
 
 JS_ADMIN_ASSETS = (

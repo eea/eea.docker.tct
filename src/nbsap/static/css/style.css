@@ -426,21 +426,25 @@ body {
   .toc h5 {
     margin-top: auto;
   }
-  .toc ul {
-    margin: auto;
-    list-style: none;
+  .toc > ul {
+    list-style-type: none;
     overflow: hidden;
   }
-  .toc ul li {
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
+  .toc > ul > li {
+    list-style-type: none;
+  }
+  .toc .column-list {
     float: left;
     width: 25%;
+
   }
-  .toc ul li:before {
-    content: "\2022 ";
+  .toc .column-list ul,
+  .toc .column-list li {
+    margin: 0;
+    padding: 0;
+    list-style-type: disc;
   }
+
 
 .action-bar {
   margin-top: 1em;
