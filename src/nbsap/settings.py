@@ -220,8 +220,13 @@ TINYMCE_JS_ROOT = '/static/js/tiny_mce'
 
 CSS_ASSETS = ()
 
-ASSETS_ROOT = '/var/local/nbsap-django/src/nbsap/static'
+ASSETS_ROOT = os.path.join(BASE_DIR, 'static')
 
+EU_STRATEGY = False
+SITE_HEADER = 'Your site header'
+INFO_HEADER = False
+
+# Override
 try:
     from local_settings import *
 except ImportError:
