@@ -1,7 +1,7 @@
 language: python
 python:
   - "2.7"
-install: pip install -r requirements-dev.txt --use-mirrors && ./instance/manage.py collectstatic --noinput
+install: pip install -r requirements-dev.txt --use-mirrors && pip install -e . && ./instance/manage.py collectstatic --noinput
 script:  ./instance/manage.py test nbsap
 notifications:
   email:
