@@ -17,7 +17,7 @@ class NationalActionsTest(BaseWebTest):
         url = reverse('view_national_objective', kwargs={'pk': nat_obj.pk})
         resp = self.app.get(url, user='staff')
         self.assertEqual(200, resp.status_code)
-        titles = resp.pyquery('#objective-title')
+        titles = resp.pyquery('.page-title')
         self.assertEqual(1, len(titles))
         expected_title = 'Objective {}: {}'.format(nat_obj.code,
                                                    nat_obj.title)
@@ -52,7 +52,7 @@ class NationalActionsTest(BaseWebTest):
         self.assertEqual(200, resp.status_code)
         expected_title = 'Action {}: {}'.format(nat_act.code,
                                                 nat_act.title)
-        titles = resp.pyquery('#action-title')
+        titles = resp.pyquery('.page-title')
         self.assertEqual(1, len(titles))
         self.assertEqual(expected_title, titles[0].text_content())
 
@@ -76,7 +76,7 @@ class NationalActionsTest(BaseWebTest):
 
         self.assertObjectInDatabase('NationalAction', pk=1,
                                     title_en=nat_act.title_en,
-                                    description_en=nat_act.description_en)
+                                    description_en__contains=nat_act.description_en)
 
     def test_add_national_action_with_encodings(self):
         nat_obj = NationalObjectiveFactory()
@@ -94,7 +94,7 @@ class NationalActionsTest(BaseWebTest):
 
         self.assertObjectInDatabase('NationalAction', pk=1,
                                     title_en=nat_act.title_en,
-                                    description_en=data['description'])
+                                    description_en__contains=data['description'])
 
     def test_edit_national_action(self):
         nat_act = NationalActionFactory()
@@ -115,7 +115,7 @@ class NationalActionsTest(BaseWebTest):
 
         self.assertObjectInDatabase('NationalAction', pk=1,
                                     title_en='action_edited',
-                                    description_en='description_edited')
+                                    description_en__contains='description_edited')
 
     def test_edit_national_action_with_encodings(self):
         nat_act = NationalActionFactory()
@@ -134,7 +134,7 @@ class NationalActionsTest(BaseWebTest):
         form.submit().follow()
 
         self.assertObjectInDatabase('NationalAction', pk=1,
-                                    description_en=data['description'])
+                                    description_en__contains=data['description'])
 
     def test_delete_national_action(self):
         nat_act = NationalActionFactory()
