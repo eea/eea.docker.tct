@@ -26,7 +26,7 @@ class NationalSubObjectiveTest(BaseWebTest):
         form.submit().follow()
         self.assertObjectInDatabase('NationalObjective', pk=2,
                                     title_en=nat_subobj.title_en,
-                                    description_en=nat_subobj.description_en,
+                                    description_en__contains=nat_subobj.description_en,
                                     parent=nat_obj)
 
     def test_edit_subobjective(self):
@@ -44,7 +44,7 @@ class NationalSubObjectiveTest(BaseWebTest):
         form.submit().follow()
         self.assertObjectInDatabase('NationalObjective', pk=2,
                                     title_en=data['title'],
-                                    description_en=data['description'],
+                                    description_en__contains=data['description'],
                                     parent=nat_obj)
 
     def test_edit_subobjective_with_encodings(self):
@@ -62,7 +62,7 @@ class NationalSubObjectiveTest(BaseWebTest):
         form.submit().follow()
         self.assertObjectInDatabase('NationalObjective', pk=2,
                                     title_en=data['title'],
-                                    description_en=data['description'],
+                                    description_en__contains=data['description'],
                                     parent=nat_obj)
 
     def test_delete_subobjective(self):

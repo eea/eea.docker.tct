@@ -36,7 +36,7 @@ class NationalObjectiveTest(BaseWebTest):
         form.submit().follow()
         self.assertObjectInDatabase('NationalObjective', pk=1,
                                     title_en=nat_obj.title_en,
-                                    description_en=nat_obj.description_en)
+                                    description_en__contains=nat_obj.description_en)
 
     def test_add_national_objective_with_encodings(self):
         nat_obj = NationalObjectiveFactory.build()
@@ -54,7 +54,7 @@ class NationalObjectiveTest(BaseWebTest):
         form.submit().follow()
         self.assertObjectInDatabase('NationalObjective', pk=1,
                                     title_en=nat_obj.title_en,
-                                    description_en=data['description'])
+                                    description_en__contains=data['description'])
 
     def test_edit_national_objective(self):
         nat_obj = NationalObjectiveFactory()
@@ -73,7 +73,7 @@ class NationalObjectiveTest(BaseWebTest):
         form.submit().follow()
         self.assertObjectInDatabase('NationalObjective', pk=1,
                                     title_en=data['title'],
-                                    description_en=data['description'])
+                                    description_en__contains=data['description'])
 
     def test_edit_national_objective_code_updates_subobjective_code(self):
         """Test code prefix of subobjective is changed on parent code edit."""
@@ -165,7 +165,7 @@ class NationalObjectiveTest(BaseWebTest):
         form.submit().follow()
         self.assertObjectInDatabase('NationalObjective', pk=1,
                                     title_en=data['title'],
-                                    description_en=data['description'])
+                                    description_en__contains=data['description'])
 
     def test_delete_national_objective(self):
         nat_obj = NationalObjectiveFactory()
