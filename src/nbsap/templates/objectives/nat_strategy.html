@@ -37,7 +37,7 @@
 {% block content %}
 
   <h1 class="page-title">{% trans 'National Strategy' %}</h1>
-  <h1>{% trans "Objective" %} {{ current_objective.code }}: {{ current_objective.title }}</h1>
+  <h1 class="x-title">{% trans "Objective" %} {{ current_objective.code }}: {{ current_objective.title }}</h1>
   <div class="summary">
     <div class="snippet">
       {{ current_objective.description|striptags|truncatechars:510|safe }}

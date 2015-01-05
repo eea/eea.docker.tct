@@ -184,9 +184,9 @@ class ObjectivesTest(BaseWebTest):
         nat_obj = NationalObjectiveFactory()
         resp = self.app.get(reverse('nat_strategy'))
         self.assertEqual(200, resp.status_code)
-        h1 = resp.pyquery('h1')
+        h1 = resp.pyquery('h1.x-title')
         h1_expected = 'Objective %s: %s' % (nat_obj.code, nat_obj.title)
-        description = resp.pyquery('.objective-description')
+        description = resp.pyquery('.summary .full')
         self.assertEqual(1, len(h1))
         self.assertEqual(1, len(description))
         self.assertEqual(h1_expected, h1[0].text_content())
@@ -197,9 +197,9 @@ class ObjectivesTest(BaseWebTest):
         url = reverse('nat_strategy', kwargs={'code': nat_obj.code})
         resp = self.app.get(url)
         self.assertEqual(200, resp.status_code)
-        h1 = resp.pyquery('h1')
+        h1 = resp.pyquery('h1.x-title')
         h1_expected = 'Objective %s: %s' % (nat_obj.code, nat_obj.title)
-        description = resp.pyquery('.objective-description')
+        description = resp.pyquery('.summary .full')
         self.assertEqual(1, len(h1))
         self.assertEqual(1, len(description))
         self.assertEqual(h1_expected, h1[0].text_content())
@@ -208,7 +208,7 @@ class ObjectivesTest(BaseWebTest):
     def test_list_objectives_when_database_empty(self):
         resp = self.app.get(reverse('nat_strategy'))
         self.assertEqual(200, resp.status_code)
-        content = resp.pyquery('.homepage_view')
+        content = resp.pyquery('.main')
         self.assertEqual(1, len(content))
         self.assertIn('No objectives found', content[0].text_content())
 
@@ -216,7 +216,7 @@ class ObjectivesTest(BaseWebTest):
         url = reverse('nat_strategy', kwargs={'code': '1'})
         resp = self.app.get(url)
         self.assertEqual(200, resp.status_code)
-        content = resp.pyquery('.homepage_view')
+        content = resp.pyquery('.main')
         self.assertEqual(1, len(content))
         self.assertIn('No objectives found', content[0].text_content())
 
@@ -225,8 +225,8 @@ class ObjectivesTest(BaseWebTest):
         nat_obj = NationalObjectiveFactory(actions=(nat_act,))
         resp = self.app.get(reverse('implementation'))
         self.assertEqual(200, resp.status_code)
-        h1 = resp.pyquery('h1')
-        h1_expected = 'Actions related to Objective %s: %s' % (nat_obj.code,
+        h1 = resp.pyquery('h1.x-title')
+        h1_expected = 'Actions related to Objective %s (%s)' % (nat_obj.code,
                                                                nat_obj.title)
         actions = resp.pyquery('.section')
         self.assertEqual(1, len(h1))
