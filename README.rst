@@ -8,7 +8,7 @@ Following this readme will create an isolated environment for running NBSAP plat
 There are three configurations available for running this buildout::
   1. production (production)
   2. testing (staging)
-  3. development (devel)
+  3. development (development)
 
 
 Project name and whereabouts
