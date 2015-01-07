@@ -226,6 +226,12 @@ EU_STRATEGY = False
 SITE_HEADER = 'Your site header'
 INFO_HEADER = False
 
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+NOSE_ARGS = [
+    '--with-coverage',
+    '--cover-package=nbsap',
+]
+
 # Override
 try:
     from local_settings import *
