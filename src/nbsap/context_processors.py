@@ -16,7 +16,10 @@ def nbsap_admin(request):
 
 
 def nbsap_navbar_link(request):
-    return {'navbar_links': NavbarLink.objects.all()}
+    return {
+        'navbar_links': NavbarLink.objects.all(),
+        'LAYOUT_FOOTER_LOGO': settings.LAYOUT_FOOTER_LOGO_VISIBLE,
+    }
 
 
 def google_analytics(request):
