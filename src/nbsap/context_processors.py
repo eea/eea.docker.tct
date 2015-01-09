@@ -20,6 +20,7 @@ def nbsap_navbar_link(request):
         'navbar_links': NavbarLink.objects.all(),
         'LAYOUT_FOOTER_LOGO': settings.LAYOUT_FOOTER_LOGO_VISIBLE,
         'LAYOUT_HEADER_LOGO': settings.LAYOUT_HEADER_LOGO_VISIBLE,
+        'HEADER_BACKGROUND_IMG': settings.HEADER_BACKGROUND_IMG,
     }
 
 

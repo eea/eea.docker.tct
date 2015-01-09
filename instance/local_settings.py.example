@@ -95,3 +95,6 @@ LANGUAGES = (
 
 # Set to True to show layout header logo
 #LAYOUT_HEADER_LOGO_VISIBLE = False
+
+# Set the path to the image to be used as background
+#HEADER_BACKGROUND_IMG = '/static/header.png'

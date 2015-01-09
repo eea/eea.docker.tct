@@ -229,6 +229,7 @@ SITE_HEADER = 'NBSAP'
 INFO_HEADER = False
 LAYOUT_FOOTER_LOGO_VISIBLE = False
 LAYOUT_HEADER_LOGO_VISIBLE = False
+HEADER_BACKGROUND_IMG = '/static/header.png'
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 NOSE_ARGS = [
