@@ -90,5 +90,8 @@ LANGUAGES = (
 # Set to True for information header
 #INFO_HEADER = False
 
-# Set to True to show footer logo
+# Set to True to show layout footer logo
 #LAYOUT_FOOTER_LOGO_VISIBLE = False
+
+# Set to True to show layout header logo
+#LAYOUT_HEADER_LOGO_VISIBLE = False

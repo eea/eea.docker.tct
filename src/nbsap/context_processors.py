@@ -19,6 +19,7 @@ def nbsap_navbar_link(request):
     return {
         'navbar_links': NavbarLink.objects.all(),
         'LAYOUT_FOOTER_LOGO': settings.LAYOUT_FOOTER_LOGO_VISIBLE,
+        'LAYOUT_HEADER_LOGO': settings.LAYOUT_HEADER_LOGO_VISIBLE,
     }
 
 

@@ -27,9 +27,11 @@
 
     <div class="header">
       <div class="container">
-        <div class="logo img">
-          <img src="/static/CHM_logo_45x70px.png">
-        </div>
+        {% if LAYOUT_HEADER_LOGO %}
+          <div class="logo img">
+            <img src="/static/CHM_logo_45x70px.png">
+          </div>
+        {% endif %}
 
         {% include "account_menu.html" %}
 
