@@ -227,6 +227,7 @@ EU_STRATEGY = False
 NAT_STRATEGY = True
 SITE_HEADER = 'NBSAP'
 INFO_HEADER = False
+LAYOUT_FOOTER_LOGO_VISIBLE = False
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 NOSE_ARGS = [
