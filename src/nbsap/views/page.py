@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import ugettext_lazy as _
 from django.contrib import messages
+from django.conf import settings
 from nbsap.models import NbsapPage
 from nbsap.forms import NbsapPageForm
 from auth import auth_required
@@ -23,4 +24,12 @@ def admin_page(request, handle):
             messages.success(request, _('Page %s saved') % handle)
     else:
         form = NbsapPageForm(page=page, lang=lang)
-    return render(request, 'page/admin_page.html', {'page': page, 'form': form})
+    return render(request, 'page/admin_page.html',
+                  {'page': page, 'form': form})
+
+
+@auth_required
+def admin_home(request):
+    if settings.NAT_STRATEGY:
+        return redirect('list_national_objectives')
+    return redirect('list_eu_targets')

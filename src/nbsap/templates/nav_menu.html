@@ -13,9 +13,15 @@
   </li>
   {% endif %}
 
+  {% if NAT_STRATEGY %}
   <li>
     <a class="{% active request '^/objectives' %}" href="{% url 'nat_strategy' %}">{% trans "National Strategy" %}</a>
   </li>
+  {% else %}
+  <li>
+    <a class="{% active request '^/eu_indicators' %}" href="#todo">{% trans "EU Indicators" %}</a>
+  </li>
+  {% endif %}
 
   <li>
     <a class="{% active request '^/implementation' %}" href="{% url 'implementation' %}">{% trans "Implementation" %}</a>

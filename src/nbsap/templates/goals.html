@@ -81,7 +81,7 @@
     <h2>{% trans "AICHI Target" %} {{ target.code }}</h2>
     <p>{{ target.description }}</p>
 
-    {% if target.eu_aichi_strategy.all and EU_STRATEGY %}
+    {% if EU_STRATEGY and target.eu_aichi_strategy.all %}
     <div class="well">
       <div class="well-title">{% trans "Mapping with EU targets" %}</div>
       <ul>
@@ -117,7 +117,7 @@
     </div>
     {% endif %}
 
-    {% if target.eu_indicator_aichi_strategy.all and EU_STRATEGY %}
+    {% if EU_STRATEGY and target.eu_indicator_aichi_strategy.all %}
     <div class="well">
       <div class="well-title">{% trans "Mapping with EU indicators" %}</div>
       <ul>

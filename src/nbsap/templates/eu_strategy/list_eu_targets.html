@@ -1,0 +1,78 @@
+{% extends 'layout.html' %}
+
+{% load i18n %}
+{% load assets %}
+
+
+{% block title %}
+  NBSAP - {% trans "EU Strategy: List Targets" %}
+{% endblock %}
+
+
+{% block navmenu %}
+  {% include 'admin_nav_tabs.html' %}
+{% endblock %}
+
+
+{% block content %}
+
+  {% get_current_language as lang_code %}
+
+  {% if messages %}
+    <div class="messages alert alert-success">
+      {% for message in messages %}
+        <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <h1 class="page-title">{% trans "European Strategy" %}</h1>
+  <h1>{% trans "List EU Targets" %}</h1>
+
+  <div class="action-bar">
+    <a class="btn btn-success add"
+       href="#">{% trans "Add target" %}
+    </a>
+  </div>
+
+  <table class="table">
+
+    <thead>
+      <th>{% trans "Code" %}</th>
+      <th>{% trans "Title" %}</th>
+    </thead>
+
+    <tbody>
+    {% for target in targets %}
+      <tr>
+        <td>{{ target.code }}</td>
+        <td>
+          <a href="#"
+             title="{% trans 'Target' %} {{ target.code }}">
+            {{ target.title|default:target.code }}</a>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+
+  </table>
+{% endblock %}
+
+{% block scripts %}
+
+  {% assets "js_admin" %}
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+  {% endassets %}
+
+  <script>
+
+    $(document).ready(function() {
+      $('.messages').delay(1000).fadeOut();
+      $('.objectives_listing').dataTable({
+          "bStateSave": true,
+          "iDisplayLength": 25,
+      });
+    });
+  </script>
+
+{% endblock scripts %}

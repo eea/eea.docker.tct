@@ -86,13 +86,18 @@ urlpatterns = patterns('',
     url(r'^accounts/logout/$', 'nbsap.views.logout_view', name='logout'),
 
     # administration URLs
+    url(r'^administration/$',
+            'nbsap.views.admin_home',
+            name='admin_home'),
+
     url(r'^administration/objectives/$',
             'nbsap.views.list_national_objectives',
             name='list_national_objectives'),
 
-    url(r'^administration/$',
-            'nbsap.views.list_national_objectives',
-            name='list_national_objectives'),
+    url(r'^administration/targets/$',
+            'nbsap.views.list_eu_targets',
+            name='list_eu_targets'),
+
 
     url(r'^administration/objectives/(?P<pk>[\w\-]+)$',
             'nbsap.views.view_national_objective',
