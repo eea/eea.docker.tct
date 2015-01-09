@@ -1,20 +1,12 @@
+DEBUG = False
+TEMPLATE_DEBUG = DEBUG
+
 ASSETS_ROOT = 'src/nbsap/static'
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # define your language preference
 ugettext = lambda s: s
-
-DEBUG = False
-TEMPLATE_DEBUG = DEBUG
-
 LANGUAGE_CODE = 'en'
-
-# if your application is EU dependent
-EU_STRATEGY = False
-SITE_HEADER = 'Your site header'
-
-#Set to True for information header
-INFO_HEADER = False
 
 DATABASES = {
     'default': {
@@ -85,3 +77,15 @@ LANGUAGES = (
   ('da-dk', ugettext('Danish')),
   ('el-gr', ugettext('Greek')),
 )
+
+# Set to True if your application is EU dependent
+#EU_STRATEGY = False
+
+# Set to False for EU intance
+#NAT_STRATEGY = True
+
+# Template settings
+#SITE_HEADER = 'Your site header'
+
+# Set to True for information header
+#INFO_HEADER = False

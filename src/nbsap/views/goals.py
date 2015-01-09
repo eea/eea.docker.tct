@@ -22,7 +22,7 @@ def goals(request, code):
     indicators_list = models.AichiIndicator.objects.all()
 
     paginator = Paginator(indicators_list, 20)
-    info_header = getattr(settings, 'INFO_HEADER', False)
+    info_header = settings.INFO_HEADER
 
     return render_to_response('goals.html',
                               context_instance=RequestContext(request, {

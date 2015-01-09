@@ -41,7 +41,7 @@ def nat_strategy(request, code=None):
 
 
 def nat_strategy_download(request):
-    eu_strategy = getattr(settings, 'EU_STRATEGY', False)
+    eu_strategy = settings.EU_STRATEGY
     headers = ['Objective', 'Goal', 'Most Relevant Targets',
                'Other Relevant Targets']
     if eu_strategy:
