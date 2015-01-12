@@ -81,9 +81,10 @@ def edit_eu_strategy_target(request, pk=None):
             if pk:
                 messages.success(request, _('Saved changes') + "")
             else:
-                messages.success(request, _('Objective successfully added.') + "")
+                messages.success(request,
+                                 _('Objective successfully added.') + "")
 
-            return redirect('edit_eu_strategy_target')
+            return redirect('list_eu_targets')
     else:
         form = FormClass(lang=lang)
     return render(request, template, {

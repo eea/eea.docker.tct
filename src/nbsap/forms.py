@@ -103,6 +103,7 @@ class EuTargetForm(forms.Form):
         required=False)
 
     def __init__(self, *args, **kwargs):
+        self.target = kwargs.pop('target', None)
         lang = kwargs.pop('lang', None)
 
         super(EuTargetForm, self).__init__(*args, **kwargs)
