@@ -65,7 +65,7 @@ def list_eu_targets(request):
 def edit_eu_strategy_target(request, pk=None):
     if pk:
         target = get_object_or_404(models.EuTarget, pk=pk)
-        template = 'eu_strategy/add_eu_strategy_targets.html'
+        template = 'eu_strategy/edit_eu_strategy_targets.html'
         FormClass = EuTargetEditForm
     else:
         target = None
@@ -75,7 +75,7 @@ def edit_eu_strategy_target(request, pk=None):
     lang = request.GET.get('lang', request.LANGUAGE_CODE)
 
     if request.method == 'POST':
-        form = FormClass(request.POST, lang=lang)
+        form = FormClass(request.POST, target=target, lang=lang)
         if form.is_valid():
             form.save()
             if pk:
@@ -86,7 +86,7 @@ def edit_eu_strategy_target(request, pk=None):
 
             return redirect('list_eu_targets')
     else:
-        form = FormClass(lang=lang)
+        form = FormClass(target=target, lang=lang)
     return render(request, template, {
         'form': form,
         'target': target,

@@ -70,7 +70,7 @@ urlpatterns = patterns('',
             'nbsap.views.get_aichi_target_title',
             name='aichi_target_title'),
 
-   url(r'^objectives/title$',
+    url(r'^objectives/title$',
             'nbsap.views.get_national_objective_title',
             name='objective_title'),
     url(r'^objectives/title/(?P<pk>[\w\-]+)$',
@@ -90,18 +90,21 @@ urlpatterns = patterns('',
             'nbsap.views.admin_home',
             name='admin_home'),
 
-    url(r'^administration/objectives/$',
-            'nbsap.views.list_national_objectives',
-            name='list_national_objectives'),
-
     url(r'^administration/targets/$',
             'nbsap.views.list_eu_targets',
             name='list_eu_targets'),
 
     url(r'^administration/targets/add/',
         'nbsap.views.edit_eu_strategy_target',
+        name='edit_eu_target'),
+
+    url(r'^administration/targets/(?P<pk>[\w\-]+)/edit/$',
+        'nbsap.views.edit_eu_strategy_target',
         name='edit_eu_strategy_target'),
 
+    url(r'^administration/objectives/$',
+            'nbsap.views.list_national_objectives',
+            name='list_national_objectives'),
 
     url(r'^administration/objectives/(?P<pk>[\w\-]+)$',
             'nbsap.views.view_national_objective',

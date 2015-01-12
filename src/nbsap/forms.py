@@ -19,11 +19,18 @@ from nbsap.utils import remove_tags
 
 
 RE_CODE = re.compile('(\d+\.)*\d+$')
+RE_EU_TARGET_CODE = re.compile('\d+$')
 
 
 def validate_code(value):
     if not RE_CODE.match(value):
         raise ValidationError(_('%(code)s is not a valid code. (Ex: 1.1)') %
+                              {'code': value})
+
+
+def validate_eu_target_code(value):
+    if not RE_EU_TARGET_CODE.match(value):
+        raise ValidationError(_('%(code)s is not a valid code. (Ex: 1)') %
                               {'code': value})
 
 
@@ -108,6 +115,15 @@ class EuTargetForm(forms.Form):
 
         super(EuTargetForm, self).__init__(*args, **kwargs)
 
+        if self.target:
+            title = getattr(self.target, 'title_%s' % lang, None)
+            description = getattr(self.target,
+                                  'description_%s' % lang, None)
+            self.fields['title'].initial = title
+            self.fields['description'].initial = description
+            if 'code' in self.fields:
+                self.fields['code'].initial = self.target.code
+
         self.fields['language'].initial = lang
 
     def save(self):
@@ -115,17 +131,32 @@ class EuTargetForm(forms.Form):
         lang = self.cleaned_data['language']
         title = self.cleaned_data['title']
         description = self.cleaned_data['description']
+        code = self.cleaned_data.get('code', None)
 
         setattr(target, 'title_%s' % lang, title)
         setattr(target, 'description_%s' % lang, description)
 
+        if code:
+            target.code = code
         target.save()
 
         return target
 
 
 class EuTargetEditForm(EuTargetForm):
-    pass
+
+    code = forms.CharField(max_length=16, validators=[validate_eu_target_code])
+
+    def clean_code(self):
+        code = self.cleaned_data['code']
+        if code == self.target.code:
+            return code
+        try:
+            EuTarget.objects.get(code=code)
+            raise ValidationError('Code already exists.')
+        except EuTarget.DoesNotExist:
+            pass
+        return code
 
 
 class NationalActionForm(forms.Form):
