@@ -98,6 +98,10 @@ urlpatterns = patterns('',
             'nbsap.views.list_eu_targets',
             name='list_eu_targets'),
 
+    url(r'^administration/targets/add/',
+        'nbsap.views.edit_eu_strategy_target',
+        name='edit_eu_strategy_target'),
+
 
     url(r'^administration/objectives/(?P<pk>[\w\-]+)$',
             'nbsap.views.view_national_objective',

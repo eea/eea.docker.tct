@@ -1,8 +1,13 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib import messages
 from django.http import HttpResponse
+from django.utils.translation import ugettext_lazy as _
+
 
 from nbsap import models
 from auth import auth_required
+
+from nbsap.forms import EuTargetForm, EuTargetEditForm
 
 
 def eu_targets(request, code):
@@ -53,4 +58,36 @@ def list_eu_targets(request):
     targets = models.EuTarget.objects.all()
     return render(request, 'eu_strategy/list_eu_targets.html', {
         'targets': targets,
+    })
+
+
+@auth_required
+def edit_eu_strategy_target(request, pk=None):
+    if pk:
+        target = get_object_or_404(models.EuTarget, pk=pk)
+        template = 'eu_strategy/add_eu_strategy_targets.html'
+        FormClass = EuTargetEditForm
+    else:
+        target = None
+        template = 'eu_strategy/add_eu_strategy_targets.html'
+        FormClass = EuTargetForm
+
+    lang = request.GET.get('lang', request.LANGUAGE_CODE)
+
+    if request.method == 'POST':
+        form = FormClass(request.POST, lang=lang)
+        if form.is_valid():
+            form.save()
+            if pk:
+                messages.success(request, _('Saved changes') + "")
+            else:
+                messages.success(request, _('Objective successfully added.') + "")
+
+            return redirect('edit_eu_strategy_target')
+    else:
+        form = FormClass(lang=lang)
+    return render(request, template, {
+        'form': form,
+        'target': target,
+        'lang': lang,
     })

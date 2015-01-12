@@ -11,8 +11,10 @@ from django.utils.translation import ugettext_lazy as _
 from tinymce.widgets import TinyMCE
 from chosen import forms as chosenforms
 
-from nbsap.models import AichiGoal, AichiTarget, EuAction, EuTarget
-from nbsap.models import NationalStrategy, NationalObjective, NationalAction
+from nbsap.models import (
+    NationalStrategy, NationalObjective, NationalAction, EuTarget, AichiGoal,
+    AichiTarget, EuAction
+)
 from nbsap.utils import remove_tags
 
 
@@ -90,6 +92,39 @@ class NationalObjectiveEditForm(NationalObjectiveForm):
         except NationalObjective.DoesNotExist:
             pass
         return code
+
+
+class EuTargetForm(forms.Form):
+
+    language = forms.ChoiceField(choices=settings.LANGUAGES)
+    title = forms.CharField(widget=widgets.Textarea)
+    description = TextCleanedHtml(
+        widget=TinyMCE(attrs={'cols': 80, 'rows': 25}),
+        required=False)
+
+    def __init__(self, *args, **kwargs):
+        lang = kwargs.pop('lang', None)
+
+        super(EuTargetForm, self).__init__(*args, **kwargs)
+
+        self.fields['language'].initial = lang
+
+    def save(self):
+        target = self.target or EuTarget()
+        lang = self.cleaned_data['language']
+        title = self.cleaned_data['title']
+        description = self.cleaned_data['description']
+
+        setattr(target, 'title_%s' % lang, title)
+        setattr(target, 'description_%s' % lang, description)
+
+        target.save()
+
+        return target
+
+
+class EuTargetEditForm(EuTargetForm):
+    pass
 
 
 class NationalActionForm(forms.Form):
