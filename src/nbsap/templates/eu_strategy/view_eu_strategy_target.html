@@ -26,21 +26,17 @@
   <h1 class="page-title">{% trans "target" %} {{ target.code }}: {{ target.title }}</h1>
 
   <div class="action-bar">
-    <a class="btn btn-success"
-                 href="{% url 'list_eu_targets' %}"><i class="glyphicon glyphicon-arrow-left"></i> {% trans "Back" %}</a>
+    <a class="btn btn-success" href="{% url 'list_eu_targets' %}">
+        <i class="glyphicon glyphicon-arrow-left"></i> {% trans "Back" %}
+    </a>
 
 
     <a class="btn btn-default"
        href="{% url 'edit_eu_strategy_target' pk=target.pk %}">{% trans "Edit" %}</a>
 
-    <a class="btn btn-danger edit">
-       <i class="glyphicon glyphicon-trash"></i> {% trans "Delete" %}</a>
-    {% if target.children.exists %}
-      {% assign target.children.count as total %}
-      {% blocktrans with total_pluralized=total|pluralize %}
-          <a href="#subtargets">(<i class="glyphicon glyphicon-arrow-down"></i> {{ total }} sub-target{{total_pluralized }})</a>
-      {% endblocktrans %}
-    {% endif %}
+    <a class="btn btn-danger edit" href="{% url 'delete_eu_strategy_target' target.pk %}">
+       <i class="glyphicon glyphicon-trash"></i> {% trans "Delete" %}
+    </a>
   </div>
 
   <div class="html-content">
