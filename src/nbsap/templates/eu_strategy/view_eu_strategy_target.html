@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+
+{% load i18n %}
+{% load utils %}
+
+{% block title %}
+  NBSAP - {% trans "target" %} {{ target.code }}: {{target.title }}
+{% endblock %}
+
+
+{% block navmenu %}
+  {% include 'admin_nav_tabs.html' %}
+{% endblock %}
+
+
+{% block content %}
+
+  {% if messages %}
+  <div class="messages alert alert-success">
+  {% for message in messages %}
+      <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+  {% endfor %}
+  </div>
+  {% endif %}
+
+  <h1 class="page-title">{% trans "target" %} {{ target.code }}: {{ target.title }}</h1>
+
+  <div class="action-bar">
+    <a class="btn btn-success"
+                 href="{% url 'list_eu_targets' %}"><i class="glyphicon glyphicon-arrow-left"></i> {% trans "Back" %}</a>
+
+
+    <a class="btn btn-default"
+       href="{% url 'edit_eu_strategy_target' pk=target.pk %}">{% trans "Edit" %}</a>
+
+    <a class="btn btn-danger edit">
+       <i class="glyphicon glyphicon-trash"></i> {% trans "Delete" %}</a>
+    {% if target.children.exists %}
+      {% assign target.children.count as total %}
+      {% blocktrans with total_pluralized=total|pluralize %}
+          <a href="#subtargets">(<i class="glyphicon glyphicon-arrow-down"></i> {{ total }} sub-target{{total_pluralized }})</a>
+      {% endblocktrans %}
+    {% endif %}
+  </div>
+
+  <div class="html-content">
+    {{ target.description|safe }}
+  </div>
+
+{% endblock %}

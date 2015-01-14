@@ -62,6 +62,14 @@ def list_eu_targets(request):
 
 
 @auth_required
+def view_eu_strategy_target(request, pk):
+    target = get_object_or_404(models.EuTarget, pk=pk)
+    return render(request, 'eu_strategy/view_eu_strategy_target.html', {
+        'target': target,
+    })
+
+
+@auth_required
 def edit_eu_strategy_target(request, pk=None):
     if pk:
         target = get_object_or_404(models.EuTarget, pk=pk)

@@ -47,7 +47,7 @@
       <tr>
         <td>{{ target.code }}</td>
         <td>
-          <a href="#"
+          <a href="{% url 'view_eu_strategy_target' target.id %}"
              title="{% trans 'Target' %} {{ target.code }}">
             {{ target.title|default:target.code }}</a>
         </td>
