@@ -101,6 +101,45 @@ class NationalObjectiveEditForm(NationalObjectiveForm):
         return code
 
 
+class NationalActionForm(forms.Form):
+
+    language = forms.ChoiceField(choices=settings.LANGUAGES)
+    title = forms.CharField(widget=widgets.Textarea, required=False)
+    description = TextCleanedHtml(
+        widget=TinyMCE(attrs={'cols': 80,'rows': 25}))
+
+    def __init__(self, *args, **kwargs):
+
+        self.action = kwargs.pop('action', None)
+        self.objective = kwargs.pop('objective')
+        lang = kwargs.pop('lang', None)
+
+        super(NationalActionForm, self).__init__(*args, **kwargs)
+
+        title = getattr(self.action, 'title_%s' % lang, None)
+        description = getattr(self.action, 'description_%s' % lang, None)
+
+        self.fields['title'].initial = title
+        self.fields['description'].initial = description
+        self.fields['language'].initial = lang
+
+    def save(self):
+        action = self.action or NationalAction()
+        import pdb; pdb.set_trace()
+        lang = self.cleaned_data['language']
+        title = self.cleaned_data['title']
+        description = self.cleaned_data['description']
+
+        setattr(action, 'title_%s' % lang, title)
+        setattr(action, 'description_%s' % lang, description)
+        setattr(action, 'code', self.objective.code)
+
+        action.save()
+        action.objective = [self.objective]
+        action.save()
+        return action
+
+
 class EuTargetForm(forms.Form):
 
     language = forms.ChoiceField(choices=settings.LANGUAGES)
@@ -159,42 +198,36 @@ class EuTargetEditForm(EuTargetForm):
         return code
 
 
-class NationalActionForm(forms.Form):
+class EuStrategyActivityForm(forms.Form):
 
     language = forms.ChoiceField(choices=settings.LANGUAGES)
-    title = forms.CharField(widget=widgets.Textarea, required=False)
     description = TextCleanedHtml(
-        widget=TinyMCE(attrs={'cols': 80,'rows': 25}))
+        widget=TinyMCE(attrs={'cols': 80, 'rows': 25}))
 
     def __init__(self, *args, **kwargs):
 
-        self.action = kwargs.pop('action', None)
-        self.objective = kwargs.pop('objective')
+        self.activity = kwargs.pop('activity', None)
+        self.target = kwargs.pop('target')
         lang = kwargs.pop('lang', None)
 
-        super(NationalActionForm, self).__init__(*args, **kwargs)
+        super(EuStrategyActivityForm, self).__init__(*args, **kwargs)
 
-        title = getattr(self.action, 'title_%s' % lang, None)
-        description = getattr(self.action, 'description_%s' % lang, None)
+        description = getattr(self.activity, 'description_%s' % lang, None)
 
-        self.fields['title'].initial = title
         self.fields['description'].initial = description
         self.fields['language'].initial = lang
 
     def save(self):
-        action = self.action or NationalAction()
+        activity = self.activity or EuAction()
         lang = self.cleaned_data['language']
-        title = self.cleaned_data['title']
         description = self.cleaned_data['description']
+        setattr(activity, 'description_%s' % lang, description)
+        setattr(activity, 'code', self.target.code)
 
-        setattr(action, 'title_%s' % lang, title)
-        setattr(action, 'description_%s' % lang, description)
-        setattr(action, 'code', self.objective.code)
-
-        action.save()
-        action.objective = [self.objective]
-        action.save()
-        return action
+        activity.save()
+        activity.target = [self.target]
+        activity.save()
+        return activity
 
 
 class AichiGoalForm(forms.Form):

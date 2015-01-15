@@ -83,7 +83,7 @@ def edit_eu_strategy_target(request, pk=None):
     lang = request.GET.get('lang', request.LANGUAGE_CODE)
 
     if request.method == 'POST':
-        form = FormClass(request.POST, target=target, lang=lang)
+        form = FormClass(request.POST, target=target)
         if form.is_valid():
             form.save()
             if pk:

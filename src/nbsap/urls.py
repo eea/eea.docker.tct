@@ -106,6 +106,10 @@ urlpatterns = patterns('',
         'nbsap.views.edit_eu_strategy_target',
         name='edit_eu_strategy_target'),
 
+    url(r'^administration/targets/(?P<target>[\w\-]+)/activities/add/',
+        'nbsap.views.edit_eu_strategy_activity',
+        name='edit_eu_strategy_activity'),
+
     url(r'^administration/targets/(?P<pk>[\w\-]+)/delete/$',
         'nbsap.views.delete_eu_strategy_target',
         name='delete_eu_strategy_target'),
