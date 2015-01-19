@@ -35,5 +35,22 @@
 
 
 {% block scripts %}
+<script>
+  $(function () {
+    $('.messages').delay(1000).fadeOut();
+  });
 
+  $(".btn-danger").on("click", function (e) {
+    e.preventDefault();
+    if(confirm( " {% trans 'Are you sure you want to delete this activity?' %}" )) {
+      $.ajax({
+        "url": $(this).attr("href"),
+        "type": "DELETE",
+        "success": function (data) {
+        window.location = "{% url 'delete_eu_strategy_activity' target=target.pk pk=activity.pk %}";
+        }
+      });
+    }
+  });
+</script>
 {% endblock scripts %}
