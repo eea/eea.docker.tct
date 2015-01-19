@@ -22,7 +22,7 @@
        <i class="glyphicon glyphicon-arrow-left"></i> {% trans "Back" %}</a>
 
     <a class="btn btn-default edit"
-       href="#">{% trans "Edit" %}</a>
+       href="{% url 'edit_eu_strategy_activity' target=target.pk pk=activity.pk %}">{% trans "Edit" %}</a>
 
     <a class="btn btn-danger edit">
        <i class="glyphicon glyphicon-trash"></i> {% trans "Delete" %}</a>
