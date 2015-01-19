@@ -38,7 +38,7 @@
     <a class="btn btn-default"
        href="{% url 'edit_eu_strategy_target' pk=target.pk %}">{% trans "Edit" %}</a>
 
-    <a class="btn btn-danger edit" href="{% url 'delete_eu_strategy_target' target.pk %}">
+    <a class="btn btn-danger edit">
        <i class="glyphicon glyphicon-trash"></i> {% trans "Delete" %}
     </a>
   </div>
@@ -79,3 +79,26 @@
   </div>
 
 {% endblock %}
+
+
+{% block scripts %}
+<script>
+  $(function () {
+    $('.messages').delay(1000).fadeOut();
+  });
+
+  $(".btn-danger").on("click", function (e) {
+    e.preventDefault();
+    if(confirm( "{% trans 'Are you sure you want to delete this target?' %}")) {
+      $.ajax({
+        "url": $(this).attr("href"),
+        "type": "DELETE",
+        "success": function (data) {
+        window.location = "{% url 'delete_eu_strategy_target' pk=target.pk %}";
+        }
+      });
+    }
+  });
+
+</script>
+{% endblock scripts %}
