@@ -61,7 +61,7 @@
         <tr>
           <td>{{ activity.code }}</td>
           <td>
-            <a href="#"
+            <a href="{% url 'view_eu_strategy_activity' target=target.pk pk=activity.pk %}"
              title="{% trans 'activity' %} {{ activity.code }}">
             {% trans "Activities related to target" %} {{ target.code }}
             </a>

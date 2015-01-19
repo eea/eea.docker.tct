@@ -10,6 +10,16 @@ from auth import auth_required
 
 
 @auth_required
+def view_eu_strategy_activity(request, target, pk):
+    target = get_object_or_404(models.EuTarget, pk=target)
+    activity = get_object_or_404(models.EuAction, pk=pk)
+    return render(request, 'activities/view_eu_strategy_target.html', {
+        'target': target,
+        'activity': activity,
+    })
+
+
+@auth_required
 def edit_eu_strategy_activity(request, target, pk=None):
     target = get_object_or_404(models.EuTarget, pk=target)
 
