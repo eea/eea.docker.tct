@@ -25,7 +25,8 @@
       <a class="btn btn-default edit"
          href="{% url 'edit_national_action' objective=objective.pk pk=action.pk %}">{% trans "Edit" %}</a>
 
-      <button class="btn btn-danger edit">
+      <button type="submit" class="btn btn-danger edit"
+              data-message="{% trans 'Are you sure you want to delete this action?' %}">
         <i class="glyphicon glyphicon-trash"></i> {% trans "Delete" %}
       </button>
     </form>
@@ -36,19 +37,6 @@
   </div>
 {% endblock %}
 
-
 {% block scripts %}
-  <script>
-    $(function () {
-      $('.messages').delay(1000).fadeOut();
-    });
-
-    $("form").on("submit", function (e) {
-      e.preventDefault();
-      if(confirm("{% trans 'Are you sure you want to delete this action?' %}")){
-        this.submit();
-      }
-    });
-
-  </script>
+  <script src="/static/js/object_delete.js"></script>
 {% endblock scripts %}
