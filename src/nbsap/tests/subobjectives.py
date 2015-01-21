@@ -69,6 +69,6 @@ class NationalSubObjectiveTest(BaseWebTest):
         nat_obj = NationalObjectiveFactory()
         nat_subobj = NationalObjectiveFactory(parent=nat_obj)
         url = reverse('delete_national_objective', kwargs={'pk': nat_subobj.pk})
-        self.app.get(url, user='staff').follow()
+        self.app.post(url, user='staff').follow()
         with self.assertRaises(AssertionError):
             self.assertObjectInDatabase('NationalObjective', pk=2)

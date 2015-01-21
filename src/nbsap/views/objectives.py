@@ -3,13 +3,13 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib import messages
 from django.http import HttpResponse
 from django.conf import settings
-from transmeta import TransMeta
 import tablib
 
 from nbsap import models
 from nbsap.forms import NationalObjectiveForm, NationalObjectiveEditForm
 
 from auth import auth_required
+
 
 def nat_strategy(request, code=None):
     objectives = models.NationalObjective.objects.all()
@@ -143,21 +143,22 @@ def edit_national_objective(request, pk=None, parent=None):
         if form.is_valid():
             form.save()
             if pk:
-                 messages.success(request, _('Saved changes') + "")
+                messages.success(request, _('Saved changes') + "")
             else:
-                 messages.success(request, _('Objective successfully added.') + "")
+                messages.success(request,
+                                 _('Objective successfully added.') + "")
 
             if parent_objective:
                 return redirect('view_national_objective',
                                 pk=parent_objective.pk)
             elif objective:
-              return redirect('view_national_objective',
+                return redirect('view_national_objective',
                                 pk=objective.pk)
             else:
                 return redirect('list_national_objectives')
     else:
         form = FormClass(objective=objective, lang=lang)
-    return render(request, template,{
+    return render(request, template, {
         'form': form,
         'objective': objective,
         'parent': parent_objective,
@@ -167,14 +168,16 @@ def edit_national_objective(request, pk=None, parent=None):
 
 @auth_required
 def delete_national_objective(request, pk):
-    objective = get_object_or_404(models.NationalObjective, pk=pk)
-    parent = objective.parent
-    objective.delete()
-    messages.success(request, _('Objective successfully deleted.') + "")
-    if parent:
-        return redirect('view_national_objective', pk=parent.pk)
-    else:
-        return redirect('list_national_objectives')
+    if request.method == 'POST':
+        objective = get_object_or_404(models.NationalObjective, pk=pk)
+        parent = objective.parent
+        objective.delete()
+        messages.success(request, _('Objective successfully deleted.') + "")
+        if parent:
+            return redirect('view_national_objective', pk=parent.pk)
+        else:
+            return redirect('list_national_objectives')
+
 
 def get_national_objective_title(request, pk=None):
     if not pk:

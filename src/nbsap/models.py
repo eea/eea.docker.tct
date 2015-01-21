@@ -370,7 +370,43 @@ class EuTarget(models.Model):
     actions = models.ManyToManyField(EuAction,
                                      related_name="target")
     indicators = models.ManyToManyField(EuIndicator,
-                                     related_name="indicator")
+                                        related_name="indicator")
+
+    @staticmethod
+    def _pre_save_target_code_on_create(instance):
+        codes = [ob.code for ob in EuTarget.objects.filter().all()]
+        if len(codes) == 0:
+            codes = ['0']
+
+        codes.sort(key=lambda s: int(s))
+        last_code = codes[-1]
+        instance.code = '{0}'.format(int(last_code)+1)
+
+    @staticmethod
+    def _pre_save_target_code_on_edit(instance):
+
+        # update the action code for each child action
+        for action in instance.actions.all():
+            action.code = instance.code
+            action.save()
+
+        # update the action code for each child action
+        for indicator in instance.indicators.all():
+            indicator.code = instance.code
+            indicator.save()
+
+    @staticmethod
+    def pre_save_objective_code(**kwargs):
+
+        if kwargs['raw'] is True:
+            return  #ignore when loading initial_data
+
+        instance = kwargs['instance']
+
+        if instance.code:
+            EuTarget._pre_save_target_code_on_edit(instance)
+        else:
+            EuTarget._pre_save_target_code_on_create(instance)
 
     def __unicode__(self):
         return 'Target {0}: {1}'.format(self.code, self.title)
@@ -477,3 +513,4 @@ class NavbarLink(models.Model):
 
 
 pre_save.connect(NationalObjective.pre_save_objective_code, sender=NationalObjective)
+pre_save.connect(EuTarget.pre_save_objective_code, sender=EuTarget)

@@ -143,7 +143,7 @@ class NationalActionsTest(BaseWebTest):
             'objective': nat_obj.pk,
             'pk': nat_act.pk,
         })
-        self.app.delete(url, user='staff')
+        self.app.post(url, user='staff')
 
         with self.assertRaises(AssertionError):
             self.assertObjectInDatabase('NationalAction', pk=1)

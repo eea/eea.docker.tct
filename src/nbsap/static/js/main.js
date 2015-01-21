@@ -80,4 +80,6 @@ $(document).ready(function() {
   modal = new Modal($('.modal-container')[0]);
 });
 
-
+$(function () {
+  $('.messages').delay(1000).fadeOut();
+});

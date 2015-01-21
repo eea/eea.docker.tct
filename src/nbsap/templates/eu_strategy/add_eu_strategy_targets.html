@@ -1,18 +1,14 @@
 {% extends 'layout.html' %}
+
 {% load i18n %}
 
 {% block title %}
-  NBSAP - {% trans "Edit Action" %} {{ action.code }}
+  NBSAP - {% trans "Add Eu Strategy" %}
 {% endblock %}
 
 
 {% block extra_head %}
   {{ form.media }}
-{% endblock %}
-
-
-{% block scripts %}
-    <script src="/static/js/language_change.js"></script>
 {% endblock %}
 
 
@@ -23,7 +19,8 @@
 
 {% block content %}
 
-  <h1 class="page-title">{% trans "Edit Action" %} {{ action.code }}</h1>
+  <h1 class="page-title">{% trans "European Strategy" %}</h1>
+  <h1>{% trans "Add new Target" %}</h1>
 
   {% if form.errors %}
     <p>
@@ -31,7 +28,7 @@
     </p>
   {% endif %}
 
-  <form action="" method="post" id="national-action-edit" class="form">
+  <form action="" method="post" id="Eu-Strategy-add" class="form">
 
     <div class="">
       <label for="language">{% trans "Language" %}</label>
@@ -56,31 +53,11 @@
 
         </div>
       </div>
-
-      {% if lang != DEFAULT_LANGUAGE %}
-      {% trans DEFAULT_LANGUAGE_LABEL as default_language_label %}
-      <div class="col-md-6 original-hideout">
-        <p class="original-title">
-            {% blocktrans with default_language_label as language %}Original title in {{ language }}{% endblocktrans %}
-        </p>
-        <div class="well">
-          {{ action.title_default }}
-        </div>
-
-        <p class="original-description">
-            {% blocktrans with default_language_label as language %}Original description in {{ language }}{% endblocktrans %}
-        </p>
-        <div class="well">
-          {{ action.description_default|safe }}
-        </div>
-      </div>
-      {% endif %}
-
     </div>
 
     <div class="action-bar">
       <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
-      <a href="{% url 'view_national_objective' pk=objective.pk %}" class="btn btn-default" type="button">{% trans "Cancel" %}</a>
+      <a href="{% url 'list_eu_targets' %}" class="btn btn-default" type="button">{% trans "Cancel" %}</a>
     </div>
 
   </form>

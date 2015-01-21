@@ -1,8 +1,13 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib import messages
 from django.http import HttpResponse
+from django.utils.translation import ugettext_lazy as _
+
 
 from nbsap import models
 from auth import auth_required
+
+from nbsap.forms import EuTargetForm, EuTargetEditForm
 
 
 def eu_targets(request, code):
@@ -54,3 +59,53 @@ def list_eu_targets(request):
     return render(request, 'eu_strategy/list_eu_targets.html', {
         'targets': targets,
     })
+
+
+@auth_required
+def view_eu_strategy_target(request, pk):
+    target = get_object_or_404(models.EuTarget, pk=pk)
+    return render(request, 'eu_strategy/view_eu_strategy_target.html', {
+        'target': target,
+    })
+
+
+@auth_required
+def edit_eu_strategy_target(request, pk=None):
+    if pk:
+        target = get_object_or_404(models.EuTarget, pk=pk)
+        template = 'eu_strategy/edit_eu_strategy_targets.html'
+        FormClass = EuTargetEditForm
+    else:
+        target = None
+        template = 'eu_strategy/add_eu_strategy_targets.html'
+        FormClass = EuTargetForm
+
+    lang = request.GET.get('lang', request.LANGUAGE_CODE)
+
+    if request.method == 'POST':
+        form = FormClass(request.POST, target=target)
+        if form.is_valid():
+            form.save()
+            if pk:
+                messages.success(request, _('Saved changes') + "")
+            else:
+                messages.success(request,
+                                 _('Objective successfully added.') + "")
+
+            return redirect('list_eu_targets')
+    else:
+        form = FormClass(target=target, lang=lang)
+    return render(request, template, {
+        'form': form,
+        'target': target,
+        'lang': lang,
+    })
+
+
+@auth_required
+def delete_eu_strategy_target(request, pk):
+    if request.method == 'POST':
+        target = get_object_or_404(models.EuTarget, pk=pk)
+        target.delete()
+        messages.success(request, _('Target successfully deleted.') + "")
+        return redirect('list_eu_targets')

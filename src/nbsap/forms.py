@@ -11,17 +11,26 @@ from django.utils.translation import ugettext_lazy as _
 from tinymce.widgets import TinyMCE
 from chosen import forms as chosenforms
 
-from nbsap.models import AichiGoal, AichiTarget, EuAction, EuTarget
-from nbsap.models import NationalStrategy, NationalObjective, NationalAction
+from nbsap.models import (
+    NationalStrategy, NationalObjective, NationalAction, EuTarget, AichiGoal,
+    AichiTarget, EuAction
+)
 from nbsap.utils import remove_tags
 
 
 RE_CODE = re.compile('(\d+\.)*\d+$')
+RE_EU_TARGET_CODE = re.compile('\d+$')
 
 
 def validate_code(value):
     if not RE_CODE.match(value):
         raise ValidationError(_('%(code)s is not a valid code. (Ex: 1.1)') %
+                              {'code': value})
+
+
+def validate_eu_target_code(value):
+    if not RE_EU_TARGET_CODE.match(value):
+        raise ValidationError(_('%(code)s is not a valid code. (Ex: 1)') %
                               {'code': value})
 
 
@@ -128,6 +137,96 @@ class NationalActionForm(forms.Form):
         action.objective = [self.objective]
         action.save()
         return action
+
+
+class EuTargetForm(forms.Form):
+
+    language = forms.ChoiceField(choices=settings.LANGUAGES)
+    title = forms.CharField(widget=widgets.Textarea)
+    description = TextCleanedHtml(
+        widget=TinyMCE(attrs={'cols': 80, 'rows': 25}),
+        required=False)
+
+    def __init__(self, *args, **kwargs):
+        self.target = kwargs.pop('target', None)
+        lang = kwargs.pop('lang', None)
+
+        super(EuTargetForm, self).__init__(*args, **kwargs)
+
+        if self.target:
+            title = getattr(self.target, 'title_%s' % lang, None)
+            description = getattr(self.target,
+                                  'description_%s' % lang, None)
+            self.fields['title'].initial = title
+            self.fields['description'].initial = description
+            if 'code' in self.fields:
+                self.fields['code'].initial = self.target.code
+
+        self.fields['language'].initial = lang
+
+    def save(self):
+        target = self.target or EuTarget()
+        lang = self.cleaned_data['language']
+        title = self.cleaned_data['title']
+        description = self.cleaned_data['description']
+        code = self.cleaned_data.get('code', None)
+
+        setattr(target, 'title_%s' % lang, title)
+        setattr(target, 'description_%s' % lang, description)
+
+        if code:
+            target.code = code
+        target.save()
+
+        return target
+
+
+class EuTargetEditForm(EuTargetForm):
+
+    code = forms.CharField(max_length=16, validators=[validate_eu_target_code])
+
+    def clean_code(self):
+        code = self.cleaned_data['code']
+        if code == self.target.code:
+            return code
+        try:
+            EuTarget.objects.get(code=code)
+            raise ValidationError('Code already exists.')
+        except EuTarget.DoesNotExist:
+            pass
+        return code
+
+
+class EuStrategyActivityForm(forms.Form):
+
+    language = forms.ChoiceField(choices=settings.LANGUAGES)
+    description = TextCleanedHtml(
+        widget=TinyMCE(attrs={'cols': 80, 'rows': 25}))
+
+    def __init__(self, *args, **kwargs):
+
+        self.activity = kwargs.pop('activity', None)
+        self.target = kwargs.pop('target')
+        lang = kwargs.pop('lang', None)
+
+        super(EuStrategyActivityForm, self).__init__(*args, **kwargs)
+
+        description = getattr(self.activity, 'description_%s' % lang, None)
+
+        self.fields['description'].initial = description
+        self.fields['language'].initial = lang
+
+    def save(self):
+        activity = self.activity or EuAction()
+        lang = self.cleaned_data['language']
+        description = self.cleaned_data['description']
+        setattr(activity, 'description_%s' % lang, description)
+        setattr(activity, 'code', self.target.code)
+
+        activity.save()
+        activity.target = [self.target]
+        activity.save()
+        return activity
 
 
 class AichiGoalForm(forms.Form):

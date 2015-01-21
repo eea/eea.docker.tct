@@ -7,6 +7,4 @@ $(function () {
         uri.addSearch('lang', lang);
         document.location = uri.href();
     });
-
-
 });
