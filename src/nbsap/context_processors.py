@@ -1,6 +1,5 @@
 from django.conf import settings
 from nbsap.models import NavbarLink
-import re
 
 
 def nbsap_admin(request):
