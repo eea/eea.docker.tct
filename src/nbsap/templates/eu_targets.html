@@ -61,9 +61,9 @@
       {% for indicator in current_target.indicators.all %}
         <li>
           {{ indicator.code }} {{indicator.title}}
-          {% if indicator.parent.all %}
+          {% if indicator.subindicators.exists %}
           <ul>
-          {% for sub in indicator.parent.all %}
+          {% for sub in indicator.subindicators.all %}
             <li>
               {% if sub.url %}
                 <a href="{{ sub.url }}">

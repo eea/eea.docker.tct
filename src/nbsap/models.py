@@ -339,10 +339,12 @@ class EuIndicator(models.Model):
                                       max_length=4,
                                       choices=TYPES,
                                       blank=True)
-    parent = models.ManyToManyField('self',
-                                null=True,
-                                blank=True,
-                                related_name='children')
+    parent = models.ManyToManyField('self', null=True, blank=True,
+                                    symmetrical=False, related_name='parents')
+
+    @property
+    def subindicators(self):
+        return self.parent
 
     def __unicode__(self):
         return '{0} {1}: {2}'.format(self.indicator_type.upper(),
@@ -350,8 +352,9 @@ class EuIndicator(models.Model):
                                      self.title)
 
     def get_indicators(self):
-        return mark_safe(', <br>'.join([unicode(obj)
-                for obj in self.parent.all()]))
+        return mark_safe('-, <br>'.join(
+            [unicode(obj) for obj in self.parent.all()]
+        ))
     get_indicators.short_description = 'relation'
 
     class Meta:

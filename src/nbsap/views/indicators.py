@@ -1,5 +1,4 @@
-from django.core.urlresolvers import reverse
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404
 from django.utils.translation import ugettext_lazy as _
 
 from nbsap import models
@@ -25,13 +24,8 @@ def indicator(request, pk):
     })
 
 
-def list_indicators(request, pk=None):
-    if not pk:
-        indicator = models.EuIndicator.objects.all()[0]
-        return redirect(reverse('eu_indicators', args=(indicator.pk, )))
-    current_indicator = get_object_or_404(models.EuIndicator, pk=pk)
-    indicators = models.EuIndicator.objects.all()
+def list_indicators(request):
+    indicators = models.EuIndicator.objects.exclude(targets=None).all()
     return render(request, 'eu_indicators.html', {
-        'current_indicator': current_indicator,
         'indicators': indicators,
     })

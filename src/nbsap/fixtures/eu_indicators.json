@@ -233,8 +233,7 @@
         "fields" : {
             "code" : "001",
             "parent" : [
-                45,
-                12
+
             ],
             "url" : "http://www.eea.europa.eu/data-and-maps/indicators/abundance-and-distribution-of-selected-species/abundance-and-distribution-of-selected",
             "title_en" : "Abundance and distribution of selected species",
@@ -247,10 +246,7 @@
         "fields" : {
             "code" : "003",
             "parent" : [
-                1,
-                44,
-                45,
-                3
+
             ],
             "url" : "http://www.eea.europa.eu/data-and-maps/indicators/species-of-european-interest/species-of-european-interest-assessment",
             "title_en" : "Conservation status of species of European interest",
@@ -276,7 +272,7 @@
         "fields" : {
             "code" : "004",
             "parent" : [
-                1
+
             ],
             "url" : "http://www.eea.europa.eu/data-and-maps/indicators/ecosystem-coverage/ecosystem-coverage-assessment-published-may-2010",
             "title_en" : "Ecosystem coverage",
@@ -289,10 +285,7 @@
         "fields" : {
             "code" : "005",
             "parent" : [
-                1,
-                44,
-                45,
-                3
+
             ],
             "url" : "http://www.eea.europa.eu/data-and-maps/indicators/habitats-of-european-interest/habitats-of-european-interest-assessment",
             "title_en" : "Conservation status of habitats of European interest",
@@ -318,7 +311,7 @@
         "fields" : {
             "code" : "007",
             "parent" : [
-                5
+
             ],
             "url" : "http://www.eea.europa.eu/data-and-maps/indicators/nationally-designated-protected-areas/nationally-designated-protected-areas-assessment-1",
             "title_en" : "Nationally designated protected areas",
@@ -344,7 +337,7 @@
         "fields" : {
             "code" : "009",
             "parent" : [
-                4
+
             ],
             "url" : "http://www.eea.europa.eu/data-and-maps/indicators/critical-load-exceedance-for-nitrogen/critical-load-exceedance-for-nitrogen",
             "title_en" : "Critical load excedance for nitrogen",
@@ -383,7 +376,7 @@
         "fields" : {
             "code" : "012",
             "parent" : [
-                45
+
             ],
             "url" : "http://www.eea.europa.eu/data-and-maps/indicators/marine-trophic-index-of-european-seas/marine-trophic-index-of-european",
             "title_en" : "Marine trophic index of European seas",
@@ -396,7 +389,7 @@
         "fields" : {
             "code" : "013",
             "parent" : [
-                4
+
             ],
             "url" : "http://www.eea.europa.eu/data-and-maps/indicators/fragmentation-of-natural-and-semi/fragmentation-of-natural-and-semi",
             "title_en" : "Fragmentation of natural and semi-natural areas",
@@ -422,7 +415,7 @@
         "fields" : {
             "code" : "016",
             "parent" : [
-                4
+
             ],
             "url" : "http://www.eea.europa.eu/data-and-maps/indicators/freshwater-quality/freshwater-quality-assessment-published-may-2010",
             "title_en" : "Freshwater quality",
@@ -435,7 +428,7 @@
         "fields" : {
             "code" : "017",
             "parent" : [
-                10
+
             ],
             "url" : "http://www.eea.europa.eu/data-and-maps/indicators/forest-growing-stock-increment-and-fellings/forest-growing-stock-increment-and",
             "title_en" : "Forest: growing stock, increment and fellings",
@@ -448,7 +441,7 @@
         "fields" : {
             "code" : "018",
             "parent" : [
-                10
+
             ],
             "url" : "http://www.eea.europa.eu/data-and-maps/indicators/forest-deadwood/forest-deadwood-assessment-published-may-2010",
             "title_en" : "Forest: deadwood",
@@ -461,7 +454,7 @@
         "fields" : {
             "code" : "019",
             "parent" : [
-                10
+
             ],
             "url" : "http://www.eea.europa.eu/data-and-maps/indicators/agriculture-nitrogen-balance/agriculture-nitrogen-balance-assessment-published",
             "title_en" : "Agriculture: nitrogen balance",
@@ -474,7 +467,7 @@
         "fields" : {
             "code" : "020",
             "parent" : [
-                11
+
             ],
             "url" : "http://www.eea.europa.eu/data-and-maps/indicators/agriculture-area-under-management-practices/agriculture-area-under-management-practices",
             "title_en" : "Agriculture: area under management practices potentially supporting biodiversity",
@@ -500,7 +493,7 @@
         "fields" : {
             "code" : "023",
             "parent" : [
-                16
+
             ],
             "url" : "http://www.eea.europa.eu/data-and-maps/indicators/ecological-footprint-of-european-countries/ecological-footprint-of-european-countries",
             "title_en" : "Ecological footprint of EU countries",
