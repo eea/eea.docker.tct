@@ -59,7 +59,8 @@ def edit_eu_strategy_activity(request, target, pk=None):
 
 @auth_required
 def delete_eu_strategy_activity(request, target, pk=None):
-    activity = get_object_or_404(models.EuAction, pk=pk)
-    activity.delete()
-    messages.success(request, _('Activity successfully deleted.') + "")
-    return redirect('view_eu_strategy_target', pk=target)
+    if request.method == 'POST':
+        activity = get_object_or_404(models.EuAction, pk=pk)
+        activity.delete()
+        messages.success(request, _('Activity successfully deleted.') + "")
+        return redirect('view_eu_strategy_target', pk=target)

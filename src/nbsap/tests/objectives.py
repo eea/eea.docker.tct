@@ -170,7 +170,7 @@ class NationalObjectiveTest(BaseWebTest):
     def test_delete_national_objective(self):
         nat_obj = NationalObjectiveFactory()
         url = reverse('delete_national_objective', kwargs={'pk': nat_obj.pk})
-        resp = self.app.get(url, user='staff').follow()
+        resp = self.app.post(url, user='staff').follow()
         with self.assertRaises(AssertionError):
             self.assertObjectInDatabase('NationalObjective', pk=1)
 

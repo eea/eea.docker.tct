@@ -104,7 +104,8 @@ def edit_eu_strategy_target(request, pk=None):
 
 @auth_required
 def delete_eu_strategy_target(request, pk):
-    target = get_object_or_404(models.EuTarget, pk=pk)
-    target.delete()
-    messages.success(request, _('Target successfully deleted.') + "")
-    return redirect('list_eu_targets')
+    if request.method == 'POST':
+        target = get_object_or_404(models.EuTarget, pk=pk)
+        target.delete()
+        messages.success(request, _('Target successfully deleted.') + "")
+        return redirect('list_eu_targets')

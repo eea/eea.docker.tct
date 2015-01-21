@@ -58,7 +58,8 @@ def edit_national_action(request, objective, pk=None):
 
 @auth_required
 def delete_national_action(request, objective, pk=None):
-    action = get_object_or_404(models.NationalAction, pk=pk)
-    action.delete()
-    messages.success(request, _('Action successfully deleted.') + "")
-    return redirect('view_national_objective', pk=objective)
+    if request.method == 'POST':
+        action = get_object_or_404(models.NationalAction, pk=pk)
+        action.delete()
+        messages.success(request, _('Action successfully deleted.') + "")
+        return redirect('view_national_objective', pk=objective)
