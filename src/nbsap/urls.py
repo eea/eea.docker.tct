@@ -141,6 +141,10 @@ urlpatterns = patterns('',
         'nbsap.views.edit_eu_indicator',
         name='edit_eu_indicator'),
 
+    url(r'^administration/indicators/(?P<pk>\d+)/edit/$',
+        'nbsap.views.edit_eu_indicator',
+        name='edit_eu_indicator'),
+
     url(r'^administration/objectives/$',
             'nbsap.views.list_national_objectives',
             name='list_national_objectives'),
