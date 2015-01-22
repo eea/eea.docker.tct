@@ -26,6 +26,8 @@ def indicator(request, pk):
 
 def list_indicators(request):
     indicators = models.EuIndicator.objects.exclude(targets=None).all()
+    subindicators = models.EuIndicator.objects.filter(targets=None).all()
     return render(request, 'eu_indicators.html', {
         'indicators': indicators,
+        'subindicators': subindicators,
     })

@@ -47,12 +47,16 @@
           <p>{% trans "No corresponding EU target" %}.</p>
         {% endif %}
       </div>
-  
+    {% endfor %}
+
+    {% for subindicator in subindicators %}
+      <h2>EU subindicator {{ subindicator.code }}: {{ subindicator.title }}</h2>
+      <p class="objective-description">{{ subindicator.body }}</p>
       <div class ="well">
         <div class="well-title">{% trans "Mapping with Aichi Strategy" %}</div>
-        {% if indicator.eu_indicator_aichi_strategy.exists %}
+        {% if subindicator.eu_indicator_aichi_strategy.exists %}
           <ul>
-            {% for strategy in indicator.eu_indicator_aichi_strategy.all %}
+            {% for strategy in subindicator.eu_indicator_aichi_strategy.all %}
               {% for aichi_target in strategy.aichi_targets.all %}
                 {% assign aichi_target.get_parent_goal as goal %}
                 <li>
@@ -67,6 +71,7 @@
         {% endif %}
       </div>
     {% endfor %}
+
   {% else %}
     <h1>{% trans 'No Eu Indicators' %}</h1>
   {% endif %}
