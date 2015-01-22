@@ -13,7 +13,7 @@ from chosen import forms as chosenforms
 
 from nbsap.models import (
     NationalStrategy, NationalObjective, NationalAction, EuTarget, AichiGoal,
-    AichiTarget, EuAction
+    AichiTarget, EuAction, EuIndicator,
 )
 from nbsap.utils import remove_tags
 
@@ -382,4 +382,60 @@ class NbsapPageForm(forms.Form):
         setattr(self.page, 'body_%s' % lang, self.cleaned_data['body'])
         self.page.save()
         return self.page
+
+
+class EuIndicatorForm(forms.Form):
+
+    language = forms.ChoiceField(choices=settings.LANGUAGES)
+    title = forms.CharField(widget=widgets.Textarea)
+    url = forms.CharField()
+    indicator_type = forms.ChoiceField(choices=EuIndicator.TYPES)
+
+    def __init__(self, *args, **kwargs):
+        self.indicator = kwargs.pop('indicator', None)
+        lang = kwargs.pop('lang', None)
+
+        super(EuIndicatorForm, self).__init__(*args, **kwargs)
+
+        if self.indicator:
+            title = getattr(self.indicator, 'title_%s' % lang, None)
+            self.fields['title'].initial = title
+            self.fields['url'].initial = self.indicator.url
+            self.fields['indicator_type'].initial = self.indicator.indicator_type
+            if 'code' in self.fields:
+                self.fields['code'].initial = self.indicator.code
+
+        self.fields['language'].initial = lang
+
+    def save(self):
+        indicator = self.indicator or EuIndicator()
+        lang = self.cleaned_data['language']
+        title = self.cleaned_data['title']
+        code = self.cleaned_data.get('code', None)
+
+        setattr(indicator, 'title_%s' % lang, title)
+        indicator.url = self.cleaned_data['url']
+        indicator.indicator_type = self.cleaned_data['indicator_type']
+
+        if code:
+            indicator.code = code
+        indicator.save()
+
+        return indicator
+
+
+class EuIndicatorEditForm(EuIndicatorForm):
+
+    code = forms.CharField(max_length=16, validators=[validate_eu_target_code])
+
+    def clean_code(self):
+        code = self.cleaned_data['code']
+        if code == self.indicator.code:
+            return code
+        try:
+            EuIndicator.objects.get(code=code)
+            raise ValidationError('Code already exists.')
+        except EuIndicator.DoesNotExist:
+            pass
+        return code
 

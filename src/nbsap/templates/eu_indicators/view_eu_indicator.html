@@ -42,7 +42,7 @@
   </div>
 
   {% if indicator.url %}
-    <a href="{{ sub.url }}">
+    <a href="{{ indicator.url }}">
       {{ indicator.indicator_type|upper }} {{ indicator.code }}: {{indicator.title}}</a>
   {% else %}
     {{ indicator.code }} {{ indicator.title }}

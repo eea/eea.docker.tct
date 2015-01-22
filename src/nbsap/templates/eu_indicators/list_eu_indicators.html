@@ -31,7 +31,7 @@
 
   <div class="action-bar">
     <a class="btn btn-success add"
-       href="#">{% trans "Add indicator" %}
+       href="{% url 'edit_eu_indicator' %}">{% trans "Add indicator" %}
     </a>
   </div>
 
@@ -45,7 +45,7 @@
     <tbody>
     {% for indicator in indicators %}
       <tr>
-        <td>{{ indicator.code }}</td>
+        <td>{{ indicator.code|default:'' }}</td>
         <td>
           <a href="{% url 'view_eu_indicator' pk=indicator.pk %}"
              title="{% trans 'Indicator' %} {{ indicator.code }}">
