@@ -4,10 +4,12 @@
 <ul class="nav-menu">
 
   {% if NAT_STRATEGY %}
-  <li class="{% active request '^/administration/objectives/[\w\-]+' %}">
+  <li class="{% active request '^/administration/objectives/[\w\-]+' %}
+             {% active request '^/administration/objectives/' %}">
     <a href="{% url 'list_national_objectives' %}">{% trans "National Strategy" %}</a> </li>
   {% else %}
-  <li class="{% active request '^/administration/targets/[\w\-]+' %}">
+  <li class="{% active request '^/administration/targets/[\w\-]+' %}
+             {% active request '^/administration/targets/' %}">
     <a href="{% url 'list_eu_targets' %}">{% trans "EU Strategy" %}</a> </li>
   {% endif %}
 
