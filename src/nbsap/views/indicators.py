@@ -41,3 +41,10 @@ def list_eu_indicators(request):
         'indicators': indicators,
     })
 
+
+@auth_required
+def view_eu_indicator(request, pk):
+    ind = get_object_or_404(models.EuIndicator, pk=pk)
+    return render(request, 'eu_indicators/view_eu_indicator.html', {
+        'indicator': ind,
+    })

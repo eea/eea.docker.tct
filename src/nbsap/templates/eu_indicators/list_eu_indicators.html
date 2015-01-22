@@ -35,7 +35,7 @@
     </a>
   </div>
 
-  <table class="table table_listing">
+  <table class="table">
 
     <thead>
       <th>{% trans "Code" %}</th>
@@ -47,7 +47,7 @@
       <tr>
         <td>{{ indicator.code }}</td>
         <td>
-          <a href="#"
+          <a href="{% url 'view_eu_indicator' pk=indicator.pk %}"
              title="{% trans 'Indicator' %} {{ indicator.code }}">
             {{ indicator.title|default:indicator.code }}</a>
         </td>
@@ -68,10 +68,6 @@
 
     $(document).ready(function() {
       $('.messages').delay(1000).fadeOut();
-      $('.table_listing').dataTable({
-          "bStateSave": true,
-          "iDisplayLength": 25
-      });
     });
   </script>
 
