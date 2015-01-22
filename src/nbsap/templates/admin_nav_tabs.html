@@ -11,6 +11,9 @@
   <li class="{% active request '^/administration/targets/[\w\-]+' %}
              {% active request '^/administration/targets/' %}">
     <a href="{% url 'list_eu_targets' %}">{% trans "EU Strategy" %}</a> </li>
+  <li class="{% active request '^/administration/indicators/[\w\-]+' %}
+             {% active request '^/administration/indicators/' %}">
+    <a href="{% url 'list_eu_indicators' %}">{% trans "EU Indicators" %}</a> </li>
   {% endif %}
 
   <li class="{% active request '^/administration/mapping/[\w\-]+' %}
