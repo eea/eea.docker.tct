@@ -1,0 +1,73 @@
+{% extends 'layout.html' %}
+{% load i18n %}
+{% load utils %}
+
+
+{% block title %}
+  NBSAP - {% trans "EU Indicators" %}
+{% endblock %}
+
+
+{% block navmenu %}
+  {% include 'nav_menu.html' %}
+{% endblock %}
+
+{% block content %}
+  <h1 class="page-title">{% trans "EU Indicators" %}</h1>
+
+  {% if indicators %}
+    {% for indicator in indicators %}
+      <h1>{{ indicator.title }}</h1>
+      <p class="objective-description">{{ indicator.body }}</p>
+  
+      <ul>
+        {% for sub in indicator.subindicators.all %}
+          <li>
+            {% if sub.url %}
+              <a href="{{ sub.url }}">
+                {{ sub.indicator_type|upper }} {{ sub.code }}: {{ sub.title }}</a>
+            {% else %}
+              {{ sub.code }} {{ sub.title }}
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+  
+      <div class ="well">
+        <div class="well-title">{% trans "EU targets" %}</div>
+        {% if indicator.targets.exists %}
+        <ul>
+          {% for target in indicator.targets.all %}
+            <li>
+              <a href="{% url 'eu_targets' code=target.code %}">{{ target.code }} {{target.title}}</a>
+            </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+          <p>{% trans "No corresponding EU target" %}.</p>
+        {% endif %}
+      </div>
+  
+      <div class ="well">
+        <div class="well-title">{% trans "Mapping with Aichi Strategy" %}</div>
+        {% if indicator.eu_indicator_aichi_strategy.exists %}
+          <ul>
+            {% for strategy in indicator.eu_indicator_aichi_strategy.all %}
+              {% for aichi_target in strategy.aichi_targets.all %}
+                {% assign aichi_target.get_parent_goal as goal %}
+                <li>
+                  <a href="{% url 'goals' code=goal.code %}#{{ aichi_target.code }}">
+                    {% trans "AICHI Target"%} {{ aichi_target.code }}</a>
+                </li>
+              {% endfor %}
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p>{% trans "No corresponding AICHI target" %}.</p>
+        {% endif %}
+      </div>
+    {% endfor %}
+  {% else %}
+    <h1>{% trans 'No Eu Indicators' %}</h1>
+  {% endif %}
+{% endblock %}

@@ -339,10 +339,12 @@ class EuIndicator(models.Model):
                                       max_length=4,
                                       choices=TYPES,
                                       blank=True)
-    parent = models.ManyToManyField('self',
-                                null=True,
-                                blank=True,
-                                related_name='children')
+    parent = models.ManyToManyField('self', null=True, blank=True,
+                                    symmetrical=False, related_name='parents')
+
+    @property
+    def subindicators(self):
+        return self.parent
 
     def __unicode__(self):
         return '{0} {1}: {2}'.format(self.indicator_type.upper(),
@@ -350,8 +352,9 @@ class EuIndicator(models.Model):
                                      self.title)
 
     def get_indicators(self):
-        return mark_safe(', <br>'.join([unicode(obj)
-                for obj in self.parent.all()]))
+        return mark_safe('-, <br>'.join(
+            [unicode(obj) for obj in self.parent.all()]
+        ))
     get_indicators.short_description = 'relation'
 
     class Meta:
@@ -370,7 +373,7 @@ class EuTarget(models.Model):
     actions = models.ManyToManyField(EuAction,
                                      related_name="target")
     indicators = models.ManyToManyField(EuIndicator,
-                                        related_name="indicator")
+                                        related_name="targets")
 
     @staticmethod
     def _pre_save_target_code_on_create(instance):
@@ -412,8 +415,9 @@ class EuTarget(models.Model):
         return 'Target {0}: {1}'.format(self.code, self.title)
 
     def get_indicators(self):
-        return mark_safe(', <br>'.join([unicode(obj)
-                for obj in self.indicators.all()]))
+        return mark_safe(', <br>'.join(
+            [unicode(obj) for obj in self.indicators.all()]
+        ))
     get_indicators.short_description = 'EU Indicators'
 
     class Meta:
@@ -424,8 +428,8 @@ class EuTarget(models.Model):
 
 class EuIndicatorToAichiStrategy(models.Model):
     eu_indicator = models.ForeignKey(EuIndicator,
-                                  verbose_name="EU Biodiversity Indicator",
-                                  related_name="eu_indicator_aichi_strategy")
+                                     verbose_name="EU Biodiversity Indicator",
+                                     related_name="eu_indicator_aichi_strategy")
     aichi_targets = models.ManyToManyField(AichiTarget,
                                            verbose_name="Aichi targets",
                                            related_name="eu_indicator_aichi_strategy")
@@ -448,7 +452,7 @@ class EuAichiStrategy(models.Model):
                                            related_name="eu_aichi_strategy")
 
     def get_targets(self):
-       return ', '.join([obj.code for obj in self.aichi_targets.all()])
+        return ', '.join([obj.code for obj in self.aichi_targets.all()])
     get_targets.short_description = 'AICHI targets'
 
     class Meta:

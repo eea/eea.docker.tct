@@ -19,7 +19,7 @@
   </li>
   {% else %}
   <li>
-    <a class="{% active request '^/eu_indicators' %}" href="#todo">{% trans "EU Indicators" %}</a>
+    <a class="{% active request '^/eu_indicators' %}" href="{% url 'eu_indicators' %}">{% trans "EU Indicators" %}</a>
   </li>
   {% endif %}
 

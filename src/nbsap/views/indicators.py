@@ -1,5 +1,4 @@
 from django.shortcuts import render, get_object_or_404
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.utils.translation import ugettext_lazy as _
 
 from nbsap import models
@@ -22,4 +21,11 @@ def indicator(request, pk):
     indicator.other_targets_list = indicator.other_targets.all()
     return render(request, 'indicators/indicator_details.html', {
         'indicator': indicator,
+    })
+
+
+def list_indicators(request):
+    indicators = models.EuIndicator.objects.exclude(targets=None).all()
+    return render(request, 'eu_indicators.html', {
+        'indicators': indicators,
     })
