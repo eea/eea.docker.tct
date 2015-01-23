@@ -22,7 +22,7 @@ def indicator(request, pk):
     indicator.relevant_target_ob = indicator.relevant_target.all()[0]
     indicator.strategic_goal_ob = indicator.relevant_target_ob.goals.all()[0]
     indicator.other_targets_list = indicator.other_targets.all()
-    return render(request, 'eu_indicators/indicator_details.html', {
+    return render(request, 'indicators/indicator_details.html', {
         'indicator': indicator,
     })
 
