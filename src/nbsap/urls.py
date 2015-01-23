@@ -149,6 +149,10 @@ urlpatterns = patterns('',
         'nbsap.views.delete_eu_indicator',
         name='delete_eu_indicator'),
 
+    url(r'^administration/indicators/(?P<pk>\d+)/mapping/$',
+        'nbsap.views.map_eu_indicator',
+        name='map_eu_indicator'),
+
     url(r'^administration/objectives/$',
             'nbsap.views.list_national_objectives',
             name='list_national_objectives'),

@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from auth import auth_required
 from nbsap import models
-from nbsap.forms import EuIndicatorForm, EuIndicatorEditForm
+from nbsap.forms import EuIndicatorForm, EuIndicatorEditForm, EuIndicatorMapForm
 
 
 def get_indicators_pages(paginator):
@@ -86,9 +86,28 @@ def edit_eu_indicator(request, pk=None):
 
 
 @auth_required
-def delete_eu_indicator(request, pk=None):
+def delete_eu_indicator(request, pk):
     if request.method == 'POST':
         ind = get_object_or_404(models.EuIndicator, pk=pk)
         ind.delete()
         messages.success(request, _('Indicator successfully deleted.') + "")
         return redirect('list_eu_indicators')
+
+
+@auth_required
+def map_eu_indicator(request, pk):
+    ind = get_object_or_404(models.EuIndicator, pk=pk)
+
+    if request.method == 'POST':
+        form = EuIndicatorMapForm(request.POST, indicator=ind)
+        if form.is_valid():
+            form.save()
+            messages.success(request, _('Saved changes'))
+            return redirect('view_eu_indicator', pk=pk)
+    else:
+        form = EuIndicatorMapForm(indicator=ind)
+
+    return render(request, 'eu_indicators/map_eu_indicator.html', {
+        'form': form,
+        'indicator': ind,
+    })

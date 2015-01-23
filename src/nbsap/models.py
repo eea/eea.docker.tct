@@ -435,7 +435,7 @@ class EuIndicatorToAichiStrategy(models.Model):
                                            related_name="eu_indicator_aichi_strategy")
 
     def get_targets(self):
-       return ', '.join([obj.code for obj in self.aichi_targets.all()])
+        return ', '.join([obj.code for obj in self.aichi_targets.all()])
     get_targets.short_description = 'AICHI targets'
 
     class Meta:

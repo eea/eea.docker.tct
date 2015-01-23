@@ -13,7 +13,7 @@ from chosen import forms as chosenforms
 
 from nbsap.models import (
     NationalStrategy, NationalObjective, NationalAction, EuTarget, AichiGoal,
-    AichiTarget, EuAction, EuIndicator,
+    AichiTarget, EuAction, EuIndicator, EuIndicatorToAichiStrategy,
 )
 from nbsap.utils import remove_tags
 
@@ -439,3 +439,48 @@ class EuIndicatorEditForm(EuIndicatorForm):
             pass
         return code
 
+
+class EuIndicatorMapForm(forms.Form):
+
+    eu_targets = forms.MultipleChoiceField(required=False)
+    aichi_targets = forms.MultipleChoiceField(required=False)
+
+    def __init__(self, *args, **kwargs):
+        self.indicator = kwargs.pop('indicator', None)
+        super(EuIndicatorMapForm, self).__init__(*args, **kwargs)
+        self.fields['eu_targets'].choices = [
+            (t.pk, t.title) for t in EuTarget.objects.all()
+        ]
+        self.fields['eu_targets'].initial = (self.indicator.targets
+                                             .values_list('pk', flat=True))
+        self.fields['eu_targets'].widget.attrs['size'] = 6
+        self.fields['aichi_targets'].choices = [
+            (s.pk, s.code) for s in AichiTarget.objects.order_by('pk').all()
+        ]
+
+        try:
+            initial = (
+                EuIndicatorToAichiStrategy.objects
+                .filter(eu_indicator=self.indicator)[0]
+                .aichi_targets.values_list('pk', flat=True)
+            )
+        except IndexError:
+            initial = None
+        self.fields['aichi_targets'].initial = initial
+        self.fields['aichi_targets'].widget.attrs['size'] = 10
+
+    def save(self):
+        self.indicator.targets = self.cleaned_data['eu_targets']
+        self.indicator.save()
+        try:
+            ita = (EuIndicatorToAichiStrategy.objects
+                   .filter(eu_indicator=self.indicator))[0]
+        except IndexError:
+            ita = EuIndicatorToAichiStrategy.objects.create(
+                eu_indicator=self.indicator)
+
+        ita.aichi_targets = (
+            AichiTarget.objects
+            .filter(pk__in=self.cleaned_data['aichi_targets'])
+        )
+        ita.save()
