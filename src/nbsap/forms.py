@@ -443,7 +443,7 @@ class EuIndicatorEditForm(EuIndicatorForm):
 class EuIndicatorMapForm(forms.Form):
 
     eu_targets = forms.MultipleChoiceField(required=False)
-    aichi_targets = forms.MultipleChoiceField(required=False)
+    aichi_strategy = forms.MultipleChoiceField(required=False)
 
     def __init__(self, *args, **kwargs):
         self.indicator = kwargs.pop('indicator', None)
@@ -454,7 +454,7 @@ class EuIndicatorMapForm(forms.Form):
         self.fields['eu_targets'].initial = (self.indicator.targets
                                              .values_list('pk', flat=True))
         self.fields['eu_targets'].widget.attrs['size'] = 6
-        self.fields['aichi_targets'].choices = [
+        self.fields['aichi_strategy'].choices = [
             (s.pk, s.code) for s in AichiTarget.objects.order_by('pk').all()
         ]
 
@@ -466,8 +466,8 @@ class EuIndicatorMapForm(forms.Form):
             )
         except IndexError:
             initial = None
-        self.fields['aichi_targets'].initial = initial
-        self.fields['aichi_targets'].widget.attrs['size'] = 10
+        self.fields['aichi_strategy'].initial = initial
+        self.fields['aichi_strategy'].widget.attrs['size'] = 10
 
     def save(self):
         self.indicator.targets = self.cleaned_data['eu_targets']
@@ -481,6 +481,6 @@ class EuIndicatorMapForm(forms.Form):
 
         ita.aichi_targets = (
             AichiTarget.objects
-            .filter(pk__in=self.cleaned_data['aichi_targets'])
+            .filter(pk__in=self.cleaned_data['aichi_strategy'])
         )
         ita.save()

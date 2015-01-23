@@ -60,6 +60,26 @@
     </ul>
   {% endif %}
 
+  {% if indicator.targets.exists %}
+      <h2>{% trans "Mapping with EU targets" %}</h2>
+      <ul>
+      {% for target in indicator.targets.all %}
+        <li>{{ target.code }} {{ target.title }}</li>
+      {% endfor %}
+      </ul>
+  {% endif %}
+
+  {% if indicator.eu_indicator_aichi_strategy.exists %}
+    <h2>{% trans "Mapping with Aichi Strategy" %}</h2>
+    <ul>
+      {% for strategy in indicator.eu_indicator_aichi_strategy.all %}
+        {% for aichi_target in strategy.aichi_targets.all %}
+          <li>{{ aichi_target }}</li>
+        {% endfor %}
+      {% endfor %}
+    </ul>
+  {% endif %}
+
 {% endblock %}
 
 {% block scripts %}
