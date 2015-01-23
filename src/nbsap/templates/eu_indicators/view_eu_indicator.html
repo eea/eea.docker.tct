@@ -43,9 +43,9 @@
 
   {% if indicator.url %}
     <a href="{{ indicator.url }}">
-      {{ indicator.indicator_type|upper }} {{ indicator.code }}: {{indicator.title}}</a>
+      {{ indicator.get_indicator_type_display }} {{ indicator.code|default:'' }}: {{indicator.title}}</a>
   {% else %}
-    {{ indicator.code }} {{ indicator.title }}
+    {{ indicator.code|default:'' }} {{ indicator.title }}
   {% endif %}
 
   {% if indicator.subindicators.exists %}
