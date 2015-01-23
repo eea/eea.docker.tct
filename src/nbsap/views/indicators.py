@@ -83,3 +83,12 @@ def edit_eu_indicator(request, pk=None):
         'indicator': indicator,
         'lang': lang,
     })
+
+
+@auth_required
+def delete_eu_indicator(request, pk=None):
+    if request.method == 'POST':
+        ind = get_object_or_404(models.EuIndicator, pk=pk)
+        ind.delete()
+        messages.success(request, _('Indicator successfully deleted.') + "")
+        return redirect('list_eu_indicators')

@@ -26,7 +26,7 @@
   <h1 class="page-title">{% trans "Indicator" %} {{ indicator.code }}: {{ indicator.title }}</h1>
 
   <div class="action-bar">
-    <form method="POST" action="#">
+    <form method="POST" action="{% url 'delete_eu_indicator' pk=indicator.pk %}">
       <a class="btn btn-success" href="{% url 'list_eu_indicators' %}">
         <i class="glyphicon glyphicon-arrow-left"></i> {% trans "Back" %}
       </a>
