@@ -47,3 +47,11 @@ def list_national_strategy(request):
     return render(request, 'mapping/list_national_strategy.html',{
         'strategies': strategies
     })
+
+
+@auth_required
+def list_eu_aichi_strategy(request):
+    strategies = models.EuAichiStrategy.objects.all()
+    return render(request, 'mapping/list_eu_aichi_strategy.html', {
+        'strategies': strategies
+    })

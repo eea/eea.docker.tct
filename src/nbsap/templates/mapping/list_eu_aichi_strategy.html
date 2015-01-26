@@ -1,0 +1,75 @@
+{% extends 'layout.html' %}
+
+{% load i18n %}
+{% load assets %}
+
+
+{% block title %}
+  NBSAP - {% trans "Mapping EU Targets to Aichi Targets" %}
+{% endblock %}
+
+
+{% block navmenu %}
+  {% include 'admin_nav_tabs.html' %}
+{% endblock %}
+
+
+{% block content %}
+
+  {% if messages %}
+  <div class="messages alert alert-success">
+  {% for message in messages %}
+    <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+  {% endfor %}
+  </div>
+  {% endif %}
+
+  <h1 class="page-title">{% trans "Mapping EU Targets to Aichi Targets" %}</h1>
+
+  <div class="action-bar">
+    <a class="btn btn-success add"
+       href="#">{% trans "Add Mapping" %}</a>
+  </div>
+
+  <table class="table objectives_listing ">
+
+    <thead>
+      <th>{% trans "Eu Target"%}</th>
+      <th>{% trans "Aichi Targets"%}</th>
+      <th>{% trans "Edit" %}</th>
+      <th>{% trans "Delete" %}</th>
+    </thead>
+
+    <tbody>
+    {% for strategy in strategies %}
+      <tr>
+        <td class="strategy">
+          <a href="{% url 'view_eu_strategy_target' pk=strategy.eu_target.pk %}">
+            {{ strategy.eu_target.code }}</a>
+        </td>
+        <td>
+          {{ strategy.aichi_targets.all|join:", " }}
+        </td>
+        <td style="text-align: center;">
+          <a class="btn btn-mini btn-success add"
+              href="#">{% trans "Edit" %}</a>
+        </td>
+        <td style="text-align: center;">
+          <a class="btn btn-mini btn-danger">
+            {% trans "Delete" %}</a>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+
+  </table>
+{% endblock %}
+
+
+{% block scripts %}
+
+  {% assets "js_admin" %}
+     <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+  {% endassets %}
+
+{% endblock scripts %}

@@ -209,6 +209,10 @@ urlpatterns = patterns('',
             'nbsap.views.delete_national_strategy',
             name='delete_national_strategy'),
 
+    url(r'^administration/eu-aichi-mapping/$',
+        'nbsap.views.list_eu_aichi_strategy',
+        name='list_eu_aichi_strategy'),
+
     url(r'^administration/pages$', 'nbsap.views.admin_pages', name='admin_pages'),
     url(r'^administration/page/(?P<handle>[\w\-]+)/edit$', 'nbsap.views.admin_page', name='admin_page'),
 
