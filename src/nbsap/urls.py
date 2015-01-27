@@ -22,7 +22,7 @@ urlpatterns = patterns('',
 
     url(r'^indicator/(?P<pk>(\d+))$', 'nbsap.views.indicator',
         name='indicator'),
-    url(r'^eu_indicators/$', 'nbsap.views.list_indicators',
+    url(r'^eu_indicators/$', 'nbsap.views.eu_indicators',
         name='eu_indicators'),
 
     url(r'^objectives$', 'nbsap.views.nat_strategy', name='nat_strategy'),
@@ -128,6 +128,30 @@ urlpatterns = patterns('',
     url(r'^administration/targets/(?P<pk>[\w\-]+)/delete/$',
         'nbsap.views.delete_eu_strategy_target',
         name='delete_eu_strategy_target'),
+
+    url(r'^administration/indicators/$',
+        'nbsap.views.list_eu_indicators',
+        name='list_eu_indicators'),
+
+    url(r'^administration/indicator/(?P<pk>\d+)/$',
+        'nbsap.views.view_eu_indicator',
+        name='view_eu_indicator'),
+
+    url(r'^administration/indicators/add/$',
+        'nbsap.views.edit_eu_indicator',
+        name='edit_eu_indicator'),
+
+    url(r'^administration/indicators/(?P<pk>\d+)/edit/$',
+        'nbsap.views.edit_eu_indicator',
+        name='edit_eu_indicator'),
+
+    url(r'^administration/indicators/(?P<pk>\d+)/delete/$',
+        'nbsap.views.delete_eu_indicator',
+        name='delete_eu_indicator'),
+
+    url(r'^administration/indicators/(?P<pk>\d+)/mapping/$',
+        'nbsap.views.map_eu_indicator',
+        name='map_eu_indicator'),
 
     url(r'^administration/objectives/$',
             'nbsap.views.list_national_objectives',

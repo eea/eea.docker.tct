@@ -17,7 +17,7 @@
 
   {% if indicators %}
     {% for indicator in indicators %}
-      <h1>{{ indicator.title }}</h1>
+      <h1>{{ indicator.get_indicator_type_display }} {{ indicator.code|default:'' }}: {{ indicator.title }}</h1>
       <p class="objective-description">{{ indicator.body }}</p>
   
       <ul>
@@ -50,7 +50,7 @@
     {% endfor %}
 
     {% for subindicator in subindicators %}
-      <h2>EU subindicator {{ subindicator.code }}: {{ subindicator.title }}</h2>
+      <h2>{{ subindicator.get_indicator_type_display }} {{ subindicator.code|default:'' }}: {{ subindicator.title }}</h2>
       <p class="objective-description">{{ subindicator.body }}</p>
       <div class ="well">
         <div class="well-title">{% trans "Mapping with Aichi Strategy" %}</div>

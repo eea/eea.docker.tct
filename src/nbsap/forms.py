@@ -13,7 +13,7 @@ from chosen import forms as chosenforms
 
 from nbsap.models import (
     NationalStrategy, NationalObjective, NationalAction, EuTarget, AichiGoal,
-    AichiTarget, EuAction
+    AichiTarget, EuAction, EuIndicator, EuIndicatorToAichiStrategy,
 )
 from nbsap.utils import remove_tags
 
@@ -383,3 +383,104 @@ class NbsapPageForm(forms.Form):
         self.page.save()
         return self.page
 
+
+class EuIndicatorForm(forms.Form):
+
+    language = forms.ChoiceField(choices=settings.LANGUAGES)
+    title = forms.CharField(widget=widgets.Textarea)
+    url = forms.CharField()
+    indicator_type = forms.ChoiceField(choices=EuIndicator.TYPES)
+
+    def __init__(self, *args, **kwargs):
+        self.indicator = kwargs.pop('indicator', None)
+        lang = kwargs.pop('lang', None)
+
+        super(EuIndicatorForm, self).__init__(*args, **kwargs)
+
+        if self.indicator:
+            title = getattr(self.indicator, 'title_%s' % lang, None)
+            self.fields['title'].initial = title
+            self.fields['url'].initial = self.indicator.url
+            self.fields['indicator_type'].initial = self.indicator.indicator_type
+            if 'code' in self.fields:
+                self.fields['code'].initial = self.indicator.code
+
+        self.fields['language'].initial = lang
+
+    def save(self):
+        indicator = self.indicator or EuIndicator()
+        lang = self.cleaned_data['language']
+        title = self.cleaned_data['title']
+        code = self.cleaned_data.get('code', None)
+
+        setattr(indicator, 'title_%s' % lang, title)
+        indicator.url = self.cleaned_data['url']
+        indicator.indicator_type = self.cleaned_data['indicator_type']
+
+        if code:
+            indicator.code = code
+        indicator.save()
+
+        return indicator
+
+
+class EuIndicatorEditForm(EuIndicatorForm):
+
+    code = forms.CharField(max_length=16, validators=[validate_eu_target_code])
+
+    def clean_code(self):
+        code = self.cleaned_data['code']
+        if code == self.indicator.code:
+            return code
+        try:
+            EuIndicator.objects.get(code=code)
+            raise ValidationError('Code already exists.')
+        except EuIndicator.DoesNotExist:
+            pass
+        return code
+
+
+class EuIndicatorMapForm(forms.Form):
+
+    eu_targets = forms.MultipleChoiceField(required=False)
+    aichi_strategy = forms.MultipleChoiceField(required=False)
+
+    def __init__(self, *args, **kwargs):
+        self.indicator = kwargs.pop('indicator', None)
+        super(EuIndicatorMapForm, self).__init__(*args, **kwargs)
+        self.fields['eu_targets'].choices = [
+            (t.pk, t.title) for t in EuTarget.objects.all()
+        ]
+        self.fields['eu_targets'].initial = (self.indicator.targets
+                                             .values_list('pk', flat=True))
+        self.fields['eu_targets'].widget.attrs['size'] = 6
+        self.fields['aichi_strategy'].choices = [
+            (s.pk, s.code) for s in AichiTarget.objects.order_by('pk').all()
+        ]
+
+        try:
+            initial = (
+                EuIndicatorToAichiStrategy.objects
+                .filter(eu_indicator=self.indicator)[0]
+                .aichi_targets.values_list('pk', flat=True)
+            )
+        except IndexError:
+            initial = None
+        self.fields['aichi_strategy'].initial = initial
+        self.fields['aichi_strategy'].widget.attrs['size'] = 10
+
+    def save(self):
+        self.indicator.targets = self.cleaned_data['eu_targets']
+        self.indicator.save()
+        try:
+            ita = (EuIndicatorToAichiStrategy.objects
+                   .filter(eu_indicator=self.indicator))[0]
+        except IndexError:
+            ita = EuIndicatorToAichiStrategy.objects.create(
+                eu_indicator=self.indicator)
+
+        ita.aichi_targets = (
+            AichiTarget.objects
+            .filter(pk__in=self.cleaned_data['aichi_strategy'])
+        )
+        ita.save()
