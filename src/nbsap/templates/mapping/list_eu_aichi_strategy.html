@@ -28,14 +28,14 @@
 
   <div class="action-bar">
     <a class="btn btn-success add"
-       href="#">{% trans "Add Mapping" %}</a>
+       href="{% url 'edit_eu_aichi_strategy' %}">{% trans "Add Mapping" %}</a>
   </div>
 
   <table class="table objectives_listing ">
 
     <thead>
       <th>{% trans "Eu Target"%}</th>
-      <th>{% trans "Aichi Targets"%}</th>
+      <th>{% trans "AICHI Targets"%}</th>
       <th>{% trans "Edit" %}</th>
       <th>{% trans "Delete" %}</th>
     </thead>
@@ -52,7 +52,7 @@
         </td>
         <td style="text-align: center;">
           <a class="btn btn-mini btn-success add"
-              href="#">{% trans "Edit" %}</a>
+              href="{% url 'edit_eu_aichi_strategy' strategy.pk %}">{% trans "Edit" %}</a>
         </td>
         <td style="text-align: center;">
           <a class="btn btn-mini btn-danger">

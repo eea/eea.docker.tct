@@ -14,6 +14,7 @@ from chosen import forms as chosenforms
 from nbsap.models import (
     NationalStrategy, NationalObjective, NationalAction, EuTarget, AichiGoal,
     AichiTarget, EuAction, EuIndicator, EuIndicatorToAichiStrategy,
+    EuAichiStrategy,
 )
 from nbsap.utils import remove_tags
 
@@ -484,3 +485,47 @@ class EuIndicatorMapForm(forms.Form):
             .filter(pk__in=self.cleaned_data['aichi_strategy'])
         )
         ita.save()
+
+
+class EuAichiStrategyForm(forms.Form):
+    eu_target = forms.ChoiceField()
+    aichi_targets = forms.MultipleChoiceField()
+
+    def __init__(self, *args, **kwargs):
+        self.strategy = kwargs.pop('strategy', None)
+        super(EuAichiStrategyForm, self).__init__(*args, **kwargs)
+
+        self.fields['aichi_targets'].choices = (
+            AichiTarget.objects
+            .values_list('pk', 'code').all())
+        self.fields['aichi_targets'].widget.attrs['size'] = 10
+
+        if self.strategy:
+            self.fields['aichi_targets'].initial = (
+                self.strategy.aichi_targets
+                .values_list('pk', flat=True)
+            )
+            del self.fields['eu_target']
+        else:
+            existing_strategies = (EuAichiStrategy.objects
+                                   .values_list('eu_target', flat=True))
+            self.fields['eu_target'].choices = (
+                EuTarget.objects
+                .exclude(id__in=existing_strategies)
+                .values_list('pk', 'pk')
+            )
+
+    def save(self):
+        if self.strategy:
+            strategy = self.strategy
+        else:
+            strategy = EuAichiStrategy()
+            strategy.eu_target = (EuTarget.objects
+                                  .get(pk=self.cleaned_data['eu_target']))
+            strategy.save()
+
+        strategy.aichi_targets = (
+            AichiTarget.objects
+            .filter(pk__in=self.cleaned_data['aichi_targets'])
+        )
+        strategy.save()
