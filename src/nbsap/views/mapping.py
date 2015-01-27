@@ -1,3 +1,6 @@
+import json
+
+from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
@@ -85,3 +88,12 @@ def delete_eu_aichi_strategy(request, pk=None):
         strategy.delete()
         messages.success(request, _('Mapping successfully deleted.'))
         return redirect('list_eu_aichi_strategy')
+
+
+@auth_required
+def get_aichi_targets_info(request):
+    targets = request.GET.get('targets').split(',')
+    content = [[x.pk, x.description]
+               for x in models.AichiTarget.objects.filter(pk__in=targets)]
+    return HttpResponse(json.dumps(list(content)),
+                        content_type="application/json")
