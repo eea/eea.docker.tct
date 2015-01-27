@@ -76,3 +76,12 @@ def edit_eu_aichi_strategy(request, pk=None):
     else:
         form = EuAichiStrategyForm(strategy=strategy)
     return render(request, template, {'form': form, 'strategy': strategy})
+
+
+@auth_required
+def delete_eu_aichi_strategy(request, pk=None):
+    if request.method == 'POST':
+        strategy = get_object_or_404(models.EuAichiStrategy, pk=pk)
+        strategy.delete()
+        messages.success(request, _('Mapping successfully deleted.'))
+        return redirect('list_eu_aichi_strategy')
