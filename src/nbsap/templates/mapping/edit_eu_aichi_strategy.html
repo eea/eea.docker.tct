@@ -34,7 +34,6 @@
       <label class="col-md-2" for="eu_target">{% trans "EU Target" %}</label>
       <div class="col-md-3">
         {{ strategy.eu_target }}
-        {{ form.eu_target.errors }}
       </div>
     </div>
 
@@ -44,7 +43,7 @@
         {{ form.aichi_targets }}
         {{ form.aichi_targets.errors }}
       </div>
-      <div class="aichi_targets_text col-md-7 short-descrip">
+      <div class="aichi_targets_text col-md-7 short-descrip" data-url="{% url 'aichi_target_title' pk=1 %}">
       </div>
     </div>
     <div class="action-bar">
@@ -58,23 +57,5 @@
   {% assets "js_admin" %}
    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
   {% endassets %}
-  <script>
-    $(".chzn-select").chosen();
-    $('select[name=aichi_targets]').on('change', function () {
-        var option = $(this).serialize();
-        var text = $(this).parents('.form-group').find('.aichi_targets_text');
-        var output = "";
-        var args = option.split("aichi_targets=");
-        args = args.map(function(x) {return parseInt(x)});
-        args = args.filter(Number);
-        var url = "{% url 'aichi_target_title' pk=1%}";
-        text.html('');
-        $.each(args, function(i, arg) {
-          $.get(url.replace('1',arg), function(data) {
-          data = $.parseJSON(data)[0];
-          text.append('<h5>Target ' + data.code + '</h5><p>' + data.value + '</p>');
-          });
-        });
-    }).change();
-  </script>
+  <script src="/static/js/aichi_targets_selector.js"></script>
 {% endblock %}
