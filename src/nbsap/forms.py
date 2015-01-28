@@ -490,7 +490,7 @@ class EuIndicatorMapForm(forms.Form):
 class EuAichiStrategyForm(forms.Form):
     eu_target = forms.ChoiceField()
     aichi_targets = chosenforms.ChosenMultipleChoiceField(
-        choices=[], required=False, overlay="Select target...")
+        overlay="Select target...")
 
     def _get_choices(self, name, queryset, attr):
         return sorted([
