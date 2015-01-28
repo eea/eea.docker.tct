@@ -444,7 +444,7 @@ class EuIndicatorMapForm(forms.Form):
 
     eu_targets = chosenforms.ChosenMultipleChoiceField(
         overlay="Select EU target...")
-    aichi_strategy = chosenforms.ChosenMultipleChoiceField(
+    aichi_targets = chosenforms.ChosenMultipleChoiceField(
         overlay="Select Aichi target...")
 
     def _get_choices(self, name, queryset, attr):
@@ -461,8 +461,7 @@ class EuIndicatorMapForm(forms.Form):
         )
         self.fields['eu_targets'].initial = (self.indicator.targets
                                              .values_list('pk', flat=True))
-        self.fields['eu_targets'].widget.attrs['size'] = 6
-        self.fields['aichi_strategy'].choices = self._get_choices(
+        self.fields['aichi_targets'].choices = self._get_choices(
             'Target', AichiTarget.objects.all(), 'code'
         )
 
@@ -474,8 +473,7 @@ class EuIndicatorMapForm(forms.Form):
             )
         except IndexError:
             initial = None
-        self.fields['aichi_strategy'].initial = initial
-        self.fields['aichi_strategy'].widget.attrs['size'] = 10
+        self.fields['aichi_targets'].initial = initial
 
     def save(self):
         self.indicator.targets = self.cleaned_data['eu_targets']
@@ -489,6 +487,6 @@ class EuIndicatorMapForm(forms.Form):
 
         ita.aichi_targets = (
             AichiTarget.objects
-            .filter(pk__in=self.cleaned_data['aichi_strategy'])
+            .filter(pk__in=self.cleaned_data['aichi_targets'])
         )
         ita.save()
