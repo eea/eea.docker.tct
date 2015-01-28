@@ -109,30 +109,32 @@
     <h2>{% trans "Action" %} {{ action.code }}</h2>
     <p>{{ action.description }}</p>
 
-    <div class="well">
-      <div class="well-title">{% trans "Mapping with National Strategy" %}</div>
-      {% if action.national_strategy.all %}
-        <ul>
-          {% for strategy in action.national_strategy.all %}
-            <li>
-              {% if strategy.objective.parent %}
-              <a href="{% url 'nat_strategy' code=strategy.objective.parent.code %}#{{ strategy.objective.code }}">
-                {% trans "Objective" %} {{strategy.objective.code}}
-              </a>
-              <p>{{ strategy.objective.title }} {{ strategy.objective.parent.code }}</p>
-              {% else %}
-              <a href="{% url 'nat_strategy' code=strategy.objective.code%}">
-                {% trans "Objective" %} {{strategy.objective.code}}
-              </a>
-              <p>{{ strategy.objective.title }} {{ strategy.objective.code }}</p>
-              {% endif %}
-            </li>
-          {% endfor %}
-        </ul>
-      {% else %}
-        <p>{% trans "No corresponding strategy target" %}</p>
-      {% endif %}
-    </div>
+    {% if NAT_STRATEGY %}
+      <div class="well">
+        <div class="well-title">{% trans "Mapping with National Strategy" %}</div>
+        {% if action.national_strategy.all %}
+          <ul>
+            {% for strategy in action.national_strategy.all %}
+              <li>
+                {% if strategy.objective.parent %}
+                <a href="{% url 'nat_strategy' code=strategy.objective.parent.code %}#{{ strategy.objective.code }}">
+                  {% trans "Objective" %} {{strategy.objective.code}}
+                </a>
+                <p>{{ strategy.objective.title }} {{ strategy.objective.parent.code }}</p>
+                {% else %}
+                <a href="{% url 'nat_strategy' code=strategy.objective.code%}">
+                  {% trans "Objective" %} {{strategy.objective.code}}
+                </a>
+                <p>{{ strategy.objective.title }} {{ strategy.objective.code }}</p>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p>{% trans "No corresponding strategy target" %}</p>
+        {% endif %}
+      </div>
+    {% endif %}
   </div>
   {% endfor %}
 
