@@ -88,12 +88,3 @@ def delete_eu_aichi_strategy(request, pk=None):
         strategy.delete()
         messages.success(request, _('Mapping successfully deleted.'))
         return redirect('list_eu_aichi_strategy')
-
-
-@auth_required
-def get_aichi_targets_info(request):
-    targets = request.GET.get('targets').split(',')
-    content = [[x.pk, x.description]
-               for x in models.AichiTarget.objects.filter(pk__in=targets)]
-    return HttpResponse(json.dumps(list(content)),
-                        content_type="application/json")
