@@ -1,5 +1,5 @@
 {% extends 'layout.html' %}
-
+{% load assets %}
 {% load i18n %}
 
 {% block title %}
@@ -47,7 +47,6 @@
 
         </div>
       </div>
-
     </div>
 
     <div class="action-bar">
@@ -56,4 +55,13 @@
     </div>
 
   </form>
+{% endblock %}
+
+{% block scripts %}
+  {% assets "js_admin" %}
+     <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+  {% endassets %}
+  <script>
+    $(".chzn-select").chosen();
+  </script>
 {% endblock %}

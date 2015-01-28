@@ -442,21 +442,29 @@ class EuIndicatorEditForm(EuIndicatorForm):
 
 class EuIndicatorMapForm(forms.Form):
 
-    eu_targets = forms.MultipleChoiceField(required=False)
-    aichi_strategy = forms.MultipleChoiceField(required=False)
+    eu_targets = chosenforms.ChosenMultipleChoiceField(
+        overlay="Select EU target...")
+    aichi_strategy = chosenforms.ChosenMultipleChoiceField(
+        overlay="Select Aichi target...")
+
+    def _get_choices(self, name, queryset, attr):
+        return sorted([
+            (x.pk, '{} {}'.format(name, getattr(x, attr)))
+            for x in queryset
+        ], key=lambda el: int(el[1].split()[1]))
 
     def __init__(self, *args, **kwargs):
         self.indicator = kwargs.pop('indicator', None)
         super(EuIndicatorMapForm, self).__init__(*args, **kwargs)
-        self.fields['eu_targets'].choices = [
-            (t.pk, t.title) for t in EuTarget.objects.all()
-        ]
+        self.fields['eu_targets'].choices = self._get_choices(
+            'Target', EuTarget.objects.all(), 'code'
+        )
         self.fields['eu_targets'].initial = (self.indicator.targets
                                              .values_list('pk', flat=True))
         self.fields['eu_targets'].widget.attrs['size'] = 6
-        self.fields['aichi_strategy'].choices = [
-            (s.pk, s.code) for s in AichiTarget.objects.order_by('pk').all()
-        ]
+        self.fields['aichi_strategy'].choices = self._get_choices(
+            'Target', AichiTarget.objects.all(), 'code'
+        )
 
         try:
             initial = (
