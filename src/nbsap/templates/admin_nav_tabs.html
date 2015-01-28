@@ -4,22 +4,26 @@
 <ul class="nav-menu">
 
   {% if NAT_STRATEGY %}
-  <li class="{% active request '^/administration/objectives/[\w\-]+' %}
-             {% active request '^/administration/objectives/' %}">
-    <a href="{% url 'list_national_objectives' %}">{% trans "National Strategy" %}</a> </li>
+    <li class="{% active request '^/administration/objectives/[\w\-]+' %}
+               {% active request '^/administration/objectives/' %}">
+      <a href="{% url 'list_national_objectives' %}">{% trans "National Strategy" %}</a> </li>
+    <li class="{% active request '^/administration/mapping/[\w\-]+' %}
+               {% active request '^/administration/mapping/$' %}">
+      <a href="{% url 'list_national_strategy' %}">{% trans "Mapping" %}</a>
+    </li>
   {% else %}
-  <li class="{% active request '^/administration/targets/[\w\-]+' %}
-             {% active request '^/administration/targets/' %}">
-    <a href="{% url 'list_eu_targets' %}">{% trans "EU Strategy" %}</a> </li>
-  <li class="{% active request '^/administration/indicator/\d+/' %}
-             {% active request '^/administration/indicators/' %}">
+    <li class="{% active request '^/administration/targets/[\w\-]+' %}
+               {% active request '^/administration/targets/' %}">
+      <a href="{% url 'list_eu_targets' %}">{% trans "EU Strategy" %}</a> </li>
+    <li class="{% active request '^/administration/indicator/\d+/' %}
+               {% active request '^/administration/indicators/' %}">
     <a href="{% url 'list_eu_indicators' %}">{% trans "EU Indicators" %}</a> </li>
+    <li class="{% active request '^/administration/eu-aichi-mapping/[\w\-]+' %}
+               {% active request '^/administration/eu-aichi-mapping/$' %}">
+      <a href="{% url 'list_eu_aichi_strategy' %}">{% trans "Mapping" %}</a>
+    </li>
   {% endif %}
 
-  <li class="{% active request '^/administration/mapping/[\w\-]+' %}
-             {% active request '^/administration/mapping/$' %}">
-    <a href="{% url 'list_national_strategy' %}">{% trans "Mapping" %}</a>
-  </li>
 
   <li class="{% active request '^/administration/page' %}">
     <a href="{% url 'admin_pages' %}">{% trans "Intro page" %}</a>
