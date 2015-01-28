@@ -43,20 +43,38 @@
       <div class="col-md-3">
         {{ form.aichi_targets }}
         {{ form.aichi_targets.errors }}
-        <div class="action-bar">
-          <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
-          <a href="{% url 'list_eu_aichi_strategy' %}" class="btn btn-default" type="button">{% trans "Cancel" %}</a>
-        </div>
       </div>
-      <div class="col-md-7">
-        <ul id="descriptions" data-url="{% url 'get_aichi_targets_info' %}">
-        </ul>
+      <div class="aichi_targets_text col-md-7 short-descrip">
       </div>
     </div>
-
+    <div class="action-bar">
+      <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
+      <a href="{% url 'list_eu_aichi_strategy' %}" class="btn btn-default" type="button">{% trans "Cancel" %}</a>
+    </div>
   </form>
 {% endblock %}
 
 {% block scripts %}
-  <script src="/static/js/update_aichi_description.js"></script>
+  {% assets "js_admin" %}
+   <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+  {% endassets %}
+  <script>
+    $(".chzn-select").chosen();
+    $('select[name=aichi_targets]').on('change', function () {
+      var option = $(this).serialize();
+      var text = $(this).parents('.form-group').find('.aichi_targets_text');
+      var output = "";
+      var args = option.split("aichi_targets=");
+      args = args.map(function(x) {return parseInt(x)});
+      args = args.filter(Number);
+      var url = "{% url 'aichi_target_title' pk=1%}";
+      text.html('');
+      $.each(args, function(i, arg) {
+        $.get(url.replace('1',arg), function(data) {
+        data = $.parseJSON(data)[0];
+        text.append('<h5>Target ' + data.code + '</h5><p>' + data.value + '</p>');
+        });
+      });
+    }).change();
+  </script>
 {% endblock %}

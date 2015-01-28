@@ -489,16 +489,21 @@ class EuIndicatorMapForm(forms.Form):
 
 class EuAichiStrategyForm(forms.Form):
     eu_target = forms.ChoiceField()
-    aichi_targets = forms.MultipleChoiceField()
+    aichi_targets = chosenforms.ChosenMultipleChoiceField(
+        choices=[], required=False, overlay="Select target...")
+
+    def _get_choices(self, name, queryset, attr):
+        return sorted([
+            (x.pk, '{} {}'.format(name, getattr(x, attr)))
+            for x in queryset
+        ], key=lambda el: int(el[1].split()[1]))
 
     def __init__(self, *args, **kwargs):
         self.strategy = kwargs.pop('strategy', None)
         super(EuAichiStrategyForm, self).__init__(*args, **kwargs)
 
-        self.fields['aichi_targets'].choices = (
-            AichiTarget.objects
-            .values_list('pk', 'code').all())
-        self.fields['aichi_targets'].widget.attrs['size'] = 10
+        self.fields['aichi_targets'].choices = self._get_choices(
+            'Target', AichiTarget.objects.all(), 'code')
 
         if self.strategy:
             self.fields['aichi_targets'].initial = (
@@ -509,10 +514,10 @@ class EuAichiStrategyForm(forms.Form):
         else:
             existing_strategies = (EuAichiStrategy.objects
                                    .values_list('eu_target', flat=True))
-            self.fields['eu_target'].choices = (
-                EuTarget.objects
-                .exclude(id__in=existing_strategies)
-                .values_list('pk', 'pk')
+            self.fields['eu_target'].choices = self._get_choices(
+                'Target',
+                EuTarget.objects.exclude(id__in=existing_strategies).all(),
+                'pk'
             )
 
     def save(self):
