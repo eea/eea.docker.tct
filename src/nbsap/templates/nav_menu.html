@@ -23,8 +23,10 @@
   </li>
   {% endif %}
 
+  {% if NAT_STRATEGY %}
   <li>
     <a class="{% active request '^/implementation' %}" href="{% url 'implementation' %}">{% trans "Implementation" %}</a>
   </li>
+  {% endif %}
 
 </ul>
