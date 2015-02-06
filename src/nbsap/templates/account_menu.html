@@ -9,6 +9,7 @@
     </li>
   {% endfor %}
 
+  {% if LANGUAGES|length > 1 %}
   <li class="dropdown">
 
     <a class="dropdown-toggle" data-toggle="dropdown">
@@ -28,6 +29,11 @@
     </ul>
 
   </li>
+  {% else %}
+    <li>
+      <a href="" title="{{ LANGUAGES.0.1 }}">{{ LANGUAGES.0.0|upper }}</a>
+    </li>
+  {% endif %}
 
   {% if user.is_authenticated %}
     <li>
@@ -39,9 +45,11 @@
       <li>
         <a href="{% url 'admin:index' %}" class="change-lang">{% trans 'Administration' %}</a>
       </li>
+      {% if LANGUAGES|length > 1 %}
       <li>
         <a href="{% url 'rosetta-home' %}">{% trans 'Translate' %}</a>
       </li>
+      {% endif %}
     {% endif %}
 
     <li>
