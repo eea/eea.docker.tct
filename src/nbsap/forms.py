@@ -443,21 +443,28 @@ class EuIndicatorEditForm(EuIndicatorForm):
 
 class EuIndicatorMapForm(forms.Form):
 
-    eu_targets = forms.MultipleChoiceField(required=False)
-    aichi_strategy = forms.MultipleChoiceField(required=False)
+    eu_targets = chosenforms.ChosenMultipleChoiceField(
+        overlay="Select EU target...")
+    aichi_targets = chosenforms.ChosenMultipleChoiceField(
+        overlay="Select Aichi target...")
+
+    def _get_choices(self, name, queryset, attr):
+        return sorted([
+            (x.pk, '{} {}'.format(name, getattr(x, attr)))
+            for x in queryset
+        ], key=lambda el: int(el[1].split()[1]))
 
     def __init__(self, *args, **kwargs):
         self.indicator = kwargs.pop('indicator', None)
         super(EuIndicatorMapForm, self).__init__(*args, **kwargs)
-        self.fields['eu_targets'].choices = [
-            (t.pk, t.title) for t in EuTarget.objects.all()
-        ]
+        self.fields['eu_targets'].choices = self._get_choices(
+            'Target', EuTarget.objects.all(), 'code'
+        )
         self.fields['eu_targets'].initial = (self.indicator.targets
                                              .values_list('pk', flat=True))
-        self.fields['eu_targets'].widget.attrs['size'] = 6
-        self.fields['aichi_strategy'].choices = [
-            (s.pk, s.code) for s in AichiTarget.objects.order_by('pk').all()
-        ]
+        self.fields['aichi_targets'].choices = self._get_choices(
+            'Target', AichiTarget.objects.all(), 'code'
+        )
 
         try:
             initial = (
@@ -467,8 +474,7 @@ class EuIndicatorMapForm(forms.Form):
             )
         except IndexError:
             initial = None
-        self.fields['aichi_strategy'].initial = initial
-        self.fields['aichi_strategy'].widget.attrs['size'] = 10
+        self.fields['aichi_targets'].initial = initial
 
     def save(self):
         self.indicator.targets = self.cleaned_data['eu_targets']
@@ -482,7 +488,7 @@ class EuIndicatorMapForm(forms.Form):
 
         ita.aichi_targets = (
             AichiTarget.objects
-            .filter(pk__in=self.cleaned_data['aichi_strategy'])
+            .filter(pk__in=self.cleaned_data['aichi_targets'])
         )
         ita.save()
 

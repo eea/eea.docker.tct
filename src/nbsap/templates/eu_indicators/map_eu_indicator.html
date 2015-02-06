@@ -1,5 +1,5 @@
 {% extends 'layout.html' %}
-
+{% load assets %}
 {% load i18n %}
 
 {% block title %}
@@ -27,27 +27,30 @@
       {% blocktrans with form.errors|pluralize as errors %}Please correct the error {{ errors }} below.{% endblocktrans %}
     </p>
   {% endif %}
-  <form action="" method="post" id="national-indicator-edit" class="form">
+  <form action="" method="post" class="form-horizontal">
 
-    <div class="row">
-      <div class="col-md-6">
-        <div class="language-container">
+    <div class="form-group row">
+      <label class="col-md-2" for="eu_targets">{% trans "Eu Targets" %}</label>
 
-          <div class="form-group">
-            <label for="eu_targets">{% trans "Eu Targets" %}</label>
-            {{ form.eu_targets }}
-            {{ form.eu_targets.errors }}
-          </div>
-
-          <div class="form-group">
-            <label for="aichi_strategy">{% trans "Aichi Strategy" %}</label>
-            {{ form.aichi_strategy }}
-            {{ form.aichi_strategy.errors }}
-          </div>
-
-        </div>
+      <div class="col-md-3">
+        {{ form.eu_targets }}
+        {{ form.eu_targets.errors }}
       </div>
 
+      <div class="eu_targets_text col-md-7 short-descrip">
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="form-group row">
+      <label class="col-md-2" for="aichi_targets">{% trans "Aichi Targets" %}</label>
+      <div class="col-md-3">
+        {{ form.aichi_targets }}
+        {{ form.aichi_targets.errors }}
+      </div>
+      <div class="aichi_targets_text col-md-7 short-descrip">
+      </div>
     </div>
 
     <div class="action-bar">
@@ -56,4 +59,42 @@
     </div>
 
   </form>
+{% endblock %}
+
+{% block scripts %}
+  {% assets "js_admin" %}
+     <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+  {% endassets %}
+  <script>
+    $(".chzn-select").chosen();
+    $('select[name=eu_targets]').on('change', function () {
+      var option = $(this).serialize();
+      var text = $(this).parents('.form-group').find('.eu_targets_text');
+      var args = option.split("eu_targets=");
+      args = args.map(function(x) {return parseInt(x)});
+      args = args.filter(Number);
+      var url = "{% url 'eu_target_title' pk=1 %}";
+      text.html('');
+      $.each(args, function(i, arg) {
+        $.get(url.replace('1',arg), function(data) {
+        text.append('<p>' + data + '</p>');
+        });
+      });
+    }).change();
+    $('select[name=aichi_targets]').on('change', function () {
+      var option = $(this).serialize();
+      var text = $(this).parents('.form-group').find('.aichi_targets_text');
+      var args = option.split("aichi_targets=");
+      args = args.map(function(x) {return parseInt(x)});
+      args = args.filter(Number);
+      var url = "{% url 'aichi_target_title' pk=1%}";
+      text.html('');
+      $.each(args, function(i, arg) {
+        $.get(url.replace('1',arg), function(data) {
+        data = $.parseJSON(data)[0];
+        text.append('<h5>Target ' + data.code + '</h5><p>' + data.value + '</p>');
+        });
+      });
+    }).change();
+  </script>
 {% endblock %}
