@@ -3,6 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib import messages
 from django.http import HttpResponse
 from django.conf import settings
+import json
 import tablib
 
 from nbsap import models
@@ -20,7 +21,10 @@ def nat_strategy(request, code=None):
         code = objectives[0].code
 
     current_objective = get_object_or_404(models.NationalObjective, code=code)
-    objectives = models.NationalObjective.objects.filter(parent=None).order_by('id').all()
+    objectives = (
+        models.NationalObjective.objects
+        .filter(parent=None).order_by('id').all()
+    )
 
     obj_actions = []
 
@@ -107,22 +111,21 @@ def implementation_page(request):
 def view_national_objective(request, pk):
     objective = get_object_or_404(models.NationalObjective, pk=pk)
     return render(request, 'objectives/view_national_objective.html',
-                  {'objective': objective,
-                  })
+                  {'objective': objective})
 
 
 @auth_required
 def list_national_objectives(request):
     objectives = models.NationalObjective.objects.filter(parent=None).all()
-    return render(request, 'objectives/list_national_objectives.html',{
-        'objectives': objectives,
-    })
+    return render(request, 'objectives/list_national_objectives.html',
+                  {'objectives': objectives})
 
 
 @auth_required
 def edit_national_objective(request, pk=None, parent=None):
     if parent:
-        parent_objective = get_object_or_404(models.NationalObjective, pk=parent)
+        parent_objective = get_object_or_404(models.NationalObjective,
+                                             pk=parent)
     else:
         parent_objective = None
 
@@ -184,4 +187,5 @@ def get_national_objective_title(request, pk=None):
         return HttpResponse('Object not found')
 
     objective = get_object_or_404(models.NationalObjective, pk=pk)
-    return HttpResponse('Objective ' + objective.code + ': ' + objective.title)
+    return HttpResponse(json.dumps([
+        {'code': objective.code, 'value': objective.title}]))

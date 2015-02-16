@@ -4,7 +4,7 @@ wsgiref==0.1.2
 cssmin==0.1.4
 django-transmeta==0.6.10
 django-rosetta==0.7.1
-django-appconf==0.6
+django-appconf==1.0.1
 django-staticfiles==1.2.1
 django-tinymce==1.5.1
 django-assets==0.8

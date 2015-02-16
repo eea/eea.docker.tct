@@ -67,34 +67,13 @@
   {% endassets %}
   <script>
     $(".chzn-select").chosen();
-    $('select[name=eu_targets]').on('change', function () {
-      var option = $(this).serialize();
-      var text = $(this).parents('.form-group').find('.eu_targets_text');
-      var args = option.split("eu_targets=");
-      args = args.map(function(x) {return parseInt(x)});
-      args = args.filter(Number);
-      var url = "{% url 'eu_target_title' pk=1 %}";
-      text.html('');
-      $.each(args, function(i, arg) {
-        $.get(url.replace('1',arg), function(data) {
-        text.append('<p>' + data + '</p>');
-        });
-      });
-    }).change();
-    $('select[name=aichi_targets]').on('change', function () {
-      var option = $(this).serialize();
-      var text = $(this).parents('.form-group').find('.aichi_targets_text');
-      var args = option.split("aichi_targets=");
-      args = args.map(function(x) {return parseInt(x)});
-      args = args.filter(Number);
-      var url = "{% url 'aichi_target_title' pk=1%}";
-      text.html('');
-      $.each(args, function(i, arg) {
-        $.get(url.replace('1',arg), function(data) {
-        data = $.parseJSON(data)[0];
-        text.append('<h5>Target ' + data.code + '</h5><p>' + data.value + '</p>');
-        });
-      });
-    }).change();
+
+    showTargetCodeValue('eu_targets',
+                        '.eu_targets_text',
+                        "{% url 'eu_target_title' pk=1 %}");
+
+    showTargetCodeValue('aichi_targets',
+                        '.aichi_targets_text',
+                        "{% url 'aichi_target_title' pk=1 %}");
   </script>
 {% endblock %}
