@@ -1,19 +1,16 @@
 import json
 from cStringIO import StringIO
 
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
 from django.conf import settings
 from django.http import HttpResponse
-from django.template import Template, context, RequestContext
+from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.shortcuts import render_to_response
-from django.contrib import messages
 
 from nbsap import models
 from indicators import get_indicators_pages
-from auth import auth_required
-from nbsap.forms import AichiGoalForm
 
 
 def goals(request, code):
@@ -24,14 +21,16 @@ def goals(request, code):
     paginator = Paginator(indicators_list, 20)
     info_header = settings.INFO_HEADER
 
-    return render_to_response('goals.html',
-                              context_instance=RequestContext(request, {
-                                'goals': goals,
-                                'current_goal': current_goal,
-                                'indicators_pages': get_indicators_pages(paginator),
-                                'info_header': info_header,
-                              })
-    )
+    return render_to_response(
+        'goals.html',
+        context_instance=RequestContext(
+            request, {
+                'goals': goals,
+                'current_goal': current_goal,
+                'indicators_pages': get_indicators_pages(paginator),
+                'info_header': info_header,
+                })
+        )
 
 
 def eu_target_nat_strategy_export_preview(request, target_id):
@@ -57,13 +56,17 @@ def get_goal_title(request, pk=None):
         return HttpResponse('Goal not found')
 
     goal = get_object_or_404(models.AichiGoal, pk=pk)
-    targets = [{'pk': target.pk, 'value': target.pk} for target in goal.targets.all()]
+    targets = [{'pk': target.pk, 'value': target.pk}
+               for target in goal.targets.all()]
 
-    return HttpResponse(json.dumps([{'goal':goal.description,'targets':targets}]))
+    return HttpResponse(json.dumps([
+        {'goal': goal.description, 'targets': targets}]))
+
 
 def get_aichi_target_title(request, pk=None):
     if not pk:
         return HttpResponse('Aichi target not found')
 
     target = get_object_or_404(models.AichiTarget, pk=pk)
-    return HttpResponse(json.dumps([{'code': target.code, 'value':target.description}]))
+    return HttpResponse(json.dumps(
+        [{'code': target.code, 'value': target.description}]))

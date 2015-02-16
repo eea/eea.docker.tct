@@ -83,3 +83,36 @@ $(document).ready(function() {
 $(function () {
   $('.messages').delay(1000).fadeOut();
 });
+
+function showDescription(name, textSelector, url, type, code, value) {
+  var selector = 'select[name=' + name + ']';
+  $(selector).on('change', function () {
+    var text = $(this).parents('.form-group').find(textSelector);
+    text.html('');
+    $("option:selected", this).each(function() {
+      $.get(url.replace('1', this.value), function(data) {
+        data = $.parseJSON(data)[0];
+        if (code) {
+          text.append('<h5>' + type + ' ' + data.code + '</h5>');
+        }
+        text.append('<p>' + data.value + '</p>');
+      });
+    });
+  }).change();
+}
+
+function showTargetValue(name, textSelector, url) {
+  showDescription(name, textSelector, url, 'Target', false, true);
+}
+
+function showTargetCodeValue(name, textSelector, url) {
+  showDescription(name, textSelector, url, 'Target', true, true);
+}
+
+function showObjectiveCodeValue(name, textSelector, url) {
+  showDescription(name, textSelector, url, 'Objective', true, true);
+}
+
+function showActionCodeValue(name, textSelector, url) {
+  showDescription(name, textSelector, url, 'Action', true, true);
+}
