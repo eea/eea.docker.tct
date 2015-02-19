@@ -28,7 +28,7 @@
 
         <a class="btn btn-default"
            href="{% url 'edit_eu_strategy_activity' target=target.pk %}">
-          {% trans "Add activity" %}
+          {% trans "Add action" %}
         </a>
 
         <a class="btn btn-default"
@@ -50,7 +50,7 @@
     
       <thead>
         <th class="span1">{% trans "Code" %}</th>
-        <th>{% trans "Activities" %}</th>
+        <th>{% trans "Actions" %}</th>
       </thead>
     
       <tbody>
@@ -60,15 +60,15 @@
           <td>{{ activity.code }}</td>
           <td>
             <a href="{% url 'view_eu_strategy_activity' target=target.pk pk=activity.pk %}"
-             title="{% trans 'activity' %} {{ activity.code }}">
-            {% trans "Activities related to target" %} {{ target.code }}
+             title="{% trans 'action' %} {{ activity.code }}">
+            {% trans "Actions related to target" %} {{ target.code }}
             </a>
           </td>
         </tr>
       {% endfor %}
       {% else %}
         <tr>
-          <td colspan="2">{% trans "No activities found" %}.</td>
+          <td colspan="2">{% trans "No actions found" %}.</td>
         </tr>
       {% endif %}
       </tbody>

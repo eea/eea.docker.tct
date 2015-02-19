@@ -3,13 +3,13 @@
 {% load i18n %}
 
 {% block title %}
-  NBSAP - {% trans "Activity" %} {{ activity.code }}: {{ activity.title }}
+  NBSAP - {% trans "Action" %} {{ activity.code }}: {{ activity.title }}
 {% endblock %}
 
 
 {% block content %}
 
-  <h1 class="page-title">{% trans "activity" %} {{ activity.code }}</h1>
+  <h1 class="page-title">{% trans "action" %} {{ activity.code }}</h1>
 
   <div class="action-bar">
     <form method="POST" action="{% url 'delete_eu_strategy_activity' target=target.pk pk=activity.pk %}">
