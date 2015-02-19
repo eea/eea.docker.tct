@@ -13,7 +13,7 @@ from auth import auth_required
 def view_national_action(request, objective, pk):
     objective = get_object_or_404(models.NationalObjective, pk=objective)
     action = get_object_or_404(models.NationalAction, pk=pk)
-    return render(request, 'actions/view_national_action.html',
+    return render(request, 'manager/actions/view_national_action.html',
                   {'objective': objective,
                    'action': action,
                   })
@@ -25,10 +25,10 @@ def edit_national_action(request, objective, pk=None):
 
     if pk:
         action = get_object_or_404(models.NationalAction, pk=pk)
-        template = 'actions/edit_national_action.html'
+        template = 'manager/actions/edit_national_action.html'
     else:
         action = None
-        template = 'actions/add_national_action.html'
+        template = 'manager/actions/add_national_action.html'
 
     lang = request.GET.get('lang', request.LANGUAGE_CODE)
 

@@ -90,7 +90,7 @@ def implementation(request, code=None):
     data = {'body_%s' % lang: ''}
     is_empty_page = models.NbsapPage.objects.filter(handle='implementation') \
                           .exclude(**data).exists()
-    return render(request, 'implementation.html', {
+    return render(request, 'nat_strategy/implementation.html', {
         'current_objective': current_objective,
         'objectives': objectives,
         'is_empty_page': is_empty_page,
@@ -100,7 +100,7 @@ def implementation(request, code=None):
 def implementation_page(request):
     page = get_object_or_404(models.NbsapPage, handle='implementation')
     objectives = models.NationalObjective.objects.filter(parent=None).all()
-    return render(request, 'implementation_page.html', {
+    return render(request, 'nat_strategy/implementation_page.html', {
         'is_empty_page': True,
         'page': page,
         'objectives': objectives,
@@ -110,14 +110,14 @@ def implementation_page(request):
 @auth_required
 def view_national_objective(request, pk):
     objective = get_object_or_404(models.NationalObjective, pk=pk)
-    return render(request, 'objectives/view_national_objective.html',
+    return render(request, 'manager/objectives/view_national_objective.html',
                   {'objective': objective})
 
 
 @auth_required
 def list_national_objectives(request):
     objectives = models.NationalObjective.objects.filter(parent=None).all()
-    return render(request, 'objectives/list_national_objectives.html',
+    return render(request, 'manager/objectives/list_national_objectives.html',
                   {'objectives': objectives})
 
 
@@ -131,11 +131,11 @@ def edit_national_objective(request, pk=None, parent=None):
 
     if pk:
         objective = get_object_or_404(models.NationalObjective, pk=pk)
-        template = 'objectives/edit_national_objective.html'
+        template = 'manager/objectives/edit_national_objective.html'
         FormClass = NationalObjectiveEditForm
     else:
         objective = None
-        template = 'objectives/add_national_objectives.html'
+        template = 'manager/objectives/add_national_objectives.html'
         FormClass = NationalObjectiveForm
 
     lang = request.GET.get('lang', request.LANGUAGE_CODE)
