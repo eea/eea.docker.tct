@@ -22,7 +22,7 @@ def indicator(request, pk):
     indicator.relevant_target_ob = indicator.relevant_target.all()[0]
     indicator.strategic_goal_ob = indicator.relevant_target_ob.goals.all()[0]
     indicator.other_targets_list = indicator.other_targets.all()
-    return render(request, 'indicators/indicator_details.html', {
+    return render(request, 'nat_strategy/indicator_details.html', {
         'indicator': indicator,
     })
 
@@ -30,7 +30,7 @@ def indicator(request, pk):
 def eu_indicators(request):
     indicators = models.EuIndicator.objects.exclude(targets=None).all()
     subindicators = models.EuIndicator.objects.filter(targets=None).all()
-    return render(request, 'eu_indicators.html', {
+    return render(request, 'eu_strategy/eu_indicators.html', {
         'indicators': indicators,
         'subindicators': subindicators,
     })
@@ -39,7 +39,7 @@ def eu_indicators(request):
 @auth_required
 def list_eu_indicators(request):
     indicators = models.EuIndicator.objects.all()
-    return render(request, 'eu_indicators/list_eu_indicators.html', {
+    return render(request, 'manager/eu_indicators/list_eu_indicators.html', {
         'indicators': indicators,
     })
 
@@ -47,7 +47,7 @@ def list_eu_indicators(request):
 @auth_required
 def view_eu_indicator(request, pk):
     ind = get_object_or_404(models.EuIndicator, pk=pk)
-    return render(request, 'eu_indicators/view_eu_indicator.html', {
+    return render(request, 'manager/eu_indicators/view_eu_indicator.html', {
         'indicator': ind,
     })
 
@@ -56,11 +56,11 @@ def view_eu_indicator(request, pk):
 def edit_eu_indicator(request, pk=None):
     if pk:
         indicator = get_object_or_404(models.EuIndicator, pk=pk)
-        template = 'eu_indicators/edit_eu_indicator.html'
+        template = 'manager/eu_indicators/edit_eu_indicator.html'
         FormClass = EuIndicatorEditForm
     else:
         indicator = None
-        template = 'eu_indicators/add_eu_indicator.html'
+        template = 'manager/eu_indicators/add_eu_indicator.html'
         FormClass = EuIndicatorForm
 
     lang = request.GET.get('lang', request.LANGUAGE_CODE)
@@ -107,7 +107,7 @@ def map_eu_indicator(request, pk):
     else:
         form = EuIndicatorMapForm(indicator=ind)
 
-    return render(request, 'eu_indicators/map_eu_indicator.html', {
+    return render(request, 'manager/eu_indicators/map_eu_indicator.html', {
         'form': form,
         'indicator': ind,
     })

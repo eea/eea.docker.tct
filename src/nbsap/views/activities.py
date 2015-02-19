@@ -13,7 +13,7 @@ from auth import auth_required
 def view_eu_strategy_activity(request, target, pk):
     target = get_object_or_404(models.EuTarget, pk=target)
     activity = get_object_or_404(models.EuAction, pk=pk)
-    return render(request, 'activities/view_eu_strategy_target.html', {
+    return render(request, 'manager/activities/view_eu_strategy_target.html', {
         'target': target,
         'activity': activity,
     })
@@ -25,10 +25,10 @@ def edit_eu_strategy_activity(request, target, pk=None):
 
     if pk:
         activity = get_object_or_404(models.EuAction, pk=pk)
-        template = 'activities/edit_eu_strategy_activity.html'
+        template = 'manager/activities/edit_eu_strategy_activity.html'
     else:
         activity = None
-        template = 'activities/add_eu_strategy_activity.html'
+        template = 'manager/activities/add_eu_strategy_activity.html'
 
     lang = request.GET.get('lang', request.LANGUAGE_CODE)
 

@@ -15,10 +15,10 @@ from auth import auth_required
 def edit_national_strategy(request, pk=None):
     if pk:
         strategy = get_object_or_404(models.NationalStrategy, pk=pk)
-        template = 'mapping/edit_national_strategy.html'
+        template = 'manager/nat_strategy/mapping/edit_national_strategy.html'
     else:
         strategy = None
-        template = 'mapping/add_national_strategy.html'
+        template = 'manager/nat_strategy/mapping/add_national_strategy.html'
 
     if request.method == 'POST':
         form = NationalStrategyForm(request.POST, strategy=strategy)
@@ -45,7 +45,7 @@ def delete_national_strategy(request, strategy=None):
 @auth_required
 def list_national_strategy(request):
     strategies = models.NationalStrategy.objects.all()
-    return render(request, 'mapping/list_national_strategy.html',{
+    return render(request, 'manager/nat_strategy/mapping/list_national_strategy.html', {
         'strategies': strategies
     })
 
@@ -53,7 +53,7 @@ def list_national_strategy(request):
 @auth_required
 def list_eu_aichi_strategy(request):
     strategies = models.EuAichiStrategy.objects.all()
-    return render(request, 'mapping/list_eu_aichi_strategy.html', {
+    return render(request, 'manager/eu_strategy/mapping/list_eu_aichi_strategy.html', {
         'strategies': strategies
     })
 
@@ -62,10 +62,10 @@ def list_eu_aichi_strategy(request):
 def edit_eu_aichi_strategy(request, pk=None):
     if pk:
         strategy = get_object_or_404(models.EuAichiStrategy, pk=pk)
-        template = 'mapping/edit_eu_aichi_strategy.html'
+        template = 'manager/eu_strategy/mapping/edit_eu_aichi_strategy.html'
     else:
         strategy = None
-        template = 'mapping/add_eu_aichi_strategy.html'
+        template = 'manager/eu_strategy/mapping/add_eu_aichi_strategy.html'
 
     if request.method == 'POST':
         form = EuAichiStrategyForm(request.POST, strategy=strategy)

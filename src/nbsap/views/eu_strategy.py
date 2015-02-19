@@ -19,7 +19,7 @@ def eu_targets(request, code):
     for action in current_target.actions.all():
         current_target.actions_tree.extend(action.get_all_actions())
 
-    return render(request, 'eu_targets.html',
+    return render(request, 'eu_strategy/eu_targets.html',
                   {'targets': targets,
                    'current_target': current_target,
                    })
@@ -56,7 +56,7 @@ def get_actions_for_target(request, pk=None):
 @auth_required
 def list_eu_targets(request):
     targets = models.EuTarget.objects.all()
-    return render(request, 'eu_strategy/list_eu_targets.html', {
+    return render(request, 'manager/eu_strategy/list_eu_targets.html', {
         'targets': targets,
     })
 
@@ -64,7 +64,7 @@ def list_eu_targets(request):
 @auth_required
 def view_eu_strategy_target(request, pk):
     target = get_object_or_404(models.EuTarget, pk=pk)
-    return render(request, 'eu_strategy/view_eu_strategy_target.html', {
+    return render(request, 'manager/eu_strategy/view_eu_strategy_target.html', {
         'target': target,
     })
 
@@ -73,11 +73,11 @@ def view_eu_strategy_target(request, pk):
 def edit_eu_strategy_target(request, pk=None):
     if pk:
         target = get_object_or_404(models.EuTarget, pk=pk)
-        template = 'eu_strategy/edit_eu_strategy_targets.html'
+        template = 'manager/eu_strategy/edit_eu_strategy_targets.html'
         FormClass = EuTargetEditForm
     else:
         target = None
-        template = 'eu_strategy/add_eu_strategy_targets.html'
+        template = 'manager/eu_strategy/add_eu_strategy_targets.html'
         FormClass = EuTargetForm
 
     lang = request.GET.get('lang', request.LANGUAGE_CODE)

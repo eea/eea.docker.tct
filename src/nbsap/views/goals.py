@@ -22,7 +22,7 @@ def goals(request, code):
     info_header = settings.INFO_HEADER
 
     return render_to_response(
-        'goals.html',
+        'aichi/goals.html',
         context_instance=RequestContext(
             request, {
                 'goals': goals,
