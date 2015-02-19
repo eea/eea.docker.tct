@@ -12,11 +12,11 @@ def getter_for_default_language(field_name):
     def getter(self):
         lang = settings.LANGUAGE_CODE
         return getattr(self, '%s_%s' % (field_name, lang))
+
     return getter
 
 
 class Translatable(TransMeta):
-
     def __new__(cls, name, bases, attrs):
         new_class = TransMeta.__new__(cls, name, bases, attrs)
         for field in new_class._meta.translatable_fields:
@@ -41,7 +41,6 @@ class Scale(models.Model):
 
 
 class AichiIndicator(models.Model):
-
     LEVEL_CHOICES = (
         ('low', 'Low'),
         ('med', 'Medium'),
@@ -66,13 +65,15 @@ class AichiIndicator(models.Model):
     status = models.TextField(_('Status of development'),
                               blank=True)
 
-    sensitivity = models.CharField(_('Sensitivity (can it be used to make assessment by 2015?)'),
-                                   max_length=3,
-                                   choices=LEVEL_CHOICES,
-                                   blank=True)
+    sensitivity = models.CharField(
+        _('Sensitivity (can it be used to make assessment by 2015?)'),
+        max_length=3,
+        choices=LEVEL_CHOICES,
+        blank=True)
 
     scales = models.ManyToManyField(Scale,
-                                    verbose_name=_('Scale (global, regional, national, sub-national)'),
+                                    verbose_name=_(
+                                        'Scale (global, regional, national, sub-national)'),
                                     blank=True,
                                     null=True)
 
@@ -81,10 +82,11 @@ class AichiIndicator(models.Model):
                                 choices=LEVEL_CHOICES,
                                 blank=True)
 
-    ease_of_communication = models.CharField(_('How easy can it be communicated?'),
-                                             max_length=3,
-                                             choices=LEVEL_CHOICES,
-                                             blank=True)
+    ease_of_communication = models.CharField(
+        _('How easy can it be communicated?'),
+        max_length=3,
+        choices=LEVEL_CHOICES,
+        blank=True)
 
     sources = models.CharField(_('Data Sources'),
                                max_length=255,
@@ -96,9 +98,10 @@ class AichiIndicator(models.Model):
     measurer = models.TextField(_('Who\'s responsible for measuring?'),
                                 blank=True)
 
-    conventions = models.CharField(_('Other conventions/processes using indicator'),
-                                   max_length=255,
-                                   blank=True)
+    conventions = models.CharField(
+        _('Other conventions/processes using indicator'),
+        max_length=255,
+        blank=True)
 
     links = models.ManyToManyField(Link,
                                    verbose_name=_('Related Links'),
@@ -135,7 +138,6 @@ class AichiTarget(models.Model):
 
 
 class AichiGoal(models.Model):
-
     __metaclass__ = Translatable
 
     code = models.CharField(max_length=1, primary_key=True)
@@ -174,7 +176,6 @@ class NationalAction(models.Model):
 
 
 class NationalObjective(models.Model):
-
     __metaclass__ = Translatable
 
     code = models.CharField(max_length=16, unique=True)
@@ -182,13 +183,14 @@ class NationalObjective(models.Model):
                              verbose_name="Title")
     description = tinymce_models.HTMLField(verbose_name="Description")
     parent = models.ForeignKey('self',
-                                null=True,
-                                blank=True,
-                                related_name='children')
+                               null=True,
+                               blank=True,
+                               related_name='children')
     actions = models.ManyToManyField(NationalAction,
                                      null=True,
                                      blank=True,
                                      related_name="objective")
+
     class Meta:
         translate = ('title', 'description',)
 
@@ -202,7 +204,7 @@ class NationalObjective(models.Model):
         Set the next code for the objective.
         """
         if instance.parent:
-            codes = [ ob.code for ob in instance.parent.children.all() if ob ]
+            codes = [ob.code for ob in instance.parent.children.all() if ob]
             # if parent objective has children the increment the last childen's
             # code
             if codes:
@@ -210,20 +212,21 @@ class NationalObjective(models.Model):
                 parts = codes[-1].split('.')
                 parent_code = '.'.join(parts[:-1])
                 last_code = parts[-1]
-                instance.code = '{0}.{1}'.format(parent_code, int(last_code)+1)
+                instance.code = '{0}.{1}'.format(parent_code,
+                                                 int(last_code) + 1)
             else:
                 instance.code = '{0}.1'.format(instance.parent.code)
 
         else:
-            codes = [ ob.code for ob in
-                      NationalObjective.objects.filter(parent=None).all() ]
+            codes = [ob.code for ob in
+                     NationalObjective.objects.filter(parent=None).all()]
             # if empty national strategy table - reinitialize code values
             if len(codes) == 0:
                 codes = ['0']
 
             codes.sort(key=lambda s: int(s))
             last_code = codes[-1]
-            instance.code = '{0}'.format(int(last_code)+1)
+            instance.code = '{0}'.format(int(last_code) + 1)
 
     @staticmethod
     def _pre_save_objective_code_on_edit(instance):
@@ -268,7 +271,8 @@ class NationalObjective(models.Model):
         return self.objective_national_strategy.all()
 
     def has_national_strategies(self):
-        strategies = [s.eu_targets.all() for s in self.get_national_strategies()]
+        strategies = [s.eu_targets.all() for s in
+                      self.get_national_strategies()]
         strategies = filter(lambda x: len(x) > 0, strategies)
         if len(strategies) > 0:
             return True
@@ -294,9 +298,17 @@ class EuAction(models.Model):
     code = models.CharField(max_length=16)
     description = models.TextField(verbose_name="Description")
     parent = models.ForeignKey('self',
-                                null=True,
-                                blank=True,
-                                related_name='children')
+                               null=True,
+                               blank=True,
+                               related_name='children')
+
+    if settings.EU_STRATEGY and settings.NAT_STRATEGY:
+        national_strategy = models.ManyToManyField('NationalStrategy',
+                                                   null=True,
+                                                   blank=True,
+                                                   verbose_name="National strategy",
+                                                   related_name="eu_actions")
+
 
     class Meta:
         verbose_name_plural = 'EU actions'
@@ -355,6 +367,7 @@ class EuIndicator(models.Model):
         return mark_safe('-, <br>'.join(
             [unicode(obj) for obj in self.parent.all()]
         ))
+
     get_indicators.short_description = 'relation'
 
     class Meta:
@@ -375,6 +388,14 @@ class EuTarget(models.Model):
     indicators = models.ManyToManyField(EuIndicator,
                                         related_name="targets")
 
+    if settings.EU_STRATEGY and settings.NAT_STRATEGY:
+        national_strategy = models.ManyToManyField('NationalStrategy',
+                                                   null=True,
+                                                   blank=True,
+                                                   verbose_name="National objectives",
+                                                   related_name="eu_targets")
+
+
     @staticmethod
     def _pre_save_target_code_on_create(instance):
         codes = [ob.code for ob in EuTarget.objects.filter().all()]
@@ -383,7 +404,7 @@ class EuTarget(models.Model):
 
         codes.sort(key=lambda s: int(s))
         last_code = codes[-1]
-        instance.code = '{0}'.format(int(last_code)+1)
+        instance.code = '{0}'.format(int(last_code) + 1)
 
     @staticmethod
     def _pre_save_target_code_on_edit(instance):
@@ -418,6 +439,7 @@ class EuTarget(models.Model):
         return mark_safe(', <br>'.join(
             [unicode(obj) for obj in self.indicators.all()]
         ))
+
     get_indicators.short_description = 'EU Indicators'
 
     class Meta:
@@ -436,6 +458,7 @@ class EuIndicatorToAichiStrategy(models.Model):
 
     def get_targets(self):
         return ', '.join([obj.code for obj in self.aichi_targets.all()])
+
     get_targets.short_description = 'AICHI targets'
 
     class Meta:
@@ -453,6 +476,7 @@ class EuAichiStrategy(models.Model):
 
     def get_targets(self):
         return ', '.join([obj.code for obj in self.aichi_targets.all()])
+
     get_targets.short_description = 'AICHI targets'
 
     class Meta:
@@ -461,7 +485,6 @@ class EuAichiStrategy(models.Model):
 
 
 class NationalStrategy(models.Model):
-
     objective = models.ForeignKey(NationalObjective,
                                   verbose_name="National Objective",
                                   related_name="objective_national_strategy")
@@ -474,25 +497,11 @@ class NationalStrategy(models.Model):
                                            verbose_name="Other AICHI targets",
                                            related_name="other_targets_national_strategy")
 
-    from django.conf import settings
-    if settings.EU_STRATEGY:
-        eu_targets = models.ManyToManyField(EuTarget,
-                                            null=True,
-                                            blank=True,
-                                            verbose_name="EU targets",
-                                            related_name="national_strategy")
-        eu_actions = models.ManyToManyField(EuAction,
-                                            null=True,
-                                            blank=True,
-                                            verbose_name="Eu related actions",
-                                            related_name="national_strategy")
-
     class Meta:
         verbose_name_plural = ' Mappings: National strategy to AICHI&EU'
 
 
 class NbsapPage(models.Model):
-
     __metaclass__ = Translatable
 
     handle = models.CharField(max_length=32)
@@ -507,7 +516,6 @@ class NbsapPage(models.Model):
 
 
 class NavbarLink(models.Model):
-
     name = models.CharField(max_length=12)
     title = models.CharField(max_length=64, blank=True)
     url = models.URLField()
@@ -516,5 +524,6 @@ class NavbarLink(models.Model):
         return self.name
 
 
-pre_save.connect(NationalObjective.pre_save_objective_code, sender=NationalObjective)
+pre_save.connect(NationalObjective.pre_save_objective_code,
+                 sender=NationalObjective)
 pre_save.connect(EuTarget.pre_save_objective_code, sender=EuTarget)
