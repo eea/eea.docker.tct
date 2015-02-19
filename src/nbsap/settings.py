@@ -224,6 +224,7 @@ ASSETS_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Main config
 EU_STRATEGY = False
+EU_STRATEGY_ADD = False
 NAT_STRATEGY = True
 SITE_HEADER = 'NBSAP'
 INFO_HEADER = False

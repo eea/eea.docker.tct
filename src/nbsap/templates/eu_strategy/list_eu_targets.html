@@ -29,11 +29,13 @@
   <h1 class="page-title">{% trans "European Strategy" %}</h1>
   <h1>{% trans "List EU Targets" %}</h1>
 
+  {% if EU_STRATEGY_ADD %}
   <div class="action-bar">
     <a class="btn btn-success add"
        href="{% url 'edit_eu_target' %}">{% trans "Add target" %}
     </a>
   </div>
+  {% endif %}
 
   <table class="table">
 

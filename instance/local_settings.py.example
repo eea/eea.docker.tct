@@ -80,6 +80,8 @@ LANGUAGES = (
 
 # Set to True if your application is EU dependent
 #EU_STRATEGY = False
+# Allow adding new targets
+#EU_STRATEGY_ADD = False
 
 # Set to False for EU intance
 #NAT_STRATEGY = True

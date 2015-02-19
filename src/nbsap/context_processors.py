@@ -6,6 +6,7 @@ def nbsap_admin(request):
     default_lang = settings.LANGUAGE_CODE
     return {
         'EU_STRATEGY': settings.EU_STRATEGY,
+        'EU_STRATEGY_ADD': settings.EU_STRATEGY_ADD,
         'NAT_STRATEGY': settings.NAT_STRATEGY,
         'SITE_HEADER': settings.SITE_HEADER,
         'WARNING_MESSAGE': getattr(settings, 'WARNING_MESSAGE', ''),
