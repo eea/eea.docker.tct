@@ -1,0 +1,114 @@
+{% extends 'layout.html' %}
+{% load i18n %}
+{% load utils %}
+
+
+{% block title %}
+  NBSAP - {% trans "Implementation: Actions related to objectives" %}
+{% endblock %}
+
+
+{% block navmenu %}
+  {% include '_bits/nav_menu.html' %}
+{% endblock %}
+
+{% block sidebar %}
+<div class="sidebar">
+  <h4 class="sidebar-title">{% trans "Related actions" %}</h4>
+  <ul class="sidebar-menu">
+    {% if is_empty_page %}
+    <li {% if not current_objective %} class="active" {% endif %}>
+      <a href="{% url 'implementation_page' %}">{% trans "Intro" %}</a>
+    </li>
+    {% endif %}
+    {% for objective in objectives|sort_by_code %}
+    <li {% if objective.code == current_objective.code %}class="active"{% endif %}>
+      <a href="{% url 'implementation' code=objective.code %}">
+        {% trans "Objective"%} {{ objective.code }}
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}
+
+
+{% block content %}
+
+  <h1 class="page-title">Implementation</h1>
+
+  <h1 class="x-title">{% trans "Actions related to Objective"%} {{ current_objective.code }} ({{ current_objective.title }})</h1>
+
+  <div class="toc">
+    {% if current_objective.actions_tree %}
+      <h5>{% trans "Table of contents"%}</h5>
+      <ul>
+      {% for action in current_objective.actions_tree|sort_by_code %}
+        <li>
+          <a href="#{{action.code}}"
+             rel='tooltip'
+             data-placement='right'
+             data-original-title="{{ action.description }}">
+             {% trans "Action"%} {{ action.code }}</a>
+        </li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+
+  {% if current_objective.actions_tree %}
+    {% for action in current_objective.actions_tree|sort_by_code %}
+    <div class="section" id="{{action.code}}">
+      <h2>{% trans "Action" %} {{ action.code }}
+        {% if action.title %}({{ action.title }}){% endif %}
+      </h2>
+      <div class="summary">
+        <div class="snippet">
+          {{ action.description|striptags|truncatechars:510|safe }}
+          <a class="more">{% trans "show more"%}</a>
+        </div>
+        <div class="full">
+          <div class="html-content">{{ action.description|safe }}</div>
+
+          {% include 'mapping/manager/nat_strategy/mapping/nat_action_aichi_mapping.html' %}
+
+          <a class="less"> {% trans "show less" %}</a>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+
+  <div class="text-right">
+    <a href="#top">{% trans "Back to top" %}</a>
+  </div>
+  {% else %}
+    <p>{% trans "No actions found" %}.</p>
+  {% endif %}
+</div>
+
+{% endblock content %}
+
+
+{% block scripts %}
+<script>
+$(function () {
+  $('.more').on('click', function() {
+    var parents = $(this).parents('.summary');
+    var snippet = parents.find('.snippet');
+    var full = parents.find('.full');
+
+    snippet.hide();
+    full.show();
+  });
+  $('.less').on('click', function() {
+    var parents = $(this).parents('.summary');
+    var snippet = parents.find('.snippet');
+    var full = parents.find('.full');
+
+    full.hide();
+    snippet.show();
+  });
+});
+
+</script>
+{% endblock scripts %}

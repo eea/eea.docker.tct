@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block navmenu %}
-  {% include 'nav_menu.html' %}
+  {% include '_bits/nav_menu.html' %}
 {% endblock %}
 
 
@@ -50,10 +50,10 @@
   </div>
 
   <div class="pre-toc">
-    {% include 'mapping/nat_strategy_aichi_mapping.html' with subobj=current_objective %}
+    {% include 'mapping/../manager/nat_strategy/mapping/nat_strategy_aichi_mapping.html' with subobj=current_objective %}
 
     {% if EU_STRATEGY %}
-        {% include 'mapping/nat_strategy_eu_mapping.html' with subobj=current_objective %}
+        {% include 'mapping/../manager/nat_strategy/mapping/nat_strategy_eu_mapping.html' with subobj=current_objective %}
     {% endif %}
   </div>
 
@@ -98,9 +98,9 @@
         </div> {# /full #}
       </div> {# /summary #}
 
-      {% include 'mapping/nat_strategy_aichi_mapping.html' with subobj=obj%}
+      {% include 'manager/nat_strategy/mapping/nat_strategy_aichi_mapping.html' with subobj=obj%}
       {% if EU_STRATEGY %}
-        {% include 'mapping/nat_strategy_eu_mapping.html' %}
+        {% include 'manager/nat_strategy/mapping/nat_strategy_eu_mapping.html' %}
       {% endif %}
 
     </div> {# /summary #}
