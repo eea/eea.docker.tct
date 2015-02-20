@@ -67,7 +67,8 @@ $(function () {
               html = $('<option />').attr('value', d.id).attr('selected', 'selected').text(d.value);
               $.get("{% url 'action_title' pk=1%}".replace('1', d.id), function(action_data) {
                 action_data = $.parseJSON(action_data)[0];
-                action_text.append('<h5>Action '+ action_data.code + '</h5><p>' + action_data.value + '</p>');
+                action_text.append('<h5>Action '+ action_data.code + ': '
+                    + action_data.title + '</h5><p>' + action_data.value + '</p>');
               });
             }
           });

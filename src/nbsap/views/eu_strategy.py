@@ -39,8 +39,9 @@ def get_action_title(request, pk=None):
         return HttpResponse('Action not found')
 
     action = get_object_or_404(models.EuAction, pk=pk)
-    return HttpResponse(json.dumps(
-        [{'code': action.code, 'value': action.description}]))
+    return HttpResponse(json.dumps([{'code': action.code,
+                                     'value': action.description,
+                                     'title': action.title}]))
 
 
 def get_actions_for_target(request, pk=None):
@@ -64,9 +65,8 @@ def list_eu_targets(request):
 @auth_required
 def view_eu_strategy_target(request, pk):
     target = get_object_or_404(models.EuTarget, pk=pk)
-    return render(request, 'manager/eu_strategy/view_eu_strategy_target.html', {
-        'target': target,
-    })
+    return render(request, 'manager/eu_strategy/view_eu_strategy_target.html',
+                  {'target': target})
 
 
 @auth_required
