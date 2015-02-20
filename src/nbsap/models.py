@@ -71,11 +71,11 @@ class AichiIndicator(models.Model):
         choices=LEVEL_CHOICES,
         blank=True)
 
-    scales = models.ManyToManyField(Scale,
-                                    verbose_name=_(
-                                        'Scale (global, regional, national, sub-national)'),
-                                    blank=True,
-                                    null=True)
+    scales = models.ManyToManyField(
+        Scale,
+        verbose_name=_('Scale (global, regional, national, sub-national)'),
+        blank=True,
+        null=True)
 
     validity = models.CharField(_('Scientific Validity'),
                                 max_length=3,
@@ -250,7 +250,7 @@ class NationalObjective(models.Model):
     def pre_save_objective_code(**kwargs):
 
         if kwargs['raw'] is True:
-            return  #ignore when loading initial_data
+            return  # ignore when loading initial_data
 
         instance = kwargs['instance']
 
@@ -296,6 +296,7 @@ class EuAction(models.Model):
     __metaclass__ = Translatable
 
     code = models.CharField(max_length=16)
+    title = models.TextField(verbose_name="Title")
     description = models.TextField(verbose_name="Description")
     parent = models.ForeignKey('self',
                                null=True,
@@ -303,16 +304,16 @@ class EuAction(models.Model):
                                related_name='children')
 
     if settings.EU_STRATEGY and settings.NAT_STRATEGY:
-        national_strategy = models.ManyToManyField('NationalStrategy',
-                                                   null=True,
-                                                   blank=True,
-                                                   verbose_name="National strategy",
-                                                   related_name="eu_actions")
-
+        national_strategy = models.ManyToManyField(
+            'NationalStrategy',
+            null=True,
+            blank=True,
+            verbose_name="National strategy",
+            related_name="eu_actions")
 
     class Meta:
         verbose_name_plural = 'EU actions'
-        translate = ('description',)
+        translate = ('description', 'title')
 
     def __unicode__(self):
         return 'Action %s' % self.code
@@ -389,12 +390,12 @@ class EuTarget(models.Model):
                                         related_name="targets")
 
     if settings.EU_STRATEGY and settings.NAT_STRATEGY:
-        national_strategy = models.ManyToManyField('NationalStrategy',
-                                                   null=True,
-                                                   blank=True,
-                                                   verbose_name="National objectives",
-                                                   related_name="eu_targets")
-
+        national_strategy = models.ManyToManyField(
+            'NationalStrategy',
+            null=True,
+            blank=True,
+            verbose_name="National objectives",
+            related_name="eu_targets")
 
     @staticmethod
     def _pre_save_target_code_on_create(instance):
@@ -423,7 +424,7 @@ class EuTarget(models.Model):
     def pre_save_objective_code(**kwargs):
 
         if kwargs['raw'] is True:
-            return  #ignore when loading initial_data
+            return  # ignore when loading initial_data
 
         instance = kwargs['instance']
 
@@ -449,12 +450,14 @@ class EuTarget(models.Model):
 
 
 class EuIndicatorToAichiStrategy(models.Model):
-    eu_indicator = models.ForeignKey(EuIndicator,
-                                     verbose_name="EU Biodiversity Indicator",
-                                     related_name="eu_indicator_aichi_strategy")
-    aichi_targets = models.ManyToManyField(AichiTarget,
-                                           verbose_name="Aichi targets",
-                                           related_name="eu_indicator_aichi_strategy")
+    eu_indicator = models.ForeignKey(
+        EuIndicator,
+        verbose_name="EU Biodiversity Indicator",
+        related_name="eu_indicator_aichi_strategy")
+    aichi_targets = models.ManyToManyField(
+        AichiTarget,
+        verbose_name="Aichi targets",
+        related_name="eu_indicator_aichi_strategy")
 
     def get_targets(self):
         return ', '.join([obj.code for obj in self.aichi_targets.all()])
@@ -488,14 +491,16 @@ class NationalStrategy(models.Model):
     objective = models.ForeignKey(NationalObjective,
                                   verbose_name="National Objective",
                                   related_name="objective_national_strategy")
-    relevant_target = models.ForeignKey(AichiTarget,
-                                        verbose_name="Relevant AICHI target",
-                                        related_name="relevant_target_national_strategy")
-    other_targets = models.ManyToManyField(AichiTarget,
-                                           null=True,
-                                           blank=True,
-                                           verbose_name="Other AICHI targets",
-                                           related_name="other_targets_national_strategy")
+    relevant_target = models.ForeignKey(
+        AichiTarget,
+        verbose_name="Relevant AICHI target",
+        related_name="relevant_target_national_strategy")
+    other_targets = models.ManyToManyField(
+        AichiTarget,
+        null=True,
+        blank=True,
+        verbose_name="Other AICHI targets",
+        related_name="other_targets_national_strategy")
 
     class Meta:
         verbose_name_plural = ' Mappings: National strategy to AICHI&EU'
