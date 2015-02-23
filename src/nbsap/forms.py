@@ -36,14 +36,12 @@ def validate_eu_target_code(value):
 
 
 class TextCleanedHtml(forms.CharField):
-
     def to_python(self, value):
         value = super(TextCleanedHtml, self).to_python(value)
         return remove_tags(BeautifulSoup(value).prettify())
 
 
 class NationalObjectiveForm(forms.Form):
-
     language = forms.ChoiceField(choices=settings.LANGUAGES)
     title = forms.CharField(widget=widgets.Textarea)
     description = TextCleanedHtml(
@@ -87,7 +85,6 @@ class NationalObjectiveForm(forms.Form):
 
 
 class NationalObjectiveEditForm(NationalObjectiveForm):
-
     code = forms.CharField(max_length=16, validators=[validate_code])
 
     def clean_code(self):
@@ -103,14 +100,12 @@ class NationalObjectiveEditForm(NationalObjectiveForm):
 
 
 class NationalActionForm(forms.Form):
-
     language = forms.ChoiceField(choices=settings.LANGUAGES)
     title = forms.CharField(widget=widgets.Textarea, required=False)
     description = TextCleanedHtml(
         widget=TinyMCE(attrs={'cols': 80, 'rows': 25}))
 
     def __init__(self, *args, **kwargs):
-
         self.action = kwargs.pop('action', None)
         self.objective = kwargs.pop('objective')
         lang = kwargs.pop('lang', None)
@@ -141,7 +136,6 @@ class NationalActionForm(forms.Form):
 
 
 class EuTargetForm(forms.Form):
-
     language = forms.ChoiceField(choices=settings.LANGUAGES)
     title = forms.CharField(widget=widgets.Textarea)
     description = TextCleanedHtml(
@@ -183,7 +177,6 @@ class EuTargetForm(forms.Form):
 
 
 class EuTargetEditForm(EuTargetForm):
-
     code = forms.CharField(max_length=16, validators=[validate_eu_target_code])
 
     def clean_code(self):
@@ -199,14 +192,12 @@ class EuTargetEditForm(EuTargetForm):
 
 
 class EuStrategyActivityForm(forms.Form):
-
     language = forms.ChoiceField(choices=settings.LANGUAGES)
     title = forms.CharField(widget=widgets.Textarea)
     description = TextCleanedHtml(
         widget=TinyMCE(attrs={'cols': 80, 'rows': 25}), required=False)
 
     def __init__(self, *args, **kwargs):
-
         self.activity = kwargs.pop('activity', None)
         self.target = kwargs.pop('target')
         lang = kwargs.pop('lang', None)
@@ -242,7 +233,6 @@ class AichiGoalForm(forms.Form):
     title = forms.CharField(widget=widgets.Textarea)
 
     def __init__(self, *args, **kwargs):
-
         self.goal = kwargs.pop('goal', None)
         lang = kwargs.pop('lang', None)
 
@@ -266,14 +256,13 @@ class AichiGoalForm(forms.Form):
         setattr(goal, 'title_%s' % lang, title)
         goal.save()
 
-     #   for ucode in self.cleaned_data['targets']:
-     #       goal.targets.add(get_object_or_404(AichiTarget, code=ucode))
+        #   for ucode in self.cleaned_data['targets']:
+        #       goal.targets.add(get_object_or_404(AichiTarget, code=ucode))
         goal.save()
         return goal
 
 
 class NationalStrategyForm(forms.Form):
-
     def comp(self, title):
         code = title[1].split()[1]
         to_list = code.split('.')
@@ -327,12 +316,17 @@ class NationalStrategyForm(forms.Form):
 
         if self.strategy:
             self.fields['nat_objective'].initial = self.strategy.objective.id
-            self.fields['aichi_goal'].initial = self.strategy.relevant_target.get_parent_goal().pk
-            self.fields['aichi_target'].initial = self.strategy.relevant_target.id
-            self.fields['other_targets'].initial = [target.id for target in self.strategy.other_targets.all()]
+            self.fields[
+                'aichi_goal'].initial = self.strategy.relevant_target.get_parent_goal().pk
+            self.fields[
+                'aichi_target'].initial = self.strategy.relevant_target.id
+            self.fields['other_targets'].initial = [target.id for target in
+                                                    self.strategy.other_targets.all()]
             if settings.EU_STRATEGY:
-                self.fields['eu_targets'].initial = [target.id for target in self.strategy.eu_targets.all()]
-                self.fields['eu_actions'].initial = [action.id for action in self.strategy.eu_actions.all()]
+                self.fields['eu_targets'].initial = [target.id for target in
+                                                     self.strategy.eu_targets.all()]
+                self.fields['eu_actions'].initial = [action.id for action in
+                                                     self.strategy.eu_actions.all()]
 
     def save(self):
         strategy = self.strategy or NationalStrategy()
@@ -355,7 +349,8 @@ class NationalStrategyForm(forms.Form):
                                                          code=ucode))
         if settings.EU_STRATEGY:
             for ucode in self.cleaned_data['eu_targets']:
-                strategy.eu_targets.add(get_object_or_404(EuTarget, code=ucode))
+                strategy.eu_targets.add(
+                    get_object_or_404(EuTarget, code=ucode))
             for ucode in self.cleaned_data['eu_actions']:
                 strategy.eu_actions.add(get_object_or_404(EuAction, pk=ucode))
 
@@ -364,7 +359,6 @@ class NationalStrategyForm(forms.Form):
 
 
 class NbsapPageForm(forms.Form):
-
     lang = forms.ChoiceField(choices=settings.LANGUAGES, label=_('Language'))
     title = forms.CharField(label=_('Title'))
     body = TextCleanedHtml(required=False, label=_('Body'),
@@ -391,7 +385,6 @@ class NbsapPageForm(forms.Form):
 
 
 class EuIndicatorForm(forms.Form):
-
     language = forms.ChoiceField(choices=settings.LANGUAGES)
     title = forms.CharField(widget=widgets.Textarea)
     url = forms.CharField()
@@ -407,7 +400,9 @@ class EuIndicatorForm(forms.Form):
             title = getattr(self.indicator, 'title_%s' % lang, None)
             self.fields['title'].initial = title
             self.fields['url'].initial = self.indicator.url
-            self.fields['indicator_type'].initial = self.indicator.indicator_type
+            self.fields['indicator_type'].initial = (
+                self.indicator.indicator_type
+            )
             if 'code' in self.fields:
                 self.fields['code'].initial = self.indicator.code
 
@@ -431,7 +426,6 @@ class EuIndicatorForm(forms.Form):
 
 
 class EuIndicatorEditForm(EuIndicatorForm):
-
     code = forms.CharField(max_length=16, validators=[validate_eu_target_code])
 
     def clean_code(self):
@@ -447,10 +441,13 @@ class EuIndicatorEditForm(EuIndicatorForm):
 
 
 class EuIndicatorMapForm(forms.Form):
-
     eu_targets = chosenforms.ChosenMultipleChoiceField(
         overlay="Select EU target...")
+    other_eu_targets = chosenforms.ChosenMultipleChoiceField(
+        overlay="Select EU target...")
     aichi_targets = chosenforms.ChosenMultipleChoiceField(
+        overlay="Select Aichi target...")
+    other_aichi_targets = chosenforms.ChosenMultipleChoiceField(
         overlay="Select Aichi target...")
 
     def _get_choices(self, name, queryset, attr):
@@ -462,14 +459,21 @@ class EuIndicatorMapForm(forms.Form):
     def __init__(self, *args, **kwargs):
         self.indicator = kwargs.pop('indicator', None)
         super(EuIndicatorMapForm, self).__init__(*args, **kwargs)
-        self.fields['eu_targets'].choices = self._get_choices(
+        target_choices = self._get_choices(
             'Target', EuTarget.objects.all(), 'code'
         )
+        self.fields['eu_targets'].choices = target_choices
+        self.fields['other_eu_targets'].choices = target_choices
         self.fields['eu_targets'].initial = (self.indicator.targets
                                              .values_list('pk', flat=True))
-        self.fields['aichi_targets'].choices = self._get_choices(
+        self.fields['other_eu_targets'].initial = (
+            self.indicator.other_targets.values_list('pk', flat=True)
+        )
+        aichi_target_choices = self._get_choices(
             'Target', AichiTarget.objects.all(), 'code'
         )
+        self.fields['aichi_targets'].choices = aichi_target_choices
+        self.fields['other_aichi_targets'].choices = aichi_target_choices
 
         try:
             initial = (
@@ -477,12 +481,20 @@ class EuIndicatorMapForm(forms.Form):
                 .filter(eu_indicator=self.indicator)[0]
                 .aichi_targets.values_list('pk', flat=True)
             )
+            initial_other = (
+                EuIndicatorToAichiStrategy.objects
+                .filter(eu_indicator=self.indicator)[0]
+                .other_aichi_targets.values_list('pk', flat=True)
+            )
         except IndexError:
             initial = None
+            initial_other = None
         self.fields['aichi_targets'].initial = initial
+        self.fields['other_aichi_targets'].initial = initial_other
 
     def save(self):
         self.indicator.targets = self.cleaned_data['eu_targets']
+        self.indicator.other_targets = self.cleaned_data['other_eu_targets']
         self.indicator.save()
         try:
             ita = (EuIndicatorToAichiStrategy.objects
@@ -491,10 +503,8 @@ class EuIndicatorMapForm(forms.Form):
             ita = EuIndicatorToAichiStrategy.objects.create(
                 eu_indicator=self.indicator)
 
-        ita.aichi_targets = (
-            AichiTarget.objects
-            .filter(pk__in=self.cleaned_data['aichi_targets'])
-        )
+        ita.aichi_targets = self.cleaned_data['aichi_targets']
+        ita.other_aichi_targets = self.cleaned_data['other_aichi_targets']
         ita.save()
 
 
@@ -505,9 +515,9 @@ class EuAichiStrategyForm(forms.Form):
 
     def _get_choices(self, name, queryset, attr):
         return sorted([
-            (x.pk, '{} {}'.format(name, getattr(x, attr)))
-            for x in queryset
-        ], key=lambda el: int(el[1].split()[1]))
+                          (x.pk, '{} {}'.format(name, getattr(x, attr)))
+                          for x in queryset
+                      ], key=lambda el: int(el[1].split()[1]))
 
     def __init__(self, *args, **kwargs):
         self.strategy = kwargs.pop('strategy', None)

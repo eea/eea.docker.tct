@@ -388,6 +388,8 @@ class EuTarget(models.Model):
                                      related_name="target")
     indicators = models.ManyToManyField(EuIndicator,
                                         related_name="targets")
+    other_indicators = models.ManyToManyField(EuIndicator,
+                                              related_name="other_targets")
 
     if settings.EU_STRATEGY and settings.NAT_STRATEGY:
         national_strategy = models.ManyToManyField(
@@ -458,6 +460,11 @@ class EuIndicatorToAichiStrategy(models.Model):
         AichiTarget,
         verbose_name="Aichi targets",
         related_name="eu_indicator_aichi_strategy")
+    other_aichi_targets = models.ManyToManyField(
+        AichiTarget,
+        verbose_name="Other Aichi targets",
+        related_name="eu_indicator_other_aichi_strategy")
+
 
     def get_targets(self):
         return ', '.join([obj.code for obj in self.aichi_targets.all()])

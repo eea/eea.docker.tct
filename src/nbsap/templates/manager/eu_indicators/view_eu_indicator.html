@@ -39,26 +39,40 @@
     </form>
   </div>
 
+  <div>
   {% if indicator.url %}
-    <a href="{{ indicator.url }}">
+  URL: <a href="{{ indicator.url }}">
       {{ indicator.get_indicator_type_display }} {{ indicator.code|default:'' }}: {{indicator.title}}</a>
   {% else %}
     {{ indicator.code|default:'' }} {{ indicator.title }}
   {% endif %}
+  </div>
 
   {% if indicator.subindicators.exists %}
     <h2>{% trans 'Subindicators' %}</h2>
     <ul>
       {% for subindicator in indicator.subindicators.all %}
-        <li>{{ subindicator.code }}: {{ subindicator.title }}</li>
+        <li>
+          <a href="{% url 'view_eu_indicator' pk=subindicator.pk %}">
+            {{ subindicator.code }}: {{ subindicator.title }}
+          </a>
+        </li>
       {% endfor %}
     </ul>
   {% endif %}
 
   {% if indicator.targets.exists %}
       <h2>{% trans "Mapping with EU targets" %}</h2>
+      <h4>Most relevant</h4>
       <ul>
       {% for target in indicator.targets.all %}
+        <li>{{ target.code }} {{ target.title }}</li>
+      {% endfor %}
+      </ul>
+
+      <h4>Other</h4>
+      <ul>
+      {% for target in indicator.other_targets.all %}
         <li>{{ target.code }} {{ target.title }}</li>
       {% endfor %}
       </ul>
@@ -66,9 +80,19 @@
 
   {% if indicator.eu_indicator_aichi_strategy.exists %}
     <h2>{% trans "Mapping with Aichi Strategy" %}</h2>
+    <h4>Most relevant</h4>
     <ul>
       {% for strategy in indicator.eu_indicator_aichi_strategy.all %}
         {% for aichi_target in strategy.aichi_targets.all %}
+          <li>{{ aichi_target }}</li>
+        {% endfor %}
+      {% endfor %}
+    </ul>
+
+    <h4>Other</h4>
+    <ul>
+      {% for strategy in indicator.eu_indicator_aichi_strategy.all %}
+        {% for aichi_target in strategy.other_aichi_targets.all %}
           <li>{{ aichi_target }}</li>
         {% endfor %}
       {% endfor %}
