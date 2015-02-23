@@ -98,7 +98,7 @@
     </div>
     {% endif %}
 
-    {% if target.relevant_target_national_strategy.all %}
+    {% if NAT_STRATEGY and target.relevant_target_national_strategy.all %}
     <div class="well">
       <div class="well-title">
         <a href="{% url 'nat_strategy_export_preview' target_id=target.pk %}"
