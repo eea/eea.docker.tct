@@ -16,63 +16,91 @@
   <h1 class="page-title">{% trans "EU Indicators" %}</h1>
 
   {% if indicators %}
-    {% for indicator in indicators %}
-      <h1>{{ indicator.get_indicator_type_display }} {{ indicator.code|default:'' }}: {{ indicator.title }}</h1>
-      <p class="objective-description">{{ indicator.body }}</p>
-  
-      <ul>
-        {% for sub in indicator.subindicators.all %}
-          <li>
-            {% if sub.url %}
-              <a href="{{ sub.url }}">
-                {{ sub.indicator_type|upper }} {{ sub.code }}: {{ sub.title }}</a>
-            {% else %}
-              {{ sub.code }} {{ sub.title }}
-            {% endif %}
-          </li>
-        {% endfor %}
-      </ul>
-  
-      <div class ="well">
-        <div class="well-title">{% trans "EU targets" %}</div>
-        {% if indicator.targets.exists %}
-        <ul>
-          {% for target in indicator.targets.all %}
-            <li>
-              <a href="{% url 'eu_targets' code=target.code %}">{{ target.code }} {{target.title}}</a>
-            </li>
-          {% endfor %}
-        </ul>
-        {% else %}
-          <p>{% trans "No corresponding EU target" %}.</p>
-        {% endif %}
-      </div>
-    {% endfor %}
+    {% for group in indicators %}
+      <h1>{{ group.title }}</h1>
 
-    {% for subindicator in subindicators %}
-      <h2>{{ subindicator.get_indicator_type_display }} {{ subindicator.code|default:'' }}: {{ subindicator.title }}</h2>
-      <p class="objective-description">{{ subindicator.body }}</p>
-      <div class ="well">
-        <div class="well-title">{% trans "Mapping with Aichi Strategy" %}</div>
-        {% if subindicator.eu_indicator_aichi_strategy.exists %}
-          <ul>
-            {% for strategy in subindicator.eu_indicator_aichi_strategy.all %}
-              {% for aichi_target in strategy.aichi_targets.all %}
-                {% assign aichi_target.get_parent_goal as goal %}
+      {% if group.subindicators.count %}
+      {% for indicator in group.subindicators.all %}
+        <h2>{{ indicator.get_indicator_type_display }} {{ indicator.code }} {{ indicator.title }}</h2>
+
+        {% if indicator.url %}
+          <p>URL: <a href="{{ indicator.url }}">{{ indicator.title }}</a></p>
+        {% endif %}
+
+        <div class="well">
+          <div class="well-title">{% trans "EU targets" %}</div>
+          <p><strong>Most relevant:</strong></p>
+          {% if indicator.targets.exists %}
+            <ul>
+              {% for target in indicator.targets.all %}
                 <li>
-                  <a href="{% url 'goals' code=goal.code %}#{{ aichi_target.code }}">
-                    {% trans "AICHI Target"%} {{ aichi_target.code }}</a>
+                  <a href="{% url 'eu_targets' code=target.code %}">{{ target.code }} {{ target.title }}</a>
                 </li>
               {% endfor %}
-            {% endfor %}
-          </ul>
-        {% else %}
-          <p>{% trans "No corresponding AICHI target" %}.</p>
-        {% endif %}
-      </div>
+            </ul>
+          {% else %}
+            <p>{% trans "No corresponding EU target" %}.</p>
+          {% endif %}
+
+          <p><strong>Other:</strong></p>
+          {% if indicator.other_targets.exists %}
+            <ul>
+              {% for target in indicator.other_targets.all %}
+                <li>
+                  <a href="{% url 'eu_targets' code=target.code %}">{{ target.code }} {{ target.title }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p>{% trans "No corresponding EU target" %}.</p>
+          {% endif %}
+        </div>
+
+        <div class="well">
+          <div
+              class="well-title">{% trans "Mapping with Aichi Strategy" %}</div>
+          <p><strong>Most relevant:</strong></p>
+          {% if indicator.eu_indicator_aichi_strategy.exists %}
+            <ul>
+              {% for strategy in indicator.eu_indicator_aichi_strategy.all %}
+                {% for aichi_target in strategy.aichi_targets.all %}
+                  {% assign aichi_target.get_parent_goal as goal %}
+                  <li>
+                    <a href="{% url 'goals' code=goal.code %}#{{ aichi_target.code }}">
+                      {% trans "AICHI Target" %} {{ aichi_target.code }}</a>
+                  </li>
+                {% endfor %}
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p>{% trans "No corresponding AICHI target" %}.</p>
+          {% endif %}
+
+          <p><strong>Other:</strong></p>
+          {% if indicator.eu_indicator_other_aichi_strategy.exists %}
+            <ul>
+              {% for strategy in indicator.eu_indicator_other_aichi_strategy.all %}
+                {% for aichi_target in strategy.aichi_targets.all %}
+                  {% assign aichi_target.get_parent_goal as goal %}
+                  <li>
+                    <a href="{% url 'goals' code=goal.code %}#{{ aichi_target.code }}">
+                      {% trans "AICHI Target" %} {{ aichi_target.code }}</a>
+                  </li>
+                {% endfor %}
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p>{% trans "No corresponding AICHI target" %}.</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+      {% else %}
+      <p>{% trans 'No indicators in this group.' %}</p>
+      {% endif %}
+
     {% endfor %}
 
   {% else %}
-    <h1>{% trans 'No Eu Indicators' %}</h1>
+    <h1>{% trans 'No EU Indicators' %}</h1>
   {% endif %}
 {% endblock %}
