@@ -119,9 +119,31 @@
 
     {% if EU_STRATEGY and target.eu_indicator_aichi_strategy.all %}
     <div class="well">
-      <div class="well-title">{% trans "Mapping with EU indicators" %}</div>
+      <div class="well-title">{% trans "Most relevant EU indicators" %}</div>
       <ul>
         {% for strategy in target.eu_indicator_aichi_strategy.all %}
+          {% with strategy.eu_indicator as eu_indicator %}
+          <li>
+            {% if eu_indicator.url %}
+              <a href="{{ eu_indicator.url }}" title="{{ eu_indicator.title }}">
+                {{ eu_indicator.indicator_type|upper }}
+                {{ eu_indicator.code }}: {{ eu_indicator.title }}
+              </a>
+            {% else %}
+              {{ eu_indicator.code }} {{ eu_indicator.title }}
+            {% endif %}
+          </li>
+          {% endwith %}
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    {% if EU_STRATEGY and target.eu_indicator_other_aichi_strategy.all %}
+    <div class="well">
+      <div class="well-title">{% trans "Other EU indicators" %}</div>
+      <ul>
+        {% for strategy in target.eu_indicator_other_aichi_strategy.all %}
           {% with strategy.eu_indicator as eu_indicator %}
           <li>
             {% if eu_indicator.url %}

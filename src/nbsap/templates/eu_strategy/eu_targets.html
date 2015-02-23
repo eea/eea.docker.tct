@@ -54,9 +54,9 @@
     {% endif %}
   </div>
 
+  {% if current_target.indicators %}
   <div class ="well">
-    <div class="well-title">{% trans "EU indicators/sub-indicators" %}</div>
-    {% if current_target.indicators %}
+    <div class="well-title">{% trans "Most relevant EU indicators" %}</div>
     <ul>
       {% for indicator in current_target.indicators.all %}
         <li>
@@ -78,10 +78,35 @@
         </li>
       {% endfor %}
     </ul>
-    {% else %}
-      <p>{% trans "No corresponding EU target" %}.</p>
-    {% endif %}
   </div>
+  {% endif %}
+
+  {% if current_target.other_indicators %}
+  <div class ="well">
+    <div class="well-title">{% trans "Other EU indicators" %}</div>
+    <ul>
+      {% for indicator in current_target.other_indicators.all %}
+        <li>
+          {{ indicator.code }} {{indicator.title}}
+          {% if indicator.subindicators.exists %}
+          <ul>
+          {% for sub in indicator.subindicators.all %}
+            <li>
+              {% if sub.url %}
+                <a href="{{ sub.url }}">
+                  {{ sub.indicator_type|upper }} {{ sub.code }}: {{sub.title}}</a>
+              {% else %}
+                {{ sub.code }} {{ sub.title }}
+              {% endif %}
+              </li>
+          {% endfor %}
+          </ul>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
 
 
   <div class ="well">
