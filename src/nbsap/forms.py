@@ -1,4 +1,3 @@
-import re
 from bs4 import BeautifulSoup
 
 from django import forms
@@ -16,11 +15,7 @@ from nbsap.models import (
     AichiTarget, EuAction, EuIndicator, EuIndicatorToAichiStrategy,
     EuAichiStrategy,
 )
-from nbsap.utils import remove_tags, get_next_code
-
-
-RE_CODE = re.compile('(\d+\.)*\d+$')
-RE_EU_TARGET_CODE = re.compile('\d+$')
+from nbsap.utils import remove_tags, RE_CODE, RE_EU_TARGET_CODE, RE_ACTION_CODE
 
 
 def validate_code(value):
@@ -200,6 +195,7 @@ class EuStrategyActivityForm(forms.Form):
     def __init__(self, *args, **kwargs):
         self.activity = kwargs.pop('activity', None)
         self.target = kwargs.pop('target')
+        self.parent = kwargs.pop('parent', None)
         lang = kwargs.pop('lang', None)
 
         super(EuStrategyActivityForm, self).__init__(*args, **kwargs)
@@ -218,11 +214,13 @@ class EuStrategyActivityForm(forms.Form):
         description = self.cleaned_data['description']
         setattr(activity, 'title_%s' % lang, title)
         setattr(activity, 'description_%s' % lang, description)
-        activity.code = activity.code or get_next_code(EuAction)
+        activity.parent = self.parent
+        activity.code = activity.code or activity.get_next_code()
 
         activity.save()
-        activity.target = [self.target]
-        activity.save()
+        if not self.parent:
+            activity.target = [self.target]
+            activity.save()
         return activity
 
 
@@ -263,18 +261,27 @@ class AichiGoalForm(forms.Form):
 
 
 class NationalStrategyForm(forms.Form):
+
+    def comp_rgx(self, title):
+        groups = RE_ACTION_CODE.match(title[1]).groups()
+        ret_list = [int(groups[0])]
+        ret_list.extend(groups[1:])
+        return ret_list
+
     def comp(self, title):
         code = title[1].split()[1]
         to_list = code.split('.')
 
         return [int(el) for el in to_list]
 
-    def get_choices(self, string, mytype, isString=False):
+    def get_choices(self, string, mytype, isString=False, use_regex=False):
         result = [(element.pk, "%s %s" % (string, element.code.upper()))
                   for element in mytype.objects.all()]
 
         if isString:
             return sorted(result, key=lambda x: x[1].split()[1])
+        if use_regex:
+            return sorted(result, key=self.comp_rgx)
         return sorted(result, key=self.comp)
 
     def get_element_by_pk(self, mytype, u_pk):
@@ -311,8 +318,8 @@ class NationalStrategyForm(forms.Form):
         if settings.EU_STRATEGY:
             self.fields['eu_targets'].choices = self.get_choices('Target',
                                                                  EuTarget)
-            self.fields['eu_actions'].choices = self.get_choices('Action',
-                                                                 EuAction)
+            self.fields['eu_actions'].choices = self.get_choices(
+                'Action', EuAction, use_regex=True)
 
         if self.strategy:
             self.fields['nat_objective'].initial = self.strategy.objective.id

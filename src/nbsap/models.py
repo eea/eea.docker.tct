@@ -1,11 +1,13 @@
+import re
 from django.db import models
 from django.db.models.signals import pre_save
 from django.utils.safestring import mark_safe
 from django.conf import settings
 from transmeta import TransMeta
 from tinymce import models as tinymce_models
-
 from django.utils.translation import ugettext_lazy as _
+
+from nbsap.utils import RE_ACTION_CODE
 
 
 def getter_for_default_language(field_name):
@@ -324,6 +326,9 @@ class EuAction(models.Model):
         else:
             return self.parent.target.all()[0]
 
+    def subactions(self):
+        return self.get_all_actions()[1:]
+
     def get_all_actions(self):
         #we should use https://github.com/django-mptt/django-mptt/
         r = []
@@ -331,6 +336,20 @@ class EuAction(models.Model):
         for ob in EuAction.objects.filter(parent=self):
             r.extend(ob.get_all_actions())
         return r
+
+    def get_next_code(self):
+        if self.parent:
+            codes = [a.code for a in self.parent.subactions()]
+            if codes:
+                max_letter = RE_ACTION_CODE.match(max(codes)).groups()[1]
+                letter = chr(ord(max_letter) + 1)
+            else:
+                letter = 'a'
+            return self.parent.code + letter
+
+        codes = [int(RE_ACTION_CODE.match(code).groups()[0]) for code in
+                EuAction.objects.values_list('code', flat=True)]
+        return str(max(codes) + 1)
 
 
 class EuIndicator(models.Model):

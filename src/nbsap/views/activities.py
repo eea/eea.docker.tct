@@ -20,7 +20,7 @@ def view_eu_strategy_activity(request, target, pk):
 
 
 @auth_required
-def edit_eu_strategy_activity(request, target, pk=None):
+def edit_eu_strategy_activity(request, target, pk=None, parent=None):
     target = get_object_or_404(models.EuTarget, pk=target)
 
     if pk:
@@ -30,12 +30,16 @@ def edit_eu_strategy_activity(request, target, pk=None):
         activity = None
         template = 'manager/activities/add_eu_strategy_activity.html'
 
+    if parent:
+        parent = get_object_or_404(models.EuAction, pk=parent)
+
     lang = request.GET.get('lang', request.LANGUAGE_CODE)
 
     if request.method == 'POST':
         form = EuStrategyActivityForm(request.POST,
                                       activity=activity,
-                                      target=target)
+                                      target=target,
+                                      parent=parent)
         if form.is_valid():
             form.save()
             if not pk:

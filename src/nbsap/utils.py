@@ -2,6 +2,9 @@ import re
 
 DENIED_TAGS = ('html', 'head', 'link', 'body', 'meta', 'script', 'title',
                'style', 'applet',)
+RE_CODE = re.compile('(\d+\.)*\d+$')
+RE_EU_TARGET_CODE = re.compile('\d+$')
+RE_ACTION_CODE = re.compile('[^\d]*(\d+)([a-zA-Z]*)$')
 
 
 def remove_tags(html, tags=DENIED_TAGS):
@@ -12,9 +15,3 @@ def remove_tags(html, tags=DENIED_TAGS):
     html = starttag_re.sub('', html)
     html = endtag_re.sub('', html)
     return html
-
-
-def get_next_code(model_cls):
-    codes = [int(code.split('.')[0]) for code in
-             model_cls.objects.values_list('code', flat=True)]
-    return str(max(codes) + 1)

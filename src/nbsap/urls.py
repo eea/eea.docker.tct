@@ -109,7 +109,11 @@ urlpatterns = patterns('',
         'nbsap.views.edit_eu_strategy_target',
         name='edit_eu_strategy_target'),
 
-    url(r'^administration/targets/(?P<target>[\w\-]+)/activities/add/',
+    url(r'^administration/targets/(?P<target>[\w\-]+)/activities/add/$',
+        'nbsap.views.edit_eu_strategy_activity',
+        name='edit_eu_strategy_activity'),
+
+    url(r'^administration/targets/(?P<target>[\w\-]+)/activities/add/(?P<parent>[\w\-]+)/$',
         'nbsap.views.edit_eu_strategy_activity',
         name='edit_eu_strategy_activity'),
 

@@ -55,16 +55,23 @@
     
       <tbody>
       {% if target.actions.all %}
-      {% for activity in target.actions.all %}
+      {% for action in target.actions.all %}
         <tr>
-          <td>{{ activity.code }}</td>
+          <td>{{ action.code }}</td>
           <td>
-            <a href="{% url 'view_eu_strategy_activity' target=target.pk pk=activity.pk %}"
-             title="{% trans 'action' %} {{ activity.code }}">
+            <a href="{% url 'view_eu_strategy_activity' target=target.pk pk=action.pk %}"
+             title="{% trans 'action' %} {{ action.code }}">
             {% trans "Actions related to target" %} {{ target.code }}
             </a>
           </td>
         </tr>
+
+        {% for subaction in action.subactions %}
+          <tr>
+            <td>{{ subaction.code }}</td>
+            <td>{% trans "Actions related to target" %} {{ target.code }}</td>
+          </tr>
+        {% endfor %}
       {% endfor %}
       {% else %}
         <tr>

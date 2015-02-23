@@ -1,4 +1,4 @@
-/* bootstrap override */
+sub-/* bootstrap override */
 .tooltip {
   font-size: 11px;
 }
@@ -528,4 +528,8 @@ body {
 .alert {
     font-style: italic;
     color: #aaa;
+}
+
+.admin-obj-description {
+    margin: 0 0 1.5em 0;
 }
