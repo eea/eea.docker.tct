@@ -38,7 +38,7 @@ def eu_indicators(request):
 
 @auth_required
 def list_eu_indicators(request):
-    indicators = models.EuIndicator.objects.all()
+    indicators = models.EuIndicator.objects.exclude(targets=None).all()
     return render(request, 'manager/eu_indicators/list_eu_indicators.html', {
         'indicators': indicators,
     })

@@ -16,7 +16,8 @@
   {% if messages %}
     <div class="messages alert alert-success">
       {% for message in messages %}
-        <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+        <p{% if message.tags %}
+          class="{{ message.tags }}"{% endif %}>{{ message }}</p>
       {% endfor %}
     </div>
   {% endif %}
@@ -33,20 +34,27 @@
   <table class="table">
 
     <thead>
-      <th>{% trans "Code" %}</th>
-      <th>{% trans "Title" %}</th>
+    <th>{% trans "Code" %}</th>
+    <th>{% trans "Title" %}</th>
     </thead>
 
     <tbody>
-    {% for indicator in indicators %}
+    {% for group in indicators %}
       <tr>
-        <td>{{ indicator.code|default:'' }}</td>
-        <td>
-          <a href="{% url 'view_eu_indicator' pk=indicator.pk %}"
-             title="{% trans 'Indicator' %} {{ indicator.code }}">
-            {{ indicator.title|default:indicator.code }}</a>
+        <td colspan="2">
+          <strong><a href="{% url 'view_eu_indicator' pk=group.pk %}">{% if group.code %}{{ group.code }} {% endif %}{{ group.title }}</a></strong>
         </td>
       </tr>
+      {% for indicator in group.subindicators.all %}
+        <tr>
+          <td>{{ indicator.code|default:'' }}</td>
+          <td>
+            <a href="{% url 'view_eu_indicator' pk=indicator.pk %}"
+               title="{% trans 'Indicator' %} {{ indicator.code }}">
+              {{ indicator.title|default:indicator.code }}</a>
+          </td>
+        </tr>
+      {% endfor %}
     {% endfor %}
     </tbody>
 
