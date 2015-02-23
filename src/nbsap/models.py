@@ -483,6 +483,9 @@ class EuAichiStrategy(models.Model):
     aichi_targets = models.ManyToManyField(AichiTarget,
                                            verbose_name="Aichi targets",
                                            related_name="eu_aichi_strategy")
+    other_aichi_targets = models.ManyToManyField(AichiTarget,
+                                           verbose_name="Other Aichi targets",
+                                           related_name="eu_other_aichi_strategy")
 
     def get_targets(self):
         return ', '.join([obj.code for obj in self.aichi_targets.all()])

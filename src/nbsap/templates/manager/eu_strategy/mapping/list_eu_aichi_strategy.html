@@ -30,7 +30,8 @@
 
     <thead>
       <th>{% trans "Eu Target"%}</th>
-      <th>{% trans "AICHI Targets"%}</th>
+      <th>{% trans "Relevant AICHI Targets"%}</th>
+      <th>{% trans "Other AICHI Targets"%}</th>
       <th>{% trans "Edit" %}</th>
       <th>{% trans "Delete" %}</th>
     </thead>
@@ -44,6 +45,9 @@
         </td>
         <td>
           {{ strategy.aichi_targets.all|join:", " }}
+        </td>
+        <td>
+          {{ strategy.other_aichi_targets.all|join:", " }}
         </td>
         <td style="text-align: center;">
           <a class="btn btn-mini btn-success add"

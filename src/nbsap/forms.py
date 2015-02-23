@@ -512,6 +512,8 @@ class EuAichiStrategyForm(forms.Form):
     eu_target = forms.ChoiceField()
     aichi_targets = chosenforms.ChosenMultipleChoiceField(
         overlay="Select target...")
+    other_aichi_targets = chosenforms.ChosenMultipleChoiceField(
+        overlay="Select target...")
 
     def _get_choices(self, name, queryset, attr):
         return sorted([
@@ -523,12 +525,18 @@ class EuAichiStrategyForm(forms.Form):
         self.strategy = kwargs.pop('strategy', None)
         super(EuAichiStrategyForm, self).__init__(*args, **kwargs)
 
-        self.fields['aichi_targets'].choices = self._get_choices(
+        target_choices = self._get_choices(
             'Target', AichiTarget.objects.all(), 'code')
+        self.fields['aichi_targets'].choices = target_choices
+        self.fields['other_aichi_targets'].choices = target_choices
 
         if self.strategy:
             self.fields['aichi_targets'].initial = (
                 self.strategy.aichi_targets
+                .values_list('pk', flat=True)
+            )
+            self.fields['other_aichi_targets'].initial = (
+                self.strategy.other_aichi_targets
                 .values_list('pk', flat=True)
             )
             del self.fields['eu_target']
@@ -553,5 +561,9 @@ class EuAichiStrategyForm(forms.Form):
         strategy.aichi_targets = (
             AichiTarget.objects
             .filter(pk__in=self.cleaned_data['aichi_targets'])
+        )
+        strategy.other_aichi_targets = (
+            AichiTarget.objects
+            .filter(pk__in=self.cleaned_data['other_aichi_targets'])
         )
         strategy.save()

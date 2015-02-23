@@ -41,6 +41,17 @@
       <div class="aichi_targets_text col-md-7 short-descrip">
       </div>
     </div>
+
+    <div class="form-group">
+      <label class="col-md-2" for="other_aichi_targets">{% trans "Other AICHI Targets" %}</label>
+      <div class="col-md-3">
+        {{ form.other_aichi_targets }}
+        {{ form.other_aichi_targets.errors }}
+      </div>
+      <div class="other_aichi_targets_text col-md-7 short-descrip">
+      </div>
+    </div>
+
     <div class="action-bar">
       <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
       <a href="{% url 'list_eu_aichi_strategy' %}" class="btn btn-default" type="button">{% trans "Cancel" %}</a>
@@ -57,6 +68,10 @@
     $(".chzn-select").chosen();
     showTargetCodeValue('aichi_targets',
                         '.aichi_targets_text',
+                        "{% url 'aichi_target_title' pk=1 %}");
+
+    showTargetCodeValue('other_aichi_targets',
+                        '.other_aichi_targets_text',
                         "{% url 'aichi_target_title' pk=1 %}");
   });
   </script>
