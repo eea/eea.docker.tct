@@ -84,6 +84,7 @@
     {% if EU_STRATEGY and target.eu_aichi_strategy.all %}
     <div class="well">
       <div class="well-title">{% trans "Mapping with EU targets" %}</div>
+      <strong>Most relevant</strong>
       <ul>
         {% for strategy in target.eu_aichi_strategy.all %}
           {% with strategy.eu_target as eu_target %}
@@ -95,6 +96,21 @@
           {% endwith %}
         {% endfor %}
       </ul>
+
+      {% if target.eu_other_aichi_strategy.count %}
+      <strong>Others</strong>
+      <ul>
+        {% for strategy in target.eu_other_aichi_strategy.all %}
+          {% with strategy.eu_target as eu_target %}
+          <li>
+            <a href="{% url 'eu_targets' code=eu_target.code %}" title="{{ eu_target.code }}">
+              {% trans "EU Target" %} {{ eu_target.code }}: {{ eu_target.title }}
+            </a>
+          </li>
+          {% endwith %}
+        {% endfor %}
+      </ul>
+      {% endif %}
     </div>
     {% endif %}
 
