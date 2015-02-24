@@ -75,7 +75,10 @@ def edit_eu_indicator(request, pk=None):
                 messages.success(request,
                                  _('Indicator successfully added.') + "")
 
-            return redirect('list_eu_indicators')
+            if not indicator:
+                return redirect('list_eu_indicators')
+            else:
+                return redirect('view_eu_indicator', pk=indicator.pk)
     else:
         form = FormClass(indicator=indicator, lang=lang)
     return render(request, template, {

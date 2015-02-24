@@ -70,12 +70,14 @@
       {% endfor %}
       </ul>
 
+      {% if indicator.other_targets.count %}
       <h4>Other</h4>
       <ul>
       {% for target in indicator.other_targets.all %}
         <li>{{ target.code }} {{ target.title }}</li>
       {% endfor %}
       </ul>
+      {% endif %}
   {% endif %}
 
   {% if indicator.eu_indicator_aichi_strategy.exists %}
@@ -89,6 +91,7 @@
       {% endfor %}
     </ul>
 
+    {% if indicator.eu_indicator_aichi_strategy.count %}
     <h4>Other</h4>
     <ul>
       {% for strategy in indicator.eu_indicator_aichi_strategy.all %}
@@ -97,6 +100,7 @@
         {% endfor %}
       {% endfor %}
     </ul>
+    {% endif %}
   {% endif %}
 
 {% endblock %}

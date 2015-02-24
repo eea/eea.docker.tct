@@ -36,6 +36,14 @@ class TextCleanedHtml(forms.CharField):
         return remove_tags(BeautifulSoup(value).prettify())
 
 
+class ChoicesMixin(object):
+    def _get_choices(self, name, queryset, attr):
+        return sorted(
+            [(x.pk, '{} {}'.format(name, getattr(x, attr)))
+             for x in queryset],
+            key=lambda el: int(el[1].split()[1]))
+
+
 class NationalObjectiveForm(forms.Form):
     language = forms.ChoiceField(choices=settings.LANGUAGES)
     title = forms.CharField(widget=widgets.Textarea)
@@ -261,7 +269,6 @@ class AichiGoalForm(forms.Form):
 
 
 class NationalStrategyForm(forms.Form):
-
     def comp_rgx(self, title):
         groups = RE_ACTION_CODE.match(title[1]).groups()
         ret_list = [int(groups[0])]
@@ -295,12 +302,12 @@ class NationalStrategyForm(forms.Form):
                                                           overlay="Select target...")
 
     if settings.EU_STRATEGY:
-        eu_targets = chosenforms.ChosenMultipleChoiceField(choices=[],
-                                                           required=False,
-                                                           overlay="Select EU target...")
-        eu_actions = chosenforms.ChosenMultipleChoiceField(choices=[],
-                                                           required=False,
-                                                           overlay="Select EU actions...")
+        eu_targets = chosenforms.ChosenMultipleChoiceField(
+            choices=[], required=False, overlay="Select EU target...",
+        )
+        eu_actions = chosenforms.ChosenMultipleChoiceField(
+            choices=[], required=False, overlay="Select EU actions...",
+        )
 
     def __init__(self, *args, **kwargs):
         self.strategy = kwargs.pop('strategy', None)
@@ -393,8 +400,8 @@ class NbsapPageForm(forms.Form):
 
 class EuIndicatorForm(forms.Form):
     language = forms.ChoiceField(choices=settings.LANGUAGES)
-    title = forms.CharField(widget=widgets.Textarea)
-    url = forms.CharField()
+    title = forms.CharField(widget=widgets.Textarea, required=False)
+    url = forms.CharField(required=False)
     indicator_type = forms.ChoiceField(choices=EuIndicator.TYPES)
 
     def __init__(self, *args, **kwargs):
@@ -432,8 +439,21 @@ class EuIndicatorForm(forms.Form):
         return indicator
 
 
-class EuIndicatorEditForm(EuIndicatorForm):
-    code = forms.CharField(max_length=16, validators=[validate_eu_target_code])
+class EuIndicatorEditForm(EuIndicatorForm, ChoicesMixin):
+    code = forms.CharField(max_length=16, validators=[validate_eu_target_code],
+                           required=False)
+    subindicators = chosenforms.ChosenMultipleChoiceField(
+        choices=[], required=False, overlay="Select subindicators...")
+
+    def __init__(self, *args, **kwargs):
+        super(EuIndicatorEditForm, self).__init__(*args, **kwargs)
+        sub_choices = self._get_choices(
+            'Subindicator', EuIndicator.objects.exclude(indicator_type='eu'),
+            'code'
+        )
+        self.fields['subindicators'].choices = sub_choices
+        self.fields['subindicators'].initial = (self.indicator.subindicators
+                                                .values_list('pk', flat=True))
 
     def clean_code(self):
         code = self.cleaned_data['code']
@@ -446,8 +466,13 @@ class EuIndicatorEditForm(EuIndicatorForm):
             pass
         return code
 
+    def save(self):
+        indicator = super(EuIndicatorEditForm, self).save()
+        indicator.parent = self.cleaned_data['subindicators']
+        return indicator
 
-class EuIndicatorMapForm(forms.Form):
+
+class EuIndicatorMapForm(forms.Form, ChoicesMixin):
     eu_targets = chosenforms.ChosenMultipleChoiceField(
         overlay="Select EU target...")
     other_eu_targets = chosenforms.ChosenMultipleChoiceField(
@@ -456,12 +481,6 @@ class EuIndicatorMapForm(forms.Form):
         overlay="Select Aichi target...")
     other_aichi_targets = chosenforms.ChosenMultipleChoiceField(
         overlay="Select Aichi target...")
-
-    def _get_choices(self, name, queryset, attr):
-        return sorted([
-            (x.pk, '{} {}'.format(name, getattr(x, attr)))
-            for x in queryset
-        ], key=lambda el: int(el[1].split()[1]))
 
     def __init__(self, *args, **kwargs):
         self.indicator = kwargs.pop('indicator', None)
@@ -515,18 +534,12 @@ class EuIndicatorMapForm(forms.Form):
         ita.save()
 
 
-class EuAichiStrategyForm(forms.Form):
+class EuAichiStrategyForm(forms.Form, ChoicesMixin):
     eu_target = forms.ChoiceField()
     aichi_targets = chosenforms.ChosenMultipleChoiceField(
         overlay="Select target...")
     other_aichi_targets = chosenforms.ChosenMultipleChoiceField(
         overlay="Select target...")
-
-    def _get_choices(self, name, queryset, attr):
-        return sorted([
-                          (x.pk, '{} {}'.format(name, getattr(x, attr)))
-                          for x in queryset
-                      ], key=lambda el: int(el[1].split()[1]))
 
     def __init__(self, *args, **kwargs):
         self.strategy = kwargs.pop('strategy', None)

@@ -1,6 +1,7 @@
 {% extends 'manager/base.html' %}
 
 {% load i18n %}
+{% load assets %}
 
 {% block title %}
   NBSAP - {% trans "Edit indicator " %}{{ indicator.code }}
@@ -12,11 +13,6 @@
 {% endblock %}
 
 
-{% block scripts %}
-  <script src="/static/js/language_change.js"></script>
-{% endblock %}
-
-
 {% block content %}
 
   <h1 class="page-title">{% trans "Eu Indicator" %}</h1>
@@ -24,7 +20,8 @@
 
   {% if form.errors %}
     <p>
-      {% blocktrans with form.errors|pluralize as errors %}Please correct the error {{ errors }} below.{% endblocktrans %}
+      {% blocktrans with form.errors|pluralize as errors %}Please correct the
+        error {{ errors }} below.{% endblocktrans %}
     </p>
   {% endif %}
   <form action="" method="post" id="national-indicator-edit" class="form">
@@ -64,6 +61,18 @@
             {{ form.indicator_type.errors }}
           </div>
 
+          <div class="form-group">
+            <label class=""
+                   for="subindicators">{% trans "Subindicators" %}</label>
+
+            <div class="">
+              {{ form.subindicators }}
+              {{ form.subindicators.errors }}
+            </div>
+            <div class="subindicators_text col-md-7 short-descrip">
+            </div>
+          </div>
+
         </div>
       </div>
 
@@ -71,8 +80,26 @@
 
     <div class="action-bar">
       <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
-      <a href="{% url 'view_eu_indicator' pk=indicator.pk %}" class="btn btn-default" type="button">{% trans "Cancel" %}</a>
+      <a href="{% url 'view_eu_indicator' pk=indicator.pk %}"
+         class="btn btn-default" type="button">{% trans "Cancel" %}</a>
     </div>
 
   </form>
+{% endblock %}
+
+
+{% block scripts %}
+  <script src="/static/js/language_change.js"></script>
+  {% assets "js_admin" %}
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+  {% endassets %}
+
+{#  <script>#}
+{#    $(function () {#}
+{#      $(".chzn-select").chosen();#}
+{#      showTargetCodeValue('subindicators',#}
+{#          '.subindicators_text',#}
+{#          "{% url 'aichi_target_title' pk=1 %}");#}
+{#    });#}
+{#  </script>#}
 {% endblock %}
