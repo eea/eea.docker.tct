@@ -43,7 +43,7 @@
         <a href="#{{ action.code }}"
            rel="tooltip"
            data-placement="right"
-           data-original-title="{{ action.description }}">
+           data-original-title="{{ action.title }}">
            {% trans "Action" %} {{ action.code }}
         </a>
       </li>
@@ -132,6 +132,7 @@
   {% for action in current_target.actions_tree %}
   <div class="section" id="{{ action.code }}">
     <h2>{% trans "Action" %} {{ action.code }}</h2>
+    <h5>{{ action.title }}</h5>
     <p>{{ action.description }}</p>
 
     {% if NAT_STRATEGY %}
