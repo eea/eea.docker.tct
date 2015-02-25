@@ -83,8 +83,7 @@
 
     {% if EU_STRATEGY and target.eu_aichi_strategy.all %}
     <div class="well">
-      <div class="well-title">{% trans "Mapping with EU targets" %}</div>
-      <strong>Most relevant</strong>
+      <div class="well-title">{% trans "Most relevant EU targets" %}</div>
       <ul>
         {% for strategy in target.eu_aichi_strategy.all %}
           {% with strategy.eu_target as eu_target %}
@@ -96,9 +95,12 @@
           {% endwith %}
         {% endfor %}
       </ul>
+    </div>
+    {% endif %}
 
-      {% if target.eu_other_aichi_strategy.count %}
-      <strong>Others</strong>
+    {% if EU_STRATEGY and target.eu_aichi_strategy.all %}
+    <div class="well">
+      <div class="well-title">{% trans "Other relevant EU targets" %}</div>
       <ul>
         {% for strategy in target.eu_other_aichi_strategy.all %}
           {% with strategy.eu_target as eu_target %}
@@ -110,7 +112,6 @@
           {% endwith %}
         {% endfor %}
       </ul>
-      {% endif %}
     </div>
     {% endif %}
 
@@ -157,7 +158,7 @@
 
     {% if EU_STRATEGY and target.eu_indicator_other_aichi_strategy.all %}
     <div class="well">
-      <div class="well-title">{% trans "Other EU indicators" %}</div>
+      <div class="well-title">{% trans "Other relevant EU indicators" %}</div>
       <ul>
         {% for strategy in target.eu_indicator_other_aichi_strategy.all %}
           {% with strategy.eu_indicator as eu_indicator %}
