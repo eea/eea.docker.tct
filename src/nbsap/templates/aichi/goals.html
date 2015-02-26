@@ -141,14 +141,11 @@
         {% for strategy in target.eu_indicator_aichi_strategy.all %}
           {% with strategy.eu_indicator as eu_indicator %}
           <li>
-            {% if eu_indicator.url %}
-              <a href="{{ eu_indicator.url }}" title="{{ eu_indicator.title }}">
-                {{ eu_indicator.indicator_type|upper }}
-                {{ eu_indicator.code }}: {{ eu_indicator.title }}
-              </a>
-            {% else %}
-              {{ eu_indicator.code }} {{ eu_indicator.title }}
-            {% endif %}
+            <a href="{% url 'eu_indicators' %}#indicator-{{ eu_indicator.id }}"
+                title="{{ eu_indicator.title }}">
+              {{ eu_indicator.indicator_type|upper }}
+              {{ eu_indicator.code }}: {{ eu_indicator.title }}
+            </a>
           </li>
           {% endwith %}
         {% endfor %}

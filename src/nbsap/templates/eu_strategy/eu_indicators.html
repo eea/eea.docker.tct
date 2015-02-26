@@ -21,7 +21,9 @@
 
       {% if group.subindicators.count %}
       {% for indicator in group.subindicators.all %}
-        <h2>{{ indicator.get_indicator_type_display }} {{ indicator.code }} {{ indicator.title }}</h2>
+        <h2 id="indicator-{{ indicator.id }}">
+          {{ indicator.get_indicator_type_display }} {{ indicator.code }} {{ indicator.title }}
+        </h2>
 
         {% if indicator.url %}
           <p>URL: <a href="{{ indicator.url }}">{{ indicator.title }}</a></p>
