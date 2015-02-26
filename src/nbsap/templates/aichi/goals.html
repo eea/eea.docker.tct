@@ -81,37 +81,43 @@
     <h2>{% trans "AICHI Target" %} {{ target.code }}</h2>
     <p>{{ target.description }}</p>
 
-    {% if EU_STRATEGY and target.eu_aichi_strategy.all %}
+    {% if EU_STRATEGY %}
     <div class="well">
       <div class="well-title">{% trans "Most relevant EU targets" %}</div>
-      <ul>
-        {% for strategy in target.eu_aichi_strategy.all %}
-          {% with strategy.eu_target as eu_target %}
-          <li>
-            <a href="{% url 'eu_targets' code=eu_target.code %}" title="{{ eu_target.code }}">
-              {% trans "EU Target" %} {{ eu_target.code }}: {{ eu_target.title }}
-            </a>
-          </li>
-          {% endwith %}
-        {% endfor %}
-      </ul>
+      {% if target.eu_aichi_strategy.count %}
+        <ul>
+          {% for strategy in target.eu_aichi_strategy.all %}
+            {% with strategy.eu_target as eu_target %}
+            <li>
+              <a href="{% url 'eu_targets' code=eu_target.code %}" title="{{ eu_target.code }}">
+                {% trans "EU Target" %} {{ eu_target.code }}: {{ eu_target.title }}
+              </a>
+            </li>
+            {% endwith %}
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>{% trans 'No corresponding EU target.' %}</p>
+      {% endif %}
     </div>
-    {% endif %}
 
-    {% if EU_STRATEGY and target.eu_aichi_strategy.all %}
     <div class="well">
       <div class="well-title">{% trans "Other relevant EU targets" %}</div>
-      <ul>
-        {% for strategy in target.eu_other_aichi_strategy.all %}
-          {% with strategy.eu_target as eu_target %}
-          <li>
-            <a href="{% url 'eu_targets' code=eu_target.code %}" title="{{ eu_target.code }}">
-              {% trans "EU Target" %} {{ eu_target.code }}: {{ eu_target.title }}
-            </a>
-          </li>
-          {% endwith %}
-        {% endfor %}
-      </ul>
+      {% if target.eu_other_aichi_strategy.count %}
+        <ul>
+          {% for strategy in target.eu_other_aichi_strategy.all %}
+            {% with strategy.eu_target as eu_target %}
+            <li>
+              <a href="{% url 'eu_targets' code=eu_target.code %}" title="{{ eu_target.code }}">
+                {% trans "EU Target" %} {{ eu_target.code }}: {{ eu_target.title }}
+              </a>
+            </li>
+            {% endwith %}
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>{% trans 'No corresponding EU target.' %}</p>
+      {% endif %}
     </div>
     {% endif %}
 
@@ -134,78 +140,88 @@
     </div>
     {% endif %}
 
-    {% if EU_STRATEGY and target.eu_indicator_aichi_strategy.all %}
+    {% if EU_STRATEGY %}
     <div class="well">
       <div class="well-title">{% trans "Most relevant EU indicators" %}</div>
-      <ul>
-        {% for strategy in target.eu_indicator_aichi_strategy.all %}
-          {% with strategy.eu_indicator as eu_indicator %}
-          <li>
-            <a href="{% url 'eu_indicators' %}#indicator-{{ eu_indicator.id }}"
-                title="{{ eu_indicator.title }}">
-              {{ eu_indicator.indicator_type|upper }}
-              {{ eu_indicator.code }}: {{ eu_indicator.title }}
-            </a>
-          </li>
-          {% endwith %}
-        {% endfor %}
-      </ul>
-    </div>
-    {% endif %}
-
-    {% if EU_STRATEGY and target.eu_indicator_other_aichi_strategy.all %}
-    <div class="well">
-      <div class="well-title">{% trans "Other relevant EU indicators" %}</div>
-      <ul>
-        {% for strategy in target.eu_indicator_other_aichi_strategy.all %}
-          {% with strategy.eu_indicator as eu_indicator %}
-          <li>
-            {% if eu_indicator.url %}
-              <a href="{{ eu_indicator.url }}" title="{{ eu_indicator.title }}">
+      {% if target.eu_indicator_aichi_strategy.count %}
+        <ul>
+          {% for strategy in target.eu_indicator_aichi_strategy.all %}
+            {% with strategy.eu_indicator as eu_indicator %}
+            <li>
+              <a href="{% url 'eu_indicators' %}#indicator-{{ eu_indicator.id }}"
+                  title="{{ eu_indicator.title }}">
                 {{ eu_indicator.indicator_type|upper }}
                 {{ eu_indicator.code }}: {{ eu_indicator.title }}
               </a>
-            {% else %}
-              {{ eu_indicator.code }} {{ eu_indicator.title }}
-            {% endif %}
-          </li>
-          {% endwith %}
-        {% endfor %}
-      </ul>
+            </li>
+            {% endwith %}
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>{% trans 'No corresponding EU indicator.' %}</p>
+      {% endif %}
+    </div>
+
+    <div class="well">
+      <div class="well-title">{% trans "Other relevant EU indicators" %}</div>
+      {% if target.eu_indicator_other_aichi_strategy.count %}
+        <ul>
+          {% for strategy in target.eu_indicator_other_aichi_strategy.all %}
+            {% with strategy.eu_indicator as eu_indicator %}
+            <li>
+              {% if eu_indicator.url %}
+                <a href="{{ eu_indicator.url }}" title="{{ eu_indicator.title }}">
+                  {{ eu_indicator.indicator_type|upper }}
+                  {{ eu_indicator.code }}: {{ eu_indicator.title }}
+                </a>
+              {% else %}
+                {{ eu_indicator.code }} {{ eu_indicator.title }}
+              {% endif %}
+            </li>
+            {% endwith %}
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>{% trans 'No corresponding EU indicator.' %}</p>
+      {% endif %}
     </div>
     {% endif %}
 
-    {% if target.indicators.all %}
     <div class="well">
       <div class="well-title">{% trans "Most relevant CBD indicators" %}</div>
-      <ul>
-        {% for indicator in target.indicators.all %}
-        <li>
-          <a href="{% url 'indicator' pk=indicator.pk %}"
-             data-modal="#indicator_modal">
-            {% trans "Indicator" %} {{indicator.id}}: {{ indicator.title }}
-          </a>
-        </li>
-        {% endfor %}
-      </ul>
+      {% if target.indicators.count %}
+        <ul>
+          {% for indicator in target.indicators.all %}
+          <li>
+            <a href="{% url 'indicator' pk=indicator.pk %}"
+               data-modal="#indicator_modal">
+              {% trans "Indicator" %} {{indicator.id}}: {{ indicator.title }}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>{% trans 'No corresponding CBD indicator.' %}</p>
+      {% endif %}
     </div>
-    {% endif %}
 
-    {% if target.other_indicators.all %}
     <div class="well">
       <div class="well-title">{% trans "Other relevant CBD indicators" %}</div>
-      <ul>
-        {% for indicator in target.other_indicators.all %}
-        <li>
-          <a href="{% url 'indicator' pk=indicator.pk %}"
-             data-modal="#indicator_modal">
-            {% trans "Indicator" %} {{indicator.id}}: {{ indicator.title }}
-          </a>
-        </li>
-        {% endfor %}
-      </ul>
+      {% if target.other_indicators.count %}
+        <ul>
+          {% for indicator in target.other_indicators.all %}
+          <li>
+            <a href="{% url 'indicator' pk=indicator.pk %}"
+               data-modal="#indicator_modal">
+              {% trans "Indicator" %} {{indicator.id}}: {{ indicator.title }}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>{% trans 'No corresponding CBD indicator.' %}</p>
+      {% endif %}
     </div>
-    {% endif %}
 
   </div>
   {% endfor %}
