@@ -358,6 +358,8 @@ class EuIndicator(models.Model):
     TYPES = (
         ('eu', 'EU'),
         ('sebi', 'SEBI'),
+        ('csi', 'CSI'),
+        ('aei', 'AEI'),
     )
 
     code = models.CharField(max_length=25,
