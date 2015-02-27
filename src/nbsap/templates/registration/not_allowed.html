@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% load i18n %}
+
+{% block title %}
+  NBSAP - {% trans "Error" %}
+{% endblock %}
+
+{% block content %}
+
+{% if messages %}
+  <div class="messages alert alert-success">
+  {% for message in messages %}
+      <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+  {% endfor %}
+  </div>
+{% endif %}
+
+  <div class="alert alert-danger">
+    <h4>{% trans "You are not allowed to view this page." %}</h4>
+  </div>
+
+{% endblock %}

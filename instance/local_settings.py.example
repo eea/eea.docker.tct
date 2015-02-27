@@ -100,3 +100,6 @@ LANGUAGES = (
 
 # Set the path to the image to be used as background
 #HEADER_BACKGROUND_IMG = '/static/header.png'
+
+# Set the variable below to allow only certain users to use the application
+# ALLOWED_USERS = ['admin']
