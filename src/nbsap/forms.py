@@ -17,6 +17,8 @@ from nbsap.models import (
 )
 from nbsap.utils import remove_tags, RE_CODE, RE_EU_TARGET_CODE, RE_ACTION_CODE
 
+MAPPING_ERROR = 'Cannot use the same {} Target for both Most relevant and Other'
+
 
 def validate_code(value):
     if not RE_CODE.match(value):
@@ -297,9 +299,8 @@ class NationalStrategyForm(forms.Form):
     nat_objective = forms.ChoiceField(choices=[])
     aichi_goal = forms.ChoiceField(choices=[])
     aichi_target = forms.ChoiceField(choices=[])
-    other_targets = chosenforms.ChosenMultipleChoiceField(choices=[],
-                                                          required=False,
-                                                          overlay="Select target...")
+    other_targets = chosenforms.ChosenMultipleChoiceField(
+        choices=[], required=False, overlay="Select target...")
 
     if settings.EU_STRATEGY:
         eu_targets = chosenforms.ChosenMultipleChoiceField(
@@ -309,12 +310,22 @@ class NationalStrategyForm(forms.Form):
             choices=[], required=False, overlay="Select EU actions...",
         )
 
+    def clean(self):
+        cleaned_data = super(NationalStrategyForm, self).clean()
+        aichi_targets = [cleaned_data['aichi_target']]
+        other_aichi_targets = cleaned_data['other_targets']
+
+        if set(aichi_targets) & set(other_aichi_targets):
+            raise ValidationError(_(MAPPING_ERROR.format('AICHI')))
+
+        return cleaned_data
+
     def __init__(self, *args, **kwargs):
         self.strategy = kwargs.pop('strategy', None)
         super(NationalStrategyForm, self).__init__(*args, **kwargs)
 
-        self.fields['nat_objective'].choices = self.get_choices('Objective',
-                                                                NationalObjective)
+        self.fields['nat_objective'].choices = self.get_choices(
+            'Objective', NationalObjective)
         self.fields['aichi_goal'].choices = self.get_choices('Goal',
                                                              AichiGoal,
                                                              isString=True)
@@ -330,17 +341,17 @@ class NationalStrategyForm(forms.Form):
 
         if self.strategy:
             self.fields['nat_objective'].initial = self.strategy.objective.id
-            self.fields[
-                'aichi_goal'].initial = self.strategy.relevant_target.get_parent_goal().pk
+            self.fields['aichi_goal'].initial = (
+                self.strategy.relevant_target.get_parent_goal().pk)
             self.fields[
                 'aichi_target'].initial = self.strategy.relevant_target.id
-            self.fields['other_targets'].initial = [target.id for target in
-                                                    self.strategy.other_targets.all()]
+            self.fields['other_targets'].initial = [
+                target.id for target in self.strategy.other_targets.all()]
             if settings.EU_STRATEGY:
-                self.fields['eu_targets'].initial = [target.id for target in
-                                                     self.strategy.eu_targets.all()]
-                self.fields['eu_actions'].initial = [action.id for action in
-                                                     self.strategy.eu_actions.all()]
+                self.fields['eu_targets'].initial = [
+                    target.id for target in self.strategy.eu_targets.all()]
+                self.fields['eu_actions'].initial = [
+                    action.id for action in self.strategy.eu_actions.all()]
 
     def save(self):
         strategy = self.strategy or NationalStrategy()
@@ -518,6 +529,24 @@ class EuIndicatorMapForm(forms.Form, ChoicesMixin):
         self.fields['aichi_targets'].initial = initial
         self.fields['other_aichi_targets'].initial = initial_other
 
+    def clean(self):
+        cleaned_data = super(EuIndicatorMapForm, self).clean()
+        eu_targets = cleaned_data['eu_targets']
+        other_eu_targets = cleaned_data['other_eu_targets']
+        aichi_targets = cleaned_data['aichi_targets']
+        other_aichi_targets = cleaned_data['other_aichi_targets']
+
+        errors = []
+        if set(eu_targets) & set(other_eu_targets):
+            errors.append(_(MAPPING_ERROR.format('EU')))
+        if set(aichi_targets) & set(other_aichi_targets):
+            errors.append(_(MAPPING_ERROR.format('AICHI')))
+
+        if errors:
+            raise ValidationError(errors)
+
+        return cleaned_data
+
     def save(self):
         self.indicator.targets = self.cleaned_data['eu_targets']
         self.indicator.other_targets = self.cleaned_data['other_eu_targets']
@@ -568,6 +597,16 @@ class EuAichiStrategyForm(forms.Form, ChoicesMixin):
                 EuTarget.objects.exclude(id__in=existing_strategies).all(),
                 'pk'
             )
+
+    def clean(self):
+        cleaned_data = super(EuAichiStrategyForm, self).clean()
+        aichi_targets = cleaned_data['aichi_targets']
+        other_aichi_targets = cleaned_data['other_aichi_targets']
+
+        if set(aichi_targets) & set(other_aichi_targets):
+            raise ValidationError(_(MAPPING_ERROR.format('AICHI')))
+
+        return cleaned_data
 
     def save(self):
         if self.strategy:

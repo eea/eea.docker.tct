@@ -25,6 +25,8 @@
   {% endif %}
   <form action="" method="post" class="form-horizontal">
 
+    <div class="error-list">{{ form.non_field_errors }}</div>
+
     <div class="form-group row">
       <label class="col-md-2" for="eu_targets">{% trans "Most relevant EU Targets" %}</label>
 

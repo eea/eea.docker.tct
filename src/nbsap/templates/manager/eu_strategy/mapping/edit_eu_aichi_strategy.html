@@ -25,6 +25,8 @@
 
   <form action="{% url 'edit_eu_aichi_strategy' pk=strategy.pk %}" method="post" class="form-horizontal">
 
+    <div class="error-list">{{ form.non_field_errors }}</div>
+
     <div class="form-group">
       <label class="col-md-2" for="eu_target">{% trans "EU Target" %}</label>
       <div class="col-md-3">

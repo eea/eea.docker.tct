@@ -31,6 +31,8 @@
   <form action="{% url 'edit_national_strategy' %}" method="post"
         id="national-strategy-add" class="form-horizontal">
 
+    <div class="error-list">{{ form.non_field_errors }}</div>
+
     <div class="form-group">
       <label class="col-md-2" for="nat_objective">{% trans "National Objective" %}</label>
       <div class="col-md-3"> {{ form.nat_objective }}
