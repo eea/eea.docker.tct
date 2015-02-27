@@ -41,7 +41,7 @@ class ChoicesMixin(object):
         return sorted(
             [(x.pk, '{} {}'.format(name, getattr(x, attr)))
              for x in queryset],
-            key=lambda el: int(el[1].split()[1]))
+            key=lambda el: el[1].split()[1])
 
 
 class NationalObjectiveForm(forms.Form):
