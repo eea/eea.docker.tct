@@ -32,14 +32,6 @@
 
 {% block content %}
 
-  {% if messages %}
-    <div class="messages alert alert-success">
-    {% for message in messages %}
-        <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
-    {% endfor %}
-    </div>
-  {% endif %}
-
   {% if info_header %}
   <div class="alert alert-info alert-dismissible info-header" role="alert">
     <button type="button" class="close" data-dismiss="alert">
@@ -244,7 +236,6 @@
 <script>
   $(function () {
     $("[rel=tooltip]").tooltip();
-    $('.messages').delay(1000).fadeOut();
   });
 </script>
 {% endblock scripts %}

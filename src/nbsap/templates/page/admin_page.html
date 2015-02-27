@@ -33,14 +33,6 @@
 
 {% block content %}
 
-  {% if messages %}
-    <div class="messages alert alert-success">
-      {% for message in messages %}
-        {{ message }}
-      {% endfor %}
-    </div>
-  {% endif %}
-
   <h1 class="page-title">Edit page</h1>
   <form method="POST" class="edit-form">
 
