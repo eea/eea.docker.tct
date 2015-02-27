@@ -58,8 +58,12 @@ sub-/* bootstrap override */
 .form-group textarea {
   display: block;
   width: 100%;
+}
+
+.form-group textarea {
   height: 55px;
 }
+
 .chzn-choices .search-field {
   height: 34px!important;
 }
