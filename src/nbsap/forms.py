@@ -476,11 +476,11 @@ class EuIndicatorMapForm(forms.Form, ChoicesMixin):
     eu_targets = chosenforms.ChosenMultipleChoiceField(
         overlay="Select EU target...")
     other_eu_targets = chosenforms.ChosenMultipleChoiceField(
-        overlay="Select EU target...")
+        overlay="Select EU target...", required=False)
     aichi_targets = chosenforms.ChosenMultipleChoiceField(
         overlay="Select Aichi target...")
     other_aichi_targets = chosenforms.ChosenMultipleChoiceField(
-        overlay="Select Aichi target...")
+        overlay="Select Aichi target...", required=False)
 
     def __init__(self, *args, **kwargs):
         self.indicator = kwargs.pop('indicator', None)
@@ -539,7 +539,7 @@ class EuAichiStrategyForm(forms.Form, ChoicesMixin):
     aichi_targets = chosenforms.ChosenMultipleChoiceField(
         overlay="Select target...")
     other_aichi_targets = chosenforms.ChosenMultipleChoiceField(
-        overlay="Select target...")
+        overlay="Select target...", required=False)
 
     def __init__(self, *args, **kwargs):
         self.strategy = kwargs.pop('strategy', None)
