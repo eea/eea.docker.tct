@@ -93,6 +93,9 @@
   <script>
     $(".chzn-select").chosen();
 
+    forbidCrossChoicesIntersection('eu_targets', 'other_eu_targets');
+    forbidCrossChoicesIntersection('aichi_targets', 'other_aichi_targets');
+
     showTargetCodeValue('eu_targets',
         '.eu_targets_text',
         "{% url 'eu_target_title' pk=1 %}");

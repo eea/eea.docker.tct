@@ -1,6 +1,8 @@
 $(".chzn-select").chosen();
 $(function () {
 
+  forbidCrossChoicesIntersection('aichi_target', 'other_targets');
+
   showObjectiveCodeValue('nat_objective',
                          '.objective_text',
                          "{% url 'objective_title' pk=1 %}");

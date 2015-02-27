@@ -68,6 +68,9 @@
   <script>
   $(function() {
     $(".chzn-select").chosen();
+
+    forbidCrossChoicesIntersection('aichi_targets', 'other_aichi_targets');
+
     showTargetCodeValue('aichi_targets',
                         '.aichi_targets_text',
                         "{% url 'aichi_target_title' pk=1 %}");

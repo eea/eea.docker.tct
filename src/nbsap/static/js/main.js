@@ -121,3 +121,26 @@ function showObjectiveCodeValue(name, textSelector, url) {
 function showActionCodeValue(name, textSelector, url) {
   showDescription(name, textSelector, url, 'Action', true, true);
 }
+
+function forbidChoicesIntersection(selector1, selector2) {
+  $(selector1).on('change', function () {
+    $("option", this).each(function() {
+      var option2 = $(selector2).find('option[value=' + this.value + ']');
+      if (this.selected) {
+        option2.hide();
+      }
+      else {
+        option2.show();
+      }
+    });
+    $(selector2).trigger('chosen:updated');
+  }).change();
+}
+
+function forbidCrossChoicesIntersection(name, nameOther) {
+  var selectorTargets = 'select[name=' + name + ']';
+  var selectorOtherTargets = 'select[name=' + nameOther + ']';
+
+  forbidChoicesIntersection(selectorTargets, selectorOtherTargets);
+  forbidChoicesIntersection(selectorOtherTargets, selectorTargets);
+}
