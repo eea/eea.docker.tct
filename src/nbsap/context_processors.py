@@ -33,3 +33,7 @@ def google_analytics(request):
             'GOOGLE_ANALYTICS_DOMAIN': ga_domain,
         }
     return {}
+
+
+def login(request):
+    return {'RESTRICTED_ACCESS': bool(getattr(settings, 'ALLOWED_USERS', []))}

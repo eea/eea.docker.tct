@@ -18,6 +18,11 @@
     <form class="form-inline" method="post" action="{% url 'login' %}">
       <fieldset>
         <legend>{% trans "Existing Users Login" %}</legend>
+        {% if RESTRICTED_ACCESS %}
+        <div class="restricted">
+          <p>{% trans "This instance is restricted to specific users. Please contact helpdesk for more information." %}</p>
+        </div>
+        {% endif %}
         <div class="control-group">
           <label class="control-label" for="inputIcon">{% trans "Username" %}</label>
           <div class="controls">

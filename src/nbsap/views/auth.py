@@ -42,6 +42,7 @@ def auth_required(view):
 
     return wrapper
 
+
 def crashme(request):
     if request.user.is_superuser:
         raise RuntimeError("Crashing as requested")

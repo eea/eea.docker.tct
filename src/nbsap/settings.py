@@ -106,6 +106,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'nbsap.context_processors.nbsap_admin',
     'nbsap.context_processors.nbsap_navbar_link',
     'nbsap.context_processors.google_analytics',
+    'nbsap.context_processors.login',
 )
 
 # List of callables that know how to import templates from various sources.
