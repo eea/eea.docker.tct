@@ -227,6 +227,13 @@ Start running development server::
   $ ./instance/manage.py runserver
 
 
+Common configuration
+--------------------
+
+Set `ALLOWED_USERS` in settings to restrict access to a specific set of usernames.
+See `local_settings.py.example` for LDAP Authentication configuration.
+
+
 =================
 Translation files
 =================

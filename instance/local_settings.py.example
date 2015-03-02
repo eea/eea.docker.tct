@@ -103,3 +103,11 @@ LANGUAGES = (
 
 # Set the variable below to allow only certain users to use the application
 # ALLOWED_USERS = ['admin']
+
+# LDAP login
+#AUTHENTICATION_BACKENDS = (
+#    'django.contrib.auth.backends.ModelBackend',
+#    'django_auth_ldap.backend.LDAPBackend',
+#)
+#AUTH_LDAP_SERVER_URI = "ldap://nas.edw.lan"
+#AUTH_LDAP_USER_DN_TEMPLATE = "uid=%(user)s,cn=users,dc=edw,dc=lan"

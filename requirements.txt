@@ -17,5 +17,7 @@ tablib==0.9.11
 django-widget-tweaks==1.3
 beautifulsoup4==4.3.2
 django-webtest==1.7.6
+python-ldap==2.4.19
+django-auth-ldap==1.2.5
 requests==2.5.2
 WebTest==2.0.14
