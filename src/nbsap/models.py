@@ -348,7 +348,7 @@ class EuAction(models.Model):
             return self.parent.code + letter
 
         codes = [int(RE_ACTION_CODE.match(code).groups()[0]) for code in
-                EuAction.objects.values_list('code', flat=True)]
+                 EuAction.objects.values_list('code', flat=True)]
         return str(max(codes) + 1)
 
 
@@ -409,8 +409,9 @@ class EuTarget(models.Model):
                                      related_name="target")
     indicators = models.ManyToManyField(EuIndicator,
                                         related_name="targets")
-    other_indicators = models.ManyToManyField(EuIndicator,
-                                              related_name="other_targets")
+    other_indicators = models.ManyToManyField(
+        EuIndicator, related_name="other_targets", blank=True,
+    )
 
     if settings.EU_STRATEGY and settings.NAT_STRATEGY:
         national_strategy = models.ManyToManyField(
@@ -484,8 +485,9 @@ class EuIndicatorToAichiStrategy(models.Model):
     other_aichi_targets = models.ManyToManyField(
         AichiTarget,
         verbose_name="Other Aichi targets",
-        related_name="eu_indicator_other_aichi_strategy")
-
+        related_name="eu_indicator_other_aichi_strategy",
+        blank=True,
+    )
 
     def get_targets(self):
         return ', '.join([obj.code for obj in self.aichi_targets.all()])
@@ -504,9 +506,10 @@ class EuAichiStrategy(models.Model):
     aichi_targets = models.ManyToManyField(AichiTarget,
                                            verbose_name="Aichi targets",
                                            related_name="eu_aichi_strategy")
-    other_aichi_targets = models.ManyToManyField(AichiTarget,
-                                           verbose_name="Other Aichi targets",
-                                           related_name="eu_other_aichi_strategy")
+    other_aichi_targets = models.ManyToManyField(
+        AichiTarget, verbose_name="Other Aichi targets",
+        related_name="eu_other_aichi_strategy", blank=True,
+    )
 
     def get_targets(self):
         return ', '.join([obj.code for obj in self.aichi_targets.all()])
@@ -527,11 +530,10 @@ class NationalStrategy(models.Model):
         verbose_name="Relevant AICHI target",
         related_name="relevant_target_national_strategy")
     other_targets = models.ManyToManyField(
-        AichiTarget,
-        null=True,
-        blank=True,
+        AichiTarget, null=True, blank=True,
         verbose_name="Other AICHI targets",
-        related_name="other_targets_national_strategy")
+        related_name="other_targets_national_strategy",
+    )
 
     class Meta:
         verbose_name_plural = ' Mappings: National strategy to AICHI&EU'
