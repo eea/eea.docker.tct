@@ -61,6 +61,7 @@
             {{ form.indicator_type.errors }}
           </div>
 
+          {% if indicator.indicator_type == 'eu' %}
           <div class="form-group">
             <label class=""
                    for="subindicators">{% trans "Subindicators" %}</label>
@@ -72,6 +73,7 @@
             <div class="subindicators_text col-md-7 short-descrip">
             </div>
           </div>
+          {% endif %}
 
         </div>
       </div>

@@ -10,7 +10,12 @@
 
 {% block content %}
 
-  <h1 class="page-title">{% trans "Indicator" %} {{ indicator.code }}: {{ indicator.title }}</h1>
+  <h1 class="page-title">
+    {% if indicator.code %}
+      {% trans "Indicator" %} {{ indicator.code }}:
+    {% endif %}
+      {{ indicator.title }}
+  </h1>
 
   <div class="action-bar">
     <form method="POST" action="{% url 'delete_eu_indicator' pk=indicator.pk %}">

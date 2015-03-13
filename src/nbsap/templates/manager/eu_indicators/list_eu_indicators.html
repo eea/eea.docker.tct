@@ -25,15 +25,24 @@
   <table class="table">
 
     <thead>
-    <th>{% trans "Code" %}</th>
-    <th>{% trans "Title" %}</th>
+    <tr>
+      <th>{% trans "Code" %}</th>
+      <th>{% trans "Title" %}</th>
+      <th></th>
+    </tr>
     </thead>
 
     <tbody>
     {% for group in indicators %}
       <tr>
         <td colspan="2">
-          <strong><a href="{% url 'view_eu_indicator' pk=group.pk %}">{% if group.code %}{{ group.code }} {% endif %}{{ group.title }}</a></strong>
+          <strong><a href="{% url 'view_eu_indicator' pk=group.pk %}">
+            {% if group.code %}
+              {{ group.code }} {% endif %}{{ group.title }}</a></strong>
+        </td>
+        <td>
+          <a class="btn btn-default"
+             href="{% url 'edit_eu_indicator' pk=group.pk %}">{% trans "Edit" %}</a>
         </td>
       </tr>
       {% for indicator in group.subindicators.all %}
@@ -43,6 +52,10 @@
             <a href="{% url 'view_eu_indicator' pk=indicator.pk %}"
                title="{% trans 'Indicator' %} {{ indicator.code }}">
               {{ indicator.title|default:indicator.code }}</a>
+          </td>
+          <td>
+            <a class="btn btn-default"
+               href="{% url 'edit_eu_indicator' pk=indicator.pk %}">{% trans "Edit" %}</a>
           </td>
         </tr>
       {% endfor %}
