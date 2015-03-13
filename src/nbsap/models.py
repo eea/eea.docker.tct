@@ -405,10 +405,12 @@ class EuTarget(models.Model):
     title = models.TextField(max_length=512,
                              verbose_name="Title")
     description = models.TextField(verbose_name="Description")
-    actions = models.ManyToManyField(EuAction,
-                                     related_name="target")
-    indicators = models.ManyToManyField(EuIndicator,
-                                        related_name="targets")
+    actions = models.ManyToManyField(
+        EuAction, related_name="target", blank=True,
+    )
+    indicators = models.ManyToManyField(
+        EuIndicator, related_name="targets", blank=True,
+    )
     other_indicators = models.ManyToManyField(
         EuIndicator, related_name="other_targets", blank=True,
     )
@@ -433,6 +435,8 @@ class EuTarget(models.Model):
 
     @staticmethod
     def _pre_save_target_code_on_edit(instance):
+        if not instance.id:
+            return
 
         # update the action code for each child action
         for action in instance.actions.all():
