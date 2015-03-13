@@ -41,7 +41,7 @@
         {% trans 'Mappings' %}
       </a>
     </li>
-    {% if user.is_staff %}
+    {% if user.is_superuser %}
       <li>
         <a href="{% url 'admin:index' %}" class="change-lang">{% trans 'Administration' %}</a>
       </li>
