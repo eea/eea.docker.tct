@@ -16,7 +16,7 @@ def eu_targets(request, code):
     targets = models.EuTarget.objects.all()
 
     current_target.actions_tree = []
-    for action in current_target.actions.all():
+    for action in current_target.actions.order_by('code'):
         current_target.actions_tree.extend(action.get_all_actions())
 
     return render(request, 'eu_strategy/eu_targets.html',

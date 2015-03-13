@@ -154,7 +154,7 @@
       <h2>{% trans "Action" %} {{ action.code }}</h2>
       <h5>{{ action.title }}</h5>
 
-      <p>{{ action.description }}</p>
+      <p>{{ action.description|safe }}</p>
 
       {% if NAT_STRATEGY %}
         <div class="well">

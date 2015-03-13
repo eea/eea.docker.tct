@@ -333,7 +333,7 @@ class EuAction(models.Model):
         #we should use https://github.com/django-mptt/django-mptt/
         r = []
         r.append(self)
-        for ob in EuAction.objects.filter(parent=self):
+        for ob in EuAction.objects.filter(parent=self).order_by('code'):
             r.extend(ob.get_all_actions())
         return r
 

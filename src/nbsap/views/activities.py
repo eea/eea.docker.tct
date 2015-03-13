@@ -1,4 +1,3 @@
-
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import ugettext_lazy as _
 from django.contrib import messages
@@ -32,26 +31,27 @@ def edit_eu_strategy_activity(request, target, pk=None, parent=None):
 
     if parent:
         parent = get_object_or_404(models.EuAction, pk=parent)
+    else:
+        parent = activity and activity.parent
 
     lang = request.GET.get('lang', request.LANGUAGE_CODE)
 
     if request.method == 'POST':
-        form = EuStrategyActivityForm(request.POST,
-                                      activity=activity,
-                                      target=target,
-                                      parent=parent)
+        form = EuStrategyActivityForm(
+            request.POST, activity=activity, target=target, parent=parent,
+        )
         if form.is_valid():
             form.save()
             if not pk:
                 messages.success(request,
                                  _('Activity successfully added.') + "")
             else:
-                messages.success(request,  _('Saved changes.') + "")
+                messages.success(request, _('Saved changes.') + "")
             return redirect('view_eu_strategy_target', pk=target.pk)
     else:
-        form = EuStrategyActivityForm(activity=activity,
-                                      target=target,
-                                      lang=lang)
+        form = EuStrategyActivityForm(
+            activity=activity, target=target, lang=lang, parent=parent
+        )
 
     return render(request, template, {
         'form': form,
