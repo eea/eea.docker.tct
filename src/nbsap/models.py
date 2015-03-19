@@ -129,7 +129,7 @@ class AichiTarget(models.Model):
                                               null=True)
 
     def __unicode__(self):
-        return 'Target %s' % self.code
+        return u'Target %s' % self.code
 
     def get_parent_goal(self):
         return self.goals.all()[0]
@@ -318,7 +318,7 @@ class EuAction(models.Model):
         translate = ('description', 'title')
 
     def __unicode__(self):
-        return 'Action %s' % self.code
+        return u'Action %s' % self.code
 
     def get_target(self):
         if self.parent is None:
@@ -381,7 +381,7 @@ class EuIndicator(models.Model):
         return self.parent
 
     def __unicode__(self):
-        return '{0} {1}: {2}'.format(self.indicator_type.upper(),
+        return u'{0} {1}: {2}'.format(self.indicator_type.upper(),
                                      self.code,
                                      self.title)
 
