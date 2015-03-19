@@ -1,0 +1,74 @@
+{% extends 'manager/base.html' %}
+
+{% load i18n %}
+{% load assets %}
+
+
+{% block title %}
+  NBSAP - {% trans "National Indicators: List Indicators" %}
+{% endblock %}
+
+
+{% block content %}
+
+  {% get_current_language as lang_code %}
+
+  <h1 class="page-title">{% trans "National Indicators" %}</h1>
+  <h1>{% trans "List National Indicators" %}</h1>
+
+  <div class="action-bar">
+    <a class="btn btn-success add"
+       href="{% url 'edit_nat_indicator' %}">{% trans "Add indicator" %}
+    </a>
+  </div>
+
+  <table class="table">
+
+    <thead>
+    <tr>
+      <th>{% trans "Code" %}</th>
+      <th>{% trans "Title" %}</th>
+      <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    {% for group in indicators %}
+      <tr>
+        <td colspan="2">
+          <strong><a href="{% url 'view_nat_indicator' pk=group.pk %}">
+            {% if group.code %}
+              {{ group.code }} {% endif %}{{ group.title }}</a></strong>
+        </td>
+        <td>
+          <a class="btn btn-default"
+             href="{% url 'edit_nat_indicator' pk=group.pk %}">{% trans "Edit" %}</a>
+        </td>
+      </tr>
+      {% for indicator in group.subindicators.all %}
+        <tr>
+          <td>{{ indicator.code|default:'' }}</td>
+          <td>
+            <a href="{% url 'view_nat_indicator' pk=indicator.pk %}"
+               title="{% trans 'Indicator' %} {{ indicator.code }}">
+              {{ indicator.title|default:indicator.code }}</a>
+          </td>
+          <td>
+            <a class="btn btn-default"
+               href="{% url 'edit_nat_indicator' pk=indicator.pk %}">{% trans "Edit" %}</a>
+          </td>
+        </tr>
+      {% endfor %}
+    {% endfor %}
+    </tbody>
+
+  </table>
+{% endblock %}
+
+{% block scripts %}
+
+  {% assets "js_admin" %}
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+  {% endassets %}
+
+{% endblock scripts %}

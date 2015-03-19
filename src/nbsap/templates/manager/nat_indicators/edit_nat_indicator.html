@@ -1,0 +1,107 @@
+{% extends 'manager/base.html' %}
+
+{% load i18n %}
+{% load assets %}
+
+{% block title %}
+  NBSAP - {% trans "Edit indicator " %}{{ indicator.code }}
+{% endblock %}
+
+
+{% block extra_head %}
+  {{ form.media }}
+{% endblock %}
+
+
+{% block content %}
+
+  <h1 class="page-title">{% trans "National Indicator" %}</h1>
+  <h1>{% trans "Edit National Indicator" %} {{ indicator.code }}</h1>
+
+  {% if form.errors %}
+    <p>
+      {% blocktrans with form.errors|pluralize as errors %}Please correct the
+        error {{ errors }} below.{% endblocktrans %}
+    </p>
+  {% endif %}
+  <form action="" method="post" id="national-indicator-edit" class="form">
+
+    <div class="form-group">
+      <label for="language">{% trans "Language" %}</label>
+      {{ form.language }}
+    </div>
+
+    {% if form.code %}
+      <div class="form-group">
+        <label for="code">{% trans "Code" %}</label>
+        {{ form.code }}
+        {{ form.code.errors }}
+      </div>
+    {% endif %}
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="language-container">
+
+          <div class="form-group">
+            <label for="title">{% trans "Title" %}</label>
+            {{ form.title }}
+            {{ form.title.errors }}
+          </div>
+
+          <div class="form-group">
+            <label for="url">{% trans "URL" %}</label>
+            {{ form.url }}
+            {{ form.url.errors }}
+          </div>
+
+          <div class="form-group">
+            <label for="indicator_type">{% trans "Indicator type" %}</label>
+            {{ form.indicator_type }}
+            {{ form.indicator_type.errors }}
+          </div>
+
+          {% if indicator.indicator_type == 'label' %}
+          <div class="form-group">
+            <label class=""
+                   for="subindicators">{% trans "Subindicators" %}</label>
+
+            <div class="">
+              {{ form.subindicators }}
+              {{ form.subindicators.errors }}
+            </div>
+            <div class="subindicators_text col-md-7 short-descrip">
+            </div>
+          </div>
+          {% endif %}
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="action-bar">
+      <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
+      <a href="{% url 'view_nat_indicator' pk=indicator.pk %}"
+         class="btn btn-default" type="button">{% trans "Cancel" %}</a>
+    </div>
+
+  </form>
+{% endblock %}
+
+
+{% block scripts %}
+  <script src="/static/js/language_change.js"></script>
+  {% assets "js_admin" %}
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+  {% endassets %}
+
+{#  <script>#}
+{#    $(function () {#}
+{#      $(".chzn-select").chosen();#}
+{#      showTargetCodeValue('subindicators',#}
+{#          '.subindicators_text',#}
+{#          "{% url 'aichi_target_title' pk=1 %}");#}
+{#    });#}
+{#  </script>#}
+{% endblock %}

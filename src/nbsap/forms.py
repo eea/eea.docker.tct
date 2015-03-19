@@ -13,7 +13,7 @@ from chosen import forms as chosenforms
 from nbsap.models import (
     NationalStrategy, NationalObjective, NationalAction, EuTarget, AichiGoal,
     AichiTarget, EuAction, EuIndicator, EuIndicatorToAichiStrategy,
-    EuAichiStrategy,
+    EuAichiStrategy, NationalIndicator
 )
 from nbsap.utils import remove_tags, RE_CODE, RE_EU_TARGET_CODE, RE_ACTION_CODE
 
@@ -480,6 +480,57 @@ class EuIndicatorForm(forms.Form):
         return indicator
 
 
+class NationalIndicatorForm(forms.Form):
+    language = forms.ChoiceField(choices=settings.LANGUAGES)
+    title = forms.CharField(widget=widgets.Textarea, required=False)
+    code = forms.CharField(widget=widgets.Textarea, required=False)
+    url = forms.CharField(required=False)
+    indicator_type = forms.ChoiceField(choices=NationalIndicator.TYPES)
+
+    def __init__(self, *args, **kwargs):
+        self.indicator = kwargs.pop('indicator', None)
+        lang = kwargs.pop('lang', None)
+
+        super(NationalIndicatorForm, self).__init__(*args, **kwargs)
+
+        if self.indicator:
+            title = getattr(self.indicator, 'title_%s' % lang, None)
+            self.fields['title'].initial = title
+            self.fields['url'].initial = self.indicator.url
+            self.fields['indicator_type'].initial = (
+                self.indicator.indicator_type
+            )
+            if 'code' in self.fields:
+                self.fields['code'].initial = self.indicator.code
+
+        self.fields['language'].initial = lang
+
+    def clean_code(self):
+        code = self.cleaned_data['code']
+        try:
+            NationalIndicator.objects.get(code=code)
+            raise ValidationError('Code already exists.')
+        except NationalIndicator.DoesNotExist:
+            pass
+        return code
+
+    def save(self):
+        indicator = self.indicator or NationalIndicator()
+        lang = self.cleaned_data['language']
+        title = self.cleaned_data['title']
+        code = self.cleaned_data.get('code', None)
+
+        setattr(indicator, 'title_%s' % lang, title)
+        indicator.url = self.cleaned_data['url']
+        indicator.indicator_type = self.cleaned_data['indicator_type']
+
+        if code:
+            indicator.code = code
+        indicator.save()
+
+        return indicator
+
+
 class EuIndicatorEditForm(EuIndicatorForm, ChoicesMixin):
     code = forms.CharField(max_length=16, validators=[validate_eu_target_code],
                            required=False)
@@ -510,6 +561,39 @@ class EuIndicatorEditForm(EuIndicatorForm, ChoicesMixin):
     def save(self):
         indicator = super(EuIndicatorEditForm, self).save()
         indicator.parent = self.cleaned_data['subindicators']
+        return indicator
+
+
+class NationalIndicatorEditForm(NationalIndicatorForm, ChoicesMixin):
+    code = forms.CharField(max_length=16, validators=[validate_eu_target_code],
+                           required=False)
+    subindicators = chosenforms.ChosenMultipleChoiceField(
+        choices=[], required=False, overlay="Select subindicators...")
+
+    def __init__(self, *args, **kwargs):
+        super(NationalIndicatorEditForm, self).__init__(*args, **kwargs)
+        sub_choices = self._get_choices(
+            'Subindicator', NationalIndicator.objects.exclude(indicator_type='label'),
+            'code'
+        )
+        self.fields['subindicators'].choices = sub_choices
+        self.fields['subindicators'].initial = (self.indicator.subindicators
+                                                .values_list('pk', flat=True))
+
+    def clean_code(self):
+        code = self.cleaned_data['code']
+        if code == self.indicator.code:
+            return code
+        try:
+            NationalIndicator.objects.get(code=code)
+            raise ValidationError('Code already exists.')
+        except NationalIndicator.DoesNotExist:
+            pass
+        return code
+
+    def save(self):
+        indicator = super(NationalIndicatorEditForm, self).save()
+        indicator.subindicators = self.cleaned_data['subindicators']
         return indicator
 
 
@@ -591,6 +675,46 @@ class EuIndicatorMapForm(forms.Form, ChoicesMixin):
         ita.aichi_targets = self.cleaned_data['aichi_targets']
         ita.other_aichi_targets = self.cleaned_data['other_aichi_targets']
         ita.save()
+
+
+class NationalIndicatorMapForm(forms.Form, ChoicesMixin):
+    nat_objectives = chosenforms.ChosenMultipleChoiceField(
+        overlay="Select National Objective...", required=False)
+    other_nat_objectives = chosenforms.ChosenMultipleChoiceField(
+        overlay="Select National Objective...", required=False)
+
+    def __init__(self, *args, **kwargs):
+        self.indicator = kwargs.pop('indicator', None)
+        super(NationalIndicatorMapForm, self).__init__(*args, **kwargs)
+        nat_objectives = self._get_choices(
+            'Objective', NationalObjective.objects.all(), 'code'
+        )
+        self.fields['nat_objectives'].choices = nat_objectives
+        self.fields['other_nat_objectives'].choices = nat_objectives
+        self.fields['nat_objectives'].initial = (
+            self.indicator.nat_objectives.values_list('pk', flat=True))
+        self.fields['other_nat_objectives'].initial = (
+            self.indicator.other_nat_objectives.values_list('pk', flat=True)
+        )
+
+
+    def clean(self):
+        cleaned_data = super(NationalIndicatorMapForm, self).clean()
+        nat_objectives = cleaned_data['nat_objectives']
+        other_nat_objectives = cleaned_data['other_nat_objectives']
+        errors = []
+        if set(nat_objectives) & set(other_nat_objectives):
+            errors.append(_(MAPPING_ERROR.format('OBJ')))
+
+        if errors:
+            raise ValidationError(errors)
+
+        return cleaned_data
+
+    def save(self):
+        self.indicator.nat_objectives = self.cleaned_data['nat_objectives']
+        self.indicator.other_nat_objectives = self.cleaned_data['other_nat_objectives']
+        self.indicator.save()
 
 
 class EuAichiStrategyForm(forms.Form, ChoicesMixin):

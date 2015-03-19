@@ -1,0 +1,70 @@
+{% extends 'layout.html' %}
+{% load i18n %}
+{% load utils %}
+
+
+{% block title %}
+  NBSAP - {% trans "National Indicators" %}
+{% endblock %}
+
+
+{% block navmenu %}
+  {% include '_bits/nav_menu.html' %}
+{% endblock %}
+
+{% block content %}
+  <h1 class="page-title">{% trans "National Indicators" %}</h1>
+
+  {% if indicators %}
+    {% for group in indicators %}
+      <h1>{{ group.title }}</h1>
+
+      {% if group.subindicators.count %}
+      {% for indicator in group.subindicators.all %}
+        <h2 id="indicator-{{ indicator.id }}">
+          {{ indicator.get_indicator_type_display }} {{ indicator.code }} {{ indicator.title }}
+        </h2>
+
+        {% if indicator.url %}
+          <p>URL: <a href="{{ indicator.url }}">{{ indicator.title }}</a></p>
+        {% endif %}
+
+        <div class="well">
+          <div class="well-title">{% trans "National objectives" %}</div>
+          <p><strong>Most relevant:</strong></p>
+          {% if indicator.nat_objectives.exists %}
+            <ul>
+              {% for objective in indicator.nat_objectives.all %}
+                <li>
+                  <a href="{% url 'nat_strategy' code=objective.code %}">{{ objective.code }} {{ objective.title }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p>{% trans "No corresponding national objectives" %}.</p>
+          {% endif %}
+
+          <p><strong>Other:</strong></p>
+          {% if indicator.other_nat_objectives.exists %}
+            <ul>
+              {% for objective in indicator.other_nat_objectives.all %}
+                <li>
+                  <a href="{% url 'nat_strategy' code=objective.code %}">{{ objective.code }} {{ objective.title }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p>{% trans "No corresponding national objectives" %}.</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+      {% else %}
+      <p>{% trans 'No indicators in this group.' %}</p>
+      {% endif %}
+
+    {% endfor %}
+
+  {% else %}
+    <h1>{% trans 'No National Indicators' %}</h1>
+  {% endif %}
+{% endblock %}

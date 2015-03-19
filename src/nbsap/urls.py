@@ -24,6 +24,8 @@ urlpatterns = patterns('',
         name='indicator'),
     url(r'^eu_indicators/$', 'nbsap.views.eu_indicators',
         name='eu_indicators'),
+    url(r'^nat_indicators/$', 'nbsap.views.nat_indicators',
+        name='nat_indicators'),
 
     url(r'^objectives$', 'nbsap.views.nat_strategy', name='nat_strategy'),
     url(r'^objectives\.xlsx$', 'nbsap.views.nat_strategy_download', name='nat_strategy_download'),
@@ -156,6 +158,30 @@ urlpatterns = patterns('',
     url(r'^administration/indicators/(?P<pk>\d+)/mapping/$',
         'nbsap.views.map_eu_indicator',
         name='map_eu_indicator'),
+
+    url(r'^administration/nat-indicators/$',
+        'nbsap.views.list_nat_indicators',
+        name='list_nat_indicators'),
+
+    url(r'^administration/nat-indicator/(?P<pk>\d+)/$',
+        'nbsap.views.view_nat_indicator',
+        name='view_nat_indicator'),
+
+    url(r'^administration/nat-indicators/add/$',
+        'nbsap.views.edit_nat_indicator',
+        name='edit_nat_indicator'),
+
+    url(r'^administration/nat-indicators/(?P<pk>\d+)/edit/$',
+        'nbsap.views.edit_nat_indicator',
+        name='edit_nat_indicator'),
+
+    url(r'^administration/nat-indicators/(?P<pk>\d+)/delete/$',
+        'nbsap.views.delete_nat_indicator',
+        name='delete_nat_indicator'),
+
+    url(r'^administration/nat-indicators/(?P<pk>\d+)/mapping/$',
+        'nbsap.views.map_nat_indicator',
+        name='map_nat_indicator'),
 
     url(r'^administration/objectives/$',
             'nbsap.views.list_national_objectives',

@@ -7,10 +7,13 @@
     <li class="{% active request '^/administration/objectives/[\w\-]+' %}
                {% active request '^/administration/objectives/' %}">
       <a href="{% url 'list_national_objectives' %}">{% trans "National Strategy" %}</a> </li>
+    <li class="{% active request '^/administration/nat-indicators/[\w\-]+' %}
+               {% active request '^/administration/nat-indicators/$' %}">
+      <a href="{% url 'list_nat_indicators' %}">{% trans "National Indicators" %}</a>
+    </li>
     <li class="{% active request '^/administration/mapping/[\w\-]+' %}
                {% active request '^/administration/mapping/$' %}">
       <a href="{% url 'list_national_strategy' %}">{% trans "Mapping" %}</a>
-    </li>
   {% else %}
     <li class="{% active request '^/administration/targets/[\w\-]+' %}
                {% active request '^/administration/targets/' %}">
