@@ -177,6 +177,160 @@ class NationalAction(models.Model):
             return None
 
 
+class EuAction(models.Model):
+    __metaclass__ = Translatable
+
+    code = models.CharField(max_length=16)
+    title = models.TextField(verbose_name="Title")
+    description = models.TextField(verbose_name="Description")
+    parent = models.ForeignKey('self',
+                               null=True,
+                               blank=True,
+                               related_name='children')
+
+    if settings.EU_STRATEGY and settings.NAT_STRATEGY:
+        national_strategy = models.ManyToManyField(
+            'NationalStrategy',
+            null=True,
+            blank=True,
+            verbose_name="National strategy",
+            related_name="eu_actions")
+
+    class Meta:
+        verbose_name_plural = 'EU actions'
+        translate = ('description', 'title')
+
+    def __unicode__(self):
+        return 'Action %s' % self.code
+
+    def get_target(self):
+        if self.parent is None:
+            return self.target.all()[0]
+        else:
+            return self.parent.target.all()[0]
+
+    def subactions(self):
+        return self.get_all_actions()[1:]
+
+    def get_all_actions(self):
+        #we should use https://github.com/django-mptt/django-mptt/
+        r = []
+        r.append(self)
+        for ob in EuAction.objects.filter(parent=self).order_by('code'):
+            r.extend(ob.get_all_actions())
+        return r
+
+    def get_next_code(self):
+        if self.parent:
+            codes = [a.code for a in self.parent.subactions()]
+            if codes:
+                max_letter = RE_ACTION_CODE.match(max(codes)).groups()[1]
+                letter = chr(ord(max_letter) + 1)
+            else:
+                letter = 'a'
+            return self.parent.code + letter
+
+        codes = [int(RE_ACTION_CODE.match(code).groups()[0]) for code in
+                 EuAction.objects.values_list('code', flat=True)]
+        return str(max(codes) + 1)
+
+
+class BaseIndicator(models.Model):
+    def get_indicators(self):
+        return mark_safe('-, <br>'.join(
+            [unicode(obj) for obj in self.parent.all()]
+        ))
+
+    class Meta:
+        abstract = True
+
+
+class EuIndicator(BaseIndicator):
+    __metaclass__ = Translatable
+
+    TYPES = (
+        ('eu', 'EU'),
+        ('sebi', 'SEBI'),
+        ('csi', 'CSI'),
+        ('aei', 'AEI'),
+    )
+
+    code = models.CharField(max_length=25,
+                            null=True,
+                            blank=True)
+    title = models.TextField(max_length=512,
+                             verbose_name="Title")
+    url = models.URLField(null=True,
+                          blank=True)
+    indicator_type = models.CharField(_('Indicator type'),
+                                      max_length=4,
+                                      choices=TYPES,
+                                      blank=True)
+    parent = models.ManyToManyField('self', null=True, blank=True,
+                                    symmetrical=False, related_name='parents')
+
+    @property
+    def subindicators(self):
+        return self.parent
+
+    def __unicode__(self):
+        return '{0} {1}: {2}'.format(self.indicator_type.upper(),
+                                     self.code,
+                                     self.title)
+
+    def get_indicators(self):
+        return mark_safe('-, <br>'.join(
+            [unicode(obj) for obj in self.parent.all()]
+        ))
+
+    get_indicators.short_description = 'relation'
+
+    class Meta:
+        verbose_name_plural = 'EU indicators'
+        ordering = ['code']
+        translate = ('title',)
+
+
+class NationalIndicator(BaseIndicator):
+    __metaclass__ = Translatable
+
+    TYPES = (
+        ('label', 'LABEL'),
+        ('nat', 'NAT'),
+    )
+
+    code = models.CharField(max_length=25,
+                            null=True,
+                            blank=True)
+    title = models.TextField(max_length=512,
+                             verbose_name="Title")
+    url = models.URLField(null=True,
+                          blank=True)
+    indicator_type = models.CharField(_('Indicator type'),
+                                      max_length=6,
+                                      choices=TYPES,
+                                      blank=True)
+    subindicators = models.ManyToManyField('self', null=True, blank=True,
+                                    symmetrical=False, related_name='parents')
+
+    def __unicode__(self):
+        return u'{0} {1}: {2}'.format(self.indicator_type.upper(),
+                                     self.code,
+                                     self.title)
+
+    def get_indicators(self):
+        return mark_safe('-, <br>'.join(
+            [unicode(obj) for obj in self.subindicators.all()]
+        ))
+
+    get_indicators.short_description = 'relation'
+
+    class Meta:
+        verbose_name_plural = 'National indicators'
+        ordering = ['code']
+        translate = ('title',)
+
+
 class NationalObjective(models.Model):
     __metaclass__ = Translatable
 
@@ -192,6 +346,14 @@ class NationalObjective(models.Model):
                                      null=True,
                                      blank=True,
                                      related_name="objective")
+
+    nat_indicators = models.ManyToManyField(
+        NationalIndicator, related_name="nat_objectives", blank=True
+    )
+
+    other_nat_indicators = models.ManyToManyField(
+        NationalIndicator, related_name="other_nat_objectives", blank=True
+    )
 
     class Meta:
         translate = ('title', 'description',)
@@ -292,142 +454,6 @@ class NationalObjective(models.Model):
         if self.parent is not None:
             for obj in self.parent.get_parents():
                 yield obj
-
-
-class EuAction(models.Model):
-    __metaclass__ = Translatable
-
-    code = models.CharField(max_length=16)
-    title = models.TextField(verbose_name="Title")
-    description = models.TextField(verbose_name="Description")
-    parent = models.ForeignKey('self',
-                               null=True,
-                               blank=True,
-                               related_name='children')
-
-    if settings.EU_STRATEGY and settings.NAT_STRATEGY:
-        national_strategy = models.ManyToManyField(
-            'NationalStrategy',
-            null=True,
-            blank=True,
-            verbose_name="National strategy",
-            related_name="eu_actions")
-
-    class Meta:
-        verbose_name_plural = 'EU actions'
-        translate = ('description', 'title')
-
-    def __unicode__(self):
-        return u'Action %s' % self.code
-
-    def get_target(self):
-        if self.parent is None:
-            return self.target.all()[0]
-        else:
-            return self.parent.target.all()[0]
-
-    def subactions(self):
-        return self.get_all_actions()[1:]
-
-    def get_all_actions(self):
-        #we should use https://github.com/django-mptt/django-mptt/
-        r = []
-        r.append(self)
-        for ob in EuAction.objects.filter(parent=self).order_by('code'):
-            r.extend(ob.get_all_actions())
-        return r
-
-    def get_next_code(self, target):
-        #subaction code generation
-        if self.parent:
-            codes = [a.code for a in self.parent.subactions()]
-            if codes:
-                max_letter = RE_ACTION_CODE.match(max(codes)).groups()[1]
-                letter = chr(ord(max_letter) + 1)
-            else:
-                letter = 'a'
-            return self.parent.code + letter
-
-        #action code generation
-        all_actions = EuAction.objects.all().order_by('code')
-        existing_codes = [int(RE_ACTION_CODE.match(code).groups()[0]) for code
-                          in all_actions.values_list('code', flat=True)]
-        #generate the next id based on the target's current list of actions
-        if target.actions.all():
-            used_codes = [int(action.code) for action in target.actions.all()]
-        else:
-            #first action
-            used_codes = existing_codes
-        next_code = max(used_codes) + 1
-
-        #increment greater codes if the newly generated code was already used
-        if next_code in existing_codes:
-            actions_to_update = [action for action in all_actions if
-                                int(RE_ACTION_CODE.match(action.code).
-                                    groups()[0]) >= next_code]
-            for action in actions_to_update:
-                old_code = int(RE_ACTION_CODE.match(action.code).groups()[0])
-                new_code = str(int(old_code) + 1)
-                action.update_code(new_code=new_code)
-                action.save()
-
-        return str(next_code)
-
-    def update_code(self, new_code=None):
-        if new_code and not self.parent:
-            self.code = new_code
-        if self.parent:
-            code_literal = RE_ACTION_CODE.match(self.code).groups()[1]
-            if new_code:
-                self.code = new_code + code_literal
-            else:
-                self.code = self.parent.code + code_literal
-
-
-class EuIndicator(models.Model):
-    __metaclass__ = Translatable
-
-    TYPES = (
-        ('eu', 'EU'),
-        ('sebi', 'SEBI'),
-        ('csi', 'CSI'),
-        ('aei', 'AEI'),
-    )
-
-    code = models.CharField(max_length=25,
-                            null=True,
-                            blank=True)
-    title = models.TextField(max_length=512,
-                             verbose_name="Title")
-    url = models.URLField(null=True,
-                          blank=True)
-    indicator_type = models.CharField(_('Indicator type'),
-                                      max_length=4,
-                                      choices=TYPES,
-                                      blank=True)
-    parent = models.ManyToManyField('self', null=True, blank=True,
-                                    symmetrical=False, related_name='parents')
-
-    @property
-    def subindicators(self):
-        return self.parent
-
-    def __unicode__(self):
-        return u'{0} {1}: {2}'.format(self.indicator_type.upper(),
-                                     self.code,
-                                     self.title)
-
-    def get_indicators(self):
-        return mark_safe('-, <br>'.join(
-            [unicode(obj) for obj in self.parent.all()]
-        ))
-
-    get_indicators.short_description = 'relation'
-
-    class Meta:
-        verbose_name_plural = 'EU indicators'
-        ordering = ['code']
-        translate = ('title',)
 
 
 class EuTarget(models.Model):
