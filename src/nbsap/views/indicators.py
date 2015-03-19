@@ -28,8 +28,8 @@ def indicator(request, pk):
 
 
 def eu_indicators(request):
-    indicators = models.EuIndicator.objects.exclude(targets=None).all()
-    subindicators = models.EuIndicator.objects.filter(targets=None).all()
+    indicators = models.EuIndicator.objects.filter(parents=None).all()
+    subindicators = models.EuIndicator.objects.exclude(parents=None).all()
     return render(request, 'eu_strategy/eu_indicators.html', {
         'indicators': indicators,
         'subindicators': subindicators,
@@ -38,7 +38,7 @@ def eu_indicators(request):
 
 @auth_required
 def list_eu_indicators(request):
-    indicators = models.EuIndicator.objects.exclude(targets=None).all()
+    indicators = models.EuIndicator.objects.filter(parents=None).all()
     return render(request, 'manager/eu_indicators/list_eu_indicators.html', {
         'indicators': indicators,
     })
