@@ -38,7 +38,6 @@ def view_nat_indicator(request, pk):
 def edit_nat_indicator(request, pk=None):
     if pk:
         indicator = get_object_or_404(models.NationalIndicator, pk=pk)
-        print indicator
         template = 'manager/nat_indicators/edit_nat_indicator.html'
         form_cls = NationalIndicatorEditForm
     else:
@@ -77,7 +76,7 @@ def delete_nat_indicator(request, pk):
         ind = get_object_or_404(models.NationalIndicator, pk=pk)
         ind.delete()
         messages.success(request, _('Indicator successfully deleted.') + "")
-        return redirect('list_nat_indicators')
+    return redirect('list_nat_indicators')
 
 
 @auth_required
