@@ -509,6 +509,8 @@ class NationalIndicatorForm(forms.Form):
 
     def clean_code(self):
         code = self.cleaned_data['code']
+        if self.indicator and self.indicator.code == code:
+            return code
         try:
             NationalIndicator.objects.get(code=code)
             raise ValidationError('Code already exists.')
