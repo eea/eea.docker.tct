@@ -485,11 +485,11 @@ class EuIndicatorEditForm(EuIndicatorForm, ChoicesMixin):
 
 class EuIndicatorMapForm(forms.Form, ChoicesMixin):
     eu_targets = chosenforms.ChosenMultipleChoiceField(
-        overlay="Select EU target...")
+        overlay="Select EU target...", required=False)
     other_eu_targets = chosenforms.ChosenMultipleChoiceField(
         overlay="Select EU target...", required=False)
     aichi_targets = chosenforms.ChosenMultipleChoiceField(
-        overlay="Select Aichi target...")
+        overlay="Select Aichi target...", required=False)
     other_aichi_targets = chosenforms.ChosenMultipleChoiceField(
         overlay="Select Aichi target...", required=False)
 
@@ -531,6 +531,7 @@ class EuIndicatorMapForm(forms.Form, ChoicesMixin):
 
     def clean(self):
         cleaned_data = super(EuIndicatorMapForm, self).clean()
+        print cleaned_data
         eu_targets = cleaned_data['eu_targets']
         other_eu_targets = cleaned_data['other_eu_targets']
         aichi_targets = cleaned_data['aichi_targets']
