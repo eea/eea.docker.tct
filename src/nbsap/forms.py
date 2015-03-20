@@ -15,7 +15,7 @@ from nbsap.models import (
     AichiTarget, EuAction, EuIndicator, EuIndicatorToAichiStrategy,
     EuAichiStrategy, NationalIndicator
 )
-from nbsap.utils import remove_tags, RE_CODE, RE_EU_TARGET_CODE, RE_ACTION_CODE
+from nbsap.utils import remove_tags, RE_CODE, RE_DIGIT_CODE, RE_ACTION_CODE
 
 MAPPING_ERROR = 'Cannot use the same {} Target for both Most relevant and Other'
 
@@ -26,8 +26,8 @@ def validate_code(value):
                               {'code': value})
 
 
-def validate_eu_target_code(value):
-    if not RE_EU_TARGET_CODE.match(value):
+def validate_simple_digit_code(value):
+    if not RE_DIGIT_CODE.match(value):
         raise ValidationError(_('%(code)s is not a valid code. (Ex: 1)') %
                               {'code': value})
 
@@ -188,7 +188,8 @@ class EuTargetForm(forms.Form):
 
 
 class EuTargetEditForm(EuTargetForm):
-    code = forms.CharField(max_length=16, validators=[validate_eu_target_code])
+    code = forms.CharField(
+        max_length=16, validators=[validate_simple_digit_code])
 
     def clean_code(self):
         code = self.cleaned_data['code']
@@ -482,8 +483,9 @@ class EuIndicatorForm(forms.Form):
 
 class NationalIndicatorForm(forms.Form):
     language = forms.ChoiceField(choices=settings.LANGUAGES)
-    title = forms.CharField(widget=widgets.Textarea, required=False)
-    code = forms.CharField(widget=widgets.Textarea, required=False)
+    title = forms.CharField(widget=widgets.Textarea, required=True)
+    code = forms.CharField(widget=widgets.Textarea, required=False,
+                           validators=[validate_simple_digit_code])
     url = forms.CharField(required=False)
     indicator_type = forms.ChoiceField(choices=NationalIndicator.TYPES)
 
@@ -532,8 +534,8 @@ class NationalIndicatorForm(forms.Form):
 
 
 class EuIndicatorEditForm(EuIndicatorForm, ChoicesMixin):
-    code = forms.CharField(max_length=16, validators=[validate_eu_target_code],
-                           required=False)
+    code = forms.CharField(
+        max_length=16, validators=[validate_simple_digit_code], required=False)
     subindicators = chosenforms.ChosenMultipleChoiceField(
         choices=[], required=False, overlay="Select subindicators...")
 
@@ -565,8 +567,6 @@ class EuIndicatorEditForm(EuIndicatorForm, ChoicesMixin):
 
 
 class NationalIndicatorEditForm(NationalIndicatorForm, ChoicesMixin):
-    code = forms.CharField(max_length=16, validators=[validate_eu_target_code],
-                           required=False)
     subindicators = chosenforms.ChosenMultipleChoiceField(
         choices=[], required=False, overlay="Select subindicators...")
 
@@ -579,17 +579,6 @@ class NationalIndicatorEditForm(NationalIndicatorForm, ChoicesMixin):
         self.fields['subindicators'].choices = sub_choices
         self.fields['subindicators'].initial = (self.indicator.subindicators
                                                 .values_list('pk', flat=True))
-
-    def clean_code(self):
-        code = self.cleaned_data['code']
-        if code == self.indicator.code:
-            return code
-        try:
-            NationalIndicator.objects.get(code=code)
-            raise ValidationError('Code already exists.')
-        except NationalIndicator.DoesNotExist:
-            pass
-        return code
 
     def save(self):
         indicator = super(NationalIndicatorEditForm, self).save()

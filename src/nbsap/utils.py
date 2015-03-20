@@ -3,7 +3,7 @@ import re
 DENIED_TAGS = ('html', 'head', 'link', 'body', 'meta', 'script', 'title',
                'style', 'applet',)
 RE_CODE = re.compile('(\d+\.)*\d+$')
-RE_EU_TARGET_CODE = re.compile('\d+$')
+RE_DIGIT_CODE = re.compile('\d+$')
 RE_ACTION_CODE = re.compile('[^\d]*(\d+)([a-zA-Z]*)$')
 
 
