@@ -14,7 +14,6 @@
 
 
 {% block content %}
-
   <h1 class="page-title">{% trans "National Indicator" %}</h1>
   <h1>{% trans "Edit National Indicator" %} {{ indicator.code }}</h1>
 
@@ -95,13 +94,4 @@
   {% assets "js_admin" %}
     <script type="text/javascript" src="{{ ASSET_URL }}"></script>
   {% endassets %}
-
-{#  <script>#}
-{#    $(function () {#}
-{#      $(".chzn-select").chosen();#}
-{#      showTargetCodeValue('subindicators',#}
-{#          '.subindicators_text',#}
-{#          "{% url 'aichi_target_title' pk=1 %}");#}
-{#    });#}
-{#  </script>#}
 {% endblock %}

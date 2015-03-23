@@ -13,7 +13,6 @@
 
 
 {% block content %}
-
   <h1 class="page-title">{% trans "National Indicators" %}</h1>
   <h1>{% trans "Map National Indicator" %} {{ indicator.code }}</h1>
 
@@ -71,11 +70,11 @@
 
     forbidCrossChoicesIntersection('nat_objectives', 'other_nat_objectives');
 
-    showTargetCodeValue('nat_objectives',
+    showObjectiveCodeValue('nat_objectives',
         '.nat_objectives_text',
         "{% url 'objective_title' pk=1 %}");
 
-    showTargetCodeValue('other_nat_objectives',
+    showObjectiveCodeValue('other_nat_objectives',
         '.other_nat_objectives_text',
         "{% url 'objective_title' pk=1 %}");
   </script>
