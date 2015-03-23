@@ -9,7 +9,6 @@
 
 
 {% block content %}
-
   <h1 class="page-title">
     {% if indicator.code %}
       {% trans "Indicator" %} {{ indicator.code }}:
@@ -58,25 +57,24 @@
     </ul>
   {% endif %}
 
-  {% if indicator.targets.exists %}
+  {% if indicator.nat_objectives.exists %}
       <h2>{% trans "Mapping with National Objectives" %}</h2>
       <h4>Most relevant</h4>
       <ul>
-      {% for target in indicator.targets.all %}
-        <li>{{ target.code }} {{ target.title }}</li>
+      {% for objective in indicator.nat_objectives.all %}
+        <li>{{ objective.code }} {{ objective.title }}</li>
       {% endfor %}
       </ul>
 
-      {% if indicator.other_targets.count %}
+      {% if indicator.other_nat_objectives.count %}
       <h4>Other</h4>
       <ul>
-      {% for target in indicator.other_targets.all %}
-        <li>{{ target.code }} {{ target.title }}</li>
+      {% for objective in indicator.other_nat_objectives.all %}
+        <li>{{ objective.code }} {{ objective.title }}</li>
       {% endfor %}
       </ul>
       {% endif %}
   {% endif %}
-
 {% endblock %}
 
 {% block scripts %}
