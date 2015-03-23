@@ -531,7 +531,6 @@ class EuIndicatorMapForm(forms.Form, ChoicesMixin):
 
     def clean(self):
         cleaned_data = super(EuIndicatorMapForm, self).clean()
-        print cleaned_data
         eu_targets = cleaned_data['eu_targets']
         other_eu_targets = cleaned_data['other_eu_targets']
         aichi_targets = cleaned_data['aichi_targets']
