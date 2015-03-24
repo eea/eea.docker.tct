@@ -32,6 +32,12 @@ def validate_eu_target_code(value):
                               {'code': value})
 
 
+def validate_action_code(value):
+    if not RE_ACTION_CODE.match(value):
+        raise ValidationError(_('%(code)s is not a valid code. (Ex: 1, 1a)') %
+                              {'code': value})
+
+
 class TextCleanedHtml(forms.CharField):
     def to_python(self, value):
         value = super(TextCleanedHtml, self).to_python(value)
@@ -216,22 +222,40 @@ class EuStrategyActivityForm(forms.Form):
         self.fields['title'].initial = title
         self.fields['description'].initial = description
         self.fields['language'].initial = lang
+        if self.activity:
+            self.fields['code'].initial = self.activity.code
 
     def save(self):
         activity = self.activity or EuAction()
         lang = self.cleaned_data['language']
         title = self.cleaned_data['title']
+        code = self.cleaned_data.get('code', None)
         description = self.cleaned_data['description']
         setattr(activity, 'title_%s' % lang, title)
         setattr(activity, 'description_%s' % lang, description)
         activity.parent = self.parent
-        activity.code = activity.code or activity.get_next_code()
+        activity.code = code or activity.get_next_code()
 
         activity.save()
         if not self.parent:
             activity.target = [self.target]
             activity.save()
         return activity
+
+
+class EuStrategyActivityEditForm(EuStrategyActivityForm):
+    code = forms.CharField(max_length=16, validators = [validate_action_code])
+
+    def clean_code(self):
+        code = self.cleaned_data['code']
+        if code == self.activity.code:
+            return code
+        try:
+            EuAction.objects.get(code=code)
+            raise ValidationError('Code already exists.')
+        except EuAction.DoesNotExist:
+            pass
+        return code
 
 
 class AichiGoalForm(forms.Form):
