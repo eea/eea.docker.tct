@@ -337,7 +337,8 @@ class EuAction(models.Model):
             r.extend(ob.get_all_actions())
         return r
 
-    def get_next_code(self):
+    def get_next_code(self, target):
+        #subaction code generation
         if self.parent:
             codes = [a.code for a in self.parent.subactions()]
             if codes:
@@ -347,9 +348,40 @@ class EuAction(models.Model):
                 letter = 'a'
             return self.parent.code + letter
 
-        codes = [int(RE_ACTION_CODE.match(code).groups()[0]) for code in
-                 EuAction.objects.values_list('code', flat=True)]
-        return str(max(codes) + 1)
+        #action code generation
+        all_actions = EuAction.objects.all()
+        existing_codes = [int(RE_ACTION_CODE.match(code).groups()[0]) for code
+                          in all_actions.values_list('code', flat=True)]
+        #generate the next id based on the target's current list of actions
+        if target.actions.all():
+            used_codes = [int(action.code) for action in target.actions.all()]
+        else:
+            #first action
+            used_codes = existing_codes
+        next_code = max(used_codes) + 1
+
+        #increment greater codes if the newly generated code was already used
+        if next_code in existing_codes:
+            actions_to_update = [action for action in all_actions if
+                                int(RE_ACTION_CODE.match(action.code).
+                                    groups()[0]) >= next_code]
+            for action in actions_to_update:
+                old_code = int(RE_ACTION_CODE.match(action.code).groups()[0])
+                new_code = str(int(old_code) + 1)
+                action.update_code(new_code=new_code)
+                action.save()
+
+        return str(next_code)
+
+    def update_code(self, new_code=None):
+        if new_code and not self.parent:
+            self.code = new_code
+        if self.parent:
+            code_literal = RE_ACTION_CODE.match(self.code).groups()[1]
+            if new_code:
+                self.code = new_code + code_literal
+            else:
+                self.code = self.parent.code + code_literal
 
 
 class EuIndicator(models.Model):
