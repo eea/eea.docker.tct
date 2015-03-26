@@ -485,11 +485,11 @@ class EuIndicatorEditForm(EuIndicatorForm, ChoicesMixin):
 
 class EuIndicatorMapForm(forms.Form, ChoicesMixin):
     eu_targets = chosenforms.ChosenMultipleChoiceField(
-        overlay="Select EU target...")
+        overlay="Select EU target...", required=False)
     other_eu_targets = chosenforms.ChosenMultipleChoiceField(
         overlay="Select EU target...", required=False)
     aichi_targets = chosenforms.ChosenMultipleChoiceField(
-        overlay="Select Aichi target...")
+        overlay="Select Aichi target...", required=False)
     other_aichi_targets = chosenforms.ChosenMultipleChoiceField(
         overlay="Select Aichi target...", required=False)
 
