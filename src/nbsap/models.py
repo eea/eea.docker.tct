@@ -349,7 +349,7 @@ class EuAction(models.Model):
             return self.parent.code + letter
 
         #action code generation
-        all_actions = EuAction.objects.all()
+        all_actions = EuAction.objects.all().order_by('code')
         existing_codes = [int(RE_ACTION_CODE.match(code).groups()[0]) for code
                           in all_actions.values_list('code', flat=True)]
         #generate the next id based on the target's current list of actions
