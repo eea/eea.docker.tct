@@ -25,6 +25,9 @@
 
   {% if NAT_STRATEGY %}
   <li>
+    <a class="{% active request '^/nat_indicators' %}" href="{% url 'nat_indicators' %}">{% trans "National Indicators" %}</a>
+  </li>
+  <li>
     <a class="{% active request '^/implementation' %}" href="{% url 'implementation' %}">{% trans "Implementation" %}</a>
   </li>
   {% endif %}

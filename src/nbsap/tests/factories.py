@@ -91,3 +91,18 @@ class NationalStrategyFactory(factory.DjangoModelFactory):
         if extracted:
             for target in extracted:
                 self.other_targets.add(target)
+
+class NationalIndicatorFactory(factory.DjangoModelFactory):
+
+    FACTORY_FOR = 'nbsap.NationalIndicator'
+
+    code = factory.Sequence(lambda n: '%d' % n)
+    title_en = factory.Sequence(lambda n: 'indicator%d_title_en' % n)
+    indicator_type = 'LABEL'
+
+    @factory.post_generation
+    def subindicators(self, create, extracted, **kwargs):
+        if not create:
+            return
+        if extracted:
+            self.subindicators.add(extracted)

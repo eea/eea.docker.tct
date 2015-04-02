@@ -1,0 +1,81 @@
+{% extends 'manager/base.html' %}
+{% load assets %}
+{% load i18n %}
+
+{% block title %}
+  NBSAP - {% trans "Map Indicator " %}{{ indicator.code }}
+{% endblock %}
+
+
+{% block extra_head %}
+  {{ form.media }}
+{% endblock %}
+
+
+{% block content %}
+  <h1 class="page-title">{% trans "National Indicators" %}</h1>
+  <h1>{% trans "Map National Indicator" %} {{ indicator.code }}</h1>
+
+  {% if form.errors %}
+    <p>
+      {% blocktrans with form.errors|pluralize as errors %}Please correct the
+        error {{ errors }} below.{% endblocktrans %}
+    </p>
+  {% endif %}
+  <form action="" method="post" class="form-horizontal">
+
+    <div class="error-list">{{ form.non_field_errors }}</div>
+
+    <div class="form-group row">
+      <label class="col-md-2" for="nat_objectives">{% trans "Most relevant National Objectives" %}</label>
+
+      <div class="col-md-3">
+        {{ form.nat_objectives }}
+        {{ form.nat_objectives.errors }}
+      </div>
+
+      <div class="nat_objectives_text col-md-7 short-descrip">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-md-2" for="other_nat_objectives">{% trans "Other National Objectives" %}</label>
+
+      <div class="col-md-3">
+        {{ form.other_nat_objectives }}
+        {{ form.other_nat_objectives.errors }}
+      </div>
+
+      <div class="other_nat_objectives_text col-md-7 short-descrip">
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="action-bar">
+      <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
+      <a href="{% url 'view_nat_indicator' pk=indicator.pk %}"
+         class="btn btn-default" type="button">{% trans "Cancel" %}</a>
+    </div>
+
+  </form>
+{% endblock %}
+
+{% block scripts %}
+  {% assets "js_admin" %}
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+  {% endassets %}
+  <script>
+    $(".chzn-select").chosen();
+
+    forbidCrossChoicesIntersection('nat_objectives', 'other_nat_objectives');
+
+    showObjectiveCodeValue('nat_objectives',
+        '.nat_objectives_text',
+        "{% url 'objective_title' pk=1 %}");
+
+    showObjectiveCodeValue('other_nat_objectives',
+        '.other_nat_objectives_text',
+        "{% url 'objective_title' pk=1 %}");
+  </script>
+{% endblock %}
