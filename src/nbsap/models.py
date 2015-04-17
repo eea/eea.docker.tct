@@ -181,7 +181,7 @@ class EuAction(models.Model):
     __metaclass__ = Translatable
 
     code = models.CharField(max_length=16)
-    title = models.TextField(verbose_name="Title")
+    title = models.TextField(verbose_name="Title", default='')
     description = models.TextField(verbose_name="Description")
     parent = models.ForeignKey('self',
                                null=True,
