@@ -434,6 +434,11 @@ class NationalObjective(models.Model):
     def get_national_strategies(self):
         return self.objective_national_strategy.all()
 
+    @property
+    def national_strategy(self):
+        ss = self.get_national_strategies()
+        return ss and ss[0]
+
     def has_national_strategies(self):
         strategies = [s.eu_targets.all() for s in
                       self.get_national_strategies()]

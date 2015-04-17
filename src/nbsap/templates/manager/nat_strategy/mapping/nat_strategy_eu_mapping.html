@@ -4,31 +4,33 @@
 
 <div class="well">
   <div class="well-title">{% trans "Mapping with EU" %}</div>
-  {% with strategies=subobj.has_national_strategies.all %}
 
-  {% if strategies|length %}
+  {% if obj_eu_targets %}
 
     <h5>{% trans "EU Targets" %}</h5>
     <ul>
-    {% for target in strategy.eu_targets.all %}
+    {% for target, actions in obj_eu_targets.items %}
       <li>
         <a href="{% url 'eu_targets' code=target.code %}">
         {% trans "Target" %} {{ target.code }}</a>
         {{ target.title }}
-      </li>
-    {% endfor %}
-    </ul>
 
-    <h5>{% trans "Related EU actions" %}</h5>
-    <ul>
-    {% for action in strategy.eu_actions.all %}
-      {% with action.get_target as eu_target %}
-        <li>
-          <a href="{% url 'eu_targets' code=target.code %}#{{ action.code }}">
-          {% trans "Action" %} {{ action.code }}</a>
-          {{ action.description|safe }}
-        </li>
-      {% endwith %}
+        {% if actions %}
+          <p>
+            <h5>{% trans "Related EU Actions" %}</h5>
+              <ul>
+                {% for action in actions %}
+                  <li>
+                    <a href="{% url 'eu_targets' code=target.code %}#{{ action.code }}">
+                    {% trans "Action" %} {{ action.code }}</a>
+                    {{ action.description|safe }}
+                  </li>
+                {% endfor %}
+              </ul>
+          </p>
+        {% endif %}
+
+      </li>
     {% endfor %}
     </ul>
 
@@ -36,5 +38,4 @@
     <p>{% trans "No corresponding EU target" %}.</p>
   {% endif %}
 
-  {% endwith %}
 </div>
