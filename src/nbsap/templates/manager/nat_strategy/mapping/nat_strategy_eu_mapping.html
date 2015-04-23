@@ -5,11 +5,11 @@
 <div class="well">
   <div class="well-title">{% trans "Mapping with EU" %}</div>
 
-  {% if obj_eu_targets %}
+  {% if subobj.eu_objects %}
 
     <h5>{% trans "EU Targets" %}</h5>
     <ul>
-    {% for target, actions in obj_eu_targets.items %}
+    {% for target, actions in subobj.eu_objects.items %}
       <li>
         <a href="{% url 'eu_targets' code=target.code %}">
         {% trans "Target" %} {{ target.code }}</a>

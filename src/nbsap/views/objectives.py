@@ -38,23 +38,10 @@ def nat_strategy(request, code=None):
         if actions:
             obj_actions.append({subobj: actions})
 
-    obj_eu_targets = {}
-    if current_objective.national_strategy:
-        strategy = current_objective.national_strategy
-        for target in strategy.eu_targets.all():
-            obj_eu_targets.setdefault(target, [])
-            for action in target.actions.all():
-                if action in strategy.eu_actions.all():
-                    obj_eu_targets[target].append(action)
-                obj_eu_targets[target] += [subaction for subaction in
-                                           action.children.all() if subaction
-                                           in strategy.eu_actions.all()]
-
     return render(request, 'objectives/nat_strategy.html',
                   {'objectives': objectives,
                    'current_objective': current_objective,
-                   'actions_by_objectives': obj_actions,
-                   'obj_eu_targets': obj_eu_targets})
+                   'actions_by_objectives': obj_actions})
 
 
 def nat_strategy_download(request):

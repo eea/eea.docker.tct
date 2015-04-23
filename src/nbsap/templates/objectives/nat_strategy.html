@@ -107,7 +107,7 @@
 
       {% include 'manager/nat_strategy/mapping/nat_strategy_aichi_mapping.html' with subobj=obj%}
       {% if EU_STRATEGY %}
-        {% include 'manager/nat_strategy/mapping/nat_strategy_eu_mapping.html' %}
+        {% include 'manager/nat_strategy/mapping/nat_strategy_eu_mapping.html' with subobj=obj %}
       {% endif %}
 
     </div> {# /summary #}
