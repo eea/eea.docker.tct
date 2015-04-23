@@ -8,12 +8,16 @@
     <h5>{% trans "Goals" %}</h5>
     <ul>
       {% for strategy in strategies %}
-        {% with strategy.relevant_target.get_parent_goal as goal %}
-        <li>
-          <a href="{% url 'goals' code=goal.code %}" title="{{ goal.code|upper }}">{% trans "Goal" %} {{ goal.code|upper }}</a>
-          <p>{{ goal.description|safe }}</p>
-        </li>
-        {% endwith %}
+        {% if strategy.relevant_target %}
+          {% with strategy.relevant_target.get_parent_goal as goal %}
+          <li>
+            <a href="{% url 'goals' code=goal.code %}" title="{{ goal.code|upper }}">
+              {% trans "Goal" %} {{ goal.code|upper }}
+            </a>
+            <p>{{ goal.description|safe }}</p>
+          </li>
+          {% endwith %}
+        {% endif %}
       {% endfor %}
     </ul>
 

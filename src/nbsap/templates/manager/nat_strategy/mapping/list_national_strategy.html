@@ -48,11 +48,13 @@
         </td>
         {% with strategy.relevant_target as target %}
         <td>
+          {% if target %}
           <a href="{% url 'goals' code=target.get_parent_goal.code %}">
             {{ target.get_parent_goal.code|title }}</a>
+          {% endif %}
         </td>
         <td>
-           <a href="">{{ target.code }} </a>
+           <a href="">{{ target.code }}</a>
         </td>
         {% endwith %}
         <td>

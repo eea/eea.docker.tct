@@ -251,7 +251,7 @@ class EuStrategyActivityForm(forms.Form):
 
 
 class EuStrategyActivityEditForm(EuStrategyActivityForm):
-    code = forms.CharField(max_length=16, validators = [validate_action_code])
+    code = forms.CharField(max_length=16, validators=[validate_action_code])
 
     def clean_code(self):
         code = self.cleaned_data['code']
@@ -373,6 +373,7 @@ class NationalStrategyForm(forms.Form):
         if self.strategy:
             self.fields['nat_objective'].initial = self.strategy.objective.id
             self.fields['aichi_goal'].initial = (
+                self.strategy.relevant_target and
                 self.strategy.relevant_target.get_parent_goal().pk)
             self.fields[
                 'aichi_target'].initial = self.strategy.relevant_target.id
@@ -575,7 +576,8 @@ class NationalIndicatorEditForm(NationalIndicatorForm, ChoicesMixin):
     def __init__(self, *args, **kwargs):
         super(NationalIndicatorEditForm, self).__init__(*args, **kwargs)
         sub_choices = self._get_choices(
-            'Subindicator', NationalIndicator.objects.exclude(indicator_type='label'),
+            'Subindicator',
+            NationalIndicator.objects.exclude(indicator_type='label'),
             'code'
         )
         self.fields['subindicators'].choices = sub_choices
@@ -704,7 +706,9 @@ class NationalIndicatorMapForm(forms.Form, ChoicesMixin):
 
     def save(self):
         self.indicator.nat_objectives = self.cleaned_data['nat_objectives']
-        self.indicator.other_nat_objectives = self.cleaned_data['other_nat_objectives']
+        self.indicator.other_nat_objectives = (
+            self.cleaned_data['other_nat_objectives']
+        )
         self.indicator.save()
 
 

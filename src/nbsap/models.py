@@ -588,7 +588,7 @@ class NationalStrategy(models.Model):
                                   verbose_name="National Objective",
                                   related_name="objective_national_strategy")
     relevant_target = models.ForeignKey(
-        AichiTarget,
+        AichiTarget, null=True, blank=True,
         verbose_name="Relevant AICHI target",
         related_name="relevant_target_national_strategy")
     other_targets = models.ManyToManyField(
