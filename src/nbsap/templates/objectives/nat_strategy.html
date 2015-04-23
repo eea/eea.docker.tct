@@ -57,6 +57,13 @@
     {% endif %}
   </div>
 
+  <div>
+    <p>
+      <a href="{% url 'implementation' code=current_objective.code %}" title="{{ current_objective.code }}">
+      See implementation
+      </a>
+    </p>
+  </div>
 
 <div class="toc">
 <h5>{% trans "Table of contents" %}:</h5>
