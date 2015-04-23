@@ -274,7 +274,7 @@ class EuIndicator(BaseIndicator):
         return self.parent
 
     def __unicode__(self):
-        return '{0} {1}: {2}'.format(self.indicator_type.upper(),
+        return u'{0} {1}: {2}'.format(self.indicator_type.upper(),
                                      self.code,
                                      self.title)
 
@@ -311,12 +311,13 @@ class NationalIndicator(BaseIndicator):
                                       choices=TYPES,
                                       blank=True)
     subindicators = models.ManyToManyField('self', null=True, blank=True,
-                                    symmetrical=False, related_name='parents')
+                                           symmetrical=False,
+                                           related_name='parents')
 
     def __unicode__(self):
         return u'{0} {1}: {2}'.format(self.indicator_type.upper(),
-                                     self.code,
-                                     self.title)
+                                      self.code,
+                                      self.title)
 
     def get_indicators(self):
         return mark_safe('-, <br>'.join(
@@ -438,6 +439,26 @@ class NationalObjective(models.Model):
     def national_strategy(self):
         ss = self.get_national_strategies()
         return ss and ss[0]
+
+    @property
+    def eu_objects(self):
+        obj_eu_targets = {}
+        if not self.national_strategy:
+            return obj_eu_targets
+
+        strategy = self.national_strategy
+        eu_targets = strategy.eu_targets.all()
+        eu_actions = strategy.eu_actions.all()
+        for target in eu_targets:
+            obj_eu_targets.setdefault(target, [])
+            for action in target.actions.all():
+                if action in eu_actions:
+                    obj_eu_targets[target].append(action)
+                obj_eu_targets[target] += [
+                    subaction for subaction in action.children.all() if
+                    subaction in eu_actions
+                ]
+        return obj_eu_targets
 
     def has_national_strategies(self):
         strategies = [s.eu_targets.all() for s in
