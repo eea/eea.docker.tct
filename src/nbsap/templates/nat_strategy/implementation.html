@@ -56,6 +56,14 @@
     {% endif %}
   </div>
 
+  <div>
+    <p>
+      <a href="{% url 'nat_strategy' current_objective.code %}" title="{{ current_objective.code }}">
+      See objective
+      </a>
+    </p>
+  </div>
+
   {% if current_objective.actions_tree %}
     {% for action in current_objective.actions_tree|sort_by_code %}
     <div class="section" id="{{action.code}}">
