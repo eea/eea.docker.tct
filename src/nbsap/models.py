@@ -249,7 +249,6 @@ class EuIndicator(BaseIndicator):
     __metaclass__ = Translatable
 
     TYPES = (
-        ('eu', 'EU'),
         ('sebi', 'SEBI'),
         ('csi', 'CSI'),
         ('aei', 'AEI'),

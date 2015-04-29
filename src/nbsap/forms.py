@@ -538,18 +538,9 @@ class NationalIndicatorForm(forms.Form):
 class EuIndicatorEditForm(EuIndicatorForm, ChoicesMixin):
     code = forms.CharField(
         max_length=16, validators=[validate_simple_digit_code], required=False)
-    subindicators = chosenforms.ChosenMultipleChoiceField(
-        choices=[], required=False, overlay="Select subindicators...")
 
     def __init__(self, *args, **kwargs):
         super(EuIndicatorEditForm, self).__init__(*args, **kwargs)
-        sub_choices = self._get_choices(
-            'Subindicator', EuIndicator.objects.exclude(indicator_type='eu'),
-            'code'
-        )
-        self.fields['subindicators'].choices = sub_choices
-        self.fields['subindicators'].initial = (self.indicator.subindicators
-                                                .values_list('pk', flat=True))
 
     def clean_code(self):
         code = self.cleaned_data['code']
@@ -564,7 +555,6 @@ class EuIndicatorEditForm(EuIndicatorForm, ChoicesMixin):
 
     def save(self):
         indicator = super(EuIndicatorEditForm, self).save()
-        indicator.parent = self.cleaned_data['subindicators']
         return indicator
 
 
