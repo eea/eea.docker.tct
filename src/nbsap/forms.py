@@ -704,6 +704,10 @@ class EuAichiStrategyForm(forms.Form, ChoicesMixin):
         overlay="Select target...")
     other_aichi_targets = chosenforms.ChosenMultipleChoiceField(
         overlay="Select target...", required=False)
+    eu_indicators = chosenforms.ChosenMultipleChoiceField(
+        overlay="Select indicator...")
+    other_eu_indicators = chosenforms.ChosenMultipleChoiceField(
+        overlay="Select indicator...", required=False)
 
     def __init__(self, *args, **kwargs):
         self.strategy = kwargs.pop('strategy', None)
@@ -711,8 +715,13 @@ class EuAichiStrategyForm(forms.Form, ChoicesMixin):
 
         target_choices = self._get_choices(
             'Target', AichiTarget.objects.all(), 'code')
+        indicator_choices = self._get_choices(
+            'Indicator', EuIndicator.objects.all(), 'code')
+
         self.fields['aichi_targets'].choices = target_choices
         self.fields['other_aichi_targets'].choices = target_choices
+        self.fields['eu_indicators'].choices = indicator_choices
+        self.fields['other_eu_indicators'].choices = indicator_choices
 
         if self.strategy:
             self.fields['aichi_targets'].initial = (
