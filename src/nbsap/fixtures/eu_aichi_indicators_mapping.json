@@ -63,9 +63,9 @@
                 11, 
                 15
             ], 
-            "eu_indicator": 6
+            "eu_indicator": 3
         }
-    }, 
+    },
     {
         "pk": 6, 
         "model": "nbsap.euindicatortoaichistrategy", 
@@ -76,7 +76,7 @@
                 7, 
                 11
             ], 
-            "eu_indicator": 6
+            "eu_indicator": 2
         }
     }, 
     {
@@ -448,6 +448,33 @@
                 4
             ], 
             "eu_indicator": 56
+        }
+    },
+    {
+        "pk": 38,
+        "model": "nbsap.euindicatortoaichistrategy",
+        "fields": {
+            "aichi_targets": [
+                5,
+                6,
+                7,
+                11,
+                15
+            ],
+            "eu_indicator": 2
+        }
+    },
+    {
+        "pk": 39,
+        "model": "nbsap.euindicatortoaichistrategy",
+        "fields": {
+            "aichi_targets": [
+                5,
+                6,
+                7,
+                11
+            ],
+            "eu_indicator": 3
         }
     }
 ]
