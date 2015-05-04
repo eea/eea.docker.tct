@@ -16,11 +16,8 @@
   <h1 class="page-title">{% trans "EU Indicators" %}</h1>
 
   {% if indicators %}
-    {% for group in indicators %}
-      <h1>{{ group.title }}</h1>
+    {% for indicator in indicators %}
 
-      {% if group.subindicators.count %}
-      {% for indicator in group.subindicators.all %}
         <h2 id="indicator-{{ indicator.id }}">
           {{ indicator.get_indicator_type_display }} {{ indicator.code }} {{ indicator.title }}
         </h2>
@@ -28,35 +25,6 @@
         {% if indicator.url %}
           <p>URL: <a href="{{ indicator.url }}">{{ indicator.title }}</a></p>
         {% endif %}
-
-        <div class="well">
-          <div class="well-title">{% trans "EU targets" %}</div>
-          <p><strong>Most relevant:</strong></p>
-          {% if indicator.targets.exists %}
-            <ul>
-              {% for target in indicator.targets.all %}
-                <li>
-                  <a href="{% url 'eu_targets' code=target.code %}">{{ target.code }} {{ target.title }}</a>
-                </li>
-              {% endfor %}
-            </ul>
-          {% else %}
-            <p>{% trans "No corresponding EU target" %}.</p>
-          {% endif %}
-
-          <p><strong>Other:</strong></p>
-          {% if indicator.other_targets.exists %}
-            <ul>
-              {% for target in indicator.other_targets.all %}
-                <li>
-                  <a href="{% url 'eu_targets' code=target.code %}">{{ target.code }} {{ target.title }}</a>
-                </li>
-              {% endfor %}
-            </ul>
-          {% else %}
-            <p>{% trans "No corresponding EU target" %}.</p>
-          {% endif %}
-        </div>
 
         <div class="well">
           <div
@@ -95,10 +63,6 @@
             <p>{% trans "No corresponding AICHI target" %}.</p>
           {% endif %}
         </div>
-      {% endfor %}
-      {% else %}
-      <p>{% trans 'No indicators in this group.' %}</p>
-      {% endif %}
 
     {% endfor %}
 
