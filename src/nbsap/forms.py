@@ -444,6 +444,8 @@ class EuIndicatorForm(forms.Form):
     title = forms.CharField(widget=widgets.Textarea, required=False)
     url = forms.CharField(required=False)
     indicator_type = forms.ChoiceField(choices=EuIndicator.TYPES)
+    code = forms.CharField(
+        max_length=16, validators=[validate_simple_digit_code])
 
     def __init__(self, *args, **kwargs):
         self.indicator = kwargs.pop('indicator', None)
@@ -478,7 +480,6 @@ class EuIndicatorForm(forms.Form):
         indicator.save()
 
         return indicator
-
 
 class NationalIndicatorForm(forms.Form):
     language = forms.ChoiceField(choices=settings.LANGUAGES)
@@ -532,30 +533,6 @@ class NationalIndicatorForm(forms.Form):
         indicator.save()
 
         return indicator
-
-
-class EuIndicatorEditForm(EuIndicatorForm, ChoicesMixin):
-    code = forms.CharField(
-        max_length=16, validators=[validate_simple_digit_code], required=False)
-
-    def __init__(self, *args, **kwargs):
-        super(EuIndicatorEditForm, self).__init__(*args, **kwargs)
-
-    def clean_code(self):
-        code = self.cleaned_data['code']
-        if code == self.indicator.code:
-            return code
-        try:
-            EuIndicator.objects.get(code=code)
-            raise ValidationError('Code already exists.')
-        except EuIndicator.DoesNotExist:
-            pass
-        return code
-
-    def save(self):
-        indicator = super(EuIndicatorEditForm, self).save()
-        return indicator
-
 
 class NationalIndicatorEditForm(NationalIndicatorForm, ChoicesMixin):
     subindicators = chosenforms.ChosenMultipleChoiceField(

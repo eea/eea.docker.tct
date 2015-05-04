@@ -29,6 +29,14 @@
       {{ form.language }}
     </div>
 
+    {% if form.code %}
+      <div class="form-group">
+        <label for="code">{% trans "Code" %}</label>
+        {{ form.code }}
+        {{ form.code.errors }}
+      </div>
+    {% endif %}
+
     <div class="row">
       <div class="col-md-6">
         <div class="language-container">
