@@ -598,12 +598,12 @@ class EuAichiStrategy(models.Model):
         related_name="eu_other_aichi_strategy", blank=True,
     )
 
-    indicators = models.ManyToManyField(EuIndicator,
+    eu_indicators = models.ManyToManyField(EuIndicator,
                                         verbose_name="EU indicators",
                                         related_name="eu_target_eu_indicators")
-    other_indicators = models.ManyToManyField(
+    other_eu_indicators = models.ManyToManyField(
         EuIndicator, verbose_name="Other EU indicators",
-        related_name="eu_target_eu_other_indicators", blank=True,
+        related_name="eu_target_other_eu_indicators", blank=True,
     )
 
     def get_targets(self):
