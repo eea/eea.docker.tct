@@ -728,7 +728,6 @@ class EuAichiStrategyForm(forms.Form, ChoicesMixin):
 
     def clean(self):
         cleaned_data = super(EuAichiStrategyForm, self).clean()
-        print cleaned_data
         aichi_targets = cleaned_data['aichi_targets']
         other_aichi_targets = cleaned_data['other_aichi_targets']
         eu_indicators = cleaned_data['eu_indicators']
