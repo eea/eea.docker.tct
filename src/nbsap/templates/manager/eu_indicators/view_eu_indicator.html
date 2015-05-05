@@ -27,7 +27,7 @@
          href="{% url 'edit_eu_indicator' pk=indicator.pk %}">{% trans "Edit" %}</a>
 
       <a class="btn btn-default"
-         href="{% url 'map_eu_indicator' pk=indicator.pk %}">{% trans "Mapping" %}</a>
+         href="{% url 'map_eu_indicator' pk=indicator.pk %}">{% trans "Aichi Mapping" %}</a>
 
       <button type="submit" class="btn btn-danger edit"
               data-message="{% trans 'Are you sure you want to delete this indicator?' %}">
@@ -44,38 +44,6 @@
     {{ indicator.code|default:'' }} {{ indicator.title }}
   {% endif %}
   </div>
-
-  {% if indicator.subindicators.exists %}
-    <h2>{% trans 'Subindicators' %}</h2>
-    <ul>
-      {% for subindicator in indicator.subindicators.all %}
-        <li>
-          <a href="{% url 'view_eu_indicator' pk=subindicator.pk %}">
-            {{ subindicator.code }}: {{ subindicator.title }}
-          </a>
-        </li>
-      {% endfor %}
-    </ul>
-  {% endif %}
-
-  {% if indicator.targets.exists %}
-      <h2>{% trans "Mapping with EU targets" %}</h2>
-      <h4>Most relevant</h4>
-      <ul>
-      {% for target in indicator.targets.all %}
-        <li>{{ target.code }} {{ target.title }}</li>
-      {% endfor %}
-      </ul>
-
-      {% if indicator.other_targets.count %}
-      <h4>Other</h4>
-      <ul>
-      {% for target in indicator.other_targets.all %}
-        <li>{{ target.code }} {{ target.title }}</li>
-      {% endfor %}
-      </ul>
-      {% endif %}
-  {% endif %}
 
   {% if indicator.eu_indicator_aichi_strategy.exists %}
     <h2>{% trans "Mapping with Aichi Strategy" %}</h2>

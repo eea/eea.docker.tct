@@ -54,6 +54,26 @@
       </div>
     </div>
 
+    <div class="form-group">
+      <label class="col-md-2" for="eu_indicators">{% trans "EU indicators" %}</label>
+      <div class="col-md-3">
+        {{ form.eu_indicators }}
+        {{ form.eu_indicators.errors }}
+      </div>
+      <div class="aichi_targets_text col-md-7 short-descrip">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-2" for="other_eu_indicators">{% trans "Other EU indicators" %}</label>
+      <div class="col-md-3">
+        {{ form.other_eu_indicators }}
+        {{ form.other_eu_indicators.errors }}
+      </div>
+      <div class="other_aichi_targets_text col-md-7 short-descrip">
+      </div>
+    </div>
+
     <div class="action-bar">
       <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
       <a href="{% url 'list_eu_aichi_strategy' %}" class="btn btn-default" type="button">{% trans "Cancel" %}</a>
@@ -70,6 +90,7 @@
     $(".chzn-select").chosen();
 
     forbidCrossChoicesIntersection('aichi_targets', 'other_aichi_targets');
+    forbidCrossChoicesIntersection('eu_indicators', 'other_eu_indicators');
 
     showTargetCodeValue('aichi_targets',
                         '.aichi_targets_text',

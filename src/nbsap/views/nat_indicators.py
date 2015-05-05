@@ -5,7 +5,6 @@ from django.utils.translation import ugettext_lazy as _
 from auth import auth_required
 from nbsap import models
 from nbsap.forms import (
-    EuIndicatorForm, EuIndicatorEditForm, EuIndicatorMapForm,
     NationalIndicatorEditForm, NationalIndicatorForm,
     NationalIndicatorMapForm
 )

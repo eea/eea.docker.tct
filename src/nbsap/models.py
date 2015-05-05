@@ -249,7 +249,6 @@ class EuIndicator(BaseIndicator):
     __metaclass__ = Translatable
 
     TYPES = (
-        ('eu', 'EU'),
         ('sebi', 'SEBI'),
         ('csi', 'CSI'),
         ('aei', 'AEI'),
@@ -597,6 +596,14 @@ class EuAichiStrategy(models.Model):
     other_aichi_targets = models.ManyToManyField(
         AichiTarget, verbose_name="Other Aichi targets",
         related_name="eu_other_aichi_strategy", blank=True,
+    )
+
+    eu_indicators = models.ManyToManyField(EuIndicator,
+                                        verbose_name="EU indicators",
+                                        related_name="eu_target_eu_indicators")
+    other_eu_indicators = models.ManyToManyField(
+        EuIndicator, verbose_name="Other EU indicators",
+        related_name="eu_target_other_eu_indicators", blank=True,
     )
 
     def get_targets(self):

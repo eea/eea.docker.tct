@@ -47,10 +47,9 @@ class TextCleanedHtml(forms.CharField):
 class ChoicesMixin(object):
     def _get_choices(self, name, queryset, attr):
         return sorted(
-            [(x.pk, '{} {}'.format(name, getattr(x, attr)))
+            [(x.pk, name + ' ' + '-'.join([str(getattr(x, a)) for a in attr]))
              for x in queryset],
             key=lambda el: el[1].split()[1])
-
 
 class NationalObjectiveForm(forms.Form):
     language = forms.ChoiceField(choices=settings.LANGUAGES)
@@ -445,6 +444,8 @@ class EuIndicatorForm(forms.Form):
     title = forms.CharField(widget=widgets.Textarea, required=False)
     url = forms.CharField(required=False)
     indicator_type = forms.ChoiceField(choices=EuIndicator.TYPES)
+    code = forms.CharField(
+        max_length=16, validators=[validate_simple_digit_code])
 
     def __init__(self, *args, **kwargs):
         self.indicator = kwargs.pop('indicator', None)
@@ -479,7 +480,6 @@ class EuIndicatorForm(forms.Form):
         indicator.save()
 
         return indicator
-
 
 class NationalIndicatorForm(forms.Form):
     language = forms.ChoiceField(choices=settings.LANGUAGES)
@@ -534,40 +534,6 @@ class NationalIndicatorForm(forms.Form):
 
         return indicator
 
-
-class EuIndicatorEditForm(EuIndicatorForm, ChoicesMixin):
-    code = forms.CharField(
-        max_length=16, validators=[validate_simple_digit_code], required=False)
-    subindicators = chosenforms.ChosenMultipleChoiceField(
-        choices=[], required=False, overlay="Select subindicators...")
-
-    def __init__(self, *args, **kwargs):
-        super(EuIndicatorEditForm, self).__init__(*args, **kwargs)
-        sub_choices = self._get_choices(
-            'Subindicator', EuIndicator.objects.exclude(indicator_type='eu'),
-            'code'
-        )
-        self.fields['subindicators'].choices = sub_choices
-        self.fields['subindicators'].initial = (self.indicator.subindicators
-                                                .values_list('pk', flat=True))
-
-    def clean_code(self):
-        code = self.cleaned_data['code']
-        if code == self.indicator.code:
-            return code
-        try:
-            EuIndicator.objects.get(code=code)
-            raise ValidationError('Code already exists.')
-        except EuIndicator.DoesNotExist:
-            pass
-        return code
-
-    def save(self):
-        indicator = super(EuIndicatorEditForm, self).save()
-        indicator.parent = self.cleaned_data['subindicators']
-        return indicator
-
-
 class NationalIndicatorEditForm(NationalIndicatorForm, ChoicesMixin):
     subindicators = chosenforms.ChosenMultipleChoiceField(
         choices=[], required=False, overlay="Select subindicators...")
@@ -576,7 +542,7 @@ class NationalIndicatorEditForm(NationalIndicatorForm, ChoicesMixin):
         super(NationalIndicatorEditForm, self).__init__(*args, **kwargs)
         sub_choices = self._get_choices(
             'Subindicator', NationalIndicator.objects.exclude(indicator_type='label'),
-            'code'
+            ['code']
         )
         self.fields['subindicators'].choices = sub_choices
         self.fields['subindicators'].initial = (self.indicator.subindicators
@@ -602,7 +568,7 @@ class EuIndicatorMapForm(forms.Form, ChoicesMixin):
         self.indicator = kwargs.pop('indicator', None)
         super(EuIndicatorMapForm, self).__init__(*args, **kwargs)
         target_choices = self._get_choices(
-            'Target', EuTarget.objects.all(), 'code'
+            'Target', EuTarget.objects.all(), ['code']
         )
         self.fields['eu_targets'].choices = target_choices
         self.fields['other_eu_targets'].choices = target_choices
@@ -612,7 +578,7 @@ class EuIndicatorMapForm(forms.Form, ChoicesMixin):
             self.indicator.other_targets.values_list('pk', flat=True)
         )
         aichi_target_choices = self._get_choices(
-            'Target', AichiTarget.objects.all(), 'code'
+            'Target', AichiTarget.objects.all(), ['code']
         )
         self.fields['aichi_targets'].choices = aichi_target_choices
         self.fields['other_aichi_targets'].choices = aichi_target_choices
@@ -678,7 +644,7 @@ class NationalIndicatorMapForm(forms.Form, ChoicesMixin):
         self.indicator = kwargs.pop('indicator', None)
         super(NationalIndicatorMapForm, self).__init__(*args, **kwargs)
         nat_objectives = self._get_choices(
-            'Objective', NationalObjective.objects.all(), 'code'
+            'Objective', NationalObjective.objects.all(), ['code']
         )
         self.fields['nat_objectives'].choices = nat_objectives
         self.fields['other_nat_objectives'].choices = nat_objectives
@@ -714,15 +680,24 @@ class EuAichiStrategyForm(forms.Form, ChoicesMixin):
         overlay="Select target...")
     other_aichi_targets = chosenforms.ChosenMultipleChoiceField(
         overlay="Select target...", required=False)
+    eu_indicators = chosenforms.ChosenMultipleChoiceField(
+        overlay="Select indicator...", required=False)
+    other_eu_indicators = chosenforms.ChosenMultipleChoiceField(
+        overlay="Select indicator...", required=False)
 
     def __init__(self, *args, **kwargs):
         self.strategy = kwargs.pop('strategy', None)
         super(EuAichiStrategyForm, self).__init__(*args, **kwargs)
 
         target_choices = self._get_choices(
-            'Target', AichiTarget.objects.all(), 'code')
+            'Target', AichiTarget.objects.all(), ['code'])
+        indicator_choices = self._get_choices(
+            'Indicator', EuIndicator.objects.all(), ['code', 'indicator_type'])
+
         self.fields['aichi_targets'].choices = target_choices
         self.fields['other_aichi_targets'].choices = target_choices
+        self.fields['eu_indicators'].choices = indicator_choices
+        self.fields['other_eu_indicators'].choices = indicator_choices
 
         if self.strategy:
             self.fields['aichi_targets'].initial = (
@@ -733,6 +708,14 @@ class EuAichiStrategyForm(forms.Form, ChoicesMixin):
                 self.strategy.other_aichi_targets
                 .values_list('pk', flat=True)
             )
+            self.fields['eu_indicators'].initial = (
+                self.strategy.eu_indicators
+                .values_list('pk', flat=True)
+            )
+            self.fields['other_eu_indicators'].initial = (
+                self.strategy.other_eu_indicators
+                .values_list('pk', flat=True)
+            )
             del self.fields['eu_target']
         else:
             existing_strategies = (EuAichiStrategy.objects
@@ -740,16 +723,21 @@ class EuAichiStrategyForm(forms.Form, ChoicesMixin):
             self.fields['eu_target'].choices = self._get_choices(
                 'Target',
                 EuTarget.objects.exclude(id__in=existing_strategies).all(),
-                'pk'
+                ['pk']
             )
 
     def clean(self):
         cleaned_data = super(EuAichiStrategyForm, self).clean()
         aichi_targets = cleaned_data['aichi_targets']
         other_aichi_targets = cleaned_data['other_aichi_targets']
+        eu_indicators = cleaned_data['eu_indicators']
+        other_eu_indicators = cleaned_data['other_eu_indicators']
 
         if set(aichi_targets) & set(other_aichi_targets):
             raise ValidationError(_(MAPPING_ERROR.format('AICHI')))
+
+        if set(eu_indicators) & set(other_eu_indicators):
+            raise ValidationError(_(MAPPING_ERROR.format('EU_INDICATORS')))
 
         return cleaned_data
 
@@ -769,5 +757,13 @@ class EuAichiStrategyForm(forms.Form, ChoicesMixin):
         strategy.other_aichi_targets = (
             AichiTarget.objects
             .filter(pk__in=self.cleaned_data['other_aichi_targets'])
+        )
+        strategy.eu_indicators = (
+            EuIndicator.objects
+            .filter(pk__in=self.cleaned_data['eu_indicators'])
+        )
+        strategy.other_eu_indicators = (
+            EuIndicator.objects
+            .filter(pk__in=self.cleaned_data['other_eu_indicators'])
         )
         strategy.save()

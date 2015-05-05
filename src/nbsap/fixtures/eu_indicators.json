@@ -1,21 +1,5 @@
 [
     {
-        "pk": 1, 
-        "model": "nbsap.euindicator", 
-        "fields": {
-            "indicator_type": "eu", 
-            "url": "", 
-            "code": "", 
-            "title_en": "Trends and/or Change of Conservation status", 
-            "parent": [
-                2, 
-                3, 
-                4, 
-                5
-            ]
-        }
-    }, 
-    {
         "pk": 2, 
         "model": "nbsap.euindicator", 
         "fields": {
@@ -58,38 +42,7 @@
             "title_en": "Land take", 
             "parent": []
         }
-    }, 
-    {
-        "pk": 6, 
-        "model": "nbsap.euindicator", 
-        "fields": {
-            "indicator_type": "eu", 
-            "url": "", 
-            "code": "", 
-            "title_en": "Trends in and/or Change of Conservation status per ecosystem:", 
-            "parent": [
-                3, 
-                2
-            ]
-        }
-    }, 
-    {
-        "pk": 7, 
-        "model": "nbsap.euindicator", 
-        "fields": {
-            "indicator_type": "eu", 
-            "url": "", 
-            "code": "", 
-            "title_en": "Ecological conditions and/or Pressures on ecosystems:", 
-            "parent": [
-                8, 
-                9, 
-                10, 
-                11, 
-                12
-            ]
-        }
-    }, 
+    },
     {
         "pk": 8, 
         "model": "nbsap.euindicator", 
@@ -144,20 +97,7 @@
             "title_en": "Nutrients in freshwater", 
             "parent": []
         }
-    }, 
-    {
-        "pk": 13, 
-        "model": "nbsap.euindicator", 
-        "fields": {
-            "indicator_type": "eu", 
-            "url": "", 
-            "code": "", 
-            "title_en": "Maintenance of ecosystems (or responses)", 
-            "parent": [
-                14
-            ]
-        }
-    }, 
+    },
     {
         "pk": 14, 
         "model": "nbsap.euindicator", 
@@ -168,42 +108,7 @@
             "title_en": "Nationally designated protected areas", 
             "parent": []
         }
-    }, 
-    {
-        "pk": 15, 
-        "model": "nbsap.euindicator", 
-        "fields": {
-            "indicator_type": "eu", 
-            "url": "", 
-            "code": "", 
-            "title_en": "Restoration of ecosystems", 
-            "parent": []
-        }
-    }, 
-    {
-        "pk": 16, 
-        "model": "nbsap.euindicator", 
-        "fields": {
-            "indicator_type": "eu", 
-            "url": "", 
-            "code": "", 
-            "title_en": "Ecosystem services", 
-            "parent": []
-        }
-    }, 
-    {
-        "pk": 17, 
-        "model": "nbsap.euindicator", 
-        "fields": {
-            "indicator_type": "eu", 
-            "url": "", 
-            "code": "", 
-            "title_en": "Trends and/or Change of Conservation status for agro-ecosystem:", 
-            "parent": [
-                18
-            ]
-        }
-    }, 
+    },
     {
         "pk": 18, 
         "model": "nbsap.euindicator", 
@@ -214,21 +119,7 @@
             "title_en": "Abundance and distribution of selected species: Common farmland birds and grassland butterflies", 
             "parent": []
         }
-    }, 
-    {
-        "pk": 19, 
-        "model": "nbsap.euindicator", 
-        "fields": {
-            "indicator_type": "eu", 
-            "url": "", 
-            "code": "", 
-            "title_en": "Trends and/or Change of Conservation status per ecosystem:", 
-            "parent": [
-                20, 
-                21
-            ]
-        }
-    }, 
+    },
     {
         "pk": 20, 
         "model": "nbsap.euindicator", 
@@ -250,36 +141,7 @@
             "title_en": "Conservation status of habitats of European interest related to agro-ecosystems and grassland", 
             "parent": []
         }
-    }, 
-    {
-        "pk": 22, 
-        "model": "nbsap.euindicator", 
-        "fields": {
-            "indicator_type": "eu", 
-            "url": "", 
-            "code": "", 
-            "title_en": "Agricultural genetic diversity", 
-            "parent": []
-        }
-    }, 
-    {
-        "pk": 23, 
-        "model": "nbsap.euindicator", 
-        "fields": {
-            "indicator_type": "eu", 
-            "url": "", 
-            "code": "", 
-            "title_en": "Trends of Ecological conditions and/or Pressures in agro-ecosystems", 
-            "parent": [
-                24, 
-                25, 
-                26, 
-                27, 
-                28, 
-                29
-            ]
-        }
-    }, 
+    },
     {
         "pk": 24, 
         "model": "nbsap.euindicator", 
@@ -345,25 +207,7 @@
             "title_en": "Landscape \u2013 state and diversity", 
             "parent": []
         }
-    }, 
-    {
-        "pk": 30, 
-        "model": "nbsap.euindicator", 
-        "fields": {
-            "indicator_type": "eu", 
-            "url": "", 
-            "code": "", 
-            "title_en": "Trends in good practices", 
-            "parent": [
-                31, 
-                32, 
-                33, 
-                34, 
-                35, 
-                36
-            ]
-        }
-    }, 
+    },
     {
         "pk": 31, 
         "model": "nbsap.euindicator", 
@@ -429,20 +273,7 @@
             "title_en": "Agricultural areas under Natura 2000", 
             "parent": []
         }
-    }, 
-    {
-        "pk": 37, 
-        "model": "nbsap.euindicator", 
-        "fields": {
-            "indicator_type": "eu", 
-            "url": "", 
-            "code": "", 
-            "title_en": "Trends of selected species relevant for forests in EU", 
-            "parent": [
-                38
-            ]
-        }
-    }, 
+    },
     {
         "pk": 38, 
         "model": "nbsap.euindicator", 
@@ -453,21 +284,7 @@
             "title_en": "Abundance and distribution of selected species: Common forest birds", 
             "parent": []
         }
-    }, 
-    {
-        "pk": 39, 
-        "model": "nbsap.euindicator", 
-        "fields": {
-            "indicator_type": "eu", 
-            "url": "", 
-            "code": "", 
-            "title_en": "Trends and/or Change of Conservation status for forest ecosystem", 
-            "parent": [
-                40, 
-                41
-            ]
-        }
-    }, 
+    },
     {
         "pk": 40, 
         "model": "nbsap.euindicator", 
@@ -489,32 +306,7 @@
             "title_en": "Conservation status of habitats of European interest related to forests", 
             "parent": []
         }
-    }, 
-    {
-        "pk": 42, 
-        "model": "nbsap.euindicator", 
-        "fields": {
-            "indicator_type": "eu", 
-            "url": "", 
-            "code": "", 
-            "title_en": "Forest genetic diversity", 
-            "parent": []
-        }
-    }, 
-    {
-        "pk": 43, 
-        "model": "nbsap.euindicator", 
-        "fields": {
-            "indicator_type": "eu", 
-            "url": "", 
-            "code": "", 
-            "title_en": "Trends of Ecological conditions and/or Pressures in forest ecosystems", 
-            "parent": [
-                44, 
-                45
-            ]
-        }
-    }, 
+    },
     {
         "pk": 44, 
         "model": "nbsap.euindicator", 
@@ -536,21 +328,7 @@
             "title_en": "Forest: deadwood", 
             "parent": []
         }
-    }, 
-    {
-        "pk": 46, 
-        "model": "nbsap.euindicator", 
-        "fields": {
-            "indicator_type": "eu", 
-            "url": "", 
-            "code": "", 
-            "title_en": "Trends and/or Change of Conservation status for marine ecosystem:", 
-            "parent": [
-                47, 
-                48
-            ]
-        }
-    }, 
+    },
     {
         "pk": 47, 
         "model": "nbsap.euindicator", 
@@ -572,31 +350,7 @@
             "title_en": "Conservation status of habitats of European interest related to marine ecosystems", 
             "parent": []
         }
-    }, 
-    {
-        "pk": 49, 
-        "model": "nbsap.euindicator", 
-        "fields": {
-            "indicator_type": "eu", 
-            "url": "", 
-            "code": "", 
-            "title_en": "Information on good practices", 
-            "parent": []
-        }
-    }, 
-    {
-        "pk": 50, 
-        "model": "nbsap.euindicator", 
-        "fields": {
-            "indicator_type": "eu", 
-            "url": "", 
-            "code": "", 
-            "title_en": "Trends of Ecological conditions and/or Pressures on marine-ecosystems", 
-            "parent": [
-                51
-            ]
-        }
-    }, 
+    },
     {
         "pk": 51, 
         "model": "nbsap.euindicator", 
@@ -607,20 +361,7 @@
             "title_en": "Fisheries: European commercial fish stocks", 
             "parent": []
         }
-    }, 
-    {
-        "pk": 52, 
-        "model": "nbsap.euindicator", 
-        "fields": {
-            "indicator_type": "eu", 
-            "url": "", 
-            "code": "", 
-            "title_en": "Trends of Alien species and of Invasive Alien Species", 
-            "parent": [
-                53
-            ]
-        }
-    }, 
+    },
     {
         "pk": 53, 
         "model": "nbsap.euindicator", 
@@ -631,31 +372,7 @@
             "title_en": "Invasive alien species in Europe", 
             "parent": []
         }
-    }, 
-    {
-        "pk": 54, 
-        "model": "nbsap.euindicator", 
-        "fields": {
-            "indicator_type": "eu", 
-            "url": "", 
-            "code": "", 
-            "title_en": "Information on pathways", 
-            "parent": []
-        }
-    }, 
-    {
-        "pk": 55, 
-        "model": "nbsap.euindicator", 
-        "fields": {
-            "indicator_type": "eu", 
-            "url": "", 
-            "code": "", 
-            "title_en": "Information on EU impact", 
-            "parent": [
-                56
-            ]
-        }
-    }, 
+    },
     {
         "pk": 56, 
         "model": "nbsap.euindicator", 
@@ -664,17 +381,6 @@
             "url": "http://www.eea.europa.eu/data-and-maps/indicators/ecological-footprint-of-european-countries/ecological-footprint-of-european-countries", 
             "code": "23", 
             "title_en": "Ecological Footprint of European countries", 
-            "parent": []
-        }
-    }, 
-    {
-        "pk": 57, 
-        "model": "nbsap.euindicator", 
-        "fields": {
-            "indicator_type": "eu", 
-            "url": "", 
-            "code": "", 
-            "title_en": "Information on resources mobilization", 
             "parent": []
         }
     }

@@ -1,0 +1,41 @@
+{% load i18n %}
+
+<div class="form-group">
+  <label for="language">{% trans "Language" %}</label>
+  {{ form.language }}
+</div>
+
+{% if form.code %}
+  <div class="form-group">
+    <label for="code">{% trans "Code" %}</label>
+    {{ form.code }}
+    {{ form.code.errors }}
+  </div>
+{% endif %}
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="language-container">
+
+      <div class="form-group">
+        <label for="title">{% trans "Title" %}</label>
+        {{ form.title }}
+        {{ form.title.errors }}
+      </div>
+
+      <div class="form-group">
+        <label for="url">{% trans "URL" %}</label>
+        {{ form.url }}
+        {{ form.url.errors }}
+      </div>
+
+      <div class="form-group">
+        <label for="indicator_type">{% trans "Indicator type" %}</label>
+        {{ form.indicator_type }}
+        {{ form.indicator_type.errors }}
+      </div>
+
+    </div>
+  </div>
+
+</div>

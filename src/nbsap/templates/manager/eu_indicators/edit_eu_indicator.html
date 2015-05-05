@@ -26,59 +26,7 @@
   {% endif %}
   <form action="" method="post" id="national-indicator-edit" class="form">
 
-    <div class="form-group">
-      <label for="language">{% trans "Language" %}</label>
-      {{ form.language }}
-    </div>
-
-    {% if form.code %}
-      <div class="form-group">
-        <label for="code">{% trans "Code" %}</label>
-        {{ form.code }}
-        {{ form.code.errors }}
-      </div>
-    {% endif %}
-
-    <div class="row">
-      <div class="col-md-6">
-        <div class="language-container">
-
-          <div class="form-group">
-            <label for="title">{% trans "Title" %}</label>
-            {{ form.title }}
-            {{ form.title.errors }}
-          </div>
-
-          <div class="form-group">
-            <label for="url">{% trans "URL" %}</label>
-            {{ form.url }}
-            {{ form.url.errors }}
-          </div>
-
-          <div class="form-group">
-            <label for="indicator_type">{% trans "Indicator type" %}</label>
-            {{ form.indicator_type }}
-            {{ form.indicator_type.errors }}
-          </div>
-
-          {% if indicator.indicator_type == 'eu' %}
-          <div class="form-group">
-            <label class=""
-                   for="subindicators">{% trans "Subindicators" %}</label>
-
-            <div class="">
-              {{ form.subindicators }}
-              {{ form.subindicators.errors }}
-            </div>
-            <div class="subindicators_text col-md-7 short-descrip">
-            </div>
-          </div>
-          {% endif %}
-
-        </div>
-      </div>
-
-    </div>
+    {% include "manager/eu_indicators/eu_indicator_form.html" %}
 
     <div class="action-bar">
       <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
@@ -96,12 +44,4 @@
     <script type="text/javascript" src="{{ ASSET_URL }}"></script>
   {% endassets %}
 
-{#  <script>#}
-{#    $(function () {#}
-{#      $(".chzn-select").chosen();#}
-{#      showTargetCodeValue('subindicators',#}
-{#          '.subindicators_text',#}
-{#          "{% url 'aichi_target_title' pk=1 %}");#}
-{#    });#}
-{#  </script>#}
 {% endblock %}

@@ -57,22 +57,17 @@
 
   <div class="well">
     <div class="well-title">{% trans "Most relevant EU indicators" %}</div>
-    {% if current_target.indicators.count %}
+    {% if current_target.eu_aichi_strategy.count %}
       <ul>
-        {% for indicator in current_target.indicators.all %}
-          <li>
-            {{ indicator.code }} {{ indicator.title }}
-            {% if indicator.subindicators.exists %}
-              <ul>
-                {% for sub in indicator.subindicators.all %}
-                  <li>
-                    <a href="{% url 'eu_indicators' %}#indicator-{{ sub.id }}">
-                      {{ sub.indicator_type|upper }} {{ sub.code }}: {{ sub.title }}</a>
-                  </li>
-                {% endfor %}
-              </ul>
-            {% endif %}
-          </li>
+        {% for strategy in current_target.eu_aichi_strategy.all %}
+          {% if strategy.eu_indicators.count %}
+            {% for indicator in strategy.eu_indicators.all %}
+              <li>
+                <a href="{% url 'eu_indicators' %}#indicator-{{ indicator.id }}">
+                  {{ indicator.indicator_type|upper }} {{ indicator.code }}: {{ indicator.title }}</a>
+              </li>
+            {% endfor %}
+          {% endif %}
         {% endfor %}
       </ul>
     {% else %}
@@ -82,26 +77,17 @@
 
   <div class="well">
     <div class="well-title">{% trans "Other EU indicators" %}</div>
-    {% if current_target.other_indicators.count %}
+    {% if current_target.eu_aichi_strategy.count %}
       <ul>
-        {% for indicator in current_target.other_indicators.all %}
-          <li>
-            {{ indicator.code }} {{ indicator.title }}
-            {% if indicator.subindicators.exists %}
-              <ul>
-                {% for sub in indicator.subindicators.all %}
-                  <li>
-                    {% if sub.url %}
-                      <a href="{{ sub.url }}">
-                        {{ sub.indicator_type|upper }} {{ sub.code }}: {{ sub.title }}</a>
-                    {% else %}
-                      {{ sub.code }} {{ sub.title }}
-                    {% endif %}
-                  </li>
-                {% endfor %}
-              </ul>
-            {% endif %}
-          </li>
+        {% for strategy in current_target.eu_aichi_strategy.all %}
+          {% if strategy.other_eu_indicators.count %}
+            {% for indicator in strategy.other_eu_indicators.all %}
+              <li>
+                <a href="{% url 'eu_indicators' %}#indicator-{{ indicator.id }}">
+                  {{ indicator.indicator_type|upper }} {{ indicator.code }}: {{ indicator.title }}</a>
+              </li>
+            {% endfor %}
+          {% endif %}
         {% endfor %}
       </ul>
     {% else %}

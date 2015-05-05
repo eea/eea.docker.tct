@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from auth import auth_required
 from nbsap import models
-from nbsap.forms import EuIndicatorForm, EuIndicatorEditForm, EuIndicatorMapForm
+from nbsap.forms import EuIndicatorForm, EuIndicatorMapForm
 
 
 def get_indicators_pages(paginator):
@@ -57,12 +57,11 @@ def edit_eu_indicator(request, pk=None):
     if pk:
         indicator = get_object_or_404(models.EuIndicator, pk=pk)
         template = 'manager/eu_indicators/edit_eu_indicator.html'
-        FormClass = EuIndicatorEditForm
     else:
         indicator = None
         template = 'manager/eu_indicators/add_eu_indicator.html'
-        FormClass = EuIndicatorForm
 
+    FormClass = EuIndicatorForm
     lang = request.GET.get('lang', request.LANGUAGE_CODE)
 
     if request.method == 'POST':
