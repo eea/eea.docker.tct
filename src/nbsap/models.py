@@ -272,6 +272,13 @@ class EuIndicator(BaseIndicator):
     def subindicators(self):
         return self.parent
 
+    @property
+    def full_code(self):
+        if self.indicator_type:
+            return u'{0} {1}'.format(self.get_indicator_type_display().upper(),
+                                    self.code)
+        return self.code
+
     def __unicode__(self):
         return u'{0} {1}: {2}'.format(self.indicator_type.upper(),
                                      self.code,
@@ -596,14 +603,6 @@ class EuAichiStrategy(models.Model):
     other_aichi_targets = models.ManyToManyField(
         AichiTarget, verbose_name="Other Aichi targets",
         related_name="eu_other_aichi_strategy", blank=True,
-    )
-
-    eu_indicators = models.ManyToManyField(EuIndicator,
-                                        verbose_name="EU indicators",
-                                        related_name="eu_target_eu_indicators")
-    other_eu_indicators = models.ManyToManyField(
-        EuIndicator, verbose_name="Other EU indicators",
-        related_name="eu_target_other_eu_indicators", blank=True,
     )
 
     def get_targets(self):

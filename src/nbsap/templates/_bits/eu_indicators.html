@@ -1,0 +1,18 @@
+{% load i18n %}
+{% load utils %}
+
+{% if indicators.count %}
+  <ul>
+    {% for eu_indicator in indicators.all %}
+        <li>
+          <a href="{% url 'eu_indicators' %}#indicator-{{ eu_indicator.id }}"
+             title="{{ eu_indicator.title }}">
+            {{ eu_indicator.indicator_type|upper }}
+            {{ eu_indicator.code }}: {{ eu_indicator.title }}
+          </a>
+        </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>{% trans 'No corresponding EU indicator.' %}</p>
+{% endif %}

@@ -51,6 +51,7 @@ class ChoicesMixin(object):
              for x in queryset],
             key=lambda el: el[1].split()[1])
 
+
 class NationalObjectiveForm(forms.Form):
     language = forms.ChoiceField(choices=settings.LANGUAGES)
     title = forms.CharField(widget=widgets.Textarea)
@@ -692,7 +693,7 @@ class EuAichiStrategyForm(forms.Form, ChoicesMixin):
         target_choices = self._get_choices(
             'Target', AichiTarget.objects.all(), ['code'])
         indicator_choices = self._get_choices(
-            'Indicator', EuIndicator.objects.all(), ['code', 'indicator_type'])
+            'Indicator', EuIndicator.objects.all(), ['full_code'])
 
         self.fields['aichi_targets'].choices = target_choices
         self.fields['other_aichi_targets'].choices = target_choices
@@ -709,11 +710,11 @@ class EuAichiStrategyForm(forms.Form, ChoicesMixin):
                 .values_list('pk', flat=True)
             )
             self.fields['eu_indicators'].initial = (
-                self.strategy.eu_indicators
+                self.strategy.eu_target.indicators
                 .values_list('pk', flat=True)
             )
             self.fields['other_eu_indicators'].initial = (
-                self.strategy.other_eu_indicators
+                self.strategy.eu_target.other_indicators
                 .values_list('pk', flat=True)
             )
             del self.fields['eu_target']
@@ -758,11 +759,11 @@ class EuAichiStrategyForm(forms.Form, ChoicesMixin):
             AichiTarget.objects
             .filter(pk__in=self.cleaned_data['other_aichi_targets'])
         )
-        strategy.eu_indicators = (
+        strategy.eu_target.indicators = (
             EuIndicator.objects
             .filter(pk__in=self.cleaned_data['eu_indicators'])
         )
-        strategy.other_eu_indicators = (
+        strategy.eu_target.other_indicators = (
             EuIndicator.objects
             .filter(pk__in=self.cleaned_data['other_eu_indicators'])
         )

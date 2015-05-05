@@ -35,7 +35,7 @@
     <tbody>
     {% for indicator in indicators %}
       <tr>
-        <td>{{ indicator.code|default:'' }}</td>
+        <td>{{ indicator.full_code|default:'' }}</td>
         <td>
           <a href="{% url 'view_eu_indicator' pk=indicator.pk %}"
                title="{% trans 'Indicator' %} {{ indicator.code }}">
