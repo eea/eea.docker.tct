@@ -23,11 +23,13 @@
       <ul>
       {% for target in targets %}
         {% assign target.get_parent_goal as goal %}
+        {% if goal %}
         <li>
           <a href="{% url 'goals' code=goal.code %}#{{ target.code }}">
           {% trans "AICHI Target" %} {{ target.code }}</a>
           <p>{{ target.description|safe }}</p>
         </li>
+        {% endif %}
       {% endfor %}
       </ul>
 

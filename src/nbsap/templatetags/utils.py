@@ -41,7 +41,10 @@ def assign(value):
 
 @register.assignment_tag
 def get_goals_for_strategies(strategies):
-    goals = set([s.relevant_target.get_parent_goal() for s in strategies])
+    goals = set(
+        [s.relevant_target.get_parent_goal()
+         for s in strategies if s.relevant_target]
+    )
     return goals
 
 
