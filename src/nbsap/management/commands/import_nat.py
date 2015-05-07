@@ -2,6 +2,7 @@ import csv
 import cStringIO, codecs
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
+from django.conf import settings
 from nbsap.models import (
     NationalObjective, NationalStrategy, EuTarget, EuAction, AichiTarget,
 )
@@ -37,7 +38,7 @@ class UnicodeReader:
 
 def _get_obj(model, code):
     qs = model.objects.filter(code=code).all()
-    return qs and qs[0]
+    return (qs and qs[0]) or None
 
 
 class Command(BaseCommand):
@@ -47,22 +48,25 @@ class Command(BaseCommand):
             self.stderr.write('Please provide a file name to import from')
             return
 
+        language = settings.LANGUAGES[0][0]
         # header = ['national_target_main_ref', 'description', 'eu_target',
         #           'global_targets', 'eu_actions']
         data = []
         with open(filename, 'r') as f:
-            reader = UnicodeReader(f)
-            reader.next()
+            reader = UnicodeReader(f, delimiter=';')
+            header = reader.next()
             for row in reader:
+                if header[0] == 'country':
+                    row = row[1:]
                 data.append(row)
 
         for row in data:
             nat_obj = NationalObjective.objects.create()
-            nat_obj.title_en = row[0]
-            nat_obj.description_en = row[1]
+            setattr(nat_obj, 'title_' + language, row[0])
+            setattr(nat_obj, 'description_' + language, row[1])
             nat_obj.save()
             strategy = NationalStrategy.objects.create(objective=nat_obj)
-            eu_targets = row[2].split(',')
+            eu_targets = [c for c in row[2].split(',') if c]
             for code in eu_targets:
                 target = _get_obj(EuTarget, code)
                 if not target:
@@ -70,10 +74,12 @@ class Command(BaseCommand):
                         'No EuTarget found for code: {0}'.format(code))
                 else:
                     target.national_strategy.add(strategy)
+                    target.save()
             global_targets = row[3].split(',')
             atarget = _get_obj(AichiTarget, global_targets[0])
             strategy.relevant_target = atarget
             global_targets = global_targets and global_targets[1:]
+            global_targets = [c for c in global_targets if c]
             for code in global_targets:
                 atarget = _get_obj(AichiTarget, code)
                 if not atarget:
@@ -83,7 +89,7 @@ class Command(BaseCommand):
                 else:
                     strategy.other_targets.add(atarget)
             strategy.save()
-            eu_actions = row[4].split(',')
+            eu_actions = [c for c in row[4].split(',') if c]
             for code in eu_actions:
                 action = _get_obj(EuAction, code)
                 if not action:
@@ -92,3 +98,4 @@ class Command(BaseCommand):
                     )
                 else:
                     action.national_strategy.add(strategy)
+            self.stdout.write(u'Imported {0}'.format(nat_obj))

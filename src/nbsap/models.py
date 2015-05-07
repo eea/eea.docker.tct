@@ -597,6 +597,9 @@ class NationalStrategy(models.Model):
         related_name="other_targets_national_strategy",
     )
 
+    def __unicode__(self):
+        return 'Strategy' + unicode(self.objective)
+
     class Meta:
         verbose_name_plural = ' Mappings: National strategy to AICHI&EU'
 
