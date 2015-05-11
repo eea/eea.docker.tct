@@ -110,6 +110,14 @@
         {% include 'manager/nat_strategy/mapping/nat_strategy_eu_mapping.html' with subobj=obj %}
       {% endif %}
 
+      <div>
+        <p>
+          <a href="{% url 'implementation' code=current_objective.code %}#{{ obj.code }}" title="{{ obj.code }}">
+          See implementation
+          </a>
+        </p>
+      </div>
+
     </div> {# /summary #}
 
   {% endfor %}
