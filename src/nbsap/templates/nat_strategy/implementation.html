@@ -79,9 +79,15 @@
           <div class="html-content">{{ action.description|safe }}</div>
 
           {% include 'manager/nat_strategy/mapping/nat_action_aichi_mapping.html' %}
-
           <a class="less"> {% trans "show less" %}</a>
         </div>
+        <div>
+            <p>
+              <a href="{% url 'nat_strategy' current_objective.code %}#{{ action.code }}" title="{{ action.code }}">
+              See objective
+              </a>
+            </p>
+          </div>
       </div>
     </div>
   {% endfor %}
