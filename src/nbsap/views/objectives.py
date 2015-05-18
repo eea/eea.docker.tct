@@ -8,6 +8,7 @@ import tablib
 
 from nbsap import models
 from nbsap.forms import NationalObjectiveForm, NationalObjectiveEditForm
+from nbsap.utils import remove_tags
 
 from auth import auth_required
 
@@ -46,11 +47,12 @@ def nat_strategy(request, code=None):
 
 def nat_strategy_download(request):
     eu_strategy = settings.EU_STRATEGY
-    headers = ['Objective', 'Goal', 'Most Relevant Targets',
-               'Other Relevant Targets']
+    headers = ['Objective', 'Aichi Goal', 'Most Relevant Aichi Targets',
+               'Other Relevant Aichi Targets', 'Objective description']
     if eu_strategy:
         headers.extend(['EU Targets', 'EU Actions'])
     data = tablib.Dataset(headers=headers)
+    lang = request.GET.get('lang', request.LANGUAGE_CODE)
 
     for strategy in models.NationalStrategy.objects.all():
         target = strategy.relevant_target
@@ -59,6 +61,8 @@ def nat_strategy_download(request):
             target.get_parent_goal().code,
             target.code,
             ', '.join(t.code for t in strategy.other_targets.all()),
+            remove_tags(getattr(strategy.objective,
+                                'description_' + lang).rstrip(), 'p'),
         ]
         if eu_strategy:
             row.extend([
