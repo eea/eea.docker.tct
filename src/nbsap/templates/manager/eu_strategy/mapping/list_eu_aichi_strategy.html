@@ -26,6 +26,8 @@
       <th>{% trans "Other AICHI Targets"%}</th>
       <th>{% trans "Edit" %}</th>
       <th>{% trans "Delete" %}</th>
+      <th>{% trans "Eu Indicators"%}</th>
+      <th>{% trans "Other Eu Indicators"%}</th>
     </thead>
 
     <tbody>
@@ -52,6 +54,12 @@
               {% trans "Delete" %}
             </button>
           </form>
+        </td>
+        <td>
+          {{ strategy.eu_target.indicators.all|join:", " }}
+        </td>
+        <td>
+          {{ strategy.eu_target.other_indicators.all|join:", " }}
         </td>
       </tr>
     {% endfor %}
