@@ -53,3 +53,39 @@
     {% endif %}
   {% endwith %}
 </div>
+
+
+<div class="well">
+  <div class="well-title">{% trans "Mapping with National Indicators" %}</div>
+
+  {% with indicators=subobj.nat_indicators.all %}
+  {% with other_indicators=subobj.other_nat_indicators.all %}
+    {% if indicators %}
+      <h5>{% trans "Most relevant National Indicators" %}</h5>
+      <ul>
+      {% for indicator in indicators %}
+        <li>
+            <a href="{% url 'nat_indicators' %}">
+            {% trans "National Indicator " %} {{ indicator.code }}</a>
+          </li>
+      {% endfor %}
+      </ul>
+    {% elif not other_indicators %}
+      <p>{% trans "No corresponding National Indicators" %}.</p>
+    {% endif %}
+
+    {% if other_indicators %}
+      <h5>{% trans "Other National Indicators" %}</h5>
+      <ul>
+      {% for indicator in other_indicators %}
+        <li>
+            <a href="{% url 'nat_indicators' %}">
+            {% trans "National Indicator " %} {{ indicator.code }}</a>
+          </li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+  {% endwith %}
+</div>
+
