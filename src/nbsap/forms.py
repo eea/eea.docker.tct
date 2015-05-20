@@ -537,23 +537,12 @@ class NationalIndicatorForm(forms.Form):
         return indicator
 
 class NationalIndicatorEditForm(NationalIndicatorForm, ChoicesMixin):
-    subindicators = chosenforms.ChosenMultipleChoiceField(
-        choices=[], required=False, overlay="Select subindicators...")
 
     def __init__(self, *args, **kwargs):
         super(NationalIndicatorEditForm, self).__init__(*args, **kwargs)
-        sub_choices = self._get_choices(
-            'Subindicator',
-            NationalIndicator.objects.exclude(indicator_type='label'),
-            ['code']
-        )
-        self.fields['subindicators'].choices = sub_choices
-        self.fields['subindicators'].initial = (self.indicator.subindicators
-                                                .values_list('pk', flat=True))
 
     def save(self):
         indicator = super(NationalIndicatorEditForm, self).save()
-        indicator.subindicators = self.cleaned_data['subindicators']
         return indicator
 
 

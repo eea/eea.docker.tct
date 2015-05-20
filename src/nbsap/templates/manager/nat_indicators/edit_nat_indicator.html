@@ -60,20 +60,6 @@
             {{ form.indicator_type.errors }}
           </div>
 
-          {% if indicator.indicator_type == 'label' %}
-          <div class="form-group">
-            <label class=""
-                   for="subindicators">{% trans "Subindicators" %}</label>
-
-            <div class="">
-              {{ form.subindicators }}
-              {{ form.subindicators.errors }}
-            </div>
-            <div class="subindicators_text col-md-7 short-descrip">
-            </div>
-          </div>
-          {% endif %}
-
         </div>
       </div>
 
