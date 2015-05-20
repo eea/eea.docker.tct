@@ -111,3 +111,6 @@ LANGUAGES = (
 #)
 #AUTH_LDAP_SERVER_URI = "ldap://nas.edw.lan"
 #AUTH_LDAP_USER_DN_TEMPLATE = "uid=%(user)s,cn=users,dc=edw,dc=lan"
+
+#Set to True if REG is a valid National Indicator value
+#ENABLE_REG_INDICATORS = False
