@@ -301,7 +301,6 @@ class NationalIndicator(BaseIndicator):
     __metaclass__ = Translatable
 
     TYPES = (
-        ('label', 'LABEL'),
         ('nat', 'NAT'),
     )
 

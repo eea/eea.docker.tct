@@ -44,19 +44,6 @@
   {% endif %}
   </div>
 
-  {% if indicator.subindicators.exists %}
-    <h2>{% trans 'Subindicators' %}</h2>
-    <ul>
-      {% for subindicator in indicator.subindicators.all %}
-        <li>
-          <a href="{% url 'view_nat_indicator' pk=subindicator.pk %}">
-            {{ subindicator.code }}: {{ subindicator.title }}
-          </a>
-        </li>
-      {% endfor %}
-    </ul>
-  {% endif %}
-
   {% if indicator.nat_objectives.exists %}
       <h2>{% trans "Mapping with National Objectives" %}</h2>
       <h4>Most relevant</h4>
