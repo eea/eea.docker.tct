@@ -304,6 +304,9 @@ class NationalIndicator(BaseIndicator):
         ('nat', 'NAT'),
     )
 
+    if settings.ENABLE_REG_INDICATORS:
+        TYPES += (('reg', 'REG'),)
+
     code = models.CharField(max_length=25,
                             null=True,
                             blank=True)
