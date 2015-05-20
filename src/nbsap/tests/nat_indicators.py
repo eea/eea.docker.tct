@@ -74,14 +74,3 @@ class NationalIndicatorsTest(BaseWebTest):
         with self.assertRaises(AssertionError):
             self.assertObjectInDatabase('NationalIndicator',
                                         pk=nat_indicator.pk)
-
-    def test_subindicators(self):
-        nat_subindicator = NationalIndicatorFactory(indicator_type="NAT")
-        nat_indicator = NationalIndicatorFactory(
-            subindicators=(nat_subindicator))
-
-        url = reverse('view_nat_indicator',
-                      kwargs={'pk': nat_indicator.pk})
-        resp = self.app.get(url, user='staff')
-        self.assertEqual(200, resp.status_code)
-        self.assertIn(nat_subindicator.title_en, resp.body)
