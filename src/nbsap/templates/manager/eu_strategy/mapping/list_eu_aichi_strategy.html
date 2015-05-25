@@ -56,10 +56,10 @@
           </form>
         </td>
         <td>
-          {{ strategy.eu_target.indicators.all|join:", " }}
+          {{ strategy.eu_target.get_indicators_short }}
         </td>
         <td>
-          {{ strategy.eu_target.other_indicators.all|join:", " }}
+          {{ strategy.eu_target.get_other_indicators_short }}
         </td>
       </tr>
     {% endfor %}
