@@ -289,6 +289,10 @@ class EuIndicator(BaseIndicator):
             [unicode(obj) for obj in self.parent.all()]
         ))
 
+    def get_code_type(self):
+        return u'{0} {1}'.format(self.indicator_type.upper(),
+                                 self.code)
+
     get_indicators.short_description = 'relation'
 
     class Meta:
@@ -562,6 +566,13 @@ class EuTarget(models.Model):
         ))
 
     get_indicators.short_description = 'EU Indicators'
+
+    def get_indicators_short(self):
+        return ', '.join(i.get_code_type() for i in self.indicators.all())
+
+    def get_other_indicators_short(self):
+        return ', '.join(i.get_code_type()
+                         for i in self.other_indicators.all())
 
     class Meta:
         verbose_name_plural = 'EU targets'
