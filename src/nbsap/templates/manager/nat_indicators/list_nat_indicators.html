@@ -35,10 +35,16 @@
     <tbody>
     {% for group in indicators %}
       <tr>
-        <td colspan="2">
+        <td>
           <strong><a href="{% url 'view_nat_indicator' pk=group.pk %}">
             {% if group.code %}
-              {{ group.code }} {% endif %}{{ group.title }}</a></strong>
+              {{ group.indicator_type|upper }}{{ group.code }}
+            {% endif %}</a></strong>
+        </td>
+        <td>
+          <strong><a href="{% url 'view_nat_indicator' pk=group.pk %}">
+            {{ group.title }}
+          </a></strong>
         </td>
         <td>
           <a class="btn btn-default"
