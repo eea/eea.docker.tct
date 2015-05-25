@@ -486,7 +486,7 @@ class EuIndicatorForm(forms.Form):
 class NationalIndicatorForm(forms.Form):
     language = forms.ChoiceField(choices=settings.LANGUAGES)
     title = forms.CharField(widget=widgets.Textarea, required=True)
-    code = forms.CharField(widget=widgets.Textarea, required=False,
+    code = forms.CharField(widget=widgets.Textarea, required=True,
                            validators=[validate_simple_digit_code])
     url = forms.CharField(required=False)
     indicator_type = forms.ChoiceField(choices=NationalIndicator.TYPES)
