@@ -447,7 +447,7 @@ class EuIndicatorForm(forms.Form):
     url = forms.CharField(required=False)
     indicator_type = forms.ChoiceField(choices=EuIndicator.TYPES)
     code = forms.CharField(
-        max_length=16, validators=[validate_simple_digit_code])
+        max_length=16, validators=[validate_code])
 
     def __init__(self, *args, **kwargs):
         self.indicator = kwargs.pop('indicator', None)
@@ -482,6 +482,7 @@ class EuIndicatorForm(forms.Form):
         indicator.save()
 
         return indicator
+
 
 class NationalIndicatorForm(forms.Form):
     language = forms.ChoiceField(choices=settings.LANGUAGES)
@@ -535,6 +536,7 @@ class NationalIndicatorForm(forms.Form):
         indicator.save()
 
         return indicator
+
 
 class NationalIndicatorEditForm(NationalIndicatorForm, ChoicesMixin):
 
