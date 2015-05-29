@@ -39,8 +39,9 @@ def eu_indicators(request):
 
 @auth_required
 def list_eu_indicators(request):
+    lang = request.GET.get('lang', request.LANGUAGE_CODE)
     indicators = models.EuIndicator.objects.filter(
-        parents=None).all().order_by('title_' + settings.LANGUAGE_CODE)
+        parents=None).all().order_by('title_' + lang)
     return render(request, 'manager/eu_indicators/list_eu_indicators.html', {
         'indicators': indicators,
     })

@@ -20,8 +20,9 @@ def nat_indicators(request):
 
 @auth_required
 def list_nat_indicators(request):
+    lang = request.GET.get('lang', request.LANGUAGE_CODE)
     indicators = models.NationalIndicator.objects.filter(
-        parents=None).all().order_by('title_' + settings.LANGUAGE_CODE)
+        parents=None).all().order_by('title_' + lang)
     return render(request, 'manager/nat_indicators/list_nat_indicators.html', {
         'indicators': indicators,
     })
