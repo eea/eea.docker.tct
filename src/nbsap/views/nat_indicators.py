@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import ugettext_lazy as _
+from django.conf import settings
 
 from auth import auth_required
 from nbsap import models
@@ -19,7 +20,9 @@ def nat_indicators(request):
 
 @auth_required
 def list_nat_indicators(request):
-    indicators = models.NationalIndicator.objects.filter(parents=None).all()
+    lang = request.GET.get('lang', request.LANGUAGE_CODE)
+    indicators = models.NationalIndicator.objects.filter(
+        parents=None).all().order_by('title_' + lang)
     return render(request, 'manager/nat_indicators/list_nat_indicators.html', {
         'indicators': indicators,
     })
