@@ -76,9 +76,6 @@ class Command(BaseCommand):
                     target.national_strategy.add(strategy)
                     target.save()
             global_targets = row[3].split(',')
-            atarget = _get_obj(AichiTarget, global_targets[0])
-            strategy.relevant_target = atarget
-            global_targets = global_targets and global_targets[1:]
             global_targets = [c for c in global_targets if c]
             for code in global_targets:
                 atarget = _get_obj(AichiTarget, code)
