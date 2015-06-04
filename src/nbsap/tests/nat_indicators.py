@@ -37,6 +37,7 @@ class NationalIndicatorsTest(BaseWebTest):
         nat_indicator = NationalIndicatorFactory()
         url = reverse('edit_nat_indicator')
         data = {
+            'code': '01',
             'language': 'en',
             'title': nat_indicator.title_en,
             'indicator-type': nat_indicator.indicator_type,

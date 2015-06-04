@@ -37,7 +37,9 @@
 {% block content %}
 
   <h1 class="page-title">{% trans 'National Strategy' %}</h1>
-  <h1 class="x-title">{% trans "Objective" %} {{ current_objective.code }}: {{ current_objective.title }}</h1>
+  <h1 class="x-title">
+    {% trans "Objective" %} {{ current_objective.code }}{% if current_objective.title %}: {{ current_objective.title }} {% endif %}
+  </h1>
   <div class="summary">
     <div class="snippet">
       {{ current_objective.description|striptags|truncatechars:510|safe }}
@@ -90,8 +92,10 @@
   {% for obj in current_objective.objectives_tree|sort_by_code %}
 
     <div class="section" id="{{ obj.code }}">
-      <h2>{% trans "Objective" %}
-           {{ obj.code }}: {{ obj.title }}</h2>
+      <h2>
+        {% trans "Objective" %}
+           {{ obj.code }}{% if obj.title %}: {{ obj.title }} {% endif %}
+      </h2>
 
       <div class="summary">
         <div class="snippet">
