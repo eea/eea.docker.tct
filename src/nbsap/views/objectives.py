@@ -58,8 +58,8 @@ def nat_strategy_download(request):
         target = strategy.relevant_target
         row = [
             strategy.objective.code,
-            target.get_parent_goal().code,
-            target.code,
+            target.get_parent_goal().code if target else '',
+            target.code if target else '',
             ', '.join(t.code for t in strategy.other_targets.all()),
             remove_tags(getattr(strategy.objective,
                                 'description_' + lang).rstrip(), 'p'),
