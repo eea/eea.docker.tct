@@ -65,9 +65,9 @@
       <ul>
       {% for indicator in indicators %}
         <li>
-            <a href="{% url 'nat_indicators' %}#indicator-{{ indicator.id }}">
+          <a href="{% url 'nat_indicators' %}#indicator-{{ indicator.id }}">
             {{ indicator.get_indicator_type_display }}{{ indicator.code }} {{ indicator.title }}</a>
-          </li>
+        </li>
       {% endfor %}
       </ul>
     {% elif not other_indicators %}
@@ -79,9 +79,9 @@
       <ul>
       {% for indicator in other_indicators %}
         <li>
-            <a href="{% url 'nat_indicators' %}">
-            {% trans "National Indicator " %} {{ indicator.code }}</a>
-          </li>
+          <a href="{% url 'nat_indicators' %}#indicator-{{ indicator.id }}">
+            {{ indicator.get_indicator_type_display }}{{ indicator.code }} {{ indicator.title }}</a>
+        </li>
       {% endfor %}
       </ul>
     {% endif %}
