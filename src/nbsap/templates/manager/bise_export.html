@@ -1,0 +1,41 @@
+<table class="plain">
+  <tbody>
+  <tr>
+    <td colspan="2" style="width: 115.5pt;" width="154">
+      <strong>National Targets / Objectives</strong>
+    </td>
+    <td style="width: 115.55pt;" width="154">
+      <p><strong>EU Targets</strong></p>
+    </td>
+    <td style="width: 115.55pt;" width="154">
+      <p><strong>Aichi Targets</strong></p>
+    </td>
+  </tr>
+  {% for strategy in strategies %}
+    <tr>
+      <td style="width: 115.5pt;" width="154">
+        Objective {{ strategy.objective.code }}
+      </td>
+      <td style="width: 115.5pt;" width="154">
+        {{ strategy.objective.description }}
+      </td>
+      <td style="width: 115.55pt;" width="154">
+
+        <img class="image-inline" height="134"
+             id="eu_{{ strategy.targets_t }}"
+             src="{{ strategy.targets_z }}.png"
+             width="156"/>
+      </td>
+      <td style="width: 115.55pt;" width="154">
+
+        {% for target in strategy.targets_list %}
+        <img alt="Aichi target {{ target.code }}" height="46"
+             src="abt-{{ target.code }}-48.png"
+             title="Aichi target {{ target.code }}"
+             width="46"/>
+        {% endfor %}
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>

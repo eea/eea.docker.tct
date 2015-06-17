@@ -31,6 +31,11 @@
   <li class="{% active request '^/administration/page' %}">
     <a href="{% url 'admin_pages' %}">{% trans "Intro page" %}</a>
   </li>
+  {% if NAT_STRATEGY %}
+  <li class="{% active request '^/administration/export' %}">
+    <a href="{% url 'admin_export' %}">{% trans "Export" %}</a>
+  </li>
+  {% endif %}
 
   <li class="pull-right nav-btn">
     <a class="exit-admin" href="{% url 'goals' %}">{% trans "Exit from administration" %}</a>

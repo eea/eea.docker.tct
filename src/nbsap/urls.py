@@ -258,6 +258,7 @@ urlpatterns = patterns('',
         name='delete_eu_aichi_strategy'),
 
     url(r'^administration/pages$', 'nbsap.views.admin_pages', name='admin_pages'),
+    url(r'^administration/export$', 'nbsap.views.admin_export', name='admin_export'),
     url(r'^administration/page/(?P<handle>[\w\-]+)/edit$', 'nbsap.views.admin_page', name='admin_page'),
 
 )

@@ -276,13 +276,13 @@ class EuIndicator(BaseIndicator):
     def full_code(self):
         if self.indicator_type:
             return u'{0} {1}'.format(self.get_indicator_type_display().upper(),
-                                    self.code)
+                                     self.code)
         return self.code
 
     def __unicode__(self):
         return u'{0} {1}: {2}'.format(self.indicator_type.upper(),
-                                     self.code,
-                                     self.title)
+                                      self.code,
+                                      self.title)
 
     def get_indicators(self):
         return mark_safe('-, <br>'.join(
@@ -644,6 +644,34 @@ class NationalStrategy(models.Model):
 
     def __unicode__(self):
         return 'Strategy' + unicode(self.objective)
+
+    @property
+    def targets_list(self):
+        ts = []
+        if self.relevant_target:
+            ts.append(self.relevant_target)
+        ts.extend(list(self.other_targets.all()))
+        ts.sort(key=lambda t: t.code)
+        return ts
+
+    @property
+    def eu_targets_list(self):
+        return list(self.eu_targets.all())
+
+    @property
+    def targets_t(self):
+        return ''.join(['t{0}'.format(t.code) for t in self.eu_targets_list])
+
+    @property
+    def targets_z(self):
+        r = ''
+        targets = self.eu_targets_list
+        for target in EuTarget.objects.all():
+            if target in targets:
+                r += '1'
+            else:
+                r += '0'
+        return r
 
     class Meta:
         verbose_name_plural = ' Mappings: National strategy to AICHI&EU'

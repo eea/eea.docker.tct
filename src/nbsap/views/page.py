@@ -2,9 +2,17 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import ugettext_lazy as _
 from django.contrib import messages
 from django.conf import settings
-from nbsap.models import NbsapPage
+from nbsap.models import NbsapPage, NationalStrategy
 from nbsap.forms import NbsapPageForm
 from auth import auth_required
+
+
+@auth_required
+def admin_export(request):
+    resp = render(request, 'manager/bise_export.html',
+                  {'strategies': NationalStrategy.objects.all()})
+    content = resp.content
+    return render(request, 'manager/export.html', {'content': content})
 
 
 @auth_required
