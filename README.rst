@@ -276,9 +276,9 @@ automatically generated when starting sever::
 ========
 Contacts
 ========
-The project owner is Franz Daffner (franz.daffner at eaa.europa.eu)
+The project owner is EEA (European Environment Agency)
 
-Other people involved in this project are::
+Technical development team:
  - Cornel Nițu (cornel.nitu at eaudeweb.ro)
  - Miruna Bădescu (miruna.badescu at eaudeweb.ro)
  - Mihai Tabără (mihai.tabara at eaudeweb.ro)
