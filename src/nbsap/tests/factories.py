@@ -98,7 +98,6 @@ class NationalIndicatorFactory(factory.DjangoModelFactory):
 
     code = factory.Sequence(lambda n: '%d' % n)
     title_en = factory.Sequence(lambda n: 'indicator%d_title_en' % n)
-    indicator_type = 'LABEL'
 
     @factory.post_generation
     def subindicators(self, create, extracted, **kwargs):
