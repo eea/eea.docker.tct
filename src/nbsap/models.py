@@ -304,13 +304,6 @@ class EuIndicator(BaseIndicator):
 class NationalIndicator(BaseIndicator):
     __metaclass__ = Translatable
 
-    TYPES = (
-        ('nat', 'NAT'),
-    )
-
-    if settings.ENABLE_REG_INDICATORS:
-        TYPES += (('reg', 'REG'),)
-
     code = models.CharField(max_length=25,
                             null=True,
                             blank=True)
@@ -318,18 +311,12 @@ class NationalIndicator(BaseIndicator):
                              verbose_name="Title")
     url = models.URLField(null=True,
                           blank=True)
-    indicator_type = models.CharField(_('Indicator type'),
-                                      max_length=6,
-                                      choices=TYPES,
-                                      blank=True)
     subindicators = models.ManyToManyField('self', null=True, blank=True,
                                            symmetrical=False,
                                            related_name='parents')
 
     def __unicode__(self):
-        return u'{0} {1}: {2}'.format(self.indicator_type.upper(),
-                                      self.code,
-                                      self.title)
+        return u'{0}: {1}'.format(self.code, self.title)
 
     def get_indicators(self):
         return mark_safe('-, <br>'.join(

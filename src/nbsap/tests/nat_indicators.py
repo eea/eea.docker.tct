@@ -40,7 +40,6 @@ class NationalIndicatorsTest(BaseWebTest):
             'code': '01',
             'language': 'en',
             'title': nat_indicator.title_en,
-            'indicator-type': nat_indicator.indicator_type,
         }
         resp = self.app.get(url, user='staff')
         form = resp.forms[0]
@@ -49,8 +48,7 @@ class NationalIndicatorsTest(BaseWebTest):
 
         self.assertObjectInDatabase('NationalIndicator',
                                     pk=nat_indicator.pk,
-                                    title_en=nat_indicator.title_en,
-                                    indicator_type = nat_indicator.indicator_type)
+                                    title_en=nat_indicator.title_en)
 
     def test_edit_national_indicator(self):
         nat_indicator = NationalIndicatorFactory()

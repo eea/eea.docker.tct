@@ -33,22 +33,23 @@
     </thead>
 
     <tbody>
-    {% for group in indicators %}
+    {% for indicator in indicators %}
       <tr>
         <td>
-          <strong><a href="{% url 'view_nat_indicator' pk=group.pk %}">
-            {% if group.code %}
-              {{ group.indicator_type|upper }}{{ group.code }}
-            {% endif %}</a></strong>
+          <strong>
+            <a href="{% url 'view_nat_indicator' pk=indicator.pk %}">
+              {{ indicator.code }}
+            </a>
+          </strong>
         </td>
         <td>
-          <strong><a href="{% url 'view_nat_indicator' pk=group.pk %}">
-            {{ group.title }}
+          <strong><a href="{% url 'view_nat_indicator' pk=indicator.pk %}">
+            {{ indicator.title }}
           </a></strong>
         </td>
         <td>
           <a class="btn btn-default"
-             href="{% url 'edit_nat_indicator' pk=group.pk %}">{% trans "Edit" %}</a>
+             href="{% url 'edit_nat_indicator' pk=indicator.pk %}">{% trans "Edit" %}</a>
         </td>
       </tr>
     {% endfor %}

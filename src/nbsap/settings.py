@@ -244,8 +244,6 @@ NOSE_ARGS = [
 if not DEBUG:
     SENTRY_DSN = 'http://e58d6f13a36d419d81c1d1e44e5e2519:d67d512c5f4343c0aebcdca30bc64871@sentry.mojito.edw.ro/16'
 
-ENABLE_REG_INDICATORS = False
-
 try:
     from local_settings import *
 except ImportError:

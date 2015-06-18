@@ -487,10 +487,8 @@ class EuIndicatorForm(forms.Form):
 class NationalIndicatorForm(forms.Form):
     language = forms.ChoiceField(choices=settings.LANGUAGES)
     title = forms.CharField(widget=widgets.Textarea, required=True)
-    code = forms.CharField(widget=widgets.Textarea, required=True,
-                           validators=[validate_simple_digit_code])
+    code = forms.CharField(widget=widgets.Textarea, required=True)
     url = forms.CharField(required=False)
-    indicator_type = forms.ChoiceField(choices=NationalIndicator.TYPES)
 
     def __init__(self, *args, **kwargs):
         self.indicator = kwargs.pop('indicator', None)
@@ -502,9 +500,6 @@ class NationalIndicatorForm(forms.Form):
             title = getattr(self.indicator, 'title_%s' % lang, None)
             self.fields['title'].initial = title
             self.fields['url'].initial = self.indicator.url
-            self.fields['indicator_type'].initial = (
-                self.indicator.indicator_type
-            )
             if 'code' in self.fields:
                 self.fields['code'].initial = self.indicator.code
 
@@ -529,7 +524,6 @@ class NationalIndicatorForm(forms.Form):
 
         setattr(indicator, 'title_%s' % lang, title)
         indicator.url = self.cleaned_data['url']
-        indicator.indicator_type = self.cleaned_data['indicator_type']
 
         if code:
             indicator.code = code
