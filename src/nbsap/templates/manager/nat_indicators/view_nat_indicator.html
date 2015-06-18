@@ -38,7 +38,7 @@
   <div>
   {% if indicator.url %}
   URL: <a href="{{ indicator.url }}">
-      {{ indicator.get_indicator_type_display }} {{ indicator.code|default:'' }}: {{indicator.title}}</a>
+    {{ indicator.code|default:'' }}: {{indicator.title}}</a>
   {% else %}
     {{ indicator.code|default:'' }} {{ indicator.title }}
   {% endif %}

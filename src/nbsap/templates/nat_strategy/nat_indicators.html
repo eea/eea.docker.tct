@@ -18,7 +18,7 @@
   {% if indicators %}
     {% for indicator in indicators.all %}
       <h2 id="indicator-{{ indicator.id }}">
-        {{ indicator.get_indicator_type_display }} {{ indicator.code }} {{ indicator.title }}
+        {{ indicator.code }} {{ indicator.title }}
       </h2>
 
       {% if indicator.url %}
