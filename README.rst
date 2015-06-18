@@ -278,12 +278,7 @@ Contacts
 ========
 The project owner is EEA (European Environment Agency)
 
-Technical development team:
- - Cornel Nițu (cornel.nitu at eaudeweb.ro)
- - Miruna Bădescu (miruna.badescu at eaudeweb.ro)
- - Mihai Tabără (mihai.tabara at eaudeweb.ro)
- - Dragoș Catarahia (dragos.catarahia at eaudeweb.ro)
-
+Technical development team: contact at eaudeweb.ro
 
 =========
 Resources
