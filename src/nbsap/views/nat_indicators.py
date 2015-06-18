@@ -1,7 +1,6 @@
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import ugettext_lazy as _
-from django.conf import settings
 
 from auth import auth_required
 from nbsap import models
