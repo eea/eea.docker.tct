@@ -20,7 +20,7 @@ def nat_indicators(request):
 @auth_required
 def list_nat_indicators(request):
     indicators = models.NationalIndicator.objects.filter(
-        parents=None).all().order_by('indicator_type', 'code')
+        parents=None).all().order_by('code')
     return render(request, 'manager/nat_indicators/list_nat_indicators.html', {
         'indicators': indicators,
     })
