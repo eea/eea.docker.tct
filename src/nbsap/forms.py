@@ -303,7 +303,10 @@ class AichiGoalForm(forms.Form):
 
 class NationalStrategyForm(forms.Form):
     def comp_rgx(self, title):
-        groups = RE_ACTION_CODE.match(title[1]).groups()
+        match = RE_ACTION_CODE.match(title[1])
+        if not match:
+            return []
+        groups = match.groups()
         ret_list = [int(groups[0])]
         ret_list.extend(groups[1:])
         return ret_list
