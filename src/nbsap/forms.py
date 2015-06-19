@@ -363,8 +363,9 @@ class NationalStrategyForm(forms.Form):
         self.fields['aichi_goal'].choices = self.get_choices('Goal',
                                                              AichiGoal,
                                                              isString=True)
-        self.fields['aichi_target'].choices = self.get_choices('Target',
-                                                               AichiTarget)
+        self.fields['aichi_target'].choices = (
+            [('', '----')] + self.get_choices('Target', AichiTarget)
+        )
         self.fields['other_targets'].choices = self.get_choices('Target',
                                                                 AichiTarget)
         if settings.EU_STRATEGY:
@@ -378,8 +379,10 @@ class NationalStrategyForm(forms.Form):
             self.fields['aichi_goal'].initial = (
                 self.strategy.relevant_target and
                 self.strategy.relevant_target.get_parent_goal().pk)
-            self.fields[
-                'aichi_target'].initial = self.strategy.relevant_target.id
+            self.fields['aichi_target'].initial = (
+                self.strategy.relevant_target and
+                self.strategy.relevant_target.id
+            )
             self.fields['other_targets'].initial = [
                 target.id for target in self.strategy.other_targets.all()]
             if settings.EU_STRATEGY:
@@ -536,7 +539,6 @@ class NationalIndicatorForm(forms.Form):
 
 
 class NationalIndicatorEditForm(NationalIndicatorForm, ChoicesMixin):
-
     def __init__(self, *args, **kwargs):
         super(NationalIndicatorEditForm, self).__init__(*args, **kwargs)
 
