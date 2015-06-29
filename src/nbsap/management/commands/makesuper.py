@@ -10,8 +10,11 @@ class Command(BaseCommand):
             return
 
         try:
-            User.objects.get(username=user_id)
+            user = User.objects.get(username=user_id)
+            user.is_staff = True
+            user.is_superuser = True
+            user.save()
+            print "The user_id already exists. Updated permissions."
         except User.DoesNotExist:
             User.objects.create_superuser(user_id, None, None)
-            return
-        print "The user_id already exists."
+            print "The user was successfully added."
