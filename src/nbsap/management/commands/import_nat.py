@@ -60,13 +60,26 @@ class Command(BaseCommand):
                     row = row[1:]
                 data.append(row)
 
+        imported_titles = []
         for row in data:
-            nat_obj = NationalObjective.objects.create()
-            setattr(nat_obj, 'title_' + language, row[0])
-            setattr(nat_obj, 'description_' + language, row[1])
-            nat_obj.save()
-            strategy = NationalStrategy.objects.create(objective=nat_obj)
-            eu_targets = [c for c in row[2].split(',') if c]
+            obj_title = row[0]
+            if obj_title not in imported_titles:
+                # import objective
+                nat_obj = NationalObjective()
+                setattr(nat_obj, 'title_' + language, obj_title)
+                setattr(nat_obj, 'description_' + language, row[2])
+                nat_obj.save()
+                self.stdout.write(u'Imported objective {0}'.format(nat_obj))
+                imported_titles.append(obj_title)
+            # import subobjective
+            nat_sub_obj = NationalObjective()
+            setattr(nat_sub_obj, 'title_' + language, row[1])
+            setattr(nat_sub_obj, 'description_' +  language, row[3])
+            nat_sub_obj.parent = nat_obj
+            nat_sub_obj.save()
+
+            strategy = NationalStrategy.objects.create(objective=nat_sub_obj)
+            eu_targets = [c for c in row[4].split(',') if c]
             for code in eu_targets:
                 target = _get_obj(EuTarget, code)
                 if not target:
@@ -75,7 +88,7 @@ class Command(BaseCommand):
                 else:
                     target.national_strategy.add(strategy)
                     target.save()
-            global_targets = row[3].split(',')
+            global_targets = row[5].split(',')
             global_targets = [c for c in global_targets if c]
             for code in global_targets:
                 atarget = _get_obj(AichiTarget, code)
@@ -86,7 +99,7 @@ class Command(BaseCommand):
                 else:
                     strategy.other_targets.add(atarget)
             strategy.save()
-            eu_actions = [c for c in row[4].split(',') if c]
+            eu_actions = [c for c in row[6].split(',') if c]
             for code in eu_actions:
                 action = _get_obj(EuAction, code)
                 if not action:
@@ -95,4 +108,4 @@ class Command(BaseCommand):
                     )
                 else:
                     action.national_strategy.add(strategy)
-            self.stdout.write(u'Imported {0}'.format(nat_obj))
+            self.stdout.write(u'Imported subojective {0}'.format(nat_sub_obj))
