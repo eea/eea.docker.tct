@@ -60,25 +60,41 @@ class Command(BaseCommand):
                     row = row[1:]
                 data.append(row)
 
-        imported_titles = []
+        national_objectives = {}
         for row in data:
             obj_title = row[0]
-            if obj_title not in imported_titles:
-                # import objective
+            if obj_title == '':
+                continue
+            national_objectives.setdefault(obj_title, [])
+            if row[1]:
+                nat_sub_obj_title = row[1]
+                national_objectives[obj_title].append(nat_sub_obj_title)
+
+        imported_objectives = []
+        for row in data:
+            obj_title = row[0]
+            if obj_title == '' or obj_title not in imported_objectives:
+                # this is a new objective
                 nat_obj = NationalObjective()
                 setattr(nat_obj, 'title_' + language, obj_title)
                 setattr(nat_obj, 'description_' + language, row[2])
                 nat_obj.save()
                 self.stdout.write(u'Imported objective {0}'.format(nat_obj))
-                imported_titles.append(obj_title)
-            # import subobjective
-            nat_sub_obj = NationalObjective()
-            setattr(nat_sub_obj, 'title_' + language, row[1])
-            setattr(nat_sub_obj, 'description_' +  language, row[3])
-            nat_sub_obj.parent = nat_obj
-            nat_sub_obj.save()
+                imported_objectives.append(obj_title)
 
-            strategy = NationalStrategy.objects.create(objective=nat_sub_obj)
+            # add subobjectives only if there are at least 2 for the same objective
+            if obj_title in national_objectives and len(national_objectives[obj_title]) > 1:
+                nat_sub_obj = NationalObjective()
+                setattr(nat_sub_obj, 'title_' + language, row[1])
+                setattr(nat_sub_obj, 'description_' +  language, row[3])
+                nat_sub_obj.parent = nat_obj
+                nat_sub_obj.save()
+                current_obj = nat_sub_obj
+            else:
+                # this is the objective for which the strategy and targets will be added
+                current_obj = nat_obj
+
+            strategy = NationalStrategy.objects.create(objective=current_obj)
             eu_targets = [c for c in row[4].split(',') if c]
             for code in eu_targets:
                 target = _get_obj(EuTarget, code)
@@ -108,4 +124,4 @@ class Command(BaseCommand):
                     )
                 else:
                     action.national_strategy.add(strategy)
-            self.stdout.write(u'Imported subojective {0}'.format(nat_sub_obj))
+            self.stdout.write(u'Imported subojective {0}'.format(current_obj))
