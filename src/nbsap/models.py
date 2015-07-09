@@ -232,7 +232,10 @@ class EuAction(models.Model):
 
         codes = [int(RE_ACTION_CODE.match(code).groups()[0]) for code in
                  EuAction.objects.values_list('code', flat=True)]
-        return str(max(codes) + 1)
+        if codes:
+            return str(max(codes) + 1)
+        else:
+            return 1
 
 
 class BaseIndicator(models.Model):

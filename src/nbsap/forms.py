@@ -235,7 +235,7 @@ class EuStrategyActivityForm(forms.Form):
         setattr(activity, 'title_%s' % lang, title)
         setattr(activity, 'description_%s' % lang, description)
         activity.parent = self.parent
-        activity.code = code or activity.get_next_code(self.target)
+        activity.code = code or activity.get_next_code()
 
         activity.save()
         if not self.parent:
