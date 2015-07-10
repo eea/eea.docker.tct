@@ -15,12 +15,12 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'nbsap',                      # Or path to database file if using sqlite3.
+        'NAME': os.environ.get('DB_NAME', ''), # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
-        'USER': 'nbsap',
-        'PASSWORD': 'nbsap',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
+        'USER': os.environ.get('DB_USER', ''),
+        'PASSWORD': os.environ.get('DB_PASSWORD', ''),
+        'HOST': os.environ.get('DB_HOST', ''), # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': os.environ.get('DB_PORT', ''), # Set to empty string for default.
         'TEST_CHARSET': 'utf8',
         'TEST_COLLATION': 'utf8_general_ci',
     }
@@ -225,11 +225,11 @@ CSS_ASSETS = ()
 ASSETS_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Main config
-EU_STRATEGY = False
-EU_STRATEGY_ADD = False
-NAT_STRATEGY = True
-SITE_HEADER = 'NBSAP'
-INFO_HEADER = False
+EU_STRATEGY = os.environ.get('EU_STRATEGY', False)
+EU_STRATEGY_ADD = os.environ.get('EU_STRATEGY_ADD', False)
+NAT_STRATEGY = os.environ.get('NAT_STRATEGY', True)
+SITE_HEADER = os.environ.get('SITE_HEADER', '')
+INFO_HEADER = os.environ.get('INFO_HEADER', False)
 LAYOUT_FOOTER_LOGO_VISIBLE = False
 LAYOUT_HEADER_LOGO_VISIBLE = False
 HEADER_BACKGROUND_IMG = '/static/header.png'
@@ -242,7 +242,7 @@ NOSE_ARGS = [
 
 # Override
 if not DEBUG:
-    SENTRY_DSN = 'http://e58d6f13a36d419d81c1d1e44e5e2519:d67d512c5f4343c0aebcdca30bc64871@sentry.mojito.edw.ro/16'
+    SENTRY_DSN = os.environ.get('SENTRY_DSN', '')
 
 try:
     from local_settings import *
