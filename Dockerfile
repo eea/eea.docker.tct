@@ -1,5 +1,5 @@
 #start from an ubuntu image
-FROM ubuntu
+FROM ubuntu:14.04
 RUN apt-get -y update
 RUN apt-get -y install python2.7 python2.7-dev python-setuptools python-pip
 RUN apt-get -y install libldap2-dev libsasl2-dev libmysqlclient-dev libxml2-dev libxslt1-dev
@@ -8,6 +8,7 @@ RUN apt-get -y install libldap2-dev libsasl2-dev libmysqlclient-dev libxml2-dev 
 RUN mkdir /nbsap
 WORKDIR /nbsap
 ADD . /nbsap
+ADD src/nbsap/settings.py.docker /nbsap/instance/settings.py
 
 #install the requirements
 RUN pip install -r requirements-dev.txt
