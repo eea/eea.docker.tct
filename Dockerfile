@@ -14,3 +14,6 @@ ADD src/nbsap/settings.py.docker /nbsap/instance/settings.py
 RUN pip install -r requirements-dev.txt
 RUN pip install -U distribute
 RUN pip install -e .
+
+#default cmd
+CMD python instance/manage.py runserver 0.0.0.0:${APP_PORT}
