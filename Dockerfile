@@ -16,4 +16,5 @@ RUN pip install -U distribute
 RUN pip install -e .
 
 #default cmd
+EXPOSE ${APP_PORT}
 CMD python instance/manage.py runserver 0.0.0.0:${APP_PORT}
