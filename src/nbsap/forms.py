@@ -331,7 +331,8 @@ class NationalStrategyForm(forms.Form):
         return mytype.objects.filter(pk=int(u_pk)).all()[0]
 
     nat_objective = forms.ChoiceField(choices=[])
-    aichi_goal = forms.ChoiceField(choices=[])
+    aichi_goals = chosenforms.ChosenMultipleChoiceField(
+        choices=[], required=False, overlay="Select goal...")
     aichi_target = forms.ChoiceField(choices=[])
     other_targets = chosenforms.ChosenMultipleChoiceField(
         choices=[], required=False, overlay="Select target...")
@@ -360,9 +361,9 @@ class NationalStrategyForm(forms.Form):
 
         self.fields['nat_objective'].choices = self.get_choices(
             'Objective', NationalObjective)
-        self.fields['aichi_goal'].choices = self.get_choices('Goal',
-                                                             AichiGoal,
-                                                             isString=True)
+        self.fields['aichi_goals'].choices = self.get_choices('Goal',
+                                                              AichiGoal,
+                                                              isString=True)
         self.fields['aichi_target'].choices = (
             [('', '----')] + self.get_choices('Target', AichiTarget)
         )
@@ -376,13 +377,12 @@ class NationalStrategyForm(forms.Form):
 
         if self.strategy:
             self.fields['nat_objective'].initial = self.strategy.objective.id
-            self.fields['aichi_goal'].initial = (
-                self.strategy.relevant_target and
-                self.strategy.relevant_target.get_parent_goal().pk)
-            self.fields['aichi_target'].initial = (
-                self.strategy.relevant_target and
-                self.strategy.relevant_target.id
+            self.fields['aichi_goals'].initial = (
+                goal.id for goal in self.strategy.goals_list
             )
+            self.fields['aichi_target'].initial = [
+                target.id for target in self.strategy.relevant_targets.all()
+            ]
             self.fields['other_targets'].initial = [
                 target.id for target in self.strategy.other_targets.all()]
             if settings.EU_STRATEGY:
@@ -399,14 +399,17 @@ class NationalStrategyForm(forms.Form):
             AichiTarget, self.cleaned_data['aichi_target'])
 
         setattr(strategy, 'objective', nat_obj)
-        setattr(strategy, 'relevant_target', aichi_targ)
         strategy.save()
 
+        strategy.relevant_targets.clear()
         strategy.other_targets.clear()
         if settings.EU_STRATEGY:
             strategy.eu_targets.clear()
             strategy.eu_actions.clear()
 
+        for ucode in self.cleaned_data['relevant_targets']:
+            strategy.relevant_targets.add(get_object_or_404(AichiTarget,
+                                                            code=ucode))
         for ucode in self.cleaned_data['other_targets']:
             strategy.other_targets.add(get_object_or_404(AichiTarget,
                                                          code=ucode))

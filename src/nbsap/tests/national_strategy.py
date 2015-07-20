@@ -15,7 +15,7 @@ class NationalStrategyTest(BaseWebTest):
 
     def test_list_national_strategies(self):
         nat_strategy = NationalStrategyFactory()
-        aichi_goal = AichiGoalFactory(targets=(nat_strategy.relevant_target,))
+        aichi_goal = AichiGoalFactory(targets=(nat_strategy.relevant_targets.all(),))
         resp = self.app.get(reverse('list_national_strategy'), user='staff')
         self.assertEqual(200, resp.status_code)
 
