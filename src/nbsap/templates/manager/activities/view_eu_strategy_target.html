@@ -47,7 +47,7 @@
 
       <thead>
         <th class="span1">{% trans "Code" %}</th>
-        <th>{% trans "Sub-actions" %}</th>
+        <th>{% trans "Title" %}</th>
       </thead>
 
       <tbody>
@@ -58,7 +58,7 @@
           <td>
             <a href="{% url 'view_eu_strategy_activity' target=target.pk pk=action.pk %}"
              title="{% trans 'action' %} {{ action.code }}">
-            {% trans "Actions related to target" %} {{ target.code }}
+            {{ action.title }}
             </a>
           </td>
         </tr>
