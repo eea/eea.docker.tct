@@ -23,9 +23,9 @@ class NationalObjectiveTest(BaseWebTest):
     def test_add_national_objective(self):
         nat_obj = NationalObjectiveFactory.build()
         data = {
-            'language': 'en',
-            'title': nat_obj.title_en,
-            'description': nat_obj.description_en,
+            'language': 'en-us',
+            'title': getattr(nat_obj, 'title_en-us'),
+            'description': getattr(nat_obj, 'description_en-us'),
         }
         url = reverse('edit_national_objective')
         resp = self.app.get(url, user='staff')
@@ -34,15 +34,20 @@ class NationalObjectiveTest(BaseWebTest):
         form = resp.forms['national-objective-add']
         self.populate_fields(form, data)
         form.submit().follow()
-        self.assertObjectInDatabase('NationalObjective', pk=1,
-                                    title_en=nat_obj.title_en,
-                                    description_en__contains=nat_obj.description_en)
+        self.assertObjectInDatabase(
+            'NationalObjective',
+            {
+                'pk': 1,
+                 'title_en-us': getattr(nat_obj, 'title_en-us'),
+                 'description_en-us__contains': getattr(nat_obj, 'description_en-us'),
+             }
+        )
 
     def test_add_national_objective_with_encodings(self):
         nat_obj = NationalObjectiveFactory.build()
         data = {
-            'language': 'en',
-            'title': nat_obj.title_en,
+            'language': 'en-us',
+            'title': getattr(nat_obj, 'title_en-us'),
             'description': 'ĂFKĐȘKŁFKOKR–KF:ŁĂȘĐKF–KFÂŁ:FJK–FFŁKJȘĂŁF',
         }
         url = reverse('edit_national_objective')
@@ -52,14 +57,19 @@ class NationalObjectiveTest(BaseWebTest):
         form = resp.forms['national-objective-add']
         self.populate_fields(form, data)
         form.submit().follow()
-        self.assertObjectInDatabase('NationalObjective', pk=1,
-                                    title_en=nat_obj.title_en,
-                                    description_en__contains=data['description'])
+        self.assertObjectInDatabase(
+            'NationalObjective',
+            {
+                'pk': 1,
+                 'title_en-us': getattr(nat_obj, 'title_en-us'),
+                 'description_en-us__contains': data['description'],
+             }
+        )
 
     def test_edit_national_objective(self):
         nat_obj = NationalObjectiveFactory()
         data = {
-            'language': 'en',
+            'language': 'en-us',
             'code': nat_obj.code,
             'title': 'Title edited',
             'description': 'Description edited',
@@ -71,9 +81,14 @@ class NationalObjectiveTest(BaseWebTest):
         form = resp.forms['national-objective-edit']
         self.populate_fields(form, data)
         form.submit().follow()
-        self.assertObjectInDatabase('NationalObjective', pk=1,
-                                    title_en=data['title'],
-                                    description_en__contains=data['description'])
+        self.assertObjectInDatabase(
+            'NationalObjective',
+            {
+                'pk': 1,
+                 'title_en-us': data['title'],
+                 'description_en-us__contains': data['description'],
+             }
+        )
 
     def test_edit_national_objective_code_updates_subobjective_code(self):
         """Test code prefix of subobjective is changed on parent code edit."""
@@ -81,7 +96,7 @@ class NationalObjectiveTest(BaseWebTest):
         nat_subobj = NationalObjectiveFactory(parent=nat_obj, code='1.1')
         edited_code = '42'
         data = {
-            'language': 'en',
+            'language': 'en-us',
             'code': edited_code,
             'title': nat_obj.title,
             'description': nat_obj.description,
@@ -96,11 +111,16 @@ class NationalObjectiveTest(BaseWebTest):
 
         # Prefix should be changed from 1 to 42 in order to match the
         # new parent code.
-        self.assertObjectInDatabase('NationalObjective', pk=2,
-                                    title_en=nat_subobj.title_en,
-                                    description_en=nat_subobj.description_en,
-                                    code='{0}.1'.format(edited_code),
-                                    parent=nat_obj)
+        self.assertObjectInDatabase(
+            'NationalObjective',
+            {
+                'pk': 2,
+                'title_en-us': getattr(nat_subobj, 'title_en-us'),
+                'description_en-us': getattr(nat_subobj, 'description_en-us'),
+                'code': '{0}.1'.format(edited_code),
+                'parent': nat_obj,
+            }
+        )
 
     def test_edit_national_objective_code_updates_action_code(self):
         """Test action code is changed on parent code edit."""
@@ -108,7 +128,7 @@ class NationalObjectiveTest(BaseWebTest):
         nat_obj = NationalObjectiveFactory(actions=(nat_act,))
         edited_code = '42'
         data = {
-            'language': 'en',
+            'language': 'en-us',
             'code': edited_code,
             'title': nat_obj.title,
             'description': nat_obj.description,
@@ -121,16 +141,21 @@ class NationalObjectiveTest(BaseWebTest):
         self.populate_fields(form, data)
         form.submit().follow()
 
-        self.assertObjectInDatabase('NationalAction', pk=1,
-                                    title_en=nat_act.title_en,
-                                    description_en=nat_act.description_en,
-                                    code=edited_code)
+        self.assertObjectInDatabase(
+            'NationalAction',
+            {
+                'pk': 1,
+                'title_en-us': getattr(nat_act, 'title_en-us'),
+                'description_en-us': getattr(nat_act, 'description_en-us'),
+                'code': edited_code
+            }
+        )
 
     def test_edit_national_objective_fail_code(self):
         nat_obj = NationalObjectiveFactory()
         nat_obj_2 = NationalObjectiveFactory()
         data = {
-            'language': 'en',
+            'language': 'en-us',
             'code': nat_obj_2.code,
             'title': 'Title edited',
             'description': 'Description edited',
@@ -144,14 +169,19 @@ class NationalObjectiveTest(BaseWebTest):
         resp = form.submit()
         self.assertEqual(200, resp.status_code)
         with self.assertRaises(AssertionError):
-            self.assertObjectInDatabase('NationalObjective', pk=1,
-                                        title_en=data['title'],
-                                        description_en=data['description'])
+            self.assertObjectInDatabase(
+                'NationalObjective',
+                {
+                    'pk': 1,
+                     'title_en-us': data['title'],
+                     'description_en-us': data['description'],
+                 }
+            )
 
     def test_edit_national_objective_with_encodings(self):
         nat_obj = NationalObjectiveFactory()
         data = {
-            'language': 'en',
+            'language': 'en-us',
             'code': nat_obj.code,
             'title': 'Title edited',
             'description': 'ĂFKĐȘKŁFKOKR–KF:ŁĂȘĐKF–KFÂŁ:FJK–FFŁKJȘĂŁF',
@@ -163,16 +193,20 @@ class NationalObjectiveTest(BaseWebTest):
         form = resp.forms['national-objective-edit']
         self.populate_fields(form, data)
         form.submit().follow()
-        self.assertObjectInDatabase('NationalObjective', pk=1,
-                                    title_en=data['title'],
-                                    description_en__contains=data['description'])
+        self.assertObjectInDatabase(
+            'NationalObjective',
+                {'pk': 1,
+                 'title_en-us': data['title'],
+                 'description_en-us__contains': data['description'],
+                }
+        )
 
     def test_delete_national_objective(self):
         nat_obj = NationalObjectiveFactory()
         url = reverse('delete_national_objective', kwargs={'pk': nat_obj.pk})
         resp = self.app.post(url, user='staff').follow()
         with self.assertRaises(AssertionError):
-            self.assertObjectInDatabase('NationalObjective', pk=1)
+            self.assertObjectInDatabase('NationalObjective',{'pk': 1})
 
 
 class ObjectivesTest(BaseWebTest):

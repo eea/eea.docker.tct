@@ -29,7 +29,7 @@ class BaseWebTest(WebTest):
         return data
 
 
-    def assertObjectInDatabase(self, model, **kwargs):
+    def assertObjectInDatabase(self, model, kwargs):
         if isinstance(model, basestring):
             Model = get_model('nbsap', model)
         else:

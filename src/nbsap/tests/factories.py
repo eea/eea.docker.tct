@@ -4,6 +4,13 @@ from nbsap import models
 from django.contrib.auth.models import User
 from django.db.models.signals import pre_save
 
+def translate_attrs(attrs, fields):
+    for orig_field, new_field in fields.items():
+        attrs[new_field] = attrs[orig_field]
+        del attrs[orig_field]
+
+    return attrs
+
 
 class StaffUserFactory(factory.DjangoModelFactory):
 
@@ -39,9 +46,16 @@ class NationalObjectiveFactory(factory.DjangoModelFactory):
     @classmethod
     def _generate(cls, create, attrs):
         """Override the default _generate() to disable the pre-save signal."""
+
+        TRANSLATABLE_FIELDS = {
+            'title_en': 'title_en-us',
+            'description_en': 'description_en-us',
+        }
+
         pre_save.disconnect(models.NationalObjective.pre_save_objective_code,
                             models.NationalObjective)
-        obj = super(NationalObjectiveFactory, cls)._generate(create, attrs)
+        obj = super(NationalObjectiveFactory, cls)._generate(
+            create, translate_attrs(attrs, TRANSLATABLE_FIELDS))
         pre_save.connect(models.NationalObjective.pre_save_objective_code,
                          models.NationalObjective)
         return obj
@@ -54,6 +68,16 @@ class NationalActionFactory(factory.DjangoModelFactory):
     code = factory.Sequence(lambda n: '%d' % n)
     title_en = factory.Sequence(lambda n: 'action%d_title_en' % n)
     description_en = factory.Sequence(lambda n: 'action%d_description_en' % n)
+
+    @classmethod
+    def _generate(cls, create, attrs):
+        TRANSLATABLE_FIELDS = {
+            'title_en': 'title_en-us',
+            'description_en': 'description_en-us',
+        }
+        obj = super(NationalActionFactory, cls)._generate(
+            create, translate_attrs(attrs, TRANSLATABLE_FIELDS))
+        return obj
 
 
 class AichiGoalFactory(factory.DjangoModelFactory):
