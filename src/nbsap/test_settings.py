@@ -8,3 +8,6 @@ SOUTH_TESTS_MIGRATE = False
 
 NAT_STRATEGY = True
 EU_STRATEGY = True
+
+import logging
+logging.getLogger("factory").setLevel(logging.ERROR)

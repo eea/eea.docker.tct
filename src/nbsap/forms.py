@@ -333,7 +333,8 @@ class NationalStrategyForm(forms.Form):
     nat_objective = forms.ChoiceField(choices=[])
     aichi_goals = chosenforms.ChosenMultipleChoiceField(
         choices=[], required=False, overlay="Select goal...")
-    aichi_target = forms.ChoiceField(choices=[])
+    aichi_targets = chosenforms.ChosenMultipleChoiceField(
+        choices=[], required=False, overlay="Select target...")
     other_targets = chosenforms.ChosenMultipleChoiceField(
         choices=[], required=False, overlay="Select target...")
 
@@ -347,7 +348,7 @@ class NationalStrategyForm(forms.Form):
 
     def clean(self):
         cleaned_data = super(NationalStrategyForm, self).clean()
-        aichi_targets = [cleaned_data['aichi_target']]
+        aichi_targets = cleaned_data['aichi_targets']
         other_aichi_targets = cleaned_data['other_targets']
 
         if set(aichi_targets) & set(other_aichi_targets):
@@ -364,7 +365,7 @@ class NationalStrategyForm(forms.Form):
         self.fields['aichi_goals'].choices = self.get_choices('Goal',
                                                               AichiGoal,
                                                               isString=True)
-        self.fields['aichi_target'].choices = (
+        self.fields['aichi_targets'].choices = (
             [('', '----')] + self.get_choices('Target', AichiTarget)
         )
         self.fields['other_targets'].choices = self.get_choices('Target',
@@ -378,9 +379,9 @@ class NationalStrategyForm(forms.Form):
         if self.strategy:
             self.fields['nat_objective'].initial = self.strategy.objective.id
             self.fields['aichi_goals'].initial = (
-                goal.id for goal in self.strategy.goals_list
+                goal.code for goal in self.strategy.goals_list
             )
-            self.fields['aichi_target'].initial = [
+            self.fields['aichi_targets'].initial = [
                 target.id for target in self.strategy.relevant_targets.all()
             ]
             self.fields['other_targets'].initial = [
@@ -395,8 +396,6 @@ class NationalStrategyForm(forms.Form):
         strategy = self.strategy or NationalStrategy()
         nat_obj = self.get_element_by_pk(
             NationalObjective, self.cleaned_data['nat_objective'])
-        aichi_targ = self.get_element_by_pk(
-            AichiTarget, self.cleaned_data['aichi_target'])
 
         setattr(strategy, 'objective', nat_obj)
         strategy.save()
@@ -407,7 +406,7 @@ class NationalStrategyForm(forms.Form):
             strategy.eu_targets.clear()
             strategy.eu_actions.clear()
 
-        for ucode in self.cleaned_data['relevant_targets']:
+        for ucode in self.cleaned_data['aichi_targets']:
             strategy.relevant_targets.add(get_object_or_404(AichiTarget,
                                                             code=ucode))
         for ucode in self.cleaned_data['other_targets']:

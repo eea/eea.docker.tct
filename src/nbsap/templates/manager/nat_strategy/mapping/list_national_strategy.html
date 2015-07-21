@@ -46,7 +46,7 @@
           <a href="{% url 'view_national_objective' pk=strategy.objective.pk %}">
             {{ strategy.objective.code }}</a>
         </td>
-        {% with strategy.relevant_targets as targets %}
+        {% with strategy.relevant_targets.all as targets %}
         <td>
           {% for target in targets %}
           <a href="{% url 'goals' code=target.get_parent_goal.code %}">
