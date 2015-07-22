@@ -18,12 +18,21 @@ def getter_for_default_language(field_name):
     return getter
 
 
+def setter_for_default_language(field_name):
+    def setter(self, value):
+        lang = settings.LANGUAGE_CODE
+        return setattr(self, '%s_%s' % (field_name, lang), value)
+
+    return setter
+
+
 class Translatable(TransMeta):
     def __new__(cls, name, bases, attrs):
         new_class = TransMeta.__new__(cls, name, bases, attrs)
         for field in new_class._meta.translatable_fields:
             setattr(new_class, field + '_default',
-                    property(getter_for_default_language(field)))
+                    property(getter_for_default_language(field),
+                             setter_for_default_language(field)))
         return new_class
 
 

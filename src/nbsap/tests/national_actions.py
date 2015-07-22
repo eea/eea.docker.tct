@@ -65,26 +65,31 @@ class NationalActionsTest(BaseWebTest):
         nat_act = NationalActionFactory.build()
         url = reverse('edit_national_action', kwargs={'objective': nat_obj.pk})
         data = {
-            'language': 'en',
-            'title': nat_act.title_en,
-            'description': nat_act.description_en,
+            'language': 'en-us',
+            'title': nat_act.title_default,
+            'description': nat_act.description_default,
         }
         resp = self.app.get(url, user='staff')
         form = resp.forms['national-action-add']
         self.populate_fields(form, data)
         form.submit().follow()
 
-        self.assertObjectInDatabase('NationalAction', pk=1,
-                                    title_en=nat_act.title_en,
-                                    description_en__contains=nat_act.description_en)
+        self.assertObjectInDatabase(
+            'NationalAction',
+            {
+                'pk': 1,
+                'title_default': nat_act.title_default,
+                'description_default__contains': nat_act.description_default,
+            }
+        )
 
     def test_add_national_action_with_encodings(self):
         nat_obj = NationalObjectiveFactory()
         nat_act = NationalActionFactory.build()
         url = reverse('edit_national_action', kwargs={'objective': nat_obj.pk})
         data = {
-            'language': 'en',
-            'title': nat_act.title_en,
+            'language': 'en-us',
+            'title': nat_act.title_default,
             'description': 'ĂFKĐȘKŁFKOKR–KF:ŁĂȘĐKF–KFÂŁ:FJK–FFŁKJȘĂŁF',
         }
         resp = self.app.get(url, user='staff')
@@ -92,9 +97,14 @@ class NationalActionsTest(BaseWebTest):
         self.populate_fields(form, data)
         form.submit().follow()
 
-        self.assertObjectInDatabase('NationalAction', pk=1,
-                                    title_en=nat_act.title_en,
-                                    description_en__contains=data['description'])
+        self.assertObjectInDatabase(
+            'NationalAction',
+            {
+                'pk': 1,
+                'title_default': nat_act.title_default,
+                'description_default__contains': data['description'],
+            }
+        )
 
     def test_edit_national_action(self):
         nat_act = NationalActionFactory()
@@ -104,7 +114,7 @@ class NationalActionsTest(BaseWebTest):
             'pk': nat_act.pk,
         })
         data = {
-            'language': 'en',
+            'language': 'en-us',
             'title': 'action_edited',
             'description': 'description_edited',
         }
@@ -113,9 +123,14 @@ class NationalActionsTest(BaseWebTest):
         self.populate_fields(form, data)
         form.submit().follow()
 
-        self.assertObjectInDatabase('NationalAction', pk=1,
-                                    title_en='action_edited',
-                                    description_en__contains='description_edited')
+        self.assertObjectInDatabase(
+            'NationalAction',
+            {
+                'pk': 1,
+                'title_default': 'action_edited',
+                'description_default__contains': 'description_edited',
+            }
+        )
 
     def test_edit_national_action_with_encodings(self):
         nat_act = NationalActionFactory()
@@ -125,7 +140,7 @@ class NationalActionsTest(BaseWebTest):
             'pk': nat_act.pk,
         })
         data = {
-            'language': 'en',
+            'language': 'en-us',
             'description': 'ĂFKĐȘKŁFKOKR–KF:ŁĂȘĐKF–KFÂŁ:FJK–FFŁKJȘĂŁF',
         }
         resp = self.app.get(url, user='staff')
@@ -133,8 +148,13 @@ class NationalActionsTest(BaseWebTest):
         self.populate_fields(form, data)
         form.submit().follow()
 
-        self.assertObjectInDatabase('NationalAction', pk=1,
-                                    description_en__contains=data['description'])
+        self.assertObjectInDatabase(
+            'NationalAction',
+            {
+                'pk': 1,
+                'description_default__contains': data['description'],
+            }
+        )
 
     def test_delete_national_action(self):
         nat_act = NationalActionFactory()
@@ -146,4 +166,9 @@ class NationalActionsTest(BaseWebTest):
         self.app.post(url, user='staff')
 
         with self.assertRaises(AssertionError):
-            self.assertObjectInDatabase('NationalAction', pk=1)
+            self.assertObjectInDatabase(
+                'NationalAction',
+                {
+                    'pk': 1,
+                }
+            )

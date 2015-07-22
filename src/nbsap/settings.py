@@ -38,12 +38,12 @@ ALLOWED_HOSTS = []
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'en-us'
 
 ugettext = lambda s: s
 
 LANGUAGES = (
-    ('en', ugettext('English')),
+    ('en-us', ugettext('English')),
     ('fr', ugettext('French')),
     ('nl', ugettext('Dutch')),
 )

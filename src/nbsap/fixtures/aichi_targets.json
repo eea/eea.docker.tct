@@ -10,7 +10,7 @@
               88,
               97
           ],
-          "description_en" : "By 2020, at the latest, people are aware of the values of biodiversity and the steps they can take to conserve and use it sustainably.",
+          "description_en-us" : "By 2020, at the latest, people are aware of the values of biodiversity and the steps they can take to conserve and use it sustainably.",
           "indicators" : [
               66,
               67,
@@ -39,7 +39,7 @@
               97,
               98
           ],
-          "description_en" : "By 2020, at the latest, biodiversity values have been integrated into national and local development and poverty reduction strategies and planning processes and are being incorporated into national accounting, as appropriate, and reporting systems.",
+          "description_en-us" : "By 2020, at the latest, biodiversity values have been integrated into national and local development and poverty reduction strategies and planning processes and are being incorporated into national accounting, as appropriate, and reporting systems.",
           "indicators" : [
               76,
               78,
@@ -61,7 +61,7 @@
               83,
               98
           ],
-          "description_en" : "By 2020, at the latest, incentives, including subsidies, harmful to biodiversity are eliminated, phased out or reformed in order to minimize or avoid negative impacts, and positive incentives for the conservation and sustainable use of biodiversity are developed and applied, consistent and in harmony with the Convention and other relevant international obligations, taking into account national socio economic conditions.",
+          "description_en-us" : "By 2020, at the latest, incentives, including subsidies, harmful to biodiversity are eliminated, phased out or reformed in order to minimize or avoid negative impacts, and positive incentives for the conservation and sustainable use of biodiversity are developed and applied, consistent and in harmony with the Convention and other relevant international obligations, taking into account national socio economic conditions.",
           "indicators" : [
               74,
               75
@@ -97,7 +97,7 @@
               80,
               81
           ],
-          "description_en" : "By 2020, at the latest, Governments, business and stakeholders at all levels have taken steps to achieve or have implemented plans for sustainable production and consumption and have kept the impacts of use of natural resources well within safe ecological limits.",
+          "description_en-us" : "By 2020, at the latest, Governments, business and stakeholders at all levels have taken steps to achieve or have implemented plans for sustainable production and consumption and have kept the impacts of use of natural resources well within safe ecological limits.",
           "indicators" : [
               16,
               17,
@@ -144,7 +144,7 @@
               97,
               99
           ],
-          "description_en" : "By 2020, the rate of loss of all natural habitats, including forests, is at least halved and where feasible brought close to zero, and degradation and fragmentation is significantly reduced.",
+          "description_en-us" : "By 2020, the rate of loss of all natural habitats, including forests, is at least halved and where feasible brought close to zero, and degradation and fragmentation is significantly reduced.",
           "indicators" : [
               1,
               2,
@@ -184,7 +184,7 @@
               97,
               99
           ],
-          "description_en" : "By 2020 all fish and invertebrate stocks and aquatic plants are managed and harvested sustainably, legally and applying ecosystem based approaches, so that overfishing is avoided, recovery plans and measures are in place for all depleted species, fisheries have no significant adverse impacts on threatened species and vulnerable ecosystems and the impacts of fisheries on stocks, species and ecosystems are within safe ecological limits.",
+          "description_en-us" : "By 2020 all fish and invertebrate stocks and aquatic plants are managed and harvested sustainably, legally and applying ecosystem based approaches, so that overfishing is avoided, recovery plans and measures are in place for all depleted species, fisheries have no significant adverse impacts on threatened species and vulnerable ecosystems and the impacts of fisheries on stocks, species and ecosystems are within safe ecological limits.",
           "indicators" : [
               20,
               21,
@@ -234,7 +234,7 @@
               97,
               99
           ],
-          "description_en" : "By 2020 areas under agriculture, aquaculture and forestry are managed sustainably, ensuring conservation of biodiversity.",
+          "description_en-us" : "By 2020 areas under agriculture, aquaculture and forestry are managed sustainably, ensuring conservation of biodiversity.",
           "indicators" : [
               14,
               15,
@@ -263,7 +263,7 @@
               96,
               99
           ],
-          "description_en" : "By 2020, pollution, including from excess nutrients, has been brought to levels that are not detrimental to ecosystem function and biodiversity",
+          "description_en-us" : "By 2020, pollution, including from excess nutrients, has been brought to levels that are not detrimental to ecosystem function and biodiversity",
           "indicators" : [
               38,
               39,
@@ -295,7 +295,7 @@
               96,
               99
           ],
-          "description_en" : "By 2020, invasive alien species and pathways are identified and prioritized, priority species are controlled or eradicated, and measures are in place to manage pathways to prevent their introduction and establishment.",
+          "description_en-us" : "By 2020, invasive alien species and pathways are identified and prioritized, priority species are controlled or eradicated, and measures are in place to manage pathways to prevent their introduction and establishment.",
           "indicators" : [
               28,
               29,
@@ -345,7 +345,7 @@
               97,
               99
           ],
-          "description_en" : "By 2015, the multiple anthropogenic pressures on coral reefs, and other vulnerable ecosystems impacted by climate change or ocean acidification are minimized, so as to maintain their integrity and functioning.",
+          "description_en-us" : "By 2015, the multiple anthropogenic pressures on coral reefs, and other vulnerable ecosystems impacted by climate change or ocean acidification are minimized, so as to maintain their integrity and functioning.",
           "indicators" : [
               30,
               31,
@@ -370,7 +370,7 @@
               26,
               73
           ],
-          "description_en" : "By 2020, at least 17 per cent of terrestrial and inland water, and 10 per cent of coastal and marine areas, especially areas of particular importance for biodiversity and ecosystem services, are conserved through effectively and equitably managed, ecologically representative and well connected systems of protected areas and other effective area-based conservation measures, and integrated into the wider landscapes and seascapes.",
+          "description_en-us" : "By 2020, at least 17 per cent of terrestrial and inland water, and 10 per cent of coastal and marine areas, especially areas of particular importance for biodiversity and ecosystem services, are conserved through effectively and equitably managed, ecologically representative and well connected systems of protected areas and other effective area-based conservation measures, and integrated into the wider landscapes and seascapes.",
           "indicators" : [
               90,
               93,
@@ -422,7 +422,7 @@
               97,
               99
           ],
-          "description_en" : "By 2020 the extinction of known threatened species has been prevented and their conservation status, particularly of those most in decline, has been improved and sustained.",
+          "description_en-us" : "By 2020 the extinction of known threatened species has been prevented and their conservation status, particularly of those most in decline, has been improved and sustained.",
           "indicators" : [
               7,
               8,
@@ -448,7 +448,7 @@
               97,
               99
           ],
-          "description_en" : "By 2020, the genetic diversity of cultivated plants and farmed and domesticated animals and of wild relatives, including other socio-economically as well as culturally valuable species, is maintained, and strategies have been developed and implemented for minimizing genetic erosion and safeguarding their genetic diversity.",
+          "description_en-us" : "By 2020, the genetic diversity of cultivated plants and farmed and domesticated animals and of wild relatives, including other socio-economically as well as culturally valuable species, is maintained, and strategies have been developed and implemented for minimizing genetic erosion and safeguarding their genetic diversity.",
           "indicators" : [
               10,
               11,
@@ -503,7 +503,7 @@
               98,
               99
           ],
-          "description_en" : "By 2020, ecosystems that provide essential services, including services related to water, and contribute to health, livelihoods and well-being, are restored and safeguarded, taking into account the needs of women, indigenous and local communities, and the poor and vulnerable.",
+          "description_en-us" : "By 2020, ecosystems that provide essential services, including services related to water, and contribute to health, livelihoods and well-being, are restored and safeguarded, taking into account the needs of women, indigenous and local communities, and the poor and vulnerable.",
           "indicators" : [
               49,
               50,
@@ -561,7 +561,7 @@
               98,
               99
           ],
-          "description_en" : "By 2020, ecosystem resilience and the contribution of biodiversity to carbon stocks has been enhanced, through conservation and restoration, including restoration of at least 15 per cent of degraded ecosystems, thereby contributing to climate change mitigation and adaptation and to combating desertification.",
+          "description_en-us" : "By 2020, ecosystem resilience and the contribution of biodiversity to carbon stocks has been enhanced, through conservation and restoration, including restoration of at least 15 per cent of degraded ecosystems, thereby contributing to climate change mitigation and adaptation and to combating desertification.",
           "indicators" : [
               64,
               92
@@ -579,7 +579,7 @@
               73,
               98
           ],
-          "description_en" : "By 2015, the Nagoya Protocol on Access to Genetic Resources and the Fair and Equitable Sharing of Benefits Arising from their Utilization is in force and operational, consistent with national legislation.",
+          "description_en-us" : "By 2015, the Nagoya Protocol on Access to Genetic Resources and the Fair and Equitable Sharing of Benefits Arising from their Utilization is in force and operational, consistent with national legislation.",
           "indicators" : [
               85
           ]
@@ -599,7 +599,7 @@
               88,
               98
           ],
-          "description_en" : "By 2015 each Party has developed, adopted as a policy instrument, and has commenced implementing an effective, participatory and updated national biodiversity strategy and action plan.",
+          "description_en-us" : "By 2015 each Party has developed, adopted as a policy instrument, and has commenced implementing an effective, participatory and updated national biodiversity strategy and action plan.",
           "indicators" : [
               73
           ]
@@ -615,7 +615,7 @@
               66,
               73
           ],
-          "description_en" : "By 2020, the traditional knowledge, innovations and practices of indigenous and local communities relevant for the conservation and sustainable use of biodiversity, and their customary use of biological resources, are respected, subject to national legislation and relevant international obligations, and fully integrated and reflected in the implementation of the Convention with the full and effective participation of indigenous and local communities, at all relevant levels.",
+          "description_en-us" : "By 2020, the traditional knowledge, innovations and practices of indigenous and local communities relevant for the conservation and sustainable use of biodiversity, and their customary use of biological resources, are respected, subject to national legislation and relevant international obligations, and fully integrated and reflected in the implementation of the Convention with the full and effective participation of indigenous and local communities, at all relevant levels.",
           "indicators" : [
               69,
               70,
@@ -638,7 +638,7 @@
               87,
               98
           ],
-          "description_en" : "By 2020, knowledge, the science base and technologies relating to biodiversity, its values, functioning, status and trends, and the consequences of its loss, are improved, widely shared and transferred, and applied.",
+          "description_en-us" : "By 2020, knowledge, the science base and technologies relating to biodiversity, its values, functioning, status and trends, and the consequences of its loss, are improved, widely shared and transferred, and applied.",
           "indicators" : [
               88,
               89
@@ -657,7 +657,7 @@
               76,
               97
           ],
-          "description_en" : "By 2020, at the latest, the mobilization of financial resources for effectively implementing the Strategic Plan for Biodiversity 2011-2020 from all sources, and in accordance with the consolidated and agreed process in the Strategy for Resource Mobilization, should increase substantially from the current levels. This target will be subject to changes contingent to resource needs assessments to be developed and reported by Parties.",
+          "description_en-us" : "By 2020, at the latest, the mobilization of financial resources for effectively implementing the Strategic Plan for Biodiversity 2011-2020 from all sources, and in accordance with the consolidated and agreed process in the Strategy for Resource Mobilization, should increase substantially from the current levels. This target will be subject to changes contingent to resource needs assessments to be developed and reported by Parties.",
           "indicators" : [
               98
           ]

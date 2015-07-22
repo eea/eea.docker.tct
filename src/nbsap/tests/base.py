@@ -1,5 +1,6 @@
 from django.db.models import Model
 from django.db.models.loading import get_model
+from django.conf import settings
 
 from django_webtest import WebTest
 from webtest.forms import Select, MultipleSelect
@@ -28,12 +29,18 @@ class BaseWebTest(WebTest):
                 data[k] = v.pk
         return data
 
-
-    def assertObjectInDatabase(self, model, **kwargs):
+    def assertObjectInDatabase(self, model, kwargs):
         if isinstance(model, basestring):
             Model = get_model('nbsap', model)
         else:
             Model = model
+
+        kwargs_copy = {}
+        for k, v in kwargs.items():
+            if '_default' in k:
+                k = k.replace('_default', '_' + settings.LANGUAGE_CODE)
+            kwargs_copy[k] = v
+        kwargs = kwargs_copy
 
         if not Model:
             self.fail('Model {} does not exist'.format(model))

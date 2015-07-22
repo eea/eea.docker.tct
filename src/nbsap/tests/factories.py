@@ -21,8 +21,8 @@ class NationalObjectiveFactory(factory.DjangoModelFactory):
     FACTORY_FOR = 'nbsap.NationalObjective'
 
     code = factory.Sequence(lambda n: '%d' % n)
-    title_en = factory.Sequence(lambda n: 'obj%d_title_en' % n)
-    description_en = factory.Sequence(lambda n: 'obj%d_description_en' % n)
+    title_default = factory.Sequence(lambda n: 'obj%d_title_default' % n)
+    description_default = factory.Sequence(lambda n: 'obj%d_description_default' % n)
 
 
     @factory.post_generation
@@ -41,7 +41,8 @@ class NationalObjectiveFactory(factory.DjangoModelFactory):
         """Override the default _generate() to disable the pre-save signal."""
         pre_save.disconnect(models.NationalObjective.pre_save_objective_code,
                             models.NationalObjective)
-        obj = super(NationalObjectiveFactory, cls)._generate(create, attrs)
+        obj = super(NationalObjectiveFactory, cls)._generate(
+            create, attrs)
         pre_save.connect(models.NationalObjective.pre_save_objective_code,
                          models.NationalObjective)
         return obj
@@ -52,8 +53,8 @@ class NationalActionFactory(factory.DjangoModelFactory):
     FACTORY_FOR = 'nbsap.NationalAction'
 
     code = factory.Sequence(lambda n: '%d' % n)
-    title_en = factory.Sequence(lambda n: 'action%d_title_en' % n)
-    description_en = factory.Sequence(lambda n: 'action%d_description_en' % n)
+    title_default = factory.Sequence(lambda n: 'action%d_title_default' % n)
+    description_default = factory.Sequence(lambda n: 'action%d_description_default' % n)
 
 
 class AichiGoalFactory(factory.DjangoModelFactory):
@@ -61,8 +62,8 @@ class AichiGoalFactory(factory.DjangoModelFactory):
     FACTORY_FOR = 'nbsap.AichiGoal'
 
     code = factory.Sequence(lambda n: '%d' % n)
-    title_en = factory.Sequence(lambda n: 'obj%d_title_en' % n)
-    description_en = factory.Sequence(lambda n: 'obj%d_description_en' % n)
+    title_default = factory.Sequence(lambda n: 'obj%d_title_default' % n)
+    description_default = factory.Sequence(lambda n: 'obj%d_description_default' % n)
 
     @factory.post_generation
     def targets(self, create, extracted, **kwargs):
@@ -76,7 +77,7 @@ class AichiTargetFactory(factory.DjangoModelFactory):
     FACTORY_FOR = 'nbsap.AichiTarget'
 
     code = factory.Sequence(lambda n: '%d' % n)
-    description_en = factory.Sequence(lambda n: 'action%d_description_en' % n)
+    description_default = factory.Sequence(lambda n: 'action%d_description_default' % n)
 
 
 class NationalStrategyFactory(factory.DjangoModelFactory):
@@ -103,7 +104,7 @@ class NationalIndicatorFactory(factory.DjangoModelFactory):
     FACTORY_FOR = 'nbsap.NationalIndicator'
 
     code = factory.Sequence(lambda n: '%d' % n)
-    title_en = factory.Sequence(lambda n: 'indicator%d_title_en' % n)
+    title_default = factory.Sequence(lambda n: 'indicator%d_title_default' % n)
 
     @factory.post_generation
     def subindicators(self, create, extracted, **kwargs):

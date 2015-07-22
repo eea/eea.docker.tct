@@ -38,17 +38,22 @@ class NationalIndicatorsTest(BaseWebTest):
         url = reverse('edit_nat_indicator')
         data = {
             'code': '01',
-            'language': 'en',
-            'title': nat_indicator.title_en,
+            'language': 'en-us',
+            'title': nat_indicator.title_default,
         }
         resp = self.app.get(url, user='staff')
         form = resp.forms[0]
         self.populate_fields(form, data)
         form.submit().follow()
 
-        self.assertObjectInDatabase('NationalIndicator',
-                                    pk=nat_indicator.pk,
-                                    title_en=nat_indicator.title_en)
+        self.assertObjectInDatabase(
+            'NationalIndicator',
+            {
+                'pk': nat_indicator.pk,
+                'title_default': nat_indicator.title_default,
+            }
+        )
+
 
     def test_edit_national_indicator(self):
         nat_indicator = NationalIndicatorFactory()
@@ -62,14 +67,22 @@ class NationalIndicatorsTest(BaseWebTest):
         form = resp.forms['national-indicator-edit']
         self.populate_fields(form, data)
         form.submit()
-        self.assertObjectInDatabase('NationalIndicator',
-                                    pk=nat_indicator.pk,
-                                    title_en=data['title'])
+        self.assertObjectInDatabase(
+            'NationalIndicator',
+            {
+                'pk': nat_indicator.pk,
+                'title_default': data['title'],
+            }
+        )
 
     def test_delete_national_indicator(self):
         nat_indicator = NationalIndicatorFactory()
         url = reverse('delete_nat_indicator', kwargs={'pk': nat_indicator.pk})
         self.app.post(url, user='staff').follow()
         with self.assertRaises(AssertionError):
-            self.assertObjectInDatabase('NationalIndicator',
-                                        pk=nat_indicator.pk)
+            self.assertObjectInDatabase(
+                'NationalIndicator',
+                {
+                    'pk': nat_indicator.pk,
+                }
+            )
