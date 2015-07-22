@@ -8,8 +8,8 @@
     <h5>{% trans "Goals" %}</h5>
     <ul>
       {% for strategy in strategies %}
-        {% if strategy.relevant_target %}
-          {% with strategy.relevant_target.get_parent_goal as goal %}
+        {% for relevant_target in strategy.relevant_targets.all %}
+          {% with relevant_target.get_parent_goal as goal %}
           <li>
             <a href="{% url 'goals' code=goal.code %}" title="{{ goal.code|upper }}">
               {% trans "Goal" %} {{ goal.code|upper }}
@@ -17,19 +17,19 @@
             <p>{{ goal.description|safe }}</p>
           </li>
           {% endwith %}
-        {% endif %}
+        {% endfor %}
       {% endfor %}
     </ul>
 
     <h5>{% trans "Most relevant AICHI targets" %}</h5>
     <ul>
       {% for strategy in strategies %}
-        {% with strategy.relevant_target as target %}
+        {% for target in strategy.relevant_targets.all %}
         <li>
           <a href="{% url 'goals' code=goal.code %}#{{target.code}}" title="{{ target.code }}">{% trans "Target" %} {{ target.id }}</a>
           <p>{{ target.description|safe }}</p>
         </li>
-        {% endwith %}
+        {% endfor %}
       {% endfor %}
     </ul>
 

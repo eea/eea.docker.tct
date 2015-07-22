@@ -15,15 +15,16 @@ class NationalStrategyTest(BaseWebTest):
 
     def test_list_national_strategies(self):
         nat_strategy = NationalStrategyFactory()
-        aichi_goal = AichiGoalFactory(targets=(nat_strategy.relevant_target,))
+        targets = [t.id for t in nat_strategy.relevant_targets.all()]
+        aichi_goal = AichiGoalFactory(targets=targets)
         resp = self.app.get(reverse('list_national_strategy'), user='staff')
         self.assertEqual(200, resp.status_code)
 
         tds = resp.pyquery('.table').find('tbody').find('td')
         objective = nat_strategy.objective
-        goal = nat_strategy.relevant_target.get_parent_goal()
+        goals = ', '.join(g.code for g in nat_strategy.goals_list)
         self.assertIn(objective.code, tds[0].text_content())
-        self.assertIn(goal.code, tds[1].text_content())
+        self.assertIn(goals, tds[1].text_content())
 
     def test_add_national_strategy(self):
         aichi_target = AichiTargetFactory()
@@ -33,15 +34,15 @@ class NationalStrategyTest(BaseWebTest):
         data = {
             'nat_objective': nat_objective.pk,
             'aichi_goal': aichi_goal.pk,
-            'aichi_target': aichi_target.pk,
+            'aichi_targets': [aichi_target.pk],
         }
         resp = self.app.get(reverse('edit_national_strategy'), user='staff')
         form = resp.forms['national-strategy-add']
         self.populate_fields(form, data)
         form.submit().follow()
-        self.assertObjectInDatabase('NationalStrategy', pk=1,
-                                    objective=nat_objective,
-                                    relevant_target=aichi_target)
+        obj = self.assertObjectInDatabase('NationalStrategy', pk=1,
+                                          objective=nat_objective)
+        self.assertEqual(list(obj.relevant_targets.all()), [aichi_target])
 
     def test_add_national_strategy_fail(self):
         aichi_target = AichiTargetFactory()
@@ -49,8 +50,8 @@ class NationalStrategyTest(BaseWebTest):
 
         data = {
             'nat_objective': nat_objective.pk,
-            'aichi_goal': 'invalid_pk',
-            'aichi_target': aichi_target.pk,
+            'aichi_goals': 'invalid_pk',
+            'aichi_targets': [aichi_target.pk],
         }
         resp = self.app.get(reverse('edit_national_strategy'), user='staff')
         form = resp.forms['national-strategy-add']
@@ -71,13 +72,14 @@ class NationalStrategyTest(BaseWebTest):
     def test_edit_national_strategy(self):
         nat_strategy = NationalStrategyFactory()
         nat_objective_for_edit = NationalObjectiveFactory()
-        aichi_goal = AichiGoalFactory(targets=(nat_strategy.relevant_target,))
-        goal = nat_strategy.relevant_target.get_parent_goal()
+        targets = [t.id for t in nat_strategy.relevant_targets.all()]
+        aichi_goal = AichiGoalFactory(targets=targets)
+        goals = ', '.join(g.code for g in nat_strategy.goals_list)
 
         data = {
             'nat_objective': nat_objective_for_edit.pk,
-            'aichi_goal': goal.pk,
-            'aichi_target': nat_strategy.relevant_target.pk,
+            'aichi_goal': goals,
+            'aichi_targets': [t.id for t in nat_strategy.relevant_targets.all()],
         }
         url = reverse('edit_national_strategy', kwargs={'pk': nat_strategy.pk})
         resp = self.app.get(url, user='staff')

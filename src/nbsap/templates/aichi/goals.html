@@ -113,7 +113,7 @@
     </div>
     {% endif %}
 
-    {% if NAT_STRATEGY and target.relevant_target_national_strategy.all %}
+    {% if NAT_STRATEGY and target.relevant_targets_national_strategy.all %}
     <div class="well">
       <div class="well-title">
         <a href="{% url 'nat_strategy_export_preview' target_id=target.pk %}"
@@ -122,7 +122,7 @@
         {% trans "Mapping with National Strategy" %}
       </div>
       <ul>
-        {% for strategy in target.relevant_target_national_strategy.all %}
+        {% for strategy in target.relevant_targets_national_strategy.all %}
         <li>
            <a href ="{% url 'nat_strategy' %}/{{strategy.objective.get_root_parent.code }}#{{strategy.objective.code}}">
             {% trans "Objective" %} {{ strategy.objective.code }}</a>

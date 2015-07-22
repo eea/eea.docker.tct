@@ -84,13 +84,19 @@ class NationalStrategyFactory(factory.DjangoModelFactory):
     FACTORY_FOR = 'nbsap.NationalStrategy'
 
     objective = factory.SubFactory(NationalObjectiveFactory)
-    relevant_target = factory.SubFactory(AichiTargetFactory)
+
+    @factory.post_generation
+    def relevant_targets(self, create, extracted, **kwargs):
+        if extracted:
+            for target in extracted:
+                self.relevant_targets.add(target)
 
     @factory.post_generation
     def other_targets(self, create, extracted, **kwargs):
         if extracted:
             for target in extracted:
                 self.other_targets.add(target)
+
 
 class NationalIndicatorFactory(factory.DjangoModelFactory):
 

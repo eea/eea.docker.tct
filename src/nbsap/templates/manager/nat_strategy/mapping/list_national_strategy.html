@@ -46,15 +46,17 @@
           <a href="{% url 'view_national_objective' pk=strategy.objective.pk %}">
             {{ strategy.objective.code }}</a>
         </td>
-        {% with strategy.relevant_target as target %}
+        {% with strategy.relevant_targets.all as targets %}
         <td>
-          {% if target %}
+          {% for target in targets %}
           <a href="{% url 'goals' code=target.get_parent_goal.code %}">
             {{ target.get_parent_goal.code|title }}</a>
-          {% endif %}
+          {% endfor %}
         </td>
         <td>
+           {% for target in targets %}
            <a href="">{{ target.code }}</a>
+           {% endfor %}
         </td>
         {% endwith %}
         <td>

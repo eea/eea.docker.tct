@@ -622,10 +622,11 @@ class NationalStrategy(models.Model):
     objective = models.ForeignKey(NationalObjective,
                                   verbose_name="National Objective",
                                   related_name="objective_national_strategy")
-    relevant_target = models.ForeignKey(
+    relevant_targets = models.ManyToManyField(
         AichiTarget, null=True, blank=True,
-        verbose_name="Relevant AICHI target",
-        related_name="relevant_target_national_strategy")
+        verbose_name="Relevant AICHI Targets",
+        related_name="relevant_targets_national_strategy",
+    )
     other_targets = models.ManyToManyField(
         AichiTarget, null=True, blank=True,
         verbose_name="Other AICHI targets",
@@ -636,11 +637,13 @@ class NationalStrategy(models.Model):
         return 'Strategy' + unicode(self.objective)
 
     @property
+    def goals_list(self):
+        goals = [t.get_parent_goal() for t in self.targets_list]
+        return [g for g in goals if g]
+
+    @property
     def targets_list(self):
-        ts = []
-        if self.relevant_target:
-            ts.append(self.relevant_target)
-        ts.extend(list(self.other_targets.all()))
+        ts = list(self.relevant_targets.all()) + list(self.other_targets.all())
         ts.sort(key=lambda t: t.code)
         return ts
 

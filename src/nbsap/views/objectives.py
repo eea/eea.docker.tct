@@ -55,11 +55,10 @@ def nat_strategy_download(request):
     lang = request.GET.get('lang', request.LANGUAGE_CODE)
 
     for strategy in models.NationalStrategy.objects.all():
-        target = strategy.relevant_target
         row = [
             strategy.objective.code,
-            target.get_parent_goal().code if target else '',
-            target.code if target else '',
+            ', '.join(g.code for g in strategy.goals_list) or '',
+            ', '.join(t.code for t in strategy.relevant_targets.all()) or '',
             ', '.join(t.code for t in strategy.other_targets.all()),
             remove_tags(getattr(strategy.objective,
                                 'description_' + lang).rstrip(), 'p'),
