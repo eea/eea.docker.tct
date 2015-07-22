@@ -6,7 +6,7 @@
         "url": "http://www.eea.europa.eu/data-and-maps/indicators/species-of-european-interest/species-of-european-interest-assessment", 
         "indicator_type": "sebi", 
         "code": "003", 
-        "title_en": "Conservation status of species of European interest", 
+        "title_en-us": "Conservation status of species of European interest", 
         "parent": []
     }
 },
@@ -17,7 +17,7 @@
         "url": "http://www.eea.europa.eu/data-and-maps/indicators/habitats-of-european-interest/habitats-of-european-interest-assessment", 
         "indicator_type": "sebi", 
         "code": "005", 
-        "title_en": "Conservation status of habitats of European interest", 
+        "title_en-us": "Conservation status of habitats of European interest", 
         "parent": []
     }
 },
@@ -28,7 +28,7 @@
         "url": "http://www.eea.europa.eu/data-and-maps/indicators/ecosystem-coverage/ecosystem-coverage-assessment-published-may-2010", 
         "indicator_type": "sebi", 
         "code": "004", 
-        "title_en": "Ecosystem coverage", 
+        "title_en-us": "Ecosystem coverage", 
         "parent": []
     }
 },
@@ -39,7 +39,7 @@
         "url": "http://www.eea.europa.eu/data-and-maps/indicators/land-take-2/assessment-2", 
         "indicator_type": "csi", 
         "code": "014", 
-        "title_en": "Land take", 
+        "title_en-us": "Land take", 
         "parent": []
     }
 },
@@ -50,7 +50,7 @@
         "url": "http://www.eea.europa.eu/data-and-maps/indicators/critical-load-exceedance-for-nitrogen/critical-load-exceedance-for-nitrogen", 
         "indicator_type": "sebi", 
         "code": "009", 
-        "title_en": "Critical load exceedance for nitrogen", 
+        "title_en-us": "Critical load exceedance for nitrogen", 
         "parent": []
     }
 },
@@ -61,7 +61,7 @@
         "url": "http://www.eea.europa.eu/data-and-maps/indicators/fragmentation-of-natural-and-semi/fragmentation-of-natural-and-semi", 
         "indicator_type": "sebi", 
         "code": "013", 
-        "title_en": "Fragmentation of natural and semi-natural areas", 
+        "title_en-us": "Fragmentation of natural and semi-natural areas", 
         "parent": []
     }
 },
@@ -72,7 +72,7 @@
         "url": "http://www.eea.europa.eu/data-and-maps/indicators/freshwater-quality/freshwater-quality-assessment-published-may-2010", 
         "indicator_type": "sebi", 
         "code": "016", 
-        "title_en": "Freshwater quality", 
+        "title_en-us": "Freshwater quality", 
         "parent": []
     }
 },
@@ -83,7 +83,7 @@
         "url": "http://www.eea.europa.eu/data-and-maps/indicators/oxygen-consuming-substances-in-rivers/oxygen-consuming-substances-in-rivers-5", 
         "indicator_type": "csi", 
         "code": "019", 
-        "title_en": "Oxygen consuming substances in rivers", 
+        "title_en-us": "Oxygen consuming substances in rivers", 
         "parent": []
     }
 },
@@ -94,7 +94,7 @@
         "url": "http://www.eea.europa.eu/data-and-maps/indicators/nutrients-in-freshwater/nutrients-in-freshwater-assessment-published-3", 
         "indicator_type": "csi", 
         "code": "020", 
-        "title_en": "Nutrients in freshwater", 
+        "title_en-us": "Nutrients in freshwater", 
         "parent": []
     }
 },
@@ -105,7 +105,7 @@
         "url": "http://www.eea.europa.eu/data-and-maps/indicators/nationally-designated-protected-areas/nationally-designated-protected-areas-assessment-1", 
         "indicator_type": "sebi", 
         "code": "007", 
-        "title_en": "Nationally designated protected areas", 
+        "title_en-us": "Nationally designated protected areas", 
         "parent": []
     }
 },
@@ -116,7 +116,7 @@
         "url": "http://www.eea.europa.eu/data-and-maps/indicators/abundance-and-distribution-of-selected-species/abundance-and-distribution-of-selected", 
         "indicator_type": "sebi", 
         "code": "001", 
-        "title_en": "Abundance and distribution of selected species: Common farmland birds and grassland butterflies", 
+        "title_en-us": "Abundance and distribution of selected species: Common farmland birds and grassland butterflies", 
         "parent": []
     }
 },
@@ -127,7 +127,7 @@
         "url": "http://www.eea.europa.eu/data-and-maps/indicators/agriculture-nitrogen-balance/agriculture-nitrogen-balance-assessment-published", 
         "indicator_type": "sebi", 
         "code": "019", 
-        "title_en": "Agriculture: Nitrogen Balance", 
+        "title_en-us": "Agriculture: Nitrogen Balance", 
         "parent": []
     }
 },
@@ -138,7 +138,7 @@
         "url": "http://www.eea.europa.eu/data-and-maps/indicators/gross-nutrient-balance-1/gross-nutrient-balance-assessment-published", 
         "indicator_type": "csi", 
         "code": "025", 
-        "title_en": "Gross nutrient balance", 
+        "title_en-us": "Gross nutrient balance", 
         "parent": []
     }
 },
@@ -149,7 +149,7 @@
         "url": "http://epp.eurostat.ec.europa.eu/statistics_explained/index.php/Agri-environmental_indicator_-_gross_nitrogen_balance", 
         "indicator_type": "aei", 
         "code": "15", 
-        "title_en": "Gross nitrogen balance", 
+        "title_en-us": "Gross nitrogen balance", 
         "parent": []
     }
 },
@@ -160,7 +160,7 @@
         "url": "http://epp.eurostat.ec.europa.eu/statistics_explained/index.php/Agri-environmental_indicator_-_ammonia_emissions", 
         "indicator_type": "aei", 
         "code": "18", 
-        "title_en": "Ammonia emissions from agriculture", 
+        "title_en-us": "Ammonia emissions from agriculture", 
         "parent": []
     }
 },
@@ -171,7 +171,7 @@
         "url": "http://epp.eurostat.ec.europa.eu/statistics_explained/index.php/Agri-environmental_indicator_-_nitrate_pollution_of_water", 
         "indicator_type": "aei", 
         "code": "27.1", 
-        "title_en": "Water quality \u2013 Nitrate pollution", 
+        "title_en-us": "Water quality \u2013 Nitrate pollution", 
         "parent": []
     }
 },
@@ -182,7 +182,7 @@
         "url": "http://epp.eurostat.ec.europa.eu/statistics_explained/index.php/Agri-environmental_indicator_-_landscape_state_and_diversity", 
         "indicator_type": "aei", 
         "code": "28", 
-        "title_en": "Landscape \u2013 state and diversity", 
+        "title_en-us": "Landscape \u2013 state and diversity", 
         "parent": []
     }
 },
@@ -193,7 +193,7 @@
         "url": "http://www.eea.europa.eu/data-and-maps/indicators/agriculture-area-under-management-practices/agriculture-area-under-management-practices", 
         "indicator_type": "sebi", 
         "code": "020", 
-        "title_en": "Agriculture: area under management practices supporting biodiversity", 
+        "title_en-us": "Agriculture: area under management practices supporting biodiversity", 
         "parent": []
     }
 },
@@ -204,7 +204,7 @@
         "url": "http://epp.eurostat.ec.europa.eu/statistics_explained/index.php/Agri-environmental_indicator_-_High_Nature_Value_farmland", 
         "indicator_type": "aei", 
         "code": "23", 
-        "title_en": "High Nature Value farming", 
+        "title_en-us": "High Nature Value farming", 
         "parent": []
     }
 },
@@ -215,7 +215,7 @@
         "url": "http://www.eea.europa.eu/data-and-maps/indicators/area-under-organic-farming-1/area-under-organic-farming-assessment", 
         "indicator_type": "csi", 
         "code": "26", 
-        "title_en": "Organic farming", 
+        "title_en-us": "Organic farming", 
         "parent": []
     }
 },
@@ -226,7 +226,7 @@
         "url": "http://epp.eurostat.ec.europa.eu/statistics_explained/index.php/Agri-environmental_indicator_-_area_under_organic_farming", 
         "indicator_type": "aei", 
         "code": "4", 
-        "title_en": "Area under organic farming", 
+        "title_en-us": "Area under organic farming", 
         "parent": []
     }
 },
@@ -237,7 +237,7 @@
         "url": "http://epp.eurostat.ec.europa.eu/statistics_explained/index.php/Agri-environmental_indicator_-_commitments", 
         "indicator_type": "aei", 
         "code": "1", 
-        "title_en": "Agri-environmental commitments", 
+        "title_en-us": "Agri-environmental commitments", 
         "parent": []
     }
 },
@@ -248,7 +248,7 @@
         "url": "http://epp.eurostat.ec.europa.eu/statistics_explained/index.php/Agri-environmental_indicator_-_Natura_2000_agricultural_areas", 
         "indicator_type": "aei", 
         "code": "2", 
-        "title_en": "Agricultural areas under Natura 2000", 
+        "title_en-us": "Agricultural areas under Natura 2000", 
         "parent": []
     }
 },
@@ -259,7 +259,7 @@
         "url": "http://www.eea.europa.eu/data-and-maps/indicators/forest-growing-stock-increment-and-fellings/forest-growing-stock-increment-and", 
         "indicator_type": "sebi", 
         "code": "017", 
-        "title_en": "Forest: growing stock, increment and fellings", 
+        "title_en-us": "Forest: growing stock, increment and fellings", 
         "parent": []
     }
 },
@@ -270,7 +270,7 @@
         "url": "http://www.eea.europa.eu/data-and-maps/indicators/forest-deadwood/forest-deadwood-assessment-published-may-2010", 
         "indicator_type": "sebi", 
         "code": "018", 
-        "title_en": "Forest: deadwood", 
+        "title_en-us": "Forest: deadwood", 
         "parent": []
     }
 },
@@ -281,7 +281,7 @@
         "url": "http://www.eea.europa.eu/data-and-maps/indicators/fisheries-european-commercial-fish-stocks/fisheries-european-commercial-fish-stocks", 
         "indicator_type": "sebi", 
         "code": "021", 
-        "title_en": "Fisheries: European commercial fish stocks", 
+        "title_en-us": "Fisheries: European commercial fish stocks", 
         "parent": []
     }
 },
@@ -292,7 +292,7 @@
         "url": "http://www.eea.europa.eu/data-and-maps/indicators/invasive-alien-species-in-europe/invasive-alien-species-in-europe", 
         "indicator_type": "sebi", 
         "code": "010", 
-        "title_en": "Invasive alien species in Europe", 
+        "title_en-us": "Invasive alien species in Europe", 
         "parent": []
     }
 },
@@ -303,7 +303,7 @@
         "url": "http://www.eea.europa.eu/data-and-maps/indicators/ecological-footprint-of-european-countries/ecological-footprint-of-european-countries", 
         "indicator_type": "sebi", 
         "code": "023", 
-        "title_en": "Ecological Footprint of European countries", 
+        "title_en-us": "Ecological Footprint of European countries", 
         "parent": []
     }
 }
