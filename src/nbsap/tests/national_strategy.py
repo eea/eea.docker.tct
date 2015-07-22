@@ -40,8 +40,13 @@ class NationalStrategyTest(BaseWebTest):
         form = resp.forms['national-strategy-add']
         self.populate_fields(form, data)
         form.submit().follow()
-        obj = self.assertObjectInDatabase('NationalStrategy', pk=1,
-                                          objective=nat_objective)
+        obj = self.assertObjectInDatabase(
+            'NationalStrategy',
+            {
+                'pk': 1,
+                'objective': nat_objective,
+            }
+        )
         self.assertEqual(list(obj.relevant_targets.all()), [aichi_target])
 
     def test_add_national_strategy_fail(self):
@@ -59,7 +64,12 @@ class NationalStrategyTest(BaseWebTest):
         resp = form.submit()
         self.assertEqual(200, resp.status_code)
         with self.assertRaises(AssertionError):
-            self.assertObjectInDatabase('NationalStrategy', pk=1)
+            self.assertObjectInDatabase(
+                'NationalStrategy',
+                {
+                    'pk': 1,
+                }
+            )
 
     def test_delete_national_strategy(self):
         nat_strategy = NationalStrategyFactory()
@@ -67,7 +77,12 @@ class NationalStrategyTest(BaseWebTest):
                       kwargs={'strategy': nat_strategy.pk})
         resp = self.app.get(url, user='staff').follow()
         with self.assertRaises(AssertionError):
-            self.assertObjectInDatabase('NationalStrategy', pk=1)
+            self.assertObjectInDatabase(
+                'NationalStrategy',
+                {
+                    'pk': 1,
+                }
+            )
 
     def test_edit_national_strategy(self):
         nat_strategy = NationalStrategyFactory()
@@ -86,5 +101,10 @@ class NationalStrategyTest(BaseWebTest):
         form = resp.forms['national-strategy-edit']
         self.populate_fields(form, data)
         form.submit().follow()
-        self.assertObjectInDatabase('NationalStrategy', pk=1,
-                                    objective=nat_objective_for_edit.pk)
+        self.assertObjectInDatabase(
+            'NationalStrategy',
+            {
+                'pk': 1,
+                'objective': nat_objective_for_edit.pk,
+            }
+        )

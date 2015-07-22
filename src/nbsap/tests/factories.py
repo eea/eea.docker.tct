@@ -4,13 +4,6 @@ from nbsap import models
 from django.contrib.auth.models import User
 from django.db.models.signals import pre_save
 
-def translate_attrs(attrs, fields):
-    for orig_field, new_field in fields.items():
-        attrs[new_field] = attrs[orig_field]
-        del attrs[orig_field]
-
-    return attrs
-
 
 class StaffUserFactory(factory.DjangoModelFactory):
 
