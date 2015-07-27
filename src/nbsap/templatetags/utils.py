@@ -53,7 +53,10 @@ def get_goals_for_strategies(strategies):
 
 @register.assignment_tag
 def get_targets_for_strategies(strategies):
-    targets = set([s.relevant_target for s in strategies])
+    targets = []
+    for s in strategies:
+        targets.extend(s.relevant_targets.all())
+    targets = set(targets)
     return targets
 
 
