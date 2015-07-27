@@ -48,7 +48,11 @@ class Command(BaseCommand):
             self.stderr.write('Please provide a file name to import from')
             return
 
-        language = settings.LANGUAGES[0][0]
+        # cleanup, mandatory
+        for nat_obj in NationalObjective.objects.all():
+            nat_obj.delete()
+
+        language = settings.LANGUAGE_CODE
         # header = ['national_target_main_ref', 'description', 'eu_target',
         #           'global_targets', 'eu_actions']
         data = []
@@ -113,7 +117,7 @@ class Command(BaseCommand):
                         'No AichiTarget found for code: {0}'.format(code)
                     )
                 else:
-                    strategy.other_targets.add(atarget)
+                    strategy.relevant_targets.add(atarget)
             strategy.save()
             eu_actions = [c for c in row[6].split(',') if c]
             for code in eu_actions:
