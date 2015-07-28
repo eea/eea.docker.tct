@@ -70,7 +70,13 @@ def nat_strategy_download(request):
             ])
         data.append(row)
 
-    return HttpResponse(data.xlsx, content_type='application/vnd.ms-excel')
+    response = HttpResponse(
+        data.xls,
+        content_type='application/vnd.openxmlformats-officedocument'
+                     '.spreadsheetml.sheet;charset=utf-8'
+    )
+    response['Content-Disposition'] = "attachment; filename=objectives.xlsx"
+    return response
 
 
 def implementation(request, code=None):
@@ -92,7 +98,7 @@ def implementation(request, code=None):
     lang = request.LANGUAGE_CODE
     data = {'body_%s' % lang: ''}
     is_empty_page = models.NbsapPage.objects.filter(handle='implementation') \
-                          .exclude(**data).exists()
+        .exclude(**data).exists()
     return render(request, 'nat_strategy/implementation.html', {
         'current_objective': current_objective,
         'objectives': objectives,
