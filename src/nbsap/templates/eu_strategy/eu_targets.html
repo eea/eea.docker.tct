@@ -33,7 +33,7 @@
   <h1 class="page-title">{% trans "EU Targets" %}</h1>
 
   <h1>{% trans "EU Target" %} {{ current_target.code }}: {{ current_target.title }}</h1>
-  <p class="objective-description">{{ current_target.description }}</p>
+  <p class="objective-description">{{ current_target.description|safe }}</p>
 
   {% if current_target.children.count %}
     {% for subtarget in current_target.children.all %}

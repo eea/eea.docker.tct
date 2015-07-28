@@ -4,6 +4,7 @@
     "model": "nbsap.eutarget", 
     "fields": {
         "code": "1", 
+        "parent": null, 
         "other_indicators": [], 
         "title_en-us": "Fully implement the Birds and Habitats Directives", 
         "actions": [
@@ -24,6 +25,7 @@
     "model": "nbsap.eutarget", 
     "fields": {
         "code": "2", 
+        "parent": null, 
         "other_indicators": [], 
         "title_en-us": "Maintain and restore ecosystems and their services", 
         "actions": [
@@ -33,12 +35,12 @@
         ], 
         "description_en-us": "By 2020, ecosystems and their services are maintained and enhanced by establishing green infrastructure and restoring at least 15 % of degraded ecosystems.", 
         "indicators": [
-            2, 
-            3, 
             14, 
             8, 
             9, 
-            10
+            10, 
+            2, 
+            3
         ]
     }
 },
@@ -47,6 +49,7 @@
     "model": "nbsap.eutarget", 
     "fields": {
         "code": "3", 
+        "parent": null, 
         "other_indicators": [], 
         "title_en-us": "Increase the contribution of agriculture and forestry to maintaining and enhancing biodiversity", 
         "actions": [
@@ -56,14 +59,14 @@
             28, 
             31
         ], 
-        "description_en-us": "3A) Agriculture: By 2020, maximise areas under agriculture across grasslands, arable land and permanent crops that are covered by biodiversity-related measures under the CAP so as to ensure the conservation of biodiversity and to bring about a measurable improvement(1) in the conservation status of species and habitats that depend on or are affected by agriculture and in the provision of ecosystem services as compared to the EU2010 Baseline, thus contributing to enhance sustainable management.\r\n\r\n3B) Forests: By 2020, Forest Management Plans or equivalent instruments, in line with Sustainable Forest Management (SFM)30, are in place for all forests that are publicly owned and for forest holdings above a certain size(2) (to be defined by the Member States or regions and communicated in their Rural Development Programmes) that receive funding under the EU Rural Development Policy so as to bring about a measurable improvement(1) in the conservation status of species and habitats that depend on or are affected by forestry and in the provision of related ecosystem services as compared to the EU 2010 Baseline.\r\n\r\n(1) For both targets, improvement is to be measured against the quantified enhancement targets for the conservation status of species and habitats of EU interest in Target 1 and the restoration of degraded ecosystems under target 2. (2) For smaller forest holdings, Member States may provide additional incentives to encourage the adoption of Management Plans or equivalent instruments that are in line with SFM.", 
+        "description_en-us": " ", 
         "indicators": [
             2, 
             3, 
-            44, 
-            45, 
             24, 
-            31
+            31, 
+            44, 
+            45
         ]
     }
 },
@@ -72,6 +75,7 @@
     "model": "nbsap.eutarget", 
     "fields": {
         "code": "4", 
+        "parent": null, 
         "other_indicators": [], 
         "title_en-us": "Ensure the sustainable use of fisheries resources", 
         "actions": [
@@ -83,9 +87,9 @@
             18, 
             2, 
             3, 
+            24, 
             44, 
-            45, 
-            24
+            45
         ]
     }
 },
@@ -94,6 +98,7 @@
     "model": "nbsap.eutarget", 
     "fields": {
         "code": "5", 
+        "parent": null, 
         "other_indicators": [], 
         "title_en-us": "Combat invasive alien species", 
         "actions": [
@@ -109,6 +114,7 @@
     "model": "nbsap.eutarget", 
     "fields": {
         "code": "6", 
+        "parent": null, 
         "other_indicators": [], 
         "title_en-us": "Help avert global biodiversity loss", 
         "actions": [
@@ -121,6 +127,45 @@
         "indicators": [
             56
         ]
+    }
+},
+{
+    "pk": 7, 
+    "model": "nbsap.eutarget", 
+    "fields": {
+        "code": "0", 
+        "parent": null, 
+        "other_indicators": [], 
+        "title_en-us": "EU 2020 Biodiversity Headline Target", 
+        "actions": [], 
+        "description_en-us": "<p>\n Halt the loss of biodiversity and the degradation of ecosystem services in the EU by 2020, and restore them in so far as feasible, while stepping up the EU contribution to averting global biodiversity loss.\n</p>", 
+        "indicators": []
+    }
+},
+{
+    "pk": 8, 
+    "model": "nbsap.eutarget", 
+    "fields": {
+        "code": "3a", 
+        "parent": 3, 
+        "other_indicators": [], 
+        "title_en-us": "Agriculture", 
+        "actions": [], 
+        "description_en-us": " <p>\r\n   By 2020, maximise areas under agriculture across grasslands, arable land and permanent crops that are covered by biodiversity related measures under the CAP so as to ensure the conservation of biodiversity and to bring about a measurable improvement(*) in the conservation status of species and habitats that depend on or are affected by agriculture and in the provision of ecosystem services as compared to the EU2010 Baseline, thus contributing to enhance sustainable management.\r\n  </p>\r\n ", 
+        "indicators": []
+    }
+},
+{
+    "pk": 9, 
+    "model": "nbsap.eutarget", 
+    "fields": {
+        "code": "3b", 
+        "parent": 3, 
+        "other_indicators": [], 
+        "title_en-us": "Forests", 
+        "actions": [], 
+        "description_en-us": "  <p>\r\n   By 2020, Forest Management Plans or equivalent instruments, in line with Sustainable Forest Management (SFM), are in place for all forests that are publicly owned and for forest holdings above a certain size(**) (to be defined by the Member States or regions and communicated in their Rural Development Programmes) that receive funding under the EU Rural Development Policy so as to bring about a measurable improvement(*) in the conservation status of species and habitats that depend on or are affected by forestry and in the provision of related ecosystem services as compared to the EU 2010 Baseline.\r\n  </p>", 
+        "indicators": []
     }
 }
 ]

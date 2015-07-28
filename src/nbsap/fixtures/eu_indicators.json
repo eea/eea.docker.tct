@@ -5,7 +5,7 @@
     "fields": {
         "url": "http://www.eea.europa.eu/data-and-maps/indicators/species-of-european-interest/species-of-european-interest-assessment", 
         "indicator_type": "sebi", 
-        "code": "003", 
+        "code": "3", 
         "title_en-us": "Conservation status of species of European interest", 
         "parent": []
     }
@@ -16,7 +16,7 @@
     "fields": {
         "url": "http://www.eea.europa.eu/data-and-maps/indicators/habitats-of-european-interest/habitats-of-european-interest-assessment", 
         "indicator_type": "sebi", 
-        "code": "005", 
+        "code": "3", 
         "title_en-us": "Conservation status of habitats of European interest", 
         "parent": []
     }
@@ -121,12 +121,34 @@
     }
 },
 {
+    "pk": 20, 
+    "model": "nbsap.euindicator", 
+    "fields": {
+        "url": "http://www.eea.europa.eu/data-and-maps/indicators/red-list-index-for-european-species/red-list-index-for-european", 
+        "indicator_type": "sebi", 
+        "code": "002", 
+        "title_en-us": "Red List Index for European marine species", 
+        "parent": []
+    }
+},
+{
+    "pk": 23, 
+    "model": "nbsap.euindicator", 
+    "fields": {
+        "url": "http://www.eea.europa.eu/data-and-maps/indicators/livestock-genetic-diversity/livestock-genetic-diversity-assessment-published", 
+        "indicator_type": "sebi", 
+        "code": "006", 
+        "title_en-us": "Livestock genetic diversity", 
+        "parent": []
+    }
+},
+{
     "pk": 24, 
     "model": "nbsap.euindicator", 
     "fields": {
         "url": "http://www.eea.europa.eu/data-and-maps/indicators/agriculture-nitrogen-balance/agriculture-nitrogen-balance-assessment-published", 
         "indicator_type": "sebi", 
-        "code": "019", 
+        "code": "3", 
         "title_en-us": "Agriculture: Nitrogen Balance", 
         "parent": []
     }
@@ -192,7 +214,7 @@
     "fields": {
         "url": "http://www.eea.europa.eu/data-and-maps/indicators/agriculture-area-under-management-practices/agriculture-area-under-management-practices", 
         "indicator_type": "sebi", 
-        "code": "020", 
+        "code": "3", 
         "title_en-us": "Agriculture: area under management practices supporting biodiversity", 
         "parent": []
     }
@@ -253,12 +275,89 @@
     }
 },
 {
+    "pk": 37, 
+    "model": "nbsap.euindicator", 
+    "fields": {
+        "url": "http://www.eea.europa.eu/data-and-maps/indicators/fisheries-european-commercial-fish-stocks/fisheries-european-commercial-fish-stocks", 
+        "indicator_type": "sebi", 
+        "code": "021", 
+        "title_en-us": "Fisheries: European commercial fish stocks", 
+        "parent": []
+    }
+},
+{
+    "pk": 38, 
+    "model": "nbsap.euindicator", 
+    "fields": {
+        "url": "http://www.eea.europa.eu/data-and-maps/indicators/ecological-footprint-of-european-countries/ecological-footprint-of-european-countries-2  ", 
+        "indicator_type": "sebi", 
+        "code": "023", 
+        "title_en-us": "Ecological footprint of EU countries", 
+        "parent": []
+    }
+},
+{
+    "pk": 39, 
+    "model": "nbsap.euindicator", 
+    "fields": {
+        "url": "http://www.eea.europa.eu/data-and-maps/indicators/patent-applications-based-on-genetic-resources/patent-applications-based-on-genetic", 
+        "indicator_type": "sebi", 
+        "code": "024", 
+        "title_en-us": "Patent applications based on genetic resources", 
+        "parent": []
+    }
+},
+{
+    "pk": 40, 
+    "model": "nbsap.euindicator", 
+    "fields": {
+        "url": "http://www.eea.europa.eu/data-and-maps/indicators/financing-biodiversity-management/financing-biodiversity-management-assessment-published", 
+        "indicator_type": "sebi", 
+        "code": "025", 
+        "title_en-us": "Financing biodiversity management", 
+        "parent": []
+    }
+},
+{
+    "pk": 41, 
+    "model": "nbsap.euindicator", 
+    "fields": {
+        "url": "http://www.eea.europa.eu/data-and-maps/indicators/public-awareness/public-awareness-assessment-published-may-1 ", 
+        "indicator_type": "sebi", 
+        "code": "026", 
+        "title_en-us": "Public awareness", 
+        "parent": []
+    }
+},
+{
+    "pk": 42, 
+    "model": "nbsap.euindicator", 
+    "fields": {
+        "url": "http://www.eea.europa.eu/data-and-maps/indicators/aquaculture-effluent-water-quality-from/aquaculture-effluent-water-quality-from", 
+        "indicator_type": "sebi", 
+        "code": "022", 
+        "title_en-us": "Aquaculture: effluent water quality from finfish farms", 
+        "parent": []
+    }
+},
+{
+    "pk": 43, 
+    "model": "nbsap.euindicator", 
+    "fields": {
+        "url": "", 
+        "indicator_type": "sebi", 
+        "code": "014", 
+        "title_en-us": "Fragmentation of river systems (in development)", 
+        "parent": []
+    }
+},
+{
     "pk": 44, 
     "model": "nbsap.euindicator", 
     "fields": {
         "url": "http://www.eea.europa.eu/data-and-maps/indicators/forest-growing-stock-increment-and-fellings/forest-growing-stock-increment-and", 
         "indicator_type": "sebi", 
-        "code": "017", 
+        "code": "3", 
         "title_en-us": "Forest: growing stock, increment and fellings", 
         "parent": []
     }
@@ -269,7 +368,7 @@
     "fields": {
         "url": "http://www.eea.europa.eu/data-and-maps/indicators/forest-deadwood/forest-deadwood-assessment-published-may-2010", 
         "indicator_type": "sebi", 
-        "code": "018", 
+        "code": "3", 
         "title_en-us": "Forest: deadwood", 
         "parent": []
     }
