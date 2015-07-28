@@ -536,14 +536,14 @@ class EuTarget(models.Model):
             return
 
         # update the action code for each child action
-        for action in instance.actions.all():
-            action.code = instance.code
-            action.save()
+        # for action in instance.actions.all():
+        #     action.code = instance.code
+        #     action.save()
 
         # update the action code for each child action
-        for indicator in instance.indicators.all():
-            indicator.code = instance.code
-            indicator.save()
+        # for indicator in instance.indicators.all():
+        #     indicator.code = instance.code
+        #     indicator.save()
 
     @staticmethod
     def pre_save_objective_code(**kwargs):

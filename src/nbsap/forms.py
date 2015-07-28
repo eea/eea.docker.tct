@@ -242,9 +242,9 @@ class EuStrategyActivityForm(forms.Form):
             activity.target = [self.target]
             activity.save()
 
-        for subaction in activity.subactions():
-            subaction.update_code()
-            subaction.save()
+        # for subaction in activity.subactions():
+        #     subaction.update_code()
+        #     subaction.save()
         activity.save()
 
         return activity
