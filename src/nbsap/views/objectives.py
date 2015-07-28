@@ -71,7 +71,7 @@ def nat_strategy_download(request):
         data.append(row)
 
     response = HttpResponse(
-        data.xls,
+        data.xlsx,
         content_type='application/vnd.openxmlformats-officedocument'
                      '.spreadsheetml.sheet;charset=utf-8'
     )
