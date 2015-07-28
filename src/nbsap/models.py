@@ -509,6 +509,8 @@ class EuTarget(models.Model):
     other_indicators = models.ManyToManyField(
         EuIndicator, related_name="other_targets", blank=True,
     )
+    parent = models.ForeignKey('self', blank=True, null=True,
+                               related_name='children')
 
     if settings.EU_STRATEGY and settings.NAT_STRATEGY:
         national_strategy = models.ManyToManyField(

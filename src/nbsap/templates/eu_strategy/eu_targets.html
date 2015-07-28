@@ -18,7 +18,7 @@
     <h4 class="sidebar-title">Targets</h4>
     <ul class="sidebar-menu">
       {% for target in targets %}
-        <li {% if target.pk == current_target.pk %}class="active"{% endif %}>
+        <li class="{% if target.pk == current_target.pk %}active {% endif %}{% if target.parent %}indent{% endif %}">
           <a href="{% url 'eu_targets' code=target.code %}"
              title="{{ target.code }}">
             {% trans "Target" %} {{ target.code }}
@@ -33,7 +33,19 @@
   <h1 class="page-title">{% trans "EU Targets" %}</h1>
 
   <h1>{% trans "EU Target" %} {{ current_target.code }}: {{ current_target.title }}</h1>
-  <p class="objective-description">{{ current_target.body }}</p>
+  <p class="objective-description">{{ current_target.description }}</p>
+
+  {% if current_target.children.count %}
+    {% for subtarget in current_target.children.all %}
+    <h2>
+      <a href="{% url 'eu_targets' code=subtarget.code %}">
+        {% trans "EU Target" %} {{ subtarget.code }}: {{ subtarget.title }}
+      </a>
+    </h2>
+    <p class="objective-description">{{ subtarget.description|safe }}</p>
+    {% endfor %}
+  {% endif %}
+
 
   <div class="toc">
     <h5>{% trans "Table of contents" %}</h5>
