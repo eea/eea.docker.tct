@@ -203,7 +203,7 @@
     "pk": 21, 
     "model": "nbsap.euaction", 
     "fields": {
-        "code": "3", 
+        "code": "8", 
         "title_en-us": "Enhance direct payments for environmental public goods in the EU Common Agricultural Policy.", 
         "parent": null, 
         "description_en-us": ""
@@ -233,7 +233,7 @@
     "pk": 24, 
     "model": "nbsap.euaction", 
     "fields": {
-        "code": "3", 
+        "code": "9", 
         "title_en-us": "Better target Rural Development to biodiversity conservation.", 
         "parent": null, 
         "description_en-us": ""
@@ -263,17 +263,17 @@
     "pk": 27, 
     "model": "nbsap.euaction", 
     "fields": {
-        "code": "3", 
+        "code": "10", 
         "title_en-us": "Conserve Europe' s agricultural genetic diversity.", 
         "parent": null, 
-        "description_en-us": "The Commission and Member States will encourage the uptake of agrienvironmental measures to support genetic diversity in agriculture and explore the scope for developing a strategy for the conservation of genetic diversity."
+        "description_en-us": "<p>\n The Commission and Member States will encourage the uptake of agrienvironmental measures to support genetic diversity in agriculture and explore the scope for developing a strategy for the conservation of genetic diversity.\n</p>"
     }
 },
 {
     "pk": 28, 
     "model": "nbsap.euaction", 
     "fields": {
-        "code": "3", 
+        "code": "11", 
         "title_en-us": "Encourage forest holders to protect and enhance forest biodiversity.", 
         "parent": null, 
         "description_en-us": ""
@@ -303,10 +303,10 @@
     "pk": 31, 
     "model": "nbsap.euaction", 
     "fields": {
-        "code": "3", 
+        "code": "12", 
         "title_en-us": "Integrate biodiversity measures in forest management plans.", 
         "parent": null, 
-        "description_en-us": "Member States will ensure that forest management plans or equivalent instruments include as many of the following measures as possible: maintain optimal levels of deadwood, taking into account regional variations such as fire risk or potential insect outbreaks; preserve wilderness areas; ecosystem-based measures to increase the resilience of forests against fires as part of forest fire prevention schemes, in line with activities carried out in the European Forest Fire Information System (EFFIS);specific measures developed for Natura 2000 forest sites; ensuring that afforestation is carried out in accordance with the Pan European Operational Level Guidelines for SFM, in particular as regards the diversity of species, and climate change adaptation needs."
+        "description_en-us": "<p>\n Member States will ensure that forest management plans or equivalent instruments include as many of the following measures as possible: maintain optimal levels of deadwood, taking into account regional variations such as fire risk or potential insect outbreaks; preserve wilderness areas; ecosystem-based measures to increase the resilience of forests against fires as part of forest fire prevention schemes, in line with activities carried out in the European Forest Fire Information System (EFFIS);specific measures developed for Natura 2000 forest sites; ensuring that afforestation is carried out in accordance with the Pan European Operational Level Guidelines for SFM, in particular as regards the diversity of species, and climate change adaptation needs.\n</p>"
     }
 },
 {
