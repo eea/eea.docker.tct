@@ -7,7 +7,8 @@ RUN apt-get -y install libldap2-dev libsasl2-dev libmysqlclient-dev libxml2-dev 
 RUN mkdir /nbsap
 WORKDIR /nbsap
 ADD . /nbsap
-ADD src/nbsap/settings.py.docker /nbsap/instance/settings.py
+ADD src/nbsap/settings.py.docker /nbsap/instance/
+RUN mv /nbsap/instance/settings.py.docker /nbsap/instance/settings.py
 
 # install requirements
 RUN pip install -r requirements-dev.txt
