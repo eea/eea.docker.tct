@@ -31,6 +31,9 @@ class Command(BaseCommand):
                     target_obj.setdefault('national_strategy', [])
                     target_obj['national_strategy'].append(obj['pk'])
 
+                relevant_target = obj['fields'].pop('relevant_target')
+                obj['fields']['relevant_targets'] = [relevant_target]
+
 
         data = []
         for model, values in objs.items():
