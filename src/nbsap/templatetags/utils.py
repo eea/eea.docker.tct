@@ -56,7 +56,10 @@ def get_targets_for_strategies(strategies):
     targets = []
     for s in strategies:
         targets.extend(s.relevant_targets.all())
-    targets = set(targets)
+    targets = list(set(targets))
+    try:
+        targets.sort(cmp=lambda a, b: int(10 * (float(a.code) - float(b.code))))
+    except: pass
     return targets
 
 

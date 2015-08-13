@@ -64,7 +64,11 @@
           <td>
             <a href="{% url 'view_national_objective' pk=subobj.pk %}"
              title="{% trans 'Objective' %} {{ subobj.code }}">
-            {{ subobj.title }}</a>
+            {{ subobj.title|default:subobj.code }}</a>
+          </td>
+          <td>
+            <a href="{% url 'view_national_objective' pk=subobj.pk %}"
+               class="btn btn-xs btn-default">Edit</a>
           </td>
         </tr>
       {% endfor %}
