@@ -37,8 +37,7 @@
 
   <h1 class="page-title">Implementation</h1>
 
-  <h1 class="x-title">{% trans "Actions related to Objective" %} {{ current_objective.code }}
-    ({{ current_objective.title }})</h1>
+  <h1 class="x-title">{% trans "Actions related to Objective" %} {{ current_objective.code }} ({{ current_objective.title }})</h1>
 
   <div class="toc">
     {% if current_objective.actions_tree %}
@@ -107,8 +106,7 @@
 
     {% for obj in current_objective.objectives_tree|sort_by_code %}
 
-      <h2 class="x-title">{% trans "Actions related to Objective" %} {{ obj.code }}
-        ({{ obj.title }})</h2>
+      <h2 class="x-title">{% trans "Actions related to Objective" %} {{ obj.code }} ({{ obj.title }})</h2>
 
       {% if obj.actions_tree %}
         {% for action in obj.actions_tree|sort_by_code %}
