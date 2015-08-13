@@ -14,11 +14,15 @@
 
   <div class="action-bar">
     <form method="POST" action="{% url 'delete_national_objective' pk=objective.pk %}">
+      {% if objective.parent %}
+      <a class="btn btn-success"
+                   href="{% url 'view_national_objective' objective.parent.pk %}"><i class="glyphicon glyphicon-arrow-left"></i> {% trans "Back" %}</a>
+      {% else %}
       <a class="btn btn-success"
                    href="{% url 'list_national_objectives' %}"><i class="glyphicon glyphicon-arrow-left"></i> {% trans "Back" %}</a>
-
       <a class="btn btn-default"
          href="{% url 'edit_national_objective' parent=objective.pk %}">{% trans "Add sub-objective" %}</a>
+      {% endif %}
 
       <a class="btn btn-default"
          href="{% url 'edit_national_action' objective=objective.pk %}">{% trans "Add action" %}</a>
