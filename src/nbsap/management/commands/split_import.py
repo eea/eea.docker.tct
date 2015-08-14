@@ -52,11 +52,11 @@ class Command(BaseCommand):
         for row in data[1:]:
             country = row[0]
             dict_data.setdefault(country, [])
-            dict_data[country].append(row[1:])
+            dict_data[country].append(row)
 
         for country, rows in dict_data.items():
             with open('{}.csv'.format(country), 'w') as fout:
-                csv_writer = UnicodeWriter(fout)
+                csv_writer = UnicodeWriter(fout, delimiter=';')
                 csv_writer.writerow(header)
                 csv_writer.writerows(rows)
             print("{}.csv written!".format(country))
