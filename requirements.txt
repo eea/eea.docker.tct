@@ -21,3 +21,4 @@ python-ldap==2.4.19
 django-auth-ldap==1.2.5
 requests==2.5.2
 WebTest==2.0.14
+openpyxl==2.2.5
