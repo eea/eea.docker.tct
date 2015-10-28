@@ -31,7 +31,10 @@ def get_page(id):
 
 @register.filter('sort_by_code')
 def sort_by_code(value):
-    return sorted(value, key=lambda i: map(int, i.code.split('.')))
+    try:
+       return sorted(value, key=lambda i: map(int, i.code.split('.')))
+    except ValueError:
+        return sorted(value, key=lambda i: i.code)
 
 
 @register.assignment_tag
