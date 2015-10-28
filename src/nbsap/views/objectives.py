@@ -47,7 +47,7 @@ def nat_strategy(request, code=None):
 
 def nat_strategy_download(request):
     eu_strategy = settings.EU_STRATEGY
-    headers = ['Objective', 'Aichi Goal', 'Most Relevant Aichi Targets',
+    headers = ['Title', 'Subtitle', 'Objective', 'Aichi Goal', 'Most Relevant Aichi Targets',
                'Other Relevant Aichi Targets', 'Objective description']
     if eu_strategy:
         headers.extend(['EU Targets', 'EU Actions'])
@@ -55,19 +55,29 @@ def nat_strategy_download(request):
     lang = request.GET.get('lang', request.LANGUAGE_CODE)
 
     for strategy in models.NationalStrategy.objects.all():
-        row = [
-            strategy.objective.code,
-            ', '.join(g.code for g in strategy.goals_list) or '',
-            ', '.join(t.code for t in strategy.relevant_targets.all()) or '',
-            ', '.join(t.code for t in strategy.other_targets.all()),
-            remove_tags(getattr(strategy.objective,
-                                'description_' + lang).rstrip(), 'p'),
-        ]
-        if eu_strategy:
-            row.extend([
-                ', '.join(t.code for t in strategy.eu_targets.all()),
-                ', '.join(t.code for t in strategy.eu_actions.all()),
-            ])
+        if strategy.objective.children.count():
+            objectives = strategy.objective.children
+            title = strategy.objective.title
+        else:
+            objectives = (strategy.objective,)
+            title = None
+
+        for objective in objectives:
+            row = [
+                objective.title if title is None else title,
+                objective.title if title is not None else '',
+                objective.code,
+                ', '.join(g.code for g in strategy.goals_list) or '',
+                ', '.join(t.code for t in strategy.relevant_targets.all()) or '',
+                ', '.join(t.code for t in strategy.other_targets.all()),
+                remove_tags(getattr(strategy.objective,
+                                    'description_' + lang).rstrip(), 'p'),
+            ]
+            if eu_strategy:
+                row.extend([
+                    ', '.join(t.code for t in strategy.eu_targets.all()),
+                    ', '.join(t.code for t in strategy.eu_actions.all()),
+                ])
         data.append(row)
 
     response = HttpResponse(
