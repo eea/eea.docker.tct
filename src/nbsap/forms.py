@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+from natsort import natsorted
 
 from django import forms
 from django.conf import settings
@@ -311,12 +312,6 @@ class NationalStrategyForm(forms.Form):
         ret_list.extend(groups[1:])
         return ret_list
 
-    def comp(self, title):
-        code = title[1].split()[1]
-        to_list = code.split('.')
-
-        return [int(el) for el in to_list]
-
     def get_choices(self, string, mytype, isString=False, use_regex=False):
         result = [(element.pk, "%s %s" % (string, element.code.upper()))
                   for element in mytype.objects.all()]
@@ -325,7 +320,7 @@ class NationalStrategyForm(forms.Form):
             return sorted(result, key=lambda x: x[1].split()[1])
         if use_regex:
             return sorted(result, key=self.comp_rgx)
-        return sorted(result, key=self.comp)
+        return natsorted(result, key=lambda x: x[1])
 
     def get_element_by_pk(self, mytype, u_pk):
         return mytype.objects.filter(pk=int(u_pk)).all()[0]
@@ -648,7 +643,6 @@ class NationalIndicatorMapForm(forms.Form, ChoicesMixin):
         self.fields['other_nat_objectives'].initial = (
             self.indicator.other_nat_objectives.values_list('pk', flat=True)
         )
-
 
     def clean(self):
         cleaned_data = super(NationalIndicatorMapForm, self).clean()
