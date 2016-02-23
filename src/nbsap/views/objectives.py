@@ -56,12 +56,11 @@ def nat_strategy_download(request):
 
     for strategy in models.NationalStrategy.objects.all():
         if strategy.objective.children.count():
-            objectives = strategy.objective.children
+            objectives = strategy.objective.children.all()
             title = strategy.objective.title
         else:
             objectives = (strategy.objective,)
             title = None
-
         for objective in objectives:
             row = [
                 objective.title if title is None else title,
