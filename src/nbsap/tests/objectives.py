@@ -46,7 +46,7 @@ class NationalObjectiveTest(BaseWebTest):
         nat_obj = NationalObjectiveFactory.build()
         data = {
             'language': 'en-us',
-            'title': getattr(nat_obj, 'title_en-us'),
+            'title': getattr(nat_obj, 'title_en'),
             'description': 'ĂFKĐȘKŁFKOKR–KF:ŁĂȘĐKF–KFÂŁ:FJK–FFŁKJȘĂŁF',
         }
         url = reverse('edit_national_objective')
@@ -144,8 +144,8 @@ class NationalObjectiveTest(BaseWebTest):
             'NationalAction',
             {
                 'pk': 1,
-                'title_en-us': nat_act.title_default,
-                'description_en-us': nat_act.description_default,
+                'title_en': nat_act.title_default,
+                'description_en': nat_act.description_default,
                 'code': edited_code
             }
         )
