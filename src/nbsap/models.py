@@ -650,7 +650,7 @@ class NationalStrategy(models.Model):
     @property
     def goals_list(self):
         goals = [t.get_parent_goal() for t in self.targets_list]
-        return [g for g in goals if g]
+        return set(g for g in goals if g)
 
     @property
     def targets_list(self):
