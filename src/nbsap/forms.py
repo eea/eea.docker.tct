@@ -408,11 +408,10 @@ class NationalStrategyForm(forms.Form):
             strategy.other_targets.add(get_object_or_404(AichiTarget,
                                                          code=ucode))
         if settings.EU_STRATEGY:
-            for ucode in self.cleaned_data['eu_targets']:
-                strategy.eu_targets.add(
-                    get_object_or_404(EuTarget, code=ucode))
-            for ucode in self.cleaned_data['eu_actions']:
-                strategy.eu_actions.add(get_object_or_404(EuAction, pk=ucode))
+            for pk in self.cleaned_data['eu_targets']:
+                strategy.eu_targets.add(get_object_or_404(EuTarget, pk=pk))
+            for pk in self.cleaned_data['eu_actions']:
+                strategy.eu_actions.add(get_object_or_404(EuAction, pk=pk))
 
         strategy.save()
         return strategy
