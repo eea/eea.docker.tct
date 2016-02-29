@@ -19,7 +19,7 @@ $(function () {
                       '.actions_text',
                       "{% url 'action_title' pk=1 %}");
 
-  $('select[name=aichi_goal]').on('change', function () {
+  $('select[name=aichi_goals]').on('change', function () {
     var option = $(this).val();
     var text = $(this).parents('.form-group').find('.goal_text');
     var url = "{% url 'goal_title' pk=1%}".replace('1', option)
@@ -27,12 +27,13 @@ $(function () {
       data = $.parseJSON(data)[0];
 
       text.html('<p>' + data.goal + '</p>');
-      $('select[name=aichi_target]').html('');
+      $('select[name=aichi_targets]').html('');
       $.each(data.targets, function(i,t) {
         var html = $('<option />').attr('value', t.pk).text('Target ' + t.value);
-        $('select[name=aichi_target]').append(html);
+        $('select[name=aichi_targets]').append(html);
       });
-      $('select[name=aichi_target]').change();
+      $('select[name=aichi_targets]').change();
+      $('select[name=aichi_targets]').trigger("chosen:updated");
     });
   }).change();
 
