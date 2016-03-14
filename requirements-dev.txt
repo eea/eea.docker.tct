@@ -1,7 +1,7 @@
 -r requirements.txt
-Fabric==1.6.0
-paramiko==1.10.1
-pycrypto==2.6
+Fabric==1.10.2
+paramiko==1.16.0
+pycrypto==2.6.1
 webassets==0.8
 factory-boy==2.2.1
 pyquery==1.2.6

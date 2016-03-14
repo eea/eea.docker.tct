@@ -11,6 +11,6 @@ sandbox_py27/*
 /build
 .webassets-cache
 gen
-fabfile.py
 *~
 sandbox/*
+fabfile/env.ini
