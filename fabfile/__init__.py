@@ -14,7 +14,7 @@ def enviroment(location='production'):
     local_path = os.path.dirname(__file__)
     config.read(os.path.join(local_path, 'env.ini'))
     env.update(config.items(section=location))
-    env.project_paths = config.get(location, 'project_paths').split(',')
+    env.project_paths = config.get(location, 'project_root').split(',')
 
 
 @contextmanager
