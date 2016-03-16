@@ -102,47 +102,6 @@
     <p>{% trans "No actions found" %}.</p>
   {% endif %}
 
-  {% if current_objective.objectives_tree|length %}
-
-    {% for obj in current_objective.objectives_tree|sort_by_code %}
-
-      <h2 class="x-title">{% trans "Actions related to Objective" %} {{ obj.code }} ({{ obj.title }})</h2>
-
-      {% if obj.actions_tree %}
-        {% for action in obj.actions_tree|sort_by_code %}
-          <div class="section" id="{{ action.code }}">
-            <h2>{% trans "Action" %} {{ action.code }}
-              {% if action.title %}({{ action.title }}){% endif %}
-            </h2>
-
-            <div class="summary">
-              <div class="snippet">
-                {{ action.description|striptags|truncatechars:510|safe }}
-                <a class="more">{% trans "show more" %}</a>
-              </div>
-              <div class="full">
-                <div class="html-content">{{ action.description|safe }}</div>
-
-                {% include 'manager/nat_strategy/mapping/nat_action_aichi_mapping.html' %}
-                <a class="less"> {% trans "show less" %}</a>
-              </div>
-              <div>
-                <p>
-                  <a href="{% url 'nat_strategy' obj.code %}#{{ action.code }}"
-                     title="{{ action.code }}">
-                    See objective
-                  </a>
-                </p>
-              </div>
-            </div>
-          </div>
-        {% endfor %}
-      {% else %}
-        <p>No actions for this subjobective.</p>
-      {% endif %}
-    {% endfor %}
-  {% endif %}
-
   </div>
 
 {% endblock content %}
