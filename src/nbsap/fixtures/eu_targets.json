@@ -151,7 +151,7 @@
         "other_indicators": [],
         "title_en": "Agriculture",
         "actions": [],
-        "description_en": " <p>\r\n   By 2020, maximise areas under agriculture across grasslands, arable land and permanent crops that are covered by biodiversity related measures under the CAP so as to ensure the conservation of biodiversity and to bring about a measurable improvement(*) in the conservation status of species and habitats that depend on or are affected by agriculture and in the provision of ecosystem services as compared to the EU2010 Baseline, thus contributing to enhance sustainable management.\r\n  </p>\r\n ",
+        "description_en": " <p>\r\n   By 2020, maximise areas under agriculture across grasslands, arable land and permanent crops that are covered by biodiversity related measures under the CAP so as to ensure the conservation of biodiversity and to bring about a measurable improvement(*) in the conservation status of species and habitats that depend on or are affected by agriculture and in the provision of ecosystem services as compared to the EU2010 Baseline, thus contributing to enhance sustainable management.\r\n  </p>\r\n <p><i>(*) Improvement is to be measured against the quantified enhancement targets for the conservation status of species and habitats of EU interest.</i></p>",
         "indicators": []
     }
 },
@@ -164,7 +164,7 @@
         "other_indicators": [],
         "title_en": "Forests",
         "actions": [],
-        "description_en": "  <p>\r\n   By 2020, Forest Management Plans or equivalent instruments, in line with Sustainable Forest Management (SFM), are in place for all forests that are publicly owned and for forest holdings above a certain size(**) (to be defined by the Member States or regions and communicated in their Rural Development Programmes) that receive funding under the EU Rural Development Policy so as to bring about a measurable improvement(*) in the conservation status of species and habitats that depend on or are affected by forestry and in the provision of related ecosystem services as compared to the EU 2010 Baseline.\r\n  </p>",
+        "description_en": "  <p>\r\n   By 2020, Forest Management Plans or equivalent instruments, in line with Sustainable Forest Management (SFM), are in place for all forests that are publicly owned and for forest holdings above a certain size(**) (to be defined by the Member States or regions and communicated in their Rural Development Programmes) that receive funding under the EU Rural Development Policy so as to bring about a measurable improvement(*) in the conservation status of species and habitats that depend on or are affected by forestry and in the provision of related ecosystem services as compared to the EU 2010 Baseline.\r\n  </p>\r\n <p><i>(*) Improvement is to be measured against the restoration of degraded ecosystems.</i></p>\r\n<p><i>(**) For smaller forest holdings, Member States may provide additional incentives to encourage the adoption of Management Plans or equivalent instruments that are in line with SFM.</i></p> ",
         "indicators": []
     }
 }
