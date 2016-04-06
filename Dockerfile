@@ -7,15 +7,11 @@ RUN apt-get -y install libldap2-dev libsasl2-dev libmysqlclient-dev libxml2-dev 
 RUN mkdir /nbsap
 WORKDIR /nbsap
 ADD . /nbsap
-ADD src/nbsap/settings.py.docker /nbsap/instance/
-RUN mv /nbsap/instance/settings.py.docker /nbsap/instance/settings.py
 
 # install requirements
-RUN pip install -r requirements-dev.txt
+RUN pip install -r requirements.txt
 RUN pip install -U distribute
 RUN pip install -e .
 
-# default cmd
-ENV APP_PORT 8000
-EXPOSE ${APP_PORT}
-CMD python instance/manage.py runserver 0.0.0.0:${APP_PORT}
+# apply migrations & fixtures
+CMD bash -c "python instance/manage.py syncdb && python instance/manage.py load_fixtures"
