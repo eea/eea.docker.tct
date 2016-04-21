@@ -84,14 +84,10 @@
       </div>
     </div>
 
-
-    {% block head_scripts %}
-
     {% assets "js" %}
       <script type="text/javascript" src="{{ ASSET_URL }}"></script>
     {% endassets %}
-
-    {% endblock %}
+    {% block head_scripts %}{% endblock %}
 
     {% block scripts %}{% endblock %}
   </body>
