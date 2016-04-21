@@ -29,7 +29,7 @@ class Command(BaseCommand):
         urls = self.get_urls()
         for url in urls:
             resp = requests.get(url)
-            soup = BeautifulSoup(resp.text)
+            soup = BeautifulSoup(resp.text, 'lxml')
             tables = soup.find_all('table', class_='targetDesc')[1:]
             for table in tables:
                 self.get_indicators_and_mapping(table)
@@ -47,7 +47,7 @@ class Command(BaseCommand):
 
     def get_urls(self):
         resp = requests.get(INDICATORS_URL)
-        soup = BeautifulSoup(resp.text)
+        soup = BeautifulSoup(resp.text, 'lxml')
         links = soup.find(text=re.compile('show indicators')).parent('a')
         return [link['href'] for link in links]
 

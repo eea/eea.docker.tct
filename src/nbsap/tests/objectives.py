@@ -22,7 +22,7 @@ class NationalObjectiveTest(BaseWebTest):
     def test_add_national_objective(self):
         nat_obj = NationalObjectiveFactory.build()
         data = {
-            'language': 'en-us',
+            'language': 'en',
             'title': getattr(nat_obj, 'title_default'),
             'description': getattr(nat_obj, 'description_default'),
         }
@@ -45,7 +45,7 @@ class NationalObjectiveTest(BaseWebTest):
     def test_add_national_objective_with_encodings(self):
         nat_obj = NationalObjectiveFactory.build()
         data = {
-            'language': 'en-us',
+            'language': 'en',
             'title': getattr(nat_obj, 'title_en'),
             'description': 'ĂFKĐȘKŁFKOKR–KF:ŁĂȘĐKF–KFÂŁ:FJK–FFŁKJȘĂŁF',
         }
@@ -68,7 +68,7 @@ class NationalObjectiveTest(BaseWebTest):
     def test_edit_national_objective(self):
         nat_obj = NationalObjectiveFactory()
         data = {
-            'language': 'en-us',
+            'language': 'en',
             'code': nat_obj.code,
             'title': 'Title edited',
             'description': 'Description edited',
@@ -95,7 +95,7 @@ class NationalObjectiveTest(BaseWebTest):
         nat_subobj = NationalObjectiveFactory(parent=nat_obj, code='1.1')
         edited_code = '42'
         data = {
-            'language': 'en-us',
+            'language': 'en',
             'code': edited_code,
             'title': nat_obj.title,
             'description': nat_obj.description,
@@ -127,7 +127,7 @@ class NationalObjectiveTest(BaseWebTest):
         nat_obj = NationalObjectiveFactory(actions=(nat_act,))
         edited_code = '42'
         data = {
-            'language': 'en-us',
+            'language': 'en',
             'code': edited_code,
             'title': nat_obj.title,
             'description': nat_obj.description,
@@ -154,7 +154,7 @@ class NationalObjectiveTest(BaseWebTest):
         nat_obj = NationalObjectiveFactory()
         nat_obj_2 = NationalObjectiveFactory()
         data = {
-            'language': 'en-us',
+            'language': 'en',
             'code': nat_obj_2.code,
             'title': 'Title edited',
             'description': 'Description edited',
@@ -180,7 +180,7 @@ class NationalObjectiveTest(BaseWebTest):
     def test_edit_national_objective_with_encodings(self):
         nat_obj = NationalObjectiveFactory()
         data = {
-            'language': 'en-us',
+            'language': 'en',
             'code': nat_obj.code,
             'title': 'Title edited',
             'description': 'ĂFKĐȘKŁFKOKR–KF:ŁĂȘĐKF–KFÂŁ:FJK–FFŁKJȘĂŁF',

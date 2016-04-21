@@ -65,14 +65,14 @@ class NationalActionsTest(BaseWebTest):
         nat_act = NationalActionFactory.build()
         url = reverse('edit_national_action', kwargs={'objective': nat_obj.pk})
         data = {
-            'language': 'en-us',
+            'language': 'en',
             'title': nat_act.title_default,
             'description': nat_act.description_default,
         }
         resp = self.app.get(url, user='staff')
         form = resp.forms['national-action-add']
         self.populate_fields(form, data)
-        form.submit().follow()
+        form.submit()
 
         self.assertObjectInDatabase(
             'NationalAction',
@@ -88,7 +88,7 @@ class NationalActionsTest(BaseWebTest):
         nat_act = NationalActionFactory.build()
         url = reverse('edit_national_action', kwargs={'objective': nat_obj.pk})
         data = {
-            'language': 'en-us',
+            'language': 'en',
             'title': nat_act.title_default,
             'description': 'ĂFKĐȘKŁFKOKR–KF:ŁĂȘĐKF–KFÂŁ:FJK–FFŁKJȘĂŁF',
         }
@@ -114,7 +114,7 @@ class NationalActionsTest(BaseWebTest):
             'pk': nat_act.pk,
         })
         data = {
-            'language': 'en-us',
+            'language': 'en',
             'title': 'action_edited',
             'description': 'description_edited',
         }
@@ -140,7 +140,7 @@ class NationalActionsTest(BaseWebTest):
             'pk': nat_act.pk,
         })
         data = {
-            'language': 'en-us',
+            'language': 'en',
             'description': 'ĂFKĐȘKŁFKOKR–KF:ŁĂȘĐKF–KFÂŁ:FJK–FFŁKJȘĂŁF',
         }
         resp = self.app.get(url, user='staff')

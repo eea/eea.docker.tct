@@ -196,7 +196,6 @@ class EuAction(models.Model):
     if settings.EU_STRATEGY and settings.NAT_STRATEGY:
         national_strategy = models.ManyToManyField(
             'NationalStrategy',
-            null=True,
             blank=True,
             verbose_name="National strategy",
             related_name="eu_actions")
@@ -510,7 +509,6 @@ class EuTarget(models.Model):
     if settings.EU_STRATEGY and settings.NAT_STRATEGY:
         national_strategy = models.ManyToManyField(
             'NationalStrategy',
-            null=True,
             blank=True,
             verbose_name="National objectives",
             related_name="eu_targets")

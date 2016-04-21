@@ -5,6 +5,18 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 DEBUG = False
 
+# Language code for this installation. All choices can be found here:
+# http://www.i18nguy.com/unicode/language-identifiers.html
+LANGUAGE_CODE = 'en'
+
+ugettext = lambda s: s
+
+LANGUAGES = (
+    ('en', ugettext('English')),
+    ('fr', ugettext('French')),
+    ('nl', ugettext('Dutch')),
+)
+
 SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not

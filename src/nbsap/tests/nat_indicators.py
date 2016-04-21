@@ -38,7 +38,7 @@ class NationalIndicatorsTest(BaseWebTest):
         url = reverse('edit_nat_indicator')
         data = {
             'code': '01',
-            'language': 'en-us',
+            'language': 'en',
             'title': nat_indicator.title_default,
         }
         resp = self.app.get(url, user='staff')

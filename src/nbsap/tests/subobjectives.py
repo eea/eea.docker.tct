@@ -15,7 +15,7 @@ class NationalSubObjectiveTest(BaseWebTest):
         nat_obj = NationalObjectiveFactory()
         nat_subobj = NationalObjectiveFactory.build()
         data = {
-            'language': 'en-us',
+            'language': 'en',
             'title': nat_subobj.title_default,
             'description': nat_subobj.description_default,
         }
@@ -38,7 +38,7 @@ class NationalSubObjectiveTest(BaseWebTest):
         nat_obj = NationalObjectiveFactory()
         nat_subobj = NationalObjectiveFactory(parent=nat_obj)
         data = {
-            'language': 'en-us',
+            'language': 'en',
             'title': 'Title edited',
             'description': 'Description edited',
         }
@@ -61,7 +61,7 @@ class NationalSubObjectiveTest(BaseWebTest):
         nat_obj = NationalObjectiveFactory()
         nat_subobj = NationalObjectiveFactory(parent=nat_obj)
         data = {
-            'language': 'en-us',
+            'language': 'en',
             'title': 'Title edited',
             'description': 'Description edited',
         }
