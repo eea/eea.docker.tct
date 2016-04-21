@@ -4,7 +4,7 @@ from django.db.models.signals import pre_save
 from django.utils.safestring import mark_safe
 from django.conf import settings
 from transmeta import TransMeta
-from tinymce import models as tinymce_models
+import tinymce.models
 from django.utils.translation import ugettext_lazy as _
 
 from nbsap.utils import RE_ACTION_CODE
@@ -85,8 +85,7 @@ class AichiIndicator(models.Model):
     scales = models.ManyToManyField(
         Scale,
         verbose_name=_('Scale (global, regional, national, sub-national)'),
-        blank=True,
-        null=True)
+        blank=True)
 
     validity = models.CharField(_('Scientific Validity'),
                                 max_length=3,
@@ -116,8 +115,7 @@ class AichiIndicator(models.Model):
 
     links = models.ManyToManyField(Link,
                                    verbose_name=_('Related Links'),
-                                   blank=True,
-                                   null=True)
+                                   blank=True)
 
     def __unicode__(self):
         return self.title
@@ -130,12 +128,10 @@ class AichiTarget(models.Model):
     description = models.TextField(verbose_name="Description")
     indicators = models.ManyToManyField(AichiIndicator,
                                         related_name="relevant_target",
-                                        blank=True,
-                                        null=True)
+                                        blank=True)
     other_indicators = models.ManyToManyField(AichiIndicator,
                                               related_name="other_targets",
-                                              blank=True,
-                                              null=True)
+                                              blank=True)
 
     def __unicode__(self):
         return u'Target %s' % self.code
@@ -153,7 +149,7 @@ class AichiGoal(models.Model):
 
     code = models.CharField(max_length=1, primary_key=True)
     title = models.TextField(verbose_name="Title", max_length=512)
-    description = tinymce_models.HTMLField(verbose_name="Description")
+    description = tinymce.models.HTMLField(verbose_name="Description")
     targets = models.ManyToManyField(AichiTarget, related_name="goals")
 
     def __unicode__(self):
@@ -169,7 +165,7 @@ class NationalAction(models.Model):
 
     code = models.CharField(max_length=16)
     title = models.TextField(verbose_name="Title", max_length=512, blank=True)
-    description = tinymce_models.HTMLField(verbose_name="Description")
+    description = tinymce.models.HTMLField(verbose_name="Description")
 
     class Meta:
         translate = ('title', 'description',)
@@ -277,7 +273,7 @@ class EuIndicator(BaseIndicator):
                                       max_length=4,
                                       choices=TYPES,
                                       blank=True)
-    parent = models.ManyToManyField('self', null=True, blank=True,
+    parent = models.ManyToManyField('self', blank=True,
                                     symmetrical=False, related_name='parents')
 
     @property
@@ -323,7 +319,7 @@ class NationalIndicator(BaseIndicator):
                              verbose_name="Title")
     url = models.URLField(null=True,
                           blank=True)
-    subindicators = models.ManyToManyField('self', null=True, blank=True,
+    subindicators = models.ManyToManyField('self', blank=True,
                                            symmetrical=False,
                                            related_name='parents')
 
@@ -349,13 +345,12 @@ class NationalObjective(models.Model):
     code = models.CharField(max_length=16, unique=True)
     title = models.TextField(max_length=512,
                              verbose_name="Title")
-    description = tinymce_models.HTMLField(verbose_name="Description")
+    description = tinymce.models.HTMLField(verbose_name="Description")
     parent = models.ForeignKey('self',
                                null=True,
                                blank=True,
                                related_name='children')
     actions = models.ManyToManyField(NationalAction,
-                                     null=True,
                                      blank=True,
                                      related_name="objective")
 
@@ -634,12 +629,12 @@ class NationalStrategy(models.Model):
                                   verbose_name="National Objective",
                                   related_name="objective_national_strategy")
     relevant_targets = models.ManyToManyField(
-        AichiTarget, null=True, blank=True,
+        AichiTarget, blank=True,
         verbose_name="Relevant AICHI Targets",
         related_name="relevant_targets_national_strategy",
     )
     other_targets = models.ManyToManyField(
-        AichiTarget, null=True, blank=True,
+        AichiTarget, blank=True,
         verbose_name="Other AICHI targets",
         related_name="other_targets_national_strategy",
     )

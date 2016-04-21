@@ -1,5 +1,4 @@
 import factory
-
 from nbsap import models
 from django.contrib.auth.models import User
 from django.db.models.signals import pre_save
@@ -7,8 +6,9 @@ from django.db.models.signals import pre_save
 
 class StaffUserFactory(factory.DjangoModelFactory):
 
-    FACTORY_FOR = User
-    FACTORY_DJANGO_GET_OR_CREATE = ('username',)
+    class Meta:
+        model = User
+        django_get_or_create = ('username',)
 
     username = 'staff'
     email = 'staff@domain.com'
@@ -18,7 +18,8 @@ class StaffUserFactory(factory.DjangoModelFactory):
 
 class NationalObjectiveFactory(factory.DjangoModelFactory):
 
-    FACTORY_FOR = 'nbsap.NationalObjective'
+    class Meta:
+        model = models.NationalObjective
 
     code = factory.Sequence(lambda n: '%d' % n)
     title_default = factory.Sequence(lambda n: 'obj%d_title_default' % n)
@@ -50,7 +51,8 @@ class NationalObjectiveFactory(factory.DjangoModelFactory):
 
 class NationalActionFactory(factory.DjangoModelFactory):
 
-    FACTORY_FOR = 'nbsap.NationalAction'
+    class Meta:
+        model = models.NationalAction
 
     code = factory.Sequence(lambda n: '%d' % n)
     title_default = factory.Sequence(lambda n: 'action%d_title_default' % n)
@@ -59,7 +61,8 @@ class NationalActionFactory(factory.DjangoModelFactory):
 
 class AichiGoalFactory(factory.DjangoModelFactory):
 
-    FACTORY_FOR = 'nbsap.AichiGoal'
+    class Meta:
+        model = models.AichiGoal
 
     code = factory.Sequence(lambda n: '%d' % n)
     title_default = factory.Sequence(lambda n: 'obj%d_title_default' % n)
@@ -74,7 +77,8 @@ class AichiGoalFactory(factory.DjangoModelFactory):
 
 class AichiTargetFactory(factory.DjangoModelFactory):
 
-    FACTORY_FOR = 'nbsap.AichiTarget'
+    class Meta:
+        model = models.AichiTarget
 
     code = factory.Sequence(lambda n: '%d' % n)
     description_default = factory.Sequence(lambda n: 'action%d_description_default' % n)
@@ -82,7 +86,8 @@ class AichiTargetFactory(factory.DjangoModelFactory):
 
 class NationalStrategyFactory(factory.DjangoModelFactory):
 
-    FACTORY_FOR = 'nbsap.NationalStrategy'
+    class Meta:
+        model = models.NationalStrategy
 
     objective = factory.SubFactory(NationalObjectiveFactory)
 
@@ -101,7 +106,8 @@ class NationalStrategyFactory(factory.DjangoModelFactory):
 
 class NationalIndicatorFactory(factory.DjangoModelFactory):
 
-    FACTORY_FOR = 'nbsap.NationalIndicator'
+    class Meta:
+        model = models.NationalIndicator
 
     code = factory.Sequence(lambda n: '%d' % n)
     title_default = factory.Sequence(lambda n: 'indicator%d_title_default' % n)

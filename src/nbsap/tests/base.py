@@ -1,5 +1,5 @@
 from django.db.models import Model
-from django.db.models.loading import get_model
+from django.apps import apps
 from django.conf import settings
 
 from django_webtest import WebTest
@@ -31,7 +31,7 @@ class BaseWebTest(WebTest):
 
     def assertObjectInDatabase(self, model, kwargs):
         if isinstance(model, basestring):
-            Model = get_model('nbsap', model)
+            Model = apps.get_model('nbsap', model)
         else:
             Model = model
 

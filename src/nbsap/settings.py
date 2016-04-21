@@ -4,49 +4,6 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 DEBUG = False
-TEMPLATE_DEBUG = DEBUG
-
-ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
-)
-
-MANAGERS = ADMINS
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'nbsap',                      # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
-        'USER': 'nbsap',
-        'PASSWORD': 'nbsap',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
-        'TEST_CHARSET': 'utf8',
-        'TEST_COLLATION': 'utf8_general_ci',
-    }
-}
-
-# Hosts/domain names that are valid for this site; required if DEBUG is False
-# See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
-
-# Local time zone for this installation. Choices can be found here:
-# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
-# although not all choices may be available on all operating systems.
-# In a Windows environment this must be set to your system time zone.
-#TIME_ZONE = 'America/Chicago'
-
-# Language code for this installation. All choices can be found here:
-# http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
-
-ugettext = lambda s: s
-
-LANGUAGES = (
-    ('en-us', ugettext('English')),
-    ('fr', ugettext('French')),
-    ('nl', ugettext('Dutch')),
-)
 
 SITE_ID = 1
 
@@ -98,22 +55,27 @@ STATICFILES_FINDERS = (
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '8u6d#h7cga4a!&qya#-e2ct%%&$1u^ce5rub$9#1zcn=n$j@^h'
 
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.core.context_processors.request',
-    'django.contrib.messages.context_processors.messages',
-    'django.contrib.auth.context_processors.auth',
-    'django.core.context_processors.i18n',
-    'nbsap.context_processors.nbsap_admin',
-    'nbsap.context_processors.nbsap_navbar_link',
-    'nbsap.context_processors.google_analytics',
-    'nbsap.context_processors.login',
-)
-
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-)
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            os.path.join(BASE_DIR, 'nbsap', 'templates'),
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.core.context_processors.request',
+                'django.contrib.messages.context_processors.messages',
+                'django.contrib.auth.context_processors.auth',
+                'django.core.context_processors.i18n',
+                'nbsap.context_processors.nbsap_admin',
+                'nbsap.context_processors.nbsap_navbar_link',
+                'nbsap.context_processors.google_analytics',
+                'nbsap.context_processors.login',
+            ],
+        },
+    },
+]
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
@@ -131,12 +93,6 @@ ROOT_URLCONF = 'nbsap.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'nbsap.wsgi.application'
 
-TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-    os.path.join(BASE_DIR, 'nbsap', 'templates'),
-)
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -150,7 +106,6 @@ INSTALLED_APPS = (
     'django_webtest',
     'widget_tweaks',
     'transmeta',
-    'django.contrib.markup',
     'tinymce',
     'nbsap',
     'chosen',
@@ -239,10 +194,6 @@ NOSE_ARGS = [
     '--cover-package=nbsap',
 ]
 
-# Override
-if not DEBUG:
-    SENTRY_DSN = 'http://e58d6f13a36d419d81c1d1e44e5e2519:d67d512c5f4343c0aebcdca30bc64871@sentry.mojito.edw.ro/16'
-
 try:
     from local_settings import *
 except ImportError:
@@ -253,3 +204,7 @@ if 'test' in sys.argv:
         from test_settings import *
     except ImportError:
         pass
+
+# Override
+if not DEBUG:
+    SENTRY_DSN = 'http://e58d6f13a36d419d81c1d1e44e5e2519:d67d512c5f4343c0aebcdca30bc64871@sentry.mojito.edw.ro/16'
