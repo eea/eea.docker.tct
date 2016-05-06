@@ -16,7 +16,7 @@ setup(
     package_dir={ '' : 'src' },
 
     install_requires=[
-        'django == 1.5.1',
+        'django == 1.9.5',
         'mysql-python == 1.2.5',
     ]
 )

@@ -489,6 +489,9 @@ class EuIndicatorForm(forms.Form):
 class NationalIndicatorForm(forms.Form):
     language = forms.ChoiceField(choices=settings.LANGUAGES)
     title = forms.CharField(widget=widgets.Textarea, required=True)
+    description = TextCleanedHtml(
+        widget=TinyMCE(attrs={'cols': 80, 'rows': 25}),
+        required=False)
     code = forms.CharField(widget=widgets.Textarea, required=True)
     url = forms.CharField(required=False)
 
@@ -500,7 +503,10 @@ class NationalIndicatorForm(forms.Form):
 
         if self.indicator:
             title = getattr(self.indicator, 'title_%s' % lang, None)
+            description = getattr(self.indicator,
+                                  'description_%s' % lang, None)
             self.fields['title'].initial = title
+            self.fields['description'].initial = description
             self.fields['url'].initial = self.indicator.url
             if 'code' in self.fields:
                 self.fields['code'].initial = self.indicator.code
@@ -522,9 +528,11 @@ class NationalIndicatorForm(forms.Form):
         indicator = self.indicator or NationalIndicator()
         lang = self.cleaned_data['language']
         title = self.cleaned_data['title']
+        description = self.cleaned_data['description']
         code = self.cleaned_data.get('code', None)
 
         setattr(indicator, 'title_%s' % lang, title)
+        setattr(indicator, 'description_%s' % lang, description)
         indicator.url = self.cleaned_data['url']
 
         if code:

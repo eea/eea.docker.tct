@@ -44,6 +44,10 @@
   {% endif %}
   </div>
 
+  <div class="html-content">
+    {{ indicator.description|safe }}
+  </div>
+
   {% if indicator.nat_objectives.exists %}
       <h2>{% trans "Mapping with National Objectives" %}</h2>
       <h4>Most relevant</h4>

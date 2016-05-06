@@ -1,4 +1,3 @@
-import re
 from django.db import models
 from django.db.models.signals import pre_save
 from django.utils.safestring import mark_safe
@@ -217,7 +216,7 @@ class EuAction(models.Model):
         return self.get_all_actions()[1:]
 
     def get_all_actions(self):
-        #we should use https://github.com/django-mptt/django-mptt/
+        # we should use https://github.com/django-mptt/django-mptt/
         r = []
         r.append(self)
         for ob in EuAction.objects.filter(parent=self).order_by('code'):
@@ -316,6 +315,10 @@ class NationalIndicator(BaseIndicator):
                             blank=True)
     title = models.TextField(max_length=512,
                              verbose_name="Title")
+
+    description = tinymce.models.HTMLField(verbose_name="Description",
+                                           blank=True)
+
     url = models.URLField(null=True,
                           blank=True)
     subindicators = models.ManyToManyField('self', blank=True,
@@ -335,7 +338,7 @@ class NationalIndicator(BaseIndicator):
     class Meta:
         verbose_name_plural = 'National indicators'
         ordering = ['code']
-        translate = ('title',)
+        translate = ('title', 'description',)
 
 
 class NationalObjective(models.Model):
@@ -430,7 +433,7 @@ class NationalObjective(models.Model):
             NationalObjective._pre_save_objective_code_on_create(instance)
 
     def get_all_objectives(self):
-        #we should use https://github.com/django-mptt/django-mptt/
+        # we should use https://github.com/django-mptt/django-mptt/
         r = []
         for ob in NationalObjective.objects.filter(parent=self):
             r.append(ob)
