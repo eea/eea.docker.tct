@@ -7,7 +7,7 @@ django-chosen==0.1
 django-rosetta==0.7.11
 django-staticfiles==1.2.1
 django-tinymce==2.3.0
-django-transmeta==0.7.3
+git+git://github.com/eaudeweb/django-transmeta.git@master
 django-webtest==1.7.8
 django-widget-tweaks==1.4.1
 Django==1.9.5
