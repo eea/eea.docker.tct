@@ -19,12 +19,6 @@ class Migration(migrations.Migration):
             name='AichiGoal',
             fields=[
                 ('code', models.CharField(max_length=1, primary_key=True, serialize=False)),
-                ('title_en', models.TextField(max_length=512, verbose_name=b'Title')),
-                ('title_fr', models.TextField(blank=True, max_length=512, null=True, verbose_name=b'Title')),
-                ('title_nl', models.TextField(blank=True, max_length=512, null=True, verbose_name=b'Title')),
-                ('description_en', tinymce.models.HTMLField(verbose_name=b'Description')),
-                ('description_fr', tinymce.models.HTMLField(blank=True, null=True, verbose_name=b'Description')),
-                ('description_nl', tinymce.models.HTMLField(blank=True, null=True, verbose_name=b'Description')),
             ],
             options={
                 'ordering': ['code'],
@@ -54,9 +48,6 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('code', models.CharField(max_length=16)),
-                ('description_en', models.TextField(verbose_name=b'Description')),
-                ('description_fr', models.TextField(blank=True, null=True, verbose_name=b'Description')),
-                ('description_nl', models.TextField(blank=True, null=True, verbose_name=b'Description')),
                 ('indicators', models.ManyToManyField(blank=True, related_name='relevant_target', to='nbsap.AichiIndicator')),
                 ('other_indicators', models.ManyToManyField(blank=True, related_name='other_targets', to='nbsap.AichiIndicator')),
             ],
@@ -69,12 +60,6 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('code', models.CharField(max_length=16)),
-                ('title_en', models.TextField(verbose_name=b'Title')),
-                ('title_fr', models.TextField(blank=True, null=True, verbose_name=b'Title')),
-                ('title_nl', models.TextField(blank=True, null=True, verbose_name=b'Title')),
-                ('description_en', models.TextField(verbose_name=b'Description')),
-                ('description_fr', models.TextField(blank=True, null=True, verbose_name=b'Description')),
-                ('description_nl', models.TextField(blank=True, null=True, verbose_name=b'Description')),
                 ('parent', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='children', to='nbsap.EuAction')),
             ],
             options={
@@ -97,9 +82,6 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('code', models.CharField(blank=True, max_length=25, null=True)),
-                ('title_en', models.TextField(max_length=512, verbose_name=b'Title')),
-                ('title_fr', models.TextField(blank=True, max_length=512, null=True, verbose_name=b'Title')),
-                ('title_nl', models.TextField(blank=True, max_length=512, null=True, verbose_name=b'Title')),
                 ('url', models.URLField(blank=True, null=True)),
                 ('indicator_type', models.CharField(blank=True, choices=[(b'sebi', b'SEBI'), (b'csi', b'CSI'), (b'aei', b'AEI')], max_length=4, verbose_name='Indicator type')),
                 ('parent', models.ManyToManyField(blank=True, related_name='parents', to='nbsap.EuIndicator')),
@@ -127,12 +109,6 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('code', models.CharField(max_length=16)),
-                ('title_en', models.TextField(max_length=512, verbose_name=b'Title')),
-                ('title_fr', models.TextField(blank=True, max_length=512, null=True, verbose_name=b'Title')),
-                ('title_nl', models.TextField(blank=True, max_length=512, null=True, verbose_name=b'Title')),
-                ('description_en', models.TextField(verbose_name=b'Description')),
-                ('description_fr', models.TextField(blank=True, null=True, verbose_name=b'Description')),
-                ('description_nl', models.TextField(blank=True, null=True, verbose_name=b'Description')),
                 ('actions', models.ManyToManyField(blank=True, related_name='target', to='nbsap.EuAction')),
                 ('indicators', models.ManyToManyField(blank=True, related_name='targets', to='nbsap.EuIndicator')),
                 ('other_indicators', models.ManyToManyField(blank=True, related_name='other_targets', to='nbsap.EuIndicator')),
@@ -156,12 +132,6 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('code', models.CharField(max_length=16)),
-                ('title_en', models.TextField(blank=True, max_length=512, verbose_name=b'Title')),
-                ('title_fr', models.TextField(blank=True, max_length=512, null=True, verbose_name=b'Title')),
-                ('title_nl', models.TextField(blank=True, max_length=512, null=True, verbose_name=b'Title')),
-                ('description_en', tinymce.models.HTMLField(verbose_name=b'Description')),
-                ('description_fr', tinymce.models.HTMLField(blank=True, null=True, verbose_name=b'Description')),
-                ('description_nl', tinymce.models.HTMLField(blank=True, null=True, verbose_name=b'Description')),
             ],
         ),
         migrations.CreateModel(
@@ -169,9 +139,6 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('code', models.CharField(blank=True, max_length=25, null=True)),
-                ('title_en', models.TextField(max_length=512, verbose_name=b'Title')),
-                ('title_fr', models.TextField(blank=True, max_length=512, null=True, verbose_name=b'Title')),
-                ('title_nl', models.TextField(blank=True, max_length=512, null=True, verbose_name=b'Title')),
                 ('url', models.URLField(blank=True, null=True)),
                 ('subindicators', models.ManyToManyField(blank=True, related_name='parents', to='nbsap.NationalIndicator')),
             ],
@@ -185,12 +152,6 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('code', models.CharField(max_length=16, unique=True)),
-                ('title_en', models.TextField(max_length=512, verbose_name=b'Title')),
-                ('title_fr', models.TextField(blank=True, max_length=512, null=True, verbose_name=b'Title')),
-                ('title_nl', models.TextField(blank=True, max_length=512, null=True, verbose_name=b'Title')),
-                ('description_en', tinymce.models.HTMLField(verbose_name=b'Description')),
-                ('description_fr', tinymce.models.HTMLField(blank=True, null=True, verbose_name=b'Description')),
-                ('description_nl', tinymce.models.HTMLField(blank=True, null=True, verbose_name=b'Description')),
                 ('actions', models.ManyToManyField(blank=True, related_name='objective', to='nbsap.NationalAction')),
                 ('nat_indicators', models.ManyToManyField(blank=True, related_name='nat_objectives', to='nbsap.NationalIndicator')),
                 ('other_nat_indicators', models.ManyToManyField(blank=True, related_name='other_nat_objectives', to='nbsap.NationalIndicator')),
@@ -223,12 +184,6 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('handle', models.CharField(max_length=32)),
-                ('title_en', models.CharField(max_length=128, verbose_name=b'Title')),
-                ('title_fr', models.CharField(blank=True, max_length=128, null=True, verbose_name=b'Title')),
-                ('title_nl', models.CharField(blank=True, max_length=128, null=True, verbose_name=b'Title')),
-                ('body_en', models.TextField(blank=True, verbose_name=b'Body')),
-                ('body_fr', models.TextField(blank=True, null=True, verbose_name=b'Body')),
-                ('body_nl', models.TextField(blank=True, null=True, verbose_name=b'Body')),
             ],
         ),
         migrations.CreateModel(

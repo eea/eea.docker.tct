@@ -18,3 +18,5 @@ CMD django-admin.py makemessages -a
 CMD django-admin.py compilemessages
 
 WORKDIR /nbsap
+CMD python manage.py migrate --run-syncdb
+CMD python manage.py load_fixtures
