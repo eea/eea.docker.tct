@@ -17,7 +17,9 @@ admin.site.register(NationalObjective)
 
 
 class EuAichiStrategyAdmin(admin.ModelAdmin):
-    list_display = ('eu_target', 'get_targets')
+    pass
+    # TODO
+    # list_display = ('eu_target', 'get_targets')
 admin.site.register(EuAichiStrategy, EuAichiStrategyAdmin)
 
 class EuIndicatorToAichiStrategyAdmin(admin.ModelAdmin):

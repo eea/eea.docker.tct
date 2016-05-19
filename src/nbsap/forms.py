@@ -673,7 +673,8 @@ class NationalIndicatorMapForm(forms.Form, ChoicesMixin):
 
 
 class EuAichiStrategyForm(forms.Form, ChoicesMixin):
-    eu_target = forms.ChoiceField()
+    eu_targets = chosenforms.ChosenMultipleChoiceField(
+        overlay="Select target...")
     aichi_targets = chosenforms.ChosenMultipleChoiceField(
         overlay="Select target...")
     other_aichi_targets = chosenforms.ChosenMultipleChoiceField(
@@ -744,8 +745,8 @@ class EuAichiStrategyForm(forms.Form, ChoicesMixin):
             strategy = self.strategy
         else:
             strategy = EuAichiStrategy()
-            strategy.eu_target = (EuTarget.objects
-                                  .get(pk=self.cleaned_data['eu_target']))
+            strategy.eu_targets = EuTarget.objects.filter(
+                pk__in=self.cleaned_data['eu_targets'])
             strategy.save()
 
         strategy.aichi_targets = (
@@ -756,12 +757,13 @@ class EuAichiStrategyForm(forms.Form, ChoicesMixin):
             AichiTarget.objects
             .filter(pk__in=self.cleaned_data['other_aichi_targets'])
         )
-        strategy.eu_target.indicators = (
-            EuIndicator.objects
-            .filter(pk__in=self.cleaned_data['eu_indicators'])
-        )
-        strategy.eu_target.other_indicators = (
-            EuIndicator.objects
-            .filter(pk__in=self.cleaned_data['other_eu_indicators'])
-        )
+        # TODO Find a way here
+        # strategy.eu_target.indicators = (
+        #     EuIndicator.objects
+        #     .filter(pk__in=self.cleaned_data['eu_indicators'])
+        # )
+        # strategy.eu_target.other_indicators = (
+        #     EuIndicator.objects
+        #     .filter(pk__in=self.cleaned_data['other_eu_indicators'])
+        # )
         strategy.save()
