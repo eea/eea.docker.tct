@@ -719,7 +719,7 @@ class EuAichiStrategyForm(forms.Form, ChoicesMixin):
         else:
             existing_strategies = (EuAichiStrategy.objects
                                    .values_list('eu_target', flat=True))
-            self.fields['eu_target'].choices = self._get_choices(
+            self.fields['eu_targets'].choices = self._get_choices(
                 'Target',
                 EuTarget.objects.exclude(id__in=existing_strategies).all(),
                 ['pk']
@@ -741,14 +741,11 @@ class EuAichiStrategyForm(forms.Form, ChoicesMixin):
         return cleaned_data
 
     def save(self):
-        if self.strategy:
-            strategy = self.strategy
-        else:
-            strategy = EuAichiStrategy()
-            strategy.eu_targets = EuTarget.objects.filter(
-                pk__in=self.cleaned_data['eu_targets'])
-            strategy.save()
-
+        strategy = self.strategy or EuAichiStrategy.objects.create()
+        eu_targets = EuTarget.objects.filter(
+            pk__in=self.cleaned_data['eu_targets'])
+        strategy.eu_target = eu_targets.first()
+        strategy.eu_targets = eu_targets
         strategy.aichi_targets = (
             AichiTarget.objects
             .filter(pk__in=self.cleaned_data['aichi_targets'])
@@ -757,13 +754,12 @@ class EuAichiStrategyForm(forms.Form, ChoicesMixin):
             AichiTarget.objects
             .filter(pk__in=self.cleaned_data['other_aichi_targets'])
         )
-        # TODO Find a way here
-        # strategy.eu_target.indicators = (
-        #     EuIndicator.objects
-        #     .filter(pk__in=self.cleaned_data['eu_indicators'])
-        # )
-        # strategy.eu_target.other_indicators = (
-        #     EuIndicator.objects
-        #     .filter(pk__in=self.cleaned_data['other_eu_indicators'])
-        # )
+        indicators = EuIndicator.objects.filter(
+            pk__in=self.cleaned_data['eu_indicators'])
+        other_indicators = EuIndicator.objects.filter(
+            pk__in=self.cleaned_data['other_eu_indicators'])
+        for eu_target in strategy.eu_targets.all():
+            eu_target.indicators = indicators
+            eu_target.other_indicators = other_indicators
+            eu_target.save()
         strategy.save()
