@@ -605,7 +605,7 @@ class EuIndicatorToAichiStrategy(models.Model):
 
 class EuAichiStrategy(models.Model):
     # TODO should be remove after migration
-    _eu_target = models.ForeignKey(EuTarget,
+    eu_target = models.ForeignKey(EuTarget,
                                   verbose_name="EU Biodiversity Target")
     eu_targets = models.ManyToManyField(
         EuTarget,
