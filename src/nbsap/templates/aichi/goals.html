@@ -79,13 +79,13 @@
       {% if target.eu_aichi_strategy.count %}
         <ul>
           {% for strategy in target.eu_aichi_strategy.all %}
-            {% with strategy.eu_target as eu_target %}
+            {% for eu_target in strategy.eu_targets.all %}
             <li>
               <a href="{% url 'eu_targets' code=eu_target.code %}" title="{{ eu_target.code }}">
                 {% trans "EU Target" %} {{ eu_target.code }}: {{ eu_target.title }}
               </a>
             </li>
-            {% endwith %}
+            {% endfor %}
           {% endfor %}
         </ul>
       {% else %}
@@ -98,13 +98,13 @@
       {% if target.eu_other_aichi_strategy.count %}
         <ul>
           {% for strategy in target.eu_other_aichi_strategy.all %}
-            {% with strategy.eu_target as eu_target %}
+            {% for eu_target in strategy.eu_targets.all %}
             <li>
               <a href="{% url 'eu_targets' code=eu_target.code %}" title="{{ eu_target.code }}">
                 {% trans "EU Target" %} {{ eu_target.code }}: {{ eu_target.title }}
               </a>
             </li>
-            {% endwith %}
+            {% endfor %}
           {% endfor %}
         </ul>
       {% else %}

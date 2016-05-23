@@ -58,10 +58,10 @@
           </form>
         </td>
         <td>
-          {{ strategy.eu_target.get_indicators_short }}
+          {{ strategy.eu_targets.first.get_indicators_short }}
         </td>
         <td>
-          {{ strategy.eu_target.get_other_indicators_short }}
+          {{ strategy.eu_targets.first.get_other_indicators_short }}
         </td>
       </tr>
     {% endfor %}
