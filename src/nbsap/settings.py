@@ -121,9 +121,9 @@ INSTALLED_APPS = (
     'tinymce',
     'nbsap',
     'chosen',
-    'raven.contrib.django',
     'gunicorn',
     'rosetta',
+    'graypy',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -155,16 +155,19 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'simple'
         },
+        'graypy': {
+            'level': 'WARNING',
+            'class': 'graypy.GELFHandler',
+            'host': 'logcentral.eea.europa.eu',
+            'port': 12201,
+            'facility': 'tct',
+        },
+
     },
     'loggers': {
         'django.request': {
-            'handlers': ['mail_admins'],
+            'handlers': ['mail_admins', 'graypy'],
             'level': 'ERROR',
-            'propagate': True,
-        },
-        'sentry.errors': {
-            'handlers': ['console'],
-            'level': 'INFO',
             'propagate': True,
         },
     }
@@ -206,17 +209,19 @@ NOSE_ARGS = [
     '--cover-package=nbsap',
 ]
 
+FACILITY = 'tct'
+
+
 try:
     from local_settings import *
 except ImportError:
     pass
+
+
+LOGGING['handlers']['graypy']['facility'] = FACILITY
 
 if 'test' in sys.argv:
     try:
         from test_settings import *
     except ImportError:
         pass
-
-# Override
-if not DEBUG:
-    SENTRY_DSN = 'http://e58d6f13a36d419d81c1d1e44e5e2519:d67d512c5f4343c0aebcdca30bc64871@sentry.mojito.edw.ro/16'
