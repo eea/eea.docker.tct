@@ -209,7 +209,11 @@ urlpatterns = [
 
     url(r'^administration/objectives/(?P<objective>[\w\-]+)/actions/add',
             views.edit_national_action,
-             name='edit_national_action'),
+            name='edit_national_action'),
+
+    url(r'^administration/objectives/(?P<objective>[\w\-]+)/actions/(?P<parent>[\w\-]+)/add',
+            views.edit_national_action,
+            name='edit_national_action'),
 
     url(r'^administration/objectives/(?P<objective>[\w\-]+)/actions/(?P<pk>[\w\-]+)/edit',
             views.edit_national_action,

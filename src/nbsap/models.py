@@ -162,6 +162,8 @@ class AichiGoal(models.Model):
 class NationalAction(models.Model):
     __metaclass__ = Translatable
 
+    parent = models.ForeignKey('self', null=True, blank=True,
+                               related_name='children')
     code = models.CharField(max_length=16)
     title = models.TextField(verbose_name="Title", max_length=512, blank=True)
     description = tinymce.models.HTMLField(verbose_name="Description")

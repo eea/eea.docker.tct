@@ -18,6 +18,10 @@
          <i class="glyphicon glyphicon-arrow-left"></i> {% trans "Back" %}</a>
 
       <a class="btn btn-default edit"
+         href="{% url 'edit_national_action' objective=objective.pk parent=action.pk %}">
+         {% trans "Add sub-action" %}</a>
+
+      <a class="btn btn-default edit"
          href="{% url 'edit_national_action' objective=objective.pk pk=action.pk %}">{% trans "Edit" %}</a>
 
       <button type="submit" class="btn btn-danger edit"
