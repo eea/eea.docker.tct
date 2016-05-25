@@ -112,6 +112,7 @@ class NationalObjectiveEditForm(NationalObjectiveForm):
 
 
 class NationalActionForm(forms.Form):
+
     language = forms.ChoiceField(choices=settings.LANGUAGES)
     title = forms.CharField(widget=widgets.Textarea, required=False)
     description = TextCleanedHtml(
@@ -120,6 +121,7 @@ class NationalActionForm(forms.Form):
     def __init__(self, *args, **kwargs):
         self.action = kwargs.pop('action', None)
         self.objective = kwargs.pop('objective')
+        self.parent_action = kwargs.pop('parent_action', None)
         lang = kwargs.pop('lang', None)
 
         super(NationalActionForm, self).__init__(*args, **kwargs)
@@ -140,7 +142,8 @@ class NationalActionForm(forms.Form):
         setattr(action, 'title_%s' % lang, title)
         setattr(action, 'description_%s' % lang, description)
         setattr(action, 'code', self.objective.code)
-
+        if self.parent_action:
+            action.parent = self.parent_action
         action.save()
         action.objective = [self.objective]
         action.save()

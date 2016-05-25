@@ -125,8 +125,12 @@ def implementation_page(request):
 @auth_required
 def view_national_objective(request, pk):
     objective = get_object_or_404(models.NationalObjective, pk=pk)
-    return render(request, 'manager/objectives/view_national_objective.html',
-                  {'objective': objective})
+    actions = objective.actions.filter(parent=None)
+    return render(
+        request,
+        'manager/objectives/view_national_objective.html',
+        {'objective': objective, 'actions': actions}
+    )
 
 
 @auth_required

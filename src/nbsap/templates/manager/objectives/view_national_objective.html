@@ -67,7 +67,7 @@
             {{ subobj.title|default:subobj.code }}</a>
           </td>
           <td>
-            <a href="{% url 'view_national_objective' pk=subobj.pk %}"
+            <a href="{% url 'edit_national_objective' pk=subobj.pk %}"
                class="btn btn-xs btn-default">Edit</a>
           </td>
         </tr>
@@ -91,8 +91,7 @@
       </thead>
 
       <tbody>
-      {% if objective.actions.all %}
-      {% for action in objective.actions.all %}
+      {% for action in actions %}
         <tr>
           <td>{{ action.code }}</td>
           <td>
@@ -102,12 +101,11 @@
             {% if action.title %}({{ action.title }}){% endif %}</a>
           </td>
         </tr>
-      {% endfor %}
-      {% else %}
-        <tr>
+      {% empty %}
+         <tr>
           <td colspan="2">{% trans "No actions found" %}.</td>
-        </tr>
-      {% endif %}
+         </tr>
+      {% endfor %}
       </tbody>
 
     </table>

@@ -172,3 +172,56 @@ class NationalActionsTest(BaseWebTest):
                     'pk': 1,
                 }
             )
+
+    def test_add_national_subaction(self):
+        nat_act = NationalActionFactory()
+        nat_obj = NationalObjectiveFactory(actions=(nat_act,))
+        nat_subact = NationalActionFactory.build()
+
+        url = reverse('edit_national_action',
+                      kwargs={'objective': nat_obj.pk,
+                              'parent': nat_act.pk})
+        data = {
+            'language': 'en',
+            'title': nat_act.title_default,
+            'description': nat_act.description_default,
+        }
+        resp = self.app.get(url, user='staff')
+        form = resp.forms['national-action-add']
+        self.populate_fields(form, data)
+        form.submit()
+        self.assertObjectInDatabase(
+            'NationalAction',
+            {
+                'parent': nat_act.pk,
+                'title_default': nat_act.title_default,
+                'description_default__contains': nat_act.description_default,
+            }
+        )
+
+    def test_edit_national_subaction(self):
+        nat_act = NationalActionFactory()
+        nat_subact = NationalActionFactory(parent=nat_act)
+        nat_obj = NationalObjectiveFactory(
+            actions=(nat_act, nat_subact))
+
+        url = reverse('edit_national_action',
+                      kwargs={'objective': nat_obj.pk,
+                              'pk': nat_subact.pk})
+        data = {
+            'language': 'en',
+            'title': nat_act.title_default,
+            'description': nat_act.description_default,
+        }
+        resp = self.app.get(url, user='staff')
+        form = resp.forms['national-action-edit']
+        self.populate_fields(form, data)
+        form.submit()
+        self.assertObjectInDatabase(
+            'NationalAction',
+            {
+                'parent': nat_act.pk,
+                'title_default': nat_act.title_default,
+                'description_default__contains': nat_act.description_default,
+            }
+        )
