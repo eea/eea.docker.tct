@@ -48,3 +48,7 @@ def crashme(request):
         raise RuntimeError("Crashing as requested")
     else:
         return HttpResponse("Must be administrator")
+
+
+def pingme(request):
+    return HttpResponse('OK')

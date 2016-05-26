@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^$', views.goals, {'code': 'a'}, name='goals'),
     url(r'^goals/(?P<code>[\w\-]+)$', views.goals, name='goals'),
     url(r'^crashme$', views.crashme, name='crashme'),
+    url(r'^ping/me$', views.pingme, name='pingme'),
 
     url(r'^implementation$', views.implementation, name='implementation'),
     url(r'^implementation/intro$', views.implementation_page, name='implementation_page'),
