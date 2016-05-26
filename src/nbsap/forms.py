@@ -676,7 +676,8 @@ class NationalIndicatorMapForm(forms.Form, ChoicesMixin):
 
 
 class EuAichiStrategyForm(forms.Form, ChoicesMixin):
-    eu_target = forms.ChoiceField()
+    eu_targets = chosenforms.ChosenMultipleChoiceField(
+        overlay="Select target...")
     aichi_targets = chosenforms.ChosenMultipleChoiceField(
         overlay="Select target...")
     other_aichi_targets = chosenforms.ChosenMultipleChoiceField(
@@ -710,18 +711,20 @@ class EuAichiStrategyForm(forms.Form, ChoicesMixin):
                 .values_list('pk', flat=True)
             )
             self.fields['eu_indicators'].initial = (
-                self.strategy.eu_target.indicators
+                self.strategy.eu_targets.first().indicators
                 .values_list('pk', flat=True)
             )
             self.fields['other_eu_indicators'].initial = (
-                self.strategy.eu_target.other_indicators
+                self.strategy.eu_targets.first().other_indicators
                 .values_list('pk', flat=True)
             )
-            del self.fields['eu_target']
+            del self.fields['eu_targets']
         else:
-            existing_strategies = (EuAichiStrategy.objects
-                                   .values_list('eu_target', flat=True))
-            self.fields['eu_target'].choices = self._get_choices(
+            existing_strategies = (
+                EuAichiStrategy.objects.values_list(
+                    'eu_targets__id', flat=True)
+            )
+            self.fields['eu_targets'].choices = self._get_choices(
                 'Target',
                 EuTarget.objects.exclude(id__in=existing_strategies).all(),
                 ['pk']
@@ -743,13 +746,12 @@ class EuAichiStrategyForm(forms.Form, ChoicesMixin):
         return cleaned_data
 
     def save(self):
-        if self.strategy:
-            strategy = self.strategy
-        else:
-            strategy = EuAichiStrategy()
-            strategy.eu_target = (EuTarget.objects
-                                  .get(pk=self.cleaned_data['eu_target']))
-            strategy.save()
+        strategy = self.strategy or EuAichiStrategy.objects.create()
+        if 'eu_targets' in self.cleaned_data:
+            eu_targets = EuTarget.objects.filter(
+                pk__in=self.cleaned_data['eu_targets'])
+            strategy.eu_target = eu_targets.first()
+            strategy.eu_targets = eu_targets
 
         strategy.aichi_targets = (
             AichiTarget.objects
@@ -759,12 +761,12 @@ class EuAichiStrategyForm(forms.Form, ChoicesMixin):
             AichiTarget.objects
             .filter(pk__in=self.cleaned_data['other_aichi_targets'])
         )
-        strategy.eu_target.indicators = (
-            EuIndicator.objects
-            .filter(pk__in=self.cleaned_data['eu_indicators'])
-        )
-        strategy.eu_target.other_indicators = (
-            EuIndicator.objects
-            .filter(pk__in=self.cleaned_data['other_eu_indicators'])
-        )
+        indicators = EuIndicator.objects.filter(
+            pk__in=self.cleaned_data['eu_indicators'])
+        other_indicators = EuIndicator.objects.filter(
+            pk__in=self.cleaned_data['other_eu_indicators'])
+        for eu_target in strategy.eu_targets.all():
+            eu_target.indicators = indicators
+            eu_target.other_indicators = other_indicators
+            eu_target.save()
         strategy.save()

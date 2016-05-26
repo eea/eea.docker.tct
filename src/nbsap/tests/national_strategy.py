@@ -37,10 +37,8 @@ class NationalStrategyTest(BaseWebTest):
             'aichi_goal': aichi_goal.pk,
             'aichi_targets': [aichi_target.pk],
         }
-        resp = self.app.get(reverse('edit_national_strategy'), user='staff')
-        form = resp.forms['national-strategy-add']
-        self.populate_fields(form, data)
-        form.submit().follow()
+        resp = self.app.post(reverse('edit_national_strategy'), data,
+                             user='staff')
         obj = self.assertObjectInDatabase(
             'NationalStrategy',
             {

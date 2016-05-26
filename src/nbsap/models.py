@@ -606,16 +606,28 @@ class EuIndicatorToAichiStrategy(models.Model):
 
 
 class EuAichiStrategy(models.Model):
-    eu_target = models.ForeignKey(EuTarget,
-                                  verbose_name="EU Biodiversity Target",
-                                  related_name="eu_aichi_strategy")
-    aichi_targets = models.ManyToManyField(AichiTarget,
-                                           verbose_name="Aichi targets",
-                                           related_name="eu_aichi_strategy")
+    # TODO should be remove after migration
+    eu_target = models.ForeignKey(
+        EuTarget,
+        verbose_name="EU Biodiversity Target",
+        null=True,
+        blank=True)
+
+    eu_targets = models.ManyToManyField(
+        EuTarget,
+        verbose_name="EU Biodiversity Target",
+        related_name="eu_aichi_strategy")
+
+    aichi_targets = models.ManyToManyField(
+        AichiTarget,
+        verbose_name="Aichi targets",
+        related_name="eu_aichi_strategy")
+
     other_aichi_targets = models.ManyToManyField(
-        AichiTarget, verbose_name="Other Aichi targets",
-        related_name="eu_other_aichi_strategy", blank=True,
-    )
+        AichiTarget,
+        verbose_name="Other Aichi targets",
+        related_name="eu_other_aichi_strategy",
+        blank=True)
 
     def get_targets(self):
         return ', '.join([obj.code for obj in self.aichi_targets.all()])
@@ -624,7 +636,7 @@ class EuAichiStrategy(models.Model):
 
     class Meta:
         verbose_name_plural = ' Mappings: EU targets to Aichi'
-        ordering = ['eu_target']
+        ordering = ('eu_target',)
 
 
 class NationalStrategy(models.Model):
