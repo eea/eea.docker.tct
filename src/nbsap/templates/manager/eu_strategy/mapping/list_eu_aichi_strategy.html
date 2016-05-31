@@ -18,6 +18,8 @@
        href="{% url 'edit_eu_aichi_strategy' %}">{% trans "Add Mapping" %}</a>
   </div>
 
+
+  {% if strategies %}
   <table class="table objectives_listing ">
 
     <thead>
@@ -68,6 +70,9 @@
     </tbody>
 
   </table>
+  {% else %}
+  <p><em>No mappings</em></p>
+  {% endif %}
 {% endblock %}
 
 

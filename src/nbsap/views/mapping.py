@@ -45,9 +45,9 @@ def delete_national_strategy(request, strategy=None):
 @auth_required
 def list_national_strategy(request):
     strategies = models.NationalStrategy.objects.all()
-    return render(request, 'manager/nat_strategy/mapping/list_national_strategy.html', {
-        'strategies': strategies
-    })
+    return render(request,
+        'manager/nat_strategy/mapping/list_national_strategy.html',
+        {'strategies': strategies})
 
 
 @auth_required

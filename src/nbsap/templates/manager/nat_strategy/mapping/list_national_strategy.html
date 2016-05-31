@@ -23,7 +23,7 @@
        href="{% url 'edit_national_strategy' %}">{% trans "Add Mapping" %}</a>
   </div>
 
-
+  {% if  strategies %}
   <table class="table objectives_listing ">
 
     <thead>
@@ -98,6 +98,8 @@
     </tbody>
 
   </table>
+  {% endif %}
+
 {% endblock %}
 
 
