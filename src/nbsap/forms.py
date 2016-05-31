@@ -18,7 +18,8 @@ from nbsap.models import (
 )
 from nbsap.utils import remove_tags, RE_CODE, RE_DIGIT_CODE, RE_ACTION_CODE
 
-MAPPING_ERROR = 'Cannot use the same {} Target for both Most relevant and Other'
+MAPPING_ERROR = 'Cannot use the same {} Target for both Most relevant ' \
+                'and Other'
 
 
 def validate_code(value):
@@ -732,10 +733,10 @@ class EuAichiStrategyForm(forms.Form, ChoicesMixin):
 
     def clean(self):
         cleaned_data = super(EuAichiStrategyForm, self).clean()
-        aichi_targets = cleaned_data['aichi_targets']
-        other_aichi_targets = cleaned_data['other_aichi_targets']
-        eu_indicators = cleaned_data['eu_indicators']
-        other_eu_indicators = cleaned_data['other_eu_indicators']
+        aichi_targets = cleaned_data.get('aichi_targets', [])
+        other_aichi_targets = cleaned_data.get('other_aichi_targets', [])
+        eu_indicators = cleaned_data.get('eu_indicators', [])
+        other_eu_indicators = cleaned_data.get('other_eu_indicators', [])
 
         if set(aichi_targets) & set(other_aichi_targets):
             raise ValidationError(_(MAPPING_ERROR.format('AICHI')))

@@ -15,7 +15,6 @@ from auth import auth_required
 def edit_national_strategy(request, pk=None):
     if pk:
         strategy = get_object_or_404(models.NationalStrategy, pk=pk)
-        import pdb;pdb.set_trace()
         template = 'manager/nat_strategy/mapping/edit_national_strategy.html'
     else:
         strategy = None
