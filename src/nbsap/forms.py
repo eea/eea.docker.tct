@@ -17,6 +17,8 @@ from nbsap.models import (
     EuAichiStrategy, NationalIndicator
 )
 from nbsap.utils import remove_tags, RE_CODE, RE_DIGIT_CODE, RE_ACTION_CODE
+from nbsap.utils import generate_code
+
 
 MAPPING_ERROR = 'Cannot use the same {} Target for both Most relevant ' \
                 'and Other'
@@ -142,7 +144,9 @@ class NationalActionForm(forms.Form):
 
         setattr(action, 'title_%s' % lang, title)
         setattr(action, 'description_%s' % lang, description)
-        setattr(action, 'code', self.objective.code)
+
+        action.code = generate_code(NationalAction, action,
+                                    prefix=self.objective.code)
         if self.parent_action:
             action.parent = self.parent_action
         action.save()

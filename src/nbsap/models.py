@@ -1,12 +1,14 @@
+from django.conf import settings
 from django.db import models
 from django.db.models.signals import pre_save
 from django.utils.safestring import mark_safe
-from django.conf import settings
-from transmeta import TransMeta
-import tinymce.models
 from django.utils.translation import ugettext_lazy as _
+from transmeta import TransMeta
+
+import tinymce.models
 
 from nbsap.utils import RE_ACTION_CODE
+from nbsap.utils import generate_code
 
 
 def getter_for_default_language(field_name):
@@ -372,36 +374,13 @@ class NationalObjective(models.Model):
     def __unicode__(self):
         return self.title
 
-    @staticmethod
-    def _pre_save_objective_code_on_create(instance):
+    @classmethod
+    def _pre_save_objective_code_on_create(cls, instance):
         """Logic executed before saving a new Objective instance.
 
         Set the next code for the objective.
         """
-        if instance.parent:
-            codes = [ob.code for ob in instance.parent.children.all() if ob]
-            # if parent objective has children the increment the last childen's
-            # code
-            if codes:
-                codes.sort(key=lambda x: [int(y) for y in x.split('.')])
-                parts = codes[-1].split('.')
-                parent_code = '.'.join(parts[:-1])
-                last_code = parts[-1]
-                instance.code = '{0}.{1}'.format(parent_code,
-                                                 int(last_code) + 1)
-            else:
-                instance.code = '{0}.1'.format(instance.parent.code)
-
-        else:
-            codes = [ob.code for ob in
-                     NationalObjective.objects.filter(parent=None).all()]
-            # if empty national strategy table - reinitialize code values
-            if len(codes) == 0:
-                codes = ['0']
-
-            codes.sort(key=lambda s: int(s))
-            last_code = codes[-1]
-            instance.code = '{0}'.format(int(last_code) + 1)
+        instance.code = generate_code(cls, instance)
 
     @staticmethod
     def _pre_save_objective_code_on_edit(instance):
