@@ -17,7 +17,7 @@ def remove_tags(html, tags=DENIED_TAGS):
     return html
 
 
-def generate_code(model, instance, prefix=None):
+def generate_code(model, instance):
     code = None
     if instance.parent:
         codes = [ob.code for ob in instance.parent.children.all() if ob]
@@ -31,7 +31,6 @@ def generate_code(model, instance, prefix=None):
             code = '{0}.{1}'.format(parent_code, int(last_code) + 1)
         else:
             code = '{0}.1'.format(instance.parent.code)
-
     else:
         codes = [ob.code for ob in model.objects.filter(parent=None).all()]
         # if empty national strategy table - reinitialize code values
@@ -42,6 +41,4 @@ def generate_code(model, instance, prefix=None):
         last_code = codes[-1]
         code = '{0}'.format(int(last_code) + 1)
 
-    if prefix:
-        code = '{}.{}'.format(prefix, code)
     return code

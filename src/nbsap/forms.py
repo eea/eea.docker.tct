@@ -145,10 +145,10 @@ class NationalActionForm(forms.Form):
         setattr(action, 'title_%s' % lang, title)
         setattr(action, 'description_%s' % lang, description)
 
-        action.code = generate_code(NationalAction, action,
-                                    prefix=self.objective.code)
         if self.parent_action:
             action.parent = self.parent_action
+        if not action.code:
+            action.code = generate_code(NationalAction, action)
         action.save()
         action.objective = [self.objective]
         action.save()

@@ -83,6 +83,42 @@ class NationalActionsTest(BaseWebTest):
             }
         )
 
+    def test_add_national_action_code(self):
+        nat_obj = NationalObjectiveFactory()
+        nat_act = NationalActionFactory.build()
+        url = reverse('edit_national_action', kwargs={'objective': nat_obj.pk})
+        data = {
+            'language': 'en',
+            'title': nat_act.title_default,
+            'description': nat_act.description_default,
+        }
+        resp = self.app.get(url, user='staff')
+        form = resp.forms['national-action-add']
+        self.populate_fields(form, data)
+        form.submit()
+        self.assertObjectInDatabase('NationalAction',
+                                    {'code': '1', 'parent': None})
+
+    def test_add_subnational_action_code(self):
+        nat_act = NationalActionFactory(code='1')
+        nat_obj = NationalObjectiveFactory(actions=(nat_act,))
+        nat_subact = NationalActionFactory.build()
+
+        url = reverse('edit_national_action',
+                      kwargs={'objective': nat_obj.pk,
+                              'parent': nat_act.pk})
+        data = {
+            'language': 'en',
+            'title': nat_subact.title_default,
+            'description': nat_subact.description_default,
+        }
+        resp = self.app.get(url, user='staff')
+        form = resp.forms['national-action-add']
+        self.populate_fields(form, data)
+        form.submit()
+        self.assertObjectInDatabase('NationalAction',
+                                    {'code': '1.1', 'parent': 1})
+
     def test_add_national_action_with_encodings(self):
         nat_obj = NationalObjectiveFactory()
         nat_act = NationalActionFactory.build()
