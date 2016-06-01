@@ -81,7 +81,7 @@ $(document).ready(function() {
 });
 
 $(function () {
-  $('.messages').delay(1000).fadeOut();
+  $('.messages').delay(5000).fadeOut();
 });
 
 function showDescription(name, textSelector, url, type, code, value) {
