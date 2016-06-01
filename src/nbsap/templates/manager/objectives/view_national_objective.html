@@ -37,9 +37,13 @@
     </form>
 
     {% if objective.children.exists %}
-      {% assign objective.children.count as total %}
-      {% blocktrans with total_pluralized=total|pluralize %}
-          <a href="#subobjectives">(<i class="glyphicon glyphicon-arrow-down"></i> {{ total }} sub-objective{{total_pluralized }})</a>
+      {% assign objective.children.count as total_objectives %}
+      {% assign actions.count as total_actions %}
+      {% blocktrans with total_pluralized=total_objectives|pluralize %}
+          <a href="#subobjectives">(<i class="glyphicon glyphicon-arrow-down"></i> {{ total_objectives }} sub-objective{{total_pluralized }})</a>
+      {% endblocktrans %}
+      {% blocktrans with total_pluralized=total_actions|pluralize %}
+          <a href="#actions">(<i class="glyphicon glyphicon-arrow-down"></i> {{ total_actions }} action{{total_pluralized }})</a>
       {% endblocktrans %}
     {% endif %}
   </div>
@@ -57,7 +61,6 @@
       </thead>
 
       <tbody>
-      {% if objective.children.all %}
       {% for subobj in objective.children.all %}
         <tr>
           <td>{{ subobj.code }}</td>
@@ -71,18 +74,17 @@
                class="btn btn-xs btn-default">Edit</a>
           </td>
         </tr>
-      {% endfor %}
-      {% else %}
+      {% empty %}
         <tr>
           <td colspan="2">{% trans "No objectives" %}</td>
         </tr>
-      {% endif %}
+      {% endfor %}
       </tbody>
 
     </table>
   </div>
 
-  <div class="property_list">
+  <div id="actions" class="property_list">
     <table class="table table-striped minimalist">
 
       <thead>
