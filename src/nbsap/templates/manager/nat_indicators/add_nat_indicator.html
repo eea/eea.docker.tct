@@ -46,6 +46,12 @@
           </div>
 
           <div class="form-group">
+            <label for="title">{% trans "Category" %}</label>
+            {{ form.category }}
+            {{ form.category.errors }}
+          </div>
+
+          <div class="form-group">
             <label for="title">{% trans "Description" %}</label>
             {{ form.description }}
             {{ form.description.errors }}

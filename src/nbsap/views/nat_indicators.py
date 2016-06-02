@@ -19,10 +19,16 @@ def nat_indicators(request):
 
 @auth_required
 def list_nat_indicators(request):
-    indicators = models.NationalIndicator.objects.filter(
-        parents=None).all().order_by('code')
+    category = request.GET.get('category', models.NationalIndicator.HEADLINE)
+    indicators = (
+        models.NationalIndicator.objects.filter(
+            parents=None, category=category)
+        .all()
+        .order_by('code')
+    )
     return render(request, 'manager/nat_indicators/list_nat_indicators.html', {
         'indicators': indicators,
+        'category': category,
     })
 
 
@@ -46,6 +52,7 @@ def edit_nat_indicator(request, pk=None):
         form_cls = NationalIndicatorForm
 
     lang = request.GET.get('lang', request.LANGUAGE_CODE)
+    category = request.GET.get('category', models.NationalIndicator.HEADLINE)
 
     if request.method == 'POST':
         form = form_cls(request.POST, indicator=indicator)
@@ -58,11 +65,13 @@ def edit_nat_indicator(request, pk=None):
                                  _('Indicator successfully added.') + "")
 
             if not indicator:
-                return redirect('list_nat_indicators')
+                response = redirect('list_nat_indicators')
+                response['Location'] += '?category=' + category
+                return response
             else:
                 return redirect('view_nat_indicator', pk=indicator.pk)
     else:
-        form = form_cls(indicator=indicator, lang=lang)
+        form = form_cls(indicator=indicator, lang=lang, category=category)
     return render(request, template, {
         'form': form,
         'indicator': indicator,

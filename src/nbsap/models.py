@@ -312,7 +312,15 @@ class EuIndicator(BaseIndicator):
 
 
 class NationalIndicator(BaseIndicator):
+
     __metaclass__ = Translatable
+
+    HEADLINE = 'headline'
+    OTHER = 'other'
+    CATEGORIES = (
+        (HEADLINE, 'Headline indicators'),
+        (OTHER, 'Other indicators'),
+    )
 
     code = models.CharField(max_length=25,
                             null=True,
@@ -323,11 +331,13 @@ class NationalIndicator(BaseIndicator):
     description = tinymce.models.HTMLField(verbose_name="Description",
                                            blank=True)
 
-    url = models.URLField(null=True,
-                          blank=True)
+    url = models.URLField(null=True, blank=True)
+
     subindicators = models.ManyToManyField('self', blank=True,
                                            symmetrical=False,
                                            related_name='parents')
+
+    category = models.CharField(max_length=32, choices=CATEGORIES)
 
     def __unicode__(self):
         return u'{0}: {1}'.format(self.code, self.title)

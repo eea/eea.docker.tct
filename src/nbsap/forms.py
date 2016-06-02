@@ -495,17 +495,20 @@ class EuIndicatorForm(forms.Form):
 
 
 class NationalIndicatorForm(forms.Form):
+
     language = forms.ChoiceField(choices=settings.LANGUAGES)
     title = forms.CharField(widget=widgets.Textarea, required=True)
     description = TextCleanedHtml(
         widget=TinyMCE(attrs={'cols': 80, 'rows': 25}),
         required=False)
     code = forms.CharField(widget=widgets.Textarea, required=True)
+    category = forms.ChoiceField(choices=NationalIndicator.CATEGORIES)
     url = forms.CharField(required=False)
 
     def __init__(self, *args, **kwargs):
         self.indicator = kwargs.pop('indicator', None)
         lang = kwargs.pop('lang', None)
+        category = kwargs.pop('category', NationalIndicator.HEADLINE)
 
         super(NationalIndicatorForm, self).__init__(*args, **kwargs)
 
@@ -515,9 +518,12 @@ class NationalIndicatorForm(forms.Form):
                                   'description_%s' % lang, None)
             self.fields['title'].initial = title
             self.fields['description'].initial = description
+            self.fields['category'].initial = self.indicator.category
             self.fields['url'].initial = self.indicator.url
             if 'code' in self.fields:
                 self.fields['code'].initial = self.indicator.code
+        else:
+            self.fields['category'].initial = category
 
         self.fields['language'].initial = lang
 
@@ -538,15 +544,15 @@ class NationalIndicatorForm(forms.Form):
         title = self.cleaned_data['title']
         description = self.cleaned_data['description']
         code = self.cleaned_data.get('code', None)
+        category = self.cleaned_data['category']
 
         setattr(indicator, 'title_%s' % lang, title)
         setattr(indicator, 'description_%s' % lang, description)
         indicator.url = self.cleaned_data['url']
-
+        indicator.category = category
         if code:
             indicator.code = code
         indicator.save()
-
         return indicator
 
 

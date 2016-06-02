@@ -16,12 +16,21 @@
   <h1 class="page-title">{% trans "National Indicators" %}</h1>
   <h1>{% trans "List National Indicators" %}</h1>
 
+  <ul class="nav nav-tabs">
+    <li class="{% if category == 'headline' %}active{% endif %}">
+      <a href="{% url 'list_nat_indicators' %}?category=headline">Headline indicators</a>
+    </li>
+    <li class="{% if category == 'other' %}active{% endif %}">
+      <a href="{% url 'list_nat_indicators' %}?category=other">Other indicators</a></li>
+</ul>
+
   <div class="action-bar">
     <a class="btn btn-success add"
-       href="{% url 'edit_nat_indicator' %}">{% trans "Add indicator" %}
+       href="{% url 'edit_nat_indicator' %}?category={{ category }}">{% trans "Add indicator" %}
     </a>
   </div>
 
+  {% if indicators %}
   <table class="table">
 
     <thead>
@@ -54,8 +63,11 @@
       </tr>
     {% endfor %}
     </tbody>
-
   </table>
+  {% else %}
+    <p><em>No indicators found.</em></p>
+  {% endif %}
+
 {% endblock %}
 
 {% block scripts %}
