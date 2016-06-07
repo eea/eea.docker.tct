@@ -98,8 +98,10 @@ def edit_eu_strategy_target(request, pk=None, parent=None):
                 messages.success(request, _('Saved changes') + "")
             else:
                 messages.success(request, _('Target successfully added.'))
-
-            return redirect('view_eu_strategy_target', pk=target.pk)
+            if target:
+                return redirect('view_eu_strategy_target', pk=target.pk)
+            else:
+                return redirect('list_eu_targets')
     else:
         form = FormClass(target=target, lang=lang, parent_target=parent_target)
     return render(request, template, {
