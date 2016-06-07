@@ -507,15 +507,9 @@ class EuTarget(models.Model):
             verbose_name="National objectives",
             related_name="eu_targets")
 
-    @staticmethod
-    def _pre_save_target_code_on_create(instance):
-        codes = [ob.code for ob in EuTarget.objects.filter().all()]
-        if len(codes) == 0:
-            codes = ['0']
-
-        codes.sort(key=lambda s: int(s))
-        last_code = codes[-1]
-        instance.code = '{0}'.format(int(last_code) + 1)
+    @classmethod
+    def _pre_save_target_code_on_create(cls, instance):
+        instance.code = generate_code(cls, instance)
 
     @staticmethod
     def _pre_save_target_code_on_edit(instance):

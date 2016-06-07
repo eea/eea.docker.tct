@@ -100,6 +100,10 @@ urlpatterns = [
             views.list_eu_targets,
             name='list_eu_targets'),
 
+    url(r'^administration/targets/(?P<parent>[\w\-]+)/add$',
+        views.edit_eu_strategy_target,
+        name='edit_eu_target_with_parent'),
+
     url(r'^administration/targets/add/',
         views.edit_eu_strategy_target,
         name='edit_eu_target'),

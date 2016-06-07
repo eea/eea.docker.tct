@@ -165,6 +165,7 @@ class EuTargetForm(forms.Form):
     def __init__(self, *args, **kwargs):
         self.target = kwargs.pop('target', None)
         lang = kwargs.pop('lang', None)
+        self.parent_target = kwargs.pop('parent_target', None)
 
         super(EuTargetForm, self).__init__(*args, **kwargs)
 
@@ -188,17 +189,17 @@ class EuTargetForm(forms.Form):
 
         setattr(target, 'title_%s' % lang, title)
         setattr(target, 'description_%s' % lang, description)
-
+        if self.parent_target:
+            target.parent = self.parent_target
         if code:
             target.code = code
         target.save()
-
         return target
 
 
 class EuTargetEditForm(EuTargetForm):
     code = forms.CharField(
-        max_length=16, validators=[validate_simple_digit_code])
+        max_length=16, validators=[validate_code])
 
     def clean_code(self):
         code = self.cleaned_data['code']

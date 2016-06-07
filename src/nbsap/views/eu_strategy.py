@@ -56,7 +56,7 @@ def get_actions_for_target(request, pk=None):
 
 @auth_required
 def list_eu_targets(request):
-    targets = models.EuTarget.objects.all()
+    targets = models.EuTarget.objects.filter(parent=None)
     return render(request, 'manager/eu_strategy/list_eu_targets.html', {
         'targets': targets,
     })
@@ -72,7 +72,12 @@ def view_eu_strategy_target(request, pk):
 
 
 @auth_required
-def edit_eu_strategy_target(request, pk=None):
+def edit_eu_strategy_target(request, pk=None, parent=None):
+    if parent:
+        parent_target = get_object_or_404(models.EuTarget, pk=parent)
+    else:
+        parent_target = None
+
     if pk:
         target = get_object_or_404(models.EuTarget, pk=pk)
         template = 'manager/eu_strategy/edit_eu_strategy_targets.html'
@@ -85,18 +90,18 @@ def edit_eu_strategy_target(request, pk=None):
     lang = request.GET.get('lang', request.LANGUAGE_CODE)
 
     if request.method == 'POST':
-        form = FormClass(request.POST, target=target)
+        form = FormClass(
+            request.POST, target=target, parent_target=parent_target)
         if form.is_valid():
             form.save()
             if pk:
                 messages.success(request, _('Saved changes') + "")
             else:
-                messages.success(request,
-                                 _('Objective successfully added.') + "")
+                messages.success(request, _('Target successfully added.'))
 
-            return redirect('list_eu_targets')
+            return redirect('view_eu_strategy_target', pk=target.pk)
     else:
-        form = FormClass(target=target, lang=lang)
+        form = FormClass(target=target, lang=lang, parent_target=parent_target)
     return render(request, template, {
         'form': form,
         'target': target,
