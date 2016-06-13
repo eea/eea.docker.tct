@@ -118,3 +118,11 @@ class NationalIndicatorFactory(factory.DjangoModelFactory):
             return
         if extracted:
             self.subindicators.add(extracted)
+
+
+class RegionFactory(factory.DjangoModelFactory):
+
+    class Meta:
+        model = models.Region
+
+    name = factory.Sequence(lambda n: 'region_%d' % n)

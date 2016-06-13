@@ -161,6 +161,14 @@ class AichiGoal(models.Model):
         translate = ('title', 'description',)
 
 
+class Region(models.Model):
+
+    name = models.CharField(max_length=256)
+
+    def __unicode__(self):
+        return self.name
+
+
 class NationalAction(models.Model):
     __metaclass__ = Translatable
 
@@ -169,6 +177,7 @@ class NationalAction(models.Model):
     code = models.CharField(max_length=16)
     title = models.TextField(verbose_name="Title", max_length=512, blank=True)
     description = tinymce.models.HTMLField(verbose_name="Description")
+    region = models.ForeignKey(Region, null=True, blank=True)
 
     class Meta:
         translate = ('title', 'description',)

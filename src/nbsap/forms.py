@@ -14,7 +14,7 @@ from chosen import forms as chosenforms
 from nbsap.models import (
     NationalStrategy, NationalObjective, NationalAction, EuTarget, AichiGoal,
     AichiTarget, EuAction, EuIndicator, EuIndicatorToAichiStrategy,
-    EuAichiStrategy, NationalIndicator
+    EuAichiStrategy, NationalIndicator, Region
 )
 from nbsap.utils import remove_tags, RE_CODE, RE_DIGIT_CODE, RE_ACTION_CODE
 from nbsap.utils import generate_code
@@ -120,6 +120,7 @@ class NationalActionForm(forms.Form):
     title = forms.CharField(widget=widgets.Textarea, required=False)
     description = TextCleanedHtml(
         widget=TinyMCE(attrs={'cols': 80, 'rows': 25}))
+    region = forms.ChoiceField(choices=[('', 'All regions')], required=False)
 
     def __init__(self, *args, **kwargs):
         self.action = kwargs.pop('action', None)
@@ -131,16 +132,28 @@ class NationalActionForm(forms.Form):
 
         title = getattr(self.action, 'title_%s' % lang, None)
         description = getattr(self.action, 'description_%s' % lang, None)
+        region = getattr(self.action, 'region', None)
 
         self.fields['title'].initial = title
         self.fields['description'].initial = description
         self.fields['language'].initial = lang
+
+        self.fields['region'].choices += (
+            [(i.pk, i) for i in Region.objects.all()]
+        )
+        if region:
+            self.fields['region'].initial = region.pk
 
     def save(self):
         action = self.action or NationalAction()
         lang = self.cleaned_data['language']
         title = self.cleaned_data['title']
         description = self.cleaned_data['description']
+        region_pk = self.cleaned_data['region']
+        if region_pk:
+            region = Region.objects.get(pk=region_pk)
+        else:
+            region = None
 
         setattr(action, 'title_%s' % lang, title)
         setattr(action, 'description_%s' % lang, description)
@@ -149,6 +162,8 @@ class NationalActionForm(forms.Form):
             action.parent = self.parent_action
         if not action.code:
             action.code = generate_code(NationalAction, action)
+        if region:
+            action.region = region
         action.save()
         action.objective = [self.objective]
         action.save()

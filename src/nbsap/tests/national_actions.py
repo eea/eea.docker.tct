@@ -3,8 +3,9 @@
 from django.core.urlresolvers import reverse
 
 from .base import BaseWebTest
-from .factories import StaffUserFactory
 from .factories import NationalObjectiveFactory, NationalActionFactory
+from .factories import RegionFactory
+from .factories import StaffUserFactory
 
 
 class NationalActionsTest(BaseWebTest):
@@ -30,7 +31,7 @@ class NationalActionsTest(BaseWebTest):
         resp = self.app.get(url, user='staff')
         self.assertEqual(200, resp.status_code)
         trs = resp.pyquery('.table tr')
-        self.assertEqual(2, len(trs))
+        self.assertEqual(1, len(trs))
         self.assertIn(nat_sub_obj.title, trs[0].text_content())
 
     def test_list_national_actions(self):
@@ -78,6 +79,32 @@ class NationalActionsTest(BaseWebTest):
             'NationalAction',
             {
                 'pk': 1,
+                'title_default': nat_act.title_default,
+                'description_default__contains': nat_act.description_default,
+            }
+        )
+
+    def test_add_national_action_with_region(self):
+        nat_obj = NationalObjectiveFactory()
+        nat_act = NationalActionFactory.build()
+        region = RegionFactory()
+        url = reverse('edit_national_action', kwargs={'objective': nat_obj.pk})
+        data = {
+            'language': 'en',
+            'title': nat_act.title_default,
+            'description': nat_act.description_default,
+            'region': region.pk,
+        }
+        resp = self.app.get(url, user='staff')
+        form = resp.forms['national-action-add']
+        self.populate_fields(form, data)
+        form.submit()
+
+        self.assertObjectInDatabase(
+            'NationalAction',
+            {
+                'pk': 1,
+                'region': region.pk,
                 'title_default': nat_act.title_default,
                 'description_default__contains': nat_act.description_default,
             }

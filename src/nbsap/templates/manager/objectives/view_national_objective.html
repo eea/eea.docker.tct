@@ -85,32 +85,42 @@
   </div>
 
   <div id="actions" class="property_list">
-    <table class="table table-striped minimalist">
+    {% regroup actions by region as action_list %}
 
-      <thead>
-        <th class="span1">{% trans "Code" %}</th>
-        <th>{% trans "Actions" %}</th>
-      </thead>
+    {% for items in action_list %}
+      {% if items.grouper %}
+        <h4 class="page-title">{{ items.grouper }}</h4>
+      {% endif %}
 
-      <tbody>
-      {% for action in actions %}
-        <tr>
-          <td>{{ action.code }}</td>
-          <td>
-            <a href="{% url 'view_national_action' objective=objective.pk pk=action.pk %}"
-             title="{% trans 'Action' %} {{ action.code }}">
-            {% trans "Actions related to objective" %} {{ objective.code }}
-            {% if action.title %}({{ action.title }}){% endif %}</a>
-          </td>
-        </tr>
-      {% empty %}
-         <tr>
-          <td colspan="2">{% trans "No actions found" %}.</td>
-         </tr>
-      {% endfor %}
-      </tbody>
+      <table class="table table-striped minimalist">
 
-    </table>
+        <thead>
+          <th class="span1">{% trans "Code" %}</th>
+          <th>{% trans "Actions" %}</th>
+        </thead>
+
+        <tbody>
+          {% for action in items.list %}
+            <tr>
+              <td>{{ action.code }}</td>
+              <td>
+                <a href="{% url 'view_national_action' objective=objective.pk pk=action.pk %}"
+                 title="{% trans 'Action' %} {{ action.code }}">
+                {% trans "Actions related to objective" %} {{ objective.code }}
+                {% if action.title %}({{ action.title }}){% endif %}</a>
+              </td>
+            </tr>
+          {% empty %}
+             <tr>
+              <td colspan="2">{% trans "No actions found" %}.</td>
+             </tr>
+          {% endfor %}
+        </tbody>
+
+      </table>
+
+    {% endfor %}
+
   </div>
 {% endblock %}
 

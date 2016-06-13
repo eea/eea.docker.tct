@@ -9,7 +9,7 @@
 
 {% block content %}
 
-  <h1 class="page-title">{% trans "Action" %} {{ action.code }}: {{ action.title }}</h1>
+  <h1 class="page-title">{% trans "Action" %} {{ action.code }}: {{ action.title }}{% if action.region %} ({{ action.region }}){% endif %}</h1>
 
   <div class="action-bar">
     <form action="{% url 'delete_national_action' objective=objective.pk pk=action.pk %}" method="POST">
@@ -35,35 +35,43 @@
     {{ action.description|safe }}
   </div>
 
-  <table class="table">
+  {% regroup action.children.all by region as action_list %}
 
-    <thead>
-      <th class="span1">{% trans "Code" %}</th>
-      <th>{% trans "Sub-actions" %}</th>
-    </thead>
+  {% for items in action_list %}
+    {% if items.grouper %}
+      <h4 class="page-title">{{ items.grouper }}</h4>
+    {% endif %}
 
-    <tbody>
-    {% for subaction in action.children.all %}
-      <tr>
-        <td>{{ subaction.code }}</td>
-        <td>
-          <a href="{% url 'view_national_action' objective=objective.pk pk=subaction.pk %}"
-           title="{% trans 'Action' %} {{ subaction.code }}">
-          {{ subaction.title|default:subaction.code }}</a>
-        </td>
-        <td>
-          <a href="{% url 'edit_national_action' objective=objective.pk pk=subaction.pk %}"
-             class="btn btn-xs btn-default">Edit</a>
-        </td>
-      </tr>
-    {% empty %}
-      <tr>
-        <td colspan="2">{% trans "No sub actions" %}</td>
-      </tr>
-    {% endfor %}
-    </tbody>
+    <table class="table">
 
-  </table>
+      <thead>
+        <th class="span1">{% trans "Code" %}</th>
+        <th>{% trans "Sub-actions" %}</th>
+      </thead>
+
+      <tbody>
+        {% for subaction in items.list %}
+          <tr>
+            <td>{{ subaction.code }}</td>
+            <td>
+              <a href="{% url 'view_national_action' objective=objective.pk pk=subaction.pk %}"
+               title="{% trans 'Action' %} {{ subaction.code }}">
+              {{ subaction.title|default:subaction.code }}</a>
+            </td>
+            <td>
+              <a href="{% url 'edit_national_action' objective=objective.pk pk=subaction.pk %}"
+                 class="btn btn-xs btn-default">Edit</a>
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="2">{% trans "No sub actions" %}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+
+    </table>
+  {% endfor %}
 
 {% endblock %}
 

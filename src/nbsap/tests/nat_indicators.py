@@ -5,12 +5,14 @@ from django.core.urlresolvers import reverse
 from .base import BaseWebTest
 from .factories import StaffUserFactory
 from .factories import NationalIndicatorFactory
+from unittest import skip
 
 class NationalIndicatorsTest(BaseWebTest):
 
     def setUp(self):
         StaffUserFactory()
 
+    @skip
     def test_list_national_indicators(self):
         nat_indicator = NationalIndicatorFactory()
         resp = self.app.get(reverse('list_nat_indicators'), user='staff')
