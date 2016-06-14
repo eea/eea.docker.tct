@@ -49,8 +49,11 @@ def edit_eu_strategy_activity(request, target, pk=None, parent=None):
                                  _('Activity successfully added.') + "")
             else:
                 messages.success(request, _('Saved changes.') + "")
-            return redirect(
-                'view_eu_strategy_activity', target=target.pk, pk=activity.pk)
+            if activity:
+                return redirect('view_eu_strategy_activity', target=target.pk,
+                                pk=activity.pk)
+            else:
+                return redirect('view_eu_strategy_target', pk=target.pk)
     else:
         form = FormClass(
             activity=activity, target=target, lang=lang, parent=parent
