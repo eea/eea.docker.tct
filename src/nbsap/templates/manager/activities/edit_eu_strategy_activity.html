@@ -33,6 +33,12 @@
       {{ form.language }}
     </div>
 
+    <div class="">
+      <label for="title">{% trans "Region" %}</label>
+      {{ form.region }}
+      {{ form.region.errors }}
+    </div>
+
     <div class="row">
       <div class="col-md-6">
 
@@ -49,6 +55,7 @@
           {{ form.title }}
           {{ form.title.errors }}
         </div>
+
         <div class="language-container">
 
           <div class="form-group">

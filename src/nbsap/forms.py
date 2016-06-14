@@ -162,7 +162,7 @@ class NationalActionForm(forms.Form):
             action.parent = self.parent_action
         if not action.code:
             action.code = generate_code(NationalAction, action)
-        if region:
+        if region or action.region:
             action.region = region
         action.save()
         action.objective = [self.objective]
@@ -229,10 +229,12 @@ class EuTargetEditForm(EuTargetForm):
 
 
 class EuStrategyActivityForm(forms.Form):
+
     language = forms.ChoiceField(choices=settings.LANGUAGES)
     title = forms.CharField(widget=widgets.Textarea)
     description = TextCleanedHtml(
         widget=TinyMCE(attrs={'cols': 80, 'rows': 25}), required=False)
+    region = forms.ChoiceField(choices=[('', 'All regions')], required=False)
 
     def __init__(self, *args, **kwargs):
         self.activity = kwargs.pop('activity', None)
@@ -244,6 +246,7 @@ class EuStrategyActivityForm(forms.Form):
 
         title = getattr(self.activity, 'title_%s' % lang, None)
         description = getattr(self.activity, 'description_%s' % lang, None)
+        region = getattr(self.activity, 'region', None)
 
         self.fields['title'].initial = title
         self.fields['description'].initial = description
@@ -251,16 +254,31 @@ class EuStrategyActivityForm(forms.Form):
         if self.activity:
             self.fields['code'].initial = self.activity.code
 
+        self.fields['region'].choices += (
+            [(i.pk, i) for i in Region.objects.all()]
+        )
+        if region:
+            self.fields['region'].initial = region.pk
+
     def save(self):
         activity = self.activity or EuAction()
         lang = self.cleaned_data['language']
         title = self.cleaned_data['title']
         code = self.cleaned_data.get('code', None)
         description = self.cleaned_data['description']
+
+        region_pk = self.cleaned_data['region']
+        if region_pk:
+            region = Region.objects.get(pk=region_pk)
+        else:
+            region = None
+
         setattr(activity, 'title_%s' % lang, title)
         setattr(activity, 'description_%s' % lang, description)
         activity.parent = self.parent
         activity.code = code or activity.get_next_code()
+        if region or activity.region:
+            activity.region = region
 
         activity.save()
         if not self.parent:

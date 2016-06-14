@@ -63,7 +63,7 @@
       <tbody>
       {% for subtarget in target.children.all %}
         <tr>
-          <td>{{ subtarget.code }}</td>
+          <td style="width: 300px;">{{ subtarget.code }}</td>
           <td>
             <a href="{% url 'view_eu_strategy_target' subtarget.id %}"
              title="{% trans 'Target' %} {{ subtarget.code }}">
@@ -84,6 +84,12 @@
     </table>
   </div>
 
+  {% regroup actions by region as action_list %}
+
+  {% for items in action_list %}
+    {% if items.grouper %}
+      <h4 class="page-title">{{ items.grouper }}</h4>
+    {% endif %}
 
   <div class="property_list">
     <table class="table table-striped minimalist">
@@ -94,16 +100,16 @@
       </thead>
 
       <tbody>
-      {% for action in actions %}
-        <tr>
-          <td>{{ action.code }}</td>
-          <td>
-            <a href="{% url 'view_eu_strategy_activity' target=target.pk pk=action.pk %}"
-             title="{% trans 'action' %} {{ action.code }}">
-              {{ action.title }}
-            </a>
-          </td>
-        </tr>
+        {% for action in items.list %}
+          <tr>
+            <td style="width: 300px;">{{ action.code }}</td>
+            <td>
+              <a href="{% url 'view_eu_strategy_activity' target=target.pk pk=action.pk %}"
+               title="{% trans 'action' %} {{ action.code }}">
+                {{ action.title }}
+              </a>
+            </td>
+          </tr>
       {% empty %}
         <tr>
           <td colspan="2">{% trans "No actions found" %}.</td>
@@ -113,6 +119,7 @@
 
     </table>
   </div>
+  {% endfor %}
 
 {% endblock %}
 

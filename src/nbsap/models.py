@@ -204,6 +204,7 @@ class EuAction(models.Model):
                                null=True,
                                blank=True,
                                related_name='children')
+    region = models.ForeignKey(Region, null=True, blank=True)
 
     if settings.EU_STRATEGY and settings.NAT_STRATEGY:
         national_strategy = models.ManyToManyField(
