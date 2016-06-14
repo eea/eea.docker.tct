@@ -11,7 +11,7 @@
     <ul>
     {% for target, actions in subobj.eu_objects.items %}
       <li>
-        <a href="{% url 'eu_targets' code=target.code %}">
+        <a href="{% url 'eu_targets' pk=target.pk %}">
         {% trans "Target" %} {{ target.code }}</a>
         {{ target.title }}
 
@@ -21,7 +21,7 @@
               <ul>
                 {% for action in actions %}
                   <li>
-                    <a href="{% url 'eu_targets' code=target.code %}#{{ action.code }}">
+                    <a href="{% url 'eu_targets' pk=target.pk %}#{{ action.code }}">
                     {% trans "Action" %} {{ action.code }}</a>
                     {{ action.description|safe }}
                   </li>

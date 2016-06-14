@@ -11,8 +11,8 @@ from auth import auth_required
 from nbsap.forms import EuTargetForm, EuTargetEditForm
 
 
-def eu_targets(request, code):
-    current_target = get_object_or_404(models.EuTarget, code=code)
+def eu_targets(request, pk):
+    current_target = get_object_or_404(models.EuTarget, pk=pk)
     targets = models.EuTarget.objects.all()
 
     current_target.actions_tree = []

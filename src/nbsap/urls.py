@@ -19,8 +19,8 @@ urlpatterns = [
     url(r'^implementation/intro$', views.implementation_page, name='implementation_page'),
     url(r'^implementation/(?P<code>((\d+\.)*\d+$))$', views.implementation, name='implementation'),
 
-    url(r'^eu_targets$', views.eu_targets, {'code': '1'}, name='eu_targets'),
-    url(r'^eu_targets/(?P<code>[\w\-]+)$', views.eu_targets, name='eu_targets'),
+    url(r'^eu_targets$', views.eu_targets, {'pk': '1'}, name='eu_targets'),
+    url(r'^eu_targets/(?P<pk>(\d+))$', views.eu_targets, name='eu_targets'),
     url(r'^eu_targets/(?P<target_id>[\w\-]+)/objectives/export/preview/$', views.eu_target_nat_strategy_export_preview, name='nat_strategy_export_preview'),
     url(r'^eu_targets/(?P<target_id>[\w\-]+)/objectives/export/$', views.eu_target_nat_strategy_export, name='nat_strategy_export'),
 
