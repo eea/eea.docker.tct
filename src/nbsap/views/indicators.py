@@ -1,7 +1,6 @@
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import ugettext_lazy as _
-from django.conf import settings
 
 from auth import auth_required
 from nbsap import models
@@ -39,10 +38,15 @@ def eu_indicators(request):
 
 @auth_required
 def list_eu_indicators(request):
-    indicators = models.EuIndicator.objects.filter(
-        parents=None).all().order_by('indicator_type', 'code')
+    category = request.GET.get('category', models.EuIndicator.HEADLINE)
+    indicators = (
+        models.EuIndicator.objects.filter(parents=None)
+        .filter(category=category)
+        .order_by('indicator_type', 'code')
+    )
     return render(request, 'manager/eu_indicators/list_eu_indicators.html', {
         'indicators': indicators,
+        'category': category,
     })
 
 
@@ -65,6 +69,7 @@ def edit_eu_indicator(request, pk=None):
 
     FormClass = EuIndicatorForm
     lang = request.GET.get('lang', request.LANGUAGE_CODE)
+    category = request.GET.get('category', models.EuIndicator.HEADLINE)
 
     if request.method == 'POST':
         form = FormClass(request.POST, indicator=indicator)
@@ -77,11 +82,13 @@ def edit_eu_indicator(request, pk=None):
                                  _('Indicator successfully added.') + "")
 
             if not indicator:
-                return redirect('list_eu_indicators')
+                response = redirect('list_eu_indicators')
+                response['Location'] += '?category=' + category
+                return response
             else:
                 return redirect('view_eu_indicator', pk=indicator.pk)
     else:
-        form = FormClass(indicator=indicator, lang=lang)
+        form = FormClass(indicator=indicator, lang=lang, category=category)
     return render(request, template, {
         'form': form,
         'indicator': indicator,

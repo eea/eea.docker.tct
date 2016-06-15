@@ -35,7 +35,7 @@
     {{ action.description|safe }}
   </div>
 
-  {% regroup action.children.all by region as action_list %}
+  {% regroup actions by region as action_list %}
 
   {% for items in action_list %}
     {% if items.grouper %}

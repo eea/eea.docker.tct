@@ -274,6 +274,13 @@ class EuIndicator(BaseIndicator):
         ('aei', 'AEI'),
     )
 
+    HEADLINE = 'headline'
+    OTHER = 'other'
+    CATEGORIES = (
+        (HEADLINE, 'Headline indicators'),
+        (OTHER, 'Other indicators'),
+    )
+
     code = models.CharField(max_length=25,
                             null=True,
                             blank=True)
@@ -287,6 +294,8 @@ class EuIndicator(BaseIndicator):
                                       blank=True)
     parent = models.ManyToManyField('self', blank=True,
                                     symmetrical=False, related_name='parents')
+
+    category = models.CharField(max_length=32, choices=CATEGORIES)
 
     @property
     def subindicators(self):

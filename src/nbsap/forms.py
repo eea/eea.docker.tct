@@ -488,6 +488,7 @@ class NbsapPageForm(forms.Form):
 class EuIndicatorForm(forms.Form):
     language = forms.ChoiceField(choices=settings.LANGUAGES)
     title = forms.CharField(widget=widgets.Textarea, required=False)
+    category = forms.ChoiceField(choices=EuIndicator.CATEGORIES)
     url = forms.CharField(required=False)
     indicator_type = forms.ChoiceField(choices=EuIndicator.TYPES)
     code = forms.CharField(
@@ -496,6 +497,7 @@ class EuIndicatorForm(forms.Form):
     def __init__(self, *args, **kwargs):
         self.indicator = kwargs.pop('indicator', None)
         lang = kwargs.pop('lang', None)
+        category = kwargs.pop('category', EuIndicator.HEADLINE)
 
         super(EuIndicatorForm, self).__init__(*args, **kwargs)
 
@@ -503,11 +505,14 @@ class EuIndicatorForm(forms.Form):
             title = getattr(self.indicator, 'title_%s' % lang, None)
             self.fields['title'].initial = title
             self.fields['url'].initial = self.indicator.url
+            self.fields['category'].initial = self.indicator.category
             self.fields['indicator_type'].initial = (
                 self.indicator.indicator_type
             )
             if 'code' in self.fields:
                 self.fields['code'].initial = self.indicator.code
+        else:
+            self.fields['category'].initial = category
 
         self.fields['language'].initial = lang
 
@@ -516,10 +521,12 @@ class EuIndicatorForm(forms.Form):
         lang = self.cleaned_data['language']
         title = self.cleaned_data['title']
         code = self.cleaned_data.get('code', None)
+        category = self.cleaned_data['category']
 
         setattr(indicator, 'title_%s' % lang, title)
         indicator.url = self.cleaned_data['url']
         indicator.indicator_type = self.cleaned_data['indicator_type']
+        indicator.category = category
 
         if code:
             indicator.code = code

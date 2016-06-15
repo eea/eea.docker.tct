@@ -12,10 +12,11 @@ from auth import auth_required
 def view_national_action(request, objective, pk):
     objective = get_object_or_404(models.NationalObjective, pk=objective)
     action = get_object_or_404(models.NationalAction, pk=pk)
+    actions = action.children.all().order_by('region', 'code')
     return render(
         request,
         'manager/actions/view_national_action.html',
-        {'objective': objective, 'action': action}
+        {'objective': objective, 'action': action, 'actions': actions}
     )
 
 
