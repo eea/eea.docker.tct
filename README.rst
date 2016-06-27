@@ -215,7 +215,7 @@ Tune up manage.py script::
 
 Continue build devel by syncing database model and loading fixtures::
 
-  $ ./instance/manage.py syncdb
+  $ ./instance/manage.py migrate
   $ ./instance/manage.py load_fixtures
 
 Run the tests to check the validity of your installation::
