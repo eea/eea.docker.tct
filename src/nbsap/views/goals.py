@@ -60,7 +60,7 @@ def get_goal_title(request, pk=None):
                for target in goal.targets.all()]
 
     return HttpResponse(json.dumps([
-        {'goal': goal.description, 'targets': targets}]))
+        {'goal': goal.description, 'targets': targets, 'code': pk}]))
 
 
 def get_aichi_target_title(request, pk=None):
