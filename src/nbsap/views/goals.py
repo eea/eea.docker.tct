@@ -70,3 +70,12 @@ def get_aichi_target_title(request, pk=None):
     target = get_object_or_404(models.AichiTarget, pk=pk)
     return HttpResponse(json.dumps(
         [{'code': target.code, 'value': target.description}]))
+
+
+def get_eu_indicator_title(request, pk=None):
+    if not pk:
+        return HttpResponse('EU Indicator not found')
+
+    indicator = get_object_or_404(models.EuIndicator, pk=pk)
+    return HttpResponse(json.dumps(
+        [{'code': indicator.code, 'title': indicator.title}]))

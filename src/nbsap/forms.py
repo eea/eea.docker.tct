@@ -730,6 +730,8 @@ class NationalIndicatorMapForm(forms.Form, ChoicesMixin):
 class EuAichiStrategyForm(forms.Form, ChoicesMixin):
     eu_targets = chosenforms.ChosenMultipleChoiceField(
         overlay="Select target...")
+    aichi_goals = chosenforms.ChosenMultipleChoiceField(
+        choices=[], required=False, overlay="Select goal...")
     aichi_targets = chosenforms.ChosenMultipleChoiceField(
         overlay="Select target...")
     other_aichi_targets = chosenforms.ChosenMultipleChoiceField(
@@ -738,6 +740,16 @@ class EuAichiStrategyForm(forms.Form, ChoicesMixin):
         overlay="Select indicator...", required=False)
     other_eu_indicators = chosenforms.ChosenMultipleChoiceField(
         overlay="Select indicator...", required=False)
+
+    def get_choices(self, string, mytype, isString=False, use_regex=False):
+        result = [(element.pk, "%s %s" % (string, element.code.upper()))
+                  for element in mytype.objects.all()]
+
+        if isString:
+            return sorted(result, key=lambda x: x[1].split()[1])
+        if use_regex:
+            return sorted(result, key=self.comp_rgx)
+        return natsorted(result, key=lambda x: x[1])
 
     def __init__(self, *args, **kwargs):
         self.strategy = kwargs.pop('strategy', None)
@@ -752,11 +764,17 @@ class EuAichiStrategyForm(forms.Form, ChoicesMixin):
         self.fields['other_aichi_targets'].choices = target_choices
         self.fields['eu_indicators'].choices = indicator_choices
         self.fields['other_eu_indicators'].choices = indicator_choices
+        self.fields['aichi_goals'].choices = self.get_choices('Goal',
+                                                              AichiGoal,
+                                                              isString=True)
 
         if self.strategy:
             self.fields['aichi_targets'].initial = (
                 self.strategy.aichi_targets
                 .values_list('pk', flat=True)
+            )
+            self.fields['aichi_goals'].initial = (
+                goal.code for goal in self.strategy.goals_list
             )
             self.fields['other_aichi_targets'].initial = (
                 self.strategy.other_aichi_targets
@@ -781,6 +799,8 @@ class EuAichiStrategyForm(forms.Form, ChoicesMixin):
                 EuTarget.objects.exclude(id__in=existing_strategies).all(),
                 ['pk']
             )
+            if len(self.fields['eu_targets'].choices) == 0:
+                self.fields['eu_targets'].overlay = "No available targets"
 
     def clean(self):
         cleaned_data = super(EuAichiStrategyForm, self).clean()
@@ -788,8 +808,9 @@ class EuAichiStrategyForm(forms.Form, ChoicesMixin):
         other_aichi_targets = cleaned_data.get('other_aichi_targets', [])
         eu_indicators = cleaned_data.get('eu_indicators', [])
         other_eu_indicators = cleaned_data.get('other_eu_indicators', [])
+        aichi_goals = cleaned_data.get('aichi_goals', [])
 
-        if set(aichi_targets) & set(other_aichi_targets):
+        if set(aichi_targets) & set(other_aichi_targets) & set(aichi_goals):
             raise ValidationError(_(MAPPING_ERROR.format('AICHI')))
 
         if set(eu_indicators) & set(other_eu_indicators):
@@ -817,8 +838,11 @@ class EuAichiStrategyForm(forms.Form, ChoicesMixin):
             pk__in=self.cleaned_data['eu_indicators'])
         other_indicators = EuIndicator.objects.filter(
             pk__in=self.cleaned_data['other_eu_indicators'])
+        aichi_goals = AichiGoal.objects.filter(
+            pk__in=self.cleaned_data['aichi_goals'])
         for eu_target in strategy.eu_targets.all():
             eu_target.indicators = indicators
             eu_target.other_indicators = other_indicators
+            eu_target.aichi_goals = aichi_goals
             eu_target.save()
         strategy.save()

@@ -27,9 +27,16 @@
       <label class="col-md-2" for="eu_target">{% trans "EU Target" %}</label>
       <div class="col-md-3">
         {{ form.eu_targets }}
-        {{ form.eu_targets.errors }}
       </div>
     </div>
+
+    <div class="form-group">
+      <label class="col-md-2" for="aichi_goal">{% trans "AICHI Goal"%}</label>
+      <div class="col-md-3"> {{ form.aichi_goals }}
+      </div>
+      <div class="goal_text col-md-7 col-md-offset-2">
+      </div>
+    </div>    
 
     <div class="form-group">
       <label class="col-md-2" for="aichi_targets">{% trans "AICHI Targets" %}</label>
@@ -40,15 +47,37 @@
       <div class="aichi_targets_text col-md-7 short-descrip">
       </div>
     </div>
+
+    <div class="form-group">
+      <label class="col-md-2" for="other_aichi_targets">{% trans "Other AICHI Targets" %}</label>
+      <div class="col-md-3">
+        {{ form.other_aichi_targets }}
+        {{ form.other_aichi_targets.errors }}
+      </div>
+      <div class="other_aichi_targets_text col-md-7 short-descrip">
+      </div>
+    </div>
+
     <div class="form-group">
       <label class="col-md-2" for="eu_indicators">{% trans "EU Indicators" %}</label>
       <div class="col-md-3">
         {{ form.eu_indicators }}
         {{ form.eu_indicators.errors }}
       </div>
-      <div class="aichi_targets_text col-md-7 short-descrip">
+      <div class="eu_indicators_text col-md-7 short-descrip">
       </div>
     </div>
+
+    <div class="form-group">
+      <label class="col-md-2" for="other_eu_indicators">{% trans "Other EU Indicators" %}</label>
+      <div class="col-md-3">
+        {{ form.other_eu_indicators }}
+        {{ form.other_eu_indicators.errors }}
+      </div>
+      <div class="other_eu_indicators_text col-md-7 short-descrip">
+      </div>
+    </div>
+
     <div class="action-bar">
       <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
       <a href="{% url 'list_eu_aichi_strategy' %}" class="btn btn-default" type="button">{% trans "Cancel" %}</a>
@@ -66,6 +95,17 @@
     showTargetCodeValue('aichi_targets',
                         '.aichi_targets_text',
                         "{% url 'aichi_target_title' pk=1 %}");
+    showTargetCodeValue('other_aichi_targets',
+                        '.other_aichi_targets_text',
+                        "{% url 'aichi_target_title' pk=1 %}");
+    showIndicatorCodeValue('eu_indicators',
+                        '.eu_indicators_text',
+                        "{% url 'eu_indicator_title' pk=1 %}");
+    showIndicatorCodeValue('other_eu_indicators',
+                        '.other_eu_indicators_text',
+                        "{% url 'eu_indicator_title' pk=1 %}");
+
   });
+  {% include '_bits/national_strategy_mapping.js' %}
   </script>
 {% endblock %}
