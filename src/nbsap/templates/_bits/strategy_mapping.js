@@ -1,6 +1,6 @@
 $(".chzn-select").chosen();
 $(function () {
-	  $('select[name=aichi_goals]').on('change', function () {
+  $('select[name=aichi_goals]').on('change', function () {
     var option = $(this).val();
     var text = $(this).parents('.form-group').find('.goal_text');
     if (option == null){
@@ -17,7 +17,6 @@ $(function () {
         text.html('');
         $.get(url, function (data) {
           data = $.parseJSON(data)[0];
-
           text.append('<h5>Goal ' + data.code.toUpperCase() + '</h5>');
           text.append('<p>' + data.goal + '</p>');
           $('select[name=aichi_targets]').html('');

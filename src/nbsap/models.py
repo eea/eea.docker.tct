@@ -643,7 +643,6 @@ class EuAichiStrategy(models.Model):
 
     class Meta:
         verbose_name_plural = ' Mappings: EU targets to Aichi'
-        # ordering = ('eu_target',)
 
 
 class NationalStrategy(models.Model):

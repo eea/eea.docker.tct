@@ -51,7 +51,8 @@ class TextCleanedHtml(forms.CharField):
 class ChoicesMixin(object):
     def _get_choices(self, name, queryset, attr):
         return sorted(
-            [(x.pk, name + ' ' + '-'.join([str(getattr(x, a)) for a in attr]))
+            [(x.pk, name + ' ' + '-'.join([str(getattr(x, a)).upper()
+                                           for a in attr]))
              for x in queryset],
             key=lambda el: el[1].split()[1])
 
@@ -741,16 +742,6 @@ class EuAichiStrategyForm(forms.Form, ChoicesMixin):
     other_eu_indicators = chosenforms.ChosenMultipleChoiceField(
         overlay="Select indicator...", required=False)
 
-    def get_choices(self, string, mytype, isString=False, use_regex=False):
-        result = [(element.pk, "%s %s" % (string, element.code.upper()))
-                  for element in mytype.objects.all()]
-
-        if isString:
-            return sorted(result, key=lambda x: x[1].split()[1])
-        if use_regex:
-            return sorted(result, key=self.comp_rgx)
-        return natsorted(result, key=lambda x: x[1])
-
     def __init__(self, *args, **kwargs):
         self.strategy = kwargs.pop('strategy', None)
         super(EuAichiStrategyForm, self).__init__(*args, **kwargs)
@@ -764,9 +755,10 @@ class EuAichiStrategyForm(forms.Form, ChoicesMixin):
         self.fields['other_aichi_targets'].choices = target_choices
         self.fields['eu_indicators'].choices = indicator_choices
         self.fields['other_eu_indicators'].choices = indicator_choices
-        self.fields['aichi_goals'].choices = self.get_choices('Goal',
-                                                              AichiGoal,
-                                                              isString=True)
+        self.fields['aichi_goals'].choices = self._get_choices(
+            'Goal',
+            AichiGoal.objects.all(),
+            ['code'])
 
         if self.strategy:
             self.fields['aichi_targets'].initial = (
@@ -808,9 +800,8 @@ class EuAichiStrategyForm(forms.Form, ChoicesMixin):
         other_aichi_targets = cleaned_data.get('other_aichi_targets', [])
         eu_indicators = cleaned_data.get('eu_indicators', [])
         other_eu_indicators = cleaned_data.get('other_eu_indicators', [])
-        aichi_goals = cleaned_data.get('aichi_goals', [])
 
-        if set(aichi_targets) & set(other_aichi_targets) & set(aichi_goals):
+        if set(aichi_targets) & set(other_aichi_targets):
             raise ValidationError(_(MAPPING_ERROR.format('AICHI')))
 
         if set(eu_indicators) & set(other_eu_indicators):

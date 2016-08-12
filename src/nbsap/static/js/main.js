@@ -92,7 +92,6 @@ function showDescription(name, textSelector, url, type, code, value) {
     $("option:selected", this).each(function() {
       $.get(url.replace('1', this.value), function(data) {
         data = $.parseJSON(data)[0];
-        console.log(data);
         if (code) {
           var title = '<h5>' + type + ' ' + data.code;
           if (data.title && data.value) {
