@@ -634,8 +634,7 @@ class EuAichiStrategy(models.Model):
 
     @property
     def targets_list(self):
-        ts = list(self.aichi_targets.all()) + \
-            list(self.other_aichi_targets.all())
+        ts = list(self.aichi_targets.all())
         ts.sort(key=lambda t: t.code)
         return ts
 
@@ -670,7 +669,7 @@ class NationalStrategy(models.Model):
 
     @property
     def targets_list(self):
-        ts = list(self.relevant_targets.all()) + list(self.other_targets.all())
+        ts = list(self.relevant_targets.all())
         ts.sort(key=lambda t: t.code)
         return ts
 

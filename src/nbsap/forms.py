@@ -51,8 +51,7 @@ class TextCleanedHtml(forms.CharField):
 class ChoicesMixin(object):
     def _get_choices(self, name, queryset, attr):
         return sorted(
-            [(x.pk, name + ' ' + '-'.join([str(getattr(x, a)).upper()
-                                           for a in attr]))
+            [(x.pk, name + ' ' + '-'.join([str(getattr(x, a)) for a in attr]))
              for x in queryset],
             key=lambda el: el[1].split()[1])
 
@@ -755,10 +754,9 @@ class EuAichiStrategyForm(forms.Form, ChoicesMixin):
         self.fields['other_aichi_targets'].choices = target_choices
         self.fields['eu_indicators'].choices = indicator_choices
         self.fields['other_eu_indicators'].choices = indicator_choices
-        self.fields['aichi_goals'].choices = self._get_choices(
-            'Goal',
-            AichiGoal.objects.all(),
-            ['code'])
+        self.fields['aichi_goals'].choices = self.get_choices('Goal',
+                                                              AichiGoal,
+                                                              isString=True)
 
         if self.strategy:
             self.fields['aichi_targets'].initial = (
@@ -793,6 +791,17 @@ class EuAichiStrategyForm(forms.Form, ChoicesMixin):
             )
             if len(self.fields['eu_targets'].choices) == 0:
                 self.fields['eu_targets'].overlay = "No available targets"
+
+    # TODO refactor
+    def get_choices(self, string, mytype, isString=False, use_regex=False):
+        result = [(element.pk, "%s %s" % (string, element.code.upper()))
+                  for element in mytype.objects.all()]
+
+        if isString:
+            return sorted(result, key=lambda x: x[1].split()[1])
+        if use_regex:
+            return sorted(result, key=self.comp_rgx)
+        return natsorted(result, key=lambda x: x[1])
 
     def clean(self):
         cleaned_data = super(EuAichiStrategyForm, self).clean()
@@ -829,11 +838,8 @@ class EuAichiStrategyForm(forms.Form, ChoicesMixin):
             pk__in=self.cleaned_data['eu_indicators'])
         other_indicators = EuIndicator.objects.filter(
             pk__in=self.cleaned_data['other_eu_indicators'])
-        aichi_goals = AichiGoal.objects.filter(
-            pk__in=self.cleaned_data['aichi_goals'])
         for eu_target in strategy.eu_targets.all():
             eu_target.indicators = indicators
             eu_target.other_indicators = other_indicators
-            eu_target.aichi_goals = aichi_goals
             eu_target.save()
         strategy.save()

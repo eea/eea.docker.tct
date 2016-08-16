@@ -13,13 +13,13 @@ $(function () {
         urls.push(url);
       });
 
+      $('select[name=aichi_targets]').html('');
       $.each(urls, function(i, url){
         text.html('');
         $.get(url, function (data) {
           data = $.parseJSON(data)[0];
           text.append('<h5>Goal ' + data.code.toUpperCase() + '</h5>');
           text.append('<p>' + data.goal + '</p>');
-          $('select[name=aichi_targets]').html('');
           $.each(data.targets, function(i,t) {
             var html = $('<option />').attr('value', t.pk).text('Target ' + t.value);
             $('select[name=aichi_targets]').append(html);
