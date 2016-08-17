@@ -730,6 +730,8 @@ class NationalIndicatorMapForm(forms.Form, ChoicesMixin):
 class EuAichiStrategyForm(forms.Form, ChoicesMixin):
     eu_targets = chosenforms.ChosenMultipleChoiceField(
         overlay="Select target...")
+    aichi_goals = chosenforms.ChosenMultipleChoiceField(
+        choices=[], required=False, overlay="Select goal...")
     aichi_targets = chosenforms.ChosenMultipleChoiceField(
         overlay="Select target...")
     other_aichi_targets = chosenforms.ChosenMultipleChoiceField(
@@ -752,11 +754,17 @@ class EuAichiStrategyForm(forms.Form, ChoicesMixin):
         self.fields['other_aichi_targets'].choices = target_choices
         self.fields['eu_indicators'].choices = indicator_choices
         self.fields['other_eu_indicators'].choices = indicator_choices
+        self.fields['aichi_goals'].choices = self.get_choices('Goal',
+                                                              AichiGoal,
+                                                              isString=True)
 
         if self.strategy:
             self.fields['aichi_targets'].initial = (
                 self.strategy.aichi_targets
                 .values_list('pk', flat=True)
+            )
+            self.fields['aichi_goals'].initial = (
+                goal.code for goal in self.strategy.goals_list
             )
             self.fields['other_aichi_targets'].initial = (
                 self.strategy.other_aichi_targets
@@ -781,6 +789,19 @@ class EuAichiStrategyForm(forms.Form, ChoicesMixin):
                 EuTarget.objects.exclude(id__in=existing_strategies).all(),
                 ['pk']
             )
+            if len(self.fields['eu_targets'].choices) == 0:
+                self.fields['eu_targets'].overlay = "No available targets"
+
+    # TODO refactor
+    def get_choices(self, string, mytype, isString=False, use_regex=False):
+        result = [(element.pk, "%s %s" % (string, element.code.upper()))
+                  for element in mytype.objects.all()]
+
+        if isString:
+            return sorted(result, key=lambda x: x[1].split()[1])
+        if use_regex:
+            return sorted(result, key=self.comp_rgx)
+        return natsorted(result, key=lambda x: x[1])
 
     def clean(self):
         cleaned_data = super(EuAichiStrategyForm, self).clean()

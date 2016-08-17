@@ -27,7 +27,8 @@ def edit_national_strategy(request, pk=None):
             if pk:
                 messages.success(request, _('Saved changes') + "")
             else:
-                messages.success(request, _('Mapping successfully added.') + "")
+                messages.success(request, _(
+                    'Mapping successfully added.') + "")
             return redirect('list_national_strategy')
     else:
         form = NationalStrategyForm(strategy=strategy)
@@ -46,8 +47,8 @@ def delete_national_strategy(request, strategy=None):
 def list_national_strategy(request):
     strategies = models.NationalStrategy.objects.all()
     return render(request,
-        'manager/nat_strategy/mapping/list_national_strategy.html',
-        {'strategies': strategies})
+                  'manager/nat_strategy/mapping/list_national_strategy.html',
+                  {'strategies': strategies})
 
 
 @auth_required

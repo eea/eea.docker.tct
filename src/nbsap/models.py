@@ -608,13 +608,6 @@ class EuIndicatorToAichiStrategy(models.Model):
 
 
 class EuAichiStrategy(models.Model):
-    # TODO should be remove after migration
-    eu_target = models.ForeignKey(
-        EuTarget,
-        verbose_name="EU Biodiversity Target",
-        null=True,
-        blank=True)
-
     eu_targets = models.ManyToManyField(
         EuTarget,
         verbose_name="EU Biodiversity Target",
@@ -634,11 +627,21 @@ class EuAichiStrategy(models.Model):
     def get_targets(self):
         return ', '.join([obj.code for obj in self.aichi_targets.all()])
 
+    @property
+    def goals_list(self):
+        goals = [t.get_parent_goal() for t in self.targets_list]
+        return set(g for g in goals if g)
+
+    @property
+    def targets_list(self):
+        ts = list(self.aichi_targets.all())
+        ts.sort(key=lambda t: t.code)
+        return ts
+
     get_targets.short_description = 'AICHI targets'
 
     class Meta:
         verbose_name_plural = ' Mappings: EU targets to Aichi'
-        ordering = ('eu_target',)
 
 
 class NationalStrategy(models.Model):
@@ -666,7 +669,7 @@ class NationalStrategy(models.Model):
 
     @property
     def targets_list(self):
-        ts = list(self.relevant_targets.all()) + list(self.other_targets.all())
+        ts = list(self.relevant_targets.all())
         ts.sort(key=lambda t: t.code)
         return ts
 

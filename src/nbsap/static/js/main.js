@@ -94,13 +94,19 @@ function showDescription(name, textSelector, url, type, code, value) {
         data = $.parseJSON(data)[0];
         if (code) {
           var title = '<h5>' + type + ' ' + data.code;
-          if (data.title) {
+          if (data.title && data.value) {
             title += ': ' + data.title;
+            title += '</h5>';
           }
-          title += '</h5>';
+          if (data.title && !data.value){
+            title += '</h5>';
+            title += '<p>' + data.title + '</p>';
+          }
           text.append(title);
         }
-        text.append('<p>' + data.value + '</p>');
+        if (data.value) {
+          text.append('<p>' + data.value + '</p>');
+        }
       });
     });
   }).change();
@@ -112,6 +118,10 @@ function showTargetValue(name, textSelector, url) {
 
 function showTargetCodeValue(name, textSelector, url) {
   showDescription(name, textSelector, url, 'Target', true, true);
+}
+
+function showIndicatorCodeValue(name, textSelector, url) {
+  showDescription(name, textSelector, url, 'EU Indicator', true, true);
 }
 
 function showObjectiveCodeValue(name, textSelector, url) {

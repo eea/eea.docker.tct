@@ -24,6 +24,7 @@
 
     <thead>
       <th>{% trans "Eu Targets" %} </th>
+      <th>{% trans "AICHI Goals" %} </th>
       <th>{% trans "Relevant AICHI Targets"%}</th>
       <th>{% trans "Other AICHI Targets"%}</th>
       <th>{% trans "Edit" %}</th>
@@ -39,6 +40,12 @@
           {% for eu_target in strategy.eu_targets.all %}
             <a href="{% url 'view_eu_strategy_target' pk=eu_target.pk %}">
               {{ eu_target.code }}</a>
+          {% endfor %}
+        </td>
+        <td>
+          {% for goal in strategy.goals_list %}
+            <a href="{% url 'goals' code=goal.code %}">
+              {{ goal.code|title }}</a>
           {% endfor %}
         </td>
         <td>
