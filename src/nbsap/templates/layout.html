@@ -25,7 +25,7 @@
 
   <body>
 
-    <div class="header" style="background-image: url('{{ HEADER_BACKGROUND_IMG }}');">
+    <div class="header">
       <div class="container">
         {% if LAYOUT_HEADER_LOGO %}
           <div class="logo img">
@@ -33,13 +33,17 @@
           </div>
         {% endif %}
 
-        {% include "_bits/account_menu.html" %}
+        
 
-        <h1 class="site-title"><a href="{% url 'goals' %}">{% trans SITE_HEADER %}</a></h1>
+      
 
         <div class="nav-container">
+        {% include "_bits/account_menu.html" %}
           {% block navmenu %}{% endblock %}
         </div>
+
+          <h1 class="site-title"><a href="{% url 'goals' %}">{% trans SITE_HEADER %}</a></h1>
+        
       </div>
     </div>
 
