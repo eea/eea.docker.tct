@@ -8,7 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 from nbsap import models
 from auth import auth_required
 
-from nbsap.forms import EuTargetForm, EuTargetEditForm
+from nbsap.forms import EuTargetForm, EuTargetEditForm, RegionForm
 
 
 def eu_targets(request, pk):
@@ -60,6 +60,48 @@ def list_eu_targets(request):
     return render(request, 'manager/eu_strategy/list_eu_targets.html', {
         'targets': targets,
     })
+
+
+@auth_required
+def list_regions(request):
+    regions = models.Region.objects.all()
+    return render(request, 'manager/eu_strategy/list_regions.html',
+                  {'regions': regions})
+
+
+@auth_required
+def edit_region(request, pk=None):
+    if pk:
+        region = get_object_or_404(models.Region, pk=pk)
+        template = 'manager/eu_strategy/edit_region.html'
+    else:
+        region = None
+        template = 'manager/eu_strategy/add_region.html'
+
+    FormClass = RegionForm
+    if request.method == 'POST':
+        form = FormClass(request.POST, region=region)
+        if form.is_valid():
+            form.save()
+            if pk:
+                messages.success(request, _('Saved changes') + "")
+            else:
+                messages.success(request, _('Region successfully added.'))
+            return redirect('list_regions')
+    else:
+        form = FormClass(region=region)
+    return render(request,
+                  template,
+                  {'region': region, 'form': form})
+
+
+@auth_required
+def delete_region(request, pk):
+    if request.method == 'POST':
+        region = get_object_or_404(models.Region, pk=pk)
+        region.delete()
+        messages.success(request, _('Region successfully deleted.') + "")
+        return redirect('list_regions')
 
 
 @auth_required

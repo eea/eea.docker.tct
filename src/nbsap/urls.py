@@ -114,6 +114,22 @@ urlpatterns = [
         views.list_eu_targets,
         name='list_eu_targets'),
 
+    url(r'^administration/targets/region/$',
+        views.list_regions,
+        name='list_regions'),
+
+    url(r'^administration/targets/region/add/$',
+        views.edit_region,
+        name='add_region'),
+
+    url(r'^administration/targets/region/(?P<pk>[\w\-]+)/edit/$',
+        views.edit_region,
+        name='edit_region'),
+
+    url(r'^administration/targets/region/(?P<pk>\d+)/delete/$',
+        views.delete_region,
+        name='delete_region'),
+
     url(r'^administration/targets/(?P<parent>[\w\-]+)/add$',
         views.edit_eu_strategy_target,
         name='edit_eu_target_with_parent'),

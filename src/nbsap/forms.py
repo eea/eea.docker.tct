@@ -843,3 +843,24 @@ class EuAichiStrategyForm(forms.Form, ChoicesMixin):
             eu_target.other_indicators = other_indicators
             eu_target.save()
         strategy.save()
+
+
+class RegionForm(forms.Form):
+    name = forms.CharField(widget=widgets.Textarea,
+                           required=True, max_length=256)
+
+    def __init__(self, *args, **kwargs):
+        self.region = kwargs.pop('region', None)
+
+        if self.region:
+            kwargs.update(initial={'name': self.region.name})
+
+        super(RegionForm, self).__init__(*args, **kwargs)
+
+    def save(self):
+        region = self.region or Region()
+        region.name = self.cleaned_data['name']
+
+        region.save()
+
+        return region
