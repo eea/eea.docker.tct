@@ -51,16 +51,14 @@
 
   <h1 class="page-title">{% trans "AICHI Goals" %}</h1>
 
-  <h1>{% trans "AICHI Goal" %} {{ current_goal.code|upper }}: {{ current_goal.description|striptags|safe }}</h1>
+  <h2 class="page-subtitle">{% trans "AICHI Goal" %} {{ current_goal.code|upper }}: {{ current_goal.description|striptags|safe }}</h2>
   <div class="toc">
     <h5>{% trans "Table of contents"%}</h5>
     <ul>
       {% for target in current_goal.targets.all %}
       <li>
         <a href="{% url 'goals' code=current_goal.code %}#{{target.code}}"
-           rel="tooltip"
-           data-placement="right"
-           data-original-title="{{ target.description }}">
+           rel="tooltip">
            {% trans "AICHI Target" %} {{ target.code }}
         </a>
       </li>

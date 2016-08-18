@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+
+{% load i18n %}
+{% load assets %}
+
+    {% block assets %}
+    {% assets "css_admin" %}
+      <link rel="stylesheet" href="{{ ASSET_URL }}" />
+    {% endassets %}
+    {% endblock %}

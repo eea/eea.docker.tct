@@ -1,17 +1,19 @@
+@import "variables.less";
+
 .header {
-    margin-bottom: 2em;
-    padding: 16px 0;
-    // background: url("../header.png") 0 0 no-repeat;
-    // background-image: none!important;
+    position: relative;
+    z-index: 500;
 }
 
 .site-title {
     font-size: 24px;
     font-weight: normal;
+    text-align: center;
+	padding-top: 60px;
 }
 
 .site-title a {
-    color: black;
+	color: @brand-blue;
 }
 
 .account-menu {
@@ -73,8 +75,6 @@
 }
 
 .nav-container {
-    padding: 0 16px;
-    border-radius: 5px;
     // background-color: rgba(0, 0, 0, 0.75);
     background: #60c5ef;
     background: -moz-linear-gradient(-15deg, #60c5ef 0%, #347eb9 100%);
@@ -82,6 +82,8 @@
     background: linear-gradient(165deg, #60c5ef 0%, #347eb9 100%);
     // filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#60c5ef', endColorstr='#347eb9', GradientType=1);
     margin-bottom: 30px;
+    position: fixed;
+    width: 100%;
 }
 
 .nav-container:after {
@@ -96,6 +98,10 @@
     float: left;
     margin: 0;
     display: inline-block;
+}
+
+.nav-container li {
+	margin-bottom: 0;
 }
 
 .nav-menu:after {
@@ -117,13 +123,13 @@
 }
 
 .nav-menu a:hover {
-    color: #fff;
-    background: #039749;
+    color: black;
+    background: white;
 }
 
 .nav-menu .active {
     position: relative;
-    color: #04e26d;
+    color: white;
 }
 
 .nav-menu .active:after {
@@ -137,4 +143,12 @@
     margin-left: -6px;
     border: 6px solid transparent;
     border-bottom-color: #fff;
+}
+
+
+.header {
+	.container {
+		max-width: 100%;
+		width: 100%;
+	}
 }

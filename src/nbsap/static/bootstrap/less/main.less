@@ -1,3 +1,5 @@
+@import "variables.less";
+
 @media (max-width: 800px) {
 	.sidebar {
 		float:none;
@@ -212,12 +214,13 @@ h3,
 h4,
 h5,
 h6 {
-  margin-top: auto;
-  font-weight: bold;
+  margin-top: auto; 
+  color: @brand-blue;
 }
 h1 {
   font-size: 30px;
   line-height: 1.2;
+  font-weight: bold;
 }
 
 h2 {
@@ -307,7 +310,7 @@ body {
 }
 
 .page-title {
-  color: #039749;
+  color: @brand-orange;
 }
 
 
@@ -348,15 +351,17 @@ body {
   margin-bottom: 1em;
   padding: 1em;
   background-color: #eee;
+  width: 180px;
+
 }
   .toc h5 {
     margin-top: auto;
   }
-  .toc > ul {
+  .toc  ul {
     list-style-type: none;
     overflow: hidden;
   }
-  .toc > ul > li {
+  .toc li {
     list-style-type: none;
   }
   .toc .column-list {
@@ -466,4 +471,9 @@ body {
 }
 li.indent {
     padding-left: 1em;
+}
+
+
+ .toc li {
+  display: inline-block;
 }
