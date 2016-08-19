@@ -20,7 +20,7 @@ function Modal(container) {
         $(self).trigger({
           'type': 'modalopen',
           'target': target
-        })
+        });
         self.activeModal = target;
         $(target).addClass('active');
         $('body').addClass('modal-open');

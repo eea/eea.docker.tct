@@ -68,20 +68,18 @@
       {% endif %}
     </div>
   </footer>
+</div>
+<div class="modal-container">
+  {% block modal %}
+  {% endblock %}
+</div>
 
-  <div class="modal-container">
-    <div class="container">
-      {% block modal %}
-      {% endblock %}
-    </div>
-  </div>
+{% assets "js_admin" %}
+<script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
+{% block head_scripts %}{% endblock %}
 
-  {% assets "js_admin" %}
-  <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-  {% endassets %}
-  {% block head_scripts %}{% endblock %}
-
-  {% block scripts %}{% endblock %}
+{% block scripts %}{% endblock %}
 
 
 </body>

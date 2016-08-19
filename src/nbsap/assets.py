@@ -13,7 +13,7 @@ JS_ASSETS = (
 JS_ADMIN_ASSETS = (
     'js/jquery-1.11.1.min.js',
     'js/jquery.utils.js',
-    'js/bootstrap.min.js',
+    'bootstrap/js/bootstrap.min.js',
     'js/lib/datatables/jquery.dataTables.min.js',
     'js/lib/datatables/DT_bootstrap.js',
     'js/jquery.browser.min.js',
@@ -35,6 +35,7 @@ CSS_ADMIN_ASSETS = (
     'bootstrap/css/bootstrap.min.css',
     'js/chosen/chosen.css',
     'css/AdminLTE.min.css',
+    'css/admin_style.css',
     'css/skin-blue.min.css'
 ) + settings.CSS_ASSETS
 
