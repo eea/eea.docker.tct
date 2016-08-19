@@ -29,6 +29,23 @@
 </div>
 {% endblock %}
 
+{% block sidebar-right %}
+<div class="sidebar-right">
+  <div class="toc">
+    <h5>{% trans "Table of contents"%}</h5>
+    <ul>
+      {% for target in current_goal.targets.all %}
+      <li>
+        <a href="{% url 'goals' code=current_goal.code %}#{{target.code}}"
+           rel="tooltip">
+           {% trans "AICHI Target" %} {{ target.code }}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}
 
 {% block content %}
 
@@ -51,22 +68,8 @@
 
   <h1 class="page-title">{% trans "AICHI Goals" %}</h1>
 
-  <h1>{% trans "AICHI Goal" %} {{ current_goal.code|upper }}: {{ current_goal.description|striptags|safe }}</h1>
-  <div class="toc">
-    <h5>{% trans "Table of contents"%}</h5>
-    <ul>
-      {% for target in current_goal.targets.all %}
-      <li>
-        <a href="{% url 'goals' code=current_goal.code %}#{{target.code}}"
-           rel="tooltip"
-           data-placement="right"
-           data-original-title="{{ target.description }}">
-           {% trans "AICHI Target" %} {{ target.code }}
-        </a>
-      </li>
-      {% endfor %}
-    </ul>
-  </div>
+  <h2 class="page-subtitle">{% trans "AICHI Goal" %} {{ current_goal.code|upper }}: {{ current_goal.description|striptags|safe }}</h2>
+
 
   {% for target in current_goal.targets.all %}
   <div class="section" id="{{ target.code }}">

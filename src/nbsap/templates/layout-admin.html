@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+
+
+    <!DOCTYPE html>
 
 {% load i18n %}
 {% load assets %}
@@ -13,7 +15,7 @@
     <![endif]-->
 
     {% block assets %}
-    {% assets "css" %}
+    {% assets "css_admin" %}
       <link rel="stylesheet" href="{{ ASSET_URL }}" />
     {% endassets %}
     {% endblock %}
@@ -88,7 +90,7 @@
       </div>
     </div>
 
-    {% assets "js" %}
+    {% assets "js_admin" %}
       <script type="text/javascript" src="{{ ASSET_URL }}"></script>
     {% endassets %}
     {% block head_scripts %}{% endblock %}
