@@ -96,7 +96,11 @@ function showDescription(name, textSelector, url, type, code, value) {
       $.get(url.replace('1', this.value), function(data) {
         data = $.parseJSON(data)[0];
         if (code) {
-          var title = '<h5>' + type + ' ' + data.code;
+          var title = '<h5>' + type;
+          if (type == 'EU Indicator') {
+            title += ': ' + data.indicator_type.toUpperCase();
+          }
+          title += ' ' + data.code;
           if (data.title && data.value) {
             title += ': ' + data.title;
             title += '</h5>';
