@@ -10,8 +10,12 @@ admin.autodiscover()
 
 urlpatterns = [
     # homepage URLs
-    url(r'^$', views.goals, {'code': 'a'}, name='goals'),
+    url(r'^$', views.goals, {'code': 'a',
+                             'aichi_target_id': '1'}, name='goals'),
     url(r'^goals/(?P<code>[\w\-]+)$', views.goals, name='goals'),
+    url(r'^goals/(?P<code>[\w\-]+)/aichi_target/(?P<aichi_target_id>[\w\-]+)$',
+        views.goals,
+        name='goals'),
     url(r'^crashme$', views.crashme, name='crashme'),
     url(r'^ping/me$', views.pingme, name='pingme'),
 
