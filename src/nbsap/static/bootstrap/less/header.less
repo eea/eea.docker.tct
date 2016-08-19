@@ -9,7 +9,7 @@
     font-size: 24px;
     font-weight: normal;
     text-align: center;
-	padding-top: 60px;
+	padding-top: 80px;
 }
 
 .site-title a {
@@ -43,7 +43,7 @@
     display: block;
     color: #fff;
     padding: 0 8px;
-    line-height: 36px;
+    line-height: 6rem;
 }
 
 .account-menu a:hover {
@@ -75,15 +75,16 @@
 }
 
 .nav-container {
-    // background-color: rgba(0, 0, 0, 0.75);
-    background: #60c5ef;
-    background: -moz-linear-gradient(-15deg, #60c5ef 0%, #347eb9 100%);
-    background: -webkit-linear-gradient(-15deg, #60c5ef 0%, #347eb9 100%);
-    background: linear-gradient(165deg, #60c5ef 0%, #347eb9 100%);
+	background: @brand-blue;
+    // background: #60c5ef;
+    // background: -moz-linear-gradient(-15deg, #60c5ef 0%, #347eb9 100%);
+    // background: -webkit-linear-gradient(-15deg, #60c5ef 0%, #347eb9 100%);
+    // background: linear-gradient(165deg, #60c5ef 0%, #347eb9 100%);
     // filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#60c5ef', endColorstr='#347eb9', GradientType=1);
     margin-bottom: 30px;
     position: fixed;
     width: 100%;
+    box-shadow: 0 0 2px rgba(0,0,0,.14),0 2px 2px rgba(0,0,0,.28);
 }
 
 .nav-container:after {
@@ -117,7 +118,7 @@
 .nav-menu a {
     display: block;
     padding: 0 16px;
-    line-height: 36px;
+    line-height: 6rem;
     color: #fff;
     text-decoration: none;
 }
