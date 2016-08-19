@@ -15,6 +15,8 @@ JS_ADMIN_ASSETS = (
     'js/lib/datatables/DT_bootstrap.js',
     'js/jquery.browser.min.js',
     'js/chosen/chosen.jquery.min.js',
+    'js/app.js',
+    'js/vendor.js'
 )
 
 CSS_ASSETS = (
@@ -28,7 +30,8 @@ CSS_ASSETS = (
 CSS_ADMIN_ASSETS = (
     'bootstrap/css/bootstrap.min.css',
     'js/chosen/chosen.css',
-    'css/style.css',
+    'css/app-blue.css',
+    'css/vendor.css'
 ) + settings.CSS_ASSETS
 
 js = Bundle(*JS_ASSETS, filters='jsmin', output='gen/packed.js')

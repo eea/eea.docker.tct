@@ -12,11 +12,10 @@
       <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    {% block assets %}
+
     {% assets "css_admin" %}
       <link rel="stylesheet" href="{{ ASSET_URL }}" />
     {% endassets %}
-    {% endblock %}
 
     {% block extra_head %}{% endblock %}
 
@@ -26,7 +25,6 @@
   </head>
 
 <body>
-  
     <div class="header">
       <div class="container">
         {% if LAYOUT_HEADER_LOGO %}
@@ -100,3 +98,4 @@
 </body>
 
 </html>
+

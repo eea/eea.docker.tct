@@ -12,11 +12,9 @@
       <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    {% block assets %}
     {% assets "css" %}
       <link rel="stylesheet" href="{{ ASSET_URL }}" />
     {% endassets %}
-    {% endblock %}
 
     {% block extra_head %}{% endblock %}
 
@@ -34,8 +32,6 @@
             <img src="/static/CHM_logo_45x70px.png">
           </div>
         {% endif %}
-
-
         <div class="nav-container">
         {% include "_bits/account_menu.html" %}
           {% block navmenu %}{% endblock %}
