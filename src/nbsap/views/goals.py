@@ -29,8 +29,8 @@ def goals(request, code):
                 'current_goal': current_goal,
                 'indicators_pages': get_indicators_pages(paginator),
                 'info_header': info_header,
-                })
-        )
+            })
+    )
 
 
 def eu_target_nat_strategy_export_preview(request, target_id):
@@ -78,4 +78,5 @@ def get_eu_indicator_title(request, pk=None):
 
     indicator = get_object_or_404(models.EuIndicator, pk=pk)
     return HttpResponse(json.dumps(
-        [{'code': indicator.code, 'title': indicator.title}]))
+        [{'code': indicator.code, 'title': indicator.title,
+          'indicator_type': indicator.indicator_type}]))
