@@ -1,7 +1,7 @@
 {% load utils %}
 {% load i18n %}
 
-<ul class="nav-menu">
+<ul class="sidebar-menu">
 
   <li>
     <a class="{% active request '^/$' %} {% active request '^/indicators' %}{% active request '^/goals' %}" href="{% url 'goals' %}" class="uppercase">{% trans "Aichi" %}</a>
