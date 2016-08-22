@@ -4,11 +4,11 @@
 {% load i18n %}
 
 {% block title %}
-NBSAP - {% trans "National Strategy: Objectives" %}
+  NBSAP - {% trans "National Strategy: Objectives" %}
 {% endblock %}
 
 {% block navmenu %}
-{% include '_bits/nav_menu.html' %}
+  {% include '_bits/nav_menu.html' %}
 {% endblock %}
 
 
@@ -17,11 +17,11 @@ NBSAP - {% trans "National Strategy: Objectives" %}
   <h4 class="sidebar-title">{% trans "Objectives" %}</h4>
   <ul class="sidebar-menu">
     {% for objective in objectives|sort_by_code %}
-    <li {% if objective.code == current_objective.code %}class="active" {% endif %}>
-      <a href="{% url 'nat_strategy' code=objective.code %}" title="{{ objective.code }}">
-        {% trans "Objective" %} {{ objective.code }}
-      </a>
-    </li>
+      <li {% if objective.code == current_objective.code %}class="active"{% endif %}>
+        <a href="{% url 'nat_strategy' code=objective.code %}" title="{{ objective.code }}">
+          {% trans "Objective" %} {{ objective.code }}
+        </a>
+      </li>
     {% endfor %}
   </ul>
 
@@ -35,19 +35,16 @@ NBSAP - {% trans "National Strategy: Objectives" %}
 
 
 {% block content %}
-<section class="content-header">
+<section class="content-header"></section>
   <h1>{% trans 'National Strategy' %}</h1>
-</section>
-<section class="content">
-  <h2>
-    {% trans "Objective" %} {{ current_objective.code }}{% if current_objective.title %}: {{ current_objective.title }}
-    {% endif %}
-  </h2>
+  <h1 class="x-title">
+    {% trans "Objective" %} {{ current_objective.code }}{% if current_objective.title %}: {{ current_objective.title }} {% endif %}
+  </h1>
   <div class="summary">
     <div class="snippet">
       {{ current_objective.description|striptags|truncatechars:510|safe }}
       {% if current_objective.description|length > 510 %}
-      <a class="more">{% trans "show more" %}</a>
+        <a class="more">{% trans "show more" %}</a>
       {% endif%}
     </div>
     <div class="full">
@@ -57,105 +54,100 @@ NBSAP - {% trans "National Strategy: Objectives" %}
   </div>
 
   <div class="pre-toc">
-    {% include 'mapping/../manager/nat_strategy/mapping/nat_strategy_aichi_mapping.html' with subobj=current_objective
-    %}
+    {% include 'mapping/../manager/nat_strategy/mapping/nat_strategy_aichi_mapping.html' with subobj=current_objective %}
 
     {% if EU_STRATEGY %}
-    {% include 'mapping/../manager/nat_strategy/mapping/nat_strategy_eu_mapping.html' with subobj=current_objective %}
+        {% include 'mapping/../manager/nat_strategy/mapping/nat_strategy_eu_mapping.html' with subobj=current_objective %}
     {% endif %}
   </div>
 
   <div>
     <p>
       <a href="{% url 'implementation' code=current_objective.code %}" title="{{ current_objective.code }}">
-        See implementation
+      See implementation
       </a>
     </p>
   </div>
 
-  <div class="toc">
-    <h5>{% trans "Table of contents" %}:</h5>
-    {% if current_objective.objectives_tree|length %}
-    <ul>
-      {% for objective in current_objective.objectives_tree|sort_by_code %}
-      <li>
-        <a href="#{{ objective.code }}"
-           rel="tooltip"
-           data-placement="right"
-           data-original-title="{{ objective.title }}">
-          {% trans "Objective" %} {{ objective.code }}</a>
+<div class="toc">
+<h5>{% trans "Table of contents" %}:</h5>
+{% if current_objective.objectives_tree|length %}
+<ul>
+  {% for objective in current_objective.objectives_tree|sort_by_code %}
+  <li>
+    <a href="#{{ objective.code }}"
+       rel="tooltip"
+       data-placement="right"
+       data-original-title="{{ objective.title }}">
+       {% trans "Objective" %} {{ objective.code }}</a>
 
-      </li>
-      {% endfor %}
-    </ul>
-    {% else %}
-    <p>{% trans "No sub-objectives found" %}</p>
-    {% endif %}
-  </div>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+  <p>{% trans "No sub-objectives found" %}</p>
+{% endif %}
+</div>
 
-  {% if current_objective.objectives_tree|length %}
+{% if current_objective.objectives_tree|length %}
 
   {% for obj in current_objective.objectives_tree|sort_by_code %}
 
-  <div class="section" id="{{ obj.code }}">
-    <h2>
-      {% trans "Objective" %}
-      {{ obj.code }}{% if obj.title %}: {{ obj.title }} {% endif %}
-    </h2>
+    <div class="section" id="{{ obj.code }}">
+      <h2>
+        {% trans "Objective" %}
+           {{ obj.code }}{% if obj.title %}: {{ obj.title }} {% endif %}
+      </h2>
 
-    <div class="summary">
-      <div class="snippet">
-        {{ obj.description|striptags|truncatechars:510|safe }}
-        {% if obj.description|length > 510 %}
-        <a class="more">{% trans "show more" %}</a>
-        {% endif%}
-      </div>
-      {# /snippet #}
-      <div class="full">
-        {{ obj.description|safe }}
-        <a class="less">
-          {% trans "show less" %}</a>
-      </div>
-      {# /full #}
-    </div>
-    {# /summary #}
+      <div class="summary">
+        <div class="snippet">
+          {{ obj.description|striptags|truncatechars:510|safe }}
+          {% if obj.description|length > 510 %}
+            <a class="more">{% trans "show more" %}</a>
+          {% endif%}
+        </div> {# /snippet #}
+        <div class="full">
+          {{ obj.description|safe }}
+          <a class="less">
+            {% trans "show less" %}</a>
+        </div> {# /full #}
+      </div> {# /summary #}
 
-    {% include 'manager/nat_strategy/mapping/nat_strategy_aichi_mapping.html' with subobj=obj%}
-    {% if EU_STRATEGY %}
-    {% include 'manager/nat_strategy/mapping/nat_strategy_eu_mapping.html' with subobj=obj %}
-    {% endif %}
+      {% include 'manager/nat_strategy/mapping/nat_strategy_aichi_mapping.html' with subobj=obj%}
+      {% if EU_STRATEGY %}
+        {% include 'manager/nat_strategy/mapping/nat_strategy_eu_mapping.html' with subobj=obj %}
+      {% endif %}
 
-    <div>
-      <p>
-        <a href="{% url 'implementation' code=current_objective.code %}#{{ obj.code }}" title="{{ obj.code }}">
+      <div>
+        <p>
+          <a href="{% url 'implementation' code=current_objective.code %}#{{ obj.code }}" title="{{ obj.code }}">
           See implementation
-        </a>
-      </p>
-    </div>
+          </a>
+        </p>
+      </div>
 
-  </div>
-  {# /summary #}
+    </div> {# /summary #}
 
   {% endfor %}
 
-  {% endif %}
+{% endif %}
 
 
-  <div class="text-right">
-    <a href="#top">
-      {% trans "Back to top"%}</a>
-  </div>
-</section>
+<div class="text-right">
+  <a href="#top">
+    {% trans "Back to top"%}</a>
+</div>
+
 
 {% endblock %}
 
 
 {% block scripts %}
-<script>
+  <script>
   $(function () {
     $("[rel=tooltip]").tooltip();
 
-    $('.more').on('click', function () {
+    $('.more').on('click', function() {
       var parents = $(this).parents('.summary');
       var snippet = parents.find('.snippet');
       var full = parents.find('.full');
@@ -164,7 +156,7 @@ NBSAP - {% trans "National Strategy: Objectives" %}
       full.show();
     });
 
-    $('.less').on('click', function () {
+    $('.less').on('click', function() {
       var parents = $(this).parents('.summary');
       var snippet = parents.find('.snippet');
       var full = parents.find('.full');
@@ -173,5 +165,5 @@ NBSAP - {% trans "National Strategy: Objectives" %}
       snippet.show();
     });
   });
-</script>
+  </script>
 {% endblock scripts %}
