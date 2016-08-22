@@ -1,33 +1,31 @@
 import json
 from cStringIO import StringIO
 
-from django.utils.translation import ugettext_lazy as _
-
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
 from django.conf import settings
 from django.http import HttpResponse
 from django.template import RequestContext
 from django.template.loader import render_to_string
-from django.shortcuts import render_to_response, redirect
-from django.contrib import messages
+from django.shortcuts import render_to_response
 
 from nbsap import models
 from indicators import get_indicators_pages
 
 
-def goals(request, code, aichi_target_id=None):
-    current_goal = get_object_or_404(models.AichiGoal, code=code)
+def goals(request, code=None, aichi_target_id=None):
+    if code:
+        current_goal = models.AichiGoal.objects.get(code=code)
+        targets = current_goal.targets.all()
+    else:
+        current_goal = None
+        targets = models.AichiTarget.objects.all()
     goals = models.AichiGoal.objects.order_by('code').all()
+
     indicators_list = models.AichiIndicator.objects.all()
 
     if not aichi_target_id:
-        aichi_target_id = current_goal.targets.first().id
-        target = current_goal.targets.get(pk=aichi_target_id)
-    elif int('0' + aichi_target_id) not in \
-            current_goal.targets.all().values_list('id', flat=True):
-        messages.error(request, _('Target does not exist') + "")
-        return redirect('goals')
+        target = None
     else:
         target = current_goal.targets.get(pk=aichi_target_id)
 
@@ -35,10 +33,12 @@ def goals(request, code, aichi_target_id=None):
     info_header = settings.INFO_HEADER
 
     return render_to_response(
-        'aichi/goals.html',
+        'aichi/aichi.html',
         context_instance=RequestContext(
             request, {
+                'code': code,
                 'goals': goals,
+                'targets': targets,
                 'current_goal': current_goal,
                 'target': target,
                 'indicators_pages': get_indicators_pages(paginator),
