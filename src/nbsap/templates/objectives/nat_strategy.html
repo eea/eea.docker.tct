@@ -43,7 +43,9 @@
   <div class="summary">
     <div class="snippet">
       {{ current_objective.description|striptags|truncatechars:510|safe }}
-      <a class="more">{% trans "show more" %}</a>
+      {% if current_objective.description|length > 510 %}
+        <a class="more">{% trans "show more" %}</a>
+      {% endif%}
     </div>
     <div class="full">
       {{ current_objective.description|safe }}
@@ -100,7 +102,9 @@
       <div class="summary">
         <div class="snippet">
           {{ obj.description|striptags|truncatechars:510|safe }}
-          <a class="more">{% trans "show more" %}</a>
+          {% if obj.description|length > 510 %}
+            <a class="more">{% trans "show more" %}</a>
+          {% endif%}
         </div> {# /snippet #}
         <div class="full">
           {{ obj.description|safe }}

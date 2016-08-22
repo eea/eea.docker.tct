@@ -36,7 +36,7 @@
     <ul>
       {% for target in current_goal.targets.all %}
       <li>
-        <a href="{% url 'goals' code=current_goal.code %}#{{target.code}}"
+        <a href="{% url 'goals' code=current_goal.code aichi_target_id=target.id %}"
            rel="tooltip">
            {% trans "AICHI Target" %} {{ target.code }}
         </a>
@@ -70,8 +70,7 @@
 
   <h2 class="page-subtitle">{% trans "AICHI Goal" %} {{ current_goal.code|upper }}: {{ current_goal.description|striptags|safe }}</h2>
 
-
-  {% for target in current_goal.targets.all %}
+  {% if target %}
   <div class="section" id="{{ target.code }}">
     <h2>{% trans "AICHI Target" %} {{ target.code }}</h2>
     <p>{{ target.description }}</p>
@@ -219,7 +218,7 @@
     </div>
 
   </div>
-  {% endfor %}
+  {% endif %}
 
   <div class="text-right">
     <a href="#top">{% trans "Back to top" %}</a>

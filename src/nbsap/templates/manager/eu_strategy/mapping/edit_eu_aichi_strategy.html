@@ -38,6 +38,14 @@
     </div>
 
     <div class="form-group">
+      <label class="col-md-2" for="aichi_goal">{% trans "AICHI Goal"%}</label>
+      <div class="col-md-3"> {{ form.aichi_goals }}
+      </div>
+      <div class="goal_text col-md-7 col-md-offset-2">
+      </div>
+    </div> 
+
+    <div class="form-group">
       <label class="col-md-2" for="aichi_targets">{% trans "AICHI Targets" %}</label>
       <div class="col-md-3">
         {{ form.aichi_targets }}
@@ -102,6 +110,14 @@
     showTargetCodeValue('other_aichi_targets',
                         '.other_aichi_targets_text',
                         "{% url 'aichi_target_title' pk=1 %}");
+    showIndicatorCodeValue('eu_indicators',
+                        '.eu_indicators_text',
+                        "{% url 'eu_indicator_title' pk=1 %}");
+    showIndicatorCodeValue('other_eu_indicators',
+                        '.other_eu_indicators_text',
+                        "{% url 'eu_indicator_title' pk=1 %}");
+
   });
+  {% include '_bits/strategy_mapping.js' %}
   </script>
 {% endblock %}

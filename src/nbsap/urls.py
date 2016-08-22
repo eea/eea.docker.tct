@@ -10,19 +10,27 @@ admin.autodiscover()
 
 urlpatterns = [
     # homepage URLs
-    url(r'^$', views.goals, {'code': 'a'}, name='goals'),
+    url(r'^$', views.goals, {'code': 'a',
+                             'aichi_target_id': '1'}, name='goals'),
     url(r'^goals/(?P<code>[\w\-]+)$', views.goals, name='goals'),
+    url(r'^goals/(?P<code>[\w\-]+)/aichi_target/(?P<aichi_target_id>[\w\-]+)$',
+        views.goals,
+        name='goals'),
     url(r'^crashme$', views.crashme, name='crashme'),
     url(r'^ping/me$', views.pingme, name='pingme'),
 
     url(r'^implementation$', views.implementation, name='implementation'),
-    url(r'^implementation/intro$', views.implementation_page, name='implementation_page'),
-    url(r'^implementation/(?P<code>((\d+\.)*\d+$))$', views.implementation, name='implementation'),
+    url(r'^implementation/intro$', views.implementation_page,
+        name='implementation_page'),
+    url(r'^implementation/(?P<code>((\d+\.)*\d+$))$',
+        views.implementation, name='implementation'),
 
     url(r'^eu_targets$', views.eu_targets, {'pk': '1'}, name='eu_targets'),
     url(r'^eu_targets/(?P<pk>(\d+))$', views.eu_targets, name='eu_targets'),
-    url(r'^eu_targets/(?P<target_id>[\w\-]+)/objectives/export/preview/$', views.eu_target_nat_strategy_export_preview, name='nat_strategy_export_preview'),
-    url(r'^eu_targets/(?P<target_id>[\w\-]+)/objectives/export/$', views.eu_target_nat_strategy_export, name='nat_strategy_export'),
+    url(r'^eu_targets/(?P<target_id>[\w\-]+)/objectives/export/preview/$',
+        views.eu_target_nat_strategy_export_preview, name='nat_strategy_export_preview'),
+    url(r'^eu_targets/(?P<target_id>[\w\-]+)/objectives/export/$',
+        views.eu_target_nat_strategy_export, name='nat_strategy_export'),
 
     url(r'^indicator/(?P<pk>(\d+))$', views.indicator,
         name='indicator'),
@@ -32,8 +40,10 @@ urlpatterns = [
         name='nat_indicators'),
 
     url(r'^objectives$', views.nat_strategy, name='nat_strategy'),
-    url(r'^download/xslx$', views.nat_strategy_download, name='nat_strategy_download'),
-    url(r'^objectives/(?P<code>[\w\.\-]+)$', views.nat_strategy, name='nat_strategy'),
+    url(r'^download/xslx$', views.nat_strategy_download,
+        name='nat_strategy_download'),
+    url(r'^objectives/(?P<code>[\w\.\-]+)$',
+        views.nat_strategy, name='nat_strategy'),
 
     url(r'^admin/', include(admin.site.urls)),
 
@@ -43,46 +53,54 @@ urlpatterns = [
     url(r'^favicon\.ico$', RedirectView.as_view(url='/static/favicon.ico')),
 
     # Disallow search engines to index data
-    url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
+    url(r'^robots\.txt$', TemplateView.as_view(
+        template_name='robots.txt', content_type='text/plain')),
 
     # URLs for mapping form
     url(r'^goals/title$',
-            views.get_goal_title,
-            name='goal_title'),
+        views.get_goal_title,
+        name='goal_title'),
     url(r'^goals/title/(?P<pk>[\w\-]+)$',
-            views.get_goal_title,
-            name='goal_title'),
+        views.get_goal_title,
+        name='goal_title'),
 
     url(r'^actions/title$',
-            views.get_action_title,
-            name='action_title'),
+        views.get_action_title,
+        name='action_title'),
     url(r'^actions/title/(?P<pk>[\w\-]+)$',
-            views.get_action_title,
-            name='action_title'),
+        views.get_action_title,
+        name='action_title'),
 
     url(r'^eu_targets/title$',
-            views.get_eu_target_title,
-            name='eu_target_title'),
+        views.get_eu_target_title,
+        name='eu_target_title'),
     url(r'^eu_targets/title/(?P<pk>[\w\-]+)$',
-            views.get_eu_target_title,
-            name='eu_target_title'),
+        views.get_eu_target_title,
+        name='eu_target_title'),
     url(r'^eu_targets/actions/(?P<pk>[\w\-]+)$',
-            views.get_actions_for_target,
-            name='target_action'),
+        views.get_actions_for_target,
+        name='target_action'),
 
     url(r'^aichi_targets/title$',
-            views.get_aichi_target_title,
-            name='aichi_target_title'),
+        views.get_aichi_target_title,
+        name='aichi_target_title'),
     url(r'^aichi_targets/title/(?P<pk>[\w\-]+)$',
-            views.get_aichi_target_title,
-            name='aichi_target_title'),
+        views.get_aichi_target_title,
+        name='aichi_target_title'),
+
+    url(r'^eu_indicator/title$',
+        views.get_eu_indicator_title,
+        name='eu_indicator_title'),
+    url(r'^eu_indicator/title/(?P<pk>[\w\-]+)$',
+        views.get_eu_indicator_title,
+        name='eu_indicator_title'),
 
     url(r'^objectives/title$',
-            views.get_national_objective_title,
-            name='objective_title'),
+        views.get_national_objective_title,
+        name='objective_title'),
     url(r'^objectives/title/(?P<pk>[\w\-]+)$',
-            views.get_national_objective_title,
-            name='objective_title'),
+        views.get_national_objective_title,
+        name='objective_title'),
 
     # othe URLs
     url(r'^tinymce/', include('tinymce.urls')),
@@ -93,12 +111,28 @@ urlpatterns = [
 
     # administration URLs
     url(r'^administration/$',
-            views.admin_home,
-            name='admin_home'),
+        views.admin_home,
+        name='admin_home'),
 
     url(r'^administration/targets/$',
-            views.list_eu_targets,
-            name='list_eu_targets'),
+        views.list_eu_targets,
+        name='list_eu_targets'),
+
+    url(r'^administration/targets/region/$',
+        views.list_regions,
+        name='list_regions'),
+
+    url(r'^administration/targets/region/add/$',
+        views.edit_region,
+        name='add_region'),
+
+    url(r'^administration/targets/region/(?P<pk>[\w\-]+)/edit/$',
+        views.edit_region,
+        name='edit_region'),
+
+    url(r'^administration/targets/region/(?P<pk>\d+)/delete/$',
+        views.delete_region,
+        name='delete_region'),
 
     url(r'^administration/targets/(?P<parent>[\w\-]+)/add$',
         views.edit_eu_strategy_target,
@@ -189,64 +223,64 @@ urlpatterns = [
         name='map_nat_indicator'),
 
     url(r'^administration/objectives/$',
-            views.list_national_objectives,
-            name='list_national_objectives'),
+        views.list_national_objectives,
+        name='list_national_objectives'),
 
     url(r'^administration/objectives/(?P<pk>[\w\-]+)$',
-            views.view_national_objective,
-            name='view_national_objective'),
+        views.view_national_objective,
+        name='view_national_objective'),
 
     url(r'^administration/objectives/(?P<pk>[\w\-]+)/edit$',
-            views.edit_national_objective,
-            name='edit_national_objective'),
+        views.edit_national_objective,
+        name='edit_national_objective'),
 
     url(r'^administration/objectives/(?P<parent>[\w\-]+)/add$',
-            views.edit_national_objective,
-            name='edit_national_objective'),
+        views.edit_national_objective,
+        name='edit_national_objective'),
 
     url(r'^administration/objectives/add/$',
-            views.edit_national_objective,
-             name='edit_national_objective'),
+        views.edit_national_objective,
+        name='edit_national_objective'),
 
     url(r'^administration/objectives/(?P<pk>[\w\-]+)/delete',
-            views.delete_national_objective,
-             name='delete_national_objective'),
+        views.delete_national_objective,
+        name='delete_national_objective'),
 
     url(r'^administration/objectives/(?P<objective>[\w\-]+)/actions/add',
-            views.edit_national_action,
-            name='edit_national_action'),
+        views.edit_national_action,
+        name='edit_national_action'),
 
     url(r'^administration/objectives/(?P<objective>[\w\-]+)/actions/(?P<parent>[\w\-]+)/add',
-            views.edit_national_action,
-            name='edit_national_action'),
+        views.edit_national_action,
+        name='edit_national_action'),
 
     url(r'^administration/objectives/(?P<objective>[\w\-]+)/actions/(?P<pk>[\w\-]+)/edit',
-            views.edit_national_action,
-            name='edit_national_action'),
+        views.edit_national_action,
+        name='edit_national_action'),
 
     url(r'^administration/objectives/(?P<objective>[\w\-]+)/actions/(?P<pk>[\w\-]+)/$',
-            views.view_national_action,
-            name='view_national_action'),
+        views.view_national_action,
+        name='view_national_action'),
 
     url(r'^administration/objectives/(?P<objective>[\w\-]+)/actions/(?P<pk>[\w\-]+)/delete',
-            views.delete_national_action,
-            name='delete_national_action'),
+        views.delete_national_action,
+        name='delete_national_action'),
 
     url(r'^administration/mapping/$',
-            views.list_national_strategy,
-            name='list_national_strategy'),
+        views.list_national_strategy,
+        name='list_national_strategy'),
 
     url(r'^administration/mapping/add$',
-            views.edit_national_strategy,
-            name='edit_national_strategy'),
+        views.edit_national_strategy,
+        name='edit_national_strategy'),
 
     url(r'^administration/mapping/(?P<pk>[\w\-]+)/add$',
-            views.edit_national_strategy,
-            name='edit_national_strategy'),
+        views.edit_national_strategy,
+        name='edit_national_strategy'),
 
     url(r'^administration/mapping/(?P<strategy>[\w\-]+)/delete$',
-            views.delete_national_strategy,
-            name='delete_national_strategy'),
+        views.delete_national_strategy,
+        name='delete_national_strategy'),
 
     url(r'^administration/eu-aichi-mapping/$',
         views.list_eu_aichi_strategy,
@@ -268,7 +302,8 @@ urlpatterns = [
 
     url(r'^administration/pages$', views.admin_pages, name='admin_pages'),
     url(r'^administration/export$', views.admin_export, name='admin_export'),
-    url(r'^administration/page/(?P<handle>[\w\-]+)/edit$', views.admin_page, name='admin_page')
+    url(r'^administration/page/(?P<handle>[\w\-]+)/edit$',
+        views.admin_page, name='admin_page')
 ]
 
 # Django Rosetta support for translation
