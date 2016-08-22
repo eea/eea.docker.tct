@@ -6,8 +6,8 @@
 }
 
 	.sidebar-right {
-		position: fixed;
-	    right: 0;
+		position: relative;
+		float: right;
 	    clear: both;
 	    width: 15%;
 	    box-sizing: border-box;
@@ -32,7 +32,6 @@
 	    background: @gray-lightest;
 	    padding: 1rem;
 	    border-radius: 3px;
-	  
 	}
 
 }
@@ -49,6 +48,9 @@
     display:none;
 	    }
 
+   .sidebaropen {
+      	overflow: hidden;
+      }
 
 	 #backdrop {
       position: fixed;
@@ -60,7 +62,11 @@
       z-index: 100;
   }
 
-
+ 
+ .sidebar li {
+ 	display: inline-block;
+ 	padding: 1rem;
+ }
   .sidebar-trigger {
 	display: block;
     transform: rotate(270deg);

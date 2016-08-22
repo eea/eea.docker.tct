@@ -15,7 +15,7 @@ $(document).ready(function() {
 
     $accountheader.click(function() {
 
-
+    	$accountheader.toggleClass('clicked');
 
         $accountmenu.animate({
             height: 'toggle'
@@ -50,11 +50,11 @@ $(document).ready(function() {
 
 
     $('.nav-trigger button, .close-trigger').click(function() {
-
-
         $backdrop.animate({
             height: 'toggle'
         }, 1);
+
+        $('body').toggleClass('sidebaropen');
 
         $navcontainer.animate({
             width: 'toggle'
@@ -66,7 +66,7 @@ $(document).ready(function() {
         $backdrop.animate({
             height: 'toggle'
         }, 1);
-
+        $('body').toggleClass('sidebaropen');
         $sidebarright.animate({
             width: 'toggle'
         });
@@ -82,6 +82,8 @@ $(document).ready(function() {
         $navcontainer.animate({
             width: 'hide'
         });
+        $('body').removeClass('sidebaropen');
+
     });
 
 

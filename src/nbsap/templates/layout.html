@@ -12,7 +12,6 @@
       <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-  
     {% assets "css" %}
       <link rel="stylesheet" href="{{ ASSET_URL }}" />
     {% endassets %}
@@ -26,7 +25,6 @@
   </head>
 
 <body class="user">
-  
     <div class="header">
       <div class="container">
         {% if LAYOUT_HEADER_LOGO %}
@@ -48,7 +46,6 @@
         </div>
 
           <h1 class="site-title"><a href="{% url 'goals' %}">{% trans SITE_HEADER %}</a></h1>
-        
       </div>
     </div>
 
@@ -60,8 +57,7 @@
       {% endif %}
       <div class="sidebar-trigger"><button type="button" class="btn">Open Sidebar</button></div>
       {% block sidebar %}{% endblock %}
-      {% block sidebar-right %}{% endblock %} 
-
+      {% block sidebar-right %}{% endblock %}
       <div class="main">
         {% if messages %}
           <div class="messages alert alert-success">

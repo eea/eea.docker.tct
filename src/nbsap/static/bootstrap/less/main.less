@@ -4,7 +4,7 @@
 	.sidebar {
 		float:none;
     // display: block;
-        text-align: center;
+
 	}
 
 	.main {
@@ -293,6 +293,28 @@ body {
   border-top: 1px solid @gray-lightest;
 }
 
+.section h2,h5 {
+  display: inline;
+  color: @text-color;
+  font-size: 1.7rem;
+}
+
+.section h2 {
+  font-weight: 600;
+}
+
+.section h2:after {
+  content:': ';
+}
+.section p {
+  font-style: italic;
+}
+
+.section h2:before {
+  content:'• ';
+  padding-left: 10px;
+}
+
 .footer {
   margin-top: 2em;
   padding-top: 1em;
@@ -324,15 +346,16 @@ body {
 
 .well {
   padding: 10px;
-  background: transparent;
   box-shadow: 0 0 3px 0 rgba(0,0,0,.1);
+  background: #f7f7f7;
 }
   .well-title {
     margin: -10px -10px 10px;
     padding: 3px 10px;
     font-size: 14px;
-    color: #777;
-    border-bottom: 1px solid @gray-light;;
+    color: white;
+    border-bottom: 1px solid @gray-light;
+    background: #039be5;
   }
   .well .html-content {
     margin: -10px;
@@ -343,12 +366,8 @@ body {
   margin-bottom: 1em;
   padding: 1rem;
   background-color: @gray-lightest;
- @media screen and (max-width: 800px) {
-  text-align: center;
-  }
-
-  @media (min-width: 800px) {
-    height: 350px;
+  @media (max-width: 800px) {
+    height: 550px;
     overflow-y: auto;
   }
 
@@ -357,9 +376,13 @@ body {
   .toc h5 {
     margin-top: auto;
   }
-  .toc  ul {
+  .toc ul {
     list-style-type: none;
     overflow: hidden;
+    @media (max-width: 800px) {
+    height: 300px;
+    overflow-y: scroll;
+    }
   }
   .toc li {
     list-style-type: none;
