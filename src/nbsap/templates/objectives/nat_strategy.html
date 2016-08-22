@@ -17,7 +17,7 @@ NBSAP - {% trans "National Strategy: Objectives" %}
   <h4 class="sidebar-title">{% trans "Objectives" %}</h4>
   <ul class="sidebar-menu">
     {% for objective in objectives|sort_by_code %}
-    <li {% if objective.code== current_objective.code %}class="active" {% endif %}>
+    <li {% if objective.code == current_objective.code %}class="active" {% endif %}>
       <a href="{% url 'nat_strategy' code=objective.code %}" title="{{ objective.code }}">
         {% trans "Objective" %} {{ objective.code }}
       </a>
