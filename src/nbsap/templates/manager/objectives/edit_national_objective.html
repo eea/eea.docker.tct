@@ -71,8 +71,7 @@ NBSAP - {% trans "Edit Objective " %}{{ objective.code }}
         </div>
 
         <p class="original-description">
-          {% blocktrans with default_language_label as language %}Original description in {{ language }}{% endblocktrans
-          %}
+          {% blocktrans with default_language_label as language %}Original description in {{ language }}{% endblocktrans %}
         </p>
         <div class="well">
           {{ objective.description_default|safe }}
