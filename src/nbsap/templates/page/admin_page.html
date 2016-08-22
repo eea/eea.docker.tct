@@ -5,35 +5,37 @@
 
 
 {% block title %}
-  NBSAP - {% trans "Edit page" %}
+NBSAP - {% trans "Edit page" %}
 {% endblock %}
 
 
 {% block head_scripts %}
-  {{ form.media }}
+{{ form.media }}
 {% endblock %}
 
 {% block scripts %}
-  {% url 'admin_page' handle=page.handle as page_url %}
-  <script>
-    $(function () {
-      $('#id_lang').on('change', function () {
-        var lang = $(this).val();
-        window.location.replace('{{ page_url }}?lang=' + lang);
-      });
+{% url 'admin_page' handle=page.handle as page_url %}
+<script>
+  $(function () {
+    $('#id_lang').on('change', function () {
+      var lang = $(this).val();
+      window.location.replace('{{ page_url }}?lang=' + lang);
     });
-  </script>
+  });
+</script>
 {% endblock %}
 
 
 {% block navmenu %}
-  {% include 'manager/admin_nav_tabs.html' %}
+{% include 'manager/admin_nav_tabs.html' %}
 {% endblock %}
 
 
 {% block content %}
-
-  <h1 class="page-title">Edit page</h1>
+<section class="content-header">
+  <h1>Edit page</h1>
+</section>
+<section class="content">
   <form method="POST" class="edit-form">
 
     <div class="control-group">
@@ -68,4 +70,5 @@
     </div>
 
   </form>
+</section>
 {% endblock %}

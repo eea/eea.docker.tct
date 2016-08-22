@@ -58,7 +58,7 @@ class ChoicesMixin(object):
 
 class NationalObjectiveForm(forms.Form):
     language = forms.ChoiceField(choices=settings.LANGUAGES)
-    title = forms.CharField(widget=widgets.Textarea)
+    title = forms.CharField(widget=widgets.TextInput)
     description = TextCleanedHtml(
         widget=TinyMCE(attrs={'cols': 80, 'rows': 25}),
         required=False)
@@ -117,7 +117,7 @@ class NationalObjectiveEditForm(NationalObjectiveForm):
 class NationalActionForm(forms.Form):
 
     language = forms.ChoiceField(choices=settings.LANGUAGES)
-    title = forms.CharField(widget=widgets.Textarea, required=False)
+    title = forms.CharField(widget=widgets.TextInput, required=False)
     description = TextCleanedHtml(
         widget=TinyMCE(attrs={'cols': 80, 'rows': 25}))
     region = forms.ChoiceField(choices=[('', 'All regions')], required=False)
@@ -172,7 +172,7 @@ class NationalActionForm(forms.Form):
 
 class EuTargetForm(forms.Form):
     language = forms.ChoiceField(choices=settings.LANGUAGES)
-    title = forms.CharField(widget=widgets.Textarea)
+    title = forms.CharField(widget=widgets.TextInput)
     description = TextCleanedHtml(
         widget=TinyMCE(attrs={'cols': 80, 'rows': 25}),
         required=False)
@@ -231,7 +231,7 @@ class EuTargetEditForm(EuTargetForm):
 class EuStrategyActivityForm(forms.Form):
 
     language = forms.ChoiceField(choices=settings.LANGUAGES)
-    title = forms.CharField(widget=widgets.Textarea)
+    title = forms.CharField(widget=widgets.TextInput)
     description = TextCleanedHtml(
         widget=TinyMCE(attrs={'cols': 80, 'rows': 25}), required=False)
     region = forms.ChoiceField(choices=[('', 'All regions')], required=False)
@@ -312,7 +312,7 @@ class AichiGoalForm(forms.Form):
     language = forms.ChoiceField(choices=settings.LANGUAGES)
     description = TextCleanedHtml(
         widget=TinyMCE(attrs={'cols': 80, 'rows': 25}))
-    title = forms.CharField(widget=widgets.Textarea)
+    title = forms.CharField(widget=widgets.TextInput)
 
     def __init__(self, *args, **kwargs):
         self.goal = kwargs.pop('goal', None)
@@ -487,7 +487,7 @@ class NbsapPageForm(forms.Form):
 
 class EuIndicatorForm(forms.Form):
     language = forms.ChoiceField(choices=settings.LANGUAGES)
-    title = forms.CharField(widget=widgets.Textarea, required=False)
+    title = forms.CharField(widget=widgets.TextInput, required=False)
     category = forms.ChoiceField(choices=EuIndicator.CATEGORIES)
     url = forms.CharField(required=False)
     indicator_type = forms.ChoiceField(choices=EuIndicator.TYPES)
@@ -538,11 +538,11 @@ class EuIndicatorForm(forms.Form):
 class NationalIndicatorForm(forms.Form):
 
     language = forms.ChoiceField(choices=settings.LANGUAGES)
-    title = forms.CharField(widget=widgets.Textarea, required=True)
+    title = forms.CharField(widget=widgets.TextInput, required=True)
     description = TextCleanedHtml(
         widget=TinyMCE(attrs={'cols': 80, 'rows': 25}),
         required=False)
-    code = forms.CharField(widget=widgets.Textarea, required=True)
+    code = forms.CharField(widget=widgets.TextInput, required=True)
     category = forms.ChoiceField(choices=NationalIndicator.CATEGORIES)
     url = forms.CharField(required=False)
 
@@ -846,7 +846,7 @@ class EuAichiStrategyForm(forms.Form, ChoicesMixin):
 
 
 class RegionForm(forms.Form):
-    name = forms.CharField(widget=widgets.Textarea,
+    name = forms.CharField(widget=widgets.TextInput,
                            required=True, max_length=256)
 
     def __init__(self, *args, **kwargs):

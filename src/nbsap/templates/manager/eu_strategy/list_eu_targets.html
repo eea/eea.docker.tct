@@ -5,16 +5,18 @@
 
 
 {% block title %}
-  NBSAP - {% trans "EU Strategy: List Targets" %}
+NBSAP - {% trans "EU Strategy: List Targets" %}
 {% endblock %}
 
 
 {% block content %}
 
-  {% get_current_language as lang_code %}
-
-  <h1 class="page-title">{% trans "European Strategy" %}</h1>
-  <h1>{% trans "List EU Targets" %}</h1>
+{% get_current_language as lang_code %}
+<section class="content-header">
+  <h1>{% trans "European Strategy" %}</h1>
+</section>
+<section class="content">
+  <h2>{% trans "List EU Targets" %}</h2>
 
   {% if EU_STRATEGY_ADD %}
   <div class="action-bar">
@@ -33,40 +35,41 @@
   <table class="table">
 
     <thead>
-      <th>{% trans "Code" %}</th>
-      <th>{% trans "Title" %}</th>
+    <th>{% trans "Code" %}</th>
+    <th>{% trans "Title" %}</th>
     </thead>
 
     <tbody>
     {% for target in targets %}
-      <tr>
-        <td>{{ target.code }}</td>
-        <td>
-          <a href="{% url 'view_eu_strategy_target' target.id %}"
-             title="{% trans 'Target' %} {{ target.code }}">
-            {{ target.title|default:target.code }}</a>
-        </td>
-      </tr>
+    <tr>
+      <td>{{ target.code }}</td>
+      <td>
+        <a href="{% url 'view_eu_strategy_target' target.id %}"
+           title="{% trans 'Target' %} {{ target.code }}">
+          {{ target.title|default:target.code }}</a>
+      </td>
+    </tr>
     {% endfor %}
     </tbody>
 
   </table>
+</section>
 {% endblock %}
 
 {% block scripts %}
 
-  {% assets "js_admin" %}
-    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-  {% endassets %}
+{% assets "js_admin" %}
+<script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
 
-  <script>
+<script>
 
-    $(document).ready(function() {
-      $('.objectives_listing').dataTable({
-          "bStateSave": true,
-          "iDisplayLength": 25,
-      });
+  $(document).ready(function () {
+    $('.objectives_listing').dataTable({
+      "bStateSave": true,
+      "iDisplayLength": 25,
     });
-  </script>
+  });
+</script>
 
 {% endblock scripts %}

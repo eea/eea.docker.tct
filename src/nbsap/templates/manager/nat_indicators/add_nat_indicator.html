@@ -3,23 +3,25 @@
 {% load i18n %}
 
 {% block title %}
-  NBSAP - {% trans "Add National Indicator" %}
+NBSAP - {% trans "Add National Indicator" %}
 {% endblock %}
 
 
 {% block head_scripts %}
-  {{ form.media }}
+{{ form.media }}
 {% endblock %}
 
 
 {% block content %}
-
+<section class="content-header">
   <h1>{% trans "Add new National Indicator" %}</h1>
+</section>
 
+<section class="content">
   {% if form.errors %}
-    <p>
-      {% blocktrans with form.errors|pluralize as errors %}Please correct the error {{ errors }} below.{% endblocktrans %}
-    </p>
+  <p>
+    {% blocktrans with form.errors|pluralize as errors %}Please correct the error {{ errors }} below.{% endblocktrans %}
+  </p>
   {% endif %}
 
   <form action="#" method="post" class="form">
@@ -72,4 +74,5 @@
     </div>
 
   </form>
+</section>
 {% endblock %}

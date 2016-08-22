@@ -3,23 +3,24 @@
 {% load assets %}
 
 {% block title %}
-  NBSAP - {% trans "Mapping EU and Aichi strategies: Edit" %}
+NBSAP - {% trans "Mapping EU and Aichi strategies: Edit" %}
 {% endblock %}
 
 
 {% block head_scripts %}
-  {{ form.media }}
+{{ form.media }}
 {% endblock %}
 
 
 {% block content %}
-
-  <h1 class="page-title">{% trans "Mapping EU and Aichi strategies" %}</h1>
-
+<section class="content-header">
+  <h1>{% trans "Mapping EU and Aichi strategies" %}</h1>
+</section>
+<section class="content">
   {% if form.errors %}
-    <p>
-      {% blocktrans with form.errors|pluralize as errors %}Please correct the error {{ errors }} below.{% endblocktrans %}
-    </p>
+  <p>
+    {% blocktrans with form.errors|pluralize as errors %}Please correct the error {{ errors }} below.{% endblocktrans %}
+  </p>
   {% endif %}
 
   <form action="{% url 'edit_eu_aichi_strategy' pk=strategy.pk %}" method="post" class="form-horizontal">
@@ -31,7 +32,7 @@
       <div class="col-md-3">
         <ul class="list-unstyled">
           {% for target in strategy.eu_targets.all %}
-            <li>- {{ target }}</li>
+          <li>- {{ target }}</li>
           {% endfor %}
         </ul>
       </div>
@@ -43,7 +44,7 @@
       </div>
       <div class="goal_text col-md-7 col-md-offset-2">
       </div>
-    </div> 
+    </div>
 
     <div class="form-group">
       <label class="col-md-2" for="aichi_targets">{% trans "AICHI Targets" %}</label>
@@ -90,34 +91,38 @@
       <a href="{% url 'list_eu_aichi_strategy' %}" class="btn btn-default" type="button">{% trans "Cancel" %}</a>
     </div>
   </form>
+</section>
 {% endblock %}
 
 {% block scripts %}
-  {% assets "js_admin" %}
-   <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-  {% endassets %}
-  <script>
-  $(function() {
+{% assets "js_admin" %}
+<script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
+<script>
+  $(function () {
     $(".chzn-select").chosen();
 
     forbidCrossChoicesIntersection('aichi_targets', 'other_aichi_targets');
     forbidCrossChoicesIntersection('eu_indicators', 'other_eu_indicators');
 
     showTargetCodeValue('aichi_targets',
-                        '.aichi_targets_text',
-                        "{% url 'aichi_target_title' pk=1 %}");
+      '.aichi_targets_text',
+      "{% url 'aichi_target_title' pk=1 %}");
 
     showTargetCodeValue('other_aichi_targets',
-                        '.other_aichi_targets_text',
-                        "{% url 'aichi_target_title' pk=1 %}");
+      '.other_aichi_targets_text',
+      "{% url 'aichi_target_title' pk=1 %}");
     showIndicatorCodeValue('eu_indicators',
-                        '.eu_indicators_text',
-                        "{% url 'eu_indicator_title' pk=1 %}");
+      '.eu_indicators_text',
+      "{% url 'eu_indicator_title' pk=1 %}");
     showIndicatorCodeValue('other_eu_indicators',
-                        '.other_eu_indicators_text',
-                        "{% url 'eu_indicator_title' pk=1 %}");
+      '.other_eu_indicators_text',
+      "{% url 'eu_indicator_title' pk=1 %}");
 
   });
-  {% include '_bits/strategy_mapping.js' %}
-  </script>
+  {%
+    include
+    '_bits/strategy_mapping.js' %
+  }
+</script>
 {% endblock %}

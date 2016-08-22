@@ -4,48 +4,50 @@
 {% load utils %}
 
 {% block title %}
-  NBSAP - {% trans "target" %} {{ target.code }}: {{target.title }}
+NBSAP - {% trans "target" %} {{ target.code }}: {{target.title }}
 {% endblock %}
 
 
 {% block content %}
+<section class="content-header">
+  <h1>{% trans "Target" %} {{ target.code }}: {{ target.title }}</h1>
+</section>
 
-  <h1 class="page-title">{% trans "Target" %} {{ target.code }}: {{ target.title }}</h1>
+<section class="content">
+  <div class="action-bar">
+    <form method="POST" action="{% url 'delete_eu_strategy_target' pk=target.pk %}">
 
-    <div class="action-bar">
-      <form method="POST" action="{% url 'delete_eu_strategy_target' pk=target.pk %}">
+      {% if target.parent %}
+      {% url 'view_eu_strategy_target' target.parent.id as back_url %}
+      {% else %}
+      {% url 'list_eu_targets' as back_url %}
+      {% endif %}
 
-        {% if target.parent %}
-          {% url 'view_eu_strategy_target' target.parent.id as back_url %}
-        {% else %}
-          {% url 'list_eu_targets' as back_url %}
-        {% endif %}
+      <a class="btn btn-success" href="{{ back_url }}">
+        <i class="glyphicon glyphicon-arrow-left"></i> {% trans "Back" %}
+      </a>
 
-        <a class="btn btn-success" href="{{ back_url }}">
-          <i class="glyphicon glyphicon-arrow-left"></i> {% trans "Back" %}
-        </a>
+      <a class="btn btn-default"
+         href="{% url 'edit_eu_strategy_activity' target=target.pk %}">
+        {% trans "Add action" %}
+      </a>
 
-        <a class="btn btn-default"
-           href="{% url 'edit_eu_strategy_activity' target=target.pk %}">
-          {% trans "Add action" %}
-        </a>
+      {% if not target.parent %}
+      <a class="btn btn-default"
+         href="{% url 'edit_eu_target_with_parent' parent=target.pk %}">
+        {% trans "Add sub target" %}
+      </a>
+      {% endif %}
 
-        {% if not target.parent %}
-        <a class="btn btn-default"
-           href="{% url 'edit_eu_target_with_parent' parent=target.pk %}">
-          {% trans "Add sub target" %}
-        </a>
-        {% endif %}
+      <a class="btn btn-default"
+         href="{% url 'edit_eu_strategy_target' pk=target.pk %}">{% trans "Edit" %}</a>
 
-        <a class="btn btn-default"
-           href="{% url 'edit_eu_strategy_target' pk=target.pk %}">{% trans "Edit" %}</a>
-
-        <button type="submit" class="btn btn-danger edit"
-                data-message="{% trans 'Are you sure you want to delete this target?' %}">
-          <i class="glyphicon glyphicon-trash"></i> {% trans "Delete" %}
-        </button>
-      </form>
-    </div>
+      <button type="submit" class="btn btn-danger edit"
+              data-message="{% trans 'Are you sure you want to delete this target?' %}">
+        <i class="glyphicon glyphicon-trash"></i> {% trans "Delete" %}
+      </button>
+    </form>
+  </div>
 
   <div class="html-content">
     {{ target.description|safe }}
@@ -55,29 +57,29 @@
     <table class="table table-striped minimalist">
 
       <thead>
-        <th class="span1">{% trans "Code" %}</th>
-        <th>{% trans "Sub-target" %}</th>
-        <th></th>
+      <th class="span1">{% trans "Code" %}</th>
+      <th>{% trans "Sub-target" %}</th>
+      <th></th>
       </thead>
 
       <tbody>
       {% for subtarget in target.children.all %}
-        <tr>
-          <td style="width: 300px;">{{ subtarget.code }}</td>
-          <td>
-            <a href="{% url 'view_eu_strategy_target' subtarget.id %}"
+      <tr>
+        <td style="width: 300px;">{{ subtarget.code }}</td>
+        <td>
+          <a href="{% url 'view_eu_strategy_target' subtarget.id %}"
              title="{% trans 'Target' %} {{ subtarget.code }}">
             {{ subtarget.title|default:subtarget.code }}</a>
-          </td>
-          <td>
-            <a href="{% url 'edit_eu_strategy_target' pk=subtarget.pk %}"
-               class="btn btn-xs btn-default">Edit</a>
-          </td>
-        </tr>
+        </td>
+        <td>
+          <a href="{% url 'edit_eu_strategy_target' pk=subtarget.pk %}"
+             class="btn btn-xs btn-default">Edit</a>
+        </td>
+      </tr>
       {% empty %}
-        <tr>
-          <td colspan="2">{% trans "No targets" %}</td>
-        </tr>
+      <tr>
+        <td colspan="2">{% trans "No targets" %}</td>
+      </tr>
       {% endfor %}
       </tbody>
 
@@ -87,42 +89,42 @@
   {% regroup actions by region as action_list %}
 
   {% for items in action_list %}
-    {% if items.grouper %}
-      <h4 class="page-title">{{ items.grouper }}</h4>
-    {% endif %}
+  {% if items.grouper %}
+  <h4 class="page-title">{{ items.grouper }}</h4>
+  {% endif %}
 
   <div class="property_list">
     <table class="table table-striped minimalist">
 
       <thead>
-        <th class="span1">{% trans "Code" %}</th>
-        <th>{% trans "Title" %}</th>
+      <th class="span1">{% trans "Code" %}</th>
+      <th>{% trans "Title" %}</th>
       </thead>
 
       <tbody>
-        {% for action in items.list %}
-          <tr>
-            <td style="width: 300px;">{{ action.code }}</td>
-            <td>
-              <a href="{% url 'view_eu_strategy_activity' target=target.pk pk=action.pk %}"
-               title="{% trans 'action' %} {{ action.code }}">
-                {{ action.title }}
-              </a>
-            </td>
-          </tr>
+      {% for action in items.list %}
+      <tr>
+        <td style="width: 300px;">{{ action.code }}</td>
+        <td>
+          <a href="{% url 'view_eu_strategy_activity' target=target.pk pk=action.pk %}"
+             title="{% trans 'action' %} {{ action.code }}">
+            {{ action.title }}
+          </a>
+        </td>
+      </tr>
       {% empty %}
-        <tr>
-          <td colspan="2">{% trans "No actions found" %}.</td>
-        </tr>
+      <tr>
+        <td colspan="2">{% trans "No actions found" %}.</td>
+      </tr>
       {% endfor %}
       </tbody>
 
     </table>
   </div>
   {% endfor %}
-
+</section>
 {% endblock %}
 
 {% block scripts %}
-  <script src="/static/js/object_delete.js"></script>
+<script src="/static/js/object_delete.js"></script>
 {% endblock scripts %}

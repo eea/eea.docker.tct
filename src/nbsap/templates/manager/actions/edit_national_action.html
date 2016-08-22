@@ -2,28 +2,30 @@
 {% load i18n %}
 
 {% block title %}
-  NBSAP - {% trans "Edit Action" %} {{ action.code }}
+NBSAP - {% trans "Edit Action" %} {{ action.code }}
 {% endblock %}
 
 
 {% block head_scripts %}
-  {{ form.media }}
+{{ form.media }}
 {% endblock %}
 
 
 {% block scripts %}
-    <script src="/static/js/language_change.js"></script>
+<script src="/static/js/language_change.js"></script>
 {% endblock %}
 
 
 {% block content %}
-
-  <h1 class="page-title">{% trans "Edit Action" %} {{ action.code }}</h1>
+<section class="content-header">
+  <h1>{% trans "Edit Action" %} {{ action.code }}</h1>
+</section>
+<section class="content">
 
   {% if form.errors %}
-    <p>
-      {% blocktrans with form.errors|pluralize as errors %}Please correct the error {{ errors }} below.{% endblocktrans %}
-    </p>
+  <p>
+    {% blocktrans with form.errors|pluralize as errors %}Please correct the error {{ errors }} below.{% endblocktrans %}
+  </p>
   {% endif %}
 
   <form action="" method="post" id="national-action-edit" class="form">
@@ -43,7 +45,7 @@
             {{ form.title.errors }}
           </div>
 
-        <div class="form-group">
+          <div class="form-group">
             <label for="region">{% trans "Region" %}</label>
             {{ form.region }}
             {{ form.region.errors }}
@@ -62,14 +64,15 @@
       {% trans DEFAULT_LANGUAGE_LABEL as default_language_label %}
       <div class="col-md-6 original-hideout">
         <p class="original-title">
-            {% blocktrans with default_language_label as language %}Original title in {{ language }}{% endblocktrans %}
+          {% blocktrans with default_language_label as language %}Original title in {{ language }}{% endblocktrans %}
         </p>
         <div class="well">
           {{ action.title_default }}
         </div>
 
         <p class="original-description">
-            {% blocktrans with default_language_label as language %}Original description in {{ language }}{% endblocktrans %}
+          {% blocktrans with default_language_label as language %}Original description in {{ language }}{% endblocktrans
+          %}
         </p>
         <div class="well">
           {{ action.description_default|safe }}
@@ -81,8 +84,10 @@
 
     <div class="action-bar">
       <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
-      <a href="{% url 'view_national_objective' pk=objective.pk %}" class="btn btn-default" type="button">{% trans "Cancel" %}</a>
+      <a href="{% url 'view_national_objective' pk=objective.pk %}" class="btn btn-default" type="button">{% trans
+        "Cancel" %}</a>
     </div>
 
   </form>
+</section>
 {% endblock %}

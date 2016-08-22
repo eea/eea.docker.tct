@@ -5,17 +5,19 @@
 
 
 {% block title %}
-  NBSAP - {% trans "National Indicators: List Indicators" %}
+NBSAP - {% trans "National Indicators: List Indicators" %}
 {% endblock %}
 
 
 {% block content %}
-
+<section class="content-header">
   {% get_current_language as lang_code %}
 
-  <h1 class="page-title">{% trans "National Indicators" %}</h1>
-  <h1>{% trans "List National Indicators" %}</h1>
+  <h1>{% trans "National Indicators" %}</h1>
+  <h2>{% trans "List National Indicators" %}</h2>
+</section>
 
+<section class="content">
   <ul class="nav nav-tabs">
     <li class="{% if category == 'headline' %}active{% endif %}">
       <a href="{% url 'list_nat_indicators' %}?category=headline">Headline indicators</a>
@@ -24,7 +26,7 @@
       <a href="{% url 'list_nat_indicators' %}?category=other">Other indicators</a></li>
   </ul>
 
-  <div class="action-bar">
+  <div class="form-group">
     <a class="btn btn-success add"
        href="{% url 'edit_nat_indicator' %}?category={{ category }}">{% trans "Add indicator" %}
     </a>
@@ -43,37 +45,30 @@
 
     <tbody>
     {% for indicator in indicators %}
-      <tr>
-        <td>
-          <strong>
-            <a href="{% url 'view_nat_indicator' pk=indicator.pk %}">
-              {{ indicator.code }}
-            </a>
-          </strong>
-        </td>
-        <td>
-          <strong><a href="{% url 'view_nat_indicator' pk=indicator.pk %}">
-            {{ indicator.title }}
-          </a></strong>
-        </td>
-        <td>
-          <a class="btn btn-default"
-             href="{% url 'edit_nat_indicator' pk=indicator.pk %}">{% trans "Edit" %}</a>
-        </td>
-      </tr>
+    <tr>
+      <td>
+        <strong>
+          <a href="{% url 'view_nat_indicator' pk=indicator.pk %}">
+            {{ indicator.code }}
+          </a>
+        </strong>
+      </td>
+      <td>
+        <strong><a href="{% url 'view_nat_indicator' pk=indicator.pk %}">
+          {{ indicator.title }}
+        </a></strong>
+      </td>
+      <td>
+        <a class="btn btn-default"
+           href="{% url 'edit_nat_indicator' pk=indicator.pk %}">{% trans "Edit" %}</a>
+      </td>
+    </tr>
     {% endfor %}
     </tbody>
   </table>
   {% else %}
-    <p><em>No indicators found.</em></p>
+  <p><em>No indicators found.</em></p>
   {% endif %}
-
+</section>
 {% endblock %}
 
-{% block scripts %}
-
-  {% assets "js_admin" %}
-    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-  {% endassets %}
-
-{% endblock scripts %}

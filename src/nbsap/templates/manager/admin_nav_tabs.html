@@ -1,7 +1,7 @@
 {% load utils %}
 {% load i18n %}
 
-<ul class="nav-menu">
+<ul class="sidebar-menu">
 
   {% if NAT_STRATEGY %}
     <li class="{% active request '^/administration/objectives/[\w\-]+' %}
@@ -37,7 +37,7 @@
   </li>
   {% endif %}
 
-  <li class="pull-right nav-btn">
+  <li class="nav-btn">
     <a class="exit-admin" href="{% url 'goals' %}">{% trans "Exit from administration" %}</a>
   </li>
 

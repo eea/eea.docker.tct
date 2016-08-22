@@ -5,16 +5,17 @@
 
 
 {% block title %}
-  NBSAP - {% trans "National Strategy: List National Objectives" %}
+NBSAP - {% trans "National Strategy: List National Objectives" %}
 {% endblock %}
 
 
 {% block content %}
-
+<section class="content-header">
+  <h1>{% trans "National Strategy" %}</h1>
+  <h2>{% trans "List National Objectives" %}</h2>
+</section>
+<section class="content">
   {% get_current_language as lang_code %}
-
-  <h1 class="page-title">{% trans "National Strategy" %}</h1>
-  <h1>{% trans "List National Objectives" %}</h1>
 
   <div class="action-bar">
     <a class="btn btn-success add"
@@ -25,40 +26,37 @@
   <table class="table">
 
     <thead>
-      <th>{% trans "Code" %}</th>
-      <th>{% trans "Title" %}</th>
+    <th>{% trans "Code" %}</th>
+    <th>{% trans "Title" %}</th>
     </thead>
 
     <tbody>
     {% for objective in objectives %}
-      <tr>
-        <td>{{ objective.code }}</td>
-        <td>
-          <a href="{% url 'view_national_objective' pk=objective.pk %}"
-             title="{% trans 'Objective' %} {{ objective.code }}">
-            {{ objective.title|default:objective.code }}</a>
-        </td>
-      </tr>
+    <tr>
+      <td>{{ objective.code }}</td>
+      <td>
+        <a href="{% url 'view_national_objective' pk=objective.pk %}"
+           title="{% trans 'Objective' %} {{ objective.code }}">
+          {{ objective.title|default:objective.code }}</a>
+      </td>
+    </tr>
     {% endfor %}
     </tbody>
 
   </table>
+</section>
 {% endblock %}
 
 {% block scripts %}
 
-  {% assets "js_admin" %}
-    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-  {% endassets %}
+<script>
 
-  <script>
-
-    $(document).ready(function() {
-      $('.objectives_listing').dataTable({
-          "bStateSave": true,
-          "iDisplayLength": 25,
-      });
+  $(document).ready(function () {
+    $('.objectives_listing').dataTable({
+      "bStateSave": true,
+      "iDisplayLength": 25
     });
-  </script>
+  });
+</script>
 
 {% endblock scripts %}

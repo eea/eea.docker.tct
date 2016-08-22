@@ -5,16 +5,18 @@
 
 
 {% block title %}
-  NBSAP - {% trans "EU Indicators: List Indicators" %}
+NBSAP - {% trans "EU Indicators: List Indicators" %}
 {% endblock %}
 
 
 {% block content %}
 
-  {% get_current_language as lang_code %}
-
-  <h1 class="page-title">{% trans "European Indicators" %}</h1>
-  <h1>{% trans "List EU Indicators" %}</h1>
+{% get_current_language as lang_code %}
+<section class="content-header">
+  <h1>{% trans "European Indicators" %}</h1>
+</section>
+<section class="content">
+  <h2>{% trans "List EU Indicators" %}</h2>
 
   <ul class="nav nav-tabs">
     <li class="{% if category == 'headline' %}active{% endif %}">
@@ -42,28 +44,29 @@
 
     <tbody>
     {% for indicator in indicators %}
-      <tr>
-        <td>{{ indicator.full_code|default:'' }}</td>
-        <td>
-          <a href="{% url 'view_eu_indicator' pk=indicator.pk %}"
-               title="{% trans 'Indicator' %} {{ indicator.code }}">
-              {{ indicator.title|default:indicator.code }}</a>
-        </td>
-        <td>
-          <a class="btn btn-default"
-             href="{% url 'edit_eu_indicator' pk=indicator.pk %}">{% trans "Edit" %}</a>
-          </td>
-      </tr>
+    <tr>
+      <td>{{ indicator.full_code|default:'' }}</td>
+      <td>
+        <a href="{% url 'view_eu_indicator' pk=indicator.pk %}"
+           title="{% trans 'Indicator' %} {{ indicator.code }}">
+          {{ indicator.title|default:indicator.code }}</a>
+      </td>
+      <td>
+        <a class="btn btn-default"
+           href="{% url 'edit_eu_indicator' pk=indicator.pk %}">{% trans "Edit" %}</a>
+      </td>
+    </tr>
     {% endfor %}
     </tbody>
 
   </table>
+</section>
 {% endblock %}
 
 {% block scripts %}
 
-  {% assets "js_admin" %}
-    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-  {% endassets %}
+{% assets "js_admin" %}
+<script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
 
 {% endblock scripts %}

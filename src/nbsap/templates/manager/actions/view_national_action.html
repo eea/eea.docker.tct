@@ -3,23 +3,27 @@
 {% load i18n %}
 
 {% block title %}
-  NBSAP - {% trans "Action" %} {{ action.code }}: {{ action.title }}
+NBSAP - {% trans "Action" %} {{ action.code }}: {{ action.title }}
 {% endblock %}
 
 
 {% block content %}
+<section class="content-header">
+  <h1>{% trans "Action" %} {{ action.code }}: {{ action.title }}{% if action.region %} ({{ action.region }}){% endif
+    %}</h1>
+</section>
 
-  <h1 class="page-title">{% trans "Action" %} {{ action.code }}: {{ action.title }}{% if action.region %} ({{ action.region }}){% endif %}</h1>
+<section class="content">
 
   <div class="action-bar">
     <form action="{% url 'delete_national_action' objective=objective.pk pk=action.pk %}" method="POST">
       <a class="btn btn-success"
          href="{% url 'view_national_objective' pk=objective.pk %}">
-         <i class="glyphicon glyphicon-arrow-left"></i> {% trans "Back" %}</a>
+        <i class="glyphicon glyphicon-arrow-left"></i> {% trans "Back" %}</a>
 
       <a class="btn btn-default edit"
          href="{% url 'edit_national_action' objective=objective.pk parent=action.pk %}">
-         {% trans "Add sub-action" %}</a>
+        {% trans "Add sub-action" %}</a>
 
       <a class="btn btn-default edit"
          href="{% url 'edit_national_action' objective=objective.pk pk=action.pk %}">{% trans "Edit" %}</a>
@@ -38,44 +42,44 @@
   {% regroup actions by region as action_list %}
 
   {% for items in action_list %}
-    {% if items.grouper %}
-      <h4 class="page-title">{{ items.grouper }}</h4>
-    {% endif %}
+  {% if items.grouper %}
+  <h4 class="page-title">{{ items.grouper }}</h4>
+  {% endif %}
 
-    <table class="table">
+  <table class="table">
 
-      <thead>
-        <th class="span1">{% trans "Code" %}</th>
-        <th>{% trans "Sub-actions" %}</th>
-      </thead>
+    <thead>
+    <th class="span1">{% trans "Code" %}</th>
+    <th>{% trans "Sub-actions" %}</th>
+    </thead>
 
-      <tbody>
-        {% for subaction in items.list %}
-          <tr>
-            <td>{{ subaction.code }}</td>
-            <td>
-              <a href="{% url 'view_national_action' objective=objective.pk pk=subaction.pk %}"
-               title="{% trans 'Action' %} {{ subaction.code }}">
-              {{ subaction.title|default:subaction.code }}</a>
-            </td>
-            <td>
-              <a href="{% url 'edit_national_action' objective=objective.pk pk=subaction.pk %}"
-                 class="btn btn-xs btn-default">Edit</a>
-            </td>
-          </tr>
-        {% empty %}
-          <tr>
-            <td colspan="2">{% trans "No sub actions" %}</td>
-          </tr>
-        {% endfor %}
-      </tbody>
+    <tbody>
+    {% for subaction in items.list %}
+    <tr>
+      <td>{{ subaction.code }}</td>
+      <td>
+        <a href="{% url 'view_national_action' objective=objective.pk pk=subaction.pk %}"
+           title="{% trans 'Action' %} {{ subaction.code }}">
+          {{ subaction.title|default:subaction.code }}</a>
+      </td>
+      <td>
+        <a href="{% url 'edit_national_action' objective=objective.pk pk=subaction.pk %}"
+           class="btn btn-xs btn-default">Edit</a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="2">{% trans "No sub actions" %}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
 
-    </table>
+  </table>
   {% endfor %}
-
+</section>
 {% endblock %}
 
 
 {% block scripts %}
-  <script src="/static/js/object_delete.js"></script>
+<script src="/static/js/object_delete.js"></script>
 {% endblock scripts %}
