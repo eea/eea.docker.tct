@@ -40,12 +40,36 @@
   </header>
 
   <aside class="main-sidebar">
-    {% block navmenu %}{% endblock %}
-    {% block sidebar %}{% endblock %}
-    {% block sidebar-right %}{% endblock %}
+    <section class="sidebar">
+      {% block navmenu %}{% endblock %}
+      {% block admin-menu %}
+      <ul class="sidebar-menu">
+        <li class="header">Administration options</li>
+        {% if user.is_authenticated %}
+        <li>
+          <a
+            href="{% if NAT_STRATEGY %}{% url 'list_national_objectives' %}{% else %}{% url 'list_eu_targets' %}{% endif %}">
+            {% trans 'Mappings' %}
+          </a>
+        </li>
+        {% if user.is_superuser %}
+        <li>
+          <a href="{% url 'admin:index' %}" class="change-lang admin">{% trans 'Administration' %}</a>
+        </li>
+        {% if LANGUAGES|length > 1 %}
+        <li>
+          <a href="{% url 'rosetta-home' %}">{% trans 'Translate' %}</a>
+        </li>
+        {% endif %}
+        {% endif %}
+        {% endif %}
+      </ul>
+      {% endblock %}
+    </section>
   </aside>
   <div class="content-wrapper">
-
+    {% block sidebar %}{% endblock %}
+    {% block sidebar-right %}{% endblock %}
     {% if messages %}
     <div class="messages alert alert-success">
       {% for message in messages %}

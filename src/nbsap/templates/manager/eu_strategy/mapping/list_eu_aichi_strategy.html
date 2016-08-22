@@ -57,11 +57,11 @@ NBSAP - {% trans "Mapping EU Targets to Aichi Targets" %}
       <td>
         {{ strategy.other_aichi_targets.all|join:", " }}
       </td>
-      <td style="text-align: center;">
+      <td>
         <a class="btn btn-mini btn-success add"
            href="{% url 'edit_eu_aichi_strategy' strategy.pk %}">{% trans "Edit" %}</a>
       </td>
-      <td style="text-align: center;">
+      <td>
         <form method="POST" action="{% url 'delete_eu_aichi_strategy' strategy.pk %}">
           <button type="submit" class="btn btn-mini btn-danger"
                   data-message="{% trans 'Are you sure you want to delete this strategy?' %}">
@@ -88,9 +88,5 @@ NBSAP - {% trans "Mapping EU Targets to Aichi Targets" %}
 
 
 {% block scripts %}
-
-{% assets "js_admin" %}
-<script type="text/javascript" src="{{ ASSET_URL }}"></script>
-{% endassets %}
 <script src="/static/js/object_delete.js"></script>
 {% endblock scripts %}

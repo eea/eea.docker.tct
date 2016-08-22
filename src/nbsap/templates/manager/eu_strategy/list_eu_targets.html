@@ -19,12 +19,12 @@ NBSAP - {% trans "EU Strategy: List Targets" %}
   <h2>{% trans "List EU Targets" %}</h2>
 
   {% if EU_STRATEGY_ADD %}
-  <div class="action-bar">
+  <div class="form-group">
     <a class="btn btn-success add"
        href="{% url 'edit_eu_target' %}">{% trans "Add target" %}
     </a>
   </div>
-  <div class="action-bar">
+  <div class="form-group">
     <a class="btn btn-success add"
        href="{% url 'list_regions' %}">{% trans "Regions" %}
     </a>
@@ -58,16 +58,12 @@ NBSAP - {% trans "EU Strategy: List Targets" %}
 
 {% block scripts %}
 
-{% assets "js_admin" %}
-<script type="text/javascript" src="{{ ASSET_URL }}"></script>
-{% endassets %}
-
 <script>
 
   $(document).ready(function () {
     $('.objectives_listing').dataTable({
       "bStateSave": true,
-      "iDisplayLength": 25,
+      "iDisplayLength": 25
     });
   });
 </script>

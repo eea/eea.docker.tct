@@ -73,3 +73,24 @@
 .search-field input[type="text"] {
   width: auto !important;
 }
+
+.admin{
+  color: #fff!important;
+  background-color: #00c0ef;
+}
+
+.toc-wrapper{
+  display: inline-block;
+}
+
+.toc-wrapper p{
+  margin: 10px;
+}
+
+.toc-wrapper ul{
+  display: inline-block;
+}
+
+.toc-wrapper ul li{
+  display: inline-block;
+}

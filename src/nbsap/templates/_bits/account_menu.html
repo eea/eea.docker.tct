@@ -38,23 +38,6 @@
 
     {% if user.is_authenticated %}
     <li>
-      <a
-        href="{% if NAT_STRATEGY %}{% url 'list_national_objectives' %}{% else %}{% url 'list_eu_targets' %}{% endif %}">
-        {% trans 'Mappings' %}
-      </a>
-    </li>
-    {% if user.is_superuser %}
-    <li>
-      <a href="{% url 'admin:index' %}" class="change-lang">{% trans 'Administration' %}</a>
-    </li>
-    {% if LANGUAGES|length > 1 %}
-    <li>
-      <a href="{% url 'rosetta-home' %}">{% trans 'Translate' %}</a>
-    </li>
-    {% endif %}
-    {% endif %}
-
-    <li>
       <a href="{% url 'logout' %}">{% trans "Logout" %}</a>
     </li>
 

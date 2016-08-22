@@ -3,8 +3,17 @@
 
 <ul class="sidebar-menu">
 
-  <li>
+  <li class="treeview">
     <a class="{% active request '^/$' %} {% active request '^/indicators' %}{% active request '^/goals' %}" href="{% url 'goals' %}" class="uppercase">{% trans "Aichi" %}</a>
+    <ul class="treeview-menu">
+      {% for goal in goals %}
+      <li {% if goal.code == current_goal.code %}class="active"{% endif %}>
+        <a href="{% url 'goals' code=goal.code %}" title="{{ goal.code|upper }}">
+          {% trans "Goal" %} {{ goal.code | upper }}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
   </li>
 
   {% if EU_STRATEGY %}
