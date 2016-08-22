@@ -4,7 +4,7 @@ function sidebarplugin($trigger, $sidebar, $closetrigger) {
     $body = $("body");
     $backdrop = $('#backdrop');
     $trigger.click(function() {
-        console.log($sidebar);
+        // console.log($sidebar);
         $sidebar.addClass('nav-open')
         $body.addClass('sidebaropen');
         $backdrop.addClass('open');

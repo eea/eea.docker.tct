@@ -10,18 +10,17 @@
     text-align: center;
     padding: 1rem;
     @media screen and (min-width: 800px) {
-    padding-top: 80px;
-	}
-	@media screen and (max-width: 800px) {
-		clear:both;
-	}
+        padding-top: 80px;
+    }
+    @media screen and (max-width: 800px) {
+        clear: both;
+    }
 }
 
 .site-title a {
     color: @brand-blue;
-
     @media (max-width: 800px) {
-    	pointer-events: none;
+        pointer-events: none;
     }
 }
 
@@ -30,6 +29,8 @@
     margin: 0;
     box-sizing: border-box;
     padding: 0;
+	overflow: hidden;
+	display: none;
     @media screen and (min-width: 800px) {
         display: inline-block;
         float: right;
@@ -98,19 +99,21 @@
         top: 0;
         width: 47%;
         margin-bottom: 0;
-        z-index:900;
+        z-index: 900;
     }
 }
 
 @media screen and (max-width: 800px) {
-	.nav-container {
-		transform: translateX(-100%);
-		transition: all 0.2s;
-	}
+    .nav-container {
+        // transform: translateX(-100%);
+        // transition: all 0.2s;
+        display: none;
+    }
 }
-.nav-open {
-		transform: translateX(0)!important;
-		}
+
+// .nav-open {
+//     transform: translateX(0)!important;
+// }
 
 .nav-container:after {
     content: '';
@@ -184,50 +187,55 @@
 }
 
 .close-trigger {
-	display: none;
+    display: none;
 }
 
 .nav-trigger button {
-	display: none;
-	}
+    display: none;
+}
 
 .nav-trigger {
-  width: 100%;
-  background: @brand-blue;
-  overflow: hidden;
+    width: 100%;
+    background: @brand-blue;
+    overflow: hidden;
 }
 
 @media screen and (max-width: 800px) {
-	.nav-trigger button {
-	display: block;
-  	float: right;
-    border-radius: 0;
-   	margin-bottom:0;
-	}
-	.nav-trigger button:before {
-		font-family: FontAwesome;
-	content: "\f0c9";
-	padding-right: 5px;
-	}
-
-
-.close-trigger {
-	    float: right;
-	    display: block;
+    .nav-trigger button {
+        display: block;
+        float: right;
+        border-radius: 0;
+        margin-bottom: 0;
+    }
+    .nav-trigger button:before {
+        font-family: FontAwesome;
+        content: "\f0c9";
+        padding-right: 5px;
+    }
+    .close-trigger {
+        float: right;
+        display: block;
+    }
 }
 
-
-
-	}
-
-
-
 .sidebaropen {
-	// overflow: hidden;
+    // overflow: hidden;
 }
 
 .open {
-	display: block!important;
+    display: block!important;
 }
 
 
+.accountwrapper .user {
+    color: #fff;
+    padding: 0 16px;
+    line-height: 6rem;
+}
+
+.account-menu-header {
+	@media (min-width: 800px) {
+		display: none;
+	}
+ 
+ }

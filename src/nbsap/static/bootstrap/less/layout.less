@@ -39,14 +39,14 @@
 
   @media screen and (max-width: 800px) {
   	.sidebar-right {
-			transform: translateX(100%);
+			// transform: translateX(100%);
     position: fixed;
     right: 0;
     top: 0;
     bottom:0;
    	background-color: @gray-lightest;
-    z-index: 900;
-    	transition: all 0.2s;
+    z-index: 900;;
+    display:none;
 	    }
 
 
@@ -59,6 +59,8 @@
       bottom: 0;
       z-index: 100;
   }
+
+
   .sidebar-trigger {
 	display: block;
     transform: rotate(270deg);
