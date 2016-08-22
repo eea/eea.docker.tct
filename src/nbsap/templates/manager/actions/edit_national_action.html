@@ -71,8 +71,7 @@ NBSAP - {% trans "Edit Action" %} {{ action.code }}
         </div>
 
         <p class="original-description">
-          {% blocktrans with default_language_label as language %}Original description in {{ language }}{% endblocktrans
-          %}
+          {% blocktrans with default_language_label as language %}Original description in {{ language }}{% endblocktrans %}
         </p>
         <div class="well">
           {{ action.description_default|safe }}
@@ -84,8 +83,7 @@ NBSAP - {% trans "Edit Action" %} {{ action.code }}
 
     <div class="action-bar">
       <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
-      <a href="{% url 'view_national_objective' pk=objective.pk %}" class="btn btn-default" type="button">{% trans
-        "Cancel" %}</a>
+      <a href="{% url 'view_national_objective' pk=objective.pk %}" class="btn btn-default" type="button">{% trans "Cancel" %}</a>
     </div>
 
   </form>

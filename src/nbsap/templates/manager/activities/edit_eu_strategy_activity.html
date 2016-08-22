@@ -75,8 +75,7 @@ NBSAP - {% trans "Edit action" %} {{ activity.code }}
       <div class="col-md-6 original-hideout">
 
         <p class="original-description">
-          {% blocktrans with default_language_label as language %}Original description in {{ language }}{% endblocktrans
-          %}
+          {% blocktrans with default_language_label as language %}Original description in {{ language }}{% endblocktrans %}
         </p>
         <div class="well">
           {{ activity.description_default|safe }}
@@ -88,8 +87,7 @@ NBSAP - {% trans "Edit action" %} {{ activity.code }}
 
     <div class="action-bar">
       <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
-      <a href="{% url 'view_eu_strategy_target' pk=target.pk %}" class="btn btn-default" type="button">{% trans "Cancel"
-        %}</a>
+      <a href="{% url 'view_eu_strategy_target' pk=target.pk %}" class="btn btn-default" type="button">{% trans "Cancel" %}</a>
     </div>
 
   </form>

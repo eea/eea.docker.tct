@@ -51,8 +51,7 @@ NBSAP - {% trans "Add objective" %}
     <div class="action-bar">
       <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
       {% if parent %}
-      <a href="{% url 'view_national_objective' pk=parent.pk %}" class="btn btn-default" type="button">{% trans "Cancel"
-        %}</a>
+      <a href="{% url 'view_national_objective' pk=parent.pk %}" class="btn btn-default" type="button">{% trans "Cancel" %}</a>
       {% else %}
       <a href="{% url 'list_national_objectives' %}" class="btn btn-default" type="button">{% trans "Cancel" %}</a>
       {% endif %}
