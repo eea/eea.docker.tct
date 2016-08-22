@@ -31,7 +31,6 @@
 
 {% block content %}
   {% if current_target %}
-    <h1 class="page-title">{% trans "EU Targets" %}</h1>
 
     <h1>{% trans "EU Target" %} {{ current_target.code }}: {{ current_target.title }}</h1>
     <p class="objective-description">{{ current_target.description|safe }}</p>
@@ -91,20 +90,21 @@
             {% endfor %}
           {% endfor %}
         </ul>
-      {% else %}
+      {% else %} 
         <p>{% trans "No corresponding AICHI target" %}.</p>
       {% endif %}
     </div>
   {% else %}
-    {% for target in targets %}
-      <ul>
+    <h1 class="page-title">{% trans "EU Targets" %}</h1>
+    <ul>
+      {% for target in targets %}
         <li>{{ target.code }}
           <a href="{% url 'eu_targets' target.id %}"
              title="{% trans 'Target' %} {{ target.code }}">
             {{ target.title|default:target.code }}</a>
         </li>
-      </ul>
-    {% endfor %}
+      {% endfor %}
+    </ul>
   {% endif %}
 
   {% for action in current_target.actions_tree %}
