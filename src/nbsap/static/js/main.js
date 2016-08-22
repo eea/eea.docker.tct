@@ -147,3 +147,5 @@ function forbidCrossChoicesIntersection(name, nameOther) {
   forbidChoicesIntersection(selectorTargets, selectorOtherTargets);
   forbidChoicesIntersection(selectorOtherTargets, selectorTargets);
 }
+
+

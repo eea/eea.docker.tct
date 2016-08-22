@@ -14,21 +14,20 @@
       <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    {% block assets %}
+  
     {% assets "css_admin" %}
       <link rel="stylesheet" href="{{ ASSET_URL }}" />
     {% endassets %}
-    {% endblock %}
+   
 
     {% block extra_head %}{% endblock %}
 
-    {% if GOOGLE_ANALYTICS_PROPERTY_ID %}
+    {% if GOOGLE_ANALYTICS_PROPERTY_ID %}Fs
       {% include "_bits/ga.html" %}
     {% endif %}
   </head>
 
-<body>
-  
+<body class='admin'>
     <div class="header">
       <div class="container">
         {% if LAYOUT_HEADER_LOGO %}
@@ -90,7 +89,7 @@
       </div>
     </div>
 
-    {% assets "js_admin" %}
+    {% assets "js" %}
       <script type="text/javascript" src="{{ ASSET_URL }}"></script>
     {% endassets %}
     {% block head_scripts %}{% endblock %}

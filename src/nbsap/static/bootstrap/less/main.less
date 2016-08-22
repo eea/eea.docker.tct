@@ -1,13 +1,14 @@
 @import "variables.less";
 
-@media (max-width: 800px) {
+@media screen and (max-width: 800px) {
 	.sidebar {
 		float:none;
-    display: block;
+    // display: block;
+        text-align: center;
 	}
 
 	.main {
-		    display: block;
+		    // display: block;
 
 	}
 }
@@ -275,10 +276,11 @@ body {
     .sidebar-menu a:hover {
       color: #fff;
       text-decoration: none;
-      background: #039749;
+      background: @brand-blue;
     }
     .sidebar-menu .active a {
       background-color: @gray-lightest;
+      color: #039be5;
     }
 
 .sidebar + .main {
@@ -339,11 +341,19 @@ body {
 .toc {
   border-radius: 4px;
   margin-bottom: 1em;
-  padding: 1em;
+  padding: 1rem;
   background-color: @gray-lightest;
-  width: 180px;
+ @media screen and (max-width: 800px) {
+  text-align: center;
+  }
+
+  @media (min-width: 800px) {
+    height: 350px;
+    overflow-y: auto;
+  }
 
 }
+
   .toc h5 {
     margin-top: auto;
   }
@@ -353,6 +363,8 @@ body {
   }
   .toc li {
     list-style-type: none;
+    padding: 1rem;
+    white-space: nowrap;
   }
   .toc .column-list {
     float: left;
@@ -464,6 +476,3 @@ li.indent {
 }
 
 
- .toc li {
-  display: inline-block;
-}

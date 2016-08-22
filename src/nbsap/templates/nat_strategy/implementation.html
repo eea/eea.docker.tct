@@ -46,9 +46,7 @@
         {% for action in current_objective.actions_tree|sort_by_code %}
           <li>
             <a href="#{{ action.code }}"
-               rel='tooltip'
-               data-placement='right'
-               data-original-title="{{ action.description }}">
+               rel='tooltip'>
               {% trans "Action" %} {{ action.code }}</a>
           </li>
         {% endfor %}

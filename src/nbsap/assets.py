@@ -8,6 +8,8 @@ JS_ASSETS = (
     'bootstrap/js/bootstrap.min.js',
     'js/main.js',
     'js/lib/jquery.columnlist.js',
+    'bootstrap/js/sidebar-plugin.js',
+    'bootstrap/js/sidebar.js',
 )
 
 JS_ADMIN_ASSETS = (
@@ -23,6 +25,7 @@ CSS_ASSETS = (
     'bootstrap/css/skeleton.css',
     'js/chosen/chosen.css',
     'css/style.css',
+    'https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css',
 ) + settings.CSS_ASSETS
 
 CSS_ADMIN_ASSETS = (

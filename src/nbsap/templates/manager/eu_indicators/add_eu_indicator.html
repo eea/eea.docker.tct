@@ -15,7 +15,6 @@
 {% block content %}
 
   <h1>{% trans "Add new Eu Indicator" %}</h1>
-
   {% if form.errors %}
     <p>
       {% blocktrans with form.errors|pluralize as errors %}Please correct the error {{ errors }} below.{% endblocktrans %}

@@ -29,24 +29,8 @@
   </div>
 {% endblock %}
 
-{% block content %}
-  <h1 class="page-title">{% trans "EU Targets" %}</h1>
-
-  <h1>{% trans "EU Target" %} {{ current_target.code }}: {{ current_target.title }}</h1>
-  <p class="objective-description">{{ current_target.description|safe }}</p>
-
-  {% if current_target.children.count %}
-    {% for subtarget in current_target.children.all %}
-    <h2>
-      <a href="{% url 'eu_targets' pk=subtarget.pk %}">
-        {% trans "EU Target" %} {{ subtarget.code }}: {{ subtarget.title }}
-      </a>
-    </h2>
-    <p class="objective-description">{{ subtarget.description|safe }}</p>
-    {% endfor %}
-  {% endif %}
-
-
+{% block sidebar-right %}
+<div class="sidebar-right">
   <div class="toc">
     <h5>{% trans "Table of contents" %}</h5>
     {% if current_target.actions_tree|length %}
@@ -66,6 +50,26 @@
       <p>{% trans "No actions found" %}</p>
     {% endif %}
   </div>
+  </div>
+  {% endblock %}
+
+{% block content %}
+  <h1 class="page-title">{% trans "EU Targets" %}</h1>
+
+  <h1>{% trans "EU Target" %} {{ current_target.code }}: {{ current_target.title }}</h1>
+  <p class="objective-description">{{ current_target.description|safe }}</p>
+
+  {% if current_target.children.count %}
+    {% for subtarget in current_target.children.all %}
+    <h2>
+      <a href="{% url 'eu_targets' pk=subtarget.pk %}">
+        {% trans "EU Target" %} {{ subtarget.code }}: {{ subtarget.title }}
+      </a>
+    </h2>
+    <p class="objective-description">{{ subtarget.description|safe }}</p>
+    {% endfor %}
+  {% endif %}
+
 
   <div class="well">
     <div class="well-title">{% trans "Most relevant EU indicators" %}</div>

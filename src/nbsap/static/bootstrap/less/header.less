@@ -1,5 +1,4 @@
 @import "variables.less";
-
 .header {
     position: relative;
     z-index: 500;
@@ -9,11 +8,21 @@
     font-size: 24px;
     font-weight: normal;
     text-align: center;
-	padding-top: 80px;
+    padding: 1rem;
+    @media screen and (min-width: 800px) {
+    padding-top: 80px;
+	}
+	@media screen and (max-width: 800px) {
+		clear:both;
+	}
 }
 
 .site-title a {
-	color: @brand-blue;
+    color: @brand-blue;
+
+    @media (max-width: 800px) {
+    	pointer-events: none;
+    }
 }
 
 .account-menu {
@@ -21,8 +30,10 @@
     margin: 0;
     box-sizing: border-box;
     padding: 0;
-    display: inline-block;
-    float: right;
+    @media screen and (min-width: 800px) {
+        display: inline-block;
+        float: right;
+    }
 }
 
 .account-menu:after {
@@ -36,13 +47,15 @@
 }
 
 .account-menu > li {
-    float: left;
+    @media screen and (min-width: 800px) {
+        float: left;
+    }
 }
 
 .account-menu > li > a {
     display: block;
     color: #fff;
-    padding: 0 8px;
+    padding: 0 16px;
     line-height: 6rem;
 }
 
@@ -75,17 +88,29 @@
 }
 
 .nav-container {
-	background: @brand-blue;
-    // background: #60c5ef;
-    // background: -moz-linear-gradient(-15deg, #60c5ef 0%, #347eb9 100%);
-    // background: -webkit-linear-gradient(-15deg, #60c5ef 0%, #347eb9 100%);
-    // background: linear-gradient(165deg, #60c5ef 0%, #347eb9 100%);
-    // filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#60c5ef', endColorstr='#347eb9', GradientType=1);
+    background: @brand-blue;
     margin-bottom: 30px;
     position: fixed;
     width: 100%;
-    box-shadow: 0 0 2px rgba(0,0,0,.14),0 2px 2px rgba(0,0,0,.28);
+    box-shadow: 0 0 2px rgba(0, 0, 0, .14), 0 2px 2px rgba(0, 0, 0, .28);
+    @media screen and (max-width: 800px) {
+        bottom: 0;
+        top: 0;
+        width: 47%;
+        margin-bottom: 0;
+        z-index:900;
+    }
 }
+
+@media screen and (max-width: 800px) {
+	.nav-container {
+		transform: translateX(-100%);
+		transition: all 0.2s;
+	}
+}
+.nav-open {
+		transform: translateX(0)!important;
+		}
 
 .nav-container:after {
     content: '';
@@ -96,13 +121,15 @@
 .nav-menu {
     list-style: none;
     padding-left: 0;
-    float: left;
     margin: 0;
-    display: inline-block;
+    @media screen and (min-width: 800px) {
+        display: inline-block;
+        float: left;
+    }
 }
 
 .nav-container li {
-	margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 .nav-menu:after {
@@ -112,7 +139,9 @@
 }
 
 .nav-menu > li {
-    float: left;
+    @media screen and (min-width: 800px) {
+        float: left;
+    }
 }
 
 .nav-menu a {
@@ -123,33 +152,82 @@
     text-decoration: none;
 }
 
-.nav-menu a:hover {
-    color: black;
-    background: white;
-}
-
 .nav-menu .active {
     position: relative;
     color: white;
 }
 
-.nav-menu .active:after {
-    content: '';
-    display: block;
-    width: 0;
-    height: 0;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    margin-left: -6px;
-    border: 6px solid transparent;
-    border-bottom-color: #fff;
+@media screen and (min-width: 800px) {
+    .nav-menu a:hover {
+        color: black;
+        background: white;
+    }
+    .nav-menu .active:after {
+        content: '';
+        display: block;
+        width: 0;
+        height: 0;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        margin-left: -6px;
+        border: 6px solid transparent;
+        border-bottom-color: #fff;
+    }
 }
-
 
 .header {
-	.container {
-		max-width: 100%;
-		width: 100%;
-	}
+    .container {
+        max-width: 100%;
+        width: 100%;
+    }
 }
+
+.close-trigger {
+	display: none;
+}
+
+.nav-trigger button {
+	display: none;
+	}
+
+.nav-trigger {
+  width: 100%;
+  background: @brand-blue;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 800px) {
+	.nav-trigger button {
+	display: block;
+  	float: right;
+    border-radius: 0;
+   	margin-bottom:0;
+	}
+	.nav-trigger button:before {
+		font-family: FontAwesome;
+	content: "\f0c9";
+	padding-right: 5px;
+	}
+
+
+.close-trigger {
+	    float: right;
+	    display: block;
+}
+
+
+
+	}
+
+
+
+.sidebaropen {
+	// overflow: hidden;
+}
+
+.open {
+	display: block!important;
+}
+
+
