@@ -1,74 +1,77 @@
 {% load i18n %}
 
 <div class="accountwrapper">
-  <div class="account-menu-header">
-    <span class="user"> 
-      testuser
-    </span>
-    <i class="fa fa-caret-right" id="user-close"></i>
-  </div>
+ <div class="account-menu-header">
+   <span class="user">
+     testuser
+   </span>
+ </div>
 
 <ul class="account-menu">
 
-  {% for navbar_link in navbar_links %}
-    <li>
-      <a href="{{ navbar_link.url }}" target="_blank" title="{{ navbar_link.title }}">
-        {{ navbar_link }}</a>
-    </li>
-  {% endfor %}
+  {% for navbar_link in navbar_links %}
+    <li>
+      <a href="{{ navbar_link.url }}" target="_blank" title="{{ navbar_link.title }}">
+        {{ navbar_link }}</a>
+    </li>
+  {% endfor %}
 
-  {% if LANGUAGES|length > 1 %}
-  <li class="dropdown">
+  {% if LANGUAGES|length > 1 %}
+  <li class="dropdown">
 
-    <a class="dropdown-toggle" data-toggle="dropdown">
-      {{ request.LANGUAGE_CODE|upper }}<b class="caret"></b>
-    </a>
+    <a class="dropdown-toggle" data-toggle="dropdown">
+      {{ request.LANGUAGE_CODE|upper }}<b class="caret"></b>
+    </a>
 
-    <ul class="dropdown-menu">
-      {% for lang in LANGUAGES %}
-        <li>
-          <a class="change-lang">{{ lang.1 }}</a>
-          <form name="set_lang_{{ lang.0 }}" class="language-menu" action="{% url 'set_language' %}" method="POST">
-            <input name="next" type="hidden" value="{{ request.get_full_path }}">
-            <input name="language" type="hidden" value="{{ lang.0 }}">
-          </form>
-        </li>
-      {% endfor %}
-    </ul>
+    <ul class="dropdown-menu">
+      {% for lang in LANGUAGES %}
+        <li>
+          <a class="change-lang">{{ lang.1 }}</a>
+          <form name="set_lang_{{ lang.0 }}" class="language-menu" action="{% url 'set_language' %}" method="POST">
+            <input name="next" type="hidden" value="{{ request.get_full_path }}">
+            <input name="language" type="hidden" value="{{ lang.0 }}">
+          </form>
+        </li>
+      {% endfor %}
+    </ul>
 
-  </li>
-  {% else %}
-    <li>
-      <a href="" title="{{ LANGUAGES.0.1 }}">{{ LANGUAGES.0.0|upper }}</a>
-    </li>
-  {% endif %}
+  </li>
+  {% else %}
+    <li>
+      <a href="" title="{{ LANGUAGES.0.1 }}">{{ LANGUAGES.0.0|upper }}</a>
+    </li>
+  {% endif %}
 
-  {% if user.is_authenticated %}
-    <li>
-      <a href="{% if NAT_STRATEGY %}{% url 'list_national_objectives' %}{% else %}{% url 'list_eu_targets' %}{% endif %}">
-        {% trans 'Mappings' %}
-      </a>
-    </li>
-    {% if user.is_superuser %}
-      <li>
-        <a href="{% url 'admin:index' %}" class="change-lang">{% trans 'Administration' %}</a>
-      </li>
-      {% if LANGUAGES|length > 1 %}
-      <li>
-        <a href="{% url 'rosetta-home' %}">{% trans 'Translate' %}</a>
-      </li>
-      {% endif %}
-    {% endif %}
+  {% if user.is_authenticated %}
+    <li>
+      <a href="{% if NAT_STRATEGY %}{% url 'list_national_objectives' %}{% else %}{% url 'list_eu_targets' %}{% endif %}">
+        {% trans 'Mappings' %}
+      </a>
+    </li>
+    {% if user.is_superuser %}
+      <li>
+        <a href="{% url 'admin:index' %}" class="change-lang">{% trans 'Administration' %}</a>
+      </li>
+      {% if LANGUAGES|length > 1 %}
+      <li>
+        <a href="{% url 'rosetta-home' %}">{% trans 'Translate' %}</a>
+      </li>
+      {% endif %}
+    {% endif %}
 
-    <li>
-      <a href="{% url 'logout' %}">{% trans "Logout" %}</a>
-    </li>
+    <li>
+      <a href="{% url 'logout' %}">{% trans "Logout" %}</a>
+    </li>
 
-  {% else %}
-    <li><a href="{% url 'login' %}">{% trans "Login" %}</a></li>
-  {% endif %}
+  {% else %}
+    <li><a href="{% url 'login' %}">{% trans "Login" %}</a></li>
+  {% endif %}
 
 </ul>
 
+<<<<<<< HEAD
 </div>
 
+=======
+</div>
+>>>>>>> 470b9cda97b99714d07cc6fb5e43de37d80d2c89

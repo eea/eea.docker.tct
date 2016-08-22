@@ -10,10 +10,10 @@ admin.autodiscover()
 
 urlpatterns = [
     # homepage URLs
-    url(r'^$', views.goals, {'code': 'a',
-                             'aichi_target_id': '1'}, name='goals'),
-    url(r'^goals/(?P<code>[\w\-]+)$', views.goals, name='goals'),
-    url(r'^goals/(?P<code>[\w\-]+)/aichi_target/(?P<aichi_target_id>[\w\-]+)$',
+    url(r'^$', views.goals, name='goals'),
+    url(r'^aichi$', views.goals, name='goals'),
+    url(r'^aichi/goals/(?P<code>[\w\-]+)$', views.goals, name='goals'),
+    url(r'^aichi/goals/(?P<code>[\w\-]+)/targets/(?P<aichi_target_id>[\w\-]+)$',
         views.goals,
         name='goals'),
     url(r'^crashme$', views.crashme, name='crashme'),
@@ -25,8 +25,10 @@ urlpatterns = [
     url(r'^implementation/(?P<code>((\d+\.)*\d+$))$',
         views.implementation, name='implementation'),
 
-    url(r'^eu_targets$', views.eu_targets, {'pk': '1'}, name='eu_targets'),
-    url(r'^eu_targets/(?P<pk>(\d+))$', views.eu_targets, name='eu_targets'),
+    url(r'^european-strategy$', views.eu_targets, {'pk': '1'}, name='eu_targets'),
+    url(r'^european-strategy/(?P<pk>(\d+))$', views.eu_targets, name='eu_targets'),
+
+
     url(r'^eu_targets/(?P<target_id>[\w\-]+)/objectives/export/preview/$',
         views.eu_target_nat_strategy_export_preview, name='nat_strategy_export_preview'),
     url(r'^eu_targets/(?P<target_id>[\w\-]+)/objectives/export/$',

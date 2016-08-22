@@ -1,0 +1,13 @@
+{% load i18n %}
+{% load utils %}
+
+<ul>
+  {% for target in current_goal.targets.all %}
+  <li>
+    <a href="{% url 'goals' code=current_goal.code aichi_target_id=target.id %}"
+       rel="tooltip">
+       {% trans "AICHI Target" %} {{ target.code }}
+    </a>
+  </li>
+  {% endfor %}
+</ul>

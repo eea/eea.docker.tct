@@ -1,0 +1,12 @@
+{% load i18n %}
+{% load utils %}
+
+<ul>
+{% for goal in goals %}
+<li {% if goal.code == current_goal.code %}class="active"{% endif %}>
+  <a href="{% url 'goals' code=goal.code %}" title="{{ goal.code|upper }}"</a>
+    {% trans "Goal" %} {{ goal.code | upper }}
+  </a>
+</li>
+{% endfor %}
+</ul>
