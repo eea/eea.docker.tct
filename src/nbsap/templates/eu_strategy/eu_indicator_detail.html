@@ -1,0 +1,76 @@
+{% extends 'layout.html' %}
+{% load i18n %}
+{% load utils %}
+
+
+{% block title %}
+  NBSAP - {% trans "EU Indicators" %}
+{% endblock %}
+
+
+{% block navmenu %}
+  {% include '_bits/nav_menu.html' %}
+{% endblock %}
+
+{% block sidebar %}
+<div class="sidebar">
+  <h4 class="sidebar-title">Actions</h4>
+  <ul class="sidebar-menu">
+    {% for indicator in indicators %}
+    <li {% if indicator.code == current_indicator.code %}class="active"{% endif %}>
+      <a href="{% url 'eu_indicator_details' indicator.pk %}" title="{{ indicator.code|upper }}"</a>
+        {% trans "Indicator" %} {{ indicator.code | upper }}
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}
+
+{% block content %}
+	<h2 id="indicator-{{ current_indicator.id }}">
+	  {{ current_indicator.get_indicator_type_display }} {{ current_indicator.code }} {{ current_indicator.title }}
+	</h2>
+
+	{% if current_indicator.url %}
+	  <p>URL: <a href="{{ current_indicator.url }}">{{ current_indicator.title }}</a></p>
+	{% endif %}
+
+	<div class="well">
+	  <div
+	      class="well-title">{% trans "Mapping with Aichi Strategy" %}</div>
+	  <p><strong>Most relevant:</strong></p>
+	  {% if current_indicator.eu_indicator_aichi_strategy.exists %}
+	    <ul>
+	      {% for strategy in current_indicator.eu_indicator_aichi_strategy.all %}
+	        {% for aichi_target in strategy.aichi_targets.all %}
+	          {% assign aichi_target.get_parent_goal as goal %}
+	          <li>
+	            <a href="{% url 'goals' code=goal.code %}#{{ aichi_target.code }}">
+	              {% trans "AICHI Target" %} {{ aichi_target.code }}</a>
+	          </li>
+	        {% endfor %}
+	      {% endfor %}
+	    </ul>
+	  {% else %}
+	    <p>{% trans "No corresponding AICHI target" %}.</p>
+	  {% endif %}
+
+	  <p><strong>Other:</strong></p>
+	  {% if current_indicator.eu_indicator_other_aichi_strategy.exists %}
+	    <ul>
+	      {% for strategy in current_indicator.eu_indicator_other_aichi_strategy.all %}
+	        {% for aichi_target in strategy.aichi_targets.all %}
+	          {% assign aichi_target.get_parent_goal as goal %}
+	          <li>
+	            <a href="{% url 'goals' code=goal.code %}#{{ aichi_target.code }}">
+	              {% trans "AICHI Target" %} {{ aichi_target.code }}</a>
+	          </li>
+	        {% endfor %}
+	      {% endfor %}
+	    </ul>
+	  {% else %}
+	    <p>{% trans "No corresponding AICHI target" %}.</p>
+	  {% endif %}
+	</div>
+{% endblock %}

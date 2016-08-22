@@ -36,6 +36,15 @@ def eu_indicators(request):
     })
 
 
+def indicator_details(request, pk):
+    current_indicator = models.EuIndicator.objects.get(pk=pk)
+    indicators = models.EuIndicator.objects.filter(parents=None).all()
+    return render(request, 'eu_strategy/eu_indicator_detail.html', {
+        'current_indicator': current_indicator,
+        'indicators': indicators,
+    })
+
+
 @auth_required
 def list_eu_indicators(request):
     category = request.GET.get('category', models.EuIndicator.HEADLINE)

@@ -68,8 +68,6 @@
 
   <h1 class="page-title">{% trans "AICHI Goals" %}</h1>
 
-  <h2 class="page-subtitle">{% trans "AICHI Goal" %} {{ current_goal.code|upper }}: {{ current_goal.description|striptags|safe }}</h2>
-
   {% if not code %}
     {% include 'aichi/list_goals.html' %}
   {% elif target %}

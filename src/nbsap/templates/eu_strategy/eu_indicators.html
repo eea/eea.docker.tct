@@ -16,56 +16,13 @@
   <h1 class="page-title">{% trans "EU Indicators" %}</h1>
 
   {% if indicators %}
+    <div class="indicator-pages">
     {% for indicator in indicators %}
-
-        <h2 id="indicator-{{ indicator.id }}">
-          {{ indicator.get_indicator_type_display }} {{ indicator.code }} {{ indicator.title }}
-        </h2>
-
-        {% if indicator.url %}
-          <p>URL: <a href="{{ indicator.url }}">{{ indicator.title }}</a></p>
-        {% endif %}
-
-        <div class="well">
-          <div
-              class="well-title">{% trans "Mapping with Aichi Strategy" %}</div>
-          <p><strong>Most relevant:</strong></p>
-          {% if indicator.eu_indicator_aichi_strategy.exists %}
-            <ul>
-              {% for strategy in indicator.eu_indicator_aichi_strategy.all %}
-                {% for aichi_target in strategy.aichi_targets.all %}
-                  {% assign aichi_target.get_parent_goal as goal %}
-                  <li>
-                    <a href="{% url 'goals' code=goal.code %}#{{ aichi_target.code }}">
-                      {% trans "AICHI Target" %} {{ aichi_target.code }}</a>
-                  </li>
-                {% endfor %}
-              {% endfor %}
-            </ul>
-          {% else %}
-            <p>{% trans "No corresponding AICHI target" %}.</p>
-          {% endif %}
-
-          <p><strong>Other:</strong></p>
-          {% if indicator.eu_indicator_other_aichi_strategy.exists %}
-            <ul>
-              {% for strategy in indicator.eu_indicator_other_aichi_strategy.all %}
-                {% for aichi_target in strategy.aichi_targets.all %}
-                  {% assign aichi_target.get_parent_goal as goal %}
-                  <li>
-                    <a href="{% url 'goals' code=goal.code %}#{{ aichi_target.code }}">
-                      {% trans "AICHI Target" %} {{ aichi_target.code }}</a>
-                  </li>
-                {% endfor %}
-              {% endfor %}
-            </ul>
-          {% else %}
-            <p>{% trans "No corresponding AICHI target" %}.</p>
-          {% endif %}
-        </div>
-
+      <li id="indicator-{{ indicator.id }}">
+        <a href="{% url 'eu_indicator_details' indicator.pk %}">{{ indicator.get_indicator_type_display }} {{ indicator.code }} {{ indicator.title }}</a>
+      </li>
     {% endfor %}
-
+    </div>
   {% else %}
     <h1>{% trans 'No EU Indicators' %}</h1>
   {% endif %}

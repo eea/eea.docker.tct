@@ -36,8 +36,10 @@ urlpatterns = [
 
     url(r'^indicator/(?P<pk>(\d+))$', views.indicator,
         name='indicator'),
-    url(r'^eu_indicators/$', views.eu_indicators,
+    url(r'^european-strategy/indicators/$', views.eu_indicators,
         name='eu_indicators'),
+    url(r'^european-strategy/indicators/(?P<pk>[\w\-]+)$', views.indicator_details,
+        name='eu_indicator_details'),
     url(r'^nat_indicators/$', views.nat_indicators,
         name='nat_indicators'),
 
