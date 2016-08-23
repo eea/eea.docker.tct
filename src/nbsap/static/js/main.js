@@ -34,41 +34,33 @@ function Modal(container) {
     };
 
     // events - buttons
-    $('[data-modal]').on('click', function(e) {
-        e.preventDefault();
-        target = $(this).data('modal');
-        if (target == 'close') {
-            self.close();
-        } else {
-          href = $(this).attr('href');
-          if (href) {
-            $.ajax({
-              url: href,
-              context: document.body,
-              beforeSend: function() {
-                $(target).html('loading');
-              }
-            }).done(function(html) {
-              $(target).html(html);
-            });
+    $('[data-modal]').on('click', function (e) {
+    e.preventDefault();
+     $('#backdrop').addClass('open');
+    target = $(this).data('modal');
+      href = $(this).attr('href');
+      if (href) {
+        $.ajax({
+          url: href,
+          context: document.body,
+          beforeSend: function () {
+            $(target).html('loading');
           }
-          self.open(target);
-        }
-    });
-    // events - close
-    $(self.activeModal).on('click', function(event) {
-        event.stopPropagation();
-    });
-    $(self.container).on('click', function() {
-        if (self.activeModal) {
-            self.close();
-        }
-    });
-    $(document).keyup(function(e) {
-        if (e.keyCode == 27 && self.activeModal) {
-            self.close();
-        }
-    });
+        }).done(function (html) {
+          $(target).html(html);
+        });
+      }
+      self.open(target);
+
+  });
+  // events - close
+  $(self.activeModal).on('click', function (event) {
+    event.stopPropagation();
+  });
+  $('#backdrop').on('click', function () {
+ $('#backdrop').removeClass('open');
+       self.close();
+   });
 
     // TOC in goals was generating double ul - li markup
 

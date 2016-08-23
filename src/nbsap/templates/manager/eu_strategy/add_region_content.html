@@ -1,0 +1,18 @@
+{% load i18n %}
+
+<section class="content-header">
+  <h1>{% trans "Add New Region" %}</h1>
+</section>
+<section class="content">
+  <form action="" method="post" id="region-add" class="form">
+    <div class="">
+      <label for="region">{% trans "Region" %}</label>
+      {{ form.name }}
+    </div>
+
+    <div class="action-bar">
+      <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
+      <a href="{% url 'list_regions' %}" class="btn btn-danger" type="button">{% trans "Cancel" %}</a>
+    </div>
+  </form>
+</section>

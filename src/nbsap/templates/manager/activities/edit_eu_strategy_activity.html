@@ -29,7 +29,7 @@ NBSAP - {% trans "Edit action" %} {{ activity.code }}
   </p>
   {% endif %}
 
-  <form action="" method="post" id="national-activity-edit" class="form">
+  <form action="" method="post" id="eu-activity-edit" class="form">
 
     <div class="">
       <label for="language">{% trans "Language" %}</label>
@@ -40,6 +40,7 @@ NBSAP - {% trans "Edit action" %} {{ activity.code }}
       <label for="title">{% trans "Region" %}</label>
       {{ form.region }}
       {{ form.region.errors }}
+      <a href="{% url 'region_content' content=1 %}" data-modal="#add_region_modal" class="btn btn-default" type="button">Add Region</a>
     </div>
 
     <div class="row">
