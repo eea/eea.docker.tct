@@ -125,3 +125,12 @@
   border-radius: 10px;
   padding: 5px;
 }
+
+.action-bar{
+  display: inline-block;
+}
+
+#aichi-map_filter{
+  display: inline-block;
+  float: right;
+}

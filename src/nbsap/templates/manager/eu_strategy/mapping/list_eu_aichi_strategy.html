@@ -16,14 +16,11 @@ NBSAP - {% trans "Mapping EU Targets to Aichi Targets" %}
 
 <section class="content">
 
-  <div class="action-bar">
-    <a class="btn btn-success add"
-       href="{% url 'edit_eu_aichi_strategy' %}">{% trans "Add Mapping" %}</a>
-  </div>
 
+  {% url 'edit_eu_aichi_strategy' as edit_strategy %}
 
   {% if strategies %}
-  <table class="table objectives_listing ">
+  <table id="aichi-map" class="table dataTable">
 
     <thead>
     <th>{% trans "Eu Targets" %}</th>
@@ -89,4 +86,13 @@ NBSAP - {% trans "Mapping EU Targets to Aichi Targets" %}
 
 {% block scripts %}
 <script src="/static/js/object_delete.js"></script>
+<script>
+  $(function () {
+    $('#aichi-map').dataTable({
+    "paging": false,
+      "dom": '<"filter-wrapper"f>t'
+    });
+    $('.filter-wrapper').prepend('<div class="action-bar"><a class="btn btn-success add" href="{{ edit_strategy }}">{% trans "Add Mapping" %}</a></div>')
+  });
+</script>
 {% endblock scripts %}
