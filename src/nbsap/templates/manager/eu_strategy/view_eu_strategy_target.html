@@ -17,13 +17,8 @@ NBSAP - {% trans "target" %} {{ target.code }}: {{target.title }}
   <div class="action-bar">
     <form method="POST" action="{% url 'delete_eu_strategy_target' pk=target.pk %}">
 
-      {% if target.parent %}
-      {% url 'view_eu_strategy_target' target.parent.id as back_url %}
-      {% else %}
-      {% url 'list_eu_targets' as back_url %}
-      {% endif %}
 
-      <a class="btn btn-success" href="{{ back_url }}">
+      <a class="btn btn-success" href="javascript: history.go(-1)">
         <i class="glyphicon glyphicon-arrow-left"></i> {% trans "Back" %}
       </a>
 
