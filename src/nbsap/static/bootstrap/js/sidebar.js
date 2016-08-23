@@ -87,4 +87,17 @@ $(document).ready(function() {
     });
 
 
+
+    $targetlistorder=$('.target-list li span');
+    $targetlistorder.each(function(){
+            console.log($(this).text());
+if ($(this).text().match(/[a-z]/i)) {
+    $(this).css("padding-left","25px");
+}
+
+        });
+
+
+
+
 });

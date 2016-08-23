@@ -11,30 +11,10 @@
         <li>
             <a href="{{ navbar_link.url }}" target="_blank" title="{{ navbar_link.title }}">{{navbar_link }}</a>
         </li>
-        {% endfor %} {% if LANGUAGES|length > 1 %}
-        <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown">
-   			{{ request.LANGUAGE_CODE|upper }}
-   					<b class="caret">
-   					</b>
-   					</a>
-            <ul class="dropdown-menu">
-                {% for lang in LANGUAGES %}
-                <li>
-                    <a class="change-lang">{{ lang.1 }}</a>
-                    <form name="set_lang_{{ lang.0 }}" class="language-menu" action="{% url 'set_language' %}" method="POST">
-                        <input name="next" type="hidden" value="{{ request.get_full_path }}">
-                        <input name="language" type="hidden" value="{{ lang.0 }}">
-                    </form>
-                </li>
-                {% endfor %}
-            </ul>
-        </li>
-        {% else %}
-        <li>
-            <a href="" title="{{ LANGUAGES.0.1 }}">{{ LANGUAGES.0.0|upper }}</a>
-        </li>
-        {% endif %} {% if user.is_authenticated %}
+        {% endfor %}
+
+
+        {% if user.is_authenticated %}
         <li>
             <a href="{% if NAT_STRATEGY %}{% url 'list_national_objectives' %}{% else %}{% url 'list_eu_targets' %}{% endif %}">
     			{% trans 'Mappings' %}
@@ -59,4 +39,31 @@
         </li>
         {% endif %}
     </ul>
+    <div class="lang-menu">
+            {% if LANGUAGES|length > 1 %}
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown">
+            {{ request.LANGUAGE_CODE|upper }}
+                    <b class="caret">
+                    </b>
+                    </a>
+            <ul class="dropdown-menu">
+                {% for lang in LANGUAGES %}
+                <li>
+                    <a class="change-lang">{{ lang.1 }}</a>
+                    <form name="set_lang_{{ lang.0 }}" class="language-menu" action="{% url 'set_language' %}" method="POST">
+                        <input name="next" type="hidden" value="{{ request.get_full_path }}">
+                        <input name="language" type="hidden" value="{{ lang.0 }}">
+                    </form>
+                </li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% else %}
+
+        <li>
+            <a href="" title="{{ LANGUAGES.0.1 }}">{{ LANGUAGES.0.0|upper }}</a>
+        </li>
+        {% endif %}
+</div>
 </div>
