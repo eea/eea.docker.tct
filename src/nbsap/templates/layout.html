@@ -26,17 +26,25 @@
 
 <body class="user">
     <div class="header">
+    <div id="backdrop"></div>
       <div class="container">
-        {% if LAYOUT_HEADER_LOGO %}
+        <div class="nav-trigger">
+        <button type="button" class="btn">menu</button>
+        </div>
+        <div class="nav-brand">
+          <div class="brand">
+              {% if LAYOUT_HEADER_LOGO %}
           <div class="logo img">
             <img src="/static/CHM_logo_45x70px.png">
           </div>
         {% endif %}
+            <h1 class="site-title"><a href="{% url 'goals' %}">{% trans SITE_HEADER %}</a></h1>
+            <form>
+              <input type="search" placeholder="Search">
+            </form>
 
-        <div class="nav-trigger">
-        <button type="button" class="btn">menu</button>
+          </div>
         </div>
-
         <div class="nav-container">
         <div class="close-trigger">
   <button type="button" class="btn">X</button>
@@ -45,7 +53,6 @@
           {% block navmenu %}{% endblock %}
         </div>
 
-          <h1 class="site-title"><a href="{% url 'goals' %}">{% trans SITE_HEADER %}</a></h1>
       </div>
     </div>
 
@@ -97,7 +104,7 @@
 
     {% block scripts %}{% endblock %}
 
-<div id="backdrop"></div>
+
 
 </body>
 

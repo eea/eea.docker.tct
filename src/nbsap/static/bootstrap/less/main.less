@@ -264,7 +264,9 @@ body {
 
 
 .content {
-  margin-top: 2em;
+  @media (min-width:800px) {
+margin-top: 17rem;
+}
 }
   .content:after {
     content: '';
@@ -372,8 +374,6 @@ body {
     color: white;
     border-bottom: 1px solid @gray-light;
     background: #039be5;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
   }
 
 
