@@ -19,7 +19,7 @@
     {% for indicator in indicators|sort_by_code|sort_by_type %}
     <li {% if indicator.code == current_indicator.code %}class="active"{% endif %}>
       <a href="{% url 'eu_indicator_details' indicator.pk %}" title="{{ indicator.code|upper }}"</a>
-        {% trans "Indicator" %} {{ indicator.indicator_type| upper }} {{indicator.code | upper }}
+        {{ indicator.indicator_type| upper }} {{indicator.code | upper }}
       </a>
     </li>
     {% endfor %}
