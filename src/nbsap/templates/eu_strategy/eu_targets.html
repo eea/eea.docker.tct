@@ -90,15 +90,15 @@
             {% endfor %}
           {% endfor %}
         </ul>
-      {% else %} 
+      {% else %}
         <p>{% trans "No corresponding AICHI target" %}.</p>
       {% endif %}
     </div>
   {% else %}
     <h1 class="page-title">{% trans "EU Targets" %}</h1>
-    <ul>
+    <ul class="target-list">
       {% for target in targets %}
-        <li>{{ target.code }}
+        <li><span>{{ target.code }}</span>
           <a href="{% url 'eu_targets' target.id %}"
              title="{% trans 'Target' %} {{ target.code }}">
             {{ target.title|default:target.code }}</a>

@@ -7,12 +7,12 @@
 
 	}
 
-	.main {
-		    // display: block;
-
-	}
 }
 
+
+.main {
+        padding: 1rem;
+  }
 
 sub-/* bootstrap override */
 .tooltip {
@@ -238,7 +238,27 @@ body {
   padding: 0px;
   font-family: Arial, sans-serif;
   position: relative;
+  // background: @gray-lightest;
+  background:white;
 }
+
+::-webkit-scrollbar-track
+{
+  background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar
+{
+  width: 10px;
+  background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+  background-color: rgba(0, 0, 0, 0.03);
+  border-radius: 5px;
+}
+
 
 
 
@@ -262,8 +282,7 @@ body {
     padding-left: 0;
     margin: 0;
     padding: 12px;
-    overflow-y: auto;
-    max-height: 500px;
+
   }
     .sidebar-menu a {
       display: block;
@@ -279,18 +298,14 @@ body {
       background: @brand-blue;
     }
     .sidebar-menu .active a {
-      background-color: @gray-lightest;
+      background-color: white;
       color: #039be5;
     }
-
-.sidebar + .main {
-
-}
 
 .section {
   padding-top: 1em;
   margin-bottom: 1em;
-  border-top: 1px solid @gray-lightest;
+  border-top: 1px solid white;
 }
 
 .section h2,h5 {
@@ -319,7 +334,7 @@ body {
   margin-top: 2em;
   padding-top: 1em;
   padding-bottom: 1em;
-  border-top: 1px solid @gray-lightest;
+  border-top: 1px solid white;
   color: gray;
 }
 
@@ -348,15 +363,21 @@ body {
   padding: 10px;
   box-shadow: 0 0 3px 0 rgba(0,0,0,.1);
   background: #f7f7f7;
+  border-radius: 5px;
 }
   .well-title {
-    margin: -10px -10px 10px;
+    margin: -11px -11px 10px;
     padding: 3px 10px;
     font-size: 14px;
     color: white;
     border-bottom: 1px solid @gray-light;
     background: #039be5;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
   }
+
+
+
   .well .html-content {
     margin: -10px;
   }
@@ -365,10 +386,9 @@ body {
   border-radius: 4px;
   margin-bottom: 1em;
   padding: 1rem;
-  background-color: @gray-lightest;
   @media (max-width: 800px) {
-    height: 550px;
-    overflow-y: auto;
+    height: 100vh;
+    overflow: auto;
   }
 
 }
@@ -379,15 +399,15 @@ body {
   .toc ul {
     list-style-type: none;
     overflow: hidden;
-    @media (max-width: 800px) {
-    height: 300px;
-    overflow-y: scroll;
+    @media (max-width: 800px){
+          padding: 10px;
     }
   }
   .toc li {
     list-style-type: none;
-    padding: 1rem;
+    padding: 0.2rem ;
     white-space: nowrap;
+    margin-bottom: 0;
   }
   .toc .column-list {
     float: left;
@@ -502,4 +522,22 @@ i {
   color: white;
 }
 
+
+.target-list {
+  padding: 1rem;
+  background: white;
+  a{
+    color: @brand-blue;
+  }
+  li {
+  }
+  span{
+    color: @brand-blue;
+
+  }
+  span:after{
+    content: " - ";
+  }
+
+}
 
