@@ -1,5 +1,6 @@
 import re
 from django import template
+from natsort import natsorted
 
 register = template.Library()
 
@@ -32,9 +33,18 @@ def get_page(id):
 @register.filter('sort_by_code')
 def sort_by_code(value):
     try:
-       return sorted(value, key=lambda i: map(int, i.code.split('.')))
+        return natsorted(value, key=lambda i: map(int, i.code.split('.')))
     except ValueError:
-        return sorted(value, key=lambda i: i.code)
+        return natsorted(value, key=lambda i: i.code)
+
+
+@register.filter('sort_by_type')
+def sort_by_type(value):
+    try:
+        return natsorted(value,
+                         key=lambda i: map(int, i.indicator_type.split('.')))
+    except ValueError:
+        return natsorted(value, key=lambda i: i.indicator_type)
 
 
 @register.assignment_tag
@@ -61,8 +71,10 @@ def get_targets_for_strategies(strategies):
         targets.extend(s.relevant_targets.all())
     targets = list(set(targets))
     try:
-        targets.sort(cmp=lambda a, b: int(10 * (float(a.code) - float(b.code))))
-    except: pass
+        targets.sort(cmp=lambda a, b: int(
+            10 * (float(a.code) - float(b.code))))
+    except:
+        pass
     return targets
 
 

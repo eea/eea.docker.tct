@@ -34,7 +34,7 @@
   <div class="toc">
     <h5>{% trans "Table of contents"%}</h5>
     <ul>
-      {% for target in targets %}
+      {% for target in targets|sort_by_code %}
       <li>
         <a href="{% url 'goals' code=target.get_parent_goal.code aichi_target_id=target.id %}"
            rel="tooltip">
