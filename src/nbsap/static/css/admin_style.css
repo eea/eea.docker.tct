@@ -74,23 +74,53 @@
   width: auto !important;
 }
 
-.admin{
-  color: #fff!important;
+.admin {
+  color: #fff !important;
   background-color: #00c0ef;
 }
 
-.toc-wrapper{
+.toc-wrapper {
   display: inline-block;
 }
 
-.toc-wrapper p{
+.toc-wrapper p {
   margin: 10px;
 }
 
-.toc-wrapper ul{
+.toc-wrapper ul {
   display: inline-block;
 }
 
-.toc-wrapper ul li{
+.toc-wrapper ul li {
   display: inline-block;
+}
+
+.logo {
+  font-size: 12px !important;
+  line-height: 15px !important;
+}
+
+.dashboard-title {
+  display: inline-block;
+  margin-top: 10px;
+  padding-left: 10px;
+  color: #fff;
+}
+
+.main-sidebar{
+  padding-top: 0;
+}
+
+.main-header{
+  z-index: 0;
+}
+
+#backdrop {
+  position: fixed;
+  background: red;
+  z-index: 1000;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
