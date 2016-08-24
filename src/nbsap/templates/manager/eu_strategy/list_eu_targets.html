@@ -19,18 +19,11 @@ NBSAP - {% trans "EU Strategy: List Targets" %}
   <h2>{% trans "List EU Targets" %}</h2>
 
   {% if EU_STRATEGY_ADD %}
-  <div class="form-group">
-    <a class="btn btn-success add"
-       href="{% url 'edit_eu_target' %}">{% trans "Add target" %}
-    </a>
-  </div>
-  <div class="form-group">
-
-  </div>
+  {% url 'edit_eu_target' as edit %}
   {% endif %}
 
 
-  <table class="table table-striped table-bordered">
+  <table data-url="{{ edit }}" id="target-table" class="table table-striped table-bordered dataTable">
 
     <thead>
     <th>{% trans "Code" %}</th>
@@ -57,12 +50,14 @@ NBSAP - {% trans "EU Strategy: List Targets" %}
 {% block scripts %}
 
 <script>
-
-  $(document).ready(function () {
-    $('.objectives_listing').dataTable({
-      "bStateSave": true,
-      "iDisplayLength": 25
+  $(function () {
+    console.log("{{ edit }}");
+    $('#target-table').dataTable({
+      "paging": false,
+      "dom": '<"filter-wrapper"f>t'
     });
+    var url=$('#target-table').data('url');
+    $('.filter-wrapper').prepend('{% if EU_STRATEGY_ADD %}<div class="action-bar"><a class="btn btn-success add" href="'+url+'">{% trans "Add target" %}</a></div>{% endif %}');
   });
 </script>
 

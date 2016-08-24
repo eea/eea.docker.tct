@@ -18,14 +18,9 @@ NBSAP - {% trans "Mapping National Objectives to AICHI and EU targets" %}
 <section class="content-header">
   <h1 class="page-title">{% trans "Mapping National Objectives to AICHI and EU targets" %}</h1>
 </section>
-<section class="content">
-  <div class="form-group">
-    <a class="btn btn-success add"
-       href="{% url 'edit_national_strategy' %}">{% trans "Add Mapping" %}</a>
-  </div>
-
+  {% url 'edit_national_strategy' as edit_strategy %}
   {% if strategies %}
-  <table class="table objectives_listing table-striped table-bordered">
+  <table id="objectives-table" data-url="{{ edit_strategy }}" class="table objectives_listing table-striped table-bordered">
 
     <thead>
     <th class="obj-id">{% trans "Objective"%}</th>
@@ -109,11 +104,17 @@ NBSAP - {% trans "Mapping National Objectives to AICHI and EU targets" %}
 <script>
 
   $(document).ready(function () {
-    $('.objectives_listing').dataTable({
-      "bStateSave": true,
-      "iDisplayLength": 10
+
+      $('#objectives-table').dataTable({
+        "paging": false,
+        "dom": '<"filter-wrapper"f>t'
+      });
+      var url=$('#objectives-table').data('url');
+      $('.filter-wrapper').prepend('<div class="action-bar"><a class="btn btn-success add" href="'+url+'?category={{ category }}">{% trans "Add mapping" %}</a></div>');
     });
-  });
+
+
+
 
   $(".btn-danger").on("click", function (e) {
     e.preventDefault();

@@ -20,7 +20,7 @@ NBSAP - {% trans "Mapping EU Targets to Aichi Targets" %}
   {% url 'edit_eu_aichi_strategy' as edit_strategy %}
 
   {% if strategies %}
-  <table id="aichi-map" class="table table-striped table-bordered dataTable">
+  <table data-url="{{ edit_strategy }}" id="aichi-map" class="table table-striped table-bordered dataTable">
 
     <thead>
     <th>{% trans "Eu Targets" %}</th>
@@ -92,7 +92,8 @@ NBSAP - {% trans "Mapping EU Targets to Aichi Targets" %}
     "paging": false,
       "dom": '<"filter-wrapper"f>t'
     });
-    $('.filter-wrapper').prepend('<div class="action-bar"><a class="btn btn-success add" href="{{ edit_strategy }}">{% trans "Add Mapping" %}</a></div>')
+    var url = $('#aichi-map').data('url');
+    $('.filter-wrapper').prepend('<div class="action-bar"><a class="btn btn-success add" href="'+url+'">{% trans "Add Mapping" %}</a></div>')
   });
 </script>
 {% endblock scripts %}

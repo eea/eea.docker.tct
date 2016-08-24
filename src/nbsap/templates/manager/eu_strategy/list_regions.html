@@ -16,7 +16,7 @@ NBSAP - {% trans "List Regions" %}
   <h1 class="page-title">{% trans "List Regions" %}</h1>
 </section>
 <section class="content">
-  <table class="table table-striped table-bordered">
+  <table id="region-table" class="table table-striped table-bordered dataTable">
     <thead>
     <th>{% trans "Region" %}</th>
     </thead>
@@ -41,11 +41,19 @@ NBSAP - {% trans "List Regions" %}
     {% endfor %}
     </tbody>
   </table>
-
-  <div class="action-bar">
-    <a class="btn btn-success add"
-       href="{% url 'add_region' %}">{% trans "Add Region" %}
-    </a>
-  </div>
+  {% url 'add_region' as add_region_url %}
 </section>
 {% endblock %}
+{% block scripts %}
+
+<script>
+  $(function () {
+    $('#region-table').dataTable({
+      "paging": false,
+      "dom": '<"filter-wrapper"f>t'
+    });
+    $('.filter-wrapper').prepend('<div class="action-bar"><a class="btn btn-success add" href="{{ add_region_url }}">{% trans "Add Region" %}</a></div>');
+  });
+</script>
+
+{% endblock scripts %}

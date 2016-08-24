@@ -16,14 +16,8 @@ NBSAP - {% trans "National Strategy: List National Objectives" %}
 </section>
 <section class="content">
   {% get_current_language as lang_code %}
-
-  <div class="action-bar">
-    <a class="btn btn-success add"
-       href="{% url 'edit_national_objective' %}">{% trans "Add objective" %}
-    </a>
-  </div>
-
-  <table class="table table-striped table-bordered">
+  {% url 'edit_national_objective' as edit_objective %}
+  <table id="objectives-table" data-url="{{ edit_objective }}" class="table table-striped table-bordered">
 
     <thead>
     <th>{% trans "Code" %}</th>
@@ -50,12 +44,13 @@ NBSAP - {% trans "National Strategy: List National Objectives" %}
 {% block scripts %}
 
 <script>
-
-  $(document).ready(function () {
-    $('.objectives_listing').dataTable({
-      "bStateSave": true,
-      "iDisplayLength": 25
+  $(function () {
+    $('#objectives-table').dataTable({
+      "paging": false,
+      "dom": '<"filter-wrapper"f>t'
     });
+    var url=$('#objectives-table').data('url');
+    $('.filter-wrapper').prepend('<div class="action-bar"><a class="btn btn-success add" href="'+url+'?category={{ category }}">{% trans "Add objective" %}</a></div>');
   });
 </script>
 

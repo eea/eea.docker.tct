@@ -130,7 +130,7 @@
   display: inline-block;
 }
 
-#aichi-map_filter{
+.dataTables_filter{
   display: inline-block;
   float: right;
 }
