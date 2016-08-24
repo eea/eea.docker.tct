@@ -9,6 +9,7 @@
     font-weight: normal;
     padding: 0.5rem;
     margin-bottom: 0;
+	float: left;
     margin-top: 1rem;
   	@media (min-width: 800px) {
 	width: 500px;
@@ -66,8 +67,12 @@
 	    }
 
     @media screen and (min-width: 800px) {
-        display: inline-block;
-        float: right;
+   	border-top: solid white;
+    position: absolute;
+    right: 0;
+    top: 51px;
+    background: #039be5;
+    box-shadow: 0 0 2px rgba(0,0,0,0.14),0 2px 2px rgba(0,0,0,0.28);
     }
 }
 
@@ -83,7 +88,7 @@
 
 .account-menu > li {
     @media screen and (min-width: 800px) {
-        float: left;
+    	    background: rgba(0,0,0,0.1)
     }
 }
 
@@ -286,16 +291,21 @@
 }
 
 .account-menu-header {
-	padding: 10px;
-	@media (min-width: 800px) {
-		display: none;
-	}
+    display: inline-block;
+    float: right;
+    cursor: pointer;
+    @media (max-width:800px){
+    	display: block;
+    	float: none;
+    }
+    @media (min-width: 800px) {
+    	i{ display :none;}
+    }
  }
 
  .clicked {
 	background: rgba(0,0,0,0.1);
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+        // border-bottom: solid white;
 	}
 
 	.nav-brand {
@@ -310,9 +320,9 @@
 
 
 
-	
 
 
+.search-form {
 input {
 	outline: none;
   float:right;
@@ -330,15 +340,11 @@ input::-webkit-search-cancel-button {
 
 
 input[type=search] {
-	background: #ededed url(http://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center;
+	background: @gray-lightest url(http://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center;
 	border: solid 1px #ccc;
-	padding: 9px 10px 9px 32px;
-	width: 55px;
-	
-	-webkit-border-radius: 10em;
-	-moz-border-radius: 10em;
-	border-radius: 10em;
-	
+    padding: 0px 10px 0px 32px;
+    width: 55px;
+    margin: 2rem;
 	-webkit-transition: all .5s;
 	-moz-transition: all .5s;
 	transition: all .5s;
@@ -346,8 +352,7 @@ input[type=search] {
 input[type=search]:focus {
 	width: 130px;
 	background-color: #fff;
-	border-color: #66CC75;
-	
+	border-color: @brand-blue;
 	-webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);
 	-moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
 	box-shadow: 0 0 5px rgba(109,207,246,.5);
@@ -359,6 +364,7 @@ input:-moz-placeholder {
 }
 input::-webkit-input-placeholder {
 	color: #999;
+}
 }
 
 

@@ -28,9 +28,6 @@
     <div class="header">
     <div id="backdrop"></div>
       <div class="container">
-        <div class="nav-trigger">
-        <button type="button" class="btn">menu</button>
-        </div>
         <div class="nav-brand">
           <div class="brand">
               {% if LAYOUT_HEADER_LOGO %}
@@ -39,11 +36,14 @@
           </div>
         {% endif %}
             <h1 class="site-title"><a href="{% url 'goals' %}">{% trans SITE_HEADER %}</a></h1>
-            <form>
+            <form class='search-form'>
               <input type="search" placeholder="Search">
             </form>
 
           </div>
+        </div>
+        <div class="nav-trigger">
+        <button type="button" class="btn">menu</button>
         </div>
         <div class="nav-container">
         <div class="close-trigger">
