@@ -1,6 +1,26 @@
 {% load i18n %}
 {% load utils %}
 
+{% block sidebar-right %}
+<div class="sidebar-right">
+  <div class="toc">
+    <h5>{% trans "Table of contents"%}</h5>
+    <ul>
+      {% for target in targets|sort_by_code %}
+      <li>
+        <a href="{% url 'goals' code=target.get_parent_goal.code aichi_target_id=target.id %}"
+           rel="tooltip">
+           {% trans "Target" %} {{ target.code }}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}
+
+<h1 class="goal-title">{% trans "AICHI Goal " %}{{ target.get_parent_goal.code|upper }}: </h1> <h1 class="goal-desc">{{ target.get_parent_goal.description|striptags|safe }}</h1>
+
 <div class="section" id="{{ target.code }}">
   <h2>{% trans "AICHI Target" %} {{ target.code }}</h2>
   <p>{{ target.description }}</p>

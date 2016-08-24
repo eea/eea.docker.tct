@@ -10,22 +10,74 @@ from django.template.loader import render_to_string
 from django.shortcuts import render_to_response
 
 from nbsap import models
+from natsort import natsorted
 from indicators import get_indicators_pages
 
 
+def _sort_by_code(value):
+    try:
+        return natsorted(value, key=lambda i: map(int, i.code.split('.')))
+    except ValueError:
+        return natsorted(value, key=lambda i: i.code)
+
+
+def list_goals(request):
+    goals = models.AichiGoal.objects.order_by('code').all()
+    list_goals = True
+    list_targets = False
+    return render_to_response(
+        'aichi/aichi.html',
+        context_instance=RequestContext(
+            request, {
+                'goals': goals,
+                'list_goals': list_goals,
+                'list_targets': list_targets,
+            })
+    )
+
+
+def list_targets(request, code=None):
+    if code:
+        current_goal = models.AichiGoal.objects.get(code=code)
+        targets = models.AichiGoal.objects.get(code=code).targets.all()
+    else:
+        current_goal = None
+        targets = models.AichiTarget.objects.all()
+
+    goals = models.AichiGoal.objects.order_by('code').all()
+    list_goals = False
+    list_targets = True
+
+    return render_to_response(
+        'aichi/aichi.html',
+        context_instance=RequestContext(
+            request, {
+                'current_goal': current_goal,
+                'goals': goals,
+                'list_goals': list_goals,
+                'list_targets': list_targets,
+                'targets': targets,
+            })
+    )
+
+
 def goals(request, code=None, aichi_target_id=None):
+    if not code and aichi_target_id:
+        code = models.AichiTarget.objects.get(
+            pk=aichi_target_id).get_parent_goal().code
     if code:
         current_goal = models.AichiGoal.objects.get(code=code)
         targets = current_goal.targets.all()
     else:
         current_goal = None
         targets = models.AichiTarget.objects.all()
+
     goals = models.AichiGoal.objects.order_by('code').all()
 
     indicators_list = models.AichiIndicator.objects.all()
 
     if not aichi_target_id:
-        target = None
+        target = _sort_by_code(current_goal.targets.all())[0]
     else:
         target = current_goal.targets.get(pk=aichi_target_id)
 
@@ -39,7 +91,6 @@ def goals(request, code=None, aichi_target_id=None):
                 'code': code,
                 'goals': goals,
                 'targets': targets,
-                'current_goal': current_goal,
                 'target': target,
                 'indicators_pages': get_indicators_pages(paginator),
                 'info_header': info_header,

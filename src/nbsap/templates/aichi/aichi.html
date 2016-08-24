@@ -29,24 +29,6 @@
 </div>
 {% endblock %}
 
-{% block sidebar-right %}
-<div class="sidebar-right">
-  <div class="toc">
-    <h5>{% trans "Table of contents"%}</h5>
-    <ul>
-      {% for target in targets|sort_by_code %}
-      <li>
-        <a href="{% url 'goals' code=target.get_parent_goal.code aichi_target_id=target.id %}"
-           rel="tooltip">
-           {% trans "Target" %} {{ target.code }}
-        </a>
-      </li>
-      {% endfor %}
-    </ul>
-  </div>
-</div>
-{% endblock %}
-
 {% block content %}
 
   {% if info_header %}
@@ -66,14 +48,14 @@
   </div>
   {% endif %}
 
-  <h1 class="page-title">{% trans "AICHI Goals" %}</h1>
-
-  {% if not code %}
+  {% if list_goals %}
     {% include 'aichi/list_goals.html' %}
-  {% elif target %}
-    {% include 'aichi/target_details.html' %}
-  {% else %}
+  {% endif %}
+  {% if list_targets %}
     {% include 'aichi/list_targets.html' %}
+  {% endif %}
+  {% if not list_goals and not list_targets %}
+    {% include 'aichi/target_details.html' %}
   {% endif %}
 
 {% endblock %}
