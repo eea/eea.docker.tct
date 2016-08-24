@@ -27,7 +27,9 @@ NBSAP - {% trans "EU Strategy: List Targets" %}
 
     <thead>
     <th>{% trans "Code" %}</th>
-    <th>{% trans "Title" %}</th>
+    <th>{% trans "EU Target" %}</th>
+    <th>{% trans "Has actions" %}</th>
+    <th></th>
     </thead>
 
     <tbody>
@@ -39,7 +41,62 @@ NBSAP - {% trans "EU Strategy: List Targets" %}
            title="{% trans 'Target' %} {{ target.code }}">
           {{ target.title|default:target.code }}</a>
       </td>
+      <td>
+        {% if starget.actions.all|length == 0 %}
+        <span class="label label-danger">No</span>
+        {% else %}
+        <span class="label label-success">Yes</span>
+        {% endif %}
+      </td>
+      <td>
+        <form method="POST" action="{% url 'delete_eu_strategy_target' pk=target.pk %}">
+          <a class="btn btn-success"
+             href="{% url 'edit_eu_strategy_target' pk=target.pk %}">{% trans "Edit" %}</a>
+
+          <button type="submit" class="btn btn-danger edit"
+                  data-message="{% trans 'Are you sure you want to delete this target?' %}">
+            <i class="glyphicon glyphicon-trash"></i> {% trans "Delete" %}
+          </button>
+          {% if not target.parent %}
+          <a class="btn btn-default"
+             href="{% url 'edit_eu_target_with_parent' parent=target.pk %}">
+            {% trans "Add sub target" %}
+          </a>
+          {% endif %}
+        </form>
+      </td>
     </tr>
+    {% for subtarget in target.children.all %}
+    <tr>
+      <td>{{ subtarget.code }}</td>
+      <td>
+        <a href="{% url 'view_eu_strategy_target' subtarget.id %}"
+           title="{% trans 'Target' %} {{ subtarget.code }}">
+          {{ subtarget.title|default:subtarget.code }}</a>
+      </td>
+      <td>
+        {% if subtarget.actions.all|length == 0 %}
+        <span class="label label-danger">No</span>
+        {% else %}
+        <span class="label label-success">Yes</span>
+        {% endif %}
+      </td>
+      <td>
+
+        <form method="POST" action="{% url 'delete_eu_strategy_target' pk=subtarget.pk %}">
+
+          <a class="btn btn-success"
+             href="{% url 'edit_eu_strategy_target' pk=subtarget.pk %}">{% trans "Edit" %}</a>
+
+          <button type="submit" class="btn btn-danger edit"
+                  data-message="{% trans 'Are you sure you want to delete this target?' %}">
+            <i class="glyphicon glyphicon-trash"></i> {% trans "Delete" %}
+          </button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+
     {% endfor %}
     </tbody>
 
@@ -56,9 +113,10 @@ NBSAP - {% trans "EU Strategy: List Targets" %}
       "paging": false,
       "dom": '<"filter-wrapper"f>t'
     });
-    var url=$('#target-table').data('url');
-    $('.filter-wrapper').prepend('{% if EU_STRATEGY_ADD %}<div class="action-bar"><a class="btn btn-success add" href="'+url+'">{% trans "Add target" %}</a></div>{% endif %}');
+    var url = $('#target-table').data('url');
+    $('.filter-wrapper').prepend('{% if EU_STRATEGY_ADD %}<div class="action-bar"><a class="btn btn-success add" href="' + url + '">{% trans "Add target" %}</a></div>{% endif %}');
+
   });
 </script>
-
+<script src="/static/js/object_delete.js"></script>
 {% endblock scripts %}

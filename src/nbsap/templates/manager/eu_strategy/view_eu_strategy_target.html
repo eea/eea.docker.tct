@@ -60,7 +60,7 @@ NBSAP - {% trans "target" %} {{ target.code }}: {{target.title }}
       <tbody>
       {% for subtarget in target.children.all %}
       <tr>
-        <td style="width: 300px;">{{ subtarget.code }}</td>
+        <td>{{ subtarget.code }}</td>
         <td>
           <a href="{% url 'view_eu_strategy_target' subtarget.id %}"
              title="{% trans 'Target' %} {{ subtarget.code }}">
@@ -83,10 +83,8 @@ NBSAP - {% trans "target" %} {{ target.code }}: {{target.title }}
 
   {% regroup actions by region as action_list %}
 
-  {% for items in action_list %}
-  {% if items.grouper %}
-  <h4 class="page-title">{{ items.grouper }}</h4>
-  {% endif %}
+
+
 
   <div class="property_list">
     <table class="table table-striped minimalist">
@@ -94,9 +92,11 @@ NBSAP - {% trans "target" %} {{ target.code }}: {{target.title }}
       <thead>
       <th class="span1">{% trans "Code" %}</th>
       <th>{% trans "Title" %}</th>
+      <th>{% trans "Region" %}</th>
       </thead>
 
       <tbody>
+      {% for items in action_list %}
       {% for action in items.list %}
       <tr>
         <td style="width: 300px;">{{ action.code }}</td>
@@ -106,17 +106,19 @@ NBSAP - {% trans "target" %} {{ target.code }}: {{target.title }}
             {{ action.title }}
           </a>
         </td>
+        <td>{% if items.grouper %}{{ items.grouper }}{% else %}{% trans "All regions" %}{% endif %}</td>
       </tr>
       {% empty %}
       <tr>
         <td colspan="2">{% trans "No actions found" %}.</td>
       </tr>
       {% endfor %}
+      {% endfor %}
       </tbody>
 
     </table>
   </div>
-  {% endfor %}
+
 </section>
 {% endblock %}
 
