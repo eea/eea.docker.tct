@@ -72,7 +72,7 @@
         {% for strategy in target.eu_indicator_aichi_strategy.all %}
           {% with strategy.eu_indicator as eu_indicator %}
           <li>
-            <a href="{% url 'eu_indicators' %}#indicator-{{ eu_indicator.id }}"
+            <a href="{% url 'eu_indicator_details' pk=eu_indicator.id %}"
                 title="{{ eu_indicator.title }}">
               {{ eu_indicator.indicator_type|upper }}
               {{ eu_indicator.code }}: {{ eu_indicator.title }}
