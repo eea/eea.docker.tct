@@ -15,7 +15,7 @@
                {% active request '^/dashboard/mapping/$' %}">
     <a href="{% url 'list_national_strategy' %}">{% trans "Mapping" %}</a>
   </li>
-  <li>
+  <li class="{% active request '^/dashboard/eu-strategy/regions' %}">
     <a href="{% url 'list_regions' %}">{% trans "Regions" %}
     </a>
   </li>
@@ -30,7 +30,7 @@
                {% active request '^/dashboard/eu-aichi-mapping/$' %}">
     <a href="{% url 'list_eu_aichi_strategy' %}">{% trans "Mapping" %}</a>
   </li>
-  <li>
+  <li class="{% active request '^/dashboard/eu-strategy/regions' %}">
     <a href="{% url 'list_regions' %}">{% trans "Regions" %}
     </a>
   </li>
