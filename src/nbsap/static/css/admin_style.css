@@ -65,7 +65,6 @@
 }
 
 .admin {
-  color: #fff !important;
   background-color: #00c0ef;
 }
 
@@ -130,12 +129,10 @@
   position: static;
 }
 
-.logo {
-  background-color: #3c8dbc !important;
-}
 
 .dashboard-title {
-  font-size: 1em;
+  font-size: 1.2em;
+  color: #000;
 }
 
 @media screen and (max-width: 900px) {
