@@ -59,7 +59,7 @@ NBSAP - {% trans "EU Strategy: List Targets" %}
           </button>
           {% if not target.parent %}
           <span class="btn btn-default edit_sub"
-             href="{% url 'edit_eu_target_with_parent' parent=target.pk %}">
+             data-url="{% url 'edit_eu_target_with_parent' parent=target.pk %}">
             {% trans "Add sub target" %}
           </span>
           {% endif %}
@@ -116,7 +116,6 @@ NBSAP - {% trans "EU Strategy: List Targets" %}
         <h4 class="modal-title">Modal Header</h4>
       </div>
       <div class="modal-body">
-        <p>Some text in the modal.</p>
       </div>
     </div>
 
@@ -134,7 +133,17 @@ NBSAP - {% trans "EU Strategy: List Targets" %}
     var url = $('#target-table').data('url');
     $('.filter-wrapper').prepend('{% if EU_STRATEGY_ADD %}<div class="action-bar"><a class="btn btn-success add" href="' + url + '">{% trans "Add target" %}</a></div>{% endif %}');
   $('.edit_sub').on('click',function(){
-  })
+    $this=$(this);
+    var getUrl=$this.data('url');
+    $.ajax({
+      type:'get',
+      url:getUrl,
+      success:function(data){
+        $('.modal-body').html('').append(data);
+        $('.modal').modal('show');
+      }
+    });
+  });
   });
 </script>
 <script src="/static/js/object_delete.js"></script>

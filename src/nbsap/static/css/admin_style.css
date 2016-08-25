@@ -138,17 +138,50 @@
   font-size: 1em;
 }
 
-@media screen and (max-width:900px){
-  .dashboard-title{
+@media screen and (max-width: 900px) {
+  .dashboard-title {
     font-size: 0.9em;
   }
-  .dropdown-menu li a{
-    color: #000!important;
+
+  .dropdown-menu li a {
+    color: #000 !important;
   }
 }
 
-@media screen and (min-width:769px){
-  .toggle{
-    display: none!important;
+@media screen and (min-width: 769px) {
+  .toggle {
+    display: none !important;
   }
+}
+
+.timeline {
+  margin: 10px 0 -10px 0;
+}
+
+.timeline > li {
+  margin-bottom: 0;
+}
+
+.goal_text i {
+  background-color: darkred !important;
+}
+
+.aichi_targets_text i {
+  background: navy !important;
+}
+
+.other_aichi_targets_text i {
+  background: green !important;
+}
+
+.eu_indicators_text i {
+  background: darkblue !important;
+}
+
+.other_eu_indicators_text i {
+  background: darkviolet !important;
+}
+
+.block {
+  display: block;
 }

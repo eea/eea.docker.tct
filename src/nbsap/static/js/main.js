@@ -82,26 +82,26 @@ $(function () {
 function showDescription(name, textSelector, url, type, code, value) {
   var selector = 'select[name=' + name + ']';
   $(selector).on('change', function () {
-    var text = $(this).parents('.form-group').find(textSelector);
+    var text = $(textSelector);
     text.html('');
     $("option:selected", this).each(function() {
       $.get(url.replace('1', this.value), function(data) {
         data = $.parseJSON(data)[0];
         if (code) {
-          var title = '<h5>' + type + ' ' + data.code;
+          var title = '<li><i class="fa"></i><div class="timeline-item"><h3 class="timeline-header">' + type + ' ' + data.code+'</h3>';
           if (data.title && data.value) {
             title += ': ' + data.title;
-            title += '</h5>';
+            title += '</div>';
           }
           if (data.title && !data.value){
-            title += '</h5>';
-            title += '<p>' + data.title + '</p>';
+            title += '</h3>';
+            title += '<div class="timeline-body">' + data.title + '</div></div></li>';
           }
-          text.append(title);
         }
         if (data.value) {
-          text.append('<p>' + data.value + '</p>');
+         title+='<div class="timeline-body">' + data.value + '</div></div></li>';
         }
+        text.append(title);
       });
     });
   }).change();

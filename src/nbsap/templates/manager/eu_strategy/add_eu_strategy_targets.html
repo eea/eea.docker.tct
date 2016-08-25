@@ -1,5 +1,3 @@
-{% extends 'manager/base.html' %}
-
 {% load i18n %}
 
 {% block title %}
@@ -25,7 +23,7 @@ NBSAP - {% trans "Add Eu Strategy" %}
   </p>
   {% endif %}
 
-  <form action="" method="post" id="Eu-Strategy-add" class="form">
+  <form action="{% url 'edit_eu_target_with_parent' parent=parent_target.pk %}" method="post" id="Eu-Strategy-add" class="form">
 
     <div class="">
       <label for="language">{% trans "Language" %}</label>
