@@ -86,7 +86,7 @@ NBSAP - {% trans "Edit target " %}{{ target.code }}
 
     <div class="action-bar">
       <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
-      <a href="{% url 'view_eu_strategy_target' pk=target.pk %}" class="btn btn-default" type="button">{% trans "Cancel" %}</a>
+      <a href="javascript: history.go(-1)" class="btn btn-default" type="button">{% trans "Cancel" %}</a>
     </div>
 
   </form>

@@ -42,7 +42,7 @@ NBSAP - {% trans "EU Strategy: List Targets" %}
           {{ target.title|default:target.code }}</a>
       </td>
       <td>
-        {% if starget.actions.all|length == 0 %}
+        {% if target.actions.all|length == 0 %}
         <span class="label label-danger">No</span>
         {% else %}
         <span class="label label-success">Yes</span>
@@ -58,10 +58,10 @@ NBSAP - {% trans "EU Strategy: List Targets" %}
             <i class="glyphicon glyphicon-trash"></i> {% trans "Delete" %}
           </button>
           {% if not target.parent %}
-          <span class="btn btn-default edit_sub"
-             data-url="{% url 'edit_eu_target_with_parent' parent=target.pk %}">
+          <a class="btn btn-default"
+             href="{% url 'edit_eu_target_with_parent' parent=target.pk %}">
             {% trans "Add sub target" %}
-          </span>
+          </a>
           {% endif %}
         </form>
       </td>
@@ -132,18 +132,6 @@ NBSAP - {% trans "EU Strategy: List Targets" %}
     });
     var url = $('#target-table').data('url');
     $('.filter-wrapper').prepend('{% if EU_STRATEGY_ADD %}<div class="action-bar"><a class="btn btn-success add" href="' + url + '">{% trans "Add target" %}</a></div>{% endif %}');
-  $('.edit_sub').on('click',function(){
-    $this=$(this);
-    var getUrl=$this.data('url');
-    $.ajax({
-      type:'get',
-      url:getUrl,
-      success:function(data){
-        $('.modal-body').html('').append(data);
-        $('.modal').modal('show');
-      }
-    });
-  });
   });
 </script>
 <script src="/static/js/object_delete.js"></script>
