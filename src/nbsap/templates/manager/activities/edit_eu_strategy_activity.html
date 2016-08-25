@@ -17,34 +17,36 @@ NBSAP - {% trans "Edit action" %} {{ activity.code }}
 
 
 {% block content %}
-<section class="content-header">
-  <h1 class="page-title">{% trans "Edit action" %} {{ activity.code }}</h1>
-</section>
+
 
 <section class="content">
-
-  {% if form.errors %}
-  <p>
-    {% blocktrans with form.errors|pluralize as errors %}Please correct the error {{ errors }} below.{% endblocktrans %}
-  </p>
-  {% endif %}
-
-  <form action="" method="post" id="eu-activity-edit" class="form">
-
-    <div class="">
-      <label for="language">{% trans "Language" %}</label>
-      {{ form.language }}
+  <div class="box box-primary">
+    <div class="box-header">
+      <h1 class="page-title">{% trans "Edit action" %} {{ activity.code }}</h1>
     </div>
+    <div class="box-body">
+      {% if form.errors %}
+      <p>
+        {% blocktrans with form.errors|pluralize as errors %}Please correct the error {{ errors }} below.{%
+        endblocktrans %}
+      </p>
+      {% endif %}
 
-    <div class="">
-      <label for="title">{% trans "Region" %}</label>
-      {{ form.region }}
-      {{ form.region.errors }}
-      <a href="{% url 'region_content' content=1 %}" data-modal="#add_region_modal" class="btn btn-default" type="button">Add Region</a>
-    </div>
+      <form action="" method="post" id="eu-activity-edit" class="form">
 
-    <div class="row">
-      <div class="col-md-6">
+        <div class="">
+          <label for="language">{% trans "Language" %}</label>
+          {{ form.language }}
+        </div>
+
+        <div class="">
+          <label for="title">{% trans "Region" %}</label>
+          {{ form.region }}
+          {{ form.region.errors }}
+          <a href="{% url 'region_content' content=1 %}" data-modal="#add_region_modal" class="btn btn-default"
+             type="button">Add Region</a>
+        </div>
+
 
         {% if form.code %}
         <div class="form-group">
@@ -68,29 +70,30 @@ NBSAP - {% trans "Edit action" %} {{ activity.code }}
             {{ form.description.errors }}
           </div>
 
+
+          {% if lang != DEFAULT_LANGUAGE %}
+          {% trans DEFAULT_LANGUAGE_LABEL as default_language_label %}
+          <div class="col-md-6 original-hideout">
+
+            <p class="original-description">
+              {% blocktrans with default_language_label as language %}Original description in {{ language }}{%
+              endblocktrans %}
+            </p>
+            <div class="well">
+              {{ activity.description_default|safe }}
+            </div>
+          </div>
+          {% endif %}
+
         </div>
-      </div>
 
-      {% if lang != DEFAULT_LANGUAGE %}
-      {% trans DEFAULT_LANGUAGE_LABEL as default_language_label %}
-      <div class="col-md-6 original-hideout">
-
-        <p class="original-description">
-          {% blocktrans with default_language_label as language %}Original description in {{ language }}{% endblocktrans %}
-        </p>
-        <div class="well">
-          {{ activity.description_default|safe }}
+        <div class="action-bar">
+          <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
+          <a href="{% url 'view_eu_strategy_target' pk=target.pk %}" class="btn btn-default" type="button">{% trans
+            "Cancel" %}</a>
         </div>
-      </div>
-      {% endif %}
-
+      </form>
     </div>
-
-    <div class="action-bar">
-      <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
-      <a href="{% url 'view_eu_strategy_target' pk=target.pk %}" class="btn btn-default" type="button">{% trans "Cancel" %}</a>
-    </div>
-
-  </form>
+  </div>
 </section>
 {% endblock %}

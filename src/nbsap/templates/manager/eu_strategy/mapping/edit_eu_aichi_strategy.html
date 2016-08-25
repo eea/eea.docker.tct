@@ -17,6 +17,7 @@ NBSAP - {% trans "Mapping EU and Aichi strategies: Edit" %}
   <h1 class="page-title">{% trans "Mapping EU and Aichi strategies" %}</h1>
 </section>
 <section class="content">
+  <div class="box box-primary">
   {% if form.errors %}
   <p>
     {% blocktrans with form.errors|pluralize as errors %}Please correct the error {{ errors }} below.{% endblocktrans %}
@@ -24,24 +25,23 @@ NBSAP - {% trans "Mapping EU and Aichi strategies: Edit" %}
   {% endif %}
 
   <form action="{% url 'edit_eu_aichi_strategy' pk=strategy.pk %}" method="post" class="form-horizontal">
-
+    <div class="col-md-3">
+      <div class="box box-primary">
+        <div class="box-body">
     <div class="error-list">{{ form.non_field_errors }}</div>
 
     <div class="form-group">
-      <label class="col-md-2" for="eu_targets">{% trans "EU Target" %}</label>
-      <div class="col-md-3">
+      <label class="block" for="eu_targets">{% trans "EU Target" %}</label>
         <ul class="list-unstyled">
           {% for target in strategy.eu_targets.all %}
           <li>- {{ target }}</li>
           {% endfor %}
         </ul>
-      </div>
     </div>
 
     <div class="form-group">
-      <label class="col-md-2" for="aichi_goal">{% trans "AICHI Goal"%}</label>
-      <div class="col-md-3"> {{ form.aichi_goals }}
-      </div>
+      <label class="block" for="aichi_goal">{% trans "AICHI Goal"%}</label>
+      {{ form.aichi_goals }}
       <div class="goal_text col-md-7 col-md-offset-2">
       </div>
     </div>
@@ -91,6 +91,7 @@ NBSAP - {% trans "Mapping EU and Aichi strategies: Edit" %}
       <a href="{% url 'list_eu_aichi_strategy' %}" class="btn btn-default" type="button">{% trans "Cancel" %}</a>
     </div>
   </form>
+    </div>
 </section>
 {% endblock %}
 

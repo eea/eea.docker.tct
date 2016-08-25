@@ -18,25 +18,32 @@ NBSAP - {% trans "Edit indicator " %}{{ indicator.code }}
   <h1 class="page-title">{% trans "Eu Indicator" %}</h1>
 </section>
 <section class="content">
-  <h2>{% trans "Edit Eu Indicator" %} {{ indicator.code }}</h2>
+  <div class="col-md-4">
+    <div class="box box-primary">
+      <div class="box-header with-border">
+        <h2>{% trans "Edit Eu Indicator" %} {{ indicator.code }}</h2>
+      </div>
+      <div class="box-body">
+        {% if form.errors %}
+        <p>
+          {% blocktrans with form.errors|pluralize as errors %}Please correct the
+          error {{ errors }} below.{% endblocktrans %}
+        </p>
+        {% endif %}
+        <form action="" method="post" id="national-indicator-edit" class="form">
 
-  {% if form.errors %}
-  <p>
-    {% blocktrans with form.errors|pluralize as errors %}Please correct the
-    error {{ errors }} below.{% endblocktrans %}
-  </p>
-  {% endif %}
-  <form action="" method="post" id="national-indicator-edit" class="form">
+          {% include "manager/eu_indicators/eu_indicator_form.html" %}
 
-    {% include "manager/eu_indicators/eu_indicator_form.html" %}
+          <div class="action-bar">
+            <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
+            <a href="javascript: history.go(-1)"
+               class="btn btn-default" type="button">{% trans "Cancel" %}</a>
+          </div>
 
-    <div class="action-bar">
-      <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
-      <a href="{% url 'view_eu_indicator' pk=indicator.pk %}"
-         class="btn btn-default" type="button">{% trans "Cancel" %}</a>
+        </form>
+      </div>
     </div>
-
-  </form>
+  </div>
 </section>
 {% endblock %}
 

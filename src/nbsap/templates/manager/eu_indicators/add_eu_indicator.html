@@ -13,26 +13,30 @@ NBSAP - {% trans "Add Eu Indicator" %}
 
 
 {% block content %}
-<section class="content-header">
-  <h1 class="page-title">{% trans "Add new Eu Indicator" %}</h1>
-</section>
+
 
 <section class="content">
-  {% if form.errors %}
-  <p>
-    {% blocktrans with form.errors|pluralize as errors %}Please correct the error {{ errors }} below.{% endblocktrans %}
-  </p>
-  {% endif %}
+  <div class="col-md-4">
+    <div class="box box-primary">
+      <div class="box-header"><h1 class="page-title">{% trans "Add new Eu Indicator" %}</h1></div>
+      <div class="box-body">
+        {% if form.errors %}
+        <p>
+          {% blocktrans with form.errors|pluralize as errors %}Please correct the error {{ errors }} below.{% endblocktrans %}
+        </p>
+        {% endif %}
 
-  <form action="#" method="post" class="form">
+        <form action="#" method="post" class="form">
 
-    {% include "manager/eu_indicators/eu_indicator_form.html" %}
+          {% include "manager/eu_indicators/eu_indicator_form.html" %}
 
-    <div class="action-bar">
-      <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
-      <a href="{% url 'list_eu_indicators' %}" class="btn btn-default" type="button">{% trans "Cancel" %}</a>
+          <div class="action-bar">
+            <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
+            <a href="{% url 'list_eu_indicators' %}" class="btn btn-default" type="button">{% trans "Cancel" %}</a>
+          </div>
+
+        </form>
+      </div>
     </div>
-
-  </form>
 </section>
 {% endblock %}

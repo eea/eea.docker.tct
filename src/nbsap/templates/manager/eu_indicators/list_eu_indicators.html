@@ -30,8 +30,9 @@ NBSAP - {% trans "EU Indicators: List Indicators" %}
     <thead>
     <tr>
       <th>{% trans "Code" %}</th>
-      <th colspan="1">{% trans "Title" %}</th>
-
+      <th>{% trans "Title" %}</th>
+      <th>URL</th>
+      <th></th>
     </tr>
     </thead>
 
@@ -45,7 +46,15 @@ NBSAP - {% trans "EU Indicators: List Indicators" %}
           {{ indicator.title|default:indicator.code }}</a>
       </td>
       <td>
-        <a class="btn btn-default"
+        {% if indicator.url %}
+        <a href="{{ indicator.url }}">
+          {{ indicator.get_indicator_type_display }} {{ indicator.code|default:'' }}: {{indicator.title}}</a>
+        {% else %}
+        {{ indicator.code|default:'' }} {{ indicator.title }}
+        {% endif %}
+      </td>
+      <td>
+        <a class="btn btn-success"
            href="{% url 'edit_eu_indicator' pk=indicator.pk %}">{% trans "Edit" %}</a>
       </td>
     </tr>
