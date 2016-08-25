@@ -49,7 +49,7 @@ NBSAP - {% trans "EU Strategy: List Targets" %}
         {% endif %}
       </td>
       <td>
-        <form method="POST" action="{% url 'delete_eu_strategy_target' pk=target.pk %}">
+        <form class="delete" method="POST" action="{% url 'delete_eu_strategy_target' pk=target.pk %}">
           <a class="btn btn-success"
              href="{% url 'edit_eu_strategy_target' pk=target.pk %}">{% trans "Edit" %}</a>
 
@@ -58,10 +58,10 @@ NBSAP - {% trans "EU Strategy: List Targets" %}
             <i class="glyphicon glyphicon-trash"></i> {% trans "Delete" %}
           </button>
           {% if not target.parent %}
-          <a class="btn btn-default"
+          <span class="btn btn-default edit_sub"
              href="{% url 'edit_eu_target_with_parent' parent=target.pk %}">
             {% trans "Add sub target" %}
-          </a>
+          </span>
           {% endif %}
         </form>
       </td>
@@ -83,7 +83,7 @@ NBSAP - {% trans "EU Strategy: List Targets" %}
       </td>
       <td>
 
-        <form method="POST" action="{% url 'delete_eu_strategy_target' pk=subtarget.pk %}">
+        <form class="delete" method="POST" action="{% url 'delete_eu_strategy_target' pk=subtarget.pk %}">
 
           <a class="btn btn-success"
              href="{% url 'edit_eu_strategy_target' pk=subtarget.pk %}">{% trans "Edit" %}</a>
@@ -104,18 +104,37 @@ NBSAP - {% trans "EU Strategy: List Targets" %}
 </section>
 {% endblock %}
 
+
+{% block modal %}
+<div class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
 {% block scripts %}
 
 <script>
   $(function () {
-    console.log("{{ edit }}");
     $('#target-table').dataTable({
       "paging": false,
       "dom": '<"filter-wrapper"f>t'
     });
     var url = $('#target-table').data('url');
     $('.filter-wrapper').prepend('{% if EU_STRATEGY_ADD %}<div class="action-bar"><a class="btn btn-success add" href="' + url + '">{% trans "Add target" %}</a></div>{% endif %}');
-
+  $('.edit_sub').on('click',function(){
+  })
   });
 </script>
 <script src="/static/js/object_delete.js"></script>

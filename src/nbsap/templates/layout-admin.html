@@ -27,14 +27,14 @@
 <body class="skin-blue sidebar-mini">
 <div class="wrapper">
   <header class="main-header">
-    <span class="logo">Dashboard</span>
+    <span class="logo">
+      {% if LAYOUT_HEADER_LOGO %}
+  <img style="height: 50px;width:auto;" src="/static/CHM_logo_45x70px.png">
+  {% endif %}Dashboard</span>
     {% if WARNING_MESSAGE %}
     <div class="alert alert-warning warning-demo">
       {{ WARNING_MESSAGE }}
     </div>
-    {% endif %}
-    {% if LAYOUT_HEADER_LOGO %}
-    <img src="/static/CHM_logo_45x70px.png">
     {% endif %}
     {% include "_bits/account_menu.html" %}
   </header>

@@ -104,28 +104,51 @@
 }
 
 .open {
-  display: block!important;
+  display: block !important;
 }
 
-.filter-wrapper{
+.filter-wrapper {
   background: #F5F5F5;
   border-radius: 10px;
   padding: 5px;
 }
 
-.action-bar{
+.action-bar {
   display: inline-block;
 }
 
-.dataTables_filter{
+.dataTables_filter {
   display: inline-block;
   float: right;
 }
 
-.dropdown-menu{
+.dropdown-menu {
   z-index: 9999;
 }
 
-.content-header{
+.content-header {
   position: static;
+}
+
+.logo {
+  background-color: #3c8dbc !important;
+}
+
+.dashboard-title {
+  font-size: 1em;
+}
+
+@media screen and (max-width:900px){
+  .dashboard-title{
+    font-size: 0.9em;
+  }
+  .dropdown-menu li a{
+    color: #000!important;
+  }
+}
+
+@media screen and (min-width:769px){
+  .toggle{
+    display: none!important;
+  }
 }
