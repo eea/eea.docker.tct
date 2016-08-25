@@ -6,11 +6,11 @@
   <div class="toc">
     <h5>{% trans "Table of contents"%}</h5>
     <ul>
-      {% for target in targets|sort_by_code %}
-      <li>
-        <a href="{% url 'goals' code=target.get_parent_goal.code aichi_target_id=target.id %}"
+      {% for current_target in targets|sort_by_code %}
+      <li {% if current_target.code == target.code %}class="active"{% endif %}>
+        <a href="{% url 'goals' code=current_target.get_parent_goal.code aichi_target_id=current_target.id %}"
            rel="tooltip">
-           {% trans "Target" %} {{ target.code }}
+           {% trans "Target" %} {{ current_target.code }}
         </a>
       </li>
       {% endfor %}

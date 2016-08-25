@@ -19,7 +19,7 @@
   <h4 class="sidebar-title">Goals</h4>
   <ul class="sidebar-menu">
     {% for goal in goals %}
-    <li {% if current_goal and goal.code == current_goal.code %}class="active"{% endif %}>
+    <li {% if goal.code == target.get_parent_goal.code %}class="active"{% endif %}>
       <a href="{% url 'goals' code=goal.code %}" title="{{ goal.code|upper }}"</a>
         {% trans "Goal" %} {{ goal.code | upper }}
       </a>

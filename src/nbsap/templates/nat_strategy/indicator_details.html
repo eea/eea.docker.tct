@@ -28,9 +28,9 @@
         {% trans "Strategic Goal" %}
       </td>
       <td class="col-md-8">
-        <label class="goal">{% trans "Goal" %} {{ indicator.strategic_goal_ob.code|upper }}:</label>
+        <label class="goal">{% trans "Goal" %} {{ strategic_goal_ob.code|upper }}:</label>
         <br />
-        {{ indicator.strategic_goal_ob.description }}
+        {{ strategic_goal_ob.description }}
       </td>
     </tr>
 
@@ -57,9 +57,9 @@
         {% trans "Most Relevant Aichi Target" %}
       </td>
       <td class="col-md-8">
-        <label class="target">{% trans "Target" %} {{ indicator.relevant_target_ob.code }}:</label>
+        <label class="target">{% trans "Target" %} {{ relevant_target_ob.code }}:</label>
         <br />
-        {{ indicator.relevant_target_ob.description }}
+        {{ relevant_target_ob.description }}
       </td>
     </tr>
 
@@ -69,7 +69,7 @@
       </td>
       <td class="col-md-8">
         <ul>
-        {% for target in indicator.other_targets_list %}
+        {% for target in other_targets_list %}
           <li>
             <label class="target">{% trans "Target" %} {{ target.code }}:</label>
             <br />

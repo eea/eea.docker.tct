@@ -19,11 +19,14 @@ def get_indicators_pages(paginator):
 
 def indicator(request, pk):
     indicator = get_object_or_404(models.AichiIndicator, pk=pk)
-    indicator.relevant_target_ob = indicator.relevant_target.all()[0]
-    indicator.strategic_goal_ob = indicator.relevant_target_ob.goals.all()[0]
-    indicator.other_targets_list = indicator.other_targets.all()
+    relevant_target_ob = indicator.relevant_target.all()[0]
+    strategic_goal_ob = relevant_target_ob.goals.all()[0]
+    other_targets_list = indicator.other_targets.all()
     return render(request, 'nat_strategy/indicator_details.html', {
         'indicator': indicator,
+        'relevant_target_ob': relevant_target_ob,
+        'strategic_goal_ob': strategic_goal_ob,
+        'other_targets_list': other_targets_list,
     })
 
 

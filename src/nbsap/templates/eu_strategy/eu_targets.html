@@ -98,7 +98,9 @@
     <h1 class="page-title">{% trans "EU Targets" %}</h1>
     <ul class="target-list">
       {% for target in targets %}
-        <li><span>{{ target.code }}</span>
+        <li>
+          <span>Target</span>
+          <span class="target-code">{{ target.code }}</span>
           <a href="{% url 'eu_targets' target.id %}"
              title="{% trans 'Target' %} {{ target.code }}">
             {{ target.title|default:target.code }}</a>

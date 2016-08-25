@@ -174,7 +174,7 @@ LOGGING = {
 }
 
 # NBSAP special variables
-LOGIN_REDIRECT_URL = '/administration'
+LOGIN_REDIRECT_URL = '/'
 
 TINYMCE_DEFAULT_CONFIG = {
     "theme_advanced_buttons1": ("formatselect,"
