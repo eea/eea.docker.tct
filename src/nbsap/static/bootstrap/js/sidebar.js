@@ -88,16 +88,22 @@ $(document).ready(function() {
 
 
 
-    $targetlistorder=$('.target-list li span');
+    $targetlistorder=$('.target-list li .target-code');
     $targetlistorder.each(function(){
             console.log($(this).text());
 if ($(this).text().match(/[a-z]/i)) {
-    $(this).css("padding-left","25px");
+    $(this).parent().css("padding-left","25px");
 }
 
         });
 
-
-
+    var numberofsidebars= $('.sidebar-right').length + $('.sidebar').length;
+    console.log(numberofsidebars);
+ if (numberofsidebars == 1) {
+    $('.main').addClass('one-sidebar');
+    }
+    else if (numberofsidebars == 0){
+         $('.main').addClass('no-sidebar');
+    }
 
 });

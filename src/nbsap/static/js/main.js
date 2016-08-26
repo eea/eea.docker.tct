@@ -56,19 +56,23 @@ function Modal(container) {
         }
     });
     // events - close
-    $(self.activeModal).on('click', function(event) {
-        event.stopPropagation();
+
+  $(document).ready(function() {
+      $('.well a').click(function() {
+        setTimeout(function() {
+
+            $('.modal-container').find('.modal-bot').click(function(){
+              self.close();
+          });
+        }, 300);
     });
-    $(self.container).on('click', function() {
-        if (self.activeModal) {
-            self.close();
-        }
     });
-    $(document).keyup(function(e) {
-        if (e.keyCode == 27 && self.activeModal) {
-            self.close();
-        }
-    });
+
+    // $(document).keyup(function(e) {
+    //     if (e.keyCode == 27 && self.activeModal) {
+    //         self.close();
+    //     }
+    // });
 
     // TOC in goals was generating double ul - li markup
 

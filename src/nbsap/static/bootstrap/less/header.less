@@ -15,20 +15,29 @@
 	width: 500px;
   	}
 
-    @media screen and (max-width: 800px) {
-        clear: both;
+    @media (max-width: 800px) {
+           width: 70%;
     }
+    @media (max-width: 470px) {
+        margin: 0;
+        padding:1rem 0;
+        width: 60%;
+    }
+    @media (max-width: 400px){
+        display:none;
+    }
+
 }
 
 .site-title a {
-    // color: @brand-blue;
+
     word-break: break-word;
     margin-top: 2rem;
         // color: #3b3a36;
         color: rgb(3,151,73);
         font-size: 2rem;
     @media (max-width: 800px) {
-        // pointer-events: none;
+        font-size: 1.5rem;
     }
 }
 
@@ -129,9 +138,7 @@
 .nav-container {
     background: @brand-blue;
     margin-bottom: 30px;
-    position: fixed;
-    width: 100%;
-    top: 12%;
+    position: relative;
     box-shadow: 0 0 2px rgba(0, 0, 0, .14), 0 2px 2px rgba(0, 0, 0, .28);
     @media screen and (max-width: 800px) {
         bottom: 0;
@@ -139,6 +146,7 @@
         width: 47%;
         margin-bottom: 0;
         z-index: 900;
+        position: fixed;
     }
 }
 
@@ -190,7 +198,7 @@
 	font-family:Roboto,sans-serif!important;
 }
 
-.nav-menu a, .lang-menu a, .account-menu a  {
+.nav-menu a, .lang-menu a, .accountwrapper a  {
     display: block;
     padding: 0 16px;
     line-height: 5rem;
@@ -234,8 +242,11 @@
 
 .header {
     .container {
-        max-width: 100%;
-        width: 100%;
+    max-width: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 200;
     }
 }
 
@@ -284,8 +295,12 @@
 }
 
 
-.accountwrapper .user {
-    color: #fff;
+.accountwrapper .user li{
+    list-style: none;
+}
+
+.accountwrapper .user a {
+    color: rgba(255,255,255,0.7);
     padding: 0 16px;
     line-height: 5rem;
 }
@@ -301,6 +316,7 @@
     @media (min-width: 800px) {
     	i{ display :none;}
     }
+
  }
 
  .clicked {
@@ -310,10 +326,8 @@
 
 	.nav-brand {
 		@media(min-width: 800px) {
-		position: fixed;
 	}
 		width: 100%;
-		// background: #f7f7f7;
 		background: white;
 	}
 
@@ -351,6 +365,14 @@ input[type=search] {
 }
 input[type=search]:focus {
 	width: 130px;
+    @media (max-width: 470px) {
+        width: 250px;
+    }
+    @media (max-width: 390px){
+        width:110px;
+    }
+
+
 	background-color: #fff;
 	border-color: @brand-blue;
 	-webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);

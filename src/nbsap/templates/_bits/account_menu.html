@@ -3,7 +3,7 @@
     <div class="account-menu-header">
         <span class="user">
         {% if user.is_authenticated %}
-            {{ user }}
+             <a> {{ user }} </a>
         {% else %}
             <li>
                 <a href="{% url 'login' %}">{% trans "Login" %}</a>
