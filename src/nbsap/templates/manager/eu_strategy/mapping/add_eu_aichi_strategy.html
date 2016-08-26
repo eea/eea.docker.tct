@@ -29,7 +29,7 @@ NBSAP - {% trans "Mapping EU and Aichi strategies: Add" %}
       <div class="box box-primary">
       <div class="box-body">
         <div class="form-group">
-          <label class="block" for="eu_target">{% trans "EU Target" %}</label>
+          <label class="block" for="eu_targets">{% trans "EU Target" %}</label>
           {{ form.eu_targets }}
           {{ form.eu_targets.errors }}
         </div>
@@ -73,8 +73,9 @@ NBSAP - {% trans "Mapping EU and Aichi strategies: Add" %}
       </div>
     </div>
     <div class="col-md-9">
-      <ul
-        class="timeline timeline-inverse goal_text">
+      <ul class="timeline timeline-inverse eu_targets_text">
+      </ul>
+      <ul class="timeline timeline-inverse goal_text">
       </ul>
       <ul class="timeline timeline-inverse aichi_targets_text">
       </ul>
@@ -93,6 +94,9 @@ NBSAP - {% trans "Mapping EU and Aichi strategies: Add" %}
 <script>
   $(function () {
     $(".chzn-select").chosen();
+    // showEuTargetCodeValue('eu_targets',
+    //   '.eu_targets_text',
+    //   "{% url 'eu_target_title' pk=1 %}");
     showTargetCodeValue('aichi_targets',
       '.aichi_targets_text',
       "{% url 'aichi_target_title' pk=1 %}");
