@@ -29,7 +29,6 @@ $(document).ready(function() {
                 $(this).css('-webkit-transform', 'rotate(' + now + 'deg)');
                 $(this).css('-moz-transform', 'rotate(' + now + 'deg)');
                 $(this).css('transform', 'rotate(' + now + 'deg)');
-                console.log(now);
             }
         });
     }
@@ -41,7 +40,6 @@ $(document).ready(function() {
                     $(this).css('-moz-transform', 'rotate(' + now + 'deg)');
                     $(this).css('transform', 'rotate(' + now + 'deg)');
                     toggle = 0;
-                    // console.log(now);
                 }
             });
         }
@@ -90,7 +88,7 @@ $(document).ready(function() {
 
     $targetlistorder=$('.target-list li .target-code');
     $targetlistorder.each(function(){
-            console.log($(this).text());
+
 if ($(this).text().match(/[a-z]/i)) {
     $(this).parent().css("padding-left","25px");
 }
@@ -98,7 +96,6 @@ if ($(this).text().match(/[a-z]/i)) {
         });
 
     var numberofsidebars= $('.sidebar-right').length + $('.sidebar').length;
-    console.log(numberofsidebars);
  if (numberofsidebars == 1) {
     $('.main').addClass('one-sidebar');
     }

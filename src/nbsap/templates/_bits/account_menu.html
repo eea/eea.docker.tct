@@ -3,14 +3,13 @@
     <div class="account-menu-header">
         <span class="user">
         {% if user.is_authenticated %}
-             <a> {{ user }} </a>
+             <a>  <i class="fa fa-caret-right" id="user-close"></i> {{ user }} </a>
         {% else %}
             <li>
                 <a href="{% url 'login' %}">{% trans "Login" %}</a>
             </li>
         {% endif %}
         </span>
-        <i class="fa fa-caret-right" id="user-close"></i>
     </div>
     <ul class="account-menu">
         {% for navbar_link in navbar_links %}

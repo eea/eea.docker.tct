@@ -272,8 +272,10 @@ body {
 
 
 .content {
-  @media (min-width:800px) {
+
 margin-top: 17rem;
+@media (max-width: 800px) {
+  margin-top: 20rem;
 }
 }
   .content:after {
@@ -586,4 +588,9 @@ i {
 label.goal, label.target {
   color: @brand-blue;
   display: inline;
+}
+
+
+.list-goals-wrapper h2 {
+  margin-bottom: 0;
 }
