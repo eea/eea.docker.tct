@@ -16,15 +16,15 @@ NBSAP - {% trans "Action" %} {{ action.code }}: {{ action.title }}
 
   <div class="action-bar">
     <form action="{% url 'delete_national_action' objective=objective.pk pk=action.pk %}" method="POST">
-      <a class="btn btn-success"
+      <a class="btn btn-xs btn-success"
          href="{% url 'view_national_objective' pk=objective.pk %}">
         <i class="glyphicon glyphicon-arrow-left"></i> {% trans "Back" %}</a>
 
-      <a class="btn btn-default edit"
+      <a class="btn btn-xs btn-default edit"
          href="{% url 'edit_national_action' objective=objective.pk parent=action.pk %}">
         {% trans "Add sub-action" %}</a>
 
-      <a class="btn btn-default edit"
+      <a class="btn btn-xs btn-default edit"
          href="{% url 'edit_national_action' objective=objective.pk pk=action.pk %}">{% trans "Edit" %}</a>
 
       <button type="submit" class="btn btn-danger edit"

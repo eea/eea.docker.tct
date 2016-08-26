@@ -159,6 +159,10 @@
   margin-bottom: 0;
 }
 
+.eu_target_text i {
+  background-color: #d58512 !important;
+}
+
 .goal_text i {
   background-color: darkred !important;
 }

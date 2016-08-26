@@ -115,6 +115,10 @@ function showTargetCodeValue(name, textSelector, url) {
   showDescription(name, textSelector, url, 'Target', true, true);
 }
 
+function showEuTargetCodeValue(name, textSelector, url) {
+  showDescription(name, textSelector, url, 'EU Target', true, true);
+}
+
 function showIndicatorCodeValue(name, textSelector, url) {
   showDescription(name, textSelector, url, 'EU Indicator', true, true);
 }

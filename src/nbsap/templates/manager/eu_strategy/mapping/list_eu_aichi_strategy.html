@@ -55,12 +55,12 @@ NBSAP - {% trans "Mapping EU Targets to Aichi Targets" %}
         {{ strategy.other_aichi_targets.all|join:", " }}
       </td>
       <td>
-        <a class="btn btn-mini btn-success add"
-           href="{% url 'edit_eu_aichi_strategy' strategy.pk %}">{% trans "Edit" %}</a>
+        <a class="btn btn-xs btn-success add"
+           href="{% url 'edit_eu_aichi_strategy' pk=strategy.pk %}">{% trans "Edit" %}</a>
       </td>
       <td>
-        <form method="POST" action="{% url 'delete_eu_aichi_strategy' strategy.pk %}">
-          <button type="submit" class="btn btn-mini btn-danger"
+        <form method="POST" action="{% url 'delete_eu_aichi_strategy' pk=strategy.pk %}">
+          <button type="submit" class="btn btn-xs btn-danger"
                   data-message="{% trans 'Are you sure you want to delete this strategy?' %}">
             {% trans "Delete" %}
           </button>

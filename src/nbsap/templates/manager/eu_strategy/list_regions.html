@@ -19,19 +19,18 @@ NBSAP - {% trans "List Regions" %}
   <table id="region-table" class="table table-striped table-bordered dataTable">
     <thead>
     <th>{% trans "Region" %}</th>
+    <th></th>
     </thead>
 
     <tbody>
     {% for region in regions %}
     <tr>
       <td>{{ region.name }}</td>
-      <td style="text-align: center;">
-        <a class="btn pull-right btn-mini btn-success add"
-           href="{% url 'edit_region' region.pk %}">{% trans "Edit" %}</a>
-      </td>
-      <td style="text-align: center;">
+      <td>
         <form method="POST" action="{% url 'delete_region' region.pk %}">
-          <button type="submit" class="btn btn-mini btn-danger"
+          <a class="btn btn-xs btn-warning add"
+             href="{% url 'edit_region' region.pk %}">{% trans "Edit" %}</a>
+          <button type="submit" class="btn btn-xs btn-danger"
                   data-message="{% trans 'Are you sure you want to delete this strategy?' %}">
             {% trans "Delete" %}
           </button>

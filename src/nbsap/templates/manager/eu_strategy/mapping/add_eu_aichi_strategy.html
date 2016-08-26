@@ -94,9 +94,9 @@ NBSAP - {% trans "Mapping EU and Aichi strategies: Add" %}
 <script>
   $(function () {
     $(".chzn-select").chosen();
-    // showEuTargetCodeValue('eu_targets',
-    //   '.eu_targets_text',
-    //   "{% url 'eu_target_title' pk=1 %}");
+     showEuTargetCodeValue('eu_targets',
+       '.eu_targets_text',
+       "{% url 'eu_target_title' pk=1 %}");
     showTargetCodeValue('aichi_targets',
       '.aichi_targets_text',
       "{% url 'aichi_target_title' pk=1 %}");
