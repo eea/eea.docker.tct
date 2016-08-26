@@ -66,7 +66,7 @@
 
 .admin {
   background-color: #00c0ef;
-  color: #fff!important;
+  color: #fff !important;
 }
 
 .toc-wrapper {
@@ -85,22 +85,19 @@
   display: inline-block;
 }
 
-.dashboard-title {
-  display: inline-block;
-  margin-top: 10px;
-  padding-left: 10px;
-  color: #fff;
+.navbar {
+  background: #222d32 !important;
 }
 
 /*#backdrop {*/
-  /*position: fixed;*/
-  /*background: red;*/
-  /*z-index: 1000;*/
-  /*top: 0;*/
-  /*bottom: 0;*/
-  /*left: 0;*/
-  /*right: 0;*/
-  /*display: none;*/
+/*position: fixed;*/
+/*background: red;*/
+/*z-index: 1000;*/
+/*top: 0;*/
+/*bottom: 0;*/
+/*left: 0;*/
+/*right: 0;*/
+/*display: none;*/
 /*}*/
 
 .open {
@@ -130,10 +127,12 @@
   position: static;
 }
 
-
 .dashboard-title {
   font-size: 1.2em;
-  color: #000;
+  display: inline-block;
+  margin-top: 10px;
+  padding-left: 10px;
+  color: #b8c7ce;
 }
 
 @media screen and (max-width: 900px) {
@@ -165,21 +164,25 @@
 }
 
 .aichi_targets_text i {
-  background: navy !important;
+  background: #0018A8 !important;
 }
 
 .other_aichi_targets_text i {
-  background: green !important;
+  background: #1F75FE !important;
 }
 
 .eu_indicators_text i {
-  background: darkblue !important;
+  background: #49796B !important;
 }
 
 .other_eu_indicators_text i {
-  background: darkviolet !important;
+  background: #29AB87 !important;
 }
 
 .block {
   display: block;
+}
+
+.navbar-nav a {
+  color: #b8c7ce !important;
 }
