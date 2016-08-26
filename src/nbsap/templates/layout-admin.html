@@ -47,6 +47,12 @@
       <ul class="sidebar-menu">
         <li class="header">Administration options</li>
         {% if user.is_authenticated %}
+        <li>
+          <a
+            href="{% if NAT_STRATEGY %}{% url 'list_national_objectives' %}{% else %}{% url 'list_eu_targets' %}{% endif %}">
+            {% trans 'Mappings' %}
+          </a>
+        </li>
         {% if user.is_superuser %}
         <li>
           <a href="{% url 'admin:index' %}" class="change-lang admin">{% trans 'Administration' %}</a>
