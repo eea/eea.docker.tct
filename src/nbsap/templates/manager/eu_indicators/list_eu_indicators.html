@@ -55,11 +55,8 @@ NBSAP - {% trans "EU Indicators: List Indicators" %}
       </td>
       <td>
         <form method="POST" action="{% url 'delete_eu_indicator' pk=indicator.pk %}">
-          <a class="btn btn-success" href="javascript: history.go(-1)">
-            <i class="glyphicon glyphicon-arrow-left"></i> {% trans "Back" %}
-          </a>
 
-          <a class="btn btn-default"
+          <a class="btn btn-success"
              href="{% url 'edit_eu_indicator' pk=indicator.pk %}">{% trans "Edit" %}</a>
 
           <a class="btn btn-default"
