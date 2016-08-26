@@ -107,7 +107,7 @@ NBSAP - {% trans "target" %} {{ target.code }}: {{target.title }}
       {% for items in action_list %}
       {% for action in items.list %}
       <tr>
-        <td style="width: 300px;">{{ action.code }}</td>
+        <td>{{ action.code }}</td>
         <td>
           <a href="{% url 'view_eu_strategy_activity' target=target.pk pk=action.pk %}"
              title="{% trans 'action' %} {{ action.code }}">
@@ -136,7 +136,7 @@ NBSAP - {% trans "target" %} {{ target.code }}: {{target.title }}
       </tr>
       {% for subaction in action.children.all %}
       <tr>
-        <td style="width: 300px;">{{ subaction.code }}</td>
+        <td>{{ subaction.code }}</td>
         <td>
           <a href="{% url 'view_eu_strategy_activity' target=target.pk pk=subaction.pk %}"
              title="{% trans 'action' %} {{ subaction.code }}">
