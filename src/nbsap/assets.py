@@ -36,7 +36,7 @@ CSS_ADMIN_ASSETS = (
     'js/chosen/chosen.css',
     'css/AdminLTE.min.css',
     'css/admin_style.css',
-    'css/skin-black-light.min.css'
+    'css/skin-black.min.css'
 ) + settings.CSS_ASSETS
 
 js = Bundle(*JS_ASSETS, filters='jsmin', output='gen/packed.js')

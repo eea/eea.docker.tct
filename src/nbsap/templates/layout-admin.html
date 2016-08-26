@@ -24,13 +24,13 @@
   {% endif %}
 </head>
 
-<body class="sidebar-mini skin-black-light">
+<body class="sidebar-mini skin-black">
 <div class="wrapper">
   <header class="main-header">
-    <span class="logo">
+    <a href="{% url 'admin_home' %}" class="logo">
       {% if LAYOUT_HEADER_LOGO %}
   <img style="height: 50px;width:auto;" src="/static/CHM_logo_45x70px.png">
-  {% endif %}Dashboard</span>
+  {% endif %}Dashboard</a>
     {% if WARNING_MESSAGE %}
     <div class="alert alert-warning warning-demo">
       {{ WARNING_MESSAGE }}
