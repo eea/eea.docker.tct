@@ -33,13 +33,16 @@ NBSAP - {% trans "Action" %} {{ activity.code }}: {{ activity.title }}
       </button>
     </form>
   </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="box box-primary">
+        {% if not activity.description %}
+        <p class="alert">No description provided</p>
+        {% endif %}
 
-  <div class="admin-obj-description">
-    {% if not activity.description %}
-    <p class="alert">No description provided</p>
-    {% endif %}
-
-    {{ activity.description|safe }}
+        {{ activity.description|safe }}
+      </div>
+    </div>
   </div>
 
   {% if not activity.parent %}

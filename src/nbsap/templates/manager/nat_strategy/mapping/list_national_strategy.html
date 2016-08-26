@@ -18,6 +18,7 @@ NBSAP - {% trans "Mapping National Objectives to AICHI and EU targets" %}
 <section class="content-header">
   <h1 class="page-title">{% trans "Mapping National Objectives to AICHI and EU targets" %}</h1>
 </section>
+<section class="content">
   {% url 'edit_national_strategy' as edit_strategy %}
   {% if strategies %}
   <table id="objectives-table" data-url="{{ edit_strategy }}" class="table objectives_listing table-striped table-bordered">

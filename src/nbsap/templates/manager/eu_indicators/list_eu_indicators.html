@@ -54,8 +54,22 @@ NBSAP - {% trans "EU Indicators: List Indicators" %}
         {% endif %}
       </td>
       <td>
-        <a class="btn btn-success"
-           href="{% url 'edit_eu_indicator' pk=indicator.pk %}">{% trans "Edit" %}</a>
+        <form method="POST" action="{% url 'delete_eu_indicator' pk=indicator.pk %}">
+          <a class="btn btn-success" href="javascript: history.go(-1)">
+            <i class="glyphicon glyphicon-arrow-left"></i> {% trans "Back" %}
+          </a>
+
+          <a class="btn btn-default"
+             href="{% url 'edit_eu_indicator' pk=indicator.pk %}">{% trans "Edit" %}</a>
+
+          <a class="btn btn-default"
+             href="{% url 'map_eu_indicator' pk=indicator.pk %}">{% trans "Aichi Mapping" %}</a>
+
+          <button type="submit" class="btn btn-danger edit"
+                  data-message="{% trans 'Are you sure you want to delete this indicator?' %}">
+            <i class="glyphicon glyphicon-trash"></i> {% trans "Delete" %}
+          </button>
+        </form>
       </td>
     </tr>
     {% endfor %}

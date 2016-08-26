@@ -43,11 +43,13 @@ NBSAP - {% trans "target" %} {{ target.code }}: {{target.title }}
       </button>
     </form>
   </div>
-
-  <div class="html-content">
-    {{ target.description|safe }}
+  <div class="row">
+    <div class="col-md-4">
+      <div class="box box-primary">
+        {{ target.description|safe }}
+      </div>
+    </div>
   </div>
-
   <div id="subtargets">
     <table class="table table-striped minimalist">
 
@@ -68,14 +70,15 @@ NBSAP - {% trans "target" %} {{ target.code }}: {{target.title }}
         <td>
           <form class="delete" method="POST" action="{% url 'delete_eu_strategy_target' pk=subtarget.pk %}">
 
-          <a class="btn btn-success"
-             href="{% url 'edit_eu_strategy_target' pk=subtarget.pk %}">{% trans "Edit" %}</a>
+            <a class="btn btn-success"
+               href="{% url 'edit_eu_strategy_target' pk=subtarget.pk %}">{% trans "Edit" %}</a>
 
-          <button type="submit" class="btn btn-danger edit"
-                  data-message="{% trans 'Are you sure you want to delete this target?' %}">
-            <i class="glyphicon glyphicon-trash"></i> {% trans "Delete" %}
-          </button>
-        </form></td>
+            <button type="submit" class="btn btn-danger edit"
+                    data-message="{% trans 'Are you sure you want to delete this target?' %}">
+              <i class="glyphicon glyphicon-trash"></i> {% trans "Delete" %}
+            </button>
+          </form>
+        </td>
       </tr>
       {% empty %}
       <tr>
@@ -90,8 +93,6 @@ NBSAP - {% trans "target" %} {{ target.code }}: {{target.title }}
   {% regroup actions by region as action_list %}
 
 
-
-
   <div class="property_list">
     <table class="table table-striped minimalist">
 
@@ -99,6 +100,7 @@ NBSAP - {% trans "target" %} {{ target.code }}: {{target.title }}
       <th class="span1">{% trans "Code" %}</th>
       <th>{% trans "Title" %}</th>
       <th>{% trans "Region" %}</th>
+      <th></th>
       </thead>
 
       <tbody>
@@ -113,7 +115,50 @@ NBSAP - {% trans "target" %} {{ target.code }}: {{target.title }}
           </a>
         </td>
         <td>{% if items.grouper %}{{ items.grouper }}{% else %}{% trans "All regions" %}{% endif %}</td>
+        <td>
+          <form class="delete" method="POST"
+                action="{% url 'delete_eu_strategy_activity' target=target.pk pk=action.pk %}">
+
+            <a class="btn btn-success"
+               href="{% url 'edit_eu_strategy_target' pk=action.pk %}">{% trans "Edit" %}</a>
+
+            <button type="submit" class="btn btn-danger edit"
+                    data-message="{% trans 'Are you sure you want to delete this action?' %}">
+              <i class="glyphicon glyphicon-trash"></i> {% trans "Delete" %}
+            </button>
+            {% if not activity.parent %}
+            <a class="btn btn-default"
+               href="{% url 'edit_eu_strategy_activity' target=target.pk parent=action.pk %}">
+              {% trans "Add sub-action" %}</a>
+            {% endif %}
+          </form>
+        </td>
       </tr>
+      {% for subaction in action.children.all %}
+      <tr>
+        <td style="width: 300px;">{{ subaction.code }}</td>
+        <td>
+          <a href="{% url 'view_eu_strategy_activity' target=target.pk pk=subaction.pk %}"
+             title="{% trans 'action' %} {{ subaction.code }}">
+            {{ subaction.title }}
+          </a>
+        </td>
+        <td>{% if items.grouper %}{{ items.grouper }}{% else %}{% trans "All regions" %}{% endif %}</td>
+        <td>
+          <form class="delete" method="POST"
+                action="{% url 'delete_eu_strategy_activity' target=target.pk pk=subaction.pk %}">
+
+            <a class="btn btn-success"
+               href="{% url 'edit_eu_strategy_target' pk=subaction.pk %}">{% trans "Edit" %}</a>
+
+            <button type="submit" class="btn btn-danger edit"
+                    data-message="{% trans 'Are you sure you want to delete this action?' %}">
+              <i class="glyphicon glyphicon-trash"></i> {% trans "Delete" %}
+            </button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
       {% empty %}
       <tr>
         <td colspan="2">{% trans "No actions found" %}.</td>
