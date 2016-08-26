@@ -311,11 +311,13 @@ margin-top: 17rem;
     }
     .content .active a {
       // background-color: white;
-      color: #039be5;
+      color: @brand-blue;
     }
      .content .active a:hover {
-      // background-color: white;
       color: white;
+    }
+    .toc .active a:hover {
+      color: @brand-blue;
     }
     .content .active a:before {
           content: "\f0da";
@@ -405,6 +407,7 @@ margin-top: 17rem;
   @media (max-width: 800px) {
     height: 100vh;
     overflow: auto;
+    width: 125px;
   }
 
 }
@@ -423,7 +426,12 @@ margin-top: 17rem;
     list-style-type: none;
     padding: 0.2rem ;
     white-space: nowrap;
-    margin-bottom: 0;
+    margin-bottom: 0; 
+    a {
+      @media (max-width: 800px) {
+        white-space: nowrap;
+      }
+    }
   }
   .toc .column-list {
     float: left;
@@ -593,4 +601,8 @@ label.goal, label.target {
 
 .list-goals-wrapper h2 {
   margin-bottom: 0;
+}
+
+.sign-in {
+      transform: translateX(40%);
 }
