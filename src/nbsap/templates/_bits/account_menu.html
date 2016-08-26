@@ -2,7 +2,13 @@
 <div class="accountwrapper">
     <div class="account-menu-header">
         <span class="user">
-         {{ user }}
+        {% if user.is_authenticated %}
+            {{ user }}
+        {% else %}
+            <li>
+                <a href="{% url 'login' %}">{% trans "Login" %}</a>
+            </li>
+        {% endif %}
         </span>
         <i class="fa fa-caret-right" id="user-close"></i>
     </div>
@@ -32,10 +38,6 @@
         <li>
             <a href="{% url 'logout' %}">{% trans "Logout" %}
             </a>
-        </li>
-        {% else %}
-        <li>
-            <a href="{% url 'login' %}">{% trans "Login" %}</a>
         </li>
         {% endif %}
     </ul>

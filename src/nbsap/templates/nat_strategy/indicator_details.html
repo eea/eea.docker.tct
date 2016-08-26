@@ -29,7 +29,6 @@
       </td>
       <td class="col-md-8">
         <label class="goal">{% trans "Goal" %} {{ strategic_goal_ob.code|upper }}:</label>
-        <br />
         {{ strategic_goal_ob.description }}
       </td>
     </tr>
@@ -58,7 +57,6 @@
       </td>
       <td class="col-md-8">
         <label class="target">{% trans "Target" %} {{ relevant_target_ob.code }}:</label>
-        <br />
         {{ relevant_target_ob.description }}
       </td>
     </tr>
@@ -72,7 +70,6 @@
         {% for target in other_targets_list %}
           <li>
             <label class="target">{% trans "Target" %} {{ target.code }}:</label>
-            <br />
             {{ target.description }}
           </li>
         {% endfor %}
