@@ -192,10 +192,15 @@
 }
 
 .logo {
-  border: 0;
+  border-right: 0!important;
   border-radius: 20px;
   margin-left: 25px;
   width: 170px!important;
+}
+
+.logo:hover{
+  color: #fff!important;
+  background-color: #000!important;
 }
 
 .description{
