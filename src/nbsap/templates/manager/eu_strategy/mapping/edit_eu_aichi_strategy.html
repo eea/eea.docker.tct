@@ -20,8 +20,8 @@ NBSAP - {% trans "Mapping EU and Aichi strategies: Edit" %}
   <div class="box box-primary">
     {% if form.errors %}
     <p>
-      {% blocktrans with form.errors|pluralize as errors %}Please correct the error {{ errors }} below.{% endblocktrans
-      %}
+      {% blocktrans with form.errors|pluralize as errors %}Please correct the error {{ errors }} below.
+      {% endblocktrans %}
     </p>
     {% endif %}
 
@@ -130,9 +130,6 @@ NBSAP - {% trans "Mapping EU and Aichi strategies: Edit" %}
       "{% url 'eu_indicator_title' pk=1 %}");
 
   });
-  {%
-    include
-    '_bits/strategy_mapping.js' %
-  }
+  {% include '_bits/strategy_mapping.js' %}
 </script>
 {% endblock %}
