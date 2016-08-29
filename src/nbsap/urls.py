@@ -126,10 +126,6 @@ urlpatterns = [
         views.edit_region,
         name='add_region'),
 
-    url(r'^dashboard/eu-strategy/regions-content/(?P<content>\d+)$',
-        views.edit_region,
-        name='region_content'),
-
     url(r'^dashboard/eu-strategy/regions/(?P<pk>[\w\-]+)/edit/$',
         views.edit_region,
         name='edit_region'),

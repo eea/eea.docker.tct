@@ -70,7 +70,7 @@ def list_regions(request):
 
 
 @auth_required
-def edit_region(request, content=None, pk=None):
+def edit_region(request, pk=None):
     if pk:
         region = get_object_or_404(models.Region, pk=pk)
         template = 'manager/eu_strategy/edit_region.html'
@@ -87,12 +87,9 @@ def edit_region(request, content=None, pk=None):
                 messages.success(request, _('Saved changes') + "")
             else:
                 messages.success(request, _('Region successfully added.'))
-            return redirect('list_regions')
     else:
         form = FormClass(region=region)
 
-    if content:
-        template = 'manager/eu_strategy/add_region_content.html'
     return render(request,
                   template,
                   {'region': region, 'form': form})

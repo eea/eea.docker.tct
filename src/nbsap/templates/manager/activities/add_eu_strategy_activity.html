@@ -40,7 +40,7 @@ NBSAP - {% trans "Add action" %}
             <label for="title">{% trans "Region" %}</label>
             {{ form.region }}
             {{ form.region.errors }}
-            <a href="{% url 'region_content' content=1 %}" data-modal="#add_region_modal" class="btn btn-default">Add
+            <a href="{% url 'add_region' %}" class="btn btn-default">Add
               Region</a>
           </div>
 
