@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load assets %}
+{% load utils %}
 
 
 {% block title %}
@@ -36,22 +37,22 @@ NBSAP - {% trans "Mapping EU Targets to Aichi Targets" %}
     {% for strategy in strategies %}
     <tr>
       <td class="strategy">
-        {% for eu_target in strategy.eu_targets.all %}
+        {% for eu_target in strategy.eu_targets.all|sort_by_code %}
         <a href="{% url 'view_eu_strategy_target' pk=eu_target.pk %}">
           {{ eu_target.code }}</a>
         {% endfor %}
       </td>
       <td>
-        {% for goal in strategy.goals_list %}
+        {% for goal in strategy.goals_list|sort_by_code %}
         <a href="{% url 'goals' code=goal.code %}">
           {{ goal.code|title }}</a>
         {% endfor %}
       </td>
       <td>
-        {{ strategy.aichi_targets.all|join:", " }}
+        {{ strategy.aichi_targets.all|sort_by_code|join:", " }}
       </td>
       <td>
-        {{ strategy.other_aichi_targets.all|join:", " }}
+        {{ strategy.other_aichi_targets.all|sort_by_code|join:", " }}
       </td>
       <td>
         <form method="POST" action="{% url 'delete_eu_aichi_strategy' pk=strategy.pk %}">

@@ -787,7 +787,7 @@ class EuAichiStrategyForm(forms.Form, ChoicesMixin):
             self.fields['eu_targets'].choices = self._get_choices(
                 'Target',
                 EuTarget.objects.exclude(id__in=existing_strategies).all(),
-                ['pk']
+                ['code']
             )
             if len(self.fields['eu_targets'].choices) == 0:
                 self.fields['eu_targets'].overlay = "No available targets"
