@@ -136,8 +136,8 @@ NBSAP - {% trans "target" %} {{ target.code }}: {{target.title }}
       </tr>
       {% for subaction in action.children.all %}
       <tr>
-        <td>{{ subaction.code }}</td>
-        <td>
+        <td class="table-indent">{{ subaction.code }}</td>
+        <td class="table-indent">
           <a href="{% url 'view_eu_strategy_activity' target=target.pk pk=subaction.pk %}"
              title="{% trans 'action' %} {{ subaction.code }}">
             {{ subaction.title }}

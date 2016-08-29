@@ -202,3 +202,7 @@
   padding: 5px;
   margin-top: 5px;
 }
+
+.table-indent{
+  text-indent: 10px;
+}

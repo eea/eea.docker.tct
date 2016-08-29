@@ -68,8 +68,8 @@ NBSAP - {% trans "EU Strategy: List Targets" %}
     </tr>
     {% for subtarget in target.children.all %}
     <tr>
-      <td>{{ subtarget.code }}</td>
-      <td>
+      <td class="table-indent">{{ subtarget.code }}</td>
+      <td  class="table-indent">
         <a href="{% url 'view_eu_strategy_target' subtarget.id %}"
            title="{% trans 'Target' %} {{ subtarget.code }}">
           {{ subtarget.title|default:subtarget.code }}</a>
