@@ -120,7 +120,7 @@ NBSAP - {% trans "target" %} {{ target.code }}: {{target.title }}
                 action="{% url 'delete_eu_strategy_activity' target=target.pk pk=action.pk %}">
 
             <a class="btn btn-xs btn-warning"
-               href="{% url 'edit_eu_strategy_target' pk=action.pk %}">{% trans "Edit" %}</a>
+               href="{% url 'edit_eu_strategy_activity' target=target.pk pk=action.pk %}">{% trans "Edit" %}</a>
 
             <button type="submit" class="btn btn-xs btn-danger edit"
                     data-message="{% trans 'Are you sure you want to delete this action?' %}">
@@ -149,7 +149,7 @@ NBSAP - {% trans "target" %} {{ target.code }}: {{target.title }}
                 action="{% url 'delete_eu_strategy_activity' target=target.pk pk=subaction.pk %}">
 
             <a class="btn btn-xs btn-warning"
-               href="{% url 'edit_eu_strategy_target' pk=subaction.pk %}">{% trans "Edit" %}</a>
+               href="{% url 'edit_eu_strategy_activity' target=target.pk pk=subaction.pk %}">{% trans "Edit" %}</a>
 
             <button type="submit" class="btn btn-xs btn-danger edit"
                     data-message="{% trans 'Are you sure you want to delete this action?' %}">

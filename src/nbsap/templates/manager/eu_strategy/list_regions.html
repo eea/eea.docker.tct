@@ -40,7 +40,6 @@ NBSAP - {% trans "List Regions" %}
     {% endfor %}
     </tbody>
   </table>
-  {% url 'add_region' as add_region_url %}
 </section>
 {% endblock %}
 {% block scripts %}
@@ -51,7 +50,7 @@ NBSAP - {% trans "List Regions" %}
       "paging": false,
       "dom": '<"filter-wrapper"f>t'
     });
-    $('.filter-wrapper').prepend('<div class="action-bar"><a class="btn btn-success add" href="{{ add_region_url }}">{% trans "Add Region" %}</a></div>');
+    $('.filter-wrapper').prepend('<div class="action-bar"><a class="btn btn-success add" href="{% url 'add_region' %}">{% trans "Add Region" %}</a></div>');
   });
 </script>
 
