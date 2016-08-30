@@ -54,7 +54,7 @@ NBSAP - {% trans "EU Indicators: List Indicators" %}
         {% endif %}
       </td>
       <td>
-        <form method="POST" action="{% url 'delete_eu_indicator' pk=indicator.pk %}">
+        <form method="POST" class="delete" action="{% url 'delete_eu_indicator' pk=indicator.pk %}">
 
           <a class="btn btn-xs btn-warning"
              href="{% url 'edit_eu_indicator' pk=indicator.pk %}">{% trans "Edit" %}</a>
@@ -78,7 +78,7 @@ NBSAP - {% trans "EU Indicators: List Indicators" %}
 {% endblock %}
 
 {% block scripts %}
-
+<script src="/static/js/object_delete.js"></script>
 <script>
   $(function () {
     $('#indicator-table').dataTable({

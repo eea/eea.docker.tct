@@ -13,7 +13,7 @@ NBSAP - {% trans "Action" %} {{ activity.code }}: {{ activity.title }}
 </section>
 <section class="content">
   <div class="action-bar">
-    <form method="POST" action="{% url 'delete_eu_strategy_activity' target=target.pk pk=activity.pk %}">
+    <form method="POST" class="delete" action="{% url 'delete_eu_strategy_activity' target=target.pk pk=activity.pk %}">
       <a class="btn btn-success"
          href="javascript: history.go(-1)">
         <i class="glyphicon glyphicon-arrow-left"></i> {% trans "Back" %}</a>

@@ -20,7 +20,7 @@ NBSAP - {% trans "Indicator" %} {{ indicator.code }}: {{indicator.title }}
 <section class="content">
   <div class="box box-primary">
     <div class="box-header with-border">
-      <form method="POST" action="{% url 'delete_eu_indicator' pk=indicator.pk %}">
+      <form method="POST" class="delete" action="{% url 'delete_eu_indicator' pk=indicator.pk %}">
         <a class="btn btn-success" href="javascript: history.go(-1)">
           <i class="glyphicon glyphicon-arrow-left"></i> {% trans "Back" %}
         </a>

@@ -15,7 +15,7 @@ NBSAP - {% trans "target" %} {{ target.code }}: {{target.title }}
 
 <section class="content">
   <div class="action-bar">
-    <form method="POST" action="{% url 'delete_eu_strategy_target' pk=target.pk %}">
+    <form method="POST" class="delete" action="{% url 'delete_eu_strategy_target' pk=target.pk %}">
 
 
       <a class="btn btn-success" href="javascript: history.go(-1)">
