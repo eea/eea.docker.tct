@@ -90,9 +90,9 @@ def edit_region(request, pk=None):
                 messages.success(request, _('Saved changes') + "")
             else:
                 messages.success(request, _('Region successfully added.'))
-            return redirect('list_regions')
     else:
         form = FormClass(region=region)
+
     return render(request,
                   template,
                   {'region': region, 'form': form})

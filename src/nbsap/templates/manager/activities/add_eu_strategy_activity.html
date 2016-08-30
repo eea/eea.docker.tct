@@ -3,26 +3,30 @@
 {% load i18n %}
 
 {% block title %}
-  NBSAP - {% trans "Add action" %}
+NBSAP - {% trans "Add action" %}
 {% endblock %}
 
 
 {% block head_scripts %}
-  {{ form.media }}
+{{ form.media }}
 {% endblock %}
 
 
 {% block content %}
 
+<section class="content">
+
   <h1 class="page-title">{% trans "Add action" %}</h1>
 
+
   {% if form.errors %}
-    <p>
-      {% blocktrans with form.errors|pluralize as errors %}Please correct the error {{ errors }} below.{% endblocktrans %}
-    </p>
+  <p>
+    {% blocktrans with form.errors|pluralize as errors %}Please correct the error {{ errors }} below.
+    {% endblocktrans %}
+  </p>
   {% endif %}
 
-  <form action="" method="post" id="national-activity-add" class="form">
+  <form action="" method="post" id="eu-activity-add" class="form">
 
 
     <div class="">
@@ -34,33 +38,38 @@
       <label for="title">{% trans "Region" %}</label>
       {{ form.region }}
       {{ form.region.errors }}
+      <a href="{% url 'add_region' %}" class="btn btn-default">Add
+        Region</a>
     </div>
 
-    <div class="row">
-      <div class="col-md-6">
-        <div class="language-container">
 
-          <div class="form-group">
-            <label for="title">{% trans "Title" %}</label>
-            {{ form.title }}
-            {{ form.title.errors }}
-          </div>
+    <div class="language-container">
 
-          <div class="form-group">
-            <label for="description">{% trans "Description" %}</label>
-            {{ form.description }}
-            {{ form.description.errors }}
-          </div>
-
-          </div>
-        </div>
+      <div class="form-group">
+        <label for="title">{% trans "Title" %}</label>
+        {{ form.title }}
+        {{ form.title.errors }}
       </div>
 
-      <div class="action-bar">
-        <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
-        <a href="{% url 'view_eu_strategy_target' pk=target.pk %}" class="btn btn-default" type="button">{% trans "Cancel" %}</a>
+      <div class="form-group">
+        <label for="description">{% trans "Description" %}</label>
+        {{ form.description }}
+        {{ form.description.errors }}
       </div>
 
-    </form>
+    </div>
 
+    <div class="action-bar">
+      <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
+      <a href="{% url 'view_eu_strategy_target' pk=target.pk %}" class="btn btn-default" type="button">
+        {% trans "Cancel" %}</a>
+    </div>
+
+  </form>
+
+</section>
+{% endblock %}
+
+{% block modal %}
+<div class="modal-window" id="add_region_modal"></div>
 {% endblock %}

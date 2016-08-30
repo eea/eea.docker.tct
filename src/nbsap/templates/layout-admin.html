@@ -4,98 +4,112 @@
 {% load assets %}
 
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>{% block title %}{% endblock %}</title>
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}{% endblock %}</title>
 
-    <!--[if lte IE 8]>
-      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-  
-    {% assets "css_admin" %}
-      <link rel="stylesheet" href="{{ ASSET_URL }}" />
-    {% endassets %}
-   
-
-    {% block extra_head %}{% endblock %}
-
-    {% if GOOGLE_ANALYTICS_PROPERTY_ID %}Fs
-      {% include "_bits/ga.html" %}
-    {% endif %}
-  </head>
-
-<body class='admin'>
-    <div class="header">
-      <div class="container">
-        {% if LAYOUT_HEADER_LOGO %}
-          <div class="logo img">
-            <img src="/static/CHM_logo_45x70px.png">
-          </div>
-        {% endif %}
+  <!--[if lte IE 8]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
 
 
-        <div class="nav-container">
-        {% include "_bits/account_menu.html" %}
-          {% block navmenu %}{% endblock %}
-        </div>
+  {% assets "css_admin" %}
+  <link rel="stylesheet" href="{{ ASSET_URL }}"/>
+  {% endassets %}
 
-          <h1 class="site-title"><a href="{% url 'goals' %}">{% trans SITE_HEADER %}</a></h1>
-        
-      </div>
+  {% block extra_head %}{% endblock %}
+
+  {% if GOOGLE_ANALYTICS_PROPERTY_ID %}
+  {% include "_bits/ga.html" %}
+  {% endif %}
+</head>
+
+<body class="sidebar-mini skin-black">
+<div class="wrapper">
+  <header class="main-header">
+    <a href="{% url 'admin_home' %}" class="logo">
+      {% if LAYOUT_HEADER_LOGO %}
+  <img style="height: 50px;width:auto;" src="/static/CHM_logo_45x70px.png">
+  {% endif %}Dashboard</a>
+    {% if WARNING_MESSAGE %}
+    <div class="alert alert-warning warning-demo">
+      {{ WARNING_MESSAGE }}
     </div>
+    {% endif %}
+    {% include "_bits/account_menu.html" %}
+  </header>
 
-    <div class="container content">
-      {% if WARNING_MESSAGE %}
-      <div class="alert alert-warning warning-demo">
-          {{ WARNING_MESSAGE }}
+  <aside class="main-sidebar">
+    <section class="sidebar">
+      {% block navmenu %}
+      {% endblock %}
+      {% block admin-menu %}
+      <ul class="sidebar-menu">
+        <li class="header">Administration options</li>
+        {% if user.is_authenticated %}
+        <li>
+          <a
+            href="{% if NAT_STRATEGY %}{% url 'list_national_objectives' %}{% else %}{% url 'list_eu_targets' %}{% endif %}">
+            {% trans 'Mappings' %}
+          </a>
+        </li>
+        {% if user.is_superuser %}
+        <li>
+          <a href="{% url 'admin:index' %}" class="change-lang admin">{% trans 'Administration' %}</a>
+        </li>
+        {% if LANGUAGES|length > 1 %}
+        <li>
+          <a href="{% url 'rosetta-home' %}">{% trans 'Translate' %}</a>
+        </li>
+        {% endif %}
+        {% endif %}
+        {% endif %}
+        <li class="nav-btn">
+          <a class="exit-admin" href="{% url 'goals' %}">{% trans "Exit from dashboard" %}</a>
+        </li>
+      </ul>
+      {% endblock %}
+    </section>
+  </aside>
+  <div class="content-wrapper">
+    {% block sidebar %}{% endblock %}
+    {% block sidebar-right %}{% endblock %}
+    {% if messages %}
+    <div class="messages alert alert-success">
+      {% for message in messages %}
+      <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% block content %}{% endblock %}
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      {% if LAYOUT_FOOTER_LOGO %}
+      <div class="pull-right">
+        <a href="museum.be">
+          <img src="/static/logo_irscnb.png">
+        </a>
       </div>
       {% endif %}
-
-      {% block sidebar %}{% endblock %}
-      {% block sidebar-right %}{% endblock %} 
-      
-      <div class="main">
-        {% if messages %}
-          <div class="messages alert alert-success">
-          {% for message in messages %}
-              <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
-          {% endfor %}
-          </div>
-        {% endif %}
-
-        {% block content %}{% endblock %}
-      </div>
     </div>
+  </footer>
+</div>
+<div class="modal-container">
+  {% block modal %}
+  {% endblock %}
+</div>
 
-    <footer class="footer">
-      <div class="container">
-        {% if LAYOUT_FOOTER_LOGO %}
-          <div class="pull-right">
-            <a href="museum.be">
-              <img src="/static/logo_irscnb.png">
-            </a>
-          </div>
-        {% endif %}
-      </div>
-    </footer>
+{% assets "js_admin" %}
+<script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
+{% block head_scripts %}{% endblock %}
 
-    <div class="modal-container">
-      <div class="container">
-        {% block modal %}
-        {% endblock %}
-      </div>
-    </div>
+{% block scripts %}{% endblock %}
 
-    {% assets "js" %}
-      <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-    {% endassets %}
-    {% block head_scripts %}{% endblock %}
-
-    {% block scripts %}{% endblock %}
-
-
-
+<div id="backdrop"></div>
 </body>
 
 </html>

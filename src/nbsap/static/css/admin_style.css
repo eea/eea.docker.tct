@@ -1,0 +1,213 @@
+/*Modals*/
+
+.modal-open {
+  overflow: hidden
+}
+
+.modal-open .modal-container {
+  display: block
+}
+
+.modal-container {
+}
+
+.modal-container .container {
+}
+
+.modal-window {
+  display: none;
+  position: absolute;
+  top: 50px;
+  right: 0;
+  z-index: 9999;
+  background-color: #fefefe;
+  margin-left: 230px;
+  padding: 20px;
+  border: 1px solid #888;
+}
+
+.modal-window.active {
+  display: block
+}
+
+.modal-top, .modal-bot {
+  position: absolute;
+  right: 0;
+  left: 0;
+  padding: 12px
+}
+
+.modal-top {
+  bottom: 100%
+}
+
+.modal-mid {
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+  padding: 12px 18px;
+  background-color: #fff;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.8)
+}
+
+.modal-bot {
+  top: 100%
+}
+
+/*Chosen container overrides*/
+
+.chosen-container {
+  width: auto !important;
+}
+
+.search-field input[type="text"] {
+  width: auto !important;
+}
+
+.admin {
+  background-color: #00c0ef;
+  color: #fff !important;
+}
+
+.toc-wrapper {
+  display: inline-block;
+}
+
+.toc-wrapper p {
+  margin: 10px;
+}
+
+.toc-wrapper ul {
+  display: inline-block;
+}
+
+.toc-wrapper ul li {
+  display: inline-block;
+}
+
+.navbar {
+  background: #222d32 !important;
+}
+
+/*#backdrop {*/
+/*position: fixed;*/
+/*background: red;*/
+/*z-index: 1000;*/
+/*top: 0;*/
+/*bottom: 0;*/
+/*left: 0;*/
+/*right: 0;*/
+/*display: none;*/
+/*}*/
+
+.open {
+  display: block !important;
+}
+
+.filter-wrapper {
+  background: #F5F5F5;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.action-bar {
+  display: inline-block;
+}
+
+.dataTables_filter {
+  display: inline-block;
+  float: right;
+}
+
+.dropdown-menu {
+  z-index: 9999;
+}
+
+.content-header {
+  position: static;
+}
+
+.dashboard-title {
+  font-size: 1.2em;
+  display: inline-block;
+  margin-top: 10px;
+  padding-left: 10px;
+  color: #b8c7ce;
+}
+
+@media screen and (max-width: 900px) {
+  .dashboard-title {
+    font-size: 0.9em;
+  }
+
+  .dropdown-menu li a {
+    color: #000 !important;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .toggle {
+    display: none !important;
+  }
+}
+
+.timeline {
+  margin: 10px 0 -10px 0;
+}
+
+.timeline > li {
+  margin-bottom: 0;
+}
+
+.eu_targets_text i {
+  background-color: #d58512 !important;
+}
+
+.goal_text i {
+  background-color: darkred !important;
+}
+
+.aichi_targets_text i {
+  background: #0018A8 !important;
+}
+
+.other_aichi_targets_text i {
+  background: #1F75FE !important;
+}
+
+.eu_indicators_text i {
+  background: #49796B !important;
+}
+
+.other_eu_indicators_text i {
+  background: #29AB87 !important;
+}
+
+.block {
+  display: block;
+}
+
+.navbar-nav a {
+  color: #b8c7ce !important;
+}
+
+.logo {
+  border-right: 0!important;
+  border-radius: 20px;
+  margin-left: 25px;
+  width: 170px!important;
+}
+
+.logo:hover{
+  color: #fff!important;
+  background-color: #000!important;
+}
+
+.description{
+  padding: 5px;
+  margin-top: 5px;
+}
+
+.table-indent{
+  text-indent: 10px;
+}

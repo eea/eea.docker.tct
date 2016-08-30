@@ -4,25 +4,27 @@
 {% load assets %}
 
 {% block title %}
-  NBSAP - {% trans "Edit indicator " %}{{ indicator.code }}
+NBSAP - {% trans "Edit indicator " %}{{ indicator.code }}
 {% endblock %}
 
 
 {% block head_scripts %}
-  {{ form.media }}
+{{ form.media }}
 {% endblock %}
 
 
 {% block content %}
 
+<section class="content">
   <h1 class="page-title">{% trans "Eu Indicator" %}</h1>
-  <h1>{% trans "Edit Eu Indicator" %} {{ indicator.code }}</h1>
+
+  <h2>{% trans "Edit Eu Indicator" %} {{ indicator.code }}</h2>
 
   {% if form.errors %}
-    <p>
-      {% blocktrans with form.errors|pluralize as errors %}Please correct the
-        error {{ errors }} below.{% endblocktrans %}
-    </p>
+  <p>
+    {% blocktrans with form.errors|pluralize as errors %}Please correct the
+    error {{ errors }} below.{% endblocktrans %}
+  </p>
   {% endif %}
   <form action="" method="post" id="national-indicator-edit" class="form">
 
@@ -30,18 +32,16 @@
 
     <div class="action-bar">
       <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
-      <a href="{% url 'view_eu_indicator' pk=indicator.pk %}"
+      <a href="javascript: history.go(-1)"
          class="btn btn-default" type="button">{% trans "Cancel" %}</a>
     </div>
 
   </form>
+
+</section>
 {% endblock %}
 
 
 {% block scripts %}
-  <script src="/static/js/language_change.js"></script>
-  {% assets "js_admin" %}
-    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-  {% endassets %}
-
+<script src="/static/js/language_change.js"></script>
 {% endblock %}

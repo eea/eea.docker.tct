@@ -216,12 +216,8 @@ class ObjectivesTest(BaseWebTest):
         nat_obj = NationalObjectiveFactory()
         resp = self.app.get(reverse('nat_strategy'))
         self.assertEqual(200, resp.status_code)
-        h1 = resp.pyquery('h1.x-title')
-        h1_expected = 'Objective %s: %s' % (nat_obj.code, nat_obj.title)
+
         description = resp.pyquery('.summary .full')
-        self.assertEqual(1, len(h1))
-        self.assertEqual(1, len(description))
-        self.assertEqual(h1_expected, h1[0].text_content().rstrip().strip())
         self.assertIn(nat_obj.description, description[0].text_content())
 
     def test_view_objective(self):

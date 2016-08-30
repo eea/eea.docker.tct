@@ -1,117 +1,87 @@
-<!DOCTYPE html>
-
-{% load i18n %}
-{% load assets %}
-
+<!DOCTYPE html> {% load i18n %} {% load assets %}
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{% endblock %}</title>
-
     <!--[if lte IE 8]>
       <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-
     {% assets "css" %}
-      <link rel="stylesheet" href="{{ ASSET_URL }}" />
-    {% endassets %}
-
-
-    {% block extra_head %}{% endblock %}
-
-    {% if GOOGLE_ANALYTICS_PROPERTY_ID %}
-      {% include "_bits/ga.html" %}
-    {% endif %}
-  </head>
+    <link rel="stylesheet" href="{{ ASSET_URL }}" /> {% endassets %} {% block extra_head %}{% endblock %} {% if GOOGLE_ANALYTICS_PROPERTY_ID %} {% include "_bits/ga.html" %} {% endif %}
+</head>
 
 <body class="user">
     <div class="header">
-    <div id="backdrop"></div>
-      <div class="container">
-        <div class="nav-brand">
-          <div class="brand">
-              {% if LAYOUT_HEADER_LOGO %}
-      <a href="/">
-         <div class="logo img">
-            <img src="/static/CHM_logo_45x70px.png">
-          </div>
-      </a>
-        {% endif %}
-        <a href="{% url 'list_goals_home' %}">
-            <span class="site-title">{% trans SITE_HEADER %} 
-              <span class="subtitle">
-                 contribution by European Commission
-            </span></span>
-           </a>
-            <form class='search-form'>
-              <input type="search" placeholder="Search">
-            </form>
-
-          </div>
+        <div id="backdrop"></div>
+        <div class="container">
+            <div class="nav-brand">
+                <div class="brand">
+                    {% if LAYOUT_HEADER_LOGO %}
+                    <a href="/">
+                        <div class="logo img">
+                            <img src="/static/CHM_logo_45x70px.png">
+                        </div>
+                    </a>
+                    {% endif %}
+                    <a href="{% url 'list_goals_home' %}">
+                      <span class="site-title">{% trans SITE_HEADER %}
+                        <span class="subtitle">
+                                 contribution by European Commission
+                        </span>
+                      </span>
+                    </a>
+                    <form class='search-form'>
+                        <input type="search" placeholder="Search">
+                    </form>
+                </div>
+            </div>
+            <div class="nav-trigger">
+              <button type="button" class="btn">menu</button>
+            </div>
+            <div class="nav-container">
+              <div class="close-trigger">
+                  <button type="button" class="btn">X</button>
+              </div>
+              {% include "_bits/account_menu.html" %} {% block navmenu %}{% endblock %}
+            </div>
         </div>
-        <div class="nav-trigger">
-        <button type="button" class="btn">menu</button>
-        </div>
-        <div class="nav-container">
-        <div class="close-trigger">
-  <button type="button" class="btn">X</button>
-</div>
-        {% include "_bits/account_menu.html" %}
-          {% block navmenu %}{% endblock %}
-        </div>
-
-      </div>
     </div>
-
     <div class="container content">
-      {% if WARNING_MESSAGE %}
-      <div class="alert alert-warning warning-demo">
-          {{ WARNING_MESSAGE }}
-      </div>
-      {% endif %}
-      {% block sidebar %}{% endblock %}
-      {% block sidebar-right %}{% endblock %}
-      <div class="main">
-        {% if messages %}
-          <div class="messages alert alert-success">
-          {% for message in messages %}
-              <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
-          {% endfor %}
-          </div>
-        {% endif %}
-
-        {% block content %}{% endblock %}
-      </div>
+        {% if WARNING_MESSAGE %}
+        <div class="alert alert-warning warning-demo">
+            {{ WARNING_MESSAGE }}
+        </div>
+        {% endif %} {% block sidebar %}{% endblock %} {% block sidebar-right %}{% endblock %}
+        <div class="main">
+            {% if messages %}
+            <div class="messages alert alert-success">
+                {% for message in messages %}
+                <p{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</p>
+                    {% endfor %}
+            </div>
+            {% endif %} {% block content %}{% endblock %}
+        </div>
     </div>
-
     <footer class="footer">
-      <div class="container">
-        {% if LAYOUT_FOOTER_LOGO %}
-          <div class="pull-right">
-            <a href="museum.be">
-              <img src="/static/logo_irscnb.png">
-            </a>
-          </div>
-        {% endif %}
-      </div>
+        <div class="container">
+            {% if LAYOUT_FOOTER_LOGO %}
+            <div class="pull-right">
+                <a href="museum.be">
+                    <img src="/static/logo_irscnb.png">
+                </a>
+            </div>
+            {% endif %}
+        </div>
     </footer>
-
     <div class="modal-container">
-      <div class="container">
-        {% block modal %}
-        {% endblock %}
-      </div>
+        <div class="container">
+            {% block modal %} {% endblock %}
+        </div>
     </div>
-
     {% assets "js" %}
-      <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-    {% endassets %}
-    {% block head_scripts %}{% endblock %}
-
-    {% block scripts %}{% endblock %}
-
-
-
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %} {% block head_scripts %}{% endblock %} {% block scripts %}{% endblock %}
 </body>
 
 </html>

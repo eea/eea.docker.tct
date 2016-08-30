@@ -27,6 +27,7 @@ function OnTransitionEnd() {
 }
 
 
+
 function Modal(container) {
     self = this;
     self.container = container;
@@ -99,6 +100,7 @@ function Modal(container) {
     // });
 }
 
+
 $(document).ready(function() {
     modal = new Modal($('.modal-container')[0]);
 });
@@ -108,35 +110,31 @@ $(function() {
 });
 
 function showDescription(name, textSelector, url, type, code, value) {
-    var selector = 'select[name=' + name + ']';
-    $(selector).on('change', function() {
-        var text = $(this).parents('.form-group').find(textSelector);
-        text.html('');
-        $("option:selected", this).each(function() {
-            $.get(url.replace('1', this.value), function(data) {
-                data = $.parseJSON(data)[0];
-                if (code) {
-                    var title = '<h5>' + type;
-                    if (type == 'EU Indicator') {
-                        title += ': ' + data.indicator_type.toUpperCase();
-                    }
-                    title += ' ' + data.code;
-                    if (data.title && data.value) {
-                        title += ': ' + data.title;
-                        title += '</h5>';
-                    }
-                    if (data.title && !data.value) {
-                        title += '</h5>';
-                        title += '<p>' + data.title + '</p>';
-                    }
-                    text.append(title);
-                }
-                if (data.value) {
-                    text.append('<p>' + data.value + '</p>');
-                }
-            });
-        });
-    }).change();
+  var selector = 'select[name=' + name + ']';
+  $(selector).on('change', function () {
+    var text = $(textSelector);
+    text.html('');
+    $("option:selected", this).each(function() {
+      $.get(url.replace('1', this.value), function(data) {
+        data = $.parseJSON(data)[0];
+        if (code) {
+          var title = '<li><i class="fa"></i><div class="timeline-item"><h3 class="timeline-header">' + type + ' ' + data.code+'</h3>';
+          if (data.title && data.value) {
+            title += ': ' + data.title;
+            title += '</div>';
+          }
+          if (data.title && !data.value){
+            title += '</h3>';
+            title += '<div class="timeline-body">' + data.title + '</div></div></li>';
+          }
+        }
+        if (data.value) {
+         title+='<div class="timeline-body">' + data.value + '</div></div></li>';
+        }
+        text.append(title);
+      });
+    });
+  }).change();
 }
 
 function showTargetValue(name, textSelector, url) {
@@ -145,6 +143,10 @@ function showTargetValue(name, textSelector, url) {
 
 function showTargetCodeValue(name, textSelector, url) {
     showDescription(name, textSelector, url, 'Target', true, true);
+}
+
+function showEuTargetCodeValue(name, textSelector, url) {
+  showDescription(name, textSelector, url, 'EU Target', true, true);
 }
 
 function showIndicatorCodeValue(name, textSelector, url) {
