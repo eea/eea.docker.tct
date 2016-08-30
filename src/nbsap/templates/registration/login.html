@@ -13,11 +13,11 @@
   </div>
 {% endif %}
 
-<div class="row sign-in">
-  <div class="span12">
-    <form class="form-inline" method="post" action="{% url 'login' %}">
+<!-- <div class="row sign-in"> -->
+  <!-- <div class="span12"> -->
+    <form class="form-inline login-form" method="post" action="{% url 'login' %}">
       <fieldset>
-        <legend>{% trans "Existing Users Login" %}</legend>
+        <legend>{% trans "Login" %}</legend>
         {% if RESTRICTED_ACCESS %}
         <div class="restricted">
           <p>{% trans "This instance is restricted to specific users. Please contact helpdesk for more information." %}</p>
@@ -46,7 +46,7 @@
         <button type="submit" class="btn btn-success">{% trans "Login" %}</button>
       </fieldset>
     </form>
-  </div>
-</div>
+  <!-- </div> -->
+<!-- </div> -->
 
 {% endblock %}

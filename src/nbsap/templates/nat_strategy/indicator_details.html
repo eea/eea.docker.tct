@@ -2,7 +2,9 @@
 {% load i18n %}
 <div class="modal-mid">
 <h3>{% trans "Indicator" %} {{ indicator.id }}: {{ indicator.title }}</h3>
-
+<div class="modal-bot text-center">
+  <a class="btn btn-danger" data-modal="close">close</a>
+</div>
 <table class="indicator_table table table-bordered table-striped">
   <tbody>
     <tr>
@@ -203,6 +205,4 @@
 </table>
 </div>
 
-<div class="modal-bot text-center">
-  <a class="btn btn-danger" data-modal="close">{% trans "Close" %}</a>
-</div>
+

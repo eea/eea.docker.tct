@@ -99,10 +99,10 @@
     <ul class="target-list">
       {% for target in targets %}
         <li>
-          <span>Target</span>
-          <span class="target-code">{{ target.code }}</span>
           <a href="{% url 'eu_targets' target.id %}"
              title="{% trans 'Target' %} {{ target.code }}">
+             <span>Target</span>
+          <span class="target-code">{{ target.code }}</span>
             {{ target.title|default:target.code }}</a>
         </li>
       {% endfor %}

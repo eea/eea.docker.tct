@@ -19,7 +19,7 @@
   </div>
 </div>
 {% endblock %}
-
+    <h1 class="page-title">{% trans "AICHI Goals" %}</h1>
 <h1 class="goal-title">{% trans "AICHI Goal " %}{{ target.get_parent_goal.code|upper }}: </h1> <h1 class="goal-desc">{{ target.get_parent_goal.description|striptags|safe }}</h1>
 
 <div class="section" id="{{ target.code }}">
@@ -42,7 +42,7 @@
         {% endfor %}
       </ul>
     {% else %}
-      <p>{% trans 'No corresponding EU target.' %}</p>
+      <p class="no-corresponding">{% trans 'No corresponding EU target.' %}</p>
     {% endif %}
   </div>
 
@@ -61,7 +61,7 @@
         {% endfor %}
       </ul>
     {% else %}
-      <p>{% trans 'No corresponding EU target.' %}</p>
+      <p class="no-corresponding">{% trans 'No corresponding EU target.' %}</p>
     {% endif %}
   </div>
   {% endif %}
@@ -103,7 +103,7 @@
         {% endfor %}
       </ul>
     {% else %}
-      <p>{% trans 'No corresponding EU indicator.' %}</p>
+      <p class="no-corresponding">{% trans 'No corresponding EU indicator.' %}</p>
     {% endif %}
   </div>
 
@@ -127,7 +127,7 @@
         {% endfor %}
       </ul>
     {% else %}
-      <p>{% trans 'No corresponding EU indicator.' %}</p>
+      <p class="no-corresponding">{% trans 'No corresponding EU indicator.' %}</p>
     {% endif %}
   </div>
   {% endif %}
@@ -146,7 +146,7 @@
         {% endfor %}
       </ul>
     {% else %}
-      <p>{% trans 'No corresponding CBD indicator.' %}</p>
+      <p class="no-corresponding">{% trans 'No corresponding CBD indicator.' %}</p>
     {% endif %}
   </div>
 
@@ -164,7 +164,7 @@
         {% endfor %}
       </ul>
     {% else %}
-      <p>{% trans 'No corresponding CBD indicator.' %}</p>
+      <p class="no-corresponding">{% trans 'No corresponding CBD indicator.' %}</p>
     {% endif %}
   </div>
 

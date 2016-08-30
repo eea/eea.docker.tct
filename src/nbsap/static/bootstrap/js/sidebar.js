@@ -17,9 +17,10 @@ $(document).ready(function() {
 
     	$accountheader.toggleClass('clicked');
 
+
         $accountmenu.animate({
             height: 'toggle'
-        });
+        },120);
 
         toggle++;
 
@@ -56,7 +57,7 @@ $(document).ready(function() {
 
         $navcontainer.animate({
             width: 'toggle'
-        });
+        }, 120);
     });
 
 
@@ -67,7 +68,7 @@ $(document).ready(function() {
         $('body').toggleClass('sidebaropen');
         $sidebarright.animate({
             width: 'toggle'
-        });
+        },120);
     });
 
 
@@ -76,10 +77,15 @@ $(document).ready(function() {
         $backdrop.toggle();
         $sidebarright.animate({
             width: 'hide'
-        });
+        },120);
         $navcontainer.animate({
             width: 'hide'
-        });
+        },120);
+
+         $accountmenu.animate({
+            height: 'hide'
+        },120);
+
         $('body').removeClass('sidebaropen');
 
     });

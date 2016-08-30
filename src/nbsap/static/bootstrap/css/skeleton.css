@@ -146,13 +146,6 @@ p {
   margin-top: 0; }
 
 
-/* Links
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-a {
-  color: #1EAEDB; 
-  text-decoration: none; }
-a:hover {
-  color: #0FA0CE; }
 
 
 /* Buttons
@@ -174,7 +167,7 @@ input[type="button"] {
     text-transform: uppercase;
     text-decoration: none;
     white-space: nowrap;
-    background-color: #039be5;
+    background-color: #039749;
     border-radius: 5px;
     border: none;
     cursor: pointer;
@@ -316,7 +309,7 @@ pre > code {
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 th,
 td {
-  padding: 12px 15px;
+  padding: 8px 11px;
   text-align: left;
   border-bottom: 1px solid #E1E1E1; }
 th:first-child,
