@@ -10,15 +10,8 @@ from django.template.loader import render_to_string
 from django.shortcuts import render_to_response
 
 from nbsap import models
-from natsort import natsorted
+from nbsap.models import sort_by_code
 from indicators import get_indicators_pages
-
-
-def _sort_by_code(value):
-    try:
-        return natsorted(value, key=lambda i: map(int, i.code.split('.')))
-    except ValueError:
-        return natsorted(value, key=lambda i: i.code)
 
 
 def list_goals(request):
@@ -77,7 +70,7 @@ def goals(request, code=None, aichi_target_id=None):
     indicators_list = models.AichiIndicator.objects.all()
 
     if not aichi_target_id:
-        target = _sort_by_code(current_goal.targets.all())[0]
+        target = sort_by_code(current_goal.targets.all())[0]
     else:
         target = current_goal.targets.get(pk=aichi_target_id)
 
