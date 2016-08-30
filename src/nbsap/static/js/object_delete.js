@@ -1,5 +1,5 @@
 $(".delete").on("submit", function (e) {
-  var message = $(".edit").data("message");
+  var message = $(this).find(".edit").data("message");
   e.preventDefault();
   if(confirm(message)){
     this.submit();
