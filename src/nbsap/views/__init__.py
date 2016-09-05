@@ -8,3 +8,4 @@ from actions import *
 from activities import *
 from auth import *
 from .page import *
+from cbd_api import *

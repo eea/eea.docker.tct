@@ -115,3 +115,8 @@ LANGUAGES = (
 
 #Set to True if REG is a valid National Indicator value
 #ENABLE_REG_INDICATORS = False
+
+# Set the following variables to enable communication with the CBD API
+# CBD_API_USERNAME = ''
+# CBD_API_PASSWORD = ''
+# CBD_API_REALM = ''

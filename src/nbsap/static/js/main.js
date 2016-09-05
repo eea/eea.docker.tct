@@ -1,14 +1,25 @@
 $(function () {
-   $('.change-lang').on('click', function () {
-        $(this).parent().find('form').submit();
-   });
+  $('.change-lang').on('click', function () {
+    $(this).parent().find('form').submit();
+  });
 
-   var indicator_modal = $('#indicator_modal');
-   indicator_modal.on('hidden', function () {
-     indicator_modal.data('modal', false);
-     indicator_modal.html('');
-   });
+  var indicator_modal = $('#indicator_modal');
+  indicator_modal.on('hidden', function () {
+    indicator_modal.data('modal', false);
+    indicator_modal.html('');
+  });
 
+  $('#cbd-api a').click(function(evt) {
+    evt.preventDefault();
+    var url = $(this).attr('href');
+    var messages_div = $(this).parent().find('div');
+    $.post(url, function(resp) {
+      console.log(resp);
+      messages_div.show();
+      messages_div.addClass('alert-' + resp.status);
+      messages_div.append('<p>' + resp.message + '</p>');
+    });
+  });
 });
 
 function Modal(container) {

@@ -22,6 +22,7 @@ def nat_strategy(request, code=None):
         return render(request, 'objectives/empty_nat_strategy.html')
     code = code or objectives[0].code
     current_objective = models.NationalObjective.objects.get(code=code)
+    current_objective_cls = current_objective.__class__.__name__
 
     obj_actions = []
     current_objective.objectives_tree = current_objective.get_all_objectives()
@@ -37,6 +38,7 @@ def nat_strategy(request, code=None):
     return render(request, 'objectives/nat_strategy.html',
                   {'objectives': objectives,
                    'current_objective': current_objective,
+                   'current_objective_cls': current_objective_cls,
                    'actions_by_objectives': obj_actions})
 
 

@@ -45,6 +45,9 @@ urlpatterns = [
 
     url(r'^i18n/', include('django.conf.urls.i18n')),
 
+    url(r'^send_to_cbd/(?P<model_name>[\w\-]+)/(?P<pk>(\d+))/$',
+        views.send_to_cbd, name='send_to_cbd'),
+
     # Django generic view classes
     url(r'^favicon\.ico$', RedirectView.as_view(url='/static/favicon.ico')),
 
