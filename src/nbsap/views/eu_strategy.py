@@ -13,7 +13,7 @@ from nbsap.forms import EuTargetForm, EuTargetEditForm, RegionForm
 
 def eu_targets(request, pk=None):
     if pk:
-        current_target = models.EuTarget.objects.get(pk=pk)
+        current_target = get_object_or_404(models.EuTarget, pk=pk)
         current_target.actions_tree = []
         for action in current_target.actions.order_by('code'):
             current_target.actions_tree.extend(action.get_all_actions())

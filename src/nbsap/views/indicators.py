@@ -40,7 +40,7 @@ def eu_indicators(request):
 
 
 def indicator_details(request, pk):
-    current_indicator = models.EuIndicator.objects.get(pk=pk)
+    current_indicator = get_object_or_404(models.EuIndicator, pk=pk)
     indicators = models.EuIndicator.objects.filter(parents=None).all()
     return render(request, 'eu_strategy/eu_indicator_detail.html', {
         'current_indicator': current_indicator,
