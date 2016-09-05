@@ -15,6 +15,7 @@ $(document).ready(function () {
   // sidebarplugin($sidebartrigger, $sidebarright, $closetrigger)
   $accountheader.click(function () {
     var _this = $(this);
+    var clicked;
 
     $accountheader.not(_this).removeClass('clicked');
 
@@ -23,9 +24,11 @@ $(document).ready(function () {
     switch (_this.data('click')) {
       case "user":
         toggle_user++;
+        clicked = $('#toggle_user');
         break;
       case "lang":
         toggle_lang++;
+        clicked = $('#toggle_lang');
         break;
     }
 
@@ -36,7 +39,7 @@ $(document).ready(function () {
       height: 'toggle'
     }, 120);
 
-    if (eval('toggle_'+_this.data('click')) == 1) {
+    if (clicked == 1) {
       $('#'+_this.data('click')+'-close').animate({borderSpacing: 90}, {
         step: function (now, fx) {
           $(this).css('-webkit-transform', 'rotate(' + now + 'deg)');
@@ -46,7 +49,7 @@ $(document).ready(function () {
       });
     }
 
-    if (eval('toggle_'+_this.data('click')) != 1) {
+    if (clicked != 1) {
       $('#'+_this.data('click')+'-close').animate({borderSpacing: 0}, {
         step: function (now, fx) {
           $(this).css('-webkit-transform', 'rotate(' + now + 'deg)');
