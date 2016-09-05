@@ -4,7 +4,7 @@ from cStringIO import StringIO
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
 from django.conf import settings
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.shortcuts import render_to_response
@@ -12,6 +12,10 @@ from django.shortcuts import render_to_response
 from nbsap import models
 from nbsap.models import sort_by_code
 from indicators import get_indicators_pages
+
+
+def user_homepage(request):
+    return render(request, 'user_homepage.html')
 
 
 def list_goals(request):
@@ -31,8 +35,8 @@ def list_goals(request):
 
 def list_targets(request, code=None):
     if code:
-        current_goal = models.AichiGoal.objects.get(code=code)
-        targets = models.AichiGoal.objects.get(code=code).targets.all()
+        current_goal = get_object_or_404(models.AichiGoal, code=code)
+        targets = current_goal.targets.all()
     else:
         current_goal = None
         targets = models.AichiTarget.objects.all()
@@ -56,10 +60,10 @@ def list_targets(request, code=None):
 
 def goals(request, code=None, aichi_target_id=None):
     if not code and aichi_target_id:
-        code = models.AichiTarget.objects.get(
-            pk=aichi_target_id).get_parent_goal().code
+        code = get_object_or_404(models.AichiTarget,
+                                 pk=aichi_target_id).get_parent_goal().code
     if code:
-        current_goal = models.AichiGoal.objects.get(code=code)
+        current_goal = get_object_or_404(models.AichiGoal, code=code)
         targets = current_goal.targets.all()
     else:
         current_goal = None
@@ -72,7 +76,10 @@ def goals(request, code=None, aichi_target_id=None):
     if not aichi_target_id:
         target = sort_by_code(current_goal.targets.all())[0]
     else:
-        target = current_goal.targets.get(pk=aichi_target_id)
+        target = get_object_or_404(models.AichiTarget,
+                                   pk=aichi_target_id)
+        if target not in current_goal.targets.all():
+            raise Http404
 
     paginator = Paginator(indicators_list, 20)
     info_header = settings.INFO_HEADER

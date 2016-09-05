@@ -10,7 +10,7 @@ admin.autodiscover()
 
 urlpatterns = [
     # homepage URLs
-    url(r'^$', views.list_goals, name='list_goals_home'),
+    url(r'^$', views.user_homepage, name='user_homepage'),
     url(r'^aichi/goals/$', views.list_goals, name='list_goals'),
     url(r'^aichi/$', views.goals,
         {'code': 'a',
