@@ -43,7 +43,8 @@
               <div class="close-trigger">
                   <button type="button" class="btn">X</button>
               </div>
-              {% include "_bits/account_menu.html" %} {% block navmenu %}{% endblock %}
+              {% include "_bits/account_menu.html" %} 
+              {% block navmenu %}{% endblock %}
             </div>
         </div>
     </div>
@@ -52,7 +53,9 @@
         <div class="alert alert-warning warning-demo">
             {{ WARNING_MESSAGE }}
         </div>
-        {% endif %} {% block sidebar %}{% endblock %} {% block sidebar-right %}{% endblock %}
+        {% endif %}
+        {% block sidebar %}{% endblock %}
+        {% block sidebar-right %}{% endblock %}
         <div class="main">
             {% if messages %}
             <div class="messages alert alert-success">
@@ -60,7 +63,11 @@
                 <p{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</p>
                     {% endfor %}
             </div>
-            {% endif %} {% block content %}{% endblock %}
+            {% endif %}
+
+            Salutare !!!
+            {% block content %}
+            {% endblock %}
         </div>
     </div>
     <footer class="footer">

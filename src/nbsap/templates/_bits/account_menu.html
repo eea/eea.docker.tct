@@ -1,58 +1,47 @@
-{% load i18n %}
-{% if '/dashboard' in request.path %}
+{% load i18n %} {% if '/dashboard' in request.path %}
 <nav class="navbar navbar-static-top">
-  <h3 class="dashboard-title">{% trans SITE_HEADER %}</h3>
-  <div class="navbar-custom-menu">
-    <ul class="nav navbar-nav">
-      {% for navbar_link in navbar_links %}
-      <li>
-        <a href="{{ navbar_link.url }}" target="_blank" title="{{ navbar_link.title }}">
+    <h3 class="dashboard-title">{% trans SITE_HEADER %}</h3>
+    <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+            {% for navbar_link in navbar_links %}
+            <li>
+                <a href="{{ navbar_link.url }}" target="_blank" title="{{ navbar_link.title }}">
           {{ navbar_link }}</a>
-      </li>
-      {% endfor %}
-
-      {% if LANGUAGES|length > 1 %}
-      <li class="dropdown">
-
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            </li>
+            {% endfor %} {% if LANGUAGES|length > 1 %}
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
           {{ request.LANGUAGE_CODE|upper }}
         </a>
-
-        <ul class="dropdown-menu">
-          {% for lang in LANGUAGES %}
-          <li>
-            <a class="change-lang">{{ lang.1 }}</a>
-            <form name="set_lang_{{ lang.0 }}" class="language-menu" action="{% url 'set_language' %}" method="POST">
-              <input name="next" type="hidden" value="{{ request.get_full_path }}">
-              <input name="language" type="hidden" value="{{ lang.0 }}">
-            </form>
-          </li>
-          {% endfor %}
+                <ul class="dropdown-menu">
+                    {% for lang in LANGUAGES %}
+                    <li>
+                        <a class="change-lang">{{ lang.1 }}</a>
+                        <form name="set_lang_{{ lang.0 }}" class="language-menu" action="{% url 'set_language' %}" method="POST">
+                            <input name="next" type="hidden" value="{{ request.get_full_path }}">
+                            <input name="language" type="hidden" value="{{ lang.0 }}">
+                        </form>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </li>
+            {% else %}
+            <li>
+                <a href="" title="{{ LANGUAGES.0.1 }}">{{ LANGUAGES.0.0|upper }}</a>
+            </li>
+            {% endif %} {% if user.is_authenticated %}
+            <li>
+                <a href="{% url 'logout' %}">{% trans "Logout" %}</a>
+            </li>
+            {% else %}
+            <li><a href="{% url 'login' %}">{% trans "Login" %}</a></li>
+            {% endif %}
         </ul>
-
-      </li>
-      {% else %}
-      <li>
-        <a href="" title="{{ LANGUAGES.0.1 }}">{{ LANGUAGES.0.0|upper }}</a>
-      </li>
-      {% endif %}
-
-      {% if user.is_authenticated %}
-      <li>
-        <a href="{% url 'logout' %}">{% trans "Logout" %}</a>
-      </li>
-
-      {% else %}
-      <li><a href="{% url 'login' %}">{% trans "Login" %}</a></li>
-      {% endif %}
-
-    </ul>
-
-  </div>
+    </div>
 </nav>
 {% else %}
 <div class="accountwrapper">
-  <div class="account-menu-header" data-click="user">
+    <div class="account-menu-header" data-click="user">
         <span class="user">
         {% if user.is_authenticated %}
              <a>  <i class="fa fa-caret-right" id="user-close"></i> {{ user }} </a>
@@ -60,60 +49,50 @@
                 <a href="{% url 'login' %}">{% trans "Login" %}</a>
         {% endif %}
         </span>
-  </div>
-  <ul class="account-menu" data-click="user">
-    {% for navbar_link in navbar_links %}
-    <li>
-      <a href="{{ navbar_link.url }}" target="_blank" title="{{ navbar_link.title }}">{{ navbar_link }}</a>
-    </li>
-    {% endfor %}
-
-
-    {% if user.is_authenticated %}
-    <li>
-      <a
-        href="{% if NAT_STRATEGY %}{% url 'list_national_objectives' %}{% else %}{% url 'list_eu_targets' %}{% endif %}">
+    </div>
+    <ul class="account-menu" data-click="user">
+        {% for navbar_link in navbar_links %}
+        <li>
+            <a href="{{ navbar_link.url }}" target="_blank" title="{{ navbar_link.title }}">{{ navbar_link }}</a>
+        </li>
+        {% endfor %} {% if user.is_authenticated %}
+        <li>
+            <a href="{% if NAT_STRATEGY %}{% url 'list_national_objectives' %}{% else %}{% url 'list_eu_targets' %}{% endif %}">
         {% trans 'Mappings' %}
       </a>
-    </li>
-    {% if user.is_superuser %}
-    <li>
-      <a href="{% url 'admin:index' %}" class="change-lang">{% trans 'Administration' %}</a>
-    </li>
-    {% if LANGUAGES|length > 1 %}
-    <li>
-      <a href="{% url 'rosetta-home' %}">{% trans 'Translate' %}</a>
-    </li>
-    {% endif %} {% endif %}
-    <li>
-      <a href="{% url 'logout' %}">{% trans "Logout" %}
+        </li>
+        {% if user.is_superuser %}
+        <li>
+            <a href="{% url 'admin:index' %}" class="change-lang">{% trans 'Administration' %}</a>
+        </li>
+        {% if LANGUAGES|length > 1 %}
+        <li>
+            <a href="{% url 'rosetta-home' %}">{% trans 'Translate' %}</a>
+        </li>
+        {% endif %} {% endif %}
+        <li>
+            <a href="{% url 'logout' %}">{% trans "Logout" %}
       </a>
-    </li>
-    {% endif %}
-  </ul>
-
-  <div class="account-menu-header" data-click="lang">
-    {% if LANGUAGES|length > 1 %}
-    <span class="lang">
-            <a><i class="fa" id="lang-close"></i> {{ request.LANGUAGE_CODE|upper }} </a></span>
-  </div>
-  <ul class="account-menu" data-click="lang">
-    {% for lang in LANGUAGES %}
-    <li>
-      <a class="change-lang">{{ lang.1 }}</a>
-      <form name="set_lang_{{ lang.0 }}" class="language-menu" action="{% url 'set_language' %}" method="POST">
-        <input name="next" type="hidden" value="{{ request.get_full_path }}">
-        <input name="language" type="hidden" value="{{ lang.0 }}">
-      </form>
-    </li>
-    {% endfor %}
-  </ul>
-  {% else %}
-
-
-  <a href="" title="{{ LANGUAGES.0.1 }}">{{ LANGUAGES.0.0|upper }}</a>
-
-  {% endif %}
-
+        </li>
+        {% endif %}
+    </ul>
+    <div class="account-menu-header" data-click="lang">
+        {% if LANGUAGES|length > 1 %}
+        <span class="lang">
+            <a><i class="fa" id="lang-close"></i> {{ request.LANGUAGE_CODE|upper }} </a>
+            {% else %}
+        <a href="" title="{{ LANGUAGES.0.1 }}">{{ LANGUAGES.0.0|upper }}</a> {% endif %}</span>
+    </div>
+    <ul class="account-menu" data-click="lang">
+        {% for lang in LANGUAGES %}
+        <li>
+            <a class="change-lang">{{ lang.1 }}</a>
+            <form name="set_lang_{{ lang.0 }}" class="language-menu" action="{% url 'set_language' %}" method="POST">
+                <input name="next" type="hidden" value="{{ request.get_full_path }}">
+                <input name="language" type="hidden" value="{{ lang.0 }}">
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
 </div>
 {% endif %}
