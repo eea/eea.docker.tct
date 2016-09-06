@@ -1,0 +1,9 @@
+{% extends 'page/error_pages/error_template.html' %}
+
+{% load i18n %}
+
+{% block pageerror %}
+<h1 class="page-title">{% trans "Bad Request." %}</h1>
+<h2 class="page-title">400 Error</h2>
+<p>Your browser sent a request that this server could not understand, either contact the site administrator or you can go back to our <a href="{% url 'user_homepage' %}">home page</a>.</p>
+{% endblock %}
