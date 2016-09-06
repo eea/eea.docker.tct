@@ -81,7 +81,8 @@
         <span class="lang">
             <a><i class="fa" id="lang-close"></i> {{ request.LANGUAGE_CODE|upper }} </a>
             {% else %}
-        <a href="" title="{{ LANGUAGES.0.1 }}">{{ LANGUAGES.0.0|upper }}</a> {% endif %}</span>
+        <a href="" title="{{ LANGUAGES.0.1 }}">{{ LANGUAGES.0.0|upper }}</a> {% endif %}
+        </span>
     </div>
     <ul class="account-menu" data-click="lang">
         {% for lang in LANGUAGES %}
