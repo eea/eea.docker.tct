@@ -16,14 +16,15 @@
 
 {% block content %}
 <div class="homepage-info">
-  <ul>
-    <h1>{% trans "What is The 2020 Target Cross-linking Tool?" %}</h1>
-    <li>* {% trans "A solution for multiple target reporting (Aichi targets, EU biodiversity strategy and other reporting obligations)" %}</li>
-    <li>* {% trans "A stand alone application - free of charge - to be completely “owned” by user countries" %}
-    </li>
-    <li>* {% trans "Available in national and English languages" %}</li>
-    <li>* {% trans "Ready with Aichi targets and EU targets already integrated in English" %}</li>
-    <h2>{% trans "For further info contact EEA (Rania.Spyropoulou at eea.europa.eu)" %}</h2>
-  </ul>
+	<h1 class="page-title">{% trans "National Biodiversity Strategies and Action Plan " %}</h1>
+	<h2 class="page-desc">This is platform for organizing the implementation of a country's national biodiversity strategy after AICHI (and by case after EU Strategy). Here you can:</h2>
+	<ul class="page-list">
+		<li><a href="{% url 'list_goals' %}">View current AICHI Goals</a></li>
+		<li><a href="{% url 'eu_targets' %}">View current EU Targets</a></li>
+		<li><a href="{% url 'eu_indicators' %}">View current EU Indicators</a></li>
+		{% if user.is_superuser %}
+			<li>You can also add new Goals, Targets or Indicators in the <a href="{% url 'admin_home'%}">Administration</a> section.</li>
+		{% endif %}
+	</ul>
 </div>
 {% endblock %}
