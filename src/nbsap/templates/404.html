@@ -1,18 +1,22 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title></title>
-    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="/static/bootstrap/css/bootstrap-theme.min.css" />
-</head>
+{% extends 'layout.html' %}
 
-<body>
-<div class="text-center">
-  <h1>Page not found</h1>
-  <h2>404 Error</h2>
-<p>The page you requested could not be found, either contact the site administrator or try again. Use your browser <b>Back</b> button to navigate to the page you have previously come from.</p>
-<a href="/" class="btn btn-primary">Go home</a>
+{% load i18n %}
 
-</div>
-</body>
-</html>
+{% block navmenu%}
+  {% include '_bits/nav_menu.html' %}
+{% endblock %}
+
+{% block content %}
+<h1 class="page-title">{% trans "We couldn't find that page" %}</h1>
+<h2 class="page-title">404 Error</h2>
+<ul>
+	<li>The page you requested could not be found, either contact the site administrator or you can go back to our <a href="{% url 'user_homepage' %}">home page</a>.</li>
+	<li>Or you can access:</li>
+	<li><a href="{% url 'list_goals' %}">AICHI Goals</a></li>
+	<li><a href="{% url 'eu_targets' %}">EU Targets</a></li>
+	<li><a href="{% url 'eu_indicators' %}">EU Indicators</a></li>
+	{% if user.is_authenticated %}
+		<li><a href="{% url 'admin_home'%}">Administration</a></li>
+	{% endif %}
+</ul>
+{% endblock %}

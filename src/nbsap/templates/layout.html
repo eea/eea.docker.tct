@@ -24,7 +24,7 @@
                         </div>
                     </a>
                     {% endif %}
-                    <a href="{% url 'user_homepage' %}">
+                    <a href="{% url 'list_goals' %}">
                       <span class="site-title">{% trans SITE_HEADER %}
                         <span class="subtitle">
                                  contribution by European Commission
@@ -60,8 +60,8 @@
             {% if messages %}
             <div class="messages alert alert-success">
                 {% for message in messages %}
-                <p{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</p>
-                    {% endfor %}
+                <p {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</p>
+                {% endfor %}
             </div>
             {% endif %}
 
