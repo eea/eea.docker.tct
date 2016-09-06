@@ -1,7 +1,8 @@
 {% load i18n %}
 {% load utils %}
 
-{% block sidebar-right %}
+<!-- am scos sidebar right si am pus contentul in aichi.html -->
+<!-- {% block sidebar-right %}
 <div class="sidebar-trigger"><button type="button" class="btn">Table of contents</button></div>
 <div class="sidebar-right">
   <div class="toc">
@@ -18,7 +19,9 @@
     </ul>
   </div>
 </div>
-{% endblock %}
+{% endblock %} -->
+
+
     <h1 class="page-title">{% trans "AICHI Goals" %}</h1>
 <h1 class="goal-title">{% trans "AICHI Goal " %}{{ target.get_parent_goal.code|upper }}: </h1> <h1 class="goal-desc">{{ target.get_parent_goal.description|striptags|safe }}</h1>
 
