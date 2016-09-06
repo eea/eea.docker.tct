@@ -8,6 +8,7 @@ $(document).ready(function () {
   $accountheader = $('.account-menu-header');
   $accountmenu = $('.account-menu');
   $backdrop = $('#backdrop');
+  $sidebar= $('.sidebar');
   var toggle_user = 0;
   var toggle_lang = 0;
   // sidebarplugin($navtrigger, $navcontainer, $closetrigger)
@@ -83,6 +84,9 @@ $(document).ready(function () {
     $sidebarright.animate({
       width: 'toggle'
     }, 120);
+        $sidebar.animate({
+      width: 'toggle'
+    }, 120);
   });
 
 
@@ -99,7 +103,12 @@ $(document).ready(function () {
     $accountmenu.animate({
       height: 'hide'
     }, 120);
+    $sidebar.animate({
+      width: 'hide'
+    }, 120);
 
+      $sidebartrigger.addClass('no-events');
+    $('.sidebar-trigger').removeClass('sidebar-trigger-triggered ');
     $('body').removeClass('sidebaropen');
 
   });
@@ -121,5 +130,52 @@ $(document).ready(function () {
   else if (numberofsidebars == 0) {
     $('.main').addClass('no-sidebar');
   }
+
+  if ($('.main').hasClass('no-sidebar')) {
+
+  $( ".sidebar-trigger" ).remove();
+
+  }
+
+
+
+$sidebargoal = $(".sidebar-menu #list-item-goal > a");
+$sidebargoalmenu = $(".sidebar-menu > li ");
+  $sidebargoal.click(function(e){
+     var $trigger_sidemenu = $(this);
+    $testes = $(this).parent().find('.targets-submenu').first();
+      console.log($(e.target));
+
+
+    $testes.animate({
+      height: 'toggle'
+    }, 320);});
+
+
+$('.sidebar-trigger').click(function(){
+  console.log('trololo');
+  $sidebartrigger.removeClass('no-events');
+  $(this).addClass('sidebar-trigger-triggered ');
+})
+
+// $(window).resize(function() {
+//     // run test on initial page load
+//     checkSize();
+
+//     // run test on resize of the window
+//     $(window).resize(checkSize);
+// });
+
+// //Function to the css rule
+// function checkSize(){
+//     if ($(".nav-trigger button").css("display") == "block" ){
+
+//     $('.sidebar').addClass('sidebar-right');
+//     $('.sidebar-right').removeClass('sidebar');
+
+//     }
+// }
+
+
 
 });

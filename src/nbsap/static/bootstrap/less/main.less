@@ -318,38 +318,45 @@ margin-top: 17rem;
       text-decoration: none;
       background: @brand-blue;
     }
-    .content .active a {
+    .content .active > a {
     background: rgba(0,0,0,0.1);
       color: @brand-blue;
       padding: 5px 10px;
     }
-     .content .active a:hover {
+     .content .active > a:hover {
       color: white;
        background: @brand-blue;
     }
-    .toc .active a:hover {
+    .toc .active > a:hover {
        color: #fff;
       text-decoration: none;
       background: @brand-blue;
     }
-    .toc .active a {
+    .toc .active > a {
        background: rgba(0,0,0,0.1);
        border-radius: 5px;
        padding: 0.5rem;
     }
 
-    .toc a:hover {
+    .toc > a:hover {
          color: #fff;
       text-decoration: none;
       background: @brand-blue;
       border-radius: 5px;
     }
 
-    .toc a {
+    .toc > a {
       padding: 0.5rem;
     }
 
-    .content .active a:before {
+    .content .active .targets {
+      background: transparent!important;
+    }
+      .content .active .targets:hover {
+        color: @brand-blue;
+      }
+
+    .content .active > a:before {
           content: "\f0da";
     }
 
@@ -367,13 +374,14 @@ margin-top: 17rem;
 
 .section h2 {
   font-weight: 600;
+  font-size: 2.2rem;
 }
 
 .section h2:after {
   content:': ';
 }
-.section p {
-  font-style: italic;
+.section .target-description {
+  font-size:larger;
 }
 
 .footer {
@@ -385,7 +393,10 @@ margin-top: 17rem;
 }
 
 .page-title {
-  color: @brand-orange;
+visibility: hidden;
+position: absolute;
+top: 0;
+right: 0;
 }
 
 
@@ -412,9 +423,10 @@ margin-top: 17rem;
 }
   .well-title {
     margin: -11px -11px 10px;
-    padding: 3px 10px;
-    font-size: 2.5rem;
-    color: darken(@gray-muted,10%);
+    padding: 3px 0;
+    // font-size: 2.5rem;
+    color: #949494;
+    font-size: 1.8rem;
     border-bottom: 1px solid @gray-light;
   }
 
@@ -650,8 +662,11 @@ i {
 }
 
 .goal-title, .goal-desc {
-  font-size: 2rem;
+  font-size: 1.8rem;
   display: inline;
+}
+.goal-title {
+   color: @brand-orange;
 }
 
 .list-targets-wrapper li a p{
@@ -701,3 +716,20 @@ td.col-md-3 {
 .indicator_table td {
   vertical-align: top;
 }
+
+.no-events {
+  @media (max-width: 800px) {
+  pointer-events: none;
+}
+}
+
+.info-count {
+  display: inline-block;
+}
+
+.info-count:before {
+content:"(";
+  }
+  .info-count:after {
+content:")";
+  }

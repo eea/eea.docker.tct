@@ -52,16 +52,22 @@
 }
 
 @media screen and (max-width: 800px) {
-    .sidebar-right {
-        // transform: translateX(100%);
+    .sidebar {
+        overflow: auto;
+        width: 30%;
         position: fixed;
         right: 0;
         top: 0;
         bottom: 0;
         background-color: white;
         z-index: 900;
-        ;
         display: none;
+        a {
+            white-space: nowrap;
+        }
+        li {
+            display: block;
+        }
     }
     .sidebaropen {
         overflow: hidden;
@@ -76,22 +82,32 @@
         z-index: 100;
     }
     .sidebar li {
-        display: inline-block;
         padding: 1rem;
     }
     .sidebar-trigger {
+            right: -102px;
         display: block;
         transform: rotate(270deg);
         position: fixed;
-        right: -80px;
         top: 51%;
-        background: rgba(3, 155, 229, 0.3);
+        // background: rgba(3, 155, 229, 0.3);
+        background: @brand-blue;
         border-top-left-radius: 25px;
         border-top-right-radius: 25px;
         z-index: 500;
         button {
             background: none;
         }
+    }
+    .sidebar-trigger-triggered {
+             right: -80px;
+             transition: right .2s;
+    }
+}
+
+.sidebar {
+    @media (max-width:462px){
+        width: 50%;
     }
 }
 
@@ -110,4 +126,26 @@
 
 .content {
     padding: 1rem;
+}
+
+
+.targets-submenu {
+    margin-left: 1rem;
+    margin-top: 0;
+    display: none;
+}
+
+.active .targets-submenu {
+    display: block;
+}
+
+.targets-submenu-title {
+    line-height: 2;
+    font-size: 1.6rem;
+    margin-left: -10px;
+}
+
+.sampleClass {float:left;}
+@media only screen and (max-width: 800px){
+    .sampleClass {float:none;}
 }

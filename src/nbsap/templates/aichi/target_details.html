@@ -27,11 +27,17 @@
 
 <div class="section" id="{{ target.code }}">
   <h2>{% trans "AICHI Target" %} {{ target.code }}</h2>
-  <p>{{ target.description }}</p>
+  <p class="target-description">{{ target.description }}</p>
 
   {% if EU_STRATEGY %}
   <div class="well">
-    <div class="well-title">{% trans "Most relevant EU targets" %}</div>
+    <div class="well-title">{% trans "Most relevant EU targets" %}
+     {% if target.eu_aichi_strategy.all|length  > 0 %}
+    <div class="info-count">
+      {{ target.eu_aichi_strategy.all|length }}
+    </div>
+     {% endif %}
+    </div>
     {% if target.eu_aichi_strategy.count %}
       <ul>
         {% for strategy in target.eu_aichi_strategy.all %}
@@ -50,7 +56,13 @@
   </div>
 
   <div class="well">
-    <div class="well-title">{% trans "Other relevant EU targets" %}</div>
+    <div class="well-title">{% trans "Other relevant EU targets" %}
+     {% if strategy.eu_targets.all|length  > 0 %}
+    <div class="info-count">
+      {{ strategy.eu_targets.all|length }}
+    </div>
+     {% endif %}
+    </div>
     {% if target.eu_other_aichi_strategy.count %}
       <ul>
         {% for strategy in target.eu_other_aichi_strategy.all %}
@@ -90,7 +102,13 @@
 
   {% if EU_STRATEGY %}
   <div class="well">
-    <div class="well-title">{% trans "Most relevant EU indicators" %}</div>
+    <div class="well-title">{% trans "Most relevant EU indicators" %}
+      {% if target.eu_indicator_aichi_strategy.all|length  > 0 %}
+      <div class="info-count">
+      {{ target.eu_indicator_aichi_strategy.all|length }}
+      </div>
+       {% endif %}
+    </div>
     {% if target.eu_indicator_aichi_strategy.count %}
       <ul>
         {% for strategy in target.eu_indicator_aichi_strategy.all %}
@@ -111,7 +129,13 @@
   </div>
 
   <div class="well">
-    <div class="well-title">{% trans "Other relevant EU indicators" %}</div>
+    <div class="well-title">{% trans "Other relevant EU indicators" %}
+      {% if target.eu_indicator_other_aichi_strategy.all|length > 0 %}
+      <div class="info-count">
+       {{ target.eu_indicator_other_aichi_strategy.all|length }}
+      </div>
+      {% endif %}
+    </div>
     {% if target.eu_indicator_other_aichi_strategy.count %}
       <ul>
         {% for strategy in target.eu_indicator_other_aichi_strategy.all %}
@@ -136,7 +160,13 @@
   {% endif %}
 
   <div class="well">
-    <div class="well-title">{% trans "Most relevant CBD indicators" %}</div>
+    <div class="well-title">{% trans "Most relevant CBD indicators" %}
+   {% if target.indicators.all|length > 0 %}
+    <div class="info-count">
+      {{ target.indicators.all|length }}
+    </div>
+      {% endif %}
+    </div>
     {% if target.indicators.count %}
       <ul>
         {% for indicator in target.indicators.all %}
@@ -154,7 +184,14 @@
   </div>
 
   <div class="well">
-    <div class="well-title">{% trans "Other relevant CBD indicators" %}</div>
+    <div class="well-title">{% trans "Other relevant CBD indicators" %}
+    {% if target.other_indicators.all|length > 0 %}
+    <div class="info-count">
+      {{ target.other_indicators.all|length }}
+    </div>
+    {% endif %}
+    </div>
+
     {% if target.other_indicators.count %}
       <ul>
         {% for indicator in target.other_indicators.all %}
