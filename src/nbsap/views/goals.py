@@ -58,41 +58,38 @@ def list_targets(request, code=None):
     )
 
 
-def goals(request, code=None, aichi_target_id=None):
-    if not code and aichi_target_id:
+def aichi_goals(request, code=None):
+    if not code:
+        return list_goals(request)
+    else:
+        aichi_target_id = sort_by_code(get_object_or_404(
+            models.AichiGoal, code=code).targets.all())[0].pk
+        return aichi_target_detail(request, code, aichi_target_id)
+
+
+def aichi_target_detail(request, aichi_target_id, code=None):
+    if not code:
         code = get_object_or_404(models.AichiTarget,
                                  pk=aichi_target_id).get_parent_goal().code
-    if code:
-        current_goal = get_object_or_404(models.AichiGoal, code=code)
-        targets = current_goal.targets.all()
-    else:
-        current_goal = None
-        targets = models.AichiTarget.objects.all()
 
     goals = models.AichiGoal.objects.order_by('code').all()
+    current_goal = get_object_or_404(models.AichiGoal, code=code)
+    targets = current_goal.targets.all()
+    target = get_object_or_404(models.AichiTarget,
+                               pk=aichi_target_id)
 
-    indicators_list = models.AichiIndicator.objects.all()
+    if target not in current_goal.targets.all():
+        raise Http404
 
-    if not aichi_target_id:
-        target = sort_by_code(current_goal.targets.all())[0]
-    else:
-        target = get_object_or_404(models.AichiTarget,
-                                   pk=aichi_target_id)
-        if target not in current_goal.targets.all():
-            raise Http404
-
-    paginator = Paginator(indicators_list, 20)
     info_header = settings.INFO_HEADER
 
     return render_to_response(
         'aichi/aichi.html',
         context_instance=RequestContext(
             request, {
-                'code': code,
                 'goals': goals,
                 'targets': targets,
                 'target': target,
-                'indicators_pages': get_indicators_pages(paginator),
                 'info_header': info_header,
             })
     )
