@@ -71,9 +71,9 @@
 
     <div class="well">
       <div class="well-title">{% trans "Most relevant Aichi Targets" %}
-          {% if current_target.eu_aichi_strategy.all|length  > 0 %}
+          {% if count_aichi_targets > 0 %}
             <div class="info-count">
-            {{ current_target.eu_aichi_strategy.all|length }}
+            {{ count_aichi_targets }}
             </div>
            {% endif %}
       </div>
