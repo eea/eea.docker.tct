@@ -14,6 +14,21 @@ from nbsap.models import sort_by_code
 from indicators import get_indicators_pages
 
 
+def get_adjacent_targets(targets, current_target):
+    previous_index = 0
+    next_index = 0
+    for index, target in enumerate(targets):
+        if target == current_target:
+            previous_index = index - 1
+            next_index = index + 1
+    if previous_index < 0:
+        previous_index = len(targets) - 1
+    if next_index > len(targets) - 1:
+        next_index = 0
+
+    return targets[previous_index], targets[next_index]
+
+
 def user_homepage(request):
     return render(request, 'user_homepage.html')
 
@@ -74,12 +89,20 @@ def aichi_target_detail(request, aichi_target_id, code=None):
 
     goals = models.AichiGoal.objects.order_by('code').all()
     current_goal = get_object_or_404(models.AichiGoal, code=code)
-    targets = current_goal.targets.all()
+    targets = sort_by_code(current_goal.targets.all())
     target = get_object_or_404(models.AichiTarget,
                                pk=aichi_target_id)
 
     if target not in current_goal.targets.all():
         raise Http404
+
+    previous_target, next_target = get_adjacent_targets(
+        sort_by_code(models.AichiTarget.objects.all()), target)
+
+    if previous_target not in targets:
+        previous_code = previous_target.get_parent_goal().code
+        previous_target = sort_by_code(get_object_or_404(
+            models.AichiGoal, code=previous_code).targets.all())[0]
 
     info_header = settings.INFO_HEADER
 
@@ -91,6 +114,8 @@ def aichi_target_detail(request, aichi_target_id, code=None):
                 'targets': targets,
                 'target': target,
                 'info_header': info_header,
+                'previous_target': previous_target,
+                'next_target': next_target
             })
     )
 
