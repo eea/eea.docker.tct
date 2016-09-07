@@ -20,16 +20,11 @@
   <ul class="sidebar-menu">
     {% for goal in goals %}
     <li id="list-item-goal" {% if goal.code == target.get_parent_goal.code %}class="active"{% endif %}>
-<!--       <a href="{% url 'goals' code=goal.code %}" title="{{ goal.code|upper }}"> --> <a >
-        {% trans "Goal" %} {{ goal.code | upper }}
-      </a>
+      <a>{% trans "Goal" %} {{ goal.code | upper }}</a>
       <ul class="targets-submenu">
         <h5 class=targets-submenu-title> Targets </h5>
         {% for current_target in goal.targets.all|sort_by_code %}
           <li {% if current_target.code == target.code %}class="active"{% endif %}>
-<!-- in li-ul de mai sus -->
-<!--  -->
-
             <a href="{% url 'goals' code=current_target.get_parent_goal.code aichi_target_id=current_target.id %}"
               rel="tooltip" class="targets">
                 {% trans "Target" %} {{ current_target.code }}

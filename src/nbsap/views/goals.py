@@ -2,7 +2,6 @@ import json
 from cStringIO import StringIO
 
 from django.shortcuts import render, get_object_or_404
-from django.core.paginator import Paginator
 from django.conf import settings
 from django.http import HttpResponse, Http404
 from django.template import RequestContext
@@ -11,7 +10,6 @@ from django.shortcuts import render_to_response
 
 from nbsap import models
 from nbsap.models import sort_by_code
-from indicators import get_indicators_pages
 
 
 def get_adjacent_targets(targets, current_target):
@@ -89,6 +87,7 @@ def aichi_target_detail(request, aichi_target_id, code=None):
 
     goals = models.AichiGoal.objects.order_by('code').all()
     current_goal = get_object_or_404(models.AichiGoal, code=code)
+    all_targets = sort_by_code(models.AichiTarget.objects.all())
     targets = sort_by_code(current_goal.targets.all())
     target = get_object_or_404(models.AichiTarget,
                                pk=aichi_target_id)
@@ -96,13 +95,7 @@ def aichi_target_detail(request, aichi_target_id, code=None):
     if target not in current_goal.targets.all():
         raise Http404
 
-    previous_target, next_target = get_adjacent_targets(
-        sort_by_code(models.AichiTarget.objects.all()), target)
-
-    if previous_target not in targets:
-        previous_code = previous_target.get_parent_goal().code
-        previous_target = sort_by_code(get_object_or_404(
-            models.AichiGoal, code=previous_code).targets.all())[0]
+    previous_target, next_target = get_adjacent_targets(all_targets, target)
 
     info_header = settings.INFO_HEADER
 
@@ -112,6 +105,7 @@ def aichi_target_detail(request, aichi_target_id, code=None):
             request, {
                 'goals': goals,
                 'targets': targets,
+                'all_targets': all_targets,
                 'target': target,
                 'info_header': info_header,
                 'previous_target': previous_target,

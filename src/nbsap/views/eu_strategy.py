@@ -3,7 +3,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.http import HttpResponse
 from django.utils.translation import ugettext_lazy as _
-
+from nbsap.models import sort_by_code
+from nbsap.views.goals import get_adjacent_targets
 
 from nbsap import models
 from auth import auth_required
@@ -20,11 +21,15 @@ def eu_targets(request, pk=None):
     else:
         current_target = None
 
-    targets = models.EuTarget.objects.all()
+    targets = sort_by_code(models.EuTarget.objects.all())
+    previous_target, next_target = get_adjacent_targets(
+        targets, current_target)
 
     return render(request, 'eu_strategy/eu_targets.html',
                   {'targets': targets,
-                   'current_target': current_target
+                   'current_target': current_target,
+                   'previous_target': previous_target,
+                   'next_target': next_target
                    })
 
 

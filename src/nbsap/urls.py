@@ -15,7 +15,7 @@ urlpatterns = [
     url(r'^aichi/$', views.aichi_target_detail,
         {'code': 'a',
          'aichi_target_id': '1'},
-        name='goals'),
+        name='aichi_home'),
     url(r'^aichi/goals/(?P<code>[\w\-]+)/targets/$',
         views.list_targets,
         name='list_targets'),
@@ -27,7 +27,7 @@ urlpatterns = [
         name='goals'),
     url(r'^aichi/goals/targets/(?P<aichi_target_id>[\w\-]+)$',
         views.aichi_target_detail,
-        name='goals'),
+        name='aichi_target_detail'),
     url(r'^crashme$', views.crashme, name='crashme'),
     url(r'^ping/me$', views.pingme, name='pingme'),
 
