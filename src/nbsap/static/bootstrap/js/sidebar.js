@@ -107,8 +107,6 @@ $(document).ready(function () {
       width: 'hide'
     }, 120);
 
-      $sidebartrigger.addClass('no-events');
-    $('.sidebar-trigger').removeClass('sidebar-trigger-triggered ');
     $('body').removeClass('sidebaropen');
 
   });
@@ -152,11 +150,11 @@ $sidebargoalmenu = $(".sidebar-menu > li ");
     }, 320);});
 
 
-$('.sidebar-trigger').click(function(){
-  console.log('trololo');
-  $sidebartrigger.removeClass('no-events');
-  $(this).addClass('sidebar-trigger-triggered ');
-})
+// $('.sidebar-trigger').click(function(){
+//   console.log('trololo');
+//   $sidebartrigger.removeClass('no-events');
+//   $(this).addClass('sidebar-trigger-triggered ');
+// })
 
 // $(window).resize(function() {
 //     // run test on initial page load

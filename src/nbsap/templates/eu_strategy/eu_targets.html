@@ -169,4 +169,7 @@
       {% endif %}
     </div>
   {% endfor %}
+  {% if current_target %} {% ifnotequal previous_target targets|last %}
+<a class="previous-page" href="{% url 'eu_targets' pk=previous_target.pk %}"> Target {{ previous_target.code }} </a> {% endifnotequal %} {% ifnotequal next_target targets|first %}
+<a class="next-page" href="{% url 'eu_targets' pk=next_target.pk %}"> Target {{ next_target.code }}  </a> {% endifnotequal %} {% endif %}
 {% endblock %}

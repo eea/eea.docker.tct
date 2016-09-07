@@ -37,8 +37,8 @@
 	{% endif %}
 
 	<div class="well">
-	  <div
-	      class="well-title">{% trans "Mapping with Aichi Strategy" %}</div>
+	  <div class="well-title">{% trans "Mapping with Aichi Strategy" %}
+	      </div>
 	  <p><strong>Most relevant:</strong></p>
 	  {% if current_indicator.eu_indicator_aichi_strategy.exists %}
 	    <ul>
@@ -73,4 +73,6 @@
 	    <p>{% trans "No corresponding AICHI target" %}.</p>
 	  {% endif %}
 	</div>
+	   <a class="previous-page" >  {{ previous_target.get_parent_goal }} - {{ previous_target }} </a>
+    <a class="next-page" > {{ next_target.get_parent_goal }} - {{ next_target }}  </a>
 {% endblock %}

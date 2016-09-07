@@ -22,8 +22,11 @@
 {% endblock %} -->
 
 
+
     <h1 class="page-title">{% trans "AICHI Goals" %}</h1>
 <h1 class="goal-title">{% trans "AICHI Goal " %}{{ target.get_parent_goal.code|upper }}: </h1> <h1 class="goal-desc">{{ target.get_parent_goal.description|striptags|safe }}</h1>
+
+
 
 <div class="section" id="{{ target.code }}">
   <h2>{% trans "AICHI Target" %} {{ target.code }}</h2>
@@ -207,5 +210,18 @@
       <p class="no-corresponding">{% trans 'No corresponding CBD indicator.' %}</p>
     {% endif %}
   </div>
+
+
+    {{ targets.all }}
+
+
+     {% ifnotequal previous_target.code '20' %}
+    <a class="previous-page" href="{% url 'aichi_target_detail' aichi_target_id=previous_target.pk %}">  {{ previous_target.get_parent_goal }} - {{ previous_target }} </a>
+    {% endifnotequal %}
+
+    {% ifnotequal next_target.code '1' %}
+    <a class="next-page" href="{% url 'aichi_target_detail' aichi_target_id=next_target.pk %}"> {{ next_target.get_parent_goal }} - {{ next_target }}  </a>
+     {% endifnotequal %}
+
 
 </div>
