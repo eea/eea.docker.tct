@@ -47,18 +47,36 @@
     {% endif %}
 
     <div class="well">
-      <div class="well-title">{% trans "Most relevant EU indicators" %}</div>
+      <div class="well-title">{% trans "Most relevant EU indicators" %}
+          {% if current_target.indicators.all|length  > 0 %}
+            <div class="info-count">
+            {{ current_target.indicators.all|length }}
+            </div>
+           {% endif %}
+      </div>
       {% include '_bits/eu_indicators.html' with indicators=current_target.indicators %}
     </div>
 
     <div class="well">
-      <div class="well-title">{% trans "Other EU indicators" %}</div>
+      <div class="well-title">{% trans "Other EU indicators" %}
+          {% if current_target.other_indicators.all|length  > 0 %}
+            <div class="info-count">
+            {{ current_target.other_indicators.all|length }}
+            </div>
+           {% endif %}
+      </div>
       {% include '_bits/eu_indicators.html' with indicators=current_target.other_indicators %}
     </div>
 
 
     <div class="well">
-      <div class="well-title">{% trans "Most relevant Aichi Targets" %}</div>
+      <div class="well-title">{% trans "Most relevant Aichi Targets" %}
+          {% if current_target.eu_aichi_strategy.all|length  > 0 %}
+            <div class="info-count">
+            {{ current_target.eu_aichi_strategy.all|length }}
+            </div>
+           {% endif %}
+      </div>
       {% if current_target.eu_aichi_strategy.count %}
         <ul>
           {% for strategy in current_target.eu_aichi_strategy.all %}
@@ -77,7 +95,13 @@
     </div>
 
     <div class="well">
-      <div class="well-title">{% trans "Other relevant Aichi Targets" %}</div>
+      <div class="well-title">{% trans "Other relevant Aichi Targets" %}
+{% if strategy.other_aichi_targets.all|length  > 0 %}
+            <div class="info-count">
+            {{ strategy.other_aichi_targets.all|length }}
+            </div>
+           {% endif %}
+      </div>
       {% if current_target.eu_aichi_strategy.count %}
         <ul>
           {% for strategy in current_target.eu_aichi_strategy.all %}
