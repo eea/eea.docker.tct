@@ -5,6 +5,23 @@ from django.utils.translation import ugettext_lazy as _
 from auth import auth_required
 from nbsap import models
 from nbsap.forms import EuIndicatorForm, EuIndicatorMapForm
+from nbsap.models import sort_by_code, sort_by_type
+
+
+def get_adjenct_indicators(current_indicator, indicators):
+    indicators = sort_by_type(sort_by_code(indicators))
+    previous_index = 0
+    next_index = 0
+    for index, indicator in enumerate(indicators):
+        if indicator == current_indicator:
+            previous_index = index - 1
+            next_index = index + 1
+    if previous_index < 0:
+        previous_index = len(indicators) - 1
+    if next_index > len(indicators) - 1:
+        next_index = 0
+
+    return indicators[previous_index], indicators[next_index]
 
 
 def get_indicators_pages(paginator):
@@ -42,9 +59,13 @@ def eu_indicators(request):
 def indicator_details(request, pk):
     current_indicator = get_object_or_404(models.EuIndicator, pk=pk)
     indicators = models.EuIndicator.objects.filter(parents=None).all()
+    previous_indicator, next_indicator = get_adjenct_indicators(current_indicator,
+        indicators)
     return render(request, 'eu_strategy/eu_indicator_detail.html', {
         'current_indicator': current_indicator,
         'indicators': indicators,
+        'previous_indicator': previous_indicator,
+        'next_indicator': next_indicator
     })
 
 

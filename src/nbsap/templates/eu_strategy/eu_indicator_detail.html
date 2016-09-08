@@ -75,8 +75,8 @@
 	</div>
 
 	<div class="pages-navigation">
-	 <div class="page-nav-prev-wrapper">    <a class="previous-page" >  {{ previous_target.get_parent_goal }} - {{ previous_target }} </a> </div>
-     <div class="page-nav-next-wrapper"> <a class="next-page" > {{ next_target.get_parent_goal }} - {{ next_target }}  </a></div>
+	 <div class="page-nav-prev-wrapper">    <a href="{% url 'eu_indicator_details' pk=previous_indicator.pk %}#{{ previous_indicator.pk }}" class="previous-page" >  {{ previous_indicator.indicator_type|upper }} - {{ previous_indicator.code }} </a> </div>
+     <div class="page-nav-next-wrapper"> <a href="{% url 'eu_indicator_details' pk=next_indicator.pk %}#{{ next_indicator.pk }}" class="next-page" > {{ next_indicator.indicator_type|upper }} - {{ next_indicator.code }}  </a></div>
 </div>
 
 {% endblock %}
