@@ -35,22 +35,20 @@
   {% if EU_STRATEGY %}
   <div class="well">
     <div class="well-title">{% trans "Most relevant EU targets" %}
-     {% if target.eu_aichi_strategy.all|length  > 0 %}
-    <div class="info-count">
-      {{ target.eu_aichi_strategy.all|length }}
+      {% if target.most_relevant_targets|length %}
+        <div class="info-count">
+          {{ target.most_relevant_targets|length }}
+        </div>
+      {% endif %}
     </div>
-     {% endif %}
-    </div>
-    {% if target.eu_aichi_strategy.count %}
+    {% if target.most_relevant_targets|length %}
       <ul>
-        {% for strategy in target.eu_aichi_strategy.all %}
-          {% for eu_target in strategy.eu_targets.all %}
-          <li>
-            <a href="{% url 'eu_targets' pk=eu_target.pk %}" title="{{ eu_target.code }}">
-              {% trans "EU Target" %} {{ eu_target.code }}: {{ eu_target.title }}
-            </a>
-          </li>
-          {% endfor %}
+        {% for eu_target in target.most_relevant_targets %}
+        <li>
+          <a href="{% url 'eu_targets' pk=eu_target.pk %}" title="{{ eu_target.code }}">
+            {% trans "EU Target" %} {{ eu_target.code }}: {{ eu_target.title }}
+          </a>
+        </li>
         {% endfor %}
       </ul>
     {% else %}
@@ -60,22 +58,20 @@
 
   <div class="well">
     <div class="well-title">{% trans "Other relevant EU targets" %}
-     {% if strategy.eu_targets.all|length  > 0 %}
+     {% if target.other_relevant_targets|length %}
     <div class="info-count">
-      {{ strategy.eu_targets.all|length }}
+      {{ target.other_relevant_targets|length }}
     </div>
      {% endif %}
     </div>
-    {% if target.eu_other_aichi_strategy.count %}
+    {% if target.other_relevant_targets|length %}
       <ul>
-        {% for strategy in target.eu_other_aichi_strategy.all %}
-          {% for eu_target in strategy.eu_targets.all %}
-          <li>
-            <a href="{% url 'eu_targets' pk=eu_target.pk %}" title="{{ eu_target.code }}">
-              {% trans "EU Target" %} {{ eu_target.code }}: {{ eu_target.title }}
-            </a>
-          </li>
-          {% endfor %}
+        {% for eu_target in target.other_relevant_targets %}
+        <li>
+          <a href="{% url 'eu_targets' pk=eu_target.pk %}" title="{{ eu_target.code }}">
+            {% trans "EU Target" %} {{ eu_target.code }}: {{ eu_target.title }}
+          </a>
+        </li>
         {% endfor %}
       </ul>
     {% else %}
@@ -106,16 +102,15 @@
   {% if EU_STRATEGY %}
   <div class="well">
     <div class="well-title">{% trans "Most relevant EU indicators" %}
-      {% if target.eu_indicator_aichi_strategy.all|length  > 0 %}
+      {% if target.most_relevant_indicators|length %}
       <div class="info-count">
-      {{ target.eu_indicator_aichi_strategy.all|length }}
+      {{ target.most_relevant_indicators|length }}
       </div>
        {% endif %}
     </div>
-    {% if target.eu_indicator_aichi_strategy.count %}
+    {% if target.most_relevant_indicators|length %}
       <ul>
-        {% for strategy in target.eu_indicator_aichi_strategy.all %}
-          {% with strategy.eu_indicator as eu_indicator %}
+        {% for eu_indicator in target.most_relevant_indicators|sort_by_code|sort_by_type %}
           <li>
             <a href="{% url 'eu_indicator_details' pk=eu_indicator.id %}"
                 title="{{ eu_indicator.title }}">
@@ -123,7 +118,6 @@
               {{ eu_indicator.code }}: {{ eu_indicator.title }}
             </a>
           </li>
-          {% endwith %}
         {% endfor %}
       </ul>
     {% else %}

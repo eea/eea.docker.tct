@@ -10,30 +10,45 @@ from nbsap import models
 from auth import auth_required
 
 from nbsap.forms import EuTargetForm, EuTargetEditForm, RegionForm
+from nbsap.models import sort_by_code
+
+
+def get_most_relevant_aichi_targets(target):
+    most_relevant_aichi_targets = []
+    for strategy in target.eu_aichi_strategy.all():
+        for aichi_target in strategy.aichi_targets.all():
+            most_relevant_aichi_targets.append(aichi_target)
+    return sort_by_code(most_relevant_aichi_targets)
+
+
+def get_other_relevant_aichi_targets(target):
+    other_relevant_aichi_targets = []
+    for strategy in target.eu_aichi_strategy.all():
+        for aichi_target in strategy.other_aichi_targets.all():
+            other_relevant_aichi_targets.append(aichi_target)
+    return sort_by_code(other_relevant_aichi_targets)
 
 
 def eu_targets(request, pk=None):
-    count_aichi_targets = 0
     if pk:
         current_target = get_object_or_404(models.EuTarget, pk=pk)
         current_target.actions_tree = []
         for action in current_target.actions.order_by('code'):
             current_target.actions_tree.extend(action.get_all_actions())
-        for strategy in current_target.eu_aichi_strategy.all():
-            count_aichi_targets += len(strategy.aichi_targets.all())
     else:
         current_target = None
 
     targets = sort_by_code(models.EuTarget.objects.all())
     previous_target, next_target = get_adjacent_targets(
         targets, current_target)
+    current_target.most_relevant_aichi_targets = get_most_relevant_aichi_targets(current_target)
+    current_target.other_relevant_aichi_targets = get_other_relevant_aichi_targets(current_target)
 
     return render(request, 'eu_strategy/eu_targets.html',
                   {'targets': targets,
                    'current_target': current_target,
                    'previous_target': previous_target,
-                   'next_target': next_target,
-                   'count_aichi_targets': count_aichi_targets
+                   'next_target': next_target
                    })
 
 

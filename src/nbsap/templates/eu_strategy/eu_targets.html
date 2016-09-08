@@ -48,7 +48,7 @@
 
     <div class="well">
       <div class="well-title">{% trans "Most relevant EU indicators" %}
-          {% if current_target.indicators.all|length  > 0 %}
+          {% if current_target.indicators.all|length %}
             <div class="info-count">
             {{ current_target.indicators.all|length }}
             </div>
@@ -59,7 +59,7 @@
 
     <div class="well">
       <div class="well-title">{% trans "Other EU indicators" %}
-          {% if current_target.other_indicators.all|length  > 0 %}
+          {% if current_target.other_indicators.all|length %}
             <div class="info-count">
             {{ current_target.other_indicators.all|length }}
             </div>
@@ -71,22 +71,19 @@
 
     <div class="well">
       <div class="well-title">{% trans "Most relevant Aichi Targets" %}
-          {% if count_aichi_targets > 0 %}
+          {% if current_target.most_relevant_aichi_targets|length %}
             <div class="info-count">
-            {{ count_aichi_targets }}
+            {{ current_target.most_relevant_aichi_targets|length }}
             </div>
            {% endif %}
       </div>
-      {% if current_target.eu_aichi_strategy.count %}
+      {% if current_target.most_relevant_aichi_targets|length %}
         <ul>
-          {% for strategy in current_target.eu_aichi_strategy.all %}
-            {% for aichi_target in strategy.aichi_targets.all %}
-              {% assign aichi_target.get_parent_goal as goal %}
+          {% for aichi_target in current_target.most_relevant_aichi_targets %}
               <li>
-                <a href="{% url 'list_targets' code=goal.code %}#{{ aichi_target.code }}">
+                <a href="{% url 'aichi_target_detail' aichi_target_id=aichi_target.id %}">
                   {% trans "AICHI Target" %} {{ aichi_target.code }}</a>
               </li>
-            {% endfor %}
           {% endfor %}
         </ul>
       {% else %}
@@ -96,22 +93,19 @@
 
     <div class="well">
       <div class="well-title">{% trans "Other relevant Aichi Targets" %}
-{% if strategy.other_aichi_targets.all|length  > 0 %}
-            <div class="info-count">
-            {{ strategy.other_aichi_targets.all|length }}
-            </div>
-           {% endif %}
+        {% if current_target.other_relevant_aichi_targets|length %}
+          <div class="info-count">
+            {{ current_target.other_relevant_aichi_targets|length }}
+          </div>
+        {% endif %}
       </div>
-      {% if current_target.eu_aichi_strategy.count %}
+      {% if current_target.other_relevant_aichi_targets %}
         <ul>
-          {% for strategy in current_target.eu_aichi_strategy.all %}
-            {% for aichi_target in strategy.other_aichi_targets.all %}
-              {% assign aichi_target.get_parent_goal as goal %}
-              <li>
-                <a href="{% url 'list_targets' code=goal.code %}#{{ aichi_target.code }}">
-                  {% trans "AICHI Target" %} {{ aichi_target.code }}</a>
-              </li>
-            {% endfor %}
+          {% for aichi_target in current_target.other_relevant_aichi_targets %}
+            <li>
+              <a href="{% url 'aichi_target_detail' aichi_target_id=aichi_target.id %}">
+                {% trans "AICHI Target" %} {{ aichi_target.code }}</a>
+            </li>
           {% endfor %}
         </ul>
       {% else %}

@@ -3,7 +3,7 @@
 
 {% if indicators.count %}
   <ul>
-    {% for eu_indicator in indicators.all %}
+    {% for eu_indicator in indicators.all|sort_by_code|sort_by_type %}
         <li>
           <a href="{% url 'eu_indicators' %}#indicator-{{ eu_indicator.id }}"
              title="{{ eu_indicator.title }}">

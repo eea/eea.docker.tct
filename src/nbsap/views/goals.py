@@ -12,6 +12,32 @@ from nbsap import models
 from nbsap.models import sort_by_code
 
 
+def get_most_relevant_targets(target):
+    most_relevant_targets = []
+    if target.eu_aichi_strategy.count():
+        for strategy in target.eu_aichi_strategy.all():
+            for eu_target in strategy.eu_targets.all():
+                most_relevant_targets.append(eu_target)
+    return sort_by_code(most_relevant_targets)
+
+
+def get_other_relevant_targets(target):
+    other_relevant_targets = []
+    if target.eu_other_aichi_strategy.count():
+        for strategy in target.eu_other_aichi_strategy.all():
+            for eu_target in strategy.eu_targets.all():
+                other_relevant_targets.append(eu_target)
+    return sort_by_code(other_relevant_targets)
+
+
+def get_most_relevant_indicators(target):
+    most_relevant_indicators = []
+    if target.eu_indicator_aichi_strategy.count():
+        for strategy in target.eu_indicator_aichi_strategy.all():
+            most_relevant_indicators.append(strategy.eu_indicator)
+    return most_relevant_indicators
+
+
 def get_adjacent_targets(targets, current_target):
     if not current_target:
         return None, None
@@ -100,6 +126,10 @@ def aichi_target_detail(request, aichi_target_id, code=None):
     previous_target, next_target = get_adjacent_targets(all_targets, target)
 
     info_header = settings.INFO_HEADER
+
+    target.most_relevant_targets =  get_most_relevant_targets(target)
+    target.other_relevant_targets = get_other_relevant_targets(target)
+    target.most_relevant_indicators = get_most_relevant_indicators(target)
 
     return render_to_response(
         'aichi/aichi.html',
