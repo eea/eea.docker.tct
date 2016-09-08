@@ -36,7 +36,7 @@
         margin-left: -16px;
         bottom: 0;
         top: 135px;
-        height: 85vh;
+        height:  90vh;
         width: 18%;
         padding-top: 2.5rem;
         @media (min-width: 1440px) {
@@ -161,3 +161,79 @@
 .list-item-goal a{
     cursor: pointer;
 }
+
+
+
+.pages-navigation {
+    display: block;
+    background: #039749;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    @media (max-width: 800px) {
+
+    }
+}
+
+.page-nav-next-wrapper,
+.page-nav-prev-wrapper {
+display: inline-block;
+width: 50%;
+box-sizing: border-box;
+}
+
+.page-nav-next-wrapper{
+float: right;
+text-align: right;
+}
+
+.page-nav-prev-wrapper {
+float: left;
+}
+
+
+
+.next-page,
+.previous-page{
+display: block;
+    color: white;
+    padding: 20px;
+    line-height: 0.1;
+
+}
+
+.next-page {
+
+}
+
+.next-page:after {
+        content: "\f101";
+        padding-right: 10px;
+}
+
+.previous-page:before {
+        content: "\f100";
+        padding-right: 10px;
+}
+
+
+
+
+.previous-page {
+  margin-left: 20px;
+
+}
+ @media (max-width: 530px){
+.previous-page,
+.next-page {
+        // width: 7px;
+        // overflow:hidden;
+        // white-space: nowrap;
+}
+// .next-page:before {
+//         content: "\f101";
+//         padding-right: 10px;
+// }
+
+ }

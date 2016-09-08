@@ -73,6 +73,10 @@
 	    <p>{% trans "No corresponding AICHI target" %}.</p>
 	  {% endif %}
 	</div>
-	   <a class="previous-page" >  {{ previous_target.get_parent_goal }} - {{ previous_target }} </a>
-    <a class="next-page" > {{ next_target.get_parent_goal }} - {{ next_target }}  </a>
+
+	<div class="pages-navigation">
+	 <div class="page-nav-prev-wrapper">    <a class="previous-page" >  {{ previous_target.get_parent_goal }} - {{ previous_target }} </a> </div>
+     <div class="page-nav-next-wrapper"> <a class="next-page" > {{ next_target.get_parent_goal }} - {{ next_target }}  </a></div>
+</div>
+
 {% endblock %}
