@@ -13,6 +13,8 @@ from nbsap.models import sort_by_code
 
 
 def get_adjacent_targets(targets, current_target):
+    if not current_target:
+        return None, None
     previous_index = 0
     next_index = 0
     for index, target in enumerate(targets):

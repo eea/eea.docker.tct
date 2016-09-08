@@ -83,7 +83,7 @@
             {% for aichi_target in strategy.aichi_targets.all %}
               {% assign aichi_target.get_parent_goal as goal %}
               <li>
-                <a href="{% url 'goals' code=goal.code %}#{{ aichi_target.code }}">
+                <a href="{% url 'list_targets' code=goal.code %}#{{ aichi_target.code }}">
                   {% trans "AICHI Target" %} {{ aichi_target.code }}</a>
               </li>
             {% endfor %}
@@ -108,7 +108,7 @@
             {% for aichi_target in strategy.other_aichi_targets.all %}
               {% assign aichi_target.get_parent_goal as goal %}
               <li>
-                <a href="{% url 'goals' code=goal.code %}#{{ aichi_target.code }}">
+                <a href="{% url 'list_targets' code=goal.code %}#{{ aichi_target.code }}">
                   {% trans "AICHI Target" %} {{ aichi_target.code }}</a>
               </li>
             {% endfor %}

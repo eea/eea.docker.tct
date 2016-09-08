@@ -8,7 +8,7 @@
 
   {% if EU_STRATEGY %}
   <li>
-    <a class="{% active request '^/european-strategy/targets' %}" href="{% url 'eu_targets' %}">{% trans "EU Strategy" %}</a>
+    <a class="{% active request '^/european-strategy/$' %}{% active request '^/european-strategy/targets' %}" href="{% url 'eu_targets' %}">{% trans "EU Strategy" %}</a>
   </li>
   {% endif %}
 

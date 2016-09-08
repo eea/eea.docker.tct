@@ -45,7 +45,7 @@ NBSAP - {% trans "Mapping National Objectives to AICHI and EU targets" %}
       </td>
       <td>
         {% for goal in strategy.goals_list %}
-        <a href="{% url 'goals' code=goal.code %}">
+        <a href="{% url 'list_targets' code=goal.code %}">
           {{ goal.code|title }}</a>
         {% endfor %}
       </td>

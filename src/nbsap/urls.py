@@ -21,7 +21,7 @@ urlpatterns = [
         name='list_targets'),
     url(r'^aichi/targets/$', views.list_targets, name='list_targets'),
     url(r'^aichi/goals/targets/$', views.list_targets, name='list_targets'),
-    url(r'^aichi/goals/(?P<code>[\w\-]+)$', views.aichi_goals, name='goals'),
+    url(r'^aichi/goals/(?P<code>[\w\-]+)$', views.list_targets, name='list_targets'),
     url(r'^aichi/goals/(?P<code>[\w\-]+)/targets/(?P<aichi_target_id>[\w\-]+)$',
         views.aichi_target_detail,
         name='goals'),
@@ -37,7 +37,7 @@ urlpatterns = [
     url(r'^implementation/(?P<code>((\d+\.)*\d+$))$',
         views.implementation, name='implementation'),
 
-    url(r'^european-strategy$', views.eu_targets, name='eu_targets'),
+    url(r'^european-strategy/$', views.eu_targets, name='eu_targets'),
     url(r'^european-strategy/targets/$', views.eu_targets, name='eu_targets'),
     url(r'^european-strategy/targets/(?P<pk>(\d+))$',
         views.eu_targets, name='eu_targets'),
