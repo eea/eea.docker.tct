@@ -28,9 +28,7 @@
 <div class="wrapper">
   <header class="main-header">
     <a href="{% url 'admin_home' %}" class="logo">
-      {% if LAYOUT_HEADER_LOGO %}
-  <img style="height: 50px;width:auto;" src="/static/CHM_logo_45x70px.png">
-  {% endif %}Dashboard</a>
+      Dashboard</a>
     {% if WARNING_MESSAGE %}
     <div class="alert alert-warning warning-demo">
       {{ WARNING_MESSAGE }}
@@ -45,14 +43,7 @@
       {% endblock %}
       {% block admin-menu %}
       <ul class="sidebar-menu">
-        <li class="header">Administration options</li>
         {% if user.is_authenticated %}
-        <li>
-          <a
-            href="{% if NAT_STRATEGY %}{% url 'list_national_objectives' %}{% else %}{% url 'list_eu_targets' %}{% endif %}">
-            {% trans 'Mappings' %}
-          </a>
-        </li>
         {% if user.is_superuser %}
         <li>
           <a href="{% url 'admin:index' %}" class="change-lang admin">{% trans 'Administration' %}</a>
@@ -64,9 +55,6 @@
         {% endif %}
         {% endif %}
         {% endif %}
-        <li class="nav-btn">
-          <a class="exit-admin" href="{% url 'user_homepage' %}">{% trans "Exit from dashboard" %}</a>
-        </li>
       </ul>
       {% endblock %}
     </section>
