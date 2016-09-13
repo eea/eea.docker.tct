@@ -39,10 +39,16 @@
 	<div class="well">
 	  <div class="well-title">{% trans "Mapping with Aichi Strategy" %}
 	      </div>
-	  <p><strong>Most relevant:</strong></p>
+	  <p><strong>Most relevant:</strong>
+      {% if current_indicator.relevant_aichi_targets|length %}
+        <div class="info-count">
+          {{ current_indicator.relevant_aichi_targets|length }}
+        </div>
+	  {% endif %}
+	  </p>
 	  {% if current_indicator.eu_indicator_aichi_strategy.exists %}
 	    <ul>
-	      {% for aichi_target in current_indicator.aichi_targets|sort_by_code %}
+	      {% for aichi_target in current_indicator.relevant_aichi_targets|sort_by_code %}
 	          <li>
 	            <a href="{% url 'goals' code=aichi_target.get_parent_goal.code aichi_target_id=aichi_target.id %}">
 	              {% trans "AICHI Target" %} {{ aichi_target.code }}</a>

@@ -8,6 +8,16 @@ from nbsap.forms import EuIndicatorForm, EuIndicatorMapForm
 from nbsap.models import sort_by_code, sort_by_type
 
 
+def get_most_relevant(indicator):
+    aichi_targets = []
+    if indicator.eu_indicator_aichi_strategy.exists():
+        for strategy in indicator.eu_indicator_aichi_strategy.all():
+            for aichi_target in strategy.aichi_targets.all():
+                if aichi_target not in aichi_targets:
+                    aichi_targets.append(aichi_target)
+    return aichi_targets
+
+
 def get_adjenct_indicators(current_indicator, indicators):
     indicators = sort_by_type(sort_by_code(indicators))
     previous_index = 0
@@ -62,11 +72,8 @@ def indicator_details(request, pk):
     previous_indicator, next_indicator = get_adjenct_indicators(
         current_indicator, indicators)
 
-    current_indicator.aichi_targets = []
-    for strategy in current_indicator.eu_indicator_aichi_strategy.all():
-        for aichi_target in strategy.aichi_targets.all():
-            if aichi_target not in current_indicator.aichi_targets:
-                current_indicator.aichi_targets.append(aichi_target)
+    current_indicator.relevant_aichi_targets = get_most_relevant(
+        current_indicator)
 
     return render(request, 'eu_strategy/eu_indicator_detail.html', {
         'current_indicator': current_indicator,
