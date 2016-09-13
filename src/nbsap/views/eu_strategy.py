@@ -10,7 +10,6 @@ from nbsap import models
 from auth import auth_required
 
 from nbsap.forms import EuTargetForm, EuTargetEditForm, RegionForm
-from nbsap.models import sort_by_code
 
 
 def get_most_relevant_aichi_targets(target):
@@ -33,27 +32,30 @@ def get_other_relevant_aichi_targets(target):
     return sort_by_code(other_relevant_aichi_targets)
 
 
-def eu_targets(request, pk=None):
-    if pk:
-        current_target = get_object_or_404(models.EuTarget, pk=pk)
-        current_target.actions_tree = []
-        for action in current_target.actions.order_by('code'):
-            current_target.actions_tree.extend(action.get_all_actions())
-        current_target.most_relevant_aichi_targets = get_most_relevant_aichi_targets(current_target)
-        current_target.other_relevant_aichi_targets = get_other_relevant_aichi_targets(current_target)
-    else:
-        current_target = None
+def eu_target_detail(request, pk):
+    current_target = get_object_or_404(models.EuTarget, pk=pk)
+    current_target.actions_tree = []
+    for action in current_target.actions.order_by('code'):
+        current_target.actions_tree.extend(action.get_all_actions())
+    current_target.most_relevant_aichi_targets = get_most_relevant_aichi_targets(current_target)
+    current_target.other_relevant_aichi_targets = get_other_relevant_aichi_targets(current_target)
 
     targets = sort_by_code(models.EuTarget.objects.all())
     previous_target, next_target = get_adjacent_targets(
         targets, current_target)
 
-    return render(request, 'eu_strategy/eu_targets.html',
+    return render(request, 'eu_strategy/eu_target_detail.html',
                   {'targets': targets,
                    'current_target': current_target,
                    'previous_target': previous_target,
                    'next_target': next_target
                    })
+
+
+def eu_targets(request):
+    targets = sort_by_code(models.EuTarget.objects.all())
+    return render(request, 'eu_strategy/eu_targets.html',
+                  {'targets': targets})
 
 
 def get_eu_target_title(request, pk=None):

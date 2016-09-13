@@ -1,0 +1,126 @@
+{% extends 'layout.html' %}
+{% load i18n %}
+{% load utils %}
+
+
+{% block title %}
+  NBSAP - {% trans "EU Targets" %}
+{% endblock %}
+
+
+{% block navmenu %}
+  {% include '_bits/nav_menu.html' %}
+{% endblock %}
+
+
+{% block sidebar %}
+  <div class="sidebar">
+    <h4 class="sidebar-title">Targets</h4>
+    <ul class="sidebar-menu">
+      {% for target in targets %}
+        <li class="{% if target.pk == current_target.pk %}active {% endif %}{% if target.parent %}indent{% endif %}">
+          <a href="{% url 'eu_target_detail' pk=target.pk %}"
+             title="{{ target.code }}">
+            {% trans "Target" %} {{ target.code }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}
+
+{% block content %}
+<h1>{% trans "EU Target" %} {{ current_target.code }}: {{ current_target.title }}</h1>
+<p class="objective-description">{{ current_target.description|safe }}</p>
+
+{% if current_target.children.count %}
+  {% for subtarget in current_target.children.all %}
+  <h2>
+    <a href="{% url 'eu_target_detail' pk=subtarget.pk %}">
+      {% trans "EU Target" %} {{ subtarget.code }}: {{ subtarget.title }}
+    </a>
+  </h2>
+  <p class="objective-description">{{ subtarget.description|safe }}</p>
+  {% endfor %}
+{% endif %}
+
+<div class="well">
+  <div class="well-title">{% trans "Most relevant EU indicators" %}
+    {% if current_target.indicators.all|length %}
+      <div class="info-count">
+        {{ current_target.indicators.all|length }}
+      </div>
+    {% endif %}
+  </div>
+  {% include '_bits/eu_indicators.html' with indicators=current_target.indicators %}
+</div>
+
+<div class="well">
+  <div class="well-title">{% trans "Other EU indicators" %}
+    {% if current_target.other_indicators.all|length %}
+      <div class="info-count">
+        {{ current_target.other_indicators.all|length }}
+      </div>
+    {% endif %}
+  </div>
+  {% include '_bits/eu_indicators.html' with indicators=current_target.other_indicators %}
+</div>
+
+
+<div class="well">
+  <div class="well-title">{% trans "Most relevant Aichi Targets" %}
+    {% if current_target.most_relevant_aichi_targets|length %}
+      <div class="info-count">
+        {{ current_target.most_relevant_aichi_targets|length }}
+      </div>
+    {% endif %}
+  </div>
+  {% if current_target.most_relevant_aichi_targets|length %}
+    <ul>
+      {% for aichi_target in current_target.most_relevant_aichi_targets %}
+        <li>
+          <a href="{% url 'aichi_target_detail' aichi_target_id=aichi_target.id %}">
+            {% trans "AICHI Target" %} {{ aichi_target.code }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>{% trans "No corresponding AICHI target" %}.</p>
+  {% endif %}
+</div>
+
+<div class="well">
+  <div class="well-title">{% trans "Other relevant Aichi Targets" %}
+    {% if current_target.other_relevant_aichi_targets|length %}
+      <div class="info-count">
+        {{ current_target.other_relevant_aichi_targets|length }}
+      </div>
+    {% endif %}
+  </div>
+  {% if current_target.other_relevant_aichi_targets %}
+    <ul>
+      {% for aichi_target in current_target.other_relevant_aichi_targets %}
+        <li>
+          <a href="{% url 'aichi_target_detail' aichi_target_id=aichi_target.id %}">
+            {% trans "AICHI Target" %} {{ aichi_target.code }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>{% trans "No corresponding AICHI target" %}.</p>
+  {% endif %}
+</div>
+
+<div class="pages-navigation">
+  {% ifnotequal previous_target targets|last %}
+  <div class="page-nav-prev-wrapper"> <a class="previous-page" href="{% url 'eu_target_detail' pk=previous_target.pk %}"> Target {{ previous_target.code }} </a></div>
+
+  {% endifnotequal %}
+
+  {% ifnotequal next_target targets|first %}
+  <div class="page-nav-next-wrapper"> <a class="next-page" href="{% url 'eu_target_detail' pk=next_target.pk %}"> Target {{ next_target.code }}  </a>  <div class="page-nav-next-wrapper">
+  {% endifnotequal %}
+</div>
+{% endblock %}

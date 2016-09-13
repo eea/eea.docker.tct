@@ -24,7 +24,7 @@
       <ul>
         {% for eu_target in target.most_relevant_targets %}
         <li>
-          <a href="{% url 'eu_targets' pk=eu_target.pk %}" title="{{ eu_target.code }}">
+          <a href="{% url 'eu_target_detail' pk=eu_target.pk %}" title="{{ eu_target.code }}">
             {% trans "EU Target" %} {{ eu_target.code }}:
           </a><p class="content-description">{{ eu_target.title }}</p>
         </li>
@@ -47,7 +47,7 @@
       <ul>
         {% for eu_target in target.other_relevant_targets %}
         <li>
-          <a href="{% url 'eu_targets' pk=eu_target.pk %}" title="{{ eu_target.code }}">
+          <a href="{% url 'eu_target_detail' pk=eu_target.pk %}" title="{{ eu_target.code }}">
             {% trans "EU Target" %} {{ eu_target.code }}: 
           </a> <p class="content-description">{{ eu_target.title }}</p>
         </li>
