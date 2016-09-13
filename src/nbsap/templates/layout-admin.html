@@ -27,7 +27,7 @@
 <body class="sidebar-mini skin-black">
 <div class="wrapper">
   <header class="main-header">
-    <a href="{% url 'admin_home' %}" class="logo">
+    <a href="{% if NAT_STRATEGY %}{% url 'list_national_objectives' %}{% else %}{% url 'list_eu_targets' %}{% endif %}" class="logo">
       Dashboard</a>
     {% if WARNING_MESSAGE %}
     <div class="alert alert-warning warning-demo">
