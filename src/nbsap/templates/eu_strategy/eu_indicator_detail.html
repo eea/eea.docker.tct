@@ -42,14 +42,11 @@
 	  <p><strong>Most relevant:</strong></p>
 	  {% if current_indicator.eu_indicator_aichi_strategy.exists %}
 	    <ul>
-	      {% for strategy in current_indicator.eu_indicator_aichi_strategy.all %}
-	        {% for aichi_target in strategy.aichi_targets.all|sort_by_code %}
-	          {% assign aichi_target.get_parent_goal as goal %}
+	      {% for aichi_target in current_indicator.aichi_targets|sort_by_code %}
 	          <li>
-	            <a href="{% url 'goals' code=goal.code aichi_target_id=aichi_target.id %}">
+	            <a href="{% url 'goals' code=aichi_target.get_parent_goal.code aichi_target_id=aichi_target.id %}">
 	              {% trans "AICHI Target" %} {{ aichi_target.code }}</a>
 	          </li>
-	        {% endfor %}
 	      {% endfor %}
 	    </ul>
 	  {% else %}

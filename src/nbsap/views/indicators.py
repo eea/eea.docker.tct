@@ -59,8 +59,15 @@ def eu_indicators(request):
 def indicator_details(request, pk):
     current_indicator = get_object_or_404(models.EuIndicator, pk=pk)
     indicators = models.EuIndicator.objects.filter(parents=None).all()
-    previous_indicator, next_indicator = get_adjenct_indicators(current_indicator,
-        indicators)
+    previous_indicator, next_indicator = get_adjenct_indicators(
+        current_indicator, indicators)
+
+    current_indicator.aichi_targets = []
+    for strategy in current_indicator.eu_indicator_aichi_strategy.all():
+        for aichi_target in strategy.aichi_targets.all():
+            if aichi_target not in current_indicator.aichi_targets:
+                current_indicator.aichi_targets.append(aichi_target)
+
     return render(request, 'eu_strategy/eu_indicator_detail.html', {
         'current_indicator': current_indicator,
         'indicators': indicators,
