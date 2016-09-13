@@ -16,7 +16,6 @@ $(window).scroll(function(){
     // if  ((wintop/(docheight-winheight)) > scrolltrigger) {
     //    console.log('scroll bottom');
     // }
-
 if (scrolled >= 80) {
 	$('.pages-navigation').animate({
       height: 'show'
@@ -29,7 +28,20 @@ $('.pages-navigation').animate({
     }, 200);
 
 }
-
+// if (scrolled == NaN) {
+// 		$('.pages-navigation').animate({
+//       height: 'show'
+//     }, 200);
+// }
 
 });
+
+ if ($("body").height() < $(window).height()) {
+        $('.pages-navigation').animate({
+      height: 'show'
+    }, 200);
+    }
+
+
+
 });

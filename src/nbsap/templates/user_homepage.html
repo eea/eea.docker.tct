@@ -20,9 +20,9 @@
 	<h2 class="page-desc">This is platform for organizing the implementation of a country's national biodiversity strategy after AICHI (and by case after EU Strategy). </h2>
 	<h2 class="page-list-title">Here you can:</h2>
 	<ul class="page-list">
-		<li><a href="{% url 'list_goals' %}">View current AICHI Goals</a></li>
-		<li><a href="{% url 'eu_targets' %}">View current EU Targets</a></li>
-		<li><a href="{% url 'eu_indicators' %}">View current EU Indicators</a></li>
+		<li class="homepage-goals"><a href="{% url 'list_goals' %}">View current AICHI Goals</a><div class="goals-info"></li>
+		<li class="homepage-targets"><a href="{% url 'eu_targets' %}">View current EU Targets</a><div class="targets-info"></div></li>
+		<li class="homepage-indicators"><a href="{% url 'eu_indicators' %}">View current EU Indicators</a><div class="indicators-info"></div></li>
 		{% if user.is_superuser %}
 			<li>You can also add new Goals, Targets or Indicators in the <a href="{% url 'admin_home'%}">Administration</a> section.</li>
 		{% endif %}
