@@ -14,6 +14,8 @@ from nbsap.models import sort_by_code
 
 
 def get_most_relevant_aichi_targets(target):
+    if not target:
+        return None, None
     most_relevant_aichi_targets = []
     for strategy in target.eu_aichi_strategy.all():
         for aichi_target in strategy.aichi_targets.all():
@@ -22,6 +24,8 @@ def get_most_relevant_aichi_targets(target):
 
 
 def get_other_relevant_aichi_targets(target):
+    if not target:
+        return None, None
     other_relevant_aichi_targets = []
     for strategy in target.eu_aichi_strategy.all():
         for aichi_target in strategy.other_aichi_targets.all():
@@ -35,14 +39,14 @@ def eu_targets(request, pk=None):
         current_target.actions_tree = []
         for action in current_target.actions.order_by('code'):
             current_target.actions_tree.extend(action.get_all_actions())
+        current_target.most_relevant_aichi_targets = get_most_relevant_aichi_targets(current_target)
+        current_target.other_relevant_aichi_targets = get_other_relevant_aichi_targets(current_target)
     else:
         current_target = None
 
     targets = sort_by_code(models.EuTarget.objects.all())
     previous_target, next_target = get_adjacent_targets(
         targets, current_target)
-    current_target.most_relevant_aichi_targets = get_most_relevant_aichi_targets(current_target)
-    current_target.other_relevant_aichi_targets = get_other_relevant_aichi_targets(current_target)
 
     return render(request, 'eu_strategy/eu_targets.html',
                   {'targets': targets,
