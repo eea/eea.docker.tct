@@ -10,6 +10,7 @@ JS_ASSETS = (
     'js/lib/jquery.columnlist.js',
     'bootstrap/js/sidebar-plugin.js',
     'bootstrap/js/sidebar.js',
+    'bootstrap/js/scroll.js',
 )
 
 JS_ADMIN_ASSETS = (

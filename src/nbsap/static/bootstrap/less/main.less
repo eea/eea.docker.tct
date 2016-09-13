@@ -303,9 +303,9 @@ body {
 }
 
 .content {
-    margin-top: 11rem;
+    margin-top: 8rem;
     @media (max-width: 800px) {
-        margin-top: 11rem;
+        margin-top: 8rem;
     }
 }
 
@@ -450,16 +450,14 @@ h5 {
 }
 
 .well {
-    padding: 10px;
     // box-shadow: 0 0 3px 0 rgba(0,0,0,.1);
     // background: #f7f7f7;
 }
 
 .well-title {
-    margin: -11px -11px 10px;
     padding: 3px 0;
     // font-size: 2.5rem;
-    color: #949494;
+    color: @gray-muted;
     font-size: 1.8rem;
     border-bottom: 1px solid @gray-light;
 }
@@ -763,6 +761,7 @@ td.col-md-3 {
 
 .info-count {
     display: inline-block;
+    font-size: 1.2rem;
 }
 
 .info-count:before {
@@ -771,4 +770,12 @@ td.col-md-3 {
 
 .info-count:after {
     content: ")";
+}
+
+.content-description {
+    display: inline;
+}
+
+.other {
+    font-size: 1.2rem;
 }

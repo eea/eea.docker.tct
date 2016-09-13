@@ -9,58 +9,10 @@ $(document).ready(function () {
   $accountmenu = $('.account-menu');
   $backdrop = $('#backdrop');
   $sidebar= $('.sidebar');
+  $langheader = $('.lang-menu-header');
+  $langmenu =$('.lang-menu');
   var toggle_user = 0;
   var toggle_lang = 0;
-  // sidebarplugin($navtrigger, $navcontainer, $closetrigger)
-
-  // sidebarplugin($sidebartrigger, $sidebarright, $closetrigger)
-  $accountheader.click(function () {
-    var _this = $(this);
-    var clicked;
-
-    $accountheader.not(_this).removeClass('clicked');
-
-    _this.toggleClass('clicked');
-
-    switch (_this.data('click')) {
-      case "user":
-        toggle_user++;
-        clicked = $('#toggle_user');
-        break;
-      case "lang":
-        toggle_lang++;
-        clicked = $('#toggle_lang');
-        break;
-    }
-
-    $accountmenu.not($accountmenu.filter("[data-click=" + _this.data('click') + "]")).animate({
-      height: 'hide'
-    }, 120);
-    $accountmenu.filter("[data-click=" + _this.data('click') + "]").animate({
-      height: 'toggle'
-    }, 120);
-
-    if (clicked == 1) {
-      $('#'+_this.data('click')+'-close').animate({borderSpacing: 90}, {
-        step: function (now, fx) {
-          $(this).css('-webkit-transform', 'rotate(' + now + 'deg)');
-          $(this).css('-moz-transform', 'rotate(' + now + 'deg)');
-          $(this).css('transform', 'rotate(' + now + 'deg)');
-        }
-      });
-    }
-
-    if (clicked != 1) {
-      $('#'+_this.data('click')+'-close').animate({borderSpacing: 0}, {
-        step: function (now, fx) {
-          $(this).css('-webkit-transform', 'rotate(' + now + 'deg)');
-          $(this).css('-moz-transform', 'rotate(' + now + 'deg)');
-          $(this).css('transform', 'rotate(' + now + 'deg)');
-          eval('toggle_'+_this.data('click')+'=0');
-        }
-      });
-    }
-  });
 
 
   $('.nav-trigger button, .close-trigger').click(function () {
@@ -110,6 +62,43 @@ $(document).ready(function () {
     $('body').removeClass('sidebaropen');
 
   });
+
+
+
+$('body').click (function(e){
+
+if ($(e.target).hasClass('lang-menu-trigger')){
+  $('.lang-menu').animate({
+      height: 'toggle'
+    }, 120);
+  $('.lang-menu-header').toggleClass('clicked');
+}
+else {
+    $('.lang-menu').animate({
+      height: 'hide'
+    }, 120);
+     $('.lang-menu-header').removeClass('clicked');
+}
+
+});
+
+
+$('body').click (function(e){
+if ($(e.target).hasClass('account-menu-trigger')){
+  $('.account-menu').animate({
+      height: 'toggle'
+    }, 120);
+  $('.account-menu-header').toggleClass('clicked');
+}
+else {
+    $('.account-menu').animate({
+      height: 'hide'
+    }, 120);
+     $('.account-menu-header').removeClass('clicked');
+}
+
+});
+
 
 
   $targetlistorder = $('.target-list li .target-code');

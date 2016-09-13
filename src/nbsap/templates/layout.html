@@ -17,20 +17,20 @@
         <div class="container">
             <div class="nav-brand">
                 <div class="brand">
-                    {% if LAYOUT_HEADER_LOGO %}
-                    <a href="/">
+                    <!-- <a href="{% url 'list_goals' %}"> -->
+                     <a href="/">
+                      <span class="site-title">{% trans SITE_HEADER %}
+                      </span>
+                        {% if LAYOUT_HEADER_LOGO %}
                         <div class="logo img">
                             <img src="/static/CHM_logo_45x70px.png">
                         </div>
-                    </a>
-                    {% endif %}
-                    <a href="{% url 'list_goals' %}">
-                      <span class="site-title">{% trans SITE_HEADER %}
+                        {% endif %}
                         <span class="subtitle">
                                  contribution by European Commission
                         </span>
-                      </span>
                     </a>
+               <!--      </a> -->
                     <form class='search-form'>
                         <input type="search" placeholder="Search">
                     </form>

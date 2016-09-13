@@ -44,7 +44,7 @@
     <div class="account-menu-header" data-click="user">
         <span class="user">
         {% if user.is_authenticated %}
-             <a>  <i class="fa fa-caret-right" id="user-close"></i> {{ user }} </a>
+             <a class="account-menu-trigger">  <i class="fa fa-caret-right" id="user-close"></i> {{ user }} </a>
         {% else %}
                 <a href="{% url 'login' %}">{% trans "Login" %}</a>
         {% endif %}
@@ -76,17 +76,17 @@
         </li>
         {% endif %}
     </ul>
-    <div class="account-menu-header" data-click="lang">
+    <div class="lang-menu-header" data-click="lang">
         {% if LANGUAGES|length > 1 %}
         <span class="lang">
             <a><i class="fa" id="lang-close"></i> {{ request.LANGUAGE_CODE|upper }} </a>
             {% else %}
-        <a href="" title="{{ LANGUAGES.0.1 }}">{{ LANGUAGES.0.0|upper }}</a> {% endif %}
+        <a class="lang-menu-trigger" title="{{ LANGUAGES.0.1 }}">{{ LANGUAGES.0.0|upper }}</a> {% endif %}
         </span>
     </div>
-    <ul class="account-menu" data-click="lang">
+    <ul class="lang-menu" data-click="lang">
         {% for lang in LANGUAGES %}
-        <li>
+        <li class="change-lang-wrapper">
             <a class="change-lang">{{ lang.1 }}</a>
             <form name="set_lang_{{ lang.0 }}" class="language-menu" action="{% url 'set_language' %}" method="POST">
                 <input name="next" type="hidden" value="{{ request.get_full_path }}">

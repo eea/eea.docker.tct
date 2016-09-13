@@ -1,27 +1,6 @@
 {% load i18n %}
 {% load utils %}
 
-<!-- am scos sidebar right si am pus contentul in aichi.html -->
-<!-- {% block sidebar-right %}
-<div class="sidebar-trigger"><button type="button" class="btn">Table of contents</button></div>
-<div class="sidebar-right">
-  <div class="toc">
-    <h5>{% trans "Table of contents"%}</h5>
-    <ul>
-      {% for current_target in targets|sort_by_code %}
-      <li {% if current_target.code == target.code %}class="active"{% endif %}>
-        <a href="{% url 'goals' code=current_target.get_parent_goal.code aichi_target_id=current_target.id %}"
-           rel="tooltip">
-           {% trans "Target" %} {{ current_target.code }}
-        </a>
-      </li>
-      {% endfor %}
-    </ul>
-  </div>
-</div>
-{% endblock %} -->
-
-
 
     <h1 class="page-title">{% trans "AICHI Goals" %}</h1>
 <h1 class="goal-title">{% trans "AICHI Goal " %}{{ target.get_parent_goal.code|upper }}: </h1> <h1 class="goal-desc">{{ target.get_parent_goal.description|striptags|safe }}</h1>
@@ -46,8 +25,8 @@
         {% for eu_target in target.most_relevant_targets %}
         <li>
           <a href="{% url 'eu_targets' pk=eu_target.pk %}" title="{{ eu_target.code }}">
-            {% trans "EU Target" %} {{ eu_target.code }}: {{ eu_target.title }}
-          </a>
+            {% trans "EU Target" %} {{ eu_target.code }}:
+          </a><p class="content-description">{{ eu_target.title }}</p>
         </li>
         {% endfor %}
       </ul>
@@ -57,7 +36,7 @@
   </div>
 
   <div class="well">
-    <div class="well-title">{% trans "Other relevant EU targets" %}
+    <div class="well-title other">{% trans "Other relevant EU targets" %}
      {% if target.other_relevant_targets|length %}
     <div class="info-count">
       {{ target.other_relevant_targets|length }}
@@ -69,8 +48,8 @@
         {% for eu_target in target.other_relevant_targets %}
         <li>
           <a href="{% url 'eu_targets' pk=eu_target.pk %}" title="{{ eu_target.code }}">
-            {% trans "EU Target" %} {{ eu_target.code }}: {{ eu_target.title }}
-          </a>
+            {% trans "EU Target" %} {{ eu_target.code }}: 
+          </a> <p class="content-description">{{ eu_target.title }}</p>
         </li>
         {% endfor %}
       </ul>
@@ -115,8 +94,8 @@
             <a href="{% url 'eu_indicator_details' pk=eu_indicator.id %}"
                 title="{{ eu_indicator.title }}">
               {{ eu_indicator.indicator_type|upper }}
-              {{ eu_indicator.code }}: {{ eu_indicator.title }}
-            </a>
+              {{ eu_indicator.code }}: 
+            </a><p class="content-description">{{ eu_indicator.title }}</p>
           </li>
         {% endfor %}
       </ul>
@@ -126,7 +105,7 @@
   </div>
 
   <div class="well">
-    <div class="well-title">{% trans "Other relevant EU indicators" %}
+    <div class="well-title other">{% trans "Other relevant EU indicators" %}
       {% if target.eu_indicator_other_aichi_strategy.all|length > 0 %}
       <div class="info-count">
        {{ target.eu_indicator_other_aichi_strategy.all|length }}
@@ -141,8 +120,8 @@
             {% if eu_indicator.url %}
               <a href="{{ eu_indicator.url }}" title="{{ eu_indicator.title }}">
                 {{ eu_indicator.indicator_type|upper }}
-                {{ eu_indicator.code }}: {{ eu_indicator.title }}
-              </a>
+                {{ eu_indicator.code }}: 
+              </a><p class="content-description">{{ eu_indicator.title }}</p>
             {% else %}
               {{ eu_indicator.code }} {{ eu_indicator.title }}
             {% endif %}
@@ -170,8 +149,8 @@
         <li>
           <a href="{% url 'indicator' pk=indicator.pk %}"
              data-modal="#indicator_modal">
-            {% trans "Indicator" %} {{indicator.id}}: {{ indicator.title }}
-          </a>
+            {% trans "Indicator" %} {{indicator.id}}: 
+          </a><p class="content-description">{{ indicator.title }}</p>
         </li>
         {% endfor %}
       </ul>
@@ -181,7 +160,7 @@
   </div>
 
   <div class="well">
-    <div class="well-title">{% trans "Other relevant CBD indicators" %}
+    <div class="well-title other">{% trans "Other relevant CBD indicators" %}
     {% if target.other_indicators.all|length > 0 %}
     <div class="info-count">
       {{ target.other_indicators.all|length }}
@@ -195,8 +174,8 @@
         <li>
           <a href="{% url 'indicator' pk=indicator.pk %}"
              data-modal="#indicator_modal">
-            {% trans "Indicator" %} {{indicator.id}}: {{ indicator.title }}
-          </a>
+            {% trans "Indicator" %} {{indicator.id}}: 
+          </a><p class="content-description">{{ indicator.title }}</p>
         </li>
         {% endfor %}
       </ul>
