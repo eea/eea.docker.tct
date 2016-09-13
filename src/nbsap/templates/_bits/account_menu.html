@@ -3,12 +3,15 @@
 {% if '/dashboard' in request.path %}
 <nav class="navbar navbar-static-top">
     <h3 class="dashboard-title">{% trans SITE_HEADER %}</h3>
+    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+        </a>
     <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-         <li class="nav-btn">
-          <a class="exit-admin" href="{% url 'user_homepage' %}">{% trans "Exit from dashboard" %}</a>
-        </li>
-            {% for navbar_link in navbar_links %}
+           <li class="nav-btn">
+              <a class="exit-admin" href="{% url 'user_homepage' %}">{% trans "Exit from dashboard" %}</a>
+          </li>
+          {% for navbar_link in navbar_links %}
             <li>
                 <a href="{{ navbar_link.url }}" target="_blank" title="{{ navbar_link.title }}">
           {{ navbar_link }}</a>

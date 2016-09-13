@@ -135,21 +135,6 @@
   color: #b8c7ce;
 }
 
-@media screen and (max-width: 900px) {
-  .dashboard-title {
-    font-size: 0.9em;
-  }
-
-  .dropdown-menu li a {
-    color: #000 !important;
-  }
-}
-
-@media screen and (min-width: 769px) {
-  .toggle {
-    display: none !important;
-  }
-}
 
 .timeline {
   margin: 10px 0 -10px 0;
@@ -210,4 +195,34 @@
 
 .table-indent{
   text-indent: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .dashboard-title{
+    display: none;
+  }
+
+  .logo{
+     margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .dashboard-title {
+    font-size: 0.8em;
+  }
+
+  .dropdown-menu li a {
+    color: #000 !important;
+  }
+}
+
+.sidebar-toggle{
+  color: #b8c7ce !important;
+}
+
+@media screen and (min-width: 769px) {
+  .sidebar-toggle {
+    display: none !important;
+  }
 }
