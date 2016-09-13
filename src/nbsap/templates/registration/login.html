@@ -5,6 +5,10 @@
   NBSAP - {% trans "Login page" %}
 {% endblock %}
 
+{% block navmenu %}
+  {% include '_bits/nav_menu.html' %}
+{% endblock %}
+
 {% block content %}
 
 {% if form.errors %}
@@ -17,7 +21,6 @@
   <!-- <div class="span12"> -->
     <form class="form-inline login-form" method="post" action="{% url 'login' %}">
       <fieldset>
-        <legend>{% trans "Login" %}</legend>
         {% if RESTRICTED_ACCESS %}
         <div class="restricted">
           <p>{% trans "This instance is restricted to specific users. Please contact helpdesk for more information." %}</p>

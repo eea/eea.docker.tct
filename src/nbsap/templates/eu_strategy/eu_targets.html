@@ -39,6 +39,7 @@
            <span>Target</span>
         <span class="target-code">{{ target.code }}</span>
           {{ target.title|default:target.code }}</a>
+        <div class="eu-target-desc">{{ target.description|safe }}</div>
       </li>
     {% endfor %}
   </ul>
