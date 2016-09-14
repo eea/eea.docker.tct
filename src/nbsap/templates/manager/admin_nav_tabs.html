@@ -22,7 +22,7 @@
   {% else %}
   <li class="{% active request '^/dashboard/eu-strategy/targets/[\w\-]+' %}
                {% active request '^/dashboard/eu-strategy/targets/' %}">
-    <a href="{% url 'list_eu_targets' %}">{% trans "EU Strategy" %}</a></li>
+    <a href="{% url 'list_eu_targets' %}">{% trans "EU Targets" %}</a></li>
   <li class="{% active request '^/dashboard/eu-strategy/indicator/\d+/' %}
                {% active request '^/dashboard/eu-strategy/indicators/' %}">
     <a href="{% url 'list_eu_indicators' %}">{% trans "EU Indicators" %}</a></li>

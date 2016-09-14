@@ -1,11 +1,6 @@
-{% extends 'manager/base.html' %}
+
 
 {% load i18n %}
-
-{% block title %}
-NBSAP - {% trans "Edit target " %}{{ target.code }}
-{% endblock %}
-
 
 {% block head_scripts %}
 {{ form.media }}
@@ -19,13 +14,9 @@ NBSAP - {% trans "Edit target " %}{{ target.code }}
 
 {% block content %}
 <section class="content-header">
-  <h1 class="page-title">{% trans "Eu Strategy" %}</h1>
+  <h1 class="page-title">{% trans "Edit target" %} {{ target.code }}</h1>
 </section>
 <section class="content">
-
-  <h2>{% trans "Edit target" %} {{ target.code }}</h2>
-
-
   {% if form.errors %}
   <p>
     {% blocktrans with form.errors|pluralize as errors %}Please correct the error {{ errors }} below.
@@ -91,7 +82,7 @@ NBSAP - {% trans "Edit target " %}{{ target.code }}
 
     <div class="action-bar">
       <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
-      <a href="javascript: history.go(-1)" class="btn btn-default" type="button">{% trans "Cancel" %}</a>
+      <a href="{% url 'list_eu_targets' %}" class="btn btn-default" type="button">{% trans "Cancel" %}</a>
     </div>
   </form>
 

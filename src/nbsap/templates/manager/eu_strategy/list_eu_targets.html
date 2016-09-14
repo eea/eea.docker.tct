@@ -13,10 +13,9 @@ NBSAP - {% trans "EU Strategy: List Targets" %}
 
 {% get_current_language as lang_code %}
 <section class="content-header">
-  <h1 class="page-title">{% trans "European Strategy" %}</h1>
+  <h1 class="page-title">{% trans "European Targets" %}</h1>
 </section>
 <section class="content">
-  <h2>{% trans "List EU Targets" %}</h2>
 
   {% if EU_STRATEGY_ADD %}
   {% url 'edit_eu_target' as edit %}
@@ -50,16 +49,16 @@ NBSAP - {% trans "EU Strategy: List Targets" %}
       </td>
       <td>
         <form class="delete" method="POST" action="{% url 'delete_eu_strategy_target' pk=target.pk %}">
-          <a class="btn btn-xs btn-warning"
-             href="{% url 'edit_eu_strategy_target' pk=target.pk %}">{% trans "Edit" %}</a>
+          <span class="btn btn-xs btn-warning ajaxget"
+             data-url="{% url 'edit_eu_strategy_target' pk=target.pk %}"> <i class="glyphicon glyphicon-edit"></i></span>
 
           <button type="submit" class="btn btn-xs btn-danger edit"
                   data-message="{% trans 'Are you sure you want to delete this target?' %}">
-            <i class="glyphicon glyphicon-trash"></i> {% trans "Delete" %}
+            <i class="glyphicon glyphicon-trash"></i>
           </button>
           {% if not target.parent %}
-          <a class="btn btn-xs btn-default"
-             href="{% url 'edit_eu_target_with_parent' parent=target.pk %}">
+          <span class="btn btn-xs btn-default ajaxget"
+             data-url="{% url 'edit_eu_target_with_parent' parent=target.pk %}">
             {% trans "Add sub target" %}
           </a>
           {% endif %}
@@ -85,12 +84,12 @@ NBSAP - {% trans "EU Strategy: List Targets" %}
 
         <form class="delete" method="POST" action="{% url 'delete_eu_strategy_target' pk=subtarget.pk %}">
 
-          <a class="btn btn-xs btn-warning"
-             href="{% url 'edit_eu_strategy_target' pk=subtarget.pk %}">{% trans "Edit" %}</a>
+          <span class="btn btn-xs btn-warning ajaxget"
+             data-url="{% url 'edit_eu_strategy_target' pk=subtarget.pk %}"> <i class="glyphicon glyphicon-edit"></i></span>
 
           <button type="submit" class="btn btn-xs btn-danger edit"
                   data-message="{% trans 'Are you sure you want to delete this target?' %}">
-            <i class="glyphicon glyphicon-trash"></i> {% trans "Delete" %}
+            <i class="glyphicon glyphicon-trash"></i>
           </button>
         </form>
       </td>
@@ -101,6 +100,7 @@ NBSAP - {% trans "EU Strategy: List Targets" %}
     </tbody>
 
   </table>
+ <div class="form"></div>
 </section>
 {% endblock %}
 
@@ -131,7 +131,20 @@ NBSAP - {% trans "EU Strategy: List Targets" %}
       "dom": '<"filter-wrapper"f>t'
     });
     var url = $('#target-table').data('url');
-    $('.filter-wrapper').prepend('{% if EU_STRATEGY_ADD %}<div class="action-bar"><a class="btn btn-success add" href="' + url + '">{% trans "Add target" %}</a></div>{% endif %}');
+    $('.filter-wrapper').prepend('{% if EU_STRATEGY_ADD %}<div class="action-bar"><span class="btn btn-success add ajaxget" data-url="' + url + '">{% trans "Add target" %}</span></div>{% endif %}');
+    $('.ajaxget').on('click',function(){
+      var url=$(this).data('url');
+      $('.form').empty();
+      $.get(url,function(data){
+        $('.form')
+        .append(data)
+        .find('form')
+        .attr('action',url);
+      })
+        $('html, body').animate({
+        scrollTop: $('.form').offset().top
+      }, 800);
+    });
   });
 </script>
 <script src="/static/js/object_delete.js"></script>

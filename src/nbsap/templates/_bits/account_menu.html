@@ -11,6 +11,9 @@
            <li class="nav-btn">
               <a class="exit-admin" href="{% url 'user_homepage' %}">{% trans "Exit from dashboard" %}</a>
           </li>
+          <li>
+          <a href="{% url 'admin:index' %}" class="change-lang admin">{% trans 'Administration' %}</a>
+        </li>
           {% for navbar_link in navbar_links %}
             <li>
                 <a href="{{ navbar_link.url }}" target="_blank" title="{{ navbar_link.title }}">
@@ -39,7 +42,8 @@
             </li>
             {% endif %} {% if user.is_authenticated %}
             <li>
-                <a href="{% url 'logout' %}">{% trans "Logout" %}</a>
+                <a href="{% url 'logout' %}"><i class="glyphicon glyphicon-off
+"></i></a>
             </li>
             {% else %}
             <li><a href="{% url 'login' %}">{% trans "Login" %}</a></li>
