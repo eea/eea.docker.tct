@@ -1,6 +1,12 @@
 @import "variables.less";
 .sidebar {
     box-shadow: 0 0 2px .4px rgba(0, 0, 0, 0.14);
+    background: white;
+}
+
+.main {
+    background: white;
+    border-radius: 5px;
 }
 
 @media screen and (min-width: 800px) {
@@ -222,17 +228,19 @@ display: block;
 
 }
 
-@media (min-width: 530px) {
 .next-page:after {
         content: "\f101";
         padding-right: 10px;
+        visibility: visible;
 }
 
 .previous-page:before {
         content: "\f100";
         padding-right: 10px;
+        visibility: visible;
 }
-}
+
+
 
 
 
@@ -250,7 +258,12 @@ display: block;
  @media (max-width: 530px){
 .previous-page,
 .next-page {
-display: none;
+// display: none;
+visibility: hidden;
 }
 
  }
+
+
+.eu-target-desc p {
+margin: 0;}

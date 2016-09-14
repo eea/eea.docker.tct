@@ -101,14 +101,14 @@ else {
 
 
 
-  $targetlistorder = $('.target-list li .target-code');
-  $targetlistorder.each(function () {
+  // $targetlistorder = $('.target-list li .target-code');
+  // $targetlistorder.each(function () {
 
-    if ($(this).text().match(/[a-z]/i)) {
-      $(this).parent().css("padding-left", "25px");
-    }
+  //   if ($(this).text().match(/[a-z]/i)) {
+  //     $(this).parent().css("padding-left", "25px");
+  //   }
 
-  });
+  // });
 
   var numberofsidebars = $('.sidebar-right').length + $('.sidebar').length;
   if (numberofsidebars == 1) {

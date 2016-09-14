@@ -106,7 +106,15 @@ $(document).ready(function() {
 });
 
 $(function() {
-    $('.messages').delay(5000).fadeOut();
+    // $('.messages').delay(5000).fadeOut();
+
+    $('.messages').delay(4000).animate({
+      width: 'hide'
+    }, 200);
+
+
+
+
 });
 
 function showDescription(name, textSelector, url, type, code, value) {

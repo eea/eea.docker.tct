@@ -27,12 +27,13 @@
 
 @title-color:  			darken(#999, 30%);
 // @brand-link:            rgb(3, 155, 229);
-@brand-blue: 			#039749;
+// @brand-blue: 			#039749;
+@brand-blue					:#006699;
 
 @brand-green:           #42E045;
 @brand-green-darker:    #1CB54B;
 @brand-orange: 			#FF8100;
-
+// @brand-orange:			#e8f0fb;
 @brand-primary:         @brand-blue;
 @brand-success:         @brand-green-darker;
 @brand-info:            #5bc0de;
@@ -50,11 +51,11 @@
 @emphasis-color:        @gray-dark;
 
 //** Global textual link color.
-// @link-color:            #06c;
-@link-color:			lighten(#1e392a, 30%);
+@link-color:            lighten(@brand-blue, 10%);
+// @link-color:			lighten(#1e392a, 30%);
 //** Link hover color set via `darken()` function.
-// @link-hover-color:      #06c;
-@link-hover-color: 		lighten(#1e392a, 50%);
+@link-hover-color:      lighten(@brand-blue, 20%);
+// @link-hover-color: 		lighten(#1e392a, 50%);
 //** Link hover decoration.
 // @link-hover-decoration: underline;
 

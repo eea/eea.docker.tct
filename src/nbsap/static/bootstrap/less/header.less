@@ -166,14 +166,14 @@
 }
 
 .nav-container {
-    // background: @brand-blue;
-    background: #fbfbfb;
+    background: @brand-blue;
+    // background: white;
     margin-bottom: 30px;
     position: relative;
     // box-shadow: 0 0 2px rgba(0, 0, 0, .14), 0 2px 2px rgba(0, 0, 0, .28);
     // box-shadow: 0 2px 2px rgba(0,0,0,0.28);
-    // border-bottom:1px solid #f7f7f7;
-    // border-top:1px solid #f7f7f7;
+    border-bottom:1px solid #ddd;
+    border-top:1px solid #ddd;
     @media screen and (max-width: 800px) {
         bottom: 0;
         top: 0;
@@ -242,8 +242,7 @@
     display: block;
     padding: 0 16px;
     line-height: 3;
-    // color: rgba(255, 255, 255, .7);
-    color: @brand-blue;
+    // color: @brand-blue;
     text-decoration: none;
     text-transform: uppercase;
     font-weight: 400;
@@ -255,14 +254,20 @@
     }
     @media (min-width: 800px) {
         margin-left: -2px;
+         color: rgba(255, 255, 255, 1);
     }
 }
 
-.nav-menu .active {
+
+.accountwrapper a,
+.lang-menu a {
+    color: @brand-blue;
+}
+
+.nav-container .active {
     position: relative;
     background: @brand-orange;
     // background: @gray-light;
-    color: white;
     border: solid @brand-orange;
     margin: -3px;
     // border-radius: 3px;
@@ -272,13 +277,13 @@
 }
 
 @media screen and (min-width: 800px) {
-    .nav-menu a:hover,
+    .nav-container a:hover,
     .lang-menu a:hover,
     .account-menu a:hover {
-        color: @gray-muted;
+        color: @brand-orange;
     }
-    .nav-menu .active:hover {
-        color: white;
+    .nav-container .active:hover {
+        color: @brand-blue;
     }
 }
 

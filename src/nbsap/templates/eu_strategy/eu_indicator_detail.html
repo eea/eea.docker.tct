@@ -37,14 +37,13 @@
 	{% endif %}
 
 	<div class="well">
-	  <div class="well-title">{% trans "Mapping with Aichi Strategy" %}
-	      </div>
-	  <strong>Most relevant:</strong>
-      {% if current_indicator.relevant_aichi_targets|length %}
+	  <div class="well-title">Most relevant 
+	  {% if current_indicator.relevant_aichi_targets|length %}
         <div class="info-count">
           {{ current_indicator.relevant_aichi_targets|length }}
         </div>
 	  {% endif %}
+	  </div>
 	  {% if current_indicator.eu_indicator_aichi_strategy.exists %}
 	    <ul>
 	      {% for aichi_target in current_indicator.relevant_aichi_targets|sort_by_code %}
@@ -55,10 +54,10 @@
 	      {% endfor %}
 	    </ul>
 	  {% else %}
-	    <p>{% trans "No corresponding AICHI target" %}.</p>
+	   <p class="no-corresponding">{% trans "No corresponding AICHI target" %}.</p>
 	  {% endif %}
 
-	  <p><strong>Other:</strong></p>
+	   <div class="well-title other">Other</div>
 	  {% if current_indicator.eu_indicator_other_aichi_strategy.exists %}
 	    <ul>
 	      {% for strategy in current_indicator.eu_indicator_other_aichi_strategy.all %}
@@ -72,7 +71,7 @@
 	      {% endfor %}
 	    </ul>
 	  {% else %}
-	    <p>{% trans "No corresponding AICHI target" %}.</p>
+	   <p class="no-corresponding">{% trans "No corresponding AICHI target" %}.</p>
 	  {% endif %}
 	</div>
 
