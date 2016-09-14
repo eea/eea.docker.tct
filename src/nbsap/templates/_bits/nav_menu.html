@@ -14,7 +14,7 @@
 
   {% if NAT_STRATEGY %}
   <li>
-    <a class="{% active request '^/objectives' %}" href="{% url 'nat_strategy' %}">{% trans "National Strategy" %}</a>
+    <a class="{% active request '^/national-strategy/$' %}{% active request '^/national-strategy/objectives' %}" href="{% url 'nat_strategy' %}">{% trans "National Strategy" %}</a>
   </li>
   {% else %}
   <li>
@@ -24,10 +24,10 @@
 
   {% if NAT_STRATEGY %}
   <li>
-    <a class="{% active request '^/nat_indicators' %}" href="{% url 'nat_indicators' %}">{% trans "National Indicators" %}</a>
+    <a class="{% active request '^/national-strategy/indicators' %}" href="{% url 'nat_indicators' %}">{% trans "National Indicators" %}</a>
   </li>
   <li>
-    <a class="{% active request '^/implementation' %}" href="{% url 'implementation' %}">{% trans "Implementation" %}</a>
+    <a class="{% active request '^/national-strategy/implementation' %}" href="{% url 'implementation' %}">{% trans "Implementation" %}</a>
   </li>
   {% endif %}
 

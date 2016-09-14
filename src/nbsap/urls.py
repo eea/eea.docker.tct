@@ -31,10 +31,10 @@ urlpatterns = [
     url(r'^crashme$', views.crashme, name='crashme'),
     url(r'^ping/me$', views.pingme, name='pingme'),
 
-    url(r'^implementation$', views.implementation, name='implementation'),
-    url(r'^implementation/intro$', views.implementation_page,
+    url(r'^national-strategy/implementation$', views.implementation, name='implementation'),
+    url(r'^national-strategy/implementation/intro$', views.implementation_page,
         name='implementation_page'),
-    url(r'^implementation/(?P<code>((\d+\.)*\d+$))$',
+    url(r'^national-strategy/implementation/(?P<code>((\d+\.)*\d+$))$',
         views.implementation, name='implementation'),
 
     url(r'^european-strategy/$', views.eu_targets, name='eu_targets'),
@@ -53,10 +53,11 @@ urlpatterns = [
         name='eu_indicators'),
     url(r'^european-strategy/indicators/(?P<pk>[\w\-]+)$', views.indicator_details,
         name='eu_indicator_details'),
-    url(r'^nat_indicators/$', views.nat_indicators,
+    url(r'^national-strategy/indicators/$', views.nat_indicators,
         name='nat_indicators'),
 
-    url(r'^objectives$', views.nat_strategy, name='nat_strategy'),
+    url(r'^national-strategy/$', views.nat_strategy, name='nat_strategy'),
+    url(r'^national-strategy/objectives$', views.nat_strategy, name='nat_strategy'),
     url(r'^download/xslx$', views.nat_strategy_download,
         name='nat_strategy_download'),
     url(r'^objectives/(?P<code>[\w\.\-]+)$',
@@ -115,6 +116,7 @@ urlpatterns = [
         views.get_eu_indicator_title,
         name='eu_indicator_title'),
 
+    # TODO
     url(r'^objectives/title$',
         views.get_national_objective_title,
         name='objective_title'),
