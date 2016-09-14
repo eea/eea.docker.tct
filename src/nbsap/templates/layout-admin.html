@@ -46,9 +46,6 @@
       <ul class="sidebar-menu">
         {% if user.is_authenticated %}
         {% if user.is_superuser %}
-        <li>
-          <a href="{% url 'admin:index' %}" class="change-lang admin">{% trans 'Administration' %}</a>
-        </li>
         {% if LANGUAGES|length > 1 %}
         <li>
           <a href="{% url 'rosetta-home' %}">{% trans 'Translate' %}</a>

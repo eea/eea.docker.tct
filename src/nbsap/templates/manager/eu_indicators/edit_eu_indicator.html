@@ -1,11 +1,5 @@
-{% extends 'manager/base.html' %}
-
 {% load i18n %}
 {% load assets %}
-
-{% block title %}
-NBSAP - {% trans "Edit indicator " %}{{ indicator.code }}
-{% endblock %}
 
 
 {% block head_scripts %}
@@ -16,9 +10,7 @@ NBSAP - {% trans "Edit indicator " %}{{ indicator.code }}
 {% block content %}
 
 <section class="content">
-  <h1 class="page-title">{% trans "Eu Indicator" %}</h1>
-
-  <h2>{% trans "Edit Eu Indicator" %} {{ indicator.code }}</h2>
+  <h1 class="page-title">{% trans "Edit Eu Indicator" %} {{ indicator.code }}</h1>
 
   {% if form.errors %}
   <p>
@@ -32,7 +24,7 @@ NBSAP - {% trans "Edit indicator " %}{{ indicator.code }}
 
     <div class="action-bar">
       <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
-      <a href="javascript: history.go(-1)"
+      <a href="{% url 'list_eu_indicators' %}"
          class="btn btn-default" type="button">{% trans "Cancel" %}</a>
     </div>
 
