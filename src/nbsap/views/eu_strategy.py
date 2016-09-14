@@ -3,26 +3,59 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.http import HttpResponse
 from django.utils.translation import ugettext_lazy as _
-
+from nbsap.models import sort_by_code
+from nbsap.views.goals import get_adjacent_targets
 
 from nbsap import models
 from auth import auth_required
 
-from nbsap.forms import EuTargetForm, EuTargetEditForm
+from nbsap.forms import EuTargetForm, EuTargetEditForm, RegionForm
 
 
-def eu_targets(request, pk):
+def get_most_relevant_aichi_targets(target):
+    if not target:
+        return None, None
+    most_relevant_aichi_targets = []
+    for strategy in target.eu_aichi_strategy.all():
+        for aichi_target in strategy.aichi_targets.all():
+            most_relevant_aichi_targets.append(aichi_target)
+    return sort_by_code(most_relevant_aichi_targets)
+
+
+def get_other_relevant_aichi_targets(target):
+    if not target:
+        return None, None
+    other_relevant_aichi_targets = []
+    for strategy in target.eu_aichi_strategy.all():
+        for aichi_target in strategy.other_aichi_targets.all():
+            other_relevant_aichi_targets.append(aichi_target)
+    return sort_by_code(other_relevant_aichi_targets)
+
+
+def eu_target_detail(request, pk):
     current_target = get_object_or_404(models.EuTarget, pk=pk)
-    targets = models.EuTarget.objects.all()
-
     current_target.actions_tree = []
     for action in current_target.actions.order_by('code'):
         current_target.actions_tree.extend(action.get_all_actions())
+    current_target.most_relevant_aichi_targets = get_most_relevant_aichi_targets(current_target)
+    current_target.other_relevant_aichi_targets = get_other_relevant_aichi_targets(current_target)
 
-    return render(request, 'eu_strategy/eu_targets.html',
+    targets = sort_by_code(models.EuTarget.objects.all())
+    previous_target, next_target = get_adjacent_targets(
+        targets, current_target)
+
+    return render(request, 'eu_strategy/eu_target_detail.html',
                   {'targets': targets,
                    'current_target': current_target,
+                   'previous_target': previous_target,
+                   'next_target': next_target
                    })
+
+
+def eu_targets(request):
+    targets = sort_by_code(models.EuTarget.objects.all())
+    return render(request, 'eu_strategy/eu_targets.html',
+                  {'targets': targets})
 
 
 def get_eu_target_title(request, pk=None):
@@ -60,6 +93,48 @@ def list_eu_targets(request):
     return render(request, 'manager/eu_strategy/list_eu_targets.html', {
         'targets': targets,
     })
+
+
+@auth_required
+def list_regions(request):
+    regions = models.Region.objects.all()
+    return render(request, 'manager/eu_strategy/list_regions.html',
+                  {'regions': regions})
+
+
+@auth_required
+def edit_region(request, pk=None):
+    if pk:
+        region = get_object_or_404(models.Region, pk=pk)
+        template = 'manager/eu_strategy/edit_region.html'
+    else:
+        region = None
+        template = 'manager/eu_strategy/add_region.html'
+
+    FormClass = RegionForm
+    if request.method == 'POST':
+        form = FormClass(request.POST, region=region)
+        if form.is_valid():
+            form.save()
+            if pk:
+                messages.success(request, _('Saved changes') + "")
+            else:
+                messages.success(request, _('Region successfully added.'))
+    else:
+        form = FormClass(region=region)
+
+    return render(request,
+                  template,
+                  {'region': region, 'form': form})
+
+
+@auth_required
+def delete_region(request, pk):
+    if request.method == 'POST':
+        region = get_object_or_404(models.Region, pk=pk)
+        region.delete()
+        messages.success(request, _('Region successfully deleted.') + "")
+        return redirect('list_regions')
 
 
 @auth_required

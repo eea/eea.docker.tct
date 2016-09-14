@@ -18,7 +18,7 @@
 
   <div class="action-bar">
     <form method="POST" action="{% url 'delete_nat_indicator' pk=indicator.pk %}">
-      <a class="btn btn-success" href="{% url 'list_nat_indicators' %}">
+      <a class="btn btn-success" href="javascript: history.go(-1)">
         <i class="glyphicon glyphicon-arrow-left"></i> {% trans "Back" %}
       </a>
 

@@ -2,14 +2,13 @@
 {% load i18n %}
 
 <ul class="nav-menu">
-
   <li>
-    <a class="{% active request '^/$' %} {% active request '^/indicators' %}{% active request '^/goals' %}" href="{% url 'goals' %}" class="uppercase">{% trans "Aichi" %}</a>
+    <a class="{% active request '^/$' %}{% active request '^/aichi' %}" href="{% url 'aichi_home' %}" class="uppercase">{% trans "Aichi" %}</a>
   </li>
 
   {% if EU_STRATEGY %}
   <li>
-    <a class="{% active request '^/eu_targets' %}" href="{% url 'eu_targets' %}">{% trans "EU Strategy" %}</a>
+    <a class="{% active request '^/european-strategy/$' %}{% active request '^/european-strategy/targets' %}" href="{% url 'eu_targets' %}">{% trans "EU Strategy" %}</a>
   </li>
   {% endif %}
 
@@ -19,7 +18,7 @@
   </li>
   {% else %}
   <li>
-    <a class="{% active request '^/eu_indicators' %}" href="{% url 'eu_indicators' %}">{% trans "EU Indicators" %}</a>
+    <a class="{% active request '^/european-strategy/indicators' %}" href="{% url 'eu_indicators' %}">{% trans "EU Indicators" %}</a>
   </li>
   {% endif %}
 

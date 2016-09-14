@@ -1,0 +1,9 @@
+{% extends 'page/error_pages/error_template.html' %}
+
+{% load i18n %}
+
+{% block pageerror %}
+<h1 class="error-page-title">{% trans "We couldn't find that page." %}</h1>
+<h2 class="error-page-type">404 Error</h2>
+<p>The page you requested could not be found, either contact the site administrator or you can go back to our <a href="{% url 'user_homepage' %}">home page</a>.</p>
+{% endblock %}

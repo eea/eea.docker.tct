@@ -3,28 +3,29 @@
 {% load i18n %}
 
 {% block title %}
-  NBSAP - {% trans "Action" %} {{ activity.code }}: {{ activity.title }}
+NBSAP - {% trans "Action" %} {{ activity.code }}: {{ activity.title }}
 {% endblock %}
 
 
 {% block content %}
-
+<section class="content-header">
   <h1 class="page-title">{% trans "Action" %} {{ activity.code }}: {{ activity.title }}</h1>
-
+</section>
+<section class="content">
   <div class="action-bar">
-    <form method="POST" action="{% url 'delete_eu_strategy_activity' target=target.pk pk=activity.pk %}">
+    <form method="POST" class="delete" action="{% url 'delete_eu_strategy_activity' target=target.pk pk=activity.pk %}">
       <a class="btn btn-success"
-         href="{% url 'view_eu_strategy_target' pk=target.pk %}">
+         href="javascript: history.go(-1)">
         <i class="glyphicon glyphicon-arrow-left"></i> {% trans "Back" %}</a>
 
       <a class="btn btn-default edit"
          href="{% url 'edit_eu_strategy_activity' target=target.pk pk=activity.pk %}">{% trans "Edit" %}</a>
 
-     {% if not activity.parent %}
-        <a class="btn btn-default"
-           href="{% url 'edit_eu_strategy_activity' target=target.pk parent=activity.pk %}">
-           {% trans "Add sub-action" %}</a>
-     {% endif %}
+      {% if not activity.parent %}
+      <a class="btn btn-default"
+         href="{% url 'edit_eu_strategy_activity' target=target.pk parent=activity.pk %}">
+        {% trans "Add sub-action" %}</a>
+      {% endif %}
 
       <button type="submit" class="btn btn-danger edit"
               data-message="{% trans 'Are you sure you want to delete this activity?' %}">
@@ -32,13 +33,16 @@
       </button>
     </form>
   </div>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="box box-primary description">
+        {% if not activity.description %}
+        <p class="alert">No description provided</p>
+        {% endif %}
 
-  <div class="admin-obj-description">
-    {% if not activity.description %}
-      <p class="alert">No description provided</p>
-    {% endif %}
-
-    {{ activity.description|safe }}
+        {{ activity.description|safe }}
+      </div>
+    </div>
   </div>
 
   {% if not activity.parent %}
@@ -46,33 +50,33 @@
   {% regroup actions by region as action_list %}
 
   {% for items in action_list %}
-    {% if items.grouper %}
-      <h4 class="page-title">{{ items.grouper }}</h4>
-    {% endif %}
+  {% if items.grouper %}
+  <h4 class="page-title">{{ items.grouper }}</h4>
+  {% endif %}
 
   <div class="property_list">
     <table class="table table-striped minimalist">
 
       <thead>
-        <th class="span1">{% trans "Code" %}</th>
-        <th>{% trans "Title" %}</th>
+      <th class="span1">{% trans "Code" %}</th>
+      <th>{% trans "Title" %}</th>
       </thead>
 
       <tbody>
       {% for action in items.list %}
-        <tr>
-          <td>{{ action.code }}</td>
-          <td>
-            <a href="{% url 'view_eu_strategy_activity' target=target.pk pk=action.pk %}"
+      <tr>
+        <td>{{ action.code }}</td>
+        <td>
+          <a href="{% url 'view_eu_strategy_activity' target=target.pk pk=action.pk %}"
              title="{% trans 'action' %} {{ action.code }}">
             {{ action.title }}
-            </a>
-          </td>
-        </tr>
+          </a>
+        </td>
+      </tr>
       {% empty %}
-        <tr>
-          <td colspan="2">{% trans "No sub-actions found" %}.</td>
-        </tr>
+      <tr>
+        <td colspan="2">{% trans "No sub-actions found" %}.</td>
+      </tr>
       {% endfor %}
       </tbody>
 
@@ -81,9 +85,9 @@
     {% endfor %}
   </div>
   {% endif %}
-
+</section>
 {% endblock %}
 
 {% block scripts %}
-  <script src="/static/js/object_delete.js"></script>
+<script src="/static/js/object_delete.js"></script>
 {% endblock scripts %}

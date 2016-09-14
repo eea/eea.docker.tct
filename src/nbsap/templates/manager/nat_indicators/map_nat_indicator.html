@@ -3,24 +3,27 @@
 {% load i18n %}
 
 {% block title %}
-  NBSAP - {% trans "Map Indicator " %}{{ indicator.code }}
+NBSAP - {% trans "Map Indicator " %}{{ indicator.code }}
 {% endblock %}
 
 
 {% block head_scripts %}
-  {{ form.media }}
+{{ form.media }}
 {% endblock %}
 
 
 {% block content %}
+<section class="content-header">
   <h1 class="page-title">{% trans "National Indicators" %}</h1>
-  <h1>{% trans "Map National Indicator" %} {{ indicator.code }}</h1>
+</section>
+<section class="content">
+  <h2>{% trans "Map National Indicator" %} {{ indicator.code }}</h2>
 
   {% if form.errors %}
-    <p>
-      {% blocktrans with form.errors|pluralize as errors %}Please correct the
-        error {{ errors }} below.{% endblocktrans %}
-    </p>
+  <p>
+    {% blocktrans with form.errors|pluralize as errors %}Please correct the
+    error {{ errors }} below.{% endblocktrans %}
+  </p>
   {% endif %}
   <form action="" method="post" class="form-horizontal">
 
@@ -59,23 +62,21 @@
     </div>
 
   </form>
+</section>
 {% endblock %}
 
 {% block scripts %}
-  {% assets "js_admin" %}
-    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-  {% endassets %}
-  <script>
-    $(".chzn-select").chosen();
+<script>
+  $(".chzn-select").chosen();
 
-    forbidCrossChoicesIntersection('nat_objectives', 'other_nat_objectives');
+  forbidCrossChoicesIntersection('nat_objectives', 'other_nat_objectives');
 
-    showObjectiveCodeValue('nat_objectives',
-        '.nat_objectives_text',
-        "{% url 'objective_title' pk=1 %}");
+  showObjectiveCodeValue('nat_objectives',
+    '.nat_objectives_text',
+    "{% url 'objective_title' pk=1 %}");
 
-    showObjectiveCodeValue('other_nat_objectives',
-        '.other_nat_objectives_text',
-        "{% url 'objective_title' pk=1 %}");
-  </script>
+  showObjectiveCodeValue('other_nat_objectives',
+    '.other_nat_objectives_text',
+    "{% url 'objective_title' pk=1 %}");
+</script>
 {% endblock %}

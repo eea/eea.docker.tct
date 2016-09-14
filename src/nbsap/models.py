@@ -4,11 +4,27 @@ from django.db.models.signals import pre_save
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from transmeta import TransMeta
+from natsort import natsorted
 
 import tinymce.models
 
 from nbsap.utils import RE_ACTION_CODE
 from nbsap.utils import generate_code
+
+
+def sort_by_code(value):
+    try:
+        return natsorted(value, key=lambda i: map(int, i.code.split('.')))
+    except ValueError:
+        return natsorted(value, key=lambda i: i.code)
+
+
+def sort_by_type(value):
+    try:
+        return natsorted(value,
+                         key=lambda i: map(int, i.indicator_type.split('.')))
+    except ValueError:
+        return natsorted(value, key=lambda i: i.indicator_type)
 
 
 def getter_for_default_language(field_name):
@@ -569,11 +585,13 @@ class EuTarget(models.Model):
     get_indicators.short_description = 'EU Indicators'
 
     def get_indicators_short(self):
-        return ', '.join(i.get_code_type() for i in self.indicators.all())
+        indicators = sort_by_type(sort_by_code(self.indicators.all()))
+        return ', '.join(i.get_code_type() for i in indicators)
 
     def get_other_indicators_short(self):
+        other_indicators = sort_by_type(sort_by_code(self.other_indicators.all()))
         return ', '.join(i.get_code_type()
-                         for i in self.other_indicators.all())
+                         for i in other_indicators)
 
     class Meta:
         verbose_name_plural = 'EU targets'

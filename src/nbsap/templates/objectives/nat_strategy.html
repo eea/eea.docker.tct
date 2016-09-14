@@ -35,8 +35,8 @@
 
 
 {% block content %}
-
-  <h1 class="page-title">{% trans 'National Strategy' %}</h1>
+<section class="content-header"></section>
+  <h1>{% trans 'National Strategy' %}</h1>
   <h1 class="x-title">
     {% trans "Objective" %} {{ current_objective.code }}{% if current_objective.title %}: {{ current_objective.title }} {% endif %}
   </h1>
@@ -131,22 +131,6 @@
   {% endfor %}
 
 {% endif %}
-
-<div id="cbd-api">
-  <a class="btn btn-success small"
-     href="{% url 'send_to_cbd' current_objective_cls current_objective.pk %}">
-    {% trans "Send to CBD" %}
-  </a>
-  <div class="messages alert" style="margin-top: 5px">
-  </div>
-</div>
-
-
-<div class="text-right">
-  <a href="#top">
-    {% trans "Back to top"%}</a>
-</div>
-
 
 {% endblock %}
 

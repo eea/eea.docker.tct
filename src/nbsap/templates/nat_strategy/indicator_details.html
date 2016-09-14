@@ -2,7 +2,9 @@
 {% load i18n %}
 <div class="modal-mid">
 <h3>{% trans "Indicator" %} {{ indicator.id }}: {{ indicator.title }}</h3>
-
+<div class="modal-bot text-center">
+  <a class="btn btn-danger" data-modal="close">close</a>
+</div>
 <table class="indicator_table table table-bordered table-striped">
   <tbody>
     <tr>
@@ -28,9 +30,8 @@
         {% trans "Strategic Goal" %}
       </td>
       <td class="col-md-8">
-        <label class="goal">{% trans "Goal" %} {{ indicator.strategic_goal_ob.code|upper }}:</label>
-        <br />
-        {{ indicator.strategic_goal_ob.description }}
+        <label class="goal">{% trans "Goal" %} {{ strategic_goal_ob.code|upper }}:</label>
+        {{ strategic_goal_ob.description }}
       </td>
     </tr>
 
@@ -57,9 +58,8 @@
         {% trans "Most Relevant Aichi Target" %}
       </td>
       <td class="col-md-8">
-        <label class="target">{% trans "Target" %} {{ indicator.relevant_target_ob.code }}:</label>
-        <br />
-        {{ indicator.relevant_target_ob.description }}
+        <label class="target">{% trans "Target" %} {{ relevant_target_ob.code }}:</label>
+        {{ relevant_target_ob.description }}
       </td>
     </tr>
 
@@ -69,10 +69,9 @@
       </td>
       <td class="col-md-8">
         <ul>
-        {% for target in indicator.other_targets_list %}
+        {% for target in other_targets_list %}
           <li>
             <label class="target">{% trans "Target" %} {{ target.code }}:</label>
-            <br />
             {{ target.description }}
           </li>
         {% endfor %}
@@ -206,6 +205,4 @@
 </table>
 </div>
 
-<div class="modal-bot text-center">
-  <a class="btn btn-danger" data-modal="close">{% trans "Close" %}</a>
-</div>
+

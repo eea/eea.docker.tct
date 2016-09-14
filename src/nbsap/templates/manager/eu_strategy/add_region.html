@@ -1,0 +1,50 @@
+{% extends 'manager/base.html' %}
+
+{% load i18n %}
+
+{% block title %}
+NBSAP - {% trans "Add Region" %}
+{% endblock %}
+
+
+{% block head_scripts %}
+{{ form.media }}
+{% endblock %}
+
+{% block content %}
+<section class="content-header">
+<h1>{% trans "Add New Region" %}</h1>
+</section>
+<section class="content">
+  <form action="" method="post" id="region-add" class="form">
+    <div class="">
+      <label for="region">{% trans "Region" %}</label>
+      {{ form.name }}
+    </div>
+    <div class="action-bar">
+      <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
+      <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-danger" type="button">{% trans "Cancel" %}</a>
+    </div>
+  </form>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+  $('document').ready(function(){
+    var frm = $('#region-add');
+    frm.submit(function (ev) {
+        $.ajax({
+            type: frm.attr('method'),
+            url: frm.attr('action'),
+            data: frm.serialize(),
+            success: function (data) {
+                window.location.href='{{ request.META.HTTP_REFERER }}';
+            }
+        });
+        ev.preventDefault();
+    });
+  });
+</script>
+{% endblock %}

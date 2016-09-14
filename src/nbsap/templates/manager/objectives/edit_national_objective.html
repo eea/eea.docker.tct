@@ -3,29 +3,31 @@
 {% load i18n %}
 
 {% block title %}
-  NBSAP - {% trans "Edit Objective " %}{{ objective.code }}
+NBSAP - {% trans "Edit Objective " %}{{ objective.code }}
 {% endblock %}
 
 
 {% block head_scripts %}
-  {{ form.media }}
+{{ form.media }}
 {% endblock %}
 
 
 {% block scripts %}
-  <script src="/static/js/language_change.js"></script>
+<script src="/static/js/language_change.js"></script>
 {% endblock %}
 
 
 {% block content %}
-
+<section class="content-header">
   <h1 class="page-title">{% trans "National Strategy" %}</h1>
-  <h1>{% trans "Edit Objective" %} {{ objective.code }}</h1>
+</section>
+<section class="content">
+  <h2>{% trans "Edit Objective" %} {{ objective.code }}</h2>
 
   {% if form.errors %}
-    <p>
-      {% blocktrans with form.errors|pluralize as errors %}Please correct the error {{ errors }} below.{% endblocktrans %}
-    </p>
+  <p>
+    {% blocktrans with form.errors|pluralize as errors %}Please correct the error {{ errors }} below.{% endblocktrans %}
+  </p>
   {% endif %}
 
   <form action="" method="post" id="national-objective-edit" class="form">
@@ -36,44 +38,40 @@
     </div>
 
     {% if form.code %}
-      <div class="form-group">
-        <label for="code">{% trans "Code" %}</label>
-        {{ form.code }}
-        {{ form.code.errors }}
-      </div>
+    <div class="form-group">
+      <label for="code">{% trans "Code" %}</label>
+      {{ form.code }}
+      {{ form.code.errors }}
+    </div>
     {% endif %}
 
-    <div class="row">
-      <div class="col-md-6">
-        <div class="language-container">
 
-          <div class="form-group">
-            <label for="title">{% trans "Title" %}</label>
-            {{ form.title }}
-            {{ form.title.errors }}
-          </div>
+    <div class="language-container">
 
-          <div class="form-group">
-            <label for="description">{% trans "Description" %}</label>
-            {{ form.description }}
-            {{ form.description.errors }}
-          </div>
+      <div class="form-group">
+        <label for="title">{% trans "Title" %}</label>
+        {{ form.title }}
+        {{ form.title.errors }}
+      </div>
 
-        </div>
+      <div class="form-group">
+        <label for="description">{% trans "Description" %}</label>
+        {{ form.description }}
+        {{ form.description.errors }}
       </div>
 
       {% if lang != DEFAULT_LANGUAGE %}
       {% trans DEFAULT_LANGUAGE_LABEL as default_language_label %}
-      <div class="col-md-6 original-hideout">
+      <div class="original-hideout">
         <p class="original-title">
-            {% blocktrans with default_language_label as language %}Original title in {{ language }}{% endblocktrans %}
+          {% blocktrans with default_language_label as language %}Original title in {{ language }}{% endblocktrans %}
         </p>
         <div class="well">
           {{ objective.title_default }}
         </div>
 
         <p class="original-description">
-            {% blocktrans with default_language_label as language %}Original description in {{ language }}{% endblocktrans %}
+          {% blocktrans with default_language_label as language %}Original description in {{ language }}{% endblocktrans %}
         </p>
         <div class="well">
           {{ objective.description_default|safe }}
@@ -89,4 +87,5 @@
     </div>
 
   </form>
+</section>
 {% endblock %}

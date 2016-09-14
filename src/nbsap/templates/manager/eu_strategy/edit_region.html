@@ -1,0 +1,32 @@
+{% extends 'manager/base.html' %}
+
+{% load i18n %}
+
+{% block title %}
+NBSAP - {% trans "Edit Region" %}
+{% endblock %}
+
+
+{% block head_scripts %}
+{{ form.media }}
+{% endblock %}
+
+{% block content %}
+<section class="content-header">
+  <h1>{% trans "Edit Region" %}</h1>
+</section>
+<section class="content">
+  <form action="" method="post" id="region-edit" class="form">
+    <div class="">
+      <label for="region">{% trans "Region" %}</label>
+      {{ form.name }}
+      {{ form.name.error}}
+    </div>
+
+    <div class="action-bar">
+      <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
+      <a href="{% url 'list_regions' %}" class="btn btn-danger" type="button">{% trans "Cancel" %}</a>
+    </div>
+  </form>
+</section>
+{% endblock %}

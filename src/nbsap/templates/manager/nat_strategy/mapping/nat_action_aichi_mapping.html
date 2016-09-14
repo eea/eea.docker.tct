@@ -11,7 +11,7 @@
         {% for relevant_target in strategy.relevant_targets.all %}
           {% with relevant_target.get_parent_goal as goal %}
           <li>
-            <a href="{% url 'goals' code=goal.code %}" title="{{ goal.code|upper }}">
+            <a href="{% url 'list_targets' code=goal.code %}" title="{{ goal.code|upper }}">
               {% trans "Goal" %} {{ goal.code|upper }}
             </a>
             <p>{{ goal.description|safe }}</p>
@@ -26,7 +26,7 @@
       {% for strategy in strategies %}
         {% for target in strategy.relevant_targets.all %}
         <li>
-          <a href="{% url 'goals' code=goal.code %}#{{target.code}}" title="{{ target.code }}">{% trans "Target" %} {{ target.id }}</a>
+          <a href="{% url 'list_targets' code=goal.code %}#{{target.code}}" title="{{ target.code }}">{% trans "Target" %} {{ target.id }}</a>
           <p>{{ target.description|safe }}</p>
         </li>
         {% endfor %}
@@ -38,7 +38,7 @@
       {% for strategy in strategies %}
         {% with strategy.other_targets.all as target %}
         <li>
-          <a href="{% url 'goals' code=target.get_parent_goal.code %}#{{ target.code }}" title="{{ targe.code }}">{% trans "Target" %} {{ target.id }}</a>
+          <a href="{% url 'list_targets' code=target.get_parent_goal.code %}#{{ target.code }}" title="{{ targe.code }}">{% trans "Target" %} {{ target.id }}</a>
           <p>{{ target.description|safe }}</p>
         </li>
         {% endwith %}
