@@ -1,11 +1,11 @@
 /*Modals*/
 
 .modal-open {
-  overflow: hidden
+  overflow: hidden;
 }
 
 .modal-open .modal-container {
-  display: block
+  display: block;
 }
 
 .modal-container {
@@ -64,11 +64,6 @@
   width: auto !important;
 }
 
-.admin {
-  background-color: #00c0ef;
-  color: #fff !important;
-}
-
 .toc-wrapper {
   display: inline-block;
 }
@@ -86,19 +81,13 @@
 }
 
 .navbar {
-  background: #222d32 !important;
+  background: #006699 !important;
 }
 
-/*#backdrop {*/
-/*position: fixed;*/
-/*background: red;*/
-/*z-index: 1000;*/
-/*top: 0;*/
-/*bottom: 0;*/
-/*left: 0;*/
-/*right: 0;*/
-/*display: none;*/
-/*}*/
+.skin-black .wrapper, 
+.skin-black .main-sidebar, .skin-black .left-side{
+ background: #006699 !important;
+}
 
 .open {
   display: block !important;
@@ -130,11 +119,14 @@
 .dashboard-title {
   font-size: 1.2em;
   display: inline-block;
-  margin-top: 10px;
+  margin-top: 15px;
   padding-left: 10px;
-  color: #b8c7ce;
+  color: #fff;
 }
 
+.content-wrapper, .right-side{
+  background: #fff !important;
+}
 
 .timeline {
   margin: 10px 0 -10px 0;
@@ -172,20 +164,41 @@
   display: block;
 }
 
-.navbar-nav a {
-  color: #b8c7ce !important;
-}
-
 .logo {
-  border-right: 0!important;
-  border-radius: 20px;
-  margin-left: 25px;
-  width: 170px!important;
+  background-color: #006699 !important;
 }
 
-.logo:hover{
-  color: #fff!important;
-  background-color: #000!important;
+// .logo:hover{
+//   color: #fff!important;
+//   background-color: #000!important;
+// }
+
+.skin-black .wrapper, .skin-black .main-sidebar, .skin-black .left-side{
+  background: #006699 !important;
+}
+
+.skin-black .sidebar-menu>li:hover>a, 
+.skin-black .sidebar-menu>li.active>a,
+.skin-black .main-header .navbar .nav>li>a:hover, 
+.skin-black .main-header .navbar .nav>li>a:active, 
+.skin-black .main-header .navbar .nav>li>a:focus, 
+.skin-black .main-header .navbar .nav .open>a, 
+.skin-black .main-header .navbar .nav .open>a:hover, 
+.skin-black .main-header .navbar .nav .open>a:focus, 
+.skin-black .main-header .navbar .nav>.active>a{
+  background: #FF8100 !important;
+  box-shadow: 0 0 2px rgba(0,0,0,0.14),0 2px 2px rgba(0,0,0,0.28);
+  transition: all .2s;
+}
+
+.skin-black .main-header>.logo{
+  border-right: 0 !important;
+}
+
+.skin-black .sidebar a, 
+.skin-black .main-header>.logo,
+.navbar-nav a{
+  color: #fff !important;
 }
 
 .description{
@@ -219,6 +232,7 @@
 
 .sidebar-toggle{
   color: #b8c7ce !important;
+  border-right: 0 !important;
 }
 
 @media screen and (min-width: 769px) {
