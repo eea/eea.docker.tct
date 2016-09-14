@@ -30,7 +30,7 @@
 {% endblock %}
 
 {% block content %}
-<h1>{% trans "EU Target" %} {{ current_target.code }}: {{ current_target.title }}</h1>
+<h1>{% trans "EU Target" %} {{ current_target.code }}</h1><h2> {{ current_target.title }}</h2>
 <p class="objective-description">{{ current_target.description|safe }}</p>
 
 {% if current_target.children.count %}
@@ -68,7 +68,7 @@
 
 
 <div class="well">
-  <div class="well-title">{% trans "Most relevant AICHI Targets" %}
+  <div class="well-title">{% trans "Most relevant Aichi Targets" %}
     {% if current_target.most_relevant_aichi_targets|length %}
       <div class="info-count">
         {{ current_target.most_relevant_aichi_targets|length }}
@@ -80,18 +80,18 @@
       {% for aichi_target in current_target.most_relevant_aichi_targets %}
         <li>
           <a href="{% url 'aichi_target_detail' aichi_target_id=aichi_target.id %}">
-            {% trans "AICHI Target" %} {{ aichi_target.code }}
+            {% trans "Aichi Target" %} {{ aichi_target.code }}
           </a>
         </li>
       {% endfor %}
     </ul>
   {% else %}
-    <p class="no-corresponding">{% trans "No corresponding AICHI target" %}.</p>
+    <p class="no-corresponding">{% trans "No corresponding Aichi target" %}.</p>
   {% endif %}
 </div>
 
 <div class="well">
-  <div class="well-title other">{% trans "Other relevant AICHI Targets" %}
+  <div class="well-title other">{% trans "Other relevant Aichi Targets" %}
     {% if current_target.other_relevant_aichi_targets|length %}
       <div class="info-count">
         {{ current_target.other_relevant_aichi_targets|length }}
@@ -103,13 +103,13 @@
       {% for aichi_target in current_target.other_relevant_aichi_targets %}
         <li>
           <a href="{% url 'aichi_target_detail' aichi_target_id=aichi_target.id %}">
-            {% trans "AICHI Target" %} {{ aichi_target.code }}
+            {% trans "Aichi Target" %} {{ aichi_target.code }}
           </a>
         </li>
       {% endfor %}
     </ul>
   {% else %}
-    <p class="no-corresponding">{% trans "No corresponding AICHI target" %}.</p>
+    <p class="no-corresponding">{% trans "No corresponding Aichi target" %}.</p>
   {% endif %}
 </div>
 

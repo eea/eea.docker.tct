@@ -1,6 +1,6 @@
 {% load i18n %}
 {% load utils %}
-  <h1 class="page-title">{% trans "AICHI Goals" %}</h1>
+  <h1 class="page-title">{% trans "Aichi Goals" %}</h1>
 <ul class="list-goals-wrapper">
 {% for goal in goals %}
 <li {% if goal.code == current_goal.code %}class="active"{% endif %}>

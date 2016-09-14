@@ -49,17 +49,17 @@
 	      {% for aichi_target in current_indicator.relevant_aichi_targets|sort_by_code %}
 	          <li>
 	            <a href="{% url 'goals' code=aichi_target.get_parent_goal.code aichi_target_id=aichi_target.id %}">
-	              {% trans "AICHI Target" %} {{ aichi_target.code }}</a>
+	              {% trans "Aichi Target" %} {{ aichi_target.code }}</a>
 	          </li>
 	      {% endfor %}
 	    </ul>
 	  {% else %}
-	   <p class="no-corresponding">{% trans "No corresponding AICHI target" %}.</p>
+	   <p class="no-corresponding">{% trans "No corresponding Aichi target" %}.</p>
 	  {% endif %}
 	</div>
 
 	<div class="well">
-	   <div class="well-title other">Other relevant AICHI Targets</div>
+	   <div class="well-title other">Other relevant Aichi Targets</div>
 	  {% if current_indicator.eu_indicator_other_aichi_strategy.exists %}
 	    <ul>
 	      {% for strategy in current_indicator.eu_indicator_other_aichi_strategy.all %}
@@ -67,13 +67,13 @@
 	          {% assign aichi_target.get_parent_goal as goal %}
 	          <li>
 	            <a href="{{% url 'goals' code=goal.code aichi_target_id=aichi_target.id %}">
-	              {% trans "AICHI Target" %} {{ aichi_target.code }}</a>
+	              {% trans "Aichi Target" %} {{ aichi_target.code }}</a>
 	          </li>
 	        {% endfor %}
 	      {% endfor %}
 	    </ul>
 	  {% else %}
-	   <p class="no-corresponding">{% trans "No corresponding AICHI target" %}.</p>
+	   <p class="no-corresponding">{% trans "No corresponding Aichi target" %}.</p>
 	  {% endif %}
 	</div>
 

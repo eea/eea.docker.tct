@@ -36,7 +36,7 @@
       <li>
         <a href="{% url 'eu_target_detail' pk=target.pk %}"
            title="{% trans 'Target' %} {{ target.code }}">
-           <span>Target</span>
+           <span>EU Target</span>
         <span class="target-code">{{ target.code }}</span>
           {{ target.title|default:target.code }}</a>
         <div class="eu-target-desc">{{ target.description|safe }}</div>

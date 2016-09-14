@@ -2,13 +2,13 @@
 {% load utils %}
 
 
-    <h1 class="page-title">{% trans "AICHI Goals" %}</h1>
-<h1 class="goal-title">{% trans "AICHI Goal " %}{{ target.get_parent_goal.code|upper }}: </h1> <h1 class="goal-desc">{{ target.get_parent_goal.description|striptags|safe }}</h1>
+    <h1 class="page-title">{% trans "Aichi Goals" %}</h1>
+<h1 class="goal-title">{% trans "Aichi Goal " %}{{ target.get_parent_goal.code|upper }}: </h1> <h1 class="goal-desc">{{ target.get_parent_goal.description|striptags|safe }}</h1>
 
 
 
 <div class="section" id="{{ target.code }}">
-  <h2>{% trans "AICHI Target" %} {{ target.code }}</h2>
+  <h2>{% trans "Aichi Target" %} {{ target.code }}</h2>
   <p class="target-description">{{ target.description }}</p>
 
   {% if EU_STRATEGY %}
