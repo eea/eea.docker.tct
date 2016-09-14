@@ -17,7 +17,7 @@
   <h4 class="sidebar-title">Indicators</h4>
   <ul class="sidebar-menu">
     {% for indicator in indicators|sort_by_code|sort_by_type %}
-    <li {% if indicator.code == current_indicator.code and indicator.indicator_type == current_indicator.indicator_type%}class="active"{% endif %}>
+    <li {% if indicator.pk == current_indicator.pk %}class="active"{% endif %}>
       <a href="{% url 'eu_indicator_details' indicator.pk %}#{{ indicator.pk }}" id={{ indicator.pk }} title="{{ indicator.code|upper }}"</a>
         {{ indicator.indicator_type| upper }} {{indicator.code | upper }}
       </a>
@@ -37,7 +37,7 @@
 	{% endif %}
 
 	<div class="well">
-	  <div class="well-title">Most relevant 
+	  <div class="well-title">Most relevant AICHI Targets 
 	  {% if current_indicator.relevant_aichi_targets|length %}
         <div class="info-count">
           {{ current_indicator.relevant_aichi_targets|length }}
@@ -56,8 +56,10 @@
 	  {% else %}
 	   <p class="no-corresponding">{% trans "No corresponding AICHI target" %}.</p>
 	  {% endif %}
+	</div>
 
-	   <div class="well-title other">Other</div>
+	<div class="well">
+	   <div class="well-title other">Other relevant AICHI Targets</div>
 	  {% if current_indicator.eu_indicator_other_aichi_strategy.exists %}
 	    <ul>
 	      {% for strategy in current_indicator.eu_indicator_other_aichi_strategy.all %}

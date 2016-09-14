@@ -9,7 +9,7 @@
   <li>
     <a href="{% url 'goals' code=target.get_parent_goal.code aichi_target_id=target.id %}"
        rel="tooltip">
-       <h2 class="target-title">{% trans "AICHI Target" %} {{ target.code }}: </h2><p class="target-desc">{{ target.description }}</p>
+       <h2 class="target-title">{% trans "AICHI Target" %} {{ target.code }} </h2><p class="target-desc">{{ target.description }}</p>
     </a>
   </li>
   {% endfor %}
