@@ -21,7 +21,7 @@ NBSAP - {% trans "Empty set of National Strategies" %}
   <ul>
     {% for objective in objectives %}
     <li {% if objective.code == current_objective.code %}class="active" {% endif %}>
-      <a href="{% url 'nat_strategy' code=objective.code %}" title="{{ objective.code }}">
+      <a href="{% url 'nat_strategy' pk=objective.pk %}" title="{{ objective.code }}">
         {% trans "Objective" %} {{ objective.code }}
       </a>
     </li>

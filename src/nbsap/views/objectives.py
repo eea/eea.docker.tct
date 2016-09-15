@@ -13,15 +13,19 @@ from nbsap.utils import remove_tags
 from auth import auth_required
 
 
-def nat_strategy(request, code=None):
+def nat_strategy(request, pk=None):
     objectives = (
         models.NationalObjective.objects
         .filter(parent=None).order_by('id').all()
     )
     if not objectives.exists():
         return render(request, 'objectives/empty_nat_strategy.html')
-    code = code or objectives[0].code
-    current_objective = models.NationalObjective.objects.get(code=code)
+
+    for obj in objectives:
+        obj.objectives_tree = obj.get_all_objectives()
+
+    pk = pk or objectives[0].pk
+    current_objective = models.NationalObjective.objects.get(pk=pk)
     current_objective_cls = current_objective.__class__.__name__
 
     obj_actions = []
@@ -35,6 +39,7 @@ def nat_strategy(request, code=None):
         if actions:
             obj_actions.append({subobj: actions})
 
+    # import pdb; pdb.set_trace()
     return render(request, 'objectives/nat_strategy.html',
                   {'objectives': objectives,
                    'current_objective': current_objective,

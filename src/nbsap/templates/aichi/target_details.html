@@ -70,7 +70,7 @@
     <ul>
       {% for strategy in target.relevant_targets_national_strategy.all %}
       <li>
-         <a href ="{% url 'nat_strategy' %}/{{strategy.objective.get_root_parent.code }}#{{strategy.objective.code}}">
+         <a href ="{% url 'nat_strategy' pk=strategy.objective.pk %}">
           {% trans "Objective" %} {{ strategy.objective.code }}</a>
       </li>
       {% endfor %}

@@ -61,12 +61,12 @@
               {% for strategy in action.national_strategy.all %}
                 <li>
                   {% if strategy.objective.parent %}
-                    <a href="{% url 'nat_strategy' code=strategy.objective.parent.code %}#{{ strategy.objective.code }}">
+                    <a href="{% url 'nat_strategy' pk=strategy.objective.pk %}">
                       {% trans "Objective" %} {{ strategy.objective.code }}
                     </a>
                     <p>{{ strategy.objective.title }} {{ strategy.objective.parent.code }}</p>
                   {% else %}
-                    <a href="{% url 'nat_strategy' code=strategy.objective.code %}">
+                    <a href="{% url 'nat_strategy' pk=strategy.objective.pk %}">
                       {% trans "Objective" %} {{ strategy.objective.code }}
                     </a>
                     <p>{{ strategy.objective.title }} {{ strategy.objective.code }}</p>

@@ -60,7 +60,7 @@ urlpatterns = [
     url(r'^national-strategy/objectives$', views.nat_strategy, name='nat_strategy'),
     url(r'^download/xslx$', views.nat_strategy_download,
         name='nat_strategy_download'),
-    url(r'^objectives/(?P<code>[\w\.\-]+)$',
+    url(r'^national-strategy/objectives/(?P<pk>[\w\-]+)$',
         views.nat_strategy, name='nat_strategy'),
 
     url(r'^admin/', include(admin.site.urls)),

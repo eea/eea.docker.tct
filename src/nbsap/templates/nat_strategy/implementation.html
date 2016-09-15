@@ -56,7 +56,7 @@
 
   <div>
     <p>
-      <a href="{% url 'nat_strategy' current_objective.code %}"
+      <a href="{% url 'nat_strategy' pk=current_objective.pk %}"
          title="{{ current_objective.code }}">
         See objective
       </a>
@@ -83,7 +83,7 @@
           </div>
           <div>
             <p>
-              <a href="{% url 'nat_strategy' current_objective.code %}#{{ action.code }}"
+              <a href="{% url 'nat_strategy' pk=action.pk %}"
                  title="{{ action.code }}">
                 See objective
               </a>
