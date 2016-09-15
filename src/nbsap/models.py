@@ -466,6 +466,12 @@ class NationalObjective(models.Model):
             r.extend(ob.get_all_objectives())
         return r
 
+    def get_all_actions(self):
+        actions_list = list(self.actions.all())
+        for objective in self.get_all_objectives():
+            actions_list.extend(list(objective.actions.all()))
+        return actions_list
+
     def get_national_strategies(self):
         return self.objective_national_strategy.all()
 

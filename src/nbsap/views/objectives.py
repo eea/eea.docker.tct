@@ -102,7 +102,6 @@ def implementation(request, code=None):
     objectives = models.NationalObjective.objects.filter(parent=None).all()
 
     current_objective.objectives_tree = current_objective.get_all_objectives()
-
     current_objective.actions_tree = list(current_objective.actions.all())
     for objective in current_objective.get_all_objectives():
         for action in objective.actions.all():
