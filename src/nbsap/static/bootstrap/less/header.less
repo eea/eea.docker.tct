@@ -174,14 +174,16 @@
 @media (max-width: 800px) {
     margin-left: 2rem;
     margin-right: -3rem;
-    padding: 0.2rem;
+    padding: 0;
        float: left;
 }
 
 }
 
 .brand {
+    @media (min-width: 800px) {
     overflow: hidden;
+     }
      float: left;
     @media(min-width: 800px) {
     }
@@ -262,7 +264,6 @@
     text-decoration: none;
     font-weight: 400;
     font-size: 1rem;
-    margin: .2rem;
     transition: color .2s;
     @media (max-width: 800px) {
         white-space: nowrap;
@@ -270,6 +271,7 @@
     @media (min-width: 800px) {
         margin-left: -2px;
          color: rgba(255, 255, 255, 1);
+            margin: .2rem;
     }
 }
 
@@ -300,10 +302,11 @@
     position: relative;
     background: @brand-orange;
     color: white;
-    border-radius: 3px;
     border-top: 1px solid #eee
     margin: .1rem;
-    @media (min-width: 800px) {}
+    @media (min-width: 800px) {
+    border-radius: 3px;
+    }
     @media (max-width: 800px) {}
 }
 
@@ -412,7 +415,7 @@
 
     }
     @media (min-width: 800px) {
-        width: 107px;
+        width: 112px;
         text-align: center;
         margin-right: 2rem;
         i {

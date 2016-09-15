@@ -3,7 +3,7 @@
 
 <ul class="nav-menu">
   <li>
-    <a class="{% active request '^/$' %}{% active request '^/aichi' %}" href="{% url 'aichi_home' %}" class="uppercase">{% trans "Aichi" %}</a>
+    <a class="{% active request '^/aichi' %}" href="{% url 'aichi_home' %}" class="uppercase">{% trans "Aichi" %}</a>
   </li>
 
   {% if EU_STRATEGY %}

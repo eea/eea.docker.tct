@@ -13,20 +13,20 @@
 
 
 {% block sidebar %}
-<div class="sidebar nat-obj-list">
+<div id="nat-obj-list" class="sidebar">
   <h4 class="sidebar-title">{% trans "Objectives" %}</h4>
   <input class="search" placeholder="Search" />
   <ul class="sidebar-menu list">
     {% for objective in objectives|sort_by_code %}
-      <li class="{% if objective.pk == current_objective.pk %}active{% endif %} nat-objective">
-        <a href="{% url 'nat_strategy' pk=objective.pk %}" title="{{ objective.code }}">
+      <li class="{% if objective.pk == current_objective.pk %}active{% endif %} ">
+        <a class="nat-objective" href="{% url 'nat_strategy' pk=objective.pk %}" title="{{ objective.code }}">
           {% trans "Objective" %} {{ objective.code }}
         </a>
       </li>
       {% if objective.objectives_tree|length %}
         {% for obj in objective.objectives_tree|sort_by_code %}
-          <li class="{% if obj.pk == current_objective.pk %}active{% endif %} indent nat-objective">
-            <a href="{% url 'nat_strategy' pk=obj.pk %}">
+          <li class="{% if obj.pk == current_objective.pk %}active{% endif %} indent">
+            <a class="nat-objective" href="{% url 'nat_strategy' pk=obj.pk %}">
                {% trans "Objective" %} {{ obj.code }}</a>
           </li>
         {% endfor %}
@@ -47,7 +47,8 @@
 <section class="content-header"></section>
   <h1 class="page-title">{% trans 'National Strategy' %}</h1>
   <h1 class="x-title">
-    {% trans "Objective" %} {{ current_objective.code }}{% if current_objective.title %}: {{ current_objective.title }} {% endif %}
+    {% trans "Objective" %} {{ current_objective.code }}
+    <h2>{% if current_objective.title %} {{ current_objective.title }} {% endif %}</h2>
   </h1>
   <div class="summary">
     <div class="snippet">
@@ -104,7 +105,7 @@
       snippet.show();
     });
   });
-  
+
   $(document).ready(function() {
     var options = {
       valueNames: [ 'nat-objective' ]

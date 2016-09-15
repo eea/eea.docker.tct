@@ -21,8 +21,8 @@
     {% for indicator in indicators.all %}
       <li>
         <a href="{% url 'nat_indicator_detail' pk=indicator.pk %}" id="indicator-{{ indicator.id }}">
-          {{ indicator.code }} {{ indicator.title }}
-        </a>
+          {{ indicator.code }}
+        </a> - {{ indicator.title }}
       </li>
     {% endfor %}
     </ul>

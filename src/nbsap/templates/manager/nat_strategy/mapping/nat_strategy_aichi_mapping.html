@@ -2,12 +2,12 @@
 {% load utils %}
 
 <div class="well">
-  <div class="well-title">{% trans "Mapping with Aichi" %}</div>
+  <h4 class="mapping">{% trans "Mapping with Aichi" %}</h4>
   {% with strategies=subobj.objective_national_strategy.all %}
     {% if strategies|length %}
 
       {% get_goals_for_strategies strategies=strategies as goals %}
-      <h5>{% trans "Aichi Goals" %}</h5>
+      <div class="well-title">{% trans "Aichi Goals" %}</div>
       {% if goals %}
       <ul>
       {% for goal in goals %}
@@ -21,9 +21,10 @@
       {% else %}
         <p class="no-corresponding">{% trans "No corresponding Aichi Goals" %}.</p>
       {% endif %}
-
+</div>
+<div class="well">
       {% get_targets_for_strategies strategies=strategies as targets %}
-      <h5>{% trans "Most relevant Aichi Targets" %}</h5>
+      <div class="well-title">{% trans "Most relevant Aichi Targets" %}</div>
       {% if targets %}
         <ul>
           {% for target in targets %}
@@ -40,10 +41,11 @@
       {% else %}
         <p class="no-corresponding">{% trans "No corresponding Aichi Target" %}.</p>
       {% endif %}
-
+</div>
+<div class="well">
       {% get_other_targets_for_strategies strategies=strategies as other_targets %}
       {% if other_targets %}
-        <h5>{% trans "Other relevant Aichi Targets" %}</h5>
+        <div class="well-title">{% trans "Other relevant Aichi Targets" %}</div>
         <ul>
         {% for target in other_targets %}
           {% assign target.get_parent_goal as goal %}
@@ -59,22 +61,22 @@
     {% else %}
       <p class="no-corresponding">{% trans "No corresponding Aichi Target" %}.</p>
     {% endif %}
-  {% endwith %}
 </div>
+  {% endwith %}
 
 
 <div class="well">
-  <div class="well-title">{% trans "Mapping with National Indicators" %}</div>
+  <h4 class="mapping">{% trans "Mapping with National Indicators" %}</h4>
 
   {% with indicators=subobj.nat_indicators.all %}
     {% with other_indicators=subobj.other_nat_indicators.all %}
       {% if indicators %}
-        <h5>{% trans "Most relevant National Indicators" %}</h5>
+        <div class="well-title">{% trans "Most relevant National Indicators" %}</div>
         <ul>
         {% for indicator in indicators %}
           <li>
             <a href="{% url 'nat_indicators' %}#indicator-{{ indicator.id }}">
-              {{ indicator.get_indicator_type_display }}{{ indicator.code }} {{ indicator.title }}</a>
+              {{ indicator.get_indicator_type_display }}{{ indicator.code }}</a> <div class='content-description'> {{ indicator.title }}</div>
           </li>
         {% endfor %}
         </ul>
@@ -83,12 +85,12 @@
       {% endif %}
 
       {% if other_indicators %}
-        <h5>{% trans "Other National Indicators" %}</h5>
+        <div class="well-title">{% trans "Other National Indicators" %}</div>
         <ul>
         {% for indicator in other_indicators %}
           <li>
             <a href="{% url 'nat_indicators' %}#indicator-{{ indicator.id }}">
-              {{ indicator.get_indicator_type_display }}{{ indicator.code }} {{ indicator.title }}</a>
+              {{ indicator.get_indicator_type_display }}{{ indicator.code }}</a><div class='content-description'>{{ indicator.title }}</div>
           </li>
         {% endfor %}
         </ul>

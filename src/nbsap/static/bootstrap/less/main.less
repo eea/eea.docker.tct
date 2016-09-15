@@ -22,10 +22,12 @@ a:hover {
 :after {
     font-family: FontAwesome;
 }
-
 .main {
-    padding: 1rem;
+    @media (min-width: 800px) {
+        padding: 1rem;
+    }
 }
+
 
 sub-
 /* bootstrap override */
@@ -288,12 +290,12 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    background-color: #F5F5F5;
+    background-color: transparent;
 }
 
 ::-webkit-scrollbar {
     width: 10px;
-    background-color: #F5F5F5;
+    background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -327,13 +329,14 @@ body {
 }
 
 .sidebar-menu a {
-    display: block;
+    display: inline-block;
     line-height: 20px;
     color: #333333;
     margin: 0 -8px;
     padding: 3px 8px;
     border-radius: 4px;
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .sidebar-menu a:hover {
@@ -411,6 +414,7 @@ h5 {
 }
 
 .footer {
+    display:none;
     visibility: hidden;
     margin-top: 2em;
     padding-top: 1em;
@@ -449,7 +453,7 @@ h5 {
 .well {
     border-top: 1px solid #eee;
     border-bottom: 0;
-    padding-top: 1em;
+    padding-top: .5em;
     margin-bottom: 1em;
      ul {
         margin-bottom: 0;
@@ -477,11 +481,23 @@ h5 {
     }
 }
 
+.mapping {
+    font-weight: 100;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    color: @brand-blue;
+}
 
+.related {
+    border-left: 1px solid @brand-blue;
+    padding-left: .5rem;
+}
 
 .well-title {
-        padding: 0;
+    padding: 0;
     margin-bottom: .5em;
+    margin-top: .5em;
+    font-size: 1.4rem;
 }
 
 .well-title-indicator {
@@ -493,6 +509,10 @@ h5 {
 
 .well .html-content {
     margin: -10px;
+}
+
+.snippet {
+    margin-top: 1rem;
 }
 
 .toc {
@@ -863,5 +883,11 @@ td.col-md-3 {
     }
 }
 
+
+.search {
+    width: 80%;
+    margin-top: 1rem;
+    margin-bottom: 0;
+}
 
 
