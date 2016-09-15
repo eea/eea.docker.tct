@@ -37,7 +37,7 @@
             {% endfor %}
           </ul>
         {% else %}
-          <p>{% trans "No corresponding national objectives" %}.</p>
+          <p class="no-corresponding">{% trans "No corresponding National Objective" %}.</p>
         {% endif %}
 
         <p><strong>Other:</strong></p>
@@ -50,11 +50,11 @@
             {% endfor %}
           </ul>
         {% else %}
-          <p>{% trans "No corresponding national objectives" %}.</p>
+          <p class="no-corresponding">{% trans "No corresponding National Objective" %}.</p>
         {% endif %}
       </div>
     {% endfor %}
   {% else %}
-    <h1>{% trans 'No National Indicators' %}</h1>
+    <h1 class="no-corresponding">{% trans 'No National Indicators' %}</h1>
   {% endif %}
 {% endblock %}

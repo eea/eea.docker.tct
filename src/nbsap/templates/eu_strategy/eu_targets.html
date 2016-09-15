@@ -43,44 +43,5 @@
       </li>
     {% endfor %}
   </ul>
-
-
-  {% for action in current_target.actions_tree %}
-    <div class="section" id="{{ action.code }}">
-      <h2>{% trans "Action" %} {{ action.code }}</h2>
-      <h5>{{ action.title }}</h5>
-
-      <p>{{ action.description|safe }}</p>
-
-      {% if NAT_STRATEGY %}
-        <div class="well">
-          <div
-              class="well-title">{% trans "Mapping with National Strategy" %}</div>
-          {% if action.national_strategy.all %}
-            <ul>
-              {% for strategy in action.national_strategy.all %}
-                <li>
-                  {% if strategy.objective.parent %}
-                    <a href="{% url 'nat_strategy' pk=strategy.objective.pk %}">
-                      {% trans "Objective" %} {{ strategy.objective.code }}
-                    </a>
-                    <p>{{ strategy.objective.title }} {{ strategy.objective.parent.code }}</p>
-                  {% else %}
-                    <a href="{% url 'nat_strategy' pk=strategy.objective.pk %}">
-                      {% trans "Objective" %} {{ strategy.objective.code }}
-                    </a>
-                    <p>{{ strategy.objective.title }} {{ strategy.objective.code }}</p>
-                  {% endif %}
-                </li>
-              {% endfor %}
-            </ul>
-          {% else %}
-            <p class="no-corresponding">{% trans "No corresponding strategy target" %}</p>
-          {% endif %}
-        </div>
-      {% endif %}
-    </div>
-  {% endfor %}
-
 {% endblock %}
 
