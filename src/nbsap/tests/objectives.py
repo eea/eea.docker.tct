@@ -222,7 +222,7 @@ class ObjectivesTest(BaseWebTest):
 
     def test_view_objective(self):
         nat_obj = NationalObjectiveFactory()
-        url = reverse('nat_strategy', kwargs={'code': nat_obj.code})
+        url = reverse('nat_strategy', kwargs={'pk': nat_obj.pk})
         resp = self.app.get(url)
         self.assertEqual(200, resp.status_code)
         h1 = resp.pyquery('h1.x-title')
@@ -241,7 +241,7 @@ class ObjectivesTest(BaseWebTest):
         self.assertIn('No objectives found', content[0].text_content())
 
     def test_view_objective_when_database_empty(self):
-        url = reverse('nat_strategy', kwargs={'code': '1'})
+        url = reverse('nat_strategy', kwargs={'pk': '1'})
         resp = self.app.get(url)
         self.assertEqual(200, resp.status_code)
         content = resp.pyquery('.main')
