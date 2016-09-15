@@ -489,7 +489,7 @@ class EuIndicatorForm(forms.Form):
     language = forms.ChoiceField(choices=settings.LANGUAGES)
     title = forms.CharField(widget=widgets.TextInput, required=False)
     category = forms.ChoiceField(choices=EuIndicator.CATEGORIES)
-    url = forms.CharField(required=False)
+    url = forms.CharField(widget=widgets.URLInput, required=False)
     indicator_type = forms.ChoiceField(choices=EuIndicator.TYPES)
     code = forms.CharField(
         max_length=16, validators=[validate_code])

@@ -1,33 +1,26 @@
 {% load i18n %}
-
-{% block head_scripts %}
-{{ form.media }}
-{% endblock %}
-
-
+{% block head_scripts %} {{ form.media }} {% endblock %}
 {% block content %}
 
 
 <section class="content">
 
-  <h1 class="page-title">{% trans "Add new Eu Indicator" %}</h1>
+    <h1 class="page-title">{% trans "Add new Eu Indicator" %}</h1> {% if form.errors %}
+    <p>
+        {% blocktrans with form.errors|pluralize as errors %}Please correct the error {{ errors }} below.{% endblocktrans %}
+    </p>
+    {% endif %}
+    <div class="col-md-6 form-wrapper">
+        <form action="#" method="post" class="form">
 
-  {% if form.errors %}
-  <p>
-    {% blocktrans with form.errors|pluralize as errors %}Please correct the error {{ errors }} below.{% endblocktrans %}
-  </p>
-  {% endif %}
+            {% include "manager/eu_indicators/eu_indicator_form.html" %}
 
-  <form action="#" method="post" class="form">
+            <div class="action-bar">
+                <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
+                <a href="{% url 'list_eu_indicators' %}" class="btn btn-default" type="button">{% trans "Cancel" %}</a>
+            </div>
 
-    {% include "manager/eu_indicators/eu_indicator_form.html" %}
-
-    <div class="action-bar">
-      <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
-      <a href="{% url 'list_eu_indicators' %}" class="btn btn-default" type="button">{% trans "Cancel" %}</a>
+        </form>
     </div>
-
-  </form>
-
 </section>
 {% endblock %}
