@@ -5,14 +5,18 @@
 }
 
 .site-title {
-    // font-size: 1.5rem;
+    margin-left: 2rem;
+    width: 11em;
+    color: #898989;
+    letter-spacing: .05em;
+    position: relative;
+    top: -6px;
     font-weight: normal;
-    // padding: 0.5rem;
     margin-bottom: 0;
     margin-top: 1rem;
-    color: @text-color;
+    font-size: smaller;
+    float: left;
     @media (min-width: 800px) {
-        display: inline-block;
     }
     @media (max-width: 800px) {
                margin: 0;
@@ -29,6 +33,11 @@
     @media (max-width: 729px) {
         font-size: 1.8rem;
     }
+    strong {
+    font-size: 1.5em;
+    color: #000080;
+    display: block;
+    }
 }
 
 .site-title span {
@@ -43,18 +52,27 @@
 
 
 .subtitle {
-    // font-size: 1.5rem;
-
-    display: inline-block;
-    color: @text-color;
+    display: block;
+    margin-top: 0;
+    color: #81cbf5;
+     float: left;
+    position: relative;
+    top: 12px;
+    line-height: 1.2;
+    font-style: italic;
     @media( min-width: 800px) {
-        // padding: 0.5rem;
-        margin-top: 1rem;
     }
     @media (max-width: 800px) {
     float: right;
-       display: none;
+    display: none;
     margin-right: 24%;
+    }
+    em {
+    font-style: normal;
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: navy;
     }
 
 }
@@ -82,6 +100,7 @@
 }
 
 .account-menu {
+
     list-style: none;
     margin: 0;
     box-sizing: border-box;
@@ -91,12 +110,15 @@
     @media screen and (max-width: 800px) {
         // background: rgba(0, 0, 0, 0.1);
         border-bottom: solid @brand-orange;
+        width: 100%;
     }
     @media screen and (min-width: 800px) {
-        border-top: solid white;
         position: absolute;
-        right: 0;
-        top: 48px;
+        right: 30px;
+            border-top: 1px solid @brand-blue;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+        top: 31px;
         background: white;
         box-shadow: 0 0 2px rgba(0, 0, 0, 0.14), 0 2px 2px rgba(0, 0, 0, 0.28);
     }
@@ -140,11 +162,14 @@
 }
 
 .logo {
-    display:inline-block;
-    margin-right: -45px;
+    display: block;
+    float: left;
+    width: 60px;
+    height: 68px;
+    overflow: hidden;
     img {
-        width: 55%;
-        margin-bottom: -28px;
+    width: 100%;
+    height: auto;
     }
 @media (max-width: 800px) {
     margin-left: 2rem;
@@ -157,22 +182,14 @@
 
 .brand {
     overflow: hidden;
+     float: left;
     @media(min-width: 800px) {
-    display: inline-block;
-    left: 29%;
-    position: relative;
-     margin-bottom: 1rem;
     }
 }
 
 .nav-container {
     background: @brand-blue;
-    // background: white;
     position: relative;
-    // box-shadow: 0 0 2px rgba(0, 0, 0, .14), 0 2px 2px rgba(0, 0, 0, .28);
-    // box-shadow: 0 2px 2px rgba(0,0,0,0.28);
-    border-bottom:1px solid #ddd;
-    border-top:1px solid #ddd;
     @media screen and (max-width: 800px) {
         bottom: 0;
         top: 0;
@@ -206,7 +223,6 @@
     padding-left: 0;
     margin: 0;
     @media screen and (min-width: 800px) {
-        display: inline-block;
         float: left;
         margin-left: 2rem;
     }
@@ -233,6 +249,8 @@
 
 .header a {
     font-family: Roboto, sans-serif!important;
+    display: block;
+    line-height: 1.2
 }
 .accountwrapper .user a,
 .nav-menu a,
@@ -240,13 +258,11 @@
 .accountwrapper a {
     display: block;
     padding: 0 16px;
-    line-height: 3;
-    // color: @brand-blue;
+    line-height: 2.5;
     text-decoration: none;
-    text-transform: uppercase;
     font-weight: 400;
     font-size: 1rem;
-    // margin-left: 3px;
+    margin: .2rem;
     transition: color .2s;
     @media (max-width: 800px) {
         white-space: nowrap;
@@ -258,19 +274,35 @@
 }
 
 
-.accountwrapper a,
-.lang-menu a {
-    color: @brand-blue;
+.accountwrapper .account-menu-trigger,
+.lang-menu .lang-menu-trigger {
+    color: @brand-blue!important;
+    
+    line-height: 2;
+    margin: 0!important;
+    text-transform: uppercase;
+    font-size: .8em!important;
+    margin-bottom: 0!important;
+    @media (min-width: 800px) {
+        border-bottom: 1px solid @brand-blue;
+    }
 }
+
+
+.lang-menu a,
+.account-menu a {
+    color: @brand-blue!important;
+      line-height: 2;
+  }
+
 
 .nav-container .active {
     position: relative;
     background: @brand-orange;
     color: white;
-    border: solid @brand-orange;
-    margin: -3px;
-    // border-radius: 3px;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.14), 0 2px 2px rgba(0, 0, 0, 0.28);
+    border-radius: 3px;
+    border-top: 1px solid #eee
+    margin: .1rem;
     @media (min-width: 800px) {}
     @media (max-width: 800px) {}
 }
@@ -355,12 +387,22 @@
 }
 
 
+.accountwrapper {
+    @media (min-width: 800px) {
+    position: absolute;
+    top: -53px;
+    right: 0;
+    }
+}
+
+
 
 .account-menu-header,
 .lang-menu-header {
     display: inline-block;
     float: right;
     cursor: pointer;
+
     @media (max-width: 800px) {
         display: block;
         float: none;
@@ -370,6 +412,8 @@
 
     }
     @media (min-width: 800px) {
+        width: 107px;
+        text-align: center;
         margin-right: 2rem;
         i {
             display: none;
@@ -382,17 +426,22 @@
 
         }
 
-.account-menu-header.clicked .user a {
-    @media (min-width: 800px) {
-        border-bottom: solid rgba(0, 0, 0, 0.1);
-    }
-}
+
 
 .clicked {
-    // background: rgba(0, 0, 0, 0.1);
+
     background: @brand-orange;
+
+    @media (min-width: 800px) {
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-bottom: 1px solid @brand-blue;
+}
     a {
             color: white!important;
+    }
+    .account-menu-trigger {
+        color: white!important;
     }
 
     // border-bottom: solid white;
@@ -403,6 +452,7 @@
         border-bottom: solid @brand-blue;
     }
     width: 100%;
+    overflow: hidden;
     background: white;
 }
 

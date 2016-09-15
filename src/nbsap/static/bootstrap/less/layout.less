@@ -1,8 +1,4 @@
 @import "variables.less";
-.sidebar {
-    box-shadow: 0 0 2px .4px rgba(0, 0, 0, 0.14);
-    background: white;
-}
 
 .main {
     background: white;
@@ -12,17 +8,6 @@
 @media screen and (min-width: 800px) {
     .sidebar-trigger {
         display: none;
-    }
-    .sidebar-right {
-        width: 15%;
-        height: 70vh;
-        box-sizing: border-box;
-        margin-right: 30px;
-        position: fixed;
-        overflow: auto;
-        box-shadow: none;
-        right: 0;
-        border-radius: 0;
     }
     .main {
         display: inline-block;
@@ -36,18 +21,17 @@
         position: fixed;
         margin-left: 10px;
         padding: 1rem;
-        // height: 70vh;
         overflow: auto;
-        // background: #f7f7f7;
-        border-right: 1px solid #f7f7f7;
         margin-left: -16px;
         bottom: 0;
-        // top: 116px;
-        // height:  90vh;
+        opacity: .75;
+        will-change: opacity;
+        transition: opacity .3s;
         top: 124px;
         height: 84vh;
         width: 18%;
-        padding-top: 2.5rem;
+        padding-top: 1.8rem;
+        padding-left: 2rem;
         li {
             margin-bottom: .4rem;
         }
@@ -58,10 +42,14 @@
             padding-left: 67px;
         }
         @media (max-width: 1000px) {
-            padding-left: 10px;
         }
     }
+    .sidebar:hover {
+    opacity: 1!important;
 }
+}
+
+
 
 @media screen and (max-width: 800px) {
     .sidebar {
@@ -147,17 +135,17 @@
     padding: 1rem;
 }
 
-.targets-submenu {
+.sidebar-submenu {
     margin-left: 1rem;
     margin-top: 0;
     display: none;
 }
 
-.active .targets-submenu {
+.active .sidebar-submenu {
     display: block;
 }
 
-.targets-submenu-title {
+.sidebar-submenu-title {
     line-height: 2;
     font-size: 1.2rem;
     font-weight: 400;
@@ -174,18 +162,16 @@
 }
 
 
-.list-item-goal a{
+.list-item a{
     cursor: pointer;
 }
 
 
 
 .pages-navigation {
-    display: none;
     background: white;
     border-top:1px solid #f7f7f7;
     width: 100%;
-    position: fixed;
     left: 0;
     bottom: 0;
     @media (max-width: 800px) {
@@ -266,7 +252,6 @@ display: block;
  @media (max-width: 530px){
 .previous-page,
 .next-page {
-// display: none;
 visibility: hidden;
 }
 

@@ -285,7 +285,6 @@ body {
     font-family: Arial, sans-serif;
     position: relative;
     // background: @gray-lightest;
-    background: #e8f0fb;
 }
 
 ::-webkit-scrollbar-track {
@@ -334,6 +333,7 @@ body {
     margin: 0 -8px;
     padding: 3px 8px;
     border-radius: 4px;
+    cursor: pointer;
 }
 
 .sidebar-menu a:hover {
@@ -343,8 +343,8 @@ body {
 }
 
 .content .active > a {
-    background: rgba(0, 0, 0, 0.1);
-    color: @brand-blue;
+   background: #57b9f2;
+    color: #ffffff;
     padding: 5px 10px;
 }
 
@@ -380,14 +380,14 @@ body {
     background: transparent!important;
 }
 
+.sidebar-submenu .active a {
+      color: #57b9f2;
+}
+
 .content .active .targets:hover {
     color: @brand-blue;
 }
 
-.content .active > a:before {
-    content: "\f0da";
-    padding: 5px;
-}
 
 .section {
     padding-top: 1em;
@@ -447,23 +447,41 @@ h5 {
 }
 
 .well {
-    // box-shadow: 0 0 3px 0 rgba(0,0,0,.1);
-    // background: #f7f7f7;
-     border-bottom: 1px solid #eee;
+    border-top: 1px solid #eee;
+    border-bottom: 0;
+    padding-top: 1em;
+    margin-bottom: 1em;
      ul {
         margin-bottom: 0;
      }
      li {
-        margin-bottom: .5rem;
+         overflow: hidden;
+         margin-bottom: .75em;
      }
-     margin-bottom: 2rem;
+     p {
+          margin-bottom: 0;
+     }
+    li:last-child {
+          margin-bottom: 0;
+    }
 }
 
+@media (min-width: 768px) {
+    .well li { 
+        padding-left: 7em;
+    }
+    .well li > a {
+        float: left;
+        width: 7em;
+        margin-left: -7em;
+    }
+}
+
+
+
 .well-title {
-    padding: 3px 0;
-    position: relative;
-    color: @gray-muted;
-    font-size: 1.2rem;
+        padding: 0;
+    margin-bottom: .5em;
 }
 
 .well-title-indicator {
@@ -806,20 +824,21 @@ td.col-md-3 {
 }
 
 .info-count {
-    position: absolute;
-    margin-top: 0px;
+
+    margin-top: 0;
     margin-left: .4rem;
     display: inline-block;
     font-size: .8rem;
-    border-radius: 150px;
-    background: rgba(0,102,153,0.7);
+    border-radius: 2px;
+    background: rgb(99, 192, 244);
     color: white;
-    padding-left: .5rem;
-    padding-right: .5rem;
-    line-height: 1.5rem;
-    width: 2%;
+    line-height: 1;
     text-align: center;
-    font-weight: bold;
+    height: 1em;
+    min-width: 1em;
+    padding: 3px;
+    border-radius: calc(.5em+3px);
+    vertical-align: middle;
 }
 
 .content-description {
@@ -843,3 +862,6 @@ td.col-md-3 {
         color: @text-color;
     }
 }
+
+
+

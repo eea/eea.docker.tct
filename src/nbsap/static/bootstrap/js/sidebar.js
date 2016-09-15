@@ -126,11 +126,11 @@ else {
 
 
 
-$sidebargoal = $(".sidebar-menu #list-item-goal > a");
+$sidebargoal = $(".sidebar-menu #list-item > a");
 $sidebargoalmenu = $(".sidebar-menu > li ");
   $sidebargoal.click(function(e){
      var $trigger_sidemenu = $(this);
-    $testes = $(this).parent().find('.targets-submenu').first();
+    $testes = $(this).parent().find('.sidebar-submenu').first();
       console.log($(e.target));
 
 
