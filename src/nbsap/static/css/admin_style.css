@@ -1,17 +1,7 @@
 /*Modals*/
 
-.modal-open {
-  overflow: hidden;
-}
-
 .modal-open .modal-container {
   display: block;
-}
-
-.modal-container {
-}
-
-.modal-container .container {
 }
 
 .modal-window {
@@ -26,7 +16,7 @@
   border: 1px solid #888;
 }
 
-.modal-window.active {
+.modal-window .active {
   display: block
 }
 
@@ -80,20 +70,22 @@
   display: inline-block;
 }
 
+/* Theme overrides */
 .navbar {
-  background: #006699 !important;
+  background: #A8DBA8 !important;
 }
 
-.skin-black .wrapper, 
+.skin-black .wrapper,
 .skin-black .main-sidebar, .skin-black .left-side{
- background: #006699 !important;
+ background: #A8DBA8 !important;
 }
 
 .open {
   display: block !important;
 }
 
-.filter-wrapper {
+.filter-wrapper,
+.form-wrapper {
   background: #F5F5F5;
   border-radius: 10px;
   padding: 5px;
@@ -121,7 +113,7 @@
   display: inline-block;
   margin-top: 15px;
   padding-left: 10px;
-  color: #fff;
+  color: #000;
 }
 
 .content-wrapper, .right-side{
@@ -165,28 +157,23 @@
 }
 
 .logo {
-  background-color: #006699 !important;
+  background-color: #79BD9A !important;
 }
-
-// .logo:hover{
-//   color: #fff!important;
-//   background-color: #000!important;
-// }
 
 .skin-black .wrapper, .skin-black .main-sidebar, .skin-black .left-side{
-  background: #006699 !important;
+  background: #A8DBA8 !important;
 }
 
-.skin-black .sidebar-menu>li:hover>a, 
+.skin-black .sidebar-menu>li:hover>a,
 .skin-black .sidebar-menu>li.active>a,
-.skin-black .main-header .navbar .nav>li>a:hover, 
-.skin-black .main-header .navbar .nav>li>a:active, 
-.skin-black .main-header .navbar .nav>li>a:focus, 
-.skin-black .main-header .navbar .nav .open>a, 
-.skin-black .main-header .navbar .nav .open>a:hover, 
-.skin-black .main-header .navbar .nav .open>a:focus, 
+.skin-black .main-header .navbar .nav>li>a:hover,
+.skin-black .main-header .navbar .nav>li>a:active,
+.skin-black .main-header .navbar .nav>li>a:focus,
+.skin-black .main-header .navbar .nav .open>a,
+.skin-black .main-header .navbar .nav .open>a:hover,
+.skin-black .main-header .navbar .nav .open>a:focus,
 .skin-black .main-header .navbar .nav>.active>a{
-  background: #FF8100 !important;
+  background: #79BD9A !important;
   box-shadow: 0 0 2px rgba(0,0,0,0.14),0 2px 2px rgba(0,0,0,0.28);
   transition: all .2s;
 }
@@ -195,10 +182,10 @@
   border-right: 0 !important;
 }
 
-.skin-black .sidebar a, 
+.skin-black .sidebar a,
 .skin-black .main-header>.logo,
 .navbar-nav a{
-  color: #fff !important;
+  color: #000 !important;
 }
 
 .description{
@@ -239,4 +226,24 @@
   .sidebar-toggle {
     display: none !important;
   }
+}
+
+label{
+  display: block;
+}
+
+#id_title{
+  width: 100%;
+}
+
+#id_description_tbl{
+  width: 100% !important;
+}
+
+#id_url{
+  width: 100% !important;
+}
+
+.box{
+  border-top: 0;
 }

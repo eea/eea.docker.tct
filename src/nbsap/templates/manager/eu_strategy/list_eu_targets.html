@@ -42,9 +42,9 @@ NBSAP - {% trans "EU Strategy: List Targets" %}
       </td>
       <td>
         {% if target.actions.all|length == 0 %}
-        <span class="label label-danger">No</span>
+        <span class="label label-danger"><i class="glyphicon glyphicon-remove-sign"></i></span>
         {% else %}
-        <span class="label label-success">Yes</span>
+        <span class="label label-success"><i class="glyphicon glyphicon-ok-sign"></i></span>
         {% endif %}
       </td>
       <td>
@@ -75,9 +75,9 @@ NBSAP - {% trans "EU Strategy: List Targets" %}
       </td>
       <td>
         {% if subtarget.actions.all|length == 0 %}
-        <span class="label label-danger">No</span>
+        <span class="label label-danger"><i class="glyphicon glyphicon-remove-sign"></i></span>
         {% else %}
-        <span class="label label-success">Yes</span>
+        <span class="label label-success"><i class="glyphicon glyphicon-ok-sign"></i></span>
         {% endif %}
       </td>
       <td>

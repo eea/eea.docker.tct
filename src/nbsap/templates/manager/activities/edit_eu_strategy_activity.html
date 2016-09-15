@@ -1,96 +1,88 @@
-{% extends 'manager/base.html' %}
-{% load i18n %}
-
-{% block title %}
-NBSAP - {% trans "Edit action" %} {{ activity.code }}
-{% endblock %}
-
-
-{% block head_scripts %}
-{{ form.media }}
-{% endblock %}
-
-
-{% block scripts %}
+ {% load i18n %} {% block head_scripts %} {{ form.media }} {% endblock %} {% block scripts %}
 <script src="/static/js/language_change.js"></script>
-{% endblock %}
+{% endblock %} {% block content %}
 
 
-{% block content %}
 
 
-<section class="content">
+<h1 class="page-title">{% trans "Edit action" %} {{ activity.code }}</h1> {% if form.errors %}
+<p>
+    {% blocktrans with form.errors|pluralize as errors %}Please correct the error {{ errors }} below. {% endblocktrans %}
+</p>
+{% endif %}
+<div class="row">
+    <div class="col-md-12 form-wrapper">
+        <form action="" method="post" id="eu-activity-edit" class="form">
 
-  <h1 class="page-title">{% trans "Edit action" %} {{ activity.code }}</h1>
+            <div class="form-group">
+                <label for="language">{% trans "Language" %}</label> {{ form.language }}
+            </div>
 
-  {% if form.errors %}
-  <p>
-    {% blocktrans with form.errors|pluralize as errors %}Please correct the error {{ errors }} below.
-    {% endblocktrans %}
-  </p>
-  {% endif %}
-
-  <form action="" method="post" id="eu-activity-edit" class="form">
-
-    <div class="">
-      <label for="language">{% trans "Language" %}</label>
-      {{ form.language }}
-    </div>
-
-    <div class="">
-      <label for="title">{% trans "Region" %}</label>
-      {{ form.region }}
-      {{ form.region.errors }}
-      <a href="{% url 'region_content' content=1 %}" data-modal="#add_region_modal" class="btn btn-default"
-         type="button">Add Region</a>
-    </div>
+            <div class="form-group">
+                <label for="title">{% trans "Region" %}</label> {{ form.region }} {{ form.region.errors }}
+                <span data-url="{% url 'add_region' %}" class="btn btn-default ajaxget2" type="button">Add Region</span>
+                <div class="region-form"></div>
+            </div>
 
 
-    {% if form.code %}
-    <div class="form-group">
-      <label for="code">{% trans "Code" %}</label>
-      {{ form.code }}
-      {{ form.code.errors }}
-    </div>
-    {% endif %}
+            {% if form.code %}
+            <div class="form-group">
+                <label for="code">{% trans "Code" %}</label> {{ form.code }} {{ form.code.errors }}
+            </div>
+            {% endif %}
 
-    <div class="form-group">
-      <label for="title">{% trans "Title" %}</label>
-      {{ form.title }}
-      {{ form.title.errors }}
-    </div>
+            <div class="form-group">
+                <label for="title">{% trans "Title" %}</label> {{ form.title }} {{ form.title.errors }}
+            </div>
 
-    <div class="language-container">
+            <div class="language-container">
 
-      <div class="form-group">
-        <label for="description">{% trans "Description" %}</label>
-        {{ form.description }}
-        {{ form.description.errors }}
-      </div>
+                <div class="form-group">
+                    <label for="description">{% trans "Description" %}</label> {{ form.description }} {{ form.description.errors }}
+                </div>
 
 
-      {% if lang != DEFAULT_LANGUAGE %}
-      {% trans DEFAULT_LANGUAGE_LABEL as default_language_label %}
-      <div class="col-md-6 original-hideout">
+                {% if lang != DEFAULT_LANGUAGE %} {% trans DEFAULT_LANGUAGE_LABEL as default_language_label %}
+                <div class="col-md-6 original-hideout">
 
-        <p class="original-description">
-          {% blocktrans with default_language_label as language %}Original description in {{ language }}
-          {% endblocktrans %}
-        </p>
-        <div class="well">
-          {{ activity.description_default|safe }}
-        </div>
-      </div>
-      {% endif %}
+                    <p class="original-description">
+                        {% blocktrans with default_language_label as language %}Original description in {{ language }} {% endblocktrans %}
+                    </p>
+                    <div class="well">
+                        {{ activity.description_default|safe }}
+                    </div>
+                </div>
+                {% endif %}
 
-    </div>
+            </div>
 
-    <div class="action-bar">
-      <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
-      <a href="{% url 'view_eu_strategy_target' pk=target.pk %}" class="btn btn-default" type="button">
+            <div class="action-bar">
+                <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
+                <a href="{% url 'view_eu_strategy_target' pk=target.pk %}" class="btn btn-default" type="button">
         {% trans "Cancel" %}</a>
+            </div>
+        </form>
     </div>
-  </form>
+</div>
 
-</section>
+
+{% endblock %}
+{% block script %}
+<script>
+    $(function() {
+        $('.ajaxget2').on('click', function() {
+            var url = $(this).data('url');
+            $('.region-form').empty();
+            $.get(url, function(data) {
+                $('.region-form')
+                    .append(data)
+                    .find('form')
+                    .attr('action', url);
+            })
+            $('html, body').animate({
+                scrollTop: $('.form').offset().top
+            }, 800);
+        });
+    })
+</script>
 {% endblock %}
