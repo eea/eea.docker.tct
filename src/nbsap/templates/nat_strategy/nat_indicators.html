@@ -12,48 +12,20 @@
   {% include '_bits/nav_menu.html' %}
 {% endblock %}
 
+
 {% block content %}
   <h1 class="page-title">{% trans "National Indicators" %}</h1>
 
   {% if indicators %}
+    <ul class="list-nat-indicators">
     {% for indicator in indicators.all %}
-      <h2 id="indicator-{{ indicator.id }}">
-        {{ indicator.code }} {{ indicator.title }}
-      </h2>
-
-      {% if indicator.url %}
-        <p>URL: <a href="{{ indicator.url }}">{{ indicator.title }}</a></p>
-      {% endif %}
-
-      <div class="well">
-        <div class="well-title">{% trans "National objectives" %}</div>
-        <p><strong>Most relevant:</strong></p>
-        {% if indicator.nat_objectives.exists %}
-          <ul>
-            {% for objective in indicator.nat_objectives.all %}
-              <li>
-                <a href="{% url 'nat_strategy' pk=objective.pk %}">{{ objective.code }} {{ objective.title }}</a>
-              </li>
-            {% endfor %}
-          </ul>
-        {% else %}
-          <p class="no-corresponding">{% trans "No corresponding National Objective" %}.</p>
-        {% endif %}
-
-        <p><strong>Other:</strong></p>
-        {% if indicator.other_nat_objectives.exists %}
-          <ul>
-            {% for objective in indicator.other_nat_objectives.all %}
-              <li>
-                <a href="{% url 'nat_strategy' pk=objective.pk %}">{{ objective.code }} {{ objective.title }}</a>
-              </li>
-            {% endfor %}
-          </ul>
-        {% else %}
-          <p class="no-corresponding">{% trans "No corresponding National Objective" %}.</p>
-        {% endif %}
-      </div>
+      <li>
+        <a href="{% url 'nat_indicator_detail' pk=indicator.pk %}" id="indicator-{{ indicator.id }}">
+          {{ indicator.code }} {{ indicator.title }}
+        </a>
+      </li>
     {% endfor %}
+    </ul>
   {% else %}
     <h1 class="no-corresponding">{% trans 'No National Indicators' %}</h1>
   {% endif %}
