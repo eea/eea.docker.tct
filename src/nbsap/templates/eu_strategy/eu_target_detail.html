@@ -114,7 +114,7 @@
 </div>
 
 
-{% for action in current_target.actions_tree %}
+{% for action in current_target.actions_tree|sort_by_code %}
   <div class="section" id="{{ action.code }}">
     <h2>{% trans "Action" %} {{ action.code }}</h2>
     <h5>{{ action.title }}</h5>

@@ -7,6 +7,7 @@ JS_ASSETS = (
     'js/uri.js',
     'bootstrap/js/bootstrap.min.js',
     'js/main.js',
+    'js/list.js',
     'js/lib/jquery.columnlist.js',
     'bootstrap/js/sidebar-plugin.js',
     'bootstrap/js/sidebar.js',

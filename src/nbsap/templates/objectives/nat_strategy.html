@@ -13,18 +13,19 @@
 
 
 {% block sidebar %}
-<div class="sidebar">
+<div class="sidebar nat-obj-list">
   <h4 class="sidebar-title">{% trans "Objectives" %}</h4>
-  <ul class="sidebar-menu">
+  <input class="search" placeholder="Search" />
+  <ul class="sidebar-menu list">
     {% for objective in objectives|sort_by_code %}
-      <li {% if objective.pk == current_objective.pk %}class="active"{% endif %}>
+      <li class="{% if objective.pk == current_objective.pk %}active{% endif %} nat-objective">
         <a href="{% url 'nat_strategy' pk=objective.pk %}" title="{{ objective.code }}">
           {% trans "Objective" %} {{ objective.code }}
         </a>
       </li>
       {% if objective.objectives_tree|length %}
         {% for obj in objective.objectives_tree|sort_by_code %}
-          <li class="{% if obj.pk == current_objective.pk %}active{% endif %} indent">
+          <li class="{% if obj.pk == current_objective.pk %}active{% endif %} indent nat-objective">
             <a href="{% url 'nat_strategy' pk=obj.pk %}">
                {% trans "Objective" %} {{ obj.code }}</a>
           </li>
@@ -102,6 +103,13 @@
       full.hide();
       snippet.show();
     });
+  });
+  
+  $(document).ready(function() {
+    var options = {
+      valueNames: [ 'nat-objective' ]
+    };
+    var userList = new List('nat-obj-list', options);
   });
   </script>
 {% endblock scripts %}
