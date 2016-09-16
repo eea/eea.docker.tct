@@ -22,7 +22,7 @@
         </li>
       {% endif %}
       {% for objective in objectives|sort_by_code %}
-        <li id="list-item" {% if objective.code == current_objective.code %}class="active"{% endif %}>
+        <li id="list-item-imp" {% if objective.code == current_objective.code %}class="active"{% endif %}>
           <a href="{% url 'implementation' code=objective.code %}">
             {% trans "Objective" %} {{ objective.code }}
           </a> <a class="fa fa-caret-down" aria-hidden="true"></a>

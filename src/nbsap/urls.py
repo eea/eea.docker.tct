@@ -31,7 +31,7 @@ urlpatterns = [
     url(r'^crashme$', views.crashme, name='crashme'),
     url(r'^ping/me$', views.pingme, name='pingme'),
 
-    url(r'^national-strategy/implementation$', views.implementation, name='implementation'),
+    url(r'^national-strategy/implementation/$', views.implementation, name='implementation'),
     url(r'^national-strategy/implementation/intro$', views.implementation_page,
         name='implementation_page'),
     url(r'^national-strategy/implementation/(?P<code>((\d+\.)*\d+$))$',
