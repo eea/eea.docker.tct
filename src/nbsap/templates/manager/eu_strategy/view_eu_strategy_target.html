@@ -16,6 +16,7 @@
         <span class="btn btn-default ajaxget" data-url="{% url 'edit_eu_strategy_activity' target=target.pk %}">
         {% trans "Add action" %}
       </span>
+      <span data-url="{% url 'add_region' %}" class="btn btn-default ajaxget" type="button">{% trans "Add Region" %}</span>
     </div>
     <div class="row">
         <div class="col-md-12">
@@ -131,21 +132,10 @@
 </section>
 {% endblock %} {% block scripts %}
 <script src="/static/js/object_delete.js"></script>
+<script src="/static/js/jquery.ajaxGetForm.js"></script>
 <script>
     $(function() {
-        $('.ajaxget').on('click', function() {
-            var url = $(this).data('url');
-            $('.form').empty();
-            $.get(url, function(data) {
-                $('.form')
-                    .append(data)
-                    .find('form')
-                    .attr('action', url);
-            })
-            $('html, body').animate({
-                scrollTop: $('.form').offset().top
-            }, 800);
-        });
+     $.ajaxGet({ targetForm: ".form", button: ".ajaxget" });
     })
 </script>
 {% endblock scripts %}
