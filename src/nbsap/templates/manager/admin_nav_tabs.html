@@ -6,7 +6,7 @@
   {% if NAT_STRATEGY %}
   <li class="{% active request '^/dashboard/objectives/[\w\-]+' %}
                {% active request '^/dashboard/objectives/' %}">
-    <a href="{% url 'list_national_objectives' %}">{% trans "National Strategy" %}</a></li>
+    <a href="{% url 'list_national_objectives' %}">{% trans "National Objectives" %}</a></li>
   <li class="{% active request '^/dashboard/nat-indicators/[\w\-]+' %}
                {% active request '^/dashboard/nat-indicators/$' %}">
     <a href="{% url 'list_nat_indicators' %}">{% trans "National Indicators" %}</a>
