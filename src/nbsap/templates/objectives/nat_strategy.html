@@ -46,10 +46,10 @@
 {% block content %}
 <section class="content-header"></section>
   <h1 class="page-title">{% trans 'National Strategy' %}</h1>
-  <h1 class="x-title">
+  <h1  class="title-inline">
     {% trans "Objective" %} {{ current_objective.code }}
-    <h2>{% if current_objective.title %} {{ current_objective.title }} {% endif %}</h2>
   </h1>
+  <h2 class="subtitle-inline">{% if current_objective.title %} {{ current_objective.title }} {% endif %}</h2>
   <div>
       <a class="quick-links" href="{% url 'implementation' code=current_objective.code %}" title="{{ current_objective.code }}">
       See implementation
