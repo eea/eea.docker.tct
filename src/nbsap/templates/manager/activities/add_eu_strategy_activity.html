@@ -1,4 +1,6 @@
-{% load i18n %} {% block head_scripts %} {{ form.media }} {% endblock %} {% block content %}
+{% load i18n %}
+{% block head_scripts %} {{ form.media }} {% endblock %}
+{% block content %}
 
 
 
@@ -18,8 +20,6 @@
 
             <div class="form-group">
                 <label for="title">{% trans "Region" %}</label> {{ form.region }} {{ form.region.errors }}
-                <span data-url="{% url 'add_region' %}" class="btn btn-default ajaxget2" type="button">Add Region</span>
-                <div class="region-form"></div>
             </div>
 
 
@@ -44,23 +44,4 @@
         </form>
     </div>
 </div>
-{% endblock %}
-{% block script %}
-<script>
-    $(function() {
-        $('.ajaxget2').on('click', function() {
-            var url = $(this).data('url');
-            $('.region-form').empty();
-            $.get(url, function(data) {
-                $('.region-form')
-                    .append(data)
-                    .find('form')
-                    .attr('action', url);
-            })
-            $('html, body').animate({
-                scrollTop: $('.form').offset().top
-            }, 800);
-        });
-    })
-</script>
 {% endblock %}
