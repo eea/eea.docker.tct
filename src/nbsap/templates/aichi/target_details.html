@@ -187,14 +187,27 @@
 
 
   <div class="pages-navigation">
+    {% with all_targets|last as last %}
+      {% ifnotequal previous_target.code last.code %}
+        <div class="page-nav-prev-wrapper">
+          <a class="previous-page"
+          href="{% url 'aichi_target_detail' aichi_target_id=previous_target.pk %}">
+            {{ previous_target.get_parent_goal }} - {{ previous_target }}
+          </a>
+        </div>
+      {% endifnotequal %}
+    {% endwith %}
 
-     {% ifnotequal previous_target.code '20' %}
-    <div class="page-nav-prev-wrapper">  <a class="previous-page" href="{% url 'aichi_target_detail' aichi_target_id=previous_target.pk %}">  {{ previous_target.get_parent_goal }} - {{ previous_target }} </a></div>
-    {% endifnotequal %}
-
-    {% ifnotequal next_target.code '1' %}
-     <div class="page-nav-next-wrapper"> <a class="next-page" href="{% url 'aichi_target_detail' aichi_target_id=next_target.pk %}"> {{ next_target.get_parent_goal }} - {{ next_target }}  </a></div>
-     {% endifnotequal %}
+    {% with all_targets|first as first %}
+      {% ifnotequal next_target.code first.code %}
+       <div class="page-nav-next-wrapper">
+        <a class="next-page"
+          href="{% url 'aichi_target_detail' aichi_target_id=next_target.pk %}">
+            {{ next_target.get_parent_goal }} - {{ next_target }}
+          </a>
+        </div>
+      {% endifnotequal %}
+    {% endwith %}
   </div>
 
 

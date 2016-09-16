@@ -9,8 +9,29 @@ import tablib
 from nbsap import models
 from nbsap.forms import NationalObjectiveForm, NationalObjectiveEditForm
 from nbsap.utils import remove_tags
+from nbsap.models import sort_by_code
 
 from auth import auth_required
+
+
+def get_adjacent_objectives(objectives, current_objective):
+    all_objectives = []
+    for objective in objectives:
+        all_objectives.append(objective)
+        all_objectives.extend(objective.get_all_objectives())
+    all_objectives = sort_by_code(all_objectives)
+    for index, objective in enumerate(all_objectives):
+        if objective == current_objective:
+            previous_index = index - 1
+            next_index = index + 1
+            break
+
+    if previous_index < 0:
+        previous_index = len(all_objectives) - 1
+    if next_index > len(all_objectives) - 1:
+        next_index = 0
+
+    return all_objectives[previous_index], all_objectives[next_index]
 
 
 def nat_strategy(request, pk=None):
@@ -39,9 +60,13 @@ def nat_strategy(request, pk=None):
         if actions:
             obj_actions.append({subobj: actions})
 
-    # import pdb; pdb.set_trace()
+    previous_objective, next_objective = get_adjacent_objectives(
+        objectives, current_objective)
+
     return render(request, 'objectives/nat_strategy.html',
                   {'objectives': objectives,
+                   'previous_objective': previous_objective,
+                   'next_objective': next_objective,
                    'current_objective': current_objective,
                    'current_objective_cls': current_objective_cls,
                    'actions_by_objectives': obj_actions})
@@ -49,8 +74,9 @@ def nat_strategy(request, pk=None):
 
 def nat_strategy_download(request):
     eu_strategy = settings.EU_STRATEGY
-    headers = ['Title', 'Subtitle', 'Objective', 'Aichi Goal', 'Most Relevant Aichi Targets',
-               'Other Relevant Aichi Targets', 'Objective description']
+    headers = ['Title', 'Subtitle', 'Objective', 'Aichi Goal',
+               'Most Relevant Aichi Targets', 'Other Relevant Aichi Targets',
+               'Objective description']
     if eu_strategy:
         headers.extend(['EU Targets', 'EU Actions'])
     data = tablib.Dataset(headers=headers)

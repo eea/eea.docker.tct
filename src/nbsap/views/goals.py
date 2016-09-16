@@ -41,12 +41,13 @@ def get_most_relevant_indicators(target):
 def get_adjacent_targets(targets, current_target):
     if not current_target:
         return None, None
-    previous_index = 0
-    next_index = 0
+
     for index, target in enumerate(targets):
         if target == current_target:
             previous_index = index - 1
             next_index = index + 1
+            break
+
     if previous_index < 0:
         previous_index = len(targets) - 1
     if next_index > len(targets) - 1:
