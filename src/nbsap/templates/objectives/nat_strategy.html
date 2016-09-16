@@ -22,16 +22,15 @@
         <a class="nat-objective" href="{% url 'nat_strategy' pk=objective.pk %}" title="{{ objective.code }}">
           {% trans "Objective" %} {{ objective.code }}
         </a>
-     
       {% if objective.objectives_tree|length %}
+        <ul class="sidebar-submenu list">
         {% for obj in objective.objectives_tree|sort_by_code %}
-          <ul class="sidebar-submenu list">
           <li class="{% if obj.pk == current_objective.pk %}active{% endif %} indent">
             <a class="nat-objective" href="{% url 'nat_strategy' pk=obj.pk %}">
                {% trans "Objective" %} {{ obj.code }}</a>
           </li>
-          </ul>
         {% endfor %}
+         </ul>
       {% endif %}
        </li>
     {% endfor %}
