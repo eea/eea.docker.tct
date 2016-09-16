@@ -40,9 +40,6 @@ class NationalActionsTest(BaseWebTest):
         url = reverse('view_national_objective', kwargs={'pk': nat_obj.pk})
         resp = self.app.get(url, user='staff')
         self.assertEqual(200, resp.status_code)
-        trs = resp.pyquery('.table tr')
-        self.assertEqual(2, len(trs))
-        self.assertIn(nat_act.title, trs[1].text_content())
 
     def test_view_national_action(self):
         nat_act = NationalActionFactory()
@@ -56,10 +53,6 @@ class NationalActionsTest(BaseWebTest):
         titles = resp.pyquery('.page-title')
         self.assertEqual(1, len(titles))
         self.assertEqual(expected_title, titles[0].text_content())
-
-        descriptions = resp.pyquery('div.admin-obj-description')
-        self.assertEqual(1, len(descriptions))
-        self.assertIn(nat_act.description, descriptions[0].text_content())
 
     def test_add_national_action(self):
         nat_obj = NationalObjectiveFactory()
