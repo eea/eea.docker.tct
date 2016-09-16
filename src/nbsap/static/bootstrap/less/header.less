@@ -79,27 +79,8 @@
 
 
 
+.account-menu,
 .lang-menu {
-    list-style: none;
-    margin: 0;
-    box-sizing: border-box;
-    padding: 0;
-    @media screen and (max-width: 800px) {
-        // background: rgba(0, 0, 0, 0.1);
-    }
-    @media screen and (min-width: 800px) {
-        display: inline-block;
-        float: right;
-    }
-    a {
-        display: block;
-        color: #fff;
-        padding: 0 16px;
-        line-height: 5rem;
-    }
-}
-
-.account-menu {
 
     list-style: none;
     margin: 0;
@@ -114,13 +95,26 @@
     }
     @media screen and (min-width: 800px) {
         position: absolute;
-        right: 30px;
+        
             border-top: 1px solid @brand-blue;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
         top: 31px;
         background: white;
         box-shadow: 0 0 2px rgba(0, 0, 0, 0.14), 0 2px 2px rgba(0, 0, 0, 0.28);
+    }
+}
+
+.lang-menu {
+    @media (min-width: 800px) {
+    right: 172px;
+    width: 111px;
+    }
+}
+
+.account-menu {
+    @media (min-width: 800px){
+        right: 30px;
     }
 }
 
@@ -254,9 +248,7 @@
     display: block;
     line-height: 1.2
 }
-.accountwrapper .user a,
 .nav-menu a,
-.lang-menu a,
 .accountwrapper a {
     display: block;
     padding: 0 16px;
@@ -277,10 +269,9 @@
 
 
 .accountwrapper .account-menu-trigger,
-.lang-menu .lang-menu-trigger {
+.lang-menu-trigger,
+span.user a {
     color: @brand-blue!important;
-    
-    line-height: 2;
     margin: 0!important;
     text-transform: uppercase;
     font-size: .8em!important;
@@ -288,6 +279,11 @@
     @media (min-width: 800px) {
         border-bottom: 1px solid @brand-blue;
     }
+}
+
+.user .active {
+    color: white!important;
+    border-bottom: none;
 }
 
 
@@ -517,27 +513,5 @@
     }
     @media (min-width: 800px) {
 
-    }
-}
-
-
-.lang-menu {
-    list-style: none;
-    margin: 0;
-    box-sizing: border-box;
-    padding: 0;
-    overflow: hidden;
-    display: none;
-    @media screen and (max-width: 800px) {
-        // background: rgba(0, 0, 0, 0.1);
-            border-bottom: solid @brand-orange;
-    }
-    @media screen and (min-width: 800px) {
-        border-top: solid white;
-        position: absolute;
-        right:  9rem;
-        top: 48px;
-        background: white;
-        box-shadow: 0 0 2px rgba(0, 0, 0, 0.14), 0 2px 2px rgba(0, 0, 0, 0.28);
     }
 }

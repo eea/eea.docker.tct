@@ -163,14 +163,14 @@ $sidebargoalmenu = $(".sidebar-menu > li ");
 //     }
 // }
 
-(function() {
+
     if (document.location.hash) {
         setTimeout(function() {
             window.scrollTo(window.scrollX, window.scrollY - 100);
         }, 10);
     }
 
-    $('a').click(function(){
+    $('.sidebar-menu a').click(function(){
        if (document.location.hash) {
         setTimeout(function() {
             window.scrollTo(window.scrollX, window.scrollY - 100);
@@ -178,7 +178,7 @@ $sidebargoalmenu = $(".sidebar-menu > li ");
     }
     })
 
-})();
+
 
 
 });
