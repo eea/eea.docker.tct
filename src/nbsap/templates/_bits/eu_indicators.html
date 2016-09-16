@@ -8,7 +8,7 @@
           <a href="{% url 'eu_indicator_details' pk=eu_indicator.pk %}#{{ eu_indicator.pk }}"
              title="{{ eu_indicator.title }}">
             {{ eu_indicator.indicator_type|upper }}
-            {{ eu_indicator.code }}: 
+            {{ eu_indicator.code }} 
           </a><p class="content-description">{{ eu_indicator.title }}</p>
         </li>
     {% endfor %}

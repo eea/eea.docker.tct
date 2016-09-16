@@ -25,7 +25,7 @@
         {% for eu_target in target.most_relevant_targets %}
         <li>
           <a href="{% url 'eu_target_detail' pk=eu_target.pk %}" title="{{ eu_target.code }}">
-            {% trans "EU Target" %} {{ eu_target.code }}:
+            {% trans "EU Target" %} {{ eu_target.code }}
           </a><p class="content-description">{{ eu_target.title }}</p>
         </li>
         {% endfor %}
@@ -94,7 +94,7 @@
             <a href="{% url 'eu_indicator_details' pk=eu_indicator.id %}"
                 title="{{ eu_indicator.title }}">
               {{ eu_indicator.indicator_type|upper }}
-              {{ eu_indicator.code }}: 
+              {{ eu_indicator.code }} 
             </a><p class="content-description">{{ eu_indicator.title }}</p>
           </li>
         {% endfor %}
@@ -120,7 +120,7 @@
             {% if eu_indicator.url %}
               <a href="{{ eu_indicator.url }}" title="{{ eu_indicator.title }}">
                 {{ eu_indicator.indicator_type|upper }}
-                {{ eu_indicator.code }}: 
+                {{ eu_indicator.code }} 
               </a><p class="content-description">{{ eu_indicator.title }}</p>
             {% else %}
               {{ eu_indicator.code }} {{ eu_indicator.title }}
@@ -149,7 +149,7 @@
         <li>
           <a href="{% url 'indicator' pk=indicator.pk %}"
              data-modal="#indicator_modal">
-            {% trans "Indicator" %} {{indicator.id}}: 
+            {% trans "Indicator" %} {{indicator.id}} 
           </a><p class="content-description">{{ indicator.title }}</p>
         </li>
         {% endfor %}
@@ -174,7 +174,7 @@
         <li>
           <a href="{% url 'indicator' pk=indicator.pk %}"
              data-modal="#indicator_modal">
-            {% trans "Indicator" %} {{indicator.id}}: 
+            {% trans "Indicator" %} {{indicator.id}} 
           </a><p class="content-description">{{ indicator.title }}</p>
         </li>
         {% endfor %}

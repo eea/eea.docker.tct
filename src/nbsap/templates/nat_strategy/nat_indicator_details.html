@@ -15,7 +15,7 @@
 
 {% block sidebar %}
   <div class="sidebar">
-    <h4 class="sidebar-title">National objectives</h4>
+    <h4 class="sidebar-title">National Indicators</h4>
     <ul class="sidebar-menu">
       {% for indicator in indicators|sort_by_code %}
         <li class="{% if indicator.pk == current_indicator.pk %}active {% endif %}">

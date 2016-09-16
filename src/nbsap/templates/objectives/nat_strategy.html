@@ -15,7 +15,7 @@
 {% block sidebar %}
 <div id="nat-obj-list" class="sidebar">
   <h4 class="sidebar-title">{% trans "Objectives" %}</h4>
-  <input class="search" placeholder="Search" />
+  <input class="search" placeholder="quick search" />
   <ul class="sidebar-menu list">
     {% for objective in objectives|sort_by_code %}
       <li class="{% if objective.pk == current_objective.pk %}active{% endif %} ">
@@ -50,16 +50,20 @@
     {% trans "Objective" %} {{ current_objective.code }}
     <h2>{% if current_objective.title %} {{ current_objective.title }} {% endif %}</h2>
   </h1>
+  <div>
+      <a class="quick-links" href="{% url 'implementation' code=current_objective.code %}" title="{{ current_objective.code }}">
+      See implementation
+      </a>
+      <a class="quick-links" href="#aichi-mapping">Mapping with Aichi</a>
+      <a class="quick-links" href="#nat-mapping">Mapping with National Indicators</a>
+      <a class="quick-links" href="#eu-mapping">Mapping with EU</a>
+  </div>
   <div class="summary">
     <div class="snippet">
-      {{ current_objective.description|striptags|truncatechars:510|safe }}
-      {% if current_objective.description|length > 510 %}
-        <a class="more">{% trans "show more" %}</a>
-      {% endif%}
+      {{ current_objective.description|striptags|safe }}
     </div>
     <div class="full">
       {{ current_objective.description|safe }}
-      <a class="less">{% trans "show less" %}</a>
     </div>
   </div>
 
@@ -71,40 +75,33 @@
     {% endif %}
   </div>
 
-  <div>
-    <p>
-      <a href="{% url 'implementation' code=current_objective.code %}" title="{{ current_objective.code }}">
-      See implementation
-      </a>
-    </p>
-  </div>
 
 {% endblock %}
 
 
 {% block scripts %}
   <script>
-  $(function () {
-    $("[rel=tooltip]").tooltip();
+  // $(function () {
+  //   $("[rel=tooltip]").tooltip();
 
-    $('.more').on('click', function() {
-      var parents = $(this).parents('.summary');
-      var snippet = parents.find('.snippet');
-      var full = parents.find('.full');
+  //   $('.more').on('click', function() {
+  //     var parents = $(this).parents('.summary');
+  //     var snippet = parents.find('.snippet');
+  //     var full = parents.find('.full');
 
-      snippet.hide();
-      full.show();
-    });
+  //     snippet.hide();
+  //     full.show();
+  //   });
 
-    $('.less').on('click', function() {
-      var parents = $(this).parents('.summary');
-      var snippet = parents.find('.snippet');
-      var full = parents.find('.full');
+  //   $('.less').on('click', function() {
+  //     var parents = $(this).parents('.summary');
+  //     var snippet = parents.find('.snippet');
+  //     var full = parents.find('.full');
 
-      full.hide();
-      snippet.show();
-    });
-  });
+  //     full.hide();
+  //     snippet.show();
+  //   });
+  // });
 
   $(document).ready(function() {
     var options = {

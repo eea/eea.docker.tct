@@ -2,7 +2,7 @@
 {% load utils %}
 
 <div class="well">
-  <h4 class="mapping">{% trans "Mapping with Aichi" %}</h4>
+  <h4 class="mapping" id="aichi-mapping">{% trans "Mapping with Aichi" %}</h4>
   {% with strategies=subobj.objective_national_strategy.all %}
     {% if strategies|length %}
 
@@ -66,7 +66,7 @@
 
 
 <div class="well">
-  <h4 class="mapping">{% trans "Mapping with National Indicators" %}</h4>
+  <h4 class="mapping" id="nat-mapping">{% trans "Mapping with National Indicators" %}</h4>
 
   {% with indicators=subobj.nat_indicators.all %}
     {% with other_indicators=subobj.other_nat_indicators.all %}

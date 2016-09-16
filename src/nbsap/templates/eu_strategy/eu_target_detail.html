@@ -30,7 +30,8 @@
 {% endblock %}
 
 {% block content %}
-<h1>{% trans "EU Target" %} {{ current_target.code }}</h1><h2> {{ current_target.title }}</h2>
+<h1 class="title-inline">{% trans "EU Target" %} {{ current_target.code }}</h1>
+<h2 class="subtitle-inline"> {{ current_target.title }}</h2>
 <p class="objective-description">{{ current_target.description|safe }}</p>
 
 {% if current_target.children.count %}

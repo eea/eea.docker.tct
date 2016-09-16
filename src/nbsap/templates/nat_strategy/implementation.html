@@ -66,14 +66,12 @@
 
         <div class="summary">
           <div class="snippet">
-            {{ action.description|striptags|truncatechars:510|safe }}
-            <a class="more">{% trans "show more" %}</a>
+            {{ action.description|striptags|safe }}
           </div>
           <div class="full">
             <div class="html-content">{{ action.description|safe }}</div>
 
             {% include 'manager/nat_strategy/mapping/nat_action_aichi_mapping.html' %}
-            <a class="less"> {% trans "show less" %}</a>
           </div>
           <div>
             <p>
@@ -98,24 +96,24 @@
 
 {% block scripts %}
   <script>
-    $(function () {
-      $('.more').on('click', function () {
-        var parents = $(this).parents('.summary');
-        var snippet = parents.find('.snippet');
-        var full = parents.find('.full');
+    // $(function () {
+    //   $('.more').on('click', function () {
+    //     var parents = $(this).parents('.summary');
+    //     var snippet = parents.find('.snippet');
+    //     var full = parents.find('.full');
 
-        snippet.hide();
-        full.show();
-      });
-      $('.less').on('click', function () {
-        var parents = $(this).parents('.summary');
-        var snippet = parents.find('.snippet');
-        var full = parents.find('.full');
+    //     snippet.hide();
+    //     full.show();
+    //   });
+    //   $('.less').on('click', function () {
+    //     var parents = $(this).parents('.summary');
+    //     var snippet = parents.find('.snippet');
+    //     var full = parents.find('.full');
 
-        full.hide();
-        snippet.show();
-      });
-    });
+    //     full.hide();
+    //     snippet.show();
+    //   });
+    // });
 
   </script>
 {% endblock scripts %}
