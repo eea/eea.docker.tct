@@ -33,12 +33,6 @@
       {% endif %}
     {% endfor %}
   </ul>
-
-  <div class="download-container">
-    <a class="btn btn-success small" href="{% url 'nat_strategy_download' %}">
-      {% trans "Download the mapping" %}
-    </a>
-  </div>
 </div>
 {% endblock %}
 
@@ -57,6 +51,7 @@
       <a class="quick-links" href="#aichi-mapping">Mapping with Aichi</a>
       <a class="quick-links" href="#nat-mapping">Mapping with National Indicators</a>
       <a class="quick-links" href="#eu-mapping">Mapping with EU</a>
+      <a class="quick-links" href="{% url 'nat_strategy_download' %}">{% trans "Download the mapping" %}</a>
   </div>
   <div class="summary">
     <div class="snippet">
