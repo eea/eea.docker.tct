@@ -76,6 +76,7 @@ NBSAP - {% trans "EU Indicators: List Indicators" %}
 
 {% block scripts %}
 <script src="/static/js/object_delete.js"></script>
+<script src="/static/js/jquery.ajaxGetForm.js"></script>
 <script>
   $(function () {
     $('#indicator-table').dataTable({
@@ -84,18 +85,9 @@ NBSAP - {% trans "EU Indicators: List Indicators" %}
     });
     var url=$('#indicator-table').data('url');
     $('.filter-wrapper').prepend('<div class="action-bar"><span class="btn btn-success add ajaxget" data-url="'+url+'?category={{ category }}">{% trans "Add indicator" %}</span></div>');
-   $('.ajaxget').on('click',function(){
-      var url=$(this).data('url');
-      $('.form').empty();
-      $.get(url,function(data){
-        $('.form')
-        .append(data)
-        .find('form')
-        .attr('action',url);
-      })
-        $('html, body').animate({
-        scrollTop: $('.form').offset().top
-      }, 800);
+    $.ajaxGet({
+        targetForm: ".form",
+        button: ".ajaxget"
     });
    });
 </script>

@@ -49,7 +49,7 @@ NBSAP - {% trans "EU Strategy: List Targets" %}
       </td>
       <td>
         <form class="delete" method="POST" action="{% url 'delete_eu_strategy_target' pk=target.pk %}">
-          <span class="btn btn-xs btn-warning ajaxget"
+          <span class="btn btn-xs btn-warning ajaxget2"
              data-url="{% url 'edit_eu_strategy_target' pk=target.pk %}"> <i class="glyphicon glyphicon-edit"></i></span>
 
           <button type="submit" class="btn btn-xs btn-danger edit"
@@ -123,29 +123,20 @@ NBSAP - {% trans "EU Strategy: List Targets" %}
 </div>
 {% endblock %}
 {% block scripts %}
-
+<script src="/static/js/jquery.ajaxGetForm.js"></script>
 <script>
-  $(function () {
-    $('#target-table').dataTable({
-      "paging": false,
-      "dom": '<"filter-wrapper"f>t'
+    $(function() {
+        $('#target-table').dataTable({
+            "paging": false,
+            "dom": '<"filter-wrapper"f>t'
+        });
+        var url = $('#target-table').data('url');
+        $('.filter-wrapper').prepend('{% if EU_STRATEGY_ADD %}<div class="action-bar"><span class="btn btn-success add ajaxget" data-url="' + url + '">{% trans "Add target" %}</span></div>{% endif %}');
+        $.ajaxGet({
+            targetForm: ".form",
+            button: ".ajaxget"
+        });
     });
-    var url = $('#target-table').data('url');
-    $('.filter-wrapper').prepend('{% if EU_STRATEGY_ADD %}<div class="action-bar"><span class="btn btn-success add ajaxget" data-url="' + url + '">{% trans "Add target" %}</span></div>{% endif %}');
-    $('.ajaxget').on('click',function(){
-      var url=$(this).data('url');
-      $('.form').empty();
-      $.get(url,function(data){
-        $('.form')
-        .append(data)
-        .find('form')
-        .attr('action',url);
-      })
-        $('html, body').animate({
-        scrollTop: $('.form').offset().top
-      }, 800);
-    });
-  });
 </script>
 <script src="/static/js/object_delete.js"></script>
 {% endblock scripts %}

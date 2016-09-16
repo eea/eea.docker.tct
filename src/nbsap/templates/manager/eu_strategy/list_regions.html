@@ -46,6 +46,7 @@ NBSAP - {% trans "List Regions" %}
 {% endblock %}
 {% block scripts %}
 <script src="/static/js/object_delete.js"></script>
+<script src="/static/js/jquery.ajaxGetForm.js"></script>
 <script>
   $(function () {
     $('#region-table').dataTable({
@@ -53,18 +54,9 @@ NBSAP - {% trans "List Regions" %}
       "dom": '<"filter-wrapper"f>t'
     });
     $('.filter-wrapper').prepend('<div class="action-bar"><span class="btn btn-success add ajaxget" data-url="{% url 'add_region' %}">{% trans "Add Region" %}</span></div>');
-    $('.ajaxget').on('click',function(){
-      var url=$(this).data('url');
-      $('.form').empty();
-      $.get(url,function(data){
-        $('.form')
-        .append(data)
-        .find('form')
-        .attr('action',url);
-      })
-        $('html, body').animate({
-        scrollTop: $('.form').offset().top
-      }, 800);
+    $.ajaxGet({
+        targetForm: ".form",
+        button: ".ajaxget"
     });
   });
 </script>
