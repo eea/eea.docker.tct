@@ -163,21 +163,35 @@ $sidebargoalmenu = $(".sidebar-menu > li ");
 //     }
 // }
 
+(function() {
+ $(window).on("load", function() {
+
 
     if (document.location.hash) {
         setTimeout(function() {
-            window.scrollTo(window.scrollX, window.scrollY - 100);
+            window.scrollTo(window.scrollX, window.scrollY - 130);
         }, 10);
     }
 
     $('.sidebar-menu a').click(function(){
        if (document.location.hash) {
         setTimeout(function() {
-            window.scrollTo(window.scrollX, window.scrollY - 100);
+            window.scrollTo(window.scrollX, window.scrollY - 130);
         }, 10);
     }
     })
+  })
 
+})();
+
+
+$('.search').on('focus',function(){
+  $('.sidebar-submenu').addClass('visible');
+});
+
+$('.search').on('blur',function(){
+$('.sidebar-submenu').removeClass('visible');
+});
 
 
 

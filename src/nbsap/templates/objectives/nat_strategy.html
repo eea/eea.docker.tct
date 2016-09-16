@@ -22,15 +22,18 @@
         <a class="nat-objective" href="{% url 'nat_strategy' pk=objective.pk %}" title="{{ objective.code }}">
           {% trans "Objective" %} {{ objective.code }}
         </a>
-      </li>
+     
       {% if objective.objectives_tree|length %}
         {% for obj in objective.objectives_tree|sort_by_code %}
+          <ul class="sidebar-submenu list">
           <li class="{% if obj.pk == current_objective.pk %}active{% endif %} indent">
             <a class="nat-objective" href="{% url 'nat_strategy' pk=obj.pk %}">
                {% trans "Objective" %} {{ obj.code }}</a>
           </li>
+          </ul>
         {% endfor %}
       {% endif %}
+       </li>
     {% endfor %}
   </ul>
 </div>
@@ -76,31 +79,10 @@
 
 {% block scripts %}
   <script>
-  // $(function () {
-  //   $("[rel=tooltip]").tooltip();
-
-  //   $('.more').on('click', function() {
-  //     var parents = $(this).parents('.summary');
-  //     var snippet = parents.find('.snippet');
-  //     var full = parents.find('.full');
-
-  //     snippet.hide();
-  //     full.show();
-  //   });
-
-  //   $('.less').on('click', function() {
-  //     var parents = $(this).parents('.summary');
-  //     var snippet = parents.find('.snippet');
-  //     var full = parents.find('.full');
-
-  //     full.hide();
-  //     snippet.show();
-  //   });
-  // });
-
   $(document).ready(function() {
     var options = {
-      valueNames: [ 'nat-objective' ]
+      valueNames: [ 'nat-objective' ],
+        nestedSearch: true
     };
     var userList = new List('nat-obj-list', options);
   });
