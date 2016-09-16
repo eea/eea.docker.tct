@@ -11,6 +11,7 @@ from nbsap import models
 API_BASE_URL = 'https://api.cbd.int/api/v2013/'
 AUTH_URL = API_BASE_URL + 'authentication/token'
 SAVE_URL = API_BASE_URL + 'documents/{uid}/versions/draft?schema={schema}'
+WORKFLOW_URL = API_BASE_URL + 'workflows'
 
 MODEL_TO_SCHEMA = {
     models.NationalObjective: 'nationalTarget',
@@ -57,6 +58,24 @@ def get_cbd_obj(model_cls, pk, schema):
     return cbd_obj
 
 
+def create_workflow(new_document, headers):
+    workflow_data = {
+        'type': 'publishNationalRecord',
+        'version': '0.4',
+        'data': {
+            'realm': new_document['realm'],
+            'documentID': new_document['workingDocumentID'],
+            'identifier': new_document['identifier'],
+            'title': new_document['workingDocumentTitle'],
+            'abstract': new_document['workingDocumentSummary'],
+            'metadata': new_document['workingDocumentMetadata'],
+        }
+    }
+    payload = json.dumps(workflow_data)
+    resp = requests.post(WORKFLOW_URL, payload, headers=headers)
+    return resp.status_code
+
+
 def send_to_cbd(request, model_name, pk):
     if request.method == 'POST':
         token = get_token()
@@ -86,6 +105,9 @@ def send_to_cbd(request, model_name, pk):
         if resp.status_code == 200:
             status = 'success'
             message = 'Successfully sent object to CBD.'
+
+            new_document = resp.json()
+            create_workflow(new_document, headers)
         else:
             error_message = resp.json().get('Message')
             status = 'error'
