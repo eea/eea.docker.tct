@@ -136,11 +136,13 @@
   background-color: darkred !important;
 }
 
-.aichi_targets_text i {
+.aichi_targets_text i,
+.nat_objectives_text i {
   background: #0018A8 !important;
 }
 
-.other_aichi_targets_text i {
+.other_aichi_targets_text i,
+.other_nat_objectives_text i{
   background: #1F75FE !important;
 }
 

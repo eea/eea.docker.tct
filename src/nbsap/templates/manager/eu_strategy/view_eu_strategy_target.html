@@ -63,7 +63,11 @@
     {% else %}
     <p>
 
-        {% trans "No targets" %}</p> {% endif %} {% regroup actions by region as action_list %} {% if action_list|length != 0 %}
+        {% trans "No targets" %}
+    </p>
+        {% endif %}
+        {% regroup actions by region as action_list %}
+        {% if action_list|length != 0 %}
 
     <div class="property_list">
         <table class="table table-striped minimalist">
@@ -130,7 +134,8 @@
         {% trans "No actions found" %} </p>{% endif %}
     <div class="form"></div>
 </section>
-{% endblock %} {% block scripts %}
+{% endblock %}
+{% block scripts %}
 <script src="/static/js/object_delete.js"></script>
 <script src="/static/js/jquery.ajaxGetForm.js"></script>
 <script>

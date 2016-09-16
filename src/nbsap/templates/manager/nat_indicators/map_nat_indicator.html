@@ -25,42 +25,42 @@ NBSAP - {% trans "Map Indicator " %}{{ indicator.code }}
     error {{ errors }} below.{% endblocktrans %}
   </p>
   {% endif %}
-  <form action="" method="post" class="form-horizontal">
+  <form action="" method="post">
 
     <div class="error-list">{{ form.non_field_errors }}</div>
 
-    <div class="form-group row">
-      <label class="col-md-2" for="nat_objectives">{% trans "Most relevant National Objectives" %}</label>
-
-      <div class="col-md-3">
-        {{ form.nat_objectives }}
-        {{ form.nat_objectives.errors }}
-      </div>
-
-      <div class="nat_objectives_text col-md-7 short-descrip">
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <label class="col-md-2" for="other_nat_objectives">{% trans "Other National Objectives" %}</label>
-
-      <div class="col-md-3">
-        {{ form.other_nat_objectives }}
-        {{ form.other_nat_objectives.errors }}
-      </div>
-
-      <div class="other_nat_objectives_text col-md-7 short-descrip">
-      </div>
-    </div>
-
     <hr>
+    <div class="col-md-3">
+      <div class="box">
+        <div class="box-body">
+          <div class="form-group">
+            <label class="block" for="nat_objectives">{% trans "Most relevant National Objectives" %}</label>
+            {{ form.nat_objectives }}
+            {{ form.nat_objectives.errors }}
+          </div>
 
-    <div class="action-bar">
-      <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
-      <a href="{% url 'view_nat_indicator' pk=indicator.pk %}"
-         class="btn btn-default" type="button">{% trans "Cancel" %}</a>
+
+
+          <div class="form-group">
+            <label class="block" for="other_nat_objectives">{% trans "Other National Objectives" %}</label>
+            {{ form.other_nat_objectives }}
+            {{ form.other_nat_objectives.errors }}
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
+            <a href="{% url 'view_nat_indicator' pk=indicator.pk %}" class="btn btn-default" type="button">
+              {% trans "Cancel" %}</a>
+          </div>
+        </div>
+      </div>
     </div>
-
+    <div class="col-md-9">
+      <ul class="timeline timeline-inverse nat_objectives_text">
+      </ul>
+      <ul
+        class="timeline timeline-inverse other_nat_objectives_text">
+      </ul>
+    </div>
   </form>
 </section>
 {% endblock %}
@@ -71,11 +71,11 @@ NBSAP - {% trans "Map Indicator " %}{{ indicator.code }}
 
   forbidCrossChoicesIntersection('nat_objectives', 'other_nat_objectives');
 
-  showObjectiveCodeValue('nat_objectives',
+  showTargetCodeValue('nat_objectives',
     '.nat_objectives_text',
     "{% url 'objective_title' pk=1 %}");
 
-  showObjectiveCodeValue('other_nat_objectives',
+  showTargetCodeValue('other_nat_objectives',
     '.other_nat_objectives_text',
     "{% url 'objective_title' pk=1 %}");
 </script>
