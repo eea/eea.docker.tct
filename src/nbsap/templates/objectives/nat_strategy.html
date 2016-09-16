@@ -18,7 +18,7 @@
   <input class="search" placeholder="quick search" />
   <ul class="sidebar-menu list">
     {% for objective in objectives|sort_by_code %}
-      <li class="{% if objective.pk == current_objective.pk %}active{% endif %} ">
+      <li class="{% if objective.pk == current_objective.pk %}active {% endif %}{% if current_objective in objective.objectives_tree %}active {% endif %}">
         <a class="nat-objective" href="{% url 'nat_strategy' pk=objective.pk %}" title="{{ objective.code }}">
           {% trans "Objective" %} {{ objective.code }}
         </a>
