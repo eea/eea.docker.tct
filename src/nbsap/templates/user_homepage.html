@@ -16,16 +16,17 @@
 
 {% block content %}
 <div class="homepage-info">
-	<h1 class="page-title">{% trans "National Biodiversity Strategies and Action Plan " %}</h1>
-	<h2 class="page-desc">This is platform for organizing the implementation of a country's national biodiversity strategy after AICHI (and by case after EU Strategy). </h2>
-	<h2 class="page-list-title">Here you can:</h2>
+	<h1 class="page-title">{% trans "Target Cross-linking tool" %}</h1>
+	<h2 class="page-desc">The Target Cross-linking tool is a working tool to manage cross-linkages between biodiversity-related targets from the national to the EU and the global levels. It is intended to support national and regional assessment of progress and facilitate related reporting obligations.</h2>
 	<ul class="page-list">
-		<li class="homepage-goals"><a href="{% url 'list_goals' %}">View current AICHI Goals</a><div class="goals-info"></li>
-		<li class="homepage-targets"><a href="{% url 'eu_targets' %}">View current EU Targets</a><div class="targets-info"></div></li>
-		<li class="homepage-indicators"><a href="{% url 'eu_indicators' %}">View current EU Indicators</a><div class="indicators-info"></div></li>
-		{% if user.is_superuser %}
-			<li>You can also add new Goals, Targets or Indicators in the <a href="{% url 'admin_home'%}">Administration</a> section.</li>
+		<li class="homepage-goals">View the Aichi Strategy (<a href="{% url 'list_goals' %}">Goals and Targets</a>)<div class="goals-info"></li>
+		{% if EU_STRATEGY %}
+		<li class="homepage-targets">View the EU Strategy (<a href="{% url 'eu_targets' %}">Targets, Actions</a> and <a href="{% url 'eu_indicators' %}">Indicators</a>)<div class="targets-info"></div></li>
 		{% endif %}
+		{% if NAT_STRATEGY %}
+		<li class="homepage-targets">View the <a href="{% url 'nat_strategy' %}">National Strategy</a>, <a href="{% url 'nat_indicators' %}">National Indicators</a> and the <a href="{% url 'implementation_page' %}">Implementation actions</a> <div class="targets-info"></div></li>
+		{% endif %}
+		<li>Edit the content and mappings using the <a href="{% url 'admin_home'%}">Dashboard</a> (requires login) section.</li>
 	</ul>
 </div>
 {% endblock %}

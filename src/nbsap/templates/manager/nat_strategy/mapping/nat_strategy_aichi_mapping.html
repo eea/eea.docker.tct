@@ -14,7 +14,7 @@
         {% for goal in goals %}
           <li>
             <a href="{% url 'list_targets' code=goal.code %}">
-            {% trans "Aichi Goal" %} {{ goal.code|upper }}</a>
+            {% trans "Goal" %} {{ goal.code|upper }}</a>
             <p>{{ goal.description|safe }}</p>
           </li>
         {% endfor %}
@@ -33,7 +33,7 @@
               {% if goal %}
               <li>
                 <a href="{% url 'list_targets' code=goal.code %}#{{ target.code }}">
-                {% trans "Aichi Target" %} {{ target.code }}</a>
+                {% trans "Target" %} {{ target.code }}</a>
                 <p>{{ target.description|safe }}</p>
               </li>
               {% endif %}
@@ -52,7 +52,7 @@
             {% assign target.get_parent_goal as goal %}
             <li>
               <a href="{% url 'list_targets' code=goal.code %}#{{ target.code }}">
-              {% trans "Aichi Target" %} {{ target.code }}</a>
+              {% trans "Target" %} {{ target.code }}</a>
               <p>{{ target.description|safe }}</p>
             </li>
           {% endfor %}
