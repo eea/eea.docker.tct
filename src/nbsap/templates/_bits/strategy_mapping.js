@@ -1,5 +1,6 @@
-$(".chzn-select").chosen();
 $(function () {
+  $(".chzn-select").chosen();
+
   $('select[name=aichi_goals]').on('change', function () {
     var option = $(this).val();
     var text = $('form').find('.goal_text');
@@ -9,7 +10,7 @@ $(function () {
     } else {
       var urls = [];
       $.each(option, function(i, op){
-        url = "{% url 'goal_title' pk=1%}".replace('1', op);
+        url = "{% url 'goal_title' pk=1 %}".replace('1', op);
         urls.push(url);
       });
 

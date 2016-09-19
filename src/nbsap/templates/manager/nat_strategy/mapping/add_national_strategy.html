@@ -29,72 +29,64 @@ NBSAP - {% trans "Mapping National Objectives: Add national strategy" %}
   </p>
   {% endif %}
 
-  <form action="{% url 'edit_national_strategy' %}" method="post"
-        id="national-strategy-add">
+  <form action="{% url 'edit_national_strategy' %}" method="post">
+    <div class="col-md-3">
+      <div class="box">
+        <div class="box-body">
+          <div class="error-list">{{ form.non_field_errors }}</div>
 
-    <div class="error-list">{{ form.non_field_errors }}</div>
+          <div class="form-group">
+            <label class="block" for="nat_objective">{% trans "National Objective" %}</label>
+            {{ form.nat_objective }}
+          </div>
 
-    <div class="form-group">
-      <label for="nat_objective">{% trans "National Objective" %}</label>
-      <div> {{ form.nat_objective }}
-      </div>
-      <div class="objective_text">
-      </div>
-    </div>
+          <div class="form-group">
+            <label class="block" for="aichi_goal">{% trans "AICHI Goal" %}</label>
+            {{ form.aichi_goals }}
+          </div>
 
-    <hr>
+          <div class="form-group">
+            <label class="block" for="aichi_target">{% trans "Most relevant AICHI Target" %}</label>
+            {{ form.aichi_targets }}
+          </div>
 
-    <div class="form-group">
-      <label for="aichi_goal">{% trans "AICHI Goal"%}</label>
-      <div> {{ form.aichi_goals }}
-      </div>
-      <div class="goal_text">
-      </div>
-    </div>
-
-    <hr>
-
-    <div class="form-group">
-      <label for="aichi_target">{% trans "Most relevant AICHI Targets" %}</label>
-      <div> {{ form.aichi_targets }}
-      </div>
-      <div class="target_text">
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="other_targets">{% trans "Other AICHI Targets" %}</label>
-      <div> {{ form.other_targets }}
-      </div>
-      <div class="other_target_text">
-      </div>
-    </div>
-
-    <hr>
-
-    {% if EU_STRATEGY %}
-    <div class="form-group">
-      <label>{% trans "EU Targets" %}</label>
-      <div> {{ form.eu_targets }}
-      </div>
-      <div class="eu_target_text">
+          <div class="form-group">
+            <label class="block" for="other_targets">{% trans "Other AICHI Targets" %}</label>
+            {{ form.other_targets }}
+          </div>
+          {% if EU_STRATEGY %}
+          <div class="form-group">
+            <label class="block">{% trans "EU Targets" %}</label>
+            {{ form.eu_targets }}
+          </div>
+          <div class="form-group">
+            <label class="block">{% trans "EU Actions" %}</label>
+           {{ form.eu_actions }}
+          </div>
+          {% endif %}
+          <div class="form-group">
+            <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
+            <a href="{% url 'list_eu_aichi_strategy' %}" class="btn btn-default" type="button">{% trans "Cancel" %}</a>
+          </div>
+        </div>
       </div>
     </div>
-
-    <div class="form-group">
-      <label>{% trans "EU Actions" %}</label>
-      <div> {{ form.eu_actions }}
-      </div>
-      <div class="actions_text">
-      </div>
+    <div class="col-md-9">
+      <ul class="timeline timeline-inverse objective_text">
+      </ul>
+      <ul class="timeline timeline-inverse goal_text">
+      </ul>
+      <ul class="timeline timeline-inverse target_text">
+      </ul>
+      <ul class="timeline timeline-inverse other_target_text">
+      </ul>
+      {% if EU_STRATEGY %}
+      <ul class="timeline timeline-inverse eu_target_text">
+      </ul>
+      <ul class="timeline timeline-inverse actions_text">
+      </ul>
+      {% endif %}
     </div>
-    {% endif %}
-
-    <div class="action-bar">
-      <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
-      <a href="{% url 'list_national_strategy' %}" class="btn btn-default" type="button">{% trans "Cancel" %}</a>
-    </div>
-
   </form>
 </section>
 {% endblock %}
@@ -107,4 +99,3 @@ NBSAP - {% trans "Mapping National Objectives: Add national strategy" %}
   {% include '_bits/strategy_mapping.js' %}
 </script>
 {% endblock %}
-

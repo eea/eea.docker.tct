@@ -32,8 +32,7 @@ NBSAP - {% trans "Mapping National Objectives to AICHI and EU targets" %}
     <th>{% trans "EU Targets" %}</th>
     <th>{% trans "EU Actions" %}</th>
     {% endif %}
-    <th>{% trans "Edit" %}</th>
-    <th>{% trans "Delete" %}</th>
+    <th></th>
     </thead>
 
     <tbody>
@@ -82,13 +81,11 @@ NBSAP - {% trans "Mapping National Objectives to AICHI and EU targets" %}
         {% endif %}
       </td>
       {% endif %}
-      <td style="text-align: center;">
-        <a class="btn btn-mini btn-success add"
-           href="{% url 'edit_national_strategy' pk=strategy.pk %}">{% trans "Edit" %}</a>
-      </td>
-      <td style="text-align: center;">
-        <a class="btn btn-mini btn-danger" href="" code={{strategy.id }}>
-          {% trans "Delete" %}</a>
+      <td>
+        <a class="btn btn-xs btn-warning add"
+           href="{% url 'edit_national_strategy' pk=strategy.pk %}"><i class="glyphicon glyphicon-edit"></i></a>
+        <a class="btn btn-xs btn-danger" href="" code={{strategy.id }}>
+          <i class="glyphicon glyphicon-trash"></i></a>
       </td>
     </tr>
     {% endfor %}
@@ -133,4 +130,3 @@ NBSAP - {% trans "Mapping National Objectives to AICHI and EU targets" %}
 </script>
 
 {% endblock scripts %}
-

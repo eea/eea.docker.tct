@@ -22,82 +22,75 @@
 
 
 {% block content %}
-
+<section class="content-header">
   <h1 class="page-title">{% trans "Mapping National Objectives: Edit national strategy" %}</h1>
-
+</section>
+<section class="content">
   {% if form.errors %}
     <p>
       {% blocktrans with form.errors|pluralize as errors %}Please correct the error {{ errors }} below.{% endblocktrans %}
     </p>
   {% endif %}
+  <form action="{% url 'edit_national_strategy' pk=strategy.id %}" method="post">
+    <div class="col-md-3">
+      <div class="box">
+        <div class="box-body">
+          <div class="error-list">{{ form.non_field_errors }}</div>
 
-  <form action="{% url 'edit_national_strategy' pk=strategy.id %}" method="post" id="national-strategy-edit" class="form-horizontal">
+          <div class="form-group">
+            <label class="block" for="nat_objective">{% trans "National Objective" %}</label>
+            {{ form.nat_objective }}
+          </div>
 
-    <div class="error-list">{{ form.non_field_errors }}</div>
+          <div class="form-group">
+            <label class="block" for="aichi_goal">{% trans "AICHI Goal" %}</label>
+            {{ form.aichi_goals }}
+          </div>
 
-    <div class="form-group row">
-      <label class="col-md-2" for="nat_objective">{% trans "National Objective" %}</label>
-      <div class="col-md-3"> {{ form.nat_objective }}
-      </div>
-      <div class="objective_text col-md-7 short-descrip">
-      </div>
-    </div>
+          <div class="form-group">
+            <label class="block" for="aichi_target">{% trans "Most relevant AICHI Target" %}</label>
+            {{ form.aichi_targets }}
+          </div>
 
-    <hr>
-
-    <div class="form-group row">
-      <label class="col-md-2" for="aichi_goal">{% trans "AICHI Goal" %}</label>
-      <div class="col-md-3"> {{ form.aichi_goals }}
-      </div>
-      <div class="goal_text col-md-7 short-descrip">
-      </div>
-    </div>
-
-    <hr>
-
-    <div class="form-group row">
-      <label class="col-md-2" for="aichi_target">{% trans "Most relevant AICHI Target" %}</label>
-      <div class="col-md-3"> {{ form.aichi_targets }}
-      </div>
-      <div class="target_text col-md-7 short-descrip">
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <label class="col-md-2" for="other_targets">{% trans "Other AICHI Targets" %}</label>
-      <div class="col-md-3"> {{ form.other_targets }}
-      </div>
-      <div class="other_target_text col-md-7 short-descrip">
-      </div>
-    </div>
-
-    <hr>
-
-    {% if EU_STRATEGY %}
-    <div class="form-group row">
-      <label class="col-md-2">{% trans "EU Targets" %}</label>
-      <div class="col-md-3"> {{ form.eu_targets }}
-      </div>
-      <div class="eu_target_text col-md-7 short-descrip">
+          <div class="form-group">
+            <label class="block" for="other_targets">{% trans "Other AICHI Targets" %}</label>
+            {{ form.other_targets }}
+          </div>
+          {% if EU_STRATEGY %}
+          <div class="form-group">
+            <label class="block">{% trans "EU Targets" %}</label>
+            {{ form.eu_targets }}
+          </div>
+          <div class="form-group">
+            <label class="block">{% trans "EU Actions" %}</label>
+           {{ form.eu_actions }}
+          </div>
+          {% endif %}
+          <div class="form-group">
+            <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
+            <a href="{% url 'list_eu_aichi_strategy' %}" class="btn btn-default" type="button">{% trans "Cancel" %}</a>
+          </div>
+        </div>
       </div>
     </div>
-
-    <div class="form-group row">
-      <label class="col-md-2">{% trans "EU Actions" %}</label>
-      <div class="col-md-3"> {{ form.eu_actions }}
-      </div>
-      <div class="actions_text col-md-7 short-descrip">
-      </div>
-
+    <div class="col-md-9">
+      <ul class="timeline timeline-inverse objective_text">
+      </ul>
+      <ul class="timeline timeline-inverse goal_text">
+      </ul>
+      <ul class="timeline timeline-inverse target_text">
+      </ul>
+      <ul class="timeline timeline-inverse other_target_text">
+      </ul>
+      {% if EU_STRATEGY %}
+      <ul class="timeline timeline-inverse eu_target_text">
+      </ul>
+      <ul class="timeline timeline-inverse actions_text">
+      </ul>
+      {% endif %}
     </div>
-    {% endif %}
-
-    <div class="action-bar">
-      <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
-      <a href="{% url 'list_national_strategy' %}" class="btn btn-default" type="button">{% trans "Cancel" %}</a>
-    </div>
-
   </form>
+</section>
 {% endblock %}
 
 {% block scripts %}

@@ -80,10 +80,10 @@ function Modal(container) {
 
     $(document).ready(function() {
         $('.modal-container').on('click', ".modal-bot", function() {
-          self.close();
-          });
+            self.close();
+        });
 
-      });
+    });
 
     $(document).keyup(function(e) {
         if (e.keyCode == 27 && self.activeModal) {
@@ -109,7 +109,7 @@ $(function() {
     // $('.messages').delay(5000).fadeOut();
 
     $('.messages').delay(4000).animate({
-      width: 'hide'
+        width: 'hide'
     }, 200);
 
 
@@ -118,31 +118,31 @@ $(function() {
 });
 
 function showDescription(name, textSelector, url, type, code, value) {
-  var selector = 'select[name=' + name + ']';
-  $(selector).on('change', function () {
-    var text = $(textSelector);
-    text.html('');
-    $("option:selected", this).each(function() {
-      $.get(url.replace('1', this.value), function(data) {
-        data = $.parseJSON(data)[0];
-        if (code) {
-          var title = '<li><i class="fa"></i><div class="timeline-item"><h3 class="timeline-header">' + type + ' ' + data.code+'</h3>';
-          if (data.title && data.value) {
-            title += ': ' + data.title;
-            title += '</div>';
-          }
-          if (data.title && !data.value){
-            title += '</h3>';
-            title += '<div class="timeline-body">' + data.title + '</div></div></li>';
-          }
-        }
-        if (data.value) {
-         title+='<div class="timeline-body">' + data.value + '</div></div></li>';
-        }
-        text.append(title);
-      });
-    });
-  }).change();
+    var selector = 'select[name=' + name + ']';
+    $(selector).on('change', function() {
+        var text = $(textSelector);
+        text.html('');
+        $("option:selected", this).each(function() {
+            $.get(url.replace('1', this.value), function(data) {
+                data = $.parseJSON(data)[0];
+                if (code) {
+                    var title = '<li><i class="fa"></i><div class="timeline-item"><h3 class="timeline-header">' + type + ' ' + data.code + '</h3>';
+                    if (data.title && data.value) {
+                        title += ': ' + data.title;
+                        title += '</div>';
+                    }
+                    if (data.title && !data.value) {
+                        title += '</h3>';
+                        title += '<div class="timeline-body">' + data.title + '</div></div></li>';
+                    }
+                }
+                if (data.value) {
+                    title += '<div class="timeline-body">' + data.value + '</div></div></li>';
+                }
+                text.append(title);
+            });
+        });
+    }).change();
 }
 
 function showTargetValue(name, textSelector, url) {
@@ -154,7 +154,7 @@ function showTargetCodeValue(name, textSelector, url) {
 }
 
 function showEuTargetCodeValue(name, textSelector, url) {
-  showDescription(name, textSelector, url, 'EU Target', true, true);
+    showDescription(name, textSelector, url, 'EU Target', true, true);
 }
 
 function showIndicatorCodeValue(name, textSelector, url) {
@@ -171,15 +171,17 @@ function showActionCodeValue(name, textSelector, url) {
 
 function forbidChoicesIntersection(selector1, selector2) {
     $(selector1).on('change', function() {
-        $("option", this).each(function() {
-            var option2 = $(selector2).find('option[value=' + this.value + ']');
-            if (this.selected) {
-                option2.hide();
-            } else {
-                option2.show();
-            }
-        });
-        $(selector2).trigger('chosen:updated');
+        if (this.value) {
+            $("option", this).each(function() {
+                var option2 = $(selector2).find('option[value=' + this.value + ']');
+                if (this.selected) {
+                    option2.hide();
+                } else {
+                    option2.show();
+                }
+            });
+            $(selector2).trigger('chosen:updated');
+        }
     }).change();
 }
 
