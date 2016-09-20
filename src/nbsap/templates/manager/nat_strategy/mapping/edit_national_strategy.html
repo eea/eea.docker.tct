@@ -15,7 +15,6 @@
   <script src='/static/js/jquery-1.11.1.min.js'></script>
 {% endblock %}
 
-
 {% block navmenu %}
   {% include 'manager/admin_nav_tabs.html' %}
 {% endblock %}
@@ -28,7 +27,7 @@
 <section class="content">
   {% if form.errors %}
     <p>
-      {% blocktrans with form.errors|pluralize as errors %}Please correct the error {{ errors }} below.{% endblocktrans %}
+      {% blocktrans with form.errors|pluralize as errors %}Please correct the error{{ errors }} below.{% endblocktrans %}
     </p>
   {% endif %}
   <form action="{% url 'edit_national_strategy' pk=strategy.id %}" method="post" id="national-strategy-edit">
@@ -36,22 +35,18 @@
       <div class="box">
         <div class="box-body">
           <div class="error-list">{{ form.non_field_errors }}</div>
-
           <div class="form-group">
             <label class="block" for="nat_objective">{% trans "National Objective" %}</label>
             {{ form.nat_objective }}
           </div>
-
           <div class="form-group">
             <label class="block" for="aichi_goal">{% trans "AICHI Goal" %}</label>
             {{ form.aichi_goals }}
           </div>
-
           <div class="form-group">
             <label class="block" for="aichi_target">{% trans "Most relevant AICHI Target" %}</label>
             {{ form.aichi_targets }}
           </div>
-
           <div class="form-group">
             <label class="block" for="other_targets">{% trans "Other AICHI Targets" %}</label>
             {{ form.other_targets }}
@@ -94,8 +89,6 @@
 {% endblock %}
 
 {% block scripts %}
-
-
   <script>
     {% include '_bits/national_strategy_mapping.js' %}
     {% include '_bits/strategy_mapping.js' %}

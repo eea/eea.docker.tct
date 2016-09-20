@@ -5,9 +5,7 @@
 <div class="mapping-wrapper">
   <div class="well">
     <h4 class="mapping" id="eu-mapping">{% trans "Mapping with EU" %}</h4>
-
     {% if subobj.eu_objects %}
-
       <div class="well-title">{% trans "EU Targets" %}</div>
       <ul>
       {% for target, actions in subobj.eu_objects.items %}
@@ -30,10 +28,8 @@
           {% endif %}
       {% endfor %}
       </ul>
-
     {% else %}
       <p class="no-corresponding">{% trans "No corresponding EU Target" %}.</p>
     {% endif %}
-
   </div>
 </div>

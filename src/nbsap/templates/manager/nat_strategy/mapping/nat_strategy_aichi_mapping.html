@@ -6,7 +6,6 @@
     <h4 class="mapping" id="aichi-mapping">{% trans "Mapping with Aichi" %}</h4>
     {% with strategies=subobj.objective_national_strategy.all %}
       {% if strategies|length %}
-
         {% get_goals_for_strategies strategies=strategies as goals %}
         <div class="well-title">{% trans "Aichi Goals" %}</div>
         {% if goals %}
@@ -58,18 +57,15 @@
           {% endfor %}
           </ul>
         {% endif %}
-
       {% else %}
         <p class="no-corresponding">{% trans "No corresponding Aichi Target" %}.</p>
       {% endif %}
   </div>
     {% endwith %}
 </div>
-
 <div class="mapping-wrapper">
   <div class="well">
     <h4 class="mapping" id="nat-mapping">{% trans "Mapping with National Indicators" %}</h4>
-
     {% with indicators=subobj.nat_indicators.all %}
       {% with other_indicators=subobj.other_nat_indicators.all %}
         {% if indicators %}
@@ -85,7 +81,6 @@
         {% elif not other_indicators %}
           <p class="no-corresponding">{% trans "No corresponding National Indicators" %}.</p>
         {% endif %}
-
         {% if other_indicators %}
           <div class="well-title">{% trans "Other National Indicators" %}</div>
           <ul>

@@ -2,7 +2,6 @@
 {% load i18n %}
 
 <ul class="sidebar-menu">
-
   {% if NAT_STRATEGY %}
   <li class="{% active request '^/dashboard/objectives/[\w\-]+' %}
                {% active request '^/dashboard/objectives/' %}">
@@ -35,8 +34,6 @@
     </a>
   </li>
   {% endif %}
-
-
   <li class="{% active request '^/dashboard/page' %}">
     <a href="{% url 'admin_pages' %}">{% trans "Intro page" %}</a>
   </li>
@@ -45,5 +42,4 @@
     <a href="{% url 'admin_export' %}">{% trans "Export" %}</a>
   </li>
   {% endif %}
-
 </ul>

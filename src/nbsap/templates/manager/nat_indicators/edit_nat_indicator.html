@@ -5,26 +5,22 @@
 {{ form.media }}
 {% endblock %}
 
-
 {% block content %}
 <section class="content-header">
   <h1 class="page-title">{% trans "Edit National Indicator" %} {{ indicator.code }}</h1>
 </section>
 <section class="content">
-
   {% if form.errors %}
   <p>
     {% blocktrans with form.errors|pluralize as errors %}Please correct the
-    error {{ errors }} below.{% endblocktrans %}
+    error{{ errors }} below.{% endblocktrans %}
   </p>
   {% endif %}
   <form action="" method="post" id="national-indicator-edit" class="form">
-
     <div class="form-group">
       <label class="block" for="language">{% trans "Language" %}</label>
       {{ form.language }}
     </div>
-
     {% if form.code %}
     <div class="form-group">
       <label class="block" for="code">{% trans "Code" %}</label>
@@ -32,46 +28,36 @@
       {{ form.code.errors }}
     </div>
     {% endif %}
-
-
     <div class="language-container">
-
       <div class="form-group">
         <label class="block" for="title">{% trans "Title" %}</label>
         {{ form.title }}
         {{ form.title.errors }}
       </div>
-
       <div class="form-group">
         <label class="block" for="url">{% trans "Category" %}</label>
         {{ form.category }}
         {{ form.category.errors }}
       </div>
-
       <div class="form-group">
         <label class="block" for="url">{% trans "URL" %}</label>
         {{ form.url }}
         {{ form.url.errors }}
       </div>
-
       <div class="form-group">
         <label class="block" for="indicator_type">{% trans "Indicator type" %}</label>
         {{ form.indicator_type }}
         {{ form.indicator_type.errors }}
       </div>
-
     </div>
-
     <div class="action-bar">
       <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
       <a href="{% url 'view_nat_indicator' pk=indicator.pk %}"
          class="btn btn-default" type="button">{% trans "Cancel" %}</a>
     </div>
-
   </form>
 </section>
 {% endblock %}
-
 
 {% block scripts %}
 <script src="/static/js/language_change.js"></script>

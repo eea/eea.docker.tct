@@ -6,7 +6,6 @@
 NBSAP - {% trans "Action" %} {{ activity.code }}: {{ activity.title }}
 {% endblock %}
 
-
 {% block content %}
 <section class="content-header">
   <h1 class="page-title">{% trans "Action" %} {{ activity.code }}: {{ activity.title }}</h1>
@@ -28,9 +27,7 @@ NBSAP - {% trans "Action" %} {{ activity.code }}: {{ activity.title }}
       </div>
     </div>
   </div>
-
   {% if not activity.parent %}
-
   {% regroup actions by region as action_list %}
       {% if action_list|length != 0 %}
 
@@ -56,7 +53,13 @@ NBSAP - {% trans "Action" %} {{ activity.code }}: {{ activity.title }}
           {{ action.title }}
         </a>
                   </td>
-                  <td>{% if items.grouper %}{{ items.grouper }}{% else %}{% trans "All regions" %}{% endif %}</td>
+                  <td>
+                  {% if items.grouper %}
+                    {{ items.grouper }}
+                    {% else %}
+                    {% trans "All regions" %}
+                    {% endif %}
+                  </td>
                   <td>
                       <form class="delete" method="POST" action="{% url 'delete_eu_strategy_activity' target=target.pk pk=action.pk %}">
 
@@ -66,11 +69,13 @@ NBSAP - {% trans "Action" %} {{ activity.code }}: {{ activity.title }}
             <i class="glyphicon glyphicon-trash"></i>
           </button> {% if activity.parent %}
                           <span class="btn btn-xs btn-default ajaxget" data-url="{% url 'edit_eu_strategy_activity' target=target.pk parent=action.pk %}">
-            {% trans "Add sub-action" %}</span> {% endif %}
+            {% trans "Add sub-action" %}</span>
+            {% endif %}
                       </form>
                   </td>
               </tr>
-              {% endfor %} {% endfor %}
+              {% endfor %}
+              {% endfor %}
           </tbody>
 
       </table>

@@ -1,4 +1,6 @@
-{% load i18n %} {% load utils %} {% if '/dashboard' in request.path %}
+{% load i18n %}
+{% load utils %}
+{% if '/dashboard' in request.path %}
 <nav class="navbar navbar-static-top">
     <h3 class="dashboard-title">{% trans SITE_HEADER %}</h3>
     <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
@@ -6,11 +8,11 @@
     </a>
     <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-            {% if user.is_authenticated %} {% if user.is_superuser %} {% if LANGUAGES|length > 1 %}
+            {% if user.is_authenticated and user.is_superuser and LANGUAGES|length > 1 %}
             <li>
                 <a href="{% url 'rosetta-home' %}">{% trans 'Translate' %}</a>
             </li>
-            {% endif %} {% endif %} {% endif %}
+            {% endif %}
             <li>
                 <a href="{% url 'admin:index' %}" class="change-lang admin">{% trans 'Administration' %}</a>
             </li>
@@ -42,8 +44,7 @@
             </li>
             {% endif %} {% if user.is_authenticated %}
             <li>
-                <a href="{% url 'logout' %}"><i class="glyphicon glyphicon-off
-"></i></a>
+                <a href="{% url 'logout' %}"><i class="glyphicon glyphicon-off"></i></a>
             </li>
             {% else %}
             <li><a href="{% url 'login' %}">{% trans "Login" %}</a></li>

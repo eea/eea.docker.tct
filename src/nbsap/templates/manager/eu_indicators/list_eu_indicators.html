@@ -8,9 +8,7 @@
 NBSAP - {% trans "EU Indicators: List Indicators" %}
 {% endblock %}
 
-
 {% block content %}
-
 {% get_current_language as lang_code %}
 <section class="content-header">
   <h1 class="page-title">{% trans "European Indicators" %}</h1>
@@ -25,7 +23,6 @@ NBSAP - {% trans "EU Indicators: List Indicators" %}
   </ul>
   {% url 'edit_eu_indicator' as edit_indicator %}
   <table data-url="{{ edit_indicator }}" id="indicator-table" class="table table-striped table-bordered">
-
     <thead>
     <tr>
       <th>{% trans "Code" %}</th>
@@ -34,7 +31,6 @@ NBSAP - {% trans "EU Indicators: List Indicators" %}
       <th></th>
     </tr>
     </thead>
-
     <tbody>
     {% for indicator in indicators %}
     <tr>
@@ -71,9 +67,7 @@ NBSAP - {% trans "EU Indicators: List Indicators" %}
   </table>
   <div class="form"></div>
 </section>
-
 {% endblock %}
-
 {% block scripts %}
 <script src="/static/js/object_delete.js"></script>
 <script src="/static/js/jquery.ajaxGetForm.js"></script>

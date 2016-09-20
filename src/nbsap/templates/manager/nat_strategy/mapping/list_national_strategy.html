@@ -3,16 +3,13 @@
 {% load i18n %}
 {% load assets %}
 
-
 {% block title %}
 NBSAP - {% trans "Mapping National Objectives to AICHI and EU targets" %}
 {% endblock %}
 
-
 {% block navmenu %}
 {% include 'manager/admin_nav_tabs.html' %}
 {% endblock %}
-
 
 {% block content %}
 <section class="content-header">
@@ -22,7 +19,6 @@ NBSAP - {% trans "Mapping National Objectives to AICHI and EU targets" %}
   {% url 'edit_national_strategy' as edit_strategy %}
   {% if strategies %}
   <table id="objectives-table" data-url="{{ edit_strategy }}" class="table objectives_listing table-striped table-bordered">
-
     <thead>
     <th class="obj-id">{% trans "Objective"%}</th>
     <th class="goal">{% trans "Goal" %}</th>
@@ -34,7 +30,6 @@ NBSAP - {% trans "Mapping National Objectives to AICHI and EU targets" %}
     {% endif %}
     <th></th>
     </thead>
-
     <tbody>
     {% for strategy in strategies %}
     <tr>
@@ -59,7 +54,8 @@ NBSAP - {% trans "Mapping National Objectives to AICHI and EU targets" %}
         {% if strategy.other_targets.all %}
         {% for target in strategy.other_targets.all %}
         <a href="">{{ target.code }}</a>
-        {% if not forloop.last %},{% endif %}
+        {% if not forloop.last %},
+        {% endif %}
         {% endfor %}
         {% endif %}
       </td>
@@ -68,7 +64,8 @@ NBSAP - {% trans "Mapping National Objectives to AICHI and EU targets" %}
         {% if strategy.eu_targets.all %}
         {% for eu_target in strategy.eu_targets.all %}
         <a href="">{{ eu_target.code }}</a>
-        {% if not forloop.last %},{% endif %}
+        {% if not forloop.last %},
+        {% endif %}
         {% endfor %}
         {% endif %}
       </td>
@@ -76,7 +73,8 @@ NBSAP - {% trans "Mapping National Objectives to AICHI and EU targets" %}
         {% if strategy.eu_actions.all %}
         {% for action in strategy.eu_actions.all %}
         <a href="">{% trans "Action" %} {{ action.code }}</a>
-        {% if not forloop.last %},{% endif %}
+        {% if not forloop.last %},
+        {% endif %}
         {% endfor %}
         {% endif %}
       </td>
@@ -90,19 +88,16 @@ NBSAP - {% trans "Mapping National Objectives to AICHI and EU targets" %}
     </tr>
     {% endfor %}
     </tbody>
-
   </table>
   {% endif %}
 </section>
 {% endblock %}
-
 
 {% block scripts %}
 
 <script>
 
   $(document).ready(function () {
-
       $('#objectives-table').dataTable({
         "paging": false,
         "dom": '<"filter-wrapper"f>t'
@@ -110,10 +105,6 @@ NBSAP - {% trans "Mapping National Objectives to AICHI and EU targets" %}
       var url=$('#objectives-table').data('url');
       $('.filter-wrapper').prepend('<div class="action-bar"><a class="btn btn-success add" href="'+url+'?category={{ category }}">{% trans "Add mapping" %}</a></div>');
     });
-
-
-
-
   $(".btn-danger").on("click", function (e) {
     e.preventDefault();
     var id = $(this).attr('code');
