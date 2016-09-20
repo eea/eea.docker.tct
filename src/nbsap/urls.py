@@ -53,7 +53,7 @@ urlpatterns = [
         name='eu_indicators'),
     url(r'^european-strategy/indicators/(?P<pk>[\w\-]+)$', views.indicator_details,
         name='eu_indicator_details'),
-    url(r'^national-strategy/indicators/$', views.nat_indicators,
+    url(r'^national-strategy/indicators/$', views.nat_indicator_detail,
         name='nat_indicators'),
     url(r'^national-strategy/indicators/(?P<pk>[\w\-]+)$', views.nat_indicator_detail,
         name='nat_indicator_detail'),

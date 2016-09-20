@@ -42,14 +42,16 @@
 {% block content %}
 <section class="content-header"></section>
   <h1 class="page-title">{% trans 'National Strategy' %}</h1>
-  <h1  class="title-inline">
+  <h1 class="title-inline">
     {% trans "Objective" %} {{ current_objective.code }}
   </h1>
-  <h2 class="subtitle-inline">{% if current_objective.title %} {{ current_objective.title }} {% endif %}</h2>
+  <h2 class="subtitle-inline">
+    {% if current_objective.title %}
+      {{ current_objective.title }}
+    {% endif %}
+  </h2>
   <div>
-      <a class="quick-links" href="{% url 'implementation' code=current_objective.code %}" title="{{ current_objective.code }}">
-      See implementation
-      </a>
+      <a class="quick-links" href="{% url 'implementation' code=current_objective.code %}" title="{{ current_objective.code }}">See implementation</a>
       <a class="quick-links" href="#aichi-mapping">Mapping with Aichi</a>
       <a class="quick-links" href="#nat-mapping">Mapping with National Indicators</a>
       <a class="quick-links" href="#eu-mapping">Mapping with EU</a>
@@ -71,12 +73,12 @@
         {% include 'mapping/../manager/nat_strategy/mapping/nat_strategy_eu_mapping.html' with subobj=current_objective %}
     {% endif %}
   </div>
+
   <div class="pages-navigation">
     {% with objectives.last.get_all_objectives|last as last %}
       {% ifnotequal previous_objective.pk last.pk %}
         <div class="page-nav-prev-wrapper">
-          <a class="previous-page"
-          href="{% url 'nat_strategy' pk=previous_objective.pk %}">
+          <a class="previous-page" href="{% url 'nat_strategy' pk=previous_objective.pk %}">
             {% trans "Objective" %} {{ previous_objective.code }}
           </a>
         </div>
@@ -85,9 +87,8 @@
 
     {% with objectives.first as first %}
       {% ifnotequal next_objective.pk first.pk %}
-       <div class="page-nav-next-wrapper">
-        <a class="next-page"
-          href="{% url 'nat_strategy' pk=next_objective.pk %}">
+        <div class="page-nav-next-wrapper">
+          <a class="next-page" href="{% url 'nat_strategy' pk=next_objective.pk %}">
             {% trans "Objective" %} {{ next_objective.code }}
           </a>
         </div>
@@ -100,12 +101,12 @@
 
 {% block scripts %}
   <script>
-  $(document).ready(function() {
-    var options = {
-      valueNames: [ 'nat-objective' ],
+    $(document).ready(function() {
+      var options = {
+        valueNames: [ 'nat-objective' ],
         nestedSearch: true
-    };
-    var userList = new List('nat-obj-list', options);
-  });
+      };
+      var userList = new List('nat-obj-list', options);
+    });
   </script>
 {% endblock scripts %}
