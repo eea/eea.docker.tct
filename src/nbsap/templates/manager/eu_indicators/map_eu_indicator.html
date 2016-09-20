@@ -22,13 +22,11 @@ NBSAP - {% trans "Map Indicator " %}{{ indicator.code }}
   {% if form.errors %}
   <p>
     {% blocktrans with form.errors|pluralize as errors %}Please correct the
-    error {{ errors }} below.{% endblocktrans %}
+    error{{ errors }} below.{% endblocktrans %}
   </p>
   {% endif %}
   <form action="" method="post">
-
     <div class="error-list">{{ form.non_field_errors }}</div>
-
     <hr>
     <div class="col-md-3">
       <div class="box">
@@ -38,18 +36,13 @@ NBSAP - {% trans "Map Indicator " %}{{ indicator.code }}
             {{ form.eu_targets }}
             {{ form.eu_targets.errors }}
           </div>
-
-
-
           <div class="form-group">
             <label class="block" for="aichi_targets">{% trans "AICHI Targets" %}</label>
-
             {{ form.aichi_targets }}
             {{ form.aichi_targets.errors }}
           </div>
           <div class="form-group">
             <label class="block" for="other_aichi_targets">{% trans "Other AICHI Targets" %}</label>
-
             {{ form.other_aichi_targets }}
             {{ form.other_aichi_targets.errors }}
           </div>
@@ -75,7 +68,6 @@ NBSAP - {% trans "Map Indicator " %}{{ indicator.code }}
   </form>
 </section>
 {% endblock %}
-
 {% block scripts %}
 <script>
   $(".chzn-select").chosen();

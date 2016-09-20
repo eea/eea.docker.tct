@@ -1,6 +1,8 @@
- {% load i18n %}
- {% block head_scripts %} {{ form.media }} {% endblock %}
- {% block content %}
+{% load i18n %}
+{% block head_scripts %}
+ {{ form.media }}
+{% endblock %}
+{% block content %}
 <section class="content-header">
     <h1>{% trans "Add New Region" %}</h1>
 </section>

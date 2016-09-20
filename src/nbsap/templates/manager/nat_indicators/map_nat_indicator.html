@@ -6,11 +6,9 @@
 NBSAP - {% trans "Map Indicator " %}{{ indicator.code }}
 {% endblock %}
 
-
 {% block head_scripts %}
 {{ form.media }}
 {% endblock %}
-
 
 {% block content %}
 <section class="content-header">
@@ -18,17 +16,14 @@ NBSAP - {% trans "Map Indicator " %}{{ indicator.code }}
 </section>
 <section class="content">
   <h2>{% trans "Map National Indicator" %} {{ indicator.code }}</h2>
-
   {% if form.errors %}
   <p>
     {% blocktrans with form.errors|pluralize as errors %}Please correct the
-    error {{ errors }} below.{% endblocktrans %}
+    error{{ errors }} below.{% endblocktrans %}
   </p>
   {% endif %}
   <form action="" method="post">
-
     <div class="error-list">{{ form.non_field_errors }}</div>
-
     <hr>
     <div class="col-md-3">
       <div class="box">
@@ -38,9 +33,6 @@ NBSAP - {% trans "Map Indicator " %}{{ indicator.code }}
             {{ form.nat_objectives }}
             {{ form.nat_objectives.errors }}
           </div>
-
-
-
           <div class="form-group">
             <label class="block" for="other_nat_objectives">{% trans "Other National Objectives" %}</label>
             {{ form.other_nat_objectives }}
@@ -57,8 +49,7 @@ NBSAP - {% trans "Map Indicator " %}{{ indicator.code }}
     <div class="col-md-9">
       <ul class="timeline timeline-inverse nat_objectives_text">
       </ul>
-      <ul
-        class="timeline timeline-inverse other_nat_objectives_text">
+      <ul class="timeline timeline-inverse other_nat_objectives_text">
       </ul>
     </div>
   </form>

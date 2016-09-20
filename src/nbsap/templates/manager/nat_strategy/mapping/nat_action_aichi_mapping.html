@@ -4,7 +4,6 @@
   <div class="well-title">{% trans "Mapping with AICHI" %}</div>
   {% with strategies=action.objective.objective_national_strategy.all %}
     {% if strategies|length %}
-
     <h5>{% trans "Goals" %}</h5>
     <ul>
       {% for strategy in strategies %}
@@ -20,7 +19,6 @@
         {% endfor %}
       {% endfor %}
     </ul>
-
     <h5>{% trans "Most relevant AICHI targets" %}</h5>
     <ul>
       {% for strategy in strategies %}
@@ -32,7 +30,6 @@
         {% endfor %}
       {% endfor %}
     </ul>
-
     <h5>{% trans "Other relevant AICHI targets" %}</h5>
     <ul>
       {% for strategy in strategies %}
@@ -44,10 +41,8 @@
         {% endwith %}
       {% endfor %}
     </ul>
-
     {% else %}
       <p>{% trans "No corresponding AICHI target" %}.</p>
     {% endif %}
-
   {% endwith %}
 </div>

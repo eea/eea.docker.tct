@@ -11,7 +11,6 @@ $(function() {
 
 });
 
-
 function toggleClassMenu() {
     $('.modal-container .container').addClass('menu--animatable');
     var layout = $(".modal-window");
@@ -25,8 +24,6 @@ function toggleClassMenu() {
 function OnTransitionEnd() {
     $('.modal-container .container').removeClass("menu--animatable");
 }
-
-
 
 function Modal(container) {
     self = this;
@@ -90,31 +87,16 @@ function Modal(container) {
             self.close();
         }
     });
-
-    // TOC in goals was generating double ul - li markup
-
-    // $('.toc ul').columnlist({
-    //     size : 4,
-    //     'class' : 'column-list',
-    //     incrementClass : 'column-list-'
-    // });
 }
-
 
 $(document).ready(function() {
     modal = new Modal($('.modal-container')[0]);
 });
 
 $(function() {
-    // $('.messages').delay(5000).fadeOut();
-
     $('.messages').delay(4000).animate({
         width: 'hide'
     }, 200);
-
-
-
-
 });
 
 function showDescription(name, textSelector, url, type, code, value) {

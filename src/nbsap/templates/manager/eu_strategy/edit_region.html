@@ -1,6 +1,8 @@
- {% load i18n %}
- {% block head_scripts %} {{ form.media }} {% endblock %}
- {% block content %}
+{% load i18n %}
+{% block head_scripts %}
+  {{ form.media }} 
+{% endblock %}
+{% block content %}
 <section class="content-header">
     <h1>{% trans "Edit Region" %}</h1>
 </section>
@@ -10,7 +12,6 @@
             <div class="form-group">
                 <label for="region">{% trans "Region" %}</label> {{ form.name }} {{ form.name.error}}
             </div>
-
             <div class="action-bar">
                 <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
                 <a href="{% url 'list_regions' %}" class="btn btn-default" type="button">{% trans "Cancel" %}</a>

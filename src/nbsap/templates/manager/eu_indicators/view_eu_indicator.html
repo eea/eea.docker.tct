@@ -7,7 +7,6 @@
 NBSAP - {% trans "Indicator" %} {{ indicator.code }}: {{indicator.title }}
 {% endblock %}
 
-
 {% block content %}
 <section class="content-header">
   <h1>
@@ -26,7 +25,6 @@ NBSAP - {% trans "Indicator" %} {{ indicator.code }}: {{indicator.title }}
         <a class="btn btn-default"
            href="{% url 'map_eu_indicator' pk=indicator.pk %}">{% trans "Aichi Mapping" %}</a>
     </div>
-
     <div class="box-body">
       {% if indicator.url %}
       URL: <a href="{{ indicator.url }}">
@@ -34,8 +32,6 @@ NBSAP - {% trans "Indicator" %} {{ indicator.code }}: {{indicator.title }}
       {% else %}
       {{ indicator.code|default:'' }} {{ indicator.title }}
       {% endif %}
-
-
       {% if indicator.eu_indicator_aichi_strategy.exists %}
       <h2>{% trans "Mapping with Aichi Strategy" %}</h2>
       <h4>Most relevant</h4>
@@ -46,7 +42,6 @@ NBSAP - {% trans "Indicator" %} {{ indicator.code }}: {{indicator.title }}
         {% endfor %}
         {% endfor %}
       </ul>
-
       {% if indicator.eu_indicator_aichi_strategy.count %}
       <h4>Other</h4>
       <ul>
@@ -62,7 +57,6 @@ NBSAP - {% trans "Indicator" %} {{ indicator.code }}: {{indicator.title }}
   </div>
 </section>
 {% endblock %}
-
 {% block scripts %}
 <script src="/static/js/object_delete.js"></script>
 {% endblock scripts %}

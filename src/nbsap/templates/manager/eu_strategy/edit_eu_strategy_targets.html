@@ -1,6 +1,8 @@
- {% load i18n %}
- {% block head_scripts %} {{ form.media }} {% endblock %}
- {% block scripts %}
+{% load i18n %}
+{% block head_scripts %}
+  {{ form.media }}
+{% endblock %}
+{% block scripts %}
 <script src="/static/js/language_change.js"></script>
 {% endblock %}
 {% block content %}
@@ -10,37 +12,29 @@
 <section class="content">
     {% if form.errors %}
     <p>
-        {% blocktrans with form.errors|pluralize as errors %}Please correct the error {{ errors }} below. {% endblocktrans %}
+        {% blocktrans with form.errors|pluralize as errors %}Please correct the error{{ errors }} below. {% endblocktrans %}
     </p>
     {% endif %}
     <div class="row">
         <div class="col-md-12 form-wrapper">
             <form action="" method="post" id="national-target-edit" class="form">
-
                 <div class="form-group">
                     <label for="language">{% trans "Language" %}</label> {{ form.language }}
                 </div>
-
                 {% if form.code %}
                 <div class="form-group">
                     <label for="code">{% trans "Code" %}</label> {{ form.code }} {{ form.code.errors }}
                 </div>
                 {% endif %}
-
-
                 <div class="language-container">
-
                     <div class="form-group">
                         <label for="title">{% trans "Title" %}</label> {{ form.title }} {{ form.title.errors }}
                     </div>
-
                     <div class="form-group">
                         <label for="description">{% trans "Description" %}</label> {{ form.description }} {{ form.description.errors }}
                     </div>
-
                 </div>
         </div>
-
         {% if lang != DEFAULT_LANGUAGE %} {% trans DEFAULT_LANGUAGE_LABEL as default_language_label %}
         <div class="col-md-12 original-hideout">
             <p class="original-title">
@@ -49,7 +43,6 @@
             <div class="well">
                 {{ target.title_default }}
             </div>
-
             <p class="original-description">
                 {% blocktrans with default_language_label as language %}Original description in {{ language }} {% endblocktrans %}
             </p>
@@ -58,14 +51,11 @@
             </div>
         </div>
         {% endif %}
-
     </div>
-
     <div class="action-bar">
         <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
         <a href="{% url 'list_eu_targets' %}" class="btn btn-default" type="button">{% trans "Cancel" %}</a>
     </div>
     </form>
-
 </section>
 {% endblock %}

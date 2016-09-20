@@ -6,7 +6,6 @@
 NBSAP - {% trans "Mapping EU and Aichi strategies: Add" %}
 {% endblock %}
 
-
 {% block head_scripts %}
 {{ form.media }}
 {% endblock %}
@@ -18,13 +17,10 @@ NBSAP - {% trans "Mapping EU and Aichi strategies: Add" %}
 <section class="content">
   {% if form.errors %}
   <p>
-    {% blocktrans with form.errors|pluralize as errors %}Please correct the error {{ errors }} below.{% endblocktrans %}
+    {% blocktrans with form.errors|pluralize as errors %}Please correct the error{{ errors }} below.{% endblocktrans %}
   </p>
   {% endif %}
-
   <form action="{% url 'edit_eu_aichi_strategy' %}" method="post">
-
-
     <div class="col-md-3">
       <div class="box">
       <div class="box-body">
@@ -33,35 +29,27 @@ NBSAP - {% trans "Mapping EU and Aichi strategies: Add" %}
           {{ form.eu_targets }}
           {{ form.eu_targets.errors }}
         </div>
-
-
         <div class="form-group">
           <label class="block" for="aichi_goal">{% trans "AICHI Goal"%}</label>
           {{ form.aichi_goals }}
         </div>
-
-
         <div class="form-group">
           <label class="block" for="aichi_targets">{% trans "AICHI Targets" %}</label>
-
           {{ form.aichi_targets }}
           {{ form.aichi_targets.errors }}
         </div>
         <div class="form-group">
           <label class="block" for="other_aichi_targets">{% trans "Other AICHI Targets" %}</label>
-
           {{ form.other_aichi_targets }}
           {{ form.other_aichi_targets.errors }}
         </div>
         <div class="form-group">
           <label class="block" for="eu_indicators">{% trans "EU Indicators" %}</label>
-
           {{ form.eu_indicators }}
           {{ form.eu_indicators.errors }}
         </div>
         <div class="form-group">
           <label class="block" for="other_eu_indicators">{% trans "Other EU Indicators" %}</label>
-
           {{ form.other_eu_indicators }}
           {{ form.other_eu_indicators.errors }}
           </div>

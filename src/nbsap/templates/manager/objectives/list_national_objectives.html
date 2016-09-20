@@ -3,11 +3,9 @@
 {% load i18n %}
 {% load assets %}
 
-
 {% block title %}
 NBSAP - {% trans "National Strategy: List National Objectives" %}
 {% endblock %}
-
 
 {% block content %}
 <section class="content-header">
@@ -17,14 +15,12 @@ NBSAP - {% trans "National Strategy: List National Objectives" %}
   {% get_current_language as lang_code %}
   {% url 'edit_national_objective' as edit_objective %}
   <table id="objectives-table" data-url="{{ edit_objective }}" class="table table-striped table-bordered">
-
     <thead>
     <th>{% trans "Code" %}</th>
     <th>{% trans "National Target" %}</th>
     <th>{% trans "Has actions" %}</th>
     <th></th>
     </thead>
-
     <tbody>
     {% for objective in objectives %}
     <tr>
@@ -35,7 +31,7 @@ NBSAP - {% trans "National Strategy: List National Objectives" %}
           {{ objective.title|default:objective.code }}</a>
       </td>
       <td>
-        {% if objective.actions.all|length == 0 %}
+        {% if not objective.actions.all %}
         <span class="label label-danger"><i class="glyphicon glyphicon-remove-sign"></i></span>
         {% else %}
         <span class="label label-success"><i class="glyphicon glyphicon-ok-sign"></i></span>
@@ -45,7 +41,6 @@ NBSAP - {% trans "National Strategy: List National Objectives" %}
         <form class="delete" method="POST" action="{% url 'delete_national_objective' pk=objective.pk %}">
           <span class="btn btn-xs btn-warning ajaxget"
              data-url="{% url 'edit_national_objective' pk=objective.pk %}"> <i class="glyphicon glyphicon-edit"></i></span>
-
           <button type="submit" class="btn btn-xs btn-danger edit"
                   data-message="{% trans 'Are you sure you want to delete this objective?' %}">
             <i class="glyphicon glyphicon-trash"></i>
@@ -68,14 +63,13 @@ NBSAP - {% trans "National Strategy: List National Objectives" %}
           {{ subobjective.title|default:subobjective.code }}</a>
       </td>
       <td>
-        {% if subobjective.actions.all|length == 0 %}
+        {% if not subobjective.actions.all %}
         <span class="label label-danger"><i class="glyphicon glyphicon-remove-sign"></i></span>
         {% else %}
         <span class="label label-success"><i class="glyphicon glyphicon-ok-sign"></i></span>
         {% endif %}
       </td>
       <td>
-
         <form class="delete" method="POST" action="{% url 'delete_national_objective' pk=subobjective.pk %}">
 
           <span class="btn btn-xs btn-warning ajaxget"
@@ -91,7 +85,6 @@ NBSAP - {% trans "National Strategy: List National Objectives" %}
     {% endfor %}
     {% endfor %}
     </tbody>
-
   </table>
   <div class="form">
   </div>

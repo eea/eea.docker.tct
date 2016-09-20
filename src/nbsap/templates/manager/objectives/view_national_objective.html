@@ -1,8 +1,10 @@
 {% extends 'manager/base.html' %}
- {% load i18n %}
- {% load utils %}
- {% block title %} NBSAP - {% trans "Objective" %} {{ objective.code }}: {{objective.title }} {% endblock %}
- {% block content %}
+{% load i18n %}
+{% load utils %}
+{% block title %}
+NBSAP - {% trans "Objective" %} {{ objective.code }}: {{objective.title }}
+{% endblock %}
+{% block content %}
 <section class="content-header">
     <h1 class="page-title">{% trans "Objective" %} {{ objective.code }}: {{ objective.title }}</h1>
 </section>
@@ -29,7 +31,6 @@
                 <th>{% trans "Sub-objectives" %}</th>
                 <th></th>
             </thead>
-
             <tbody>
                 {% for subobj in objective.children.all %}
                 <tr>
@@ -40,9 +41,7 @@
                     </td>
                     <td>
                         <form class="delete" method="POST" action="{% url 'delete_national_objective' pk=subobj.pk %}">
-
                             <span class="btn btn-xs btn-warning ajaxget" data-url="{% url 'edit_national_objective' pk=subobj.pk %}"> <i class="glyphicon glyphicon-edit"></i></span>
-
                             <button type="submit" class="btn btn-xs btn-danger edit" data-message="{% trans 'Are you sure you want to delete this subobjective?' %}">
               <i class="glyphicon glyphicon-trash"></i>
             </button>
@@ -51,7 +50,6 @@
                 </tr>
                 {% endfor %}
             </tbody>
-
         </table>
         {% else %}
         <p>
@@ -60,8 +58,7 @@
         {% endif %}
     </div>
     {% regroup actions by region as action_list %}
-    {% if action_list|length != 0 %}
-
+    {% if action_list %}
     <div class="property_list">
         <table class="table table-striped minimalist">
             <caption>
@@ -73,7 +70,6 @@
                 <th>{% trans "Region" %}</th>
                 <th></th>
             </thead>
-
             <tbody>
                 {% for items in action_list %} {% for action in items.list %}
                 <tr>
@@ -117,9 +113,10 @@
                         </form>
                     </td>
                 </tr>
-                {% endfor %} {% endfor %} {% endfor %}
+                {% endfor %}
+                {% endfor %}
+                {% endfor %}
             </tbody>
-
         </table>
     </div>
     {% else %}
@@ -130,7 +127,8 @@
     <div class="form">
     </div>
 </section>
-{% endblock %} {% block scripts %}
+{% endblock %}
+{% block scripts %}
 <script src="/static/js/object_delete.js"></script>
 <script src="/static/js/jquery.ajaxGetForm.js"></script>
 <script>
