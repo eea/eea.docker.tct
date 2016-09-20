@@ -17,7 +17,7 @@
 
   {% if indicators %}
     <div class="indicator-pages">
-    {% for indicator in indicators|sort_by_code|sort_by_type %}
+    {% for indicator in indicators|sort_by_type_and_code %}
       <li id="indicator-{{ indicator.id }}">
         <a href="{% url 'eu_indicator_details' indicator.pk %}">{{ indicator.get_indicator_type_display }} {{ indicator.code }} {{ indicator.title }}</a>
       </li>

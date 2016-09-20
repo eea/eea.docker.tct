@@ -1,8 +1,12 @@
 import re
 from django import template
-from natsort import natsorted
+from nbsap.models import sort_by_code, sort_by_type, sort_by_type_and_code
 
 register = template.Library()
+
+register.filter('sort_by_code', sort_by_code)
+register.filter('sort_by_type', sort_by_type)
+register.filter('sort_by_type_and_code', sort_by_type_and_code)
 
 
 @register.simple_tag
@@ -28,23 +32,6 @@ def get_page(id):
         return int(id / 20) + 1
     else:
         return int(id / 20)
-
-
-@register.filter('sort_by_code')
-def sort_by_code(value):
-    try:
-        return natsorted(value, key=lambda i: map(int, i.code.split('.')))
-    except ValueError:
-        return natsorted(value, key=lambda i: i.code)
-
-
-@register.filter('sort_by_type')
-def sort_by_type(value):
-    try:
-        return natsorted(value,
-                         key=lambda i: map(int, i.indicator_type.split('.')))
-    except ValueError:
-        return natsorted(value, key=lambda i: i.indicator_type)
 
 
 @register.assignment_tag

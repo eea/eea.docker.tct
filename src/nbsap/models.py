@@ -14,17 +14,23 @@ from nbsap.utils import generate_code
 
 def sort_by_code(value):
     try:
-        return natsorted(value, key=lambda i: map(int, i.code.split('.')))
+        return natsorted(value, key=lambda i: i.code.split('.'))
     except ValueError:
         return natsorted(value, key=lambda i: i.code)
 
 
 def sort_by_type(value):
     try:
-        return natsorted(value,
-                         key=lambda i: map(int, i.indicator_type.split('.')))
+        return natsorted(value, key=lambda i: i.indicator_type.split('.'))
     except ValueError:
         return natsorted(value, key=lambda i: i.indicator_type)
+
+def sort_by_type_and_code(value):
+    try:
+        return natsorted(value, key=lambda i: (i.code.split('.'),
+                                               i.indicator_type.split('.')))
+    except ValueError:
+        return natsorted(value, key=lambda i: (i.code, i.indicator_type))
 
 
 def getter_for_default_language(field_name):
@@ -591,11 +597,11 @@ class EuTarget(models.Model):
     get_indicators.short_description = 'EU Indicators'
 
     def get_indicators_short(self):
-        indicators = sort_by_type(sort_by_code(self.indicators.all()))
+        indicators = sort_by_type_and_code(self.indicators.all())
         return ', '.join(i.get_code_type() for i in indicators)
 
     def get_other_indicators_short(self):
-        other_indicators = sort_by_type(sort_by_code(self.other_indicators.all()))
+        other_indicators = sort_by_type_and_code(self.other_indicators.all())
         return ', '.join(i.get_code_type()
                          for i in other_indicators)
 

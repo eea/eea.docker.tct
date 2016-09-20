@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from auth import auth_required
 from nbsap import models
 from nbsap.forms import EuIndicatorForm, EuIndicatorMapForm
-from nbsap.models import sort_by_code, sort_by_type
+from nbsap.models import sort_by_type_and_code
 
 
 def get_most_relevant(indicator):
@@ -19,7 +19,7 @@ def get_most_relevant(indicator):
 
 
 def get_adjenct_indicators(current_indicator, indicators):
-    indicators = sort_by_type(sort_by_code(indicators))
+    indicators = sort_by_type_and_code(indicators)
     previous_index = 0
     next_index = 0
     for index, indicator in enumerate(indicators):
