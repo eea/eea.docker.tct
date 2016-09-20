@@ -17,7 +17,10 @@
 {% block content %}
 <div class="homepage-info">
 	<h1 class="page-title">{% trans "Target Cross-linking tool" %}</h1>
-	<h2 class="page-desc">The Target Cross-linking tool is a working tool to manage cross-linkages between biodiversity-related targets from the national to the EU and the global levels. It is intended to support national and regional assessment of progress and facilitate related reporting obligations.</h2>
+		<div class="homepage-desc">
+		<h2 class="homepage-title">The Target Cross-linking tool </h2>
+		<p>The Target Cross-linking tool is a working tool to manage cross-linkages between biodiversity-related targets from the national to the EU and the global levels. It is intended to support national and regional assessment of progress and facilitate related reporting obligations.</p>
+	</div>
 	<ul class="page-list">
 		<li class="homepage-goals">View the Aichi Strategy (<a href="{% url 'list_goals' %}">Goals and Targets</a>)<div class="goals-info"></li>
 		{% if EU_STRATEGY %}
@@ -26,7 +29,7 @@
 		{% if NAT_STRATEGY %}
 		<li class="homepage-targets">View the <a href="{% url 'nat_strategy' %}">National Strategy</a>, <a href="{% url 'nat_indicators' %}">National Indicators</a> and the <a href="{% url 'implementation_page' %}">Implementation actions</a> <div class="targets-info"></div></li>
 		{% endif %}
-		<li>Edit the content and mappings using the <a href="{% url 'admin_home'%}">Dashboard</a> (requires login) section.</li>
+		<li class="homepage-dashboard">Edit the content and mappings using the <a href="{% url 'admin_home'%}">Dashboard</a> (requires login) section.</li>
 	</ul>
 </div>
 {% endblock %}

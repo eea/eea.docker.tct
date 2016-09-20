@@ -2,15 +2,18 @@
 
 .homepage-goals,
 .homepage-targets,
-.homepage-indicators {
+.homepage-indicators,
+.homepage-dashboard  {
 	vertical-align: middle;
-	margin: 2rem;
-	margin-left: 0;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 50px;
+	padding: 2rem;
+	width: 50%;
 	a {
 		font-size: larger;
 		// color: white;
 		vertical-align: middle;
-		padding: 2rem;
 		padding-left: 0;
 		text-align: left;
 	}
@@ -21,16 +24,32 @@
 }
 
 
-.homepage-goals {
-border-top: 1px solid @gray-light;
+.homepage-goals, .homepage-indicators, .homepage-targets {
+// border-top: 1px solid @gray-light;
 }
 
 
-.homepage-targets {
-border-top: 1px solid @gray-light;
+.homepage-desc {
+	text-align: center;
+  .homepage-title {
+  		color: @brand-orange;
+  }
+  p {
+  	text-align: left;
+  }
 }
 
-.homepage-indicators {
-border-top: 1px solid @gray-light;
-margin-bottom: 1rem;
+
+.page-list {
+	text-align: center;
+
+	li:hover {
+		background: fade(#81cbf5, 50%);
+		a {
+			color: @brand-orange;
+		}
+	}
+	li {
+		transition: background .2s;
+	}
 }
