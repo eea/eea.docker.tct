@@ -37,7 +37,8 @@ def get_token():
 def get_cbd_obj(model_cls, pk, schema):
     obj = model_cls.objects.get(pk=pk)
     cbd_id = 'TCT-{}-{}'.format(model_cls.__name__, pk)
-    languages = [code for code, name in settings.LANGUAGES]
+    languages = [code for code, name in settings.LANGUAGES
+                 if code in settings.CBD_API_LANGUAGES]
 
     cbd_obj = {
         'header': {

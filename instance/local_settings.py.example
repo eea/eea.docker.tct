@@ -120,3 +120,4 @@ LANGUAGES = (
 # CBD_API_USERNAME = ''
 # CBD_API_PASSWORD = ''
 # CBD_API_REALM = ''
+# CBD_API_LANGUAGES = ['en', 'fr', 'es', 'ru']
