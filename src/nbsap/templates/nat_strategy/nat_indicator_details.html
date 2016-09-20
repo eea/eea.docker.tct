@@ -31,14 +31,14 @@
 
 {% block content %}
 	{% if current_indicator.url %}
-		<p>URL: <a href="{{ current_indicator.url }}">{{ current_indicator.title }}</a></p>
+		<p class="nat-indicator-url">URL: <a href="{{ current_indicator.url }}">{{ current_indicator.title }}</a></p>
 	{% endif %}
 
 	<div class="well">
 	<div class="well-title">{% trans "National objectives" %}</div>
 	<strong>Most relevant:</strong>
 	{% if current_indicator.nat_objectives.exists %}
-	  <ul>
+	  <ul class="most-relevant-ul">
 	    {% for objective in current_indicator.nat_objectives.all %}
 	      <li>
 	        <a href="{% url 'nat_strategy' pk=objective.pk %}">{{ objective.code }}</a> <p class="target-decription"> {{ objective.title }}</p	>
@@ -51,7 +51,7 @@
 
 	<strong>Other:</strong>
 	{% if current_indicator.other_nat_objectives.exists %}
-	  <ul>
+	  <ul class="other-relevant-ul">
 	    {% for objective in current_indicator.other_nat_objectives.all %}
 	      <li>
 	        <a href="{% url 'nat_strategy' pk=objective.pk %}">{{ objective.code }} </a> <p>{{ objective.title }}</p>

@@ -4,8 +4,9 @@ from django.core.urlresolvers import reverse
 
 from .base import BaseWebTest
 from .factories import StaffUserFactory
-from .factories import NationalIndicatorFactory
+from .factories import NationalIndicatorFactory, NationalObjectiveFactory
 from unittest import skip
+
 
 class NationalIndicatorsTest(BaseWebTest):
 
@@ -56,7 +57,6 @@ class NationalIndicatorsTest(BaseWebTest):
             }
         )
 
-
     def test_edit_national_indicator(self):
         nat_indicator = NationalIndicatorFactory()
         url = reverse('edit_nat_indicator',
@@ -88,3 +88,30 @@ class NationalIndicatorsTest(BaseWebTest):
                     'pk': nat_indicator.pk,
                 }
             )
+
+    def test_list_national_indicators_user(self):
+        nat_indicator = NationalIndicatorFactory()
+        url = reverse('nat_indicators')
+        resp = self.app.get(url)
+        self.assertEqual(200, resp.status_code)
+        trs = resp.pyquery('.list-nat-indicators li')
+        self.assertEqual(1, len(trs))
+        self.assertIn(nat_indicator.title, trs[0].text_content())
+        trs = resp.pyquery('.list-nat-indicators li a')
+        self.assertIn(nat_indicator.code, trs[0].text_content())
+
+    def test_national_indicator_detail_user(self):
+        nat_indicator = NationalIndicatorFactory()
+        nat_objective_relevant = NationalObjectiveFactory(
+            nat_indicators=(nat_indicator,))
+        nat_objective_other = NationalObjectiveFactory(
+            other_nat_indicators=(nat_indicator,))
+        url = reverse('nat_indicator_detail', kwargs={'pk': nat_indicator.pk})
+        resp = self.app.get(url)
+        self.assertEqual(200, resp.status_code)
+        trs = resp.pyquery('.nat-indicator-url a')
+        self.assertIn(nat_indicator.title, trs[0].text_content())
+        trs = resp.pyquery('.most-relevant-ul li:first-child')
+        self.assertIn(nat_objective_relevant.title, trs[0].text_content())
+        trs = resp.pyquery('.other-relevant-ul li:first-child')
+        self.assertIn(nat_objective_other.title, trs[0].text_content())
