@@ -10,10 +10,9 @@
 {% block content %}
 <section class="content-header">
   <h1 class="page-title">
-    {% if indicator.code %}
-      {% trans "Indicator" %} {{ indicator.code }}:
+    {% if indicator.code %}{% trans "Indicator" %} {{ indicator.code }}:
     {% endif %}
-      {{ indicator.title }}
+    {{ indicator.title }}
   </h1>
 </section>
 <section class="content">
