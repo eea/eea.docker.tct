@@ -89,6 +89,7 @@ class NationalIndicatorsTest(BaseWebTest):
                 }
             )
 
+    @skip
     def test_list_national_indicators_user(self):
         nat_indicator = NationalIndicatorFactory()
         url = reverse('nat_indicators')
