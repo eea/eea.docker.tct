@@ -37,7 +37,7 @@
     height: 100%;
     padding: 12px 18px;
     background-color: #fff;
-    box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.8)
+    box-shadow: 0 0 3px 0 rgba(0,0,0,0.8)
 }
 
 .modal-bot {
@@ -76,7 +76,9 @@
     background: #A8DBA8 !important;
 }
 
-.skin-black .wrapper, .skin-black .main-sidebar, .skin-black .left-side {
+.skin-black .wrapper,
+.skin-black .main-sidebar,
+.skin-black .left-side {
     background: #A8DBA8 !important;
 }
 
@@ -84,7 +86,8 @@
     display: block !important;
 }
 
-.filter-wrapper, .form-wrapper {
+.filter-wrapper,
+.form-wrapper {
     background: #F5F5F5;
     border-radius: 10px;
     padding: 5px;
@@ -115,7 +118,8 @@
     color: #000;
 }
 
-.content-wrapper, .right-side {
+.content-wrapper,
+.right-side {
     background: #fff !important;
 }
 
@@ -127,7 +131,8 @@
     margin-bottom: 0;
 }
 
-.eu_targets_text i, .objective_text i {
+.eu_targets_text i,
+.objective_text i {
     background-color: #d58512 !important;
 }
 
@@ -135,19 +140,23 @@
     background-color: darkred !important;
 }
 
-.aichi_targets_text i, .target_text i {
+.aichi_targets_text i,
+.target_text i {
     background: #0018A8 !important;
 }
 
-.other_aichi_targets_text i, .other_target_text i {
+.other_aichi_targets_text i,
+.other_target_text i {
     background: #1F75FE !important;
 }
 
-.eu_indicators_text i, .eu_target_text i {
+.eu_indicators_text i,
+.eu_target_text i {
     background: #49796B !important;
 }
 
-.other_eu_indicators_text i, .actions_text i {
+.other_eu_indicators_text i,
+.actions_text i {
     background: #29AB87 !important;
 }
 
@@ -159,13 +168,23 @@
     background-color: #79BD9A !important;
 }
 
-.skin-black .wrapper, .skin-black .main-sidebar, .skin-black .left-side {
+.skin-black .wrapper,
+.skin-black .main-sidebar,
+.skin-black .left-side {
     background: #A8DBA8 !important;
 }
 
-.skin-black .sidebar-menu>li:hover>a, .skin-black .sidebar-menu>li.active>a, .skin-black .main-header .navbar .nav>li>a:hover, .skin-black .main-header .navbar .nav>li>a:active, .skin-black .main-header .navbar .nav>li>a:focus, .skin-black .main-header .navbar .nav .open>a, .skin-black .main-header .navbar .nav .open>a:hover, .skin-black .main-header .navbar .nav .open>a:focus, .skin-black .main-header .navbar .nav>.active>a {
+.skin-black .sidebar-menu>li:hover>a,
+.skin-black .sidebar-menu>li.active>a,
+.skin-black .main-header .navbar .nav>li>a:hover,
+.skin-black .main-header .navbar .nav>li>a:active,
+.skin-black .main-header .navbar .nav>li>a:focus,
+.skin-black .main-header .navbar .nav .open>a,
+.skin-black .main-header .navbar .nav .open>a:hover,
+.skin-black .main-header .navbar .nav .open>a:focus,
+.skin-black .main-header .navbar .nav>.active>a {
     background: #79BD9A !important;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.14), 0 2px 2px rgba(0, 0, 0, 0.28);
+    box-shadow: 0 0 2px rgba(0,0,0,0.14), 0 2px 2px rgba(0,0,0,0.28);
     transition: all .2s;
 }
 
@@ -173,7 +192,9 @@
     border-right: 0 !important;
 }
 
-.skin-black .sidebar a, .skin-black .main-header>.logo, .navbar-nav a {
+.skin-black .sidebar a,
+.skin-black .main-header>.logo,
+.navbar-nav a {
     color: #000 !important;
 }
 
