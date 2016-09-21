@@ -5,70 +5,77 @@
 
 
 {% block title %}
-NBSAP - {% trans "Edit page" %}
+	NBSAP - {% trans "Edit page" %}
 {% endblock %}
 
 
 {% block head_scripts %}
-{{ form.media }}
+	{{ form.media }}
 {% endblock %}
 
+
 {% block scripts %}
-{% url 'admin_page' handle=page.handle as page_url %}
-<script>
-  $(function () {
-    $('#id_lang').on('change', function () {
-      var lang = $(this).val();
-      window.location.replace('{{ page_url }}?lang=' + lang);
-    });
-  });
-</script>
+	{% url 'admin_page' handle=page.handle as page_url %}
+	<script>
+		$(function () {
+			$('#id_lang').on('change', function () {
+				var lang = $(this).val();
+				window.location.replace('{{ page_url }}?lang=' + lang);
+			});
+		});
+	</script>
 {% endblock %}
 
 
 {% block navmenu %}
-{% include 'manager/admin_nav_tabs.html' %}
+	{% include 'manager/admin_nav_tabs.html' %}
 {% endblock %}
 
 
 {% block content %}
-<section class="content-header">
-  <h1>Edit page</h1>
-</section>
-<section class="content">
-  <form method="POST" class="edit-form">
+	<section class="content-header">
+		<h1>Edit page</h1>
+	</section>
 
-    <div class="control-group">
-      <label class="control-label" for="{{ form.lang.auto_id }}">
-        {{ form.lang.label }}</label>
-      <div class="controls">
-        {{ form.lang }}
-      </div>
-    </div>
+	<section class="content">
+		<form method="POST" class="edit-form">
 
-    <div class="control-group">
-      <label class="control-label" for="{{ form.title.auto_id }}">
-        {{ form.title.label }}</label>
-      <div class="controls">
-        {% render_field form.title class='input-xxlarge' autofocus='autofocus' %}
-        <div class="text-error">{{ form.title.errors.0 }}</div>
-      </div>
-    </div>
+			<div class="control-group">
+				<label class="control-label" for="{{ form.lang.auto_id }}">
+					{{ form.lang.label }}
+				</label>
+				<div class="controls">
+					{{ form.lang }}
+				</div>
+			</div>
 
-    <div class="control-group">
-      <label class="control-label" for="{{ form.body.auto_id }}">
-        {{ form.body.label }}</label>
-      <div class="controls">
-        {% render_field form.body class='input-xxlarge' autofocus='autofocus' %}
-      </div>
-    </div>
+			<div class="control-group">
+				<label class="control-label" for="{{ form.title.auto_id }}">
+					{{ form.title.label }}
+				</label>
+				<div class="controls">
+					{% render_field form.title class='input-xxlarge' autofocus='autofocus' %}
+					<div class="text-error">
+						{{ form.title.errors.0 }}
+					</div>
+				</div>
+			</div>
 
-    <div class="form-actions">
-      {% url 'admin_pages' as pages_url %}
-      <button type="submit" class="btn btn-success">Save</button>
-      <a href="{{ pages_url }}" class="btn btn-default">Cancel</a>
-    </div>
+			<div class="control-group">
+				<label class="control-label" for="{{ form.body.auto_id }}">
+					{{ form.body.label }}
+				</label>
+				<div class="controls">
+					{% render_field form.body class='input-xxlarge' autofocus='autofocus' %}
+				</div>
+			</div>
 
-  </form>
-</section>
+			<div class="form-actions">
+				{% url 'admin_pages' as pages_url %}
+				<button type="submit" class="btn btn-success">Save</button>
+				<a href="{{ pages_url }}" class="btn btn-default">Cancel</a>
+			</div>
+
+		</form>
+	</section>
 {% endblock %}

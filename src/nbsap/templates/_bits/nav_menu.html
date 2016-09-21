@@ -7,28 +7,38 @@
   </li>
 
   {% if EU_STRATEGY %}
-  <li>
-    <a class="{% active request '^/european-strategy/$' %}{% active request '^/european-strategy/targets' %}" href="{% url 'eu_targets' %}">{% trans "EU Strategy" %}</a>
-  </li>
+    <li>
+      <a class="{% active request '^/european-strategy/$' %}{% active request '^/european-strategy/targets' %}" href="{% url 'eu_targets' %}">
+        {% trans "EU Strategy" %}
+      </a>
+    </li>
   {% endif %}
 
   {% if NAT_STRATEGY %}
-  <li>
-    <a class="{% active request '^/national-strategy/$' %}{% active request '^/national-strategy/objectives' %}" href="{% url 'nat_strategy' %}">{% trans "National Strategy" %}</a>
-  </li>
+    <li>
+      <a class="{% active request '^/national-strategy/$' %}{% active request '^/national-strategy/objectives' %}" href="{% url 'nat_strategy' %}">
+        {% trans "National Strategy" %}
+      </a>
+    </li>
   {% else %}
-  <li>
-    <a class="{% active request '^/european-strategy/indicators' %}" href="{% url 'eu_indicators' %}">{% trans "EU Indicators" %}</a>
-  </li>
+    <li>
+      <a class="{% active request '^/european-strategy/indicators' %}" href="{% url 'eu_indicators' %}">
+        {% trans "EU Indicators" %}
+      </a>
+    </li>
   {% endif %}
 
   {% if NAT_STRATEGY %}
-  <li>
-    <a class="{% active request '^/national-strategy/indicators' %}" href="{% url 'nat_indicators' %}">{% trans "National Indicators" %}</a>
-  </li>
-  <li>
-    <a class="{% active request '^/national-strategy/implementation' %}" href="{% url 'implementation_page' %}">{% trans "Implementation" %}</a>
-  </li>
+    <li>
+      <a class="{% active request '^/national-strategy/indicators' %}" href="{% url 'nat_indicators' %}">
+        {% trans "National Indicators" %}
+      </a>
+    </li>
+    <li>
+      <a class="{% active request '^/national-strategy/implementation' %}" href="{% url 'implementation_page' %}">
+        {% trans "Implementation" %}
+      </a>
+    </li>
   {% endif %}
 
 </ul>

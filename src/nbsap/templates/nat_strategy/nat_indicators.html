@@ -4,29 +4,29 @@
 
 
 {% block title %}
-  NBSAP - {% trans "National Indicators" %}
+	NBSAP - {% trans "National Indicators" %}
 {% endblock %}
 
 
 {% block navmenu %}
-  {% include '_bits/nav_menu.html' %}
+	{% include '_bits/nav_menu.html' %}
 {% endblock %}
 
 
 {% block content %}
-  <h1 class="page-title">{% trans "National Indicators" %}</h1>
+	<h1 class="page-title">{% trans "National Indicators" %}</h1>
 
-  {% if indicators %}
-    <ul class="list-nat-indicators">
-    {% for indicator in indicators.all %}
-      <li>
-        <a href="{% url 'nat_indicator_detail' pk=indicator.pk %}" id="indicator-{{ indicator.id }}">
-          {{ indicator.code }}
-        </a> - {{ indicator.title }}
-      </li>
-    {% endfor %}
-    </ul>
-  {% else %}
-    <h1 class="no-corresponding">{% trans 'No National Indicators' %}</h1>
-  {% endif %}
+	{% if indicators %}
+		<ul class="list-nat-indicators">
+			{% for indicator in indicators.all %}
+				<li>
+					<a href="{% url 'nat_indicator_detail' pk=indicator.pk %}" id="indicator-{{ indicator.id }}">
+						{{ indicator.code }}
+					</a> - {{ indicator.title }}
+				</li>
+			{% endfor %}
+		</ul>
+	{% else %}
+		<h1 class="no-corresponding">{% trans 'No National Indicators' %}</h1>
+	{% endif %}
 {% endblock %}

@@ -1,51 +1,54 @@
 {% extends "layout.html" %}
+
 {% load i18n %}
 
+
 {% block title %}
-  NBSAP - {% trans "Login page" %}
+	NBSAP - {% trans "Login page" %}
 {% endblock %}
+
 
 {% block navmenu %}
-  {% include '_bits/nav_menu.html' %}
+	{% include '_bits/nav_menu.html' %}
 {% endblock %}
 
-{% block content %}
 
-{% if form.errors %}
-  <div class="alert alert-warning">
-    <p>{% trans "Your username and password didn't match. Please try again." %}</p>
-  </div>
-{% endif %}
-<form class="form-inline login-form" method="post" action="{% url 'login' %}">
-  <fieldset>
-    {% if RESTRICTED_ACCESS %}
-      <div class="restricted">
-        <p>
-          {% trans "This instance is restricted to specific users. Please contact helpdesk for more information." %}
-        </p>
-      </div>
-    {% endif %}
-    <div class="control-group">
-      <label class="control-label" for="inputIcon">{% trans "Username" %}</label>
-      <div class="controls">
-        <div class="input-prepend">
-          <span class="add-on"><i class="icon-user"></i></span>
-          <input id="id_username" class="span2" name="username" type="text">
-        </div>
-      </div>
-    </div>
-    <div class="control-group">
-      <label class="control-label" for="inputIcon">{% trans "Password" %}</label>
-      <div class="controls">
-        <div class="input-prepend">
-          <span class="add-on"><i class="icon-lock"></i></span>
-          <input id="id_password" class="span2" name="password" type="password">
-        </div>
-      </div>
-    </div>
-    {% csrf_token %}
-    <input type="hidden" name="next" value="{{ next }}" />
-    <button type="submit" class="btn btn-success">{% trans "Login" %}</button>
-  </fieldset>
-</form>
+{% block content %}
+	{% if form.errors %}
+		<div class="alert alert-warning">
+			<p>{% trans "Your username and password didn't match. Please try again." %}</p>
+		</div>
+	{% endif %}
+	<form class="form-inline login-form" method="post" action="{% url 'login' %}">
+		<fieldset>
+			{% if RESTRICTED_ACCESS %}
+				<div class="restricted">
+					<p>
+						{% trans "This instance is restricted to specific users. Please contact helpdesk for more information." %}
+					</p>
+				</div>
+			{% endif %}
+			<div class="control-group">
+				<label class="control-label" for="inputIcon">{% trans "Username" %}</label>
+				<div class="controls">
+					<div class="input-prepend">
+						<span class="add-on"><i class="icon-user"></i></span>
+						<input id="id_username" class="span2" name="username" type="text">
+					</div>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="inputIcon">{% trans "Password" %}</label>
+				<div class="controls">
+					<div class="input-prepend">
+						<span class="add-on"><i class="icon-lock"></i></span>
+						<input id="id_password" class="span2" name="password" type="password">
+					</div>
+				</div>
+			</div>
+			{% csrf_token %}
+			<input type="hidden" name="next" value="{{ next }}" />
+			<button type="submit" class="btn btn-success">{% trans "Login" %}</button>
+		</fieldset>
+	</form>
 {% endblock %}

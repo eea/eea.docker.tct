@@ -15,28 +15,29 @@ NBSAP - {% trans "Empty set of National Strategies" %}
 
 
 {% block sidebar %}
-<div class="sidebar">
-  <h4>{% trans "Objectives" %}</h4>
-
-  <ul>
-    {% for objective in objectives %}
-    <li {% if objective.code == current_objective.code %}class="active" {% endif %}>
-      <a href="{% url 'nat_strategy' pk=objective.pk %}" title="{{ objective.code }}">
-        {% trans "Objective" %} {{ objective.code }}
-      </a>
-    </li>
-    {% endfor %}
-  </ul>
-
-</div>
+	<div class="sidebar">
+		<h4>{% trans "Objectives" %}</h4>
+		<ul>
+			{% for objective in objectives %}
+				<li {% if objective.code == current_objective.code %}class="active" {% endif %}>
+					<a href="{% url 'nat_strategy' pk=objective.pk %}"
+						 title="{{ objective.code }}">
+						{% trans "Objective" %} {{ objective.code }}
+					</a>
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
 {% endblock %}
 
 
 {% block content %}
-<section class="content">
-  <p>
-    {% trans "No objectives found. Please define your National Strategy" %}
-    <a href="{% url 'list_national_objectives' %}">{% trans "here" %}</a>.
-  </p>
-</section>
+	<section class="content">
+		<p>
+			{% trans "No objectives found. Please define your National Strategy" %}
+			<a href="{% url 'list_national_objectives' %}">
+				{% trans "here" %}
+			</a>.
+		</p>
+	</section>
 {% endblock %}
