@@ -4,33 +4,12 @@ from django.db.models.signals import pre_save
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from transmeta import TransMeta
-from natsort import natsorted
 
 import tinymce.models
 
 from nbsap.utils import RE_ACTION_CODE
 from nbsap.utils import generate_code
-
-
-def sort_by_code(value):
-    try:
-        return natsorted(value, key=lambda i: i.code.split('.'))
-    except ValueError:
-        return natsorted(value, key=lambda i: i.code)
-
-
-def sort_by_type(value):
-    try:
-        return natsorted(value, key=lambda i: i.indicator_type.split('.'))
-    except ValueError:
-        return natsorted(value, key=lambda i: i.indicator_type)
-
-def sort_by_type_and_code(value):
-    try:
-        return natsorted(value, key=lambda i: (i.code.split('.'),
-                                               i.indicator_type.split('.')))
-    except ValueError:
-        return natsorted(value, key=lambda i: (i.code, i.indicator_type))
+from nbsap.utils import sort_by_type_and_code
 
 
 def getter_for_default_language(field_name):
@@ -464,17 +443,18 @@ class NationalObjective(models.Model):
         else:
             NationalObjective._pre_save_objective_code_on_create(instance)
 
-    def get_all_objectives(self):
+    @property
+    def objectives_tree(self):
         # we should use https://github.com/django-mptt/django-mptt/
         r = []
         for ob in NationalObjective.objects.filter(parent=self):
             r.append(ob)
-            r.extend(ob.get_all_objectives())
+            r.extend(ob.objectives_tree)
         return r
 
     def get_all_actions(self):
         actions_list = list(self.actions.all())
-        for objective in self.get_all_objectives():
+        for objective in self.objectives_tree:
             actions_list.extend(list(objective.actions.all()))
         return actions_list
 

@@ -20,7 +20,7 @@ urlpatterns = [
         views.list_targets,
         name='list_targets'),
     url(r'^aichi/targets/$', views.list_targets, name='list_targets'),
-    url(r'^aichi/goals/targets/$', views.list_targets, name='list_targets'),
+    url(r'^aichi/goals/targets/?$', views.list_targets, name='list_targets'),
     url(r'^aichi/goals/(?P<code>[\w\-]+)$', views.list_targets, name='list_targets'),
     url(r'^aichi/goals/(?P<code>[\w\-]+)/targets/(?P<aichi_target_id>[\w\-]+)$',
         views.aichi_target_detail,

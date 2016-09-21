@@ -8,8 +8,7 @@ import tablib
 
 from nbsap import models
 from nbsap.forms import NationalObjectiveForm, NationalObjectiveEditForm
-from nbsap.utils import remove_tags
-from nbsap.models import sort_by_code
+from nbsap.utils import remove_tags, sort_by_code, get_adjacent_objects
 
 from auth import auth_required
 
@@ -18,20 +17,9 @@ def get_adjacent_objectives(objectives, current_objective):
     all_objectives = []
     for objective in objectives:
         all_objectives.append(objective)
-        all_objectives.extend(objective.get_all_objectives())
-    all_objectives = sort_by_code(all_objectives)
-    for index, objective in enumerate(all_objectives):
-        if objective == current_objective:
-            previous_index = index - 1
-            next_index = index + 1
-            break
-
-    if previous_index < 0:
-        previous_index = len(all_objectives) - 1
-    if next_index > len(all_objectives) - 1:
-        next_index = 0
-
-    return all_objectives[previous_index], all_objectives[next_index]
+        all_objectives.extend(objective.objectives_tree)
+    return get_adjacent_objects(sort_by_code(all_objectives),
+                                current_objective)
 
 
 def nat_strategy(request, pk=None):
@@ -42,15 +30,11 @@ def nat_strategy(request, pk=None):
     if not objectives.exists():
         return render(request, 'objectives/empty_nat_strategy.html')
 
-    for obj in objectives:
-        obj.objectives_tree = obj.get_all_objectives()
-
     pk = pk or objectives[0].pk
     current_objective = models.NationalObjective.objects.get(pk=pk)
     current_objective_cls = current_objective.__class__.__name__
 
     obj_actions = []
-    current_objective.objectives_tree = current_objective.get_all_objectives()
     actions = [i for i in current_objective.actions.all()]
     if actions:
         obj_actions.append({current_objective: actions})
@@ -127,9 +111,8 @@ def implementation(request, code=None):
     current_objective = get_object_or_404(models.NationalObjective, code=code)
     objectives = models.NationalObjective.objects.filter(parent=None).all()
 
-    current_objective.objectives_tree = current_objective.get_all_objectives()
     current_objective.actions_tree = list(current_objective.actions.all())
-    for objective in current_objective.get_all_objectives():
+    for objective in current_objective.objectives_tree:
         for action in objective.actions.all():
             current_objective.actions_tree.append(action)
 

@@ -3,8 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.http import HttpResponse
 from django.utils.translation import ugettext_lazy as _
-from nbsap.models import sort_by_code
-from nbsap.views.goals import get_adjacent_targets
+from nbsap.utils import sort_by_code, get_adjacent_objects
 
 from nbsap import models
 from auth import auth_required
@@ -14,7 +13,7 @@ from nbsap.forms import EuTargetForm, EuTargetEditForm, RegionForm
 
 def get_most_relevant_aichi_targets(target):
     if not target:
-        return None, None
+        return []
     most_relevant_aichi_targets = []
     for strategy in target.eu_aichi_strategy.all():
         for aichi_target in strategy.aichi_targets.all():
@@ -24,7 +23,7 @@ def get_most_relevant_aichi_targets(target):
 
 def get_other_relevant_aichi_targets(target):
     if not target:
-        return None, None
+        return []
     other_relevant_aichi_targets = []
     for strategy in target.eu_aichi_strategy.all():
         for aichi_target in strategy.other_aichi_targets.all():
@@ -37,11 +36,13 @@ def eu_target_detail(request, pk):
     current_target.actions_tree = []
     for action in current_target.actions.order_by('code'):
         current_target.actions_tree.extend(action.get_all_actions())
-    current_target.most_relevant_aichi_targets = get_most_relevant_aichi_targets(current_target)
-    current_target.other_relevant_aichi_targets = get_other_relevant_aichi_targets(current_target)
+    current_target.most_relevant_aichi_targets = \
+        get_most_relevant_aichi_targets(current_target)
+    current_target.other_relevant_aichi_targets = \
+        get_other_relevant_aichi_targets(current_target)
 
     targets = sort_by_code(models.EuTarget.objects.all())
-    previous_target, next_target = get_adjacent_targets(
+    previous_target, next_target = get_adjacent_objects(
         targets, current_target)
 
     return render(request, 'eu_strategy/eu_target_detail.html',
@@ -117,7 +118,7 @@ def edit_region(request, pk=None):
         if form.is_valid():
             form.save()
             if pk:
-                messages.success(request, _('Saved changes') + "")
+                messages.success(request, _('Saved changes'))
             else:
                 messages.success(request, _('Region successfully added.'))
     else:
@@ -133,7 +134,7 @@ def delete_region(request, pk):
     if request.method == 'POST':
         region = get_object_or_404(models.Region, pk=pk)
         region.delete()
-        messages.success(request, _('Region successfully deleted.') + "")
+        messages.success(request, _('Region successfully deleted.'))
         return redirect('list_regions')
 
 
@@ -170,7 +171,7 @@ def edit_eu_strategy_target(request, pk=None, parent=None):
         if form.is_valid():
             form.save()
             if pk:
-                messages.success(request, _('Saved changes') + "")
+                messages.success(request, _('Saved changes'))
             else:
                 messages.success(request, _('Target successfully added.'))
             if target:
@@ -191,5 +192,5 @@ def delete_eu_strategy_target(request, pk):
     if request.method == 'POST':
         target = get_object_or_404(models.EuTarget, pk=pk)
         target.delete()
-        messages.success(request, _('Target successfully deleted.') + "")
+        messages.success(request, _('Target successfully deleted.'))
         return redirect('list_eu_targets')

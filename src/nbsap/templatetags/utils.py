@@ -1,6 +1,6 @@
 import re
 from django import template
-from nbsap.models import sort_by_code, sort_by_type, sort_by_type_and_code
+from nbsap.utils import sort_by_code, sort_by_type, sort_by_type_and_code
 
 register = template.Library()
 

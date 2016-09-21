@@ -75,7 +75,7 @@
   </div>
 
   <div class="pages-navigation">
-    {% with objectives.last.get_all_objectives|last as last %}
+    {% with objectives.last.objectives_tree|last as last %}
       {% ifnotequal previous_objective.pk last.pk %}
         <div class="page-nav-prev-wrapper">
           <a class="previous-page" href="{% url 'nat_strategy' pk=previous_objective.pk %}">

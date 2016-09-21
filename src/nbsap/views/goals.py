@@ -9,15 +9,14 @@ from django.template.loader import render_to_string
 from django.shortcuts import render_to_response
 
 from nbsap import models
-from nbsap.models import sort_by_code
+from nbsap.utils import sort_by_code, get_adjacent_objects
 
 
 def get_most_relevant_targets(target):
     most_relevant_targets = []
     if target.eu_aichi_strategy.count():
         for strategy in target.eu_aichi_strategy.all():
-            for eu_target in strategy.eu_targets.all():
-                most_relevant_targets.append(eu_target)
+            most_relevant_targets.extend(list(strategy.eu_targets.all()))
     return sort_by_code(most_relevant_targets)
 
 
@@ -25,8 +24,7 @@ def get_other_relevant_targets(target):
     other_relevant_targets = []
     if target.eu_other_aichi_strategy.count():
         for strategy in target.eu_other_aichi_strategy.all():
-            for eu_target in strategy.eu_targets.all():
-                other_relevant_targets.append(eu_target)
+            other_relevant_targets.extend(list(strategy.eu_targets.all()))
     return sort_by_code(other_relevant_targets)
 
 
@@ -38,39 +36,19 @@ def get_most_relevant_indicators(target):
     return most_relevant_indicators
 
 
-def get_adjacent_targets(targets, current_target):
-    if not current_target:
-        return None, None
-
-    for index, target in enumerate(targets):
-        if target == current_target:
-            previous_index = index - 1
-            next_index = index + 1
-            break
-
-    if previous_index < 0:
-        previous_index = len(targets) - 1
-    if next_index > len(targets) - 1:
-        next_index = 0
-
-    return targets[previous_index], targets[next_index]
-
-
 def user_homepage(request):
     return render(request, 'user_homepage.html')
 
 
 def list_goals(request):
     goals = models.AichiGoal.objects.order_by('code').all()
-    list_goals = True
-    list_targets = False
     return render_to_response(
         'aichi/aichi.html',
         context_instance=RequestContext(
             request, {
                 'goals': goals,
-                'list_goals': list_goals,
-                'list_targets': list_targets,
+                'list_goals': True,
+                'list_targets': False,
             })
     )
 
@@ -82,19 +60,15 @@ def list_targets(request, code=None):
     else:
         current_goal = None
         targets = models.AichiTarget.objects.all()
-
     goals = models.AichiGoal.objects.order_by('code').all()
-    list_goals = False
-    list_targets = True
-
     return render_to_response(
         'aichi/aichi.html',
         context_instance=RequestContext(
             request, {
                 'current_goal': current_goal,
                 'goals': goals,
-                'list_goals': list_goals,
-                'list_targets': list_targets,
+                'list_goals': False,
+                'list_targets': True,
                 'targets': targets,
             })
     )
@@ -124,11 +98,11 @@ def aichi_target_detail(request, aichi_target_id, code=None):
     if target not in current_goal.targets.all():
         raise Http404
 
-    previous_target, next_target = get_adjacent_targets(all_targets, target)
+    previous_target, next_target = get_adjacent_objects(all_targets, target)
 
     info_header = settings.INFO_HEADER
 
-    target.most_relevant_targets =  get_most_relevant_targets(target)
+    target.most_relevant_targets = get_most_relevant_targets(target)
     target.other_relevant_targets = get_other_relevant_targets(target)
     target.most_relevant_indicators = get_most_relevant_indicators(target)
 
