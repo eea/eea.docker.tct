@@ -3,15 +3,10 @@
 {% load i18n %}
 {% load assets %}
 
-{% block title %}
-NBSAP - {% trans "National Indicators: List Indicators" %}
-{% endblock %}
-
 {% block content %}
 <section class="content-header">
   {% get_current_language as lang_code %}
-  <h1 class="page-title">{% trans "National Indicators" %}</h1>
-  <h2>{% trans "List National Indicators" %}</h2>
+  <h1 class="page-title">{% trans "List National Indicators" %}</h1>
 </section>
 <section class="content">
   {% url 'edit_nat_indicator' as edit_indicator %}
