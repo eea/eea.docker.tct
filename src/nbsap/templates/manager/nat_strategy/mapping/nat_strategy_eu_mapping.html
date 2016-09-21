@@ -8,7 +8,7 @@
     {% if subobj.eu_objects %}
       <div class="well-title">{% trans "EU Targets" %}</div>
       <ul>
-      {% for target, actions in subobj.eu_objects.items %}
+      {% for target, actions in subobj.eu_objects.items|sort_by_code_tuplets %}
         <li>
           <a href="{% url 'eu_target_detail' pk=target.pk %}">
           {% trans "Target" %} {{ target.code }}</a>

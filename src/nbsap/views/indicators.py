@@ -12,10 +12,8 @@ def get_most_relevant(indicator):
     aichi_targets = []
     if indicator.eu_indicator_aichi_strategy.exists():
         for strategy in indicator.eu_indicator_aichi_strategy.all():
-            for aichi_target in strategy.aichi_targets.all():
-                if aichi_target not in aichi_targets:
-                    aichi_targets.append(aichi_target)
-    return aichi_targets
+            aichi_targets.extend(list(strategy.aichi_targets.all()))
+    return list(set(aichi_targets))
 
 
 def get_indicators_pages(paginator):

@@ -124,21 +124,14 @@
 			{% if NAT_STRATEGY %}
 				<div class="well">
 					<div class="well-title">{% trans "Mapping with National Strategy" %}</div>
-					{% if action.national_strategy.all %}
+					{% if action.national_strategy %}
 						<ul>
-							{% for strategy in action.national_strategy.all %}
+							{% for objective in action.get_all_objectives|sort_by_code %}
 								<li>
-									{% if strategy.objective.parent %}
-										<a href="{% url 'nat_strategy' pk=strategy.objective.pk %}">
-											{% trans "Objective" %} {{ strategy.objective.code }}
-										</a>
-										<p>{{ strategy.objective.title }} {{ strategy.objective.parent.code }}</p>
-									{% else %}
-										<a href="{% url 'nat_strategy' pk=strategy.objective.pk %}">
-											{% trans "Objective" %} {{ strategy.objective.code }}
-										</a>
-										<p>{{ strategy.objective.title }} {{ strategy.objective.code }}</p>
-									{% endif %}
+									<a href="{% url 'nat_strategy' pk=objective.pk %}">
+										{% trans "Objective" %} {{ objective.code }}
+									</a>
+									<p>{{ objective.title }}</p>
 								</li>
 							{% endfor %}
 						</ul>

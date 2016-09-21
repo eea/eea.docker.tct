@@ -227,6 +227,13 @@ class EuAction(models.Model):
         else:
             return self.parent.target.all()[0]
 
+    def get_all_objectives(self):
+        objectives = []
+        if self.national_strategy:
+            for strategy in self.national_strategy.all():
+                objectives.append(strategy.objective)
+        return objectives
+
     def subactions(self):
         return self.get_all_actions()[1:]
 

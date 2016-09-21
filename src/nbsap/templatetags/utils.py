@@ -1,10 +1,12 @@
 import re
 from django import template
 from nbsap.utils import sort_by_code, sort_by_type, sort_by_type_and_code
+from nbsap.utils import sort_by_code_tuplets
 
 register = template.Library()
 
 register.filter('sort_by_code', sort_by_code)
+register.filter('sort_by_code_tuplets', sort_by_code_tuplets)
 register.filter('sort_by_type', sort_by_type)
 register.filter('sort_by_type_and_code', sort_by_type_and_code)
 

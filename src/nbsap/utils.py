@@ -52,6 +52,13 @@ def sort_by_code(value):
         return natsorted(value, key=lambda i: i.code)
 
 
+def sort_by_code_tuplets(value):
+    try:
+        return natsorted(value, key=lambda i: i[0].code.split('.'))
+    except ValueError:
+        return natsorted(value, key=lambda i: i[0].code)
+
+
 def sort_by_type(value):
     try:
         return natsorted(value, key=lambda i: i.indicator_type.split('.'))
