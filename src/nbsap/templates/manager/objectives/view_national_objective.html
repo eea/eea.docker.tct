@@ -53,12 +53,12 @@
             {% endfor %}
           </tbody>
         </table>
+      </div>
       {% else %}
         <p>
           {% trans "No objectives" %}
         </p>
       {% endif %}
-    </div>
     {% regroup actions by region as action_list %}
     {% if action_list %}
       <div class="property_list">
