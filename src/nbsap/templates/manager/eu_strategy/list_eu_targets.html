@@ -103,7 +103,7 @@ NBSAP - {% trans "EU Strategy: List Targets" %}
             "dom": '<"filter-wrapper"f>t'
         });
         var url = $('#target-table').data('url');
-        $('.filter-wrapper').prepend('{% if EU_STRATEGY_ADD %}<div class="action-bar"><span class="btn btn-success add ajaxget" data-url="' + url + '">{% trans "Add target" %}</span></div>{% endif %}');
+        $('.filter-wrapper').prepend('<div class="action-bar"><span class="btn btn-success add ajaxget" data-url="' + url + '">{% trans "Add target" %}</span></div>');
         $.ajaxGet({
             targetForm: ".form",
             button: ".ajaxget"
