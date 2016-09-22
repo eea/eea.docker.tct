@@ -62,7 +62,10 @@
                 <p{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</p>
                     {% endfor %}
             </div>
-            {% endif %} {% block content %} {% include 'administration_homepage.html' %} {% endblock %}
+            {% endif %}
+            {% block content %}
+            {% include 'administration_homepage.html' %}
+            {% endblock %}
         </div>
 
         <footer class="footer">

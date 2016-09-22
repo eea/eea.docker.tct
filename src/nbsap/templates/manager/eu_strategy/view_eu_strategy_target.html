@@ -1,8 +1,7 @@
 {% extends 'manager/base.html' %}
 {% load i18n %}
 {% load utils %}
-{% block title %} NBSAP - {% trans "target" %}
-{{ target.code }}: {{target.title }}
+{% block title %} NBSAP - {% trans "target" %} {{ target.code }}: {{target.title }}
 {% endblock %}
 {% block content %}
 <section class="content-header">
@@ -142,7 +141,8 @@
     {% endif %}
     <div class="form"></div>
 </section>
-{% endblock %} {% block scripts %}
+{% endblock %}
+{% block scripts %}
 <script src="/static/js/object_delete.js"></script>
 <script src="/static/js/jquery.ajaxGetForm.js"></script>
 <script>
