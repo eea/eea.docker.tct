@@ -153,7 +153,7 @@ function showActionCodeValue(name, textSelector, url) {
 
 function forbidChoicesIntersection(selector1, selector2) {
     $(selector1).on('change', function() {
-        if (this.value) {
+        if (this.value && $(selector2).value) {
             $("option", this).each(function() {
                 var option2 = $(selector2).find('option[value=' + this.value + ']');
                 if (this.selected) {
