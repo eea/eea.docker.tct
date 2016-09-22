@@ -27,11 +27,11 @@ JS_ADMIN_ASSETS = (
 )
 
 CSS_ASSETS = (
-    # 'bootstrap/css/bootstrap.min.css',
     'bootstrap/css/normalize.css',
     'bootstrap/css/skeleton.css',
     'js/chosen/chosen.css',
     'css/style.css',
+    #TODO - load locally
     'https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css'
 ) + settings.CSS_ASSETS
 
