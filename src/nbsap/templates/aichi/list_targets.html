@@ -3,7 +3,7 @@
 
 <ul class="list-targets-wrapper">
 	{% if current_goal %}
-		<h2 class="list-targets-goal-title">{% trans "Goal" %} {{ current_goal.code | upper }}</h2>
+		<h2 class="list-targets-goal-title">{% trans "Goal" %} {{ current_goal.code|upper }}</h2>
 		<p class="list-targets-goal-desc">{{ current_goal.description }}</p>
 	{% endif %}
 	{% for target in targets.all|sort_by_code %}

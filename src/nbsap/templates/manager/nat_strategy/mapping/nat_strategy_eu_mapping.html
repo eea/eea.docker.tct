@@ -1,4 +1,3 @@
-
 {% load i18n %}
 {% load utils %}
 
@@ -8,28 +7,29 @@
     {% if subobj.eu_objects %}
       <div class="well-title">{% trans "EU Targets" %}</div>
       <ul>
-      {% for target, actions in subobj.eu_objects.items|sort_by_code_tuplets %}
-        <li>
-          <a href="{% url 'eu_target_detail' pk=target.pk %}">
-          {% trans "Target" %} {{ target.code }}</a>
-          {{ target.title }}
-        </li>
-        {% if actions %}
-                <ul class="related">
-                <div class="well-title other">{% trans "Related EU Actions" %}</div>
-                  {% for action in actions %}
-                    <li>
-                      <a href="{% url 'eu_target_detail' pk=target.pk %}#{{ action.code }}">
-                      {% trans "Action" %} {{ action.code }}</a>
-                      {{ action.description|safe }}
-                    </li>
-                  {% endfor %}
-                </ul>
+        {% for target, actions in subobj.eu_objects.items|sort_by_code_tuplets %}
+          <li>
+            <a href="{% url 'eu_target_detail' pk=target.pk %}">
+              {% trans "Target" %}
+              {{ target.code }}</a>
+            {{ target.title }}
+          </li>
+          {% if actions %}
+            <ul class="related">
+              <div class="well-title other">{% trans "Related EU Actions" %}</div>
+              {% for action in actions %}
+                <li>
+                  <a href="{% url 'eu_target_detail' pk=target.pk %}#{{ action.code }}">
+                    {% trans "Action" %}
+                    {{ action.code }}</a>
+                  {{ action.description|safe }}
+                </li>
+              {% endfor %}
+            </ul>
           {% endif %}
-      {% endfor %}
-      </ul>
-    {% else %}
-      <p class="no-corresponding">{% trans "No corresponding EU Target" %}.</p>
-    {% endif %}
-  </div>
+        {% endfor %}
+    </ul>
+  {% else %}
+    <p class="no-corresponding">{% trans "No corresponding EU Target" %}.</p>
+  {% endif %}
 </div>

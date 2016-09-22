@@ -20,7 +20,7 @@
 		<ul class="sidebar-menu">
 			{% for goal in goals %}
 				<li id="list-item" {% if goal.code == target.get_parent_goal.code %}class="active"{% endif %}>
-					<a>{% trans "Goal" %} {{ goal.code | upper }}</a>
+					<a>{% trans "Goal" %} {{ goal.code|upper }}</a>
 					<ul class="sidebar-submenu">
 						{% for current_target in goal.targets.all|sort_by_code %}
 							<li {% if current_target.code == target.code %}class="active"{% endif %}>

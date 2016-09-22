@@ -1,40 +1,42 @@
 {% load i18n %}
 {% block head_scripts %}
- {{ form.media }}
+  {{ form.media }}
 {% endblock %}
 {% block content %}
-<section class="content-header">
+  <section class="content-header">
     <h1>{% trans "Add New Region" %}</h1>
-</section>
-<section class="content">
+  </section>
+  <section class="content">
     <div class="col-md-2 form-wrapper">
-        <form action="" method="post" id="region-add" class="form">
-            <div class="form-group">
-                <label for="region">{% trans "Region" %}</label> {{ form.name }}
-            </div>
-            <div class="action-bar">
-                <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
-                <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-default" type="button">{% trans "Cancel" %}</a>
-            </div>
-        </form>
+      <form action="" method="post" id="region-add" class="form">
+        <div class="form-group">
+          <label for="region">{% trans "Region" %}</label>
+          {{ form.name }}
+        </div>
+        <div class="action-bar">
+          <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
+          <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-default" type="button">{% trans "Cancel" %}</a>
+        </div>
+      </form>
     </div>
-</section>
+  </section>
 
-{% endblock %} {% block scripts %}
-<script type="text/javascript">
-    $('document').ready(function() {
-        var frm = $('#region-add');
-        frm.submit(function(ev) {
-            $.ajax({
-                type: frm.attr('method'),
-                url: frm.attr('action'),
-                data: frm.serialize(),
-                success: function(data) {
-                    window.location.href = '{{ request.META.HTTP_REFERER }}';
-                }
-            });
-            ev.preventDefault();
+{% endblock %}
+{% block scripts %}
+  <script type="text/javascript">
+    $('document').ready(function () {
+      var frm = $('#region-add');
+      frm.submit(function (ev) {
+        $.ajax({
+          type: frm.attr('method'),
+          url: frm.attr('action'),
+          data: frm.serialize(),
+          success: function (data) {
+            window.location.href = '{{ request.META.HTTP_REFERER }}';
+          }
         });
+        ev.preventDefault();
+      });
     });
-</script>
+  </script>
 {% endblock %}

@@ -1,142 +1,153 @@
 {% extends 'manager/base.html' %}
 {% load i18n %}
 {% load utils %}
-{% block title %}
-NBSAP - {% trans "Objective" %} {{ objective.code }}: {{objective.title }}
-{% endblock %}
+{% block title %}NBSAP-{% trans "Objective" %}{{ objective.code }}:{{objective.title }}{% endblock %}
 {% block content %}
-<section class="content-header">
+  <section class="content-header">
     <h1 class="page-title">{% trans "Objective" %} {{ objective.code }}: {{ objective.title }}</h1>
-</section>
-<section class="content">
+  </section>
+  <section class="content">
     <div class="action-bar filter-wrapper">
-        <a class="btn btn-success" href="javascript: history.go(-1)"><i class="glyphicon glyphicon-arrow-left"></i> {% trans "Back" %}</a>
-        <span class="btn btn-default ajaxget" data-url="{% url 'edit_national_action' objective=objective.pk %}">{% trans "Add action" %}</span>
+      <a class="btn btn-success" href="javascript: history.go(-1)">
+        <i class="glyphicon glyphicon-arrow-left"></i>
+        {% trans "Back" %}</a>
+      <span class="btn btn-default ajaxget" data-url="{% url 'edit_national_action' objective=objective.pk %}">{% trans "Add action" %}</span>
     </div>
     <div class="row">
-        <div class="col-md-12">
-            <div class="box description">
-                {{ objective.description|safe }}
-            </div>
+      <div class="col-md-12">
+        <div class="box description">
+          {{ objective.description|safe }}
         </div>
+      </div>
     </div>
     {% if objective.children.all|length != 0 %}
-    <div id="subobjectives">
+      <div id="subobjectives">
         <table class="table table-striped minimalist">
-            <caption>
-                Subobjectives
-            </caption>
-            <thead>
-                <th class="span1">{% trans "Code" %}</th>
-                <th>{% trans "Sub-objectives" %}</th>
-                <th></th>
-            </thead>
-            <tbody>
-                {% for subobj in objective.children.all %}
-                <tr>
-                    <td>{{ subobj.code }}</td>
-                    <td>
-                        <a href="{% url 'view_national_objective' pk=subobj.pk %}" title="{% trans 'Objective' %} {{ subobj.code }}">
-            {{ subobj.title|default:subobj.code }}</a>
-                    </td>
-                    <td>
-                        <form class="delete" method="POST" action="{% url 'delete_national_objective' pk=subobj.pk %}">
-                            <span class="btn btn-xs btn-warning ajaxget" data-url="{% url 'edit_national_objective' pk=subobj.pk %}"> <i class="glyphicon glyphicon-edit"></i></span>
-                            <button type="submit" class="btn btn-xs btn-danger edit" data-message="{% trans 'Are you sure you want to delete this subobjective?' %}">
-              <i class="glyphicon glyphicon-trash"></i>
-            </button>
-                        </form>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
+          <caption>
+            Subobjectives
+          </caption>
+          <thead>
+            <th class="span1">{% trans "Code" %}</th>
+            <th>{% trans "Sub-objectives" %}</th>
+            <th></th>
+          </thead>
+          <tbody>
+            {% for subobj in objective.children.all %}
+              <tr>
+                <td>{{ subobj.code }}</td>
+                <td>
+                  <a href="{% url 'view_national_objective' pk=subobj.pk %}" title="{% trans 'Objective' %} {{ subobj.code }}">
+                    {{ subobj.title|default:subobj.code }}</a>
+                </td>
+                <td>
+                  <form class="delete" method="POST" action="{% url 'delete_national_objective' pk=subobj.pk %}">
+                    <span class="btn btn-xs btn-warning ajaxget" data-url="{% url 'edit_national_objective' pk=subobj.pk %}">
+                      <i class="glyphicon glyphicon-edit"></i>
+                    </span>
+                    <button type="submit" class="btn btn-xs btn-danger edit" data-message="{% trans 'Are you sure you want to delete this subobjective?' %}">
+                      <i class="glyphicon glyphicon-trash"></i>
+                    </button>
+                  </form>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
         </table>
-        {% else %}
+      {% else %}
         <p>
-            {% trans "No objectives" %}
+          {% trans "No objectives" %}
         </p>
-        {% endif %}
+      {% endif %}
     </div>
     {% regroup actions by region as action_list %}
     {% if action_list %}
-    <div class="property_list">
+      <div class="property_list">
         <table class="table table-striped minimalist">
-            <caption>
-                Actions
-            </caption>
-            <thead>
-                <th class="span1">{% trans "Code" %}</th>
-                <th>{% trans "Title" %}</th>
-                <th>{% trans "Region" %}</th>
-                <th></th>
-            </thead>
-            <tbody>
-                {% for items in action_list %} {% for action in items.list %}
+          <caption>
+            Actions
+          </caption>
+          <thead>
+            <th class="span1">{% trans "Code" %}</th>
+            <th>{% trans "Title" %}</th>
+            <th>{% trans "Region" %}</th>
+            <th></th>
+          </thead>
+          <tbody>
+            {% for items in action_list %}
+              {% for action in items.list %}
                 <tr>
-                    <td>{{ action.code }}</td>
-                    <td>
-                        <a href="{% url 'view_national_action' objective=objective.pk pk=action.pk %}" title="{% trans 'action' %} {{ action.code }}">
-          {{ action.title }}
-        </a>
-                    </td>
-                    <td>{% if items.grouper %}{{ items.grouper }}{% else %}{% trans "All regions" %}{% endif %}</td>
-                    <td>
-                        <form class="delete" method="POST" action="{% url 'delete_national_action' objective=objective.pk pk=action.pk %}">
+                  <td>{{ action.code }}</td>
+                  <td>
+                    <a href="{% url 'view_national_action' objective=objective.pk pk=action.pk %}" title="{% trans 'action' %} {{ action.code }}">
+                      {{ action.title }}
+                    </a>
+                  </td>
+                  <td>
+                    {% if items.grouper %}{{ items.grouper }}
+                    {% else %}{% trans "All regions" %}{% endif %}
+                  </td>
+                  <td>
+                    <form class="delete" method="POST" action="{% url 'delete_national_action' objective=objective.pk pk=action.pk %}">
 
-                            <span class="btn btn-xs btn-warning ajaxget" data-url="{% url 'edit_national_action' objective=objective.pk pk=action.pk %}"> <i class="glyphicon glyphicon-edit"></i></span>
+                      <span class="btn btn-xs btn-warning ajaxget" data-url="{% url 'edit_national_action' objective=objective.pk pk=action.pk %}">
+                        <i class="glyphicon glyphicon-edit"></i>
+                      </span>
 
-                            <button type="submit" class="btn btn-xs btn-danger edit" data-message="{% trans 'Are you sure you want to delete this action?' %}">
-            <i class="glyphicon glyphicon-trash"></i>
-          </button> {% if not activity.parent %}
-                            <span class="btn btn-xs btn-default ajaxget" data-url="{% url 'edit_national_action' objective=objective.pk parent=action.pk %}">
-            {% trans "Add sub-action" %}</span> {% endif %}
-                        </form>
-                    </td>
+                      <button type="submit" class="btn btn-xs btn-danger edit" data-message="{% trans 'Are you sure you want to delete this action?' %}">
+                        <i class="glyphicon glyphicon-trash"></i>
+                      </button>
+                      {% if not activity.parent %}
+                        <span class="btn btn-xs btn-default ajaxget" data-url="{% url 'edit_national_action' objective=objective.pk parent=action.pk %}">
+                          {% trans "Add sub-action" %}</span>
+                      {% endif %}
+                    </form>
+                  </td>
                 </tr>
                 {% for subaction in action.children.all %}
-                <tr>
+                  <tr>
                     <td class="table-indent">{{ subaction.code }}</td>
                     <td class="table-indent">
-                        <a href="{% url 'view_national_action' objective=objective.pk pk=subaction.pk %}" title="{% trans 'action' %} {{ subaction.code }}">
-          {{ subaction.title }}
-        </a>
+                      <a href="{% url 'view_national_action' objective=objective.pk pk=subaction.pk %}" title="{% trans 'action' %} {{ subaction.code }}">
+                        {{ subaction.title }}
+                      </a>
                     </td>
-                    <td>{% if items.grouper %}{{ items.grouper }}{% else %}{% trans "All regions" %}{% endif %}</td>
                     <td>
-                        <form class="delete" method="POST" action="{% url 'delete_national_action' objective=objective.pk pk=subaction.pk %}">
-
-                            <span class="btn btn-xs btn-warning ajaxget" data-url="{% url 'edit_national_action' objective=objective.pk pk=subaction.pk %}"> <i class="glyphicon glyphicon-edit"></i></span>
-
-                            <button type="submit" class="btn btn-xs btn-danger edit" data-message="{% trans 'Are you sure you want to delete this action?' %}">
-            <i class="glyphicon glyphicon-trash"></i>
-          </button>
-                        </form>
+                      {% if items.grouper %}{{ items.grouper }}
+                      {% else %}{% trans "All regions" %}{% endif %}
                     </td>
-                </tr>
+                    <td>
+                      <form class="delete" method="POST" action="{% url 'delete_national_action' objective=objective.pk pk=subaction.pk %}">
+
+                        <span class="btn btn-xs btn-warning ajaxget" data-url="{% url 'edit_national_action' objective=objective.pk pk=subaction.pk %}">
+                          <i class="glyphicon glyphicon-edit"></i>
+                        </span>
+
+                        <button type="submit" class="btn btn-xs btn-danger edit" data-message="{% trans 'Are you sure you want to delete this action?' %}">
+                          <i class="glyphicon glyphicon-trash"></i>
+                        </button>
+                      </form>
+                    </td>
+                  </tr>
                 {% endfor %}
-                {% endfor %}
-                {% endfor %}
-            </tbody>
+              {% endfor %}
+            {% endfor %}
+          </tbody>
         </table>
-    </div>
+      </div>
     {% else %}
-    <p>
+      <p>
         {% trans "No actions found" %}
-    </p>
+      </p>
     {% endif %}
-    <div class="form">
-    </div>
-</section>
+    <div class="form"></div>
+  </section>
 {% endblock %}
 {% block scripts %}
-<script src="/static/js/object_delete.js"></script>
-<script src="/static/js/jquery.ajaxGetForm.js"></script>
-<script>
-    $(function() {
-        $.ajaxGet({
-            targetForm: ".form",
-            button: ".ajaxget"
-        });
+  <script src="/static/js/object_delete.js"></script>
+  <script src="/static/js/jquery.ajaxGetForm.js"></script>
+  <script>
+    $(function () {
+      $.ajaxGet({targetForm: ".form", button: ".ajaxget"});
     })
-</script>
+  </script>
 {% endblock scripts %}

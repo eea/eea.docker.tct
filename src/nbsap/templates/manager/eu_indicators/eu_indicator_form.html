@@ -1,16 +1,15 @@
 {% load i18n %}
 
-
 <div class="form-group">
   <label class="block" for="language">{% trans "Language" %}</label>
   {{ form.language }}
 </div>
 {% if form.code %}
-<div class="form-group">
-  <label class="block" for="code">{% trans "Code" %}</label>
-  {{ form.code }}
-  {{ form.code.errors }}
-</div>
+  <div class="form-group">
+    <label class="block" for="code">{% trans "Code" %}</label>
+    {{ form.code }}
+    {{ form.code.errors }}
+  </div>
 {% endif %}
 <div class="language-container">
   <div class="form-group">

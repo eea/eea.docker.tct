@@ -4,95 +4,101 @@
 <div class="mapping-wrapper">
   <div class="well">
     <h4 class="mapping" id="aichi-mapping">{% trans "Mapping with Aichi" %}</h4>
-    {% with strategies=subobj.objective_national_strategy.all %}
-      {% if strategies|length %}
-        {% get_goals_for_strategies strategies=strategies as goals %}
-        <div class="well-title">{% trans "Aichi Goals" %}</div>
-        {% if goals %}
+    {% with strategies = subobj.objective_national_strategy.all %}
+    {% if strategies|length %}
+      {% get_goals_for_strategies strategies = strategies as goals %}
+      <div class="well-title">{% trans "Aichi Goals" %}</div>
+      {% if goals %}
         <ul>
-        {% for goal in goals %}
-          <li>
-            <a href="{% url 'list_targets' code=goal.code %}">
-            {% trans "Goal" %} {{ goal.code|upper }}</a>
-            <p>{{ goal.description|safe }}</p>
-          </li>
-        {% endfor %}
+          {% for goal in goals %}
+            <li>
+              <a href="{% url 'list_targets' code=goal.code %}">
+                {% trans "Goal" %}
+                {{ goal.code|upper }}</a>
+              <p>{{ goal.description|safe }}</p>
+            </li>
+          {% endfor %}
         </ul>
-        {% else %}
-          <p class="no-corresponding">{% trans "No corresponding Aichi Goals" %}.</p>
-        {% endif %}
-  </div>
-  <div class="well">
-        {% get_targets_for_strategies strategies=strategies as targets %}
-        <div class="well-title">{% trans "Most relevant Aichi Targets" %}</div>
-        {% if targets %}
-          <ul>
-            {% for target in targets %}
-              {% assign target.get_parent_goal as goal %}
-              {% if goal %}
+      {% else %}
+        <p class="no-corresponding">{% trans "No corresponding Aichi Goals" %}.</p>
+      {% endif %}
+    </div>
+    <div class="well">
+      {% get_targets_for_strategies strategies = strategies as targets %}
+      <div class="well-title">{% trans "Most relevant Aichi Targets" %}</div>
+      {% if targets %}
+        <ul>
+          {% for target in targets %}
+            {% assign target.get_parent_goal as goal %}
+            {% if goal %}
               <li>
                 <a href="{% url 'list_targets' code=goal.code %}#{{ target.code }}">
-                {% trans "Target" %} {{ target.code }}</a>
+                  {% trans "Target" %}
+                  {{ target.code }}</a>
                 <p>{{ target.description|safe }}</p>
               </li>
-              {% endif %}
-            {% endfor %}
-          </ul>
-        {% else %}
-          <p class="no-corresponding">{% trans "No corresponding Aichi Target" %}.</p>
-        {% endif %}
-  </div>
-  <div class="well">
-        {% get_other_targets_for_strategies strategies=strategies as other_targets %}
-        {% if other_targets %}
-          <div class="well-title">{% trans "Other relevant Aichi Targets" %}</div>
-          <ul>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="no-corresponding">{% trans "No corresponding Aichi Target" %}.</p>
+      {% endif %}
+    </div>
+    <div class="well">
+      {% get_other_targets_for_strategies strategies = strategies as other_targets %}
+      {% if other_targets %}
+        <div class="well-title">{% trans "Other relevant Aichi Targets" %}</div>
+        <ul>
           {% for target in other_targets %}
             {% assign target.get_parent_goal as goal %}
             <li>
               <a href="{% url 'list_targets' code=goal.code %}#{{ target.code }}">
-              {% trans "Target" %} {{ target.code }}</a>
+                {% trans "Target" %}
+                {{ target.code }}</a>
               <p>{{ target.description|safe }}</p>
             </li>
           {% endfor %}
-          </ul>
-        {% endif %}
-      {% else %}
-        <p class="no-corresponding">{% trans "No corresponding Aichi Target" %}.</p>
+        </ul>
       {% endif %}
+    {% else %}
+      <p class="no-corresponding">{% trans "No corresponding Aichi Target" %}.</p>
+    {% endif %}
   </div>
-    {% endwith %}
+  {% endwith %}
 </div>
 <div class="mapping-wrapper">
   <div class="well">
     <h4 class="mapping" id="nat-mapping">{% trans "Mapping with National Indicators" %}</h4>
-    {% with indicators=subobj.nat_indicators.all %}
-      {% with other_indicators=subobj.other_nat_indicators.all %}
-        {% if indicators %}
-          <div class="well-title">{% trans "Most relevant National Indicators" %}</div>
-          <ul>
-          {% for indicator in indicators %}
-            <li>
-              <a href="{% url 'nat_indicators' %}#indicator-{{ indicator.id }}">
-                {{ indicator.get_indicator_type_display }}{{ indicator.code }}</a> <div class='content-description'> {{ indicator.title }}</div>
-            </li>
-          {% endfor %}
-          </ul>
-        {% elif not other_indicators %}
-          <p class="no-corresponding">{% trans "No corresponding National Indicators" %}.</p>
-        {% endif %}
-        {% if other_indicators %}
-          <div class="well-title">{% trans "Other National Indicators" %}</div>
-          <ul>
-          {% for indicator in other_indicators %}
-            <li>
-              <a href="{% url 'nat_indicators' %}#indicator-{{ indicator.id }}">
-                {{ indicator.get_indicator_type_display }}{{ indicator.code }}</a><div class='content-description'>{{ indicator.title }}</div>
-            </li>
-          {% endfor %}
-          </ul>
-        {% endif %}
-      {% endwith %}
+    {% with indicators = subobj.nat_indicators.all %}
+    {% with other_indicators = subobj.other_nat_indicators.all %}
+    {% if indicators %}
+      <div class="well-title">{% trans "Most relevant National Indicators" %}</div>
+      <ul>
+        {% for indicator in indicators %}
+          <li>
+            <a href="{% url 'nat_indicators' %}#indicator-{{ indicator.id }}">
+              {{ indicator.get_indicator_type_display }}{{ indicator.code }}</a>
+            <div class='content-description'>
+              {{ indicator.title }}</div>
+          </li>
+        {% endfor %}
+      </ul>
+    {% elif not other_indicators %}
+      <p class="no-corresponding">{% trans "No corresponding National Indicators" %}.</p>
+    {% endif %}
+    {% if other_indicators %}
+      <div class="well-title">{% trans "Other National Indicators" %}</div>
+      <ul>
+        {% for indicator in other_indicators %}
+          <li>
+            <a href="{% url 'nat_indicators' %}#indicator-{{ indicator.id }}">
+              {{ indicator.get_indicator_type_display }}{{ indicator.code }}</a>
+            <div class='content-description'>{{ indicator.title }}</div>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+    {% endwith %}
     {% endwith %}
   </div>
 </div>

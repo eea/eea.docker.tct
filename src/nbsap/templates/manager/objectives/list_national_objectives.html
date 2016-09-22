@@ -4,107 +4,105 @@
 {% load assets %}
 
 {% block title %}
-NBSAP - {% trans "National Strategy: List National Objectives" %}
+  NBSAP -  {% trans "National Strategy: List National Objectives" %}
 {% endblock %}
 
 {% block content %}
-<section class="content-header">
-  <h1 class="page-title">{% trans "List National Objectives" %}</h1>
-</section>
-<section class="content">
-  {% get_current_language as lang_code %}
-  {% url 'edit_national_objective' as edit_objective %}
-  <table id="objectives-table" data-url="{{ edit_objective }}" class="table table-striped table-bordered">
-    <thead>
-    <th>{% trans "Code" %}</th>
-    <th>{% trans "National Target" %}</th>
-    <th>{% trans "Has actions" %}</th>
-    <th></th>
-    </thead>
-    <tbody>
-    {% for objective in objectives %}
-    <tr>
-      <td>{{ objective.code }}</td>
-      <td>
-        <a href="{% url 'view_national_objective' pk=objective.pk %}"
-           title="{% trans 'Objective' %} {{ objective.code }}">
-          {{ objective.title|default:objective.code }}</a>
-      </td>
-      <td>
-        {% if not objective.actions.all %}
-        <span class="label label-danger"><i class="glyphicon glyphicon-remove-sign"></i></span>
-        {% else %}
-        <span class="label label-success"><i class="glyphicon glyphicon-ok-sign"></i></span>
-        {% endif %}
-      </td>
-      <td>
-        <form class="delete" method="POST" action="{% url 'delete_national_objective' pk=objective.pk %}">
-          <span class="btn btn-xs btn-warning ajaxget"
-             data-url="{% url 'edit_national_objective' pk=objective.pk %}"> <i class="glyphicon glyphicon-edit"></i></span>
-          <button type="submit" class="btn btn-xs btn-danger edit"
-                  data-message="{% trans 'Are you sure you want to delete this objective?' %}">
-            <i class="glyphicon glyphicon-trash"></i>
-          </button>
-          {% if not target.parent %}
-          <span class="btn btn-xs btn-default ajaxget"
-             data-url="{% url 'edit_national_objective' parent=objective.pk %}">
-            {% trans "Add sub objective" %}
-          </a>
-          {% endif %}
-        </form>
-      </td>
-    </tr>
-    {% for subobjective in objective.children.all %}
-    <tr>
-      <td class="table-indent">{{ subobjective.code }}</td>
-      <td  class="table-indent">
-        <a href="{% url 'view_national_objective' pk=subobjective.pk %}"
-           title="{% trans 'Objective' %} {{ subobjective.code }}">
-          {{ subobjective.title|default:subobjective.code }}</a>
-      </td>
-      <td>
-        {% if not subobjective.actions.all %}
-        <span class="label label-danger"><i class="glyphicon glyphicon-remove-sign"></i></span>
-        {% else %}
-        <span class="label label-success"><i class="glyphicon glyphicon-ok-sign"></i></span>
-        {% endif %}
-      </td>
-      <td>
-        <form class="delete" method="POST" action="{% url 'delete_national_objective' pk=subobjective.pk %}">
+  <section class="content-header">
+    <h1 class="page-title">{% trans "List National Objectives" %}</h1>
+  </section>
+  <section class="content">
+    {% get_current_language as lang_code %}
+    {% url 'edit_national_objective' as edit_objective %}
+    <table id="objectives-table" data-url="{{ edit_objective }}" class="table table-striped table-bordered">
+      <thead>
+        <th>{% trans "Code" %}</th>
+        <th>{% trans "National Target" %}</th>
+        <th>{% trans "Has actions" %}</th>
+        <th></th>
+      </thead>
+      <tbody>
+        {% for objective in objectives %}
+          <tr>
+            <td>{{ objective.code }}</td>
+            <td>
+              <a href="{% url 'view_national_objective' pk=objective.pk %}" title="{% trans 'Objective' %} {{ objective.code }}">
+                {{ objective.title|default:objective.code }}</a>
+            </td>
+            <td>
+              {% if not objective.actions.all %}
+                <span class="label label-danger">
+                  <i class="glyphicon glyphicon-remove-sign"></i>
+                </span>
+              {% else %}
+                <span class="label label-success">
+                  <i class="glyphicon glyphicon-ok-sign"></i>
+                </span>
+              {% endif %}
+            </td>
+            <td>
+              <form class="delete" method="POST" action="{% url 'delete_national_objective' pk=objective.pk %}">
+                <span class="btn btn-xs btn-warning ajaxget" data-url="{% url 'edit_national_objective' pk=objective.pk %}">
+                  <i class="glyphicon glyphicon-edit"></i>
+                </span>
+                <button type="submit" class="btn btn-xs btn-danger edit" data-message="{% trans 'Are you sure you want to delete this objective?' %}">
+                  <i class="glyphicon glyphicon-trash"></i>
+                </button>
+                {% if not target.parent %}
+                  <span class="btn btn-xs btn-default ajaxget" data-url="{% url 'edit_national_objective' parent=objective.pk %}">
+                    {% trans "Add sub objective" %}
+                  </a>
+                {% endif %}
+              </form>
+            </td>
+          </tr>
+          {% for subobjective in objective.children.all %}
+            <tr>
+              <td class="table-indent">{{ subobjective.code }}</td>
+              <td class="table-indent">
+                <a href="{% url 'view_national_objective' pk=subobjective.pk %}" title="{% trans 'Objective' %} {{ subobjective.code }}">
+                  {{ subobjective.title|default:subobjective.code }}</a>
+              </td>
+              <td>
+                {% if not subobjective.actions.all %}
+                  <span class="label label-danger">
+                    <i class="glyphicon glyphicon-remove-sign"></i>
+                  </span>
+                {% else %}
+                  <span class="label label-success">
+                    <i class="glyphicon glyphicon-ok-sign"></i>
+                  </span>
+                {% endif %}
+              </td>
+              <td>
+                <form class="delete" method="POST" action="{% url 'delete_national_objective' pk=subobjective.pk %}">
 
-          <span class="btn btn-xs btn-warning ajaxget"
-             data-url="{% url 'edit_national_objective' pk=subobjective.pk %}"> <i class="glyphicon glyphicon-edit"></i></span>
+                  <span class="btn btn-xs btn-warning ajaxget" data-url="{% url 'edit_national_objective' pk=subobjective.pk %}">
+                    <i class="glyphicon glyphicon-edit"></i>
+                  </span>
 
-          <button type="submit" class="btn btn-xs btn-danger edit"
-                  data-message="{% trans 'Are you sure you want to delete this subobjective?' %}">
-            <i class="glyphicon glyphicon-trash"></i>
-          </button>
-        </form>
-      </td>
-    </tr>
-    {% endfor %}
-    {% endfor %}
-    </tbody>
-  </table>
-  <div class="form">
-  </div>
-</section>
+                  <button type="submit" class="btn btn-xs btn-danger edit" data-message="{% trans 'Are you sure you want to delete this subobjective?' %}">
+                    <i class="glyphicon glyphicon-trash"></i>
+                  </button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="form"></div>
+  </section>
 {% endblock %}
 {% block scripts %}
-<script src="/static/js/jquery.ajaxGetForm.js"></script>
-<script>
-    $(function() {
-      $('#objectives-table').dataTable({
-        "paging": false,
-        "dom": '<"filter-wrapper"f>t'
-      });
-      var url=$('#objectives-table').data('url');
-      $('.filter-wrapper').prepend('<div class="action-bar"><span class="btn btn-success add ajaxget" data-url="'+url+'?category={{ category }}">{% trans "Add objective" %}</span></div>');
-        $.ajaxGet({
-            targetForm: ".form",
-            button: ".ajaxget"
-        });
+  <script src="/static/js/jquery.ajaxGetForm.js"></script>
+  <script>
+    $(function () {
+      $('#objectives-table').dataTable({"paging": false, "dom": '<"filter-wrapper"f>t'});
+      var url = $('#objectives-table').data('url');
+      $('.filter-wrapper').prepend('<div class="action-bar"><span class="btn btn-success add ajaxget" data-url="' + url + '?category={{ category }}">{% trans "Add objective" %}</span></div>');
+      $.ajaxGet({targetForm: ".form", button: ".ajaxget"});
     });
-</script>
-<script src="/static/js/object_delete.js"></script>
+  </script>
+  <script src="/static/js/object_delete.js"></script>
 {% endblock scripts %}
