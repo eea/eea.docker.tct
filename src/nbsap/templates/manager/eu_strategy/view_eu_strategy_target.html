@@ -79,7 +79,8 @@ NBSAP - {% trans "target" %} {{ target.code }}: {{target.title }}
                 <th></th>
             </thead>
             <tbody>
-                {% for items in action_list %} {% for action in items.list %}
+                {% for items in action_list %}
+                {% for action in items.list %}
                 <tr>
                     <td>{{ action.code }}</td>
                     <td>
@@ -87,7 +88,13 @@ NBSAP - {% trans "target" %} {{ target.code }}: {{target.title }}
             {{ action.title }}
           </a>
                     </td>
-                    <td>{% if items.grouper %}{{ items.grouper }}{% else %}{% trans "All regions" %}{% endif %}</td>
+                    <td>
+                        {% if items.grouper %}
+                        {{ items.grouper }}
+                        {% else %}
+                        {% trans "All regions" %}
+                        {% endif %}
+                    </td>
                     <td>
                         <form class="delete" method="POST" action="{% url 'delete_eu_strategy_activity' target=target.pk pk=action.pk %}">
 
