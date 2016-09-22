@@ -1,4 +1,8 @@
-{% load i18n %} {% block head_scripts %} {{ form.media }} {% endblock %} {% block content %}
+{% load i18n %}
+{% block head_scripts %}
+{{ form.media }}
+{% endblock %}
+{% block content %}
 <section class="content-header">
     <h1 class="page-title">{% trans "Add action" %}</h1>
 </section>
@@ -30,7 +34,6 @@
                     <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
                     <a href="{% url 'view_national_objective' pk=objective.pk %}" class="btn btn-default" type="button">{% trans "Cancel" %}</a>
                 </div>
-
             </form>
         </div>
     </div>

@@ -17,8 +17,7 @@ NBSAP - {% trans "Action" %} {{ action.code }}: {{ action.title }}
             <div class="box description">
                 {% if not action.description %}
                 <p class="alert">No description provided</p>
-                {% endif %}
-                {{ action.description|safe }}
+                {% endif %} {{ action.description|safe }}
             </div>
         </div>
     </div>
@@ -45,11 +44,11 @@ NBSAP - {% trans "Action" %} {{ action.code }}: {{ action.title }}
                         <a href="{% url 'view_national_action' objective=objective.pk pk=action.pk %}" title="{% trans 'action' %} {{ action.code }}">{{ action.title }}</a>
                     </td>
                     <td>
-                      {% if items.grouper %}
-                      {{ items.grouper }}
-                      {% else %}
-                      {% trans "All regions" %}
-                      {% endif %}
+                        {% if items.grouper %}
+                        {{ items.grouper }}
+                        {% else %}
+                        {% trans "All regions" %}
+                        {% endif %}
                     </td>
                     <td>
                         <form class="delete" method="POST" action="{% url 'delete_national_action' objective=objective.pk pk=action.pk %}">
@@ -73,11 +72,13 @@ NBSAP - {% trans "Action" %} {{ action.code }}: {{ action.title }}
     <p>
         {% trans "No actions found" %}
     </p>
-    {% endif %} {% endif %}
+    {% endif %}
+    {% endif %}
     <div class="form">
     </div>
 </section>
-{% endblock %} {% block scripts %}
+{% endblock %}
+{% block scripts %}
 <script src="/static/js/object_delete.js"></script>
 <script src="/static/js/jquery.ajaxGetForm.js"></script>
 <script>

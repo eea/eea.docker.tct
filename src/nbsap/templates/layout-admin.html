@@ -3,106 +3,92 @@
 {% load assets %}
 
 <html>
-	<head>
-		<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
-		<title>{% block title %}{% endblock %}</title>
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      {% block title %}
+      {% endblock %}
+    </title>
 
-		<!--[if lte IE 8]>
+    <!--[if lte IE 8]>
 			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 
 
-		{% assets "css_admin" %}
-			<link rel="stylesheet" href="{{ ASSET_URL }}" />
-		{% endassets %}
+    {% assets "css_admin" %}
+    <link rel="stylesheet" href="{{ ASSET_URL }}" />
+    {% endassets %}
+    {% block extra_head %}
+    {% endblock %}
+    {% if GOOGLE_ANALYTICS_PROPERTY_ID %}
+    {% include "_bits/ga.html" %}
+    {% endif %}
+</head>
 
-		{% block extra_head %}
-		{% endblock %}
-
-		{% if GOOGLE_ANALYTICS_PROPERTY_ID %}
-			{% include "_bits/ga.html" %}
-		{% endif %}
-	</head>
-
-	<body class="sidebar-mini skin-black">
-		<div class="wrapper">
-			<header class="main-header">
-				<a href="{% url 'admin_home' %}" class="logo">
+<body class="sidebar-mini skin-black">
+    <div class="wrapper">
+        <header class="main-header">
+            <a href="{% url 'admin_home' %}" class="logo">
 					Dashboard
-				</a>
-				{% if WARNING_MESSAGE %}
-					<div class="alert alert-warning warning-demo">
-						{{ WARNING_MESSAGE }}
-					</div>
-				{% endif %}
-				{% include "_bits/account_menu.html" %}
-			</header>
+				</a> {% if WARNING_MESSAGE %}
+            <div class="alert alert-warning warning-demo">
+                {{ WARNING_MESSAGE }}
+            </div>
+            {% endif %} {% include "_bits/account_menu.html" %}
+        </header>
 
-			<aside class="main-sidebar">
-				<section class="sidebar">
-					{% block navmenu %}
-						{% include 'manager/admin_nav_tabs.html' %}
-					{% endblock %}
-
-					{% block admin-menu %}
-						<ul class="sidebar-menu">
-							<li class="nav-btn">
-								<a class="exit-admin"
-									 href="{% url 'user_homepage' %}">
+        <aside class="main-sidebar">
+            <section class="sidebar">
+                {% block navmenu %} {% include 'manager/admin_nav_tabs.html' %} {% endblock %} {% block admin-menu %}
+                <ul class="sidebar-menu">
+                    <li class="nav-btn">
+                        <a class="exit-admin" href="{% url 'user_homepage' %}">
 									{% trans "View site" %}
 								</a>
-							</li>
-						</ul>
-					{% endblock %}
-				</section>
-			</aside>
+                    </li>
+                </ul>
+                {% endblock %}
+            </section>
+        </aside>
 
-			<div class="content-wrapper">
-				{% block sidebar %}
-				{% endblock %}
+        <div class="content-wrapper">
+            {% block sidebar %}
+            {% endblock %}
+            {% block sidebar-right %}
+            {% endblock %}
+            {% if messages %}
+            <div class="alert alert-success messages">
+                {% for message in messages %}
+                <p{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</p>
+                    {% endfor %}
+            </div>
+            {% endif %} {% block content %} {% include 'administration_homepage.html' %} {% endblock %}
+        </div>
 
-				{% block sidebar-right %}
-				{% endblock %}
+        <footer class="footer">
+            <div class="container">
+                {% if LAYOUT_FOOTER_LOGO %}
+                <div class="pull-right">
+                    <a href="museum.be">
+                        <img src="/static/logo_irscnb.png">
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </footer>
+    </div>
 
-				{% if messages %}
-					<div class="alert alert-success messages">
-						{% for message in messages %}
-							<p{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</p>
-						{% endfor %}
-					</div>
-				{% endif %}
+    <div class="modal-container">
+        {% block modal %}
+        {% endblock %}
+    </div>
 
-				{% block content %}
-					{% include 'administration_homepage.html' %}
-				{% endblock %}
-			</div>
-
-			<footer class="footer">
-				<div class="container">
-					{% if LAYOUT_FOOTER_LOGO %}
-						<div class="pull-right">
-							<a href="museum.be">
-								<img src="/static/logo_irscnb.png">
-							</a>
-						</div>
-					{% endif %}
-				</div>
-			</footer>
-		</div>
-
-		<div class="modal-container">
-			{% block modal %}
-			{% endblock %}
-		</div>
-
-		{% assets "js_admin" %}
-			<script type="text/javascript" src="{{ ASSET_URL }}"></script>
-		{% endassets %}
-
-		{% block head_scripts %}
-		{% endblock %}
-
-		{% block scripts %}
-		{% endblock %}
-	</body>
+    {% assets "js_admin" %}
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
+    {% block head_scripts %}
+    {% endblock %}
+    {% block scripts %}
+     {% endblock %}
+</body>
 </html>

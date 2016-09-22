@@ -1,8 +1,8 @@
 {% extends 'manager/base.html' %}
 {% load i18n %}
 {% load utils %}
-{% block title %}
-NBSAP - {% trans "target" %} {{ target.code }}: {{target.title }}
+{% block title %} NBSAP - {% trans "target" %}
+{{ target.code }}: {{target.title }}
 {% endblock %}
 {% block content %}
 <section class="content-header">
@@ -64,9 +64,7 @@ NBSAP - {% trans "target" %} {{ target.code }}: {{target.title }}
     <p>
         {% trans "No targets" %}
     </p>
-    {% endif %}
-    {% regroup actions by region as action_list %}
-    {% if action_list %}
+    {% endif %} {% regroup actions by region as action_list %} {% if action_list %}
     <div class="property_list">
         <table class="table table-striped minimalist">
             <caption>
@@ -79,8 +77,7 @@ NBSAP - {% trans "target" %} {{ target.code }}: {{target.title }}
                 <th></th>
             </thead>
             <tbody>
-                {% for items in action_list %}
-                {% for action in items.list %}
+                {% for items in action_list %} {% for action in items.list %}
                 <tr>
                     <td>{{ action.code }}</td>
                     <td>
@@ -142,11 +139,10 @@ NBSAP - {% trans "target" %} {{ target.code }}: {{target.title }}
     {% else %}
     <p>
         {% trans "No actions found" %} </p>
-        {% endif %}
+    {% endif %}
     <div class="form"></div>
 </section>
-{% endblock %}
-{% block scripts %}
+{% endblock %} {% block scripts %}
 <script src="/static/js/object_delete.js"></script>
 <script src="/static/js/jquery.ajaxGetForm.js"></script>
 <script>
