@@ -81,7 +81,7 @@
 				{% for aichi_target in current_target.most_relevant_aichi_targets %}
 					<li>
 						<a href="{% url 'aichi_target_detail' aichi_target_id=aichi_target.id %}">
-							{% trans "Aichi Target" %} {{ aichi_target.code }}
+							{% trans "Target" %} {{ aichi_target.code }}
 						</a>
 					</li>
 				{% endfor %}
@@ -104,7 +104,7 @@
 				{% for aichi_target in current_target.other_relevant_aichi_targets %}
 					<li>
 						<a href="{% url 'aichi_target_detail' aichi_target_id=aichi_target.id %}">
-							{% trans "Aichi Target" %} {{ aichi_target.code }}
+							{% trans "Target" %} {{ aichi_target.code }}
 						</a>
 					</li>
 				{% endfor %}
@@ -117,7 +117,7 @@
 	{% for action in current_target.actions_tree|sort_by_code %}
 		<div class="section" id="{{ action.code }}">
 			<h2>{% trans "Action" %} {{ action.code }}</h2>
-			<h5>{{ action.title }}</h5>
+			<h5 class="eu-action-title">{{ action.title }}</h5>
 
 			<p>{{ action.description|safe }}</p>
 

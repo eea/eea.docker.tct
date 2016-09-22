@@ -51,7 +51,7 @@
 			{% for aichi_target in current_indicator.relevant_aichi_targets|sort_by_code %}
 			<li>
 			<a href="{% url 'goals' code=aichi_target.get_parent_goal.code aichi_target_id=aichi_target.id %}">
-				{% trans "Aichi Target" %} {{ aichi_target.code }}
+				{% trans "Target" %} {{ aichi_target.code }}
 			</a>
 			</li>
 			{% endfor %}
@@ -70,7 +70,7 @@
 				{% assign aichi_target.get_parent_goal as goal %}
 				<li>
 				<a href="{{% url 'goals' code=goal.code aichi_target_id=aichi_target.id %}">
-					{% trans "Aichi Target" %} {{ aichi_target.code }}
+					{% trans "Target" %} {{ aichi_target.code }}
 				</a>
 				</li>
 			{% endfor %}
@@ -88,10 +88,10 @@
 				{{ previous_indicator.indicator_type|upper }} - {{ previous_indicator.code }}
 			</a>
 		</div>
+	</div>
 	<div class="page-nav-next-wrapper">
 		<a href="{% url 'eu_indicator_details' pk=next_indicator.pk %}#{{ next_indicator.pk }}" class="next-page" >
 			{{ next_indicator.indicator_type|upper }} - {{ next_indicator.code }}
 		</a>
-	</div>
 	</div>
 {% endblock %}

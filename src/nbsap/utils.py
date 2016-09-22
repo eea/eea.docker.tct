@@ -68,10 +68,10 @@ def sort_by_type(value):
 
 def sort_by_type_and_code(value):
     try:
-        return natsorted(value, key=lambda i: (i.code.split('.'),
-                                               i.indicator_type.split('.')))
+        return natsorted(value, key=lambda i: (i.indicator_type.split('.'),
+                                               i.code.split('.')))
     except ValueError:
-        return natsorted(value, key=lambda i: (i.code, i.indicator_type))
+        return natsorted(value, key=lambda i: (i.indicator_type, i.code))
 
 
 def get_adjacent_objects(objects, current_object):

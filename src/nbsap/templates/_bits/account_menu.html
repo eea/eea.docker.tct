@@ -93,27 +93,25 @@
       </li>
     {% endif %}
   </ul>
-  <div class="lang-menu-header" data-click="lang">
-    <span class="lang">
-      {% if LANGUAGES|length > 1 %}
+  {% ifnotequal LANGUAGES|length 1 %}
+    <div class="lang-menu-header" data-click="lang">
+      <span class="lang">
         <a class="lang-menu-trigger"><i class="fa" id="lang-close"></i>
           {{ request.LANGUAGE_CODE|upper }}
         </a>
-      {% else %}
-        <a class="lang-menu-trigger" title="{{ LANGUAGES.0.1 }}">Language</a>
-      {% endif %}
-    </span>
-  </div>
-  <ul class="lang-menu" data-click="lang">
-    {% for lang in LANGUAGES %}
-      <li class="change-lang-wrapper">
-        <a class="change-lang">{{ lang.1 }}</a>
-        <form name="set_lang_{{ lang.0 }}" class="language-menu" action="{% url 'set_language' %}" method="POST">
-          <input name="next" type="hidden" value="{{ request.get_full_path }}">
-          <input name="language" type="hidden" value="{{ lang.0 }}">
-        </form>
-      </li>
-    {% endfor %}
-  </ul>
+      </span>
+    </div>
+    <ul class="lang-menu" data-click="lang">
+      {% for lang in LANGUAGES %}
+        <li class="change-lang-wrapper">
+          <a class="change-lang">{{ lang.1 }}</a>
+          <form name="set_lang_{{ lang.0 }}" class="language-menu" action="{% url 'set_language' %}" method="POST">
+            <input name="next" type="hidden" value="{{ request.get_full_path }}">
+            <input name="language" type="hidden" value="{{ lang.0 }}">
+          </form>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endifnotequal %}
 </div>
 {% endif %}
