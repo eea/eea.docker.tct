@@ -19,9 +19,7 @@ $(document).ready(function() {
         $backdrop.animate({
             height: 'toggle'
         }, 1);
-
         $('body').toggleClass('sidebaropen');
-
         $navcontainer.animate({
             width: 'toggle'
         }, 120);
@@ -43,7 +41,6 @@ $(document).ready(function() {
 
 
     $backdrop.click(function() {
-
         $backdrop.toggle();
         $sidebarright.animate({
             width: 'hide'
@@ -51,18 +48,14 @@ $(document).ready(function() {
         $navcontainer.animate({
             width: 'hide'
         }, 120);
-
         $accountmenu.animate({
             height: 'hide'
         }, 120);
         $sidebar.animate({
             width: 'hide'
         }, 120);
-
         $('body').removeClass('sidebaropen');
-
     });
-
 
 
     $('body').click(function(e) {
@@ -98,29 +91,16 @@ $(document).ready(function() {
     });
 
 
-
-    // $targetlistorder = $('.target-list li .target-code');
-    // $targetlistorder.each(function () {
-
-    //   if ($(this).text().match(/[a-z]/i)) {
-    //     $(this).parent().css("padding-left", "25px");
-    //   }
-
-    // });
-
     var numberofsidebars = $('.sidebar-right').length + $('.sidebar').length;
     if (numberofsidebars == 1) {
         $('.main').addClass('one-sidebar');
     } else if (numberofsidebars == 0) {
         $('.main').addClass('no-sidebar');
     }
-
     if ($('.main').hasClass('no-sidebar')) {
 
         $(".sidebar-trigger").remove();
-
     }
-
 
 
     $sidebargoal = $(".sidebar-menu #list-item > a");
@@ -128,86 +108,28 @@ $(document).ready(function() {
     $sidebargoal.click(function(e) {
         var $trigger_sidemenu = $(this);
         $testes = $(this).parent().find('.sidebar-submenu').first();
-        console.log($(e.target));
-
-
         $testes.animate({
             height: 'toggle'
         }, 320);
     });
 
 
-    // $('.sidebar-trigger').click(function(){
-    //   console.log('trololo');
-    //   $sidebartrigger.removeClass('no-events');
-    //   $(this).addClass('sidebar-trigger-triggered ');
-    // })
-
-    // $(window).resize(function() {
-    //     // run test on initial page load
-    //     checkSize();
-
-    //     // run test on resize of the window
-    //     $(window).resize(checkSize);
-    // });
-
-    // //Function to the css rule
-    // function checkSize(){
-    //     if ($(".nav-trigger button").css("display") == "block" ){
-
-    //     $('.sidebar').addClass('sidebar-right');
-    //     $('.sidebar-right').removeClass('sidebar');
-
-    //     }
-    // }
-
-    // (function() {
-    //  $(window).on("load", function() {
-
-
-    //     if (document.location.hash || window.hashchange) {
-    //       console.log('are');
-    //         setTimeout(function() {
-    //             window.scrollTo(window.scrollX, window.scrollY - 130);
-    //         }, 10);
-    //     }
-
-    //     $('.sidebar-menu a').click(function(){
-    //        if (document.location.hash) {
-    //         setTimeout(function() {
-    //             window.scrollTo(window.scrollX, window.scrollY - 130);
-    //         }, 10);
-    //     }
-    //     })
-    //   })
-
-    // })();
-
     var adjustAnchor = function() {
-
         var $anchor = $(':target'),
             navbarheight = 120;
-
         if ($anchor.length > 0) {
-
-
             $('html, body')
                 .stop()
                 .animate({
                     scrollTop: $anchor.offset().top - navbarheight
                 }, 250);
-
         }
-
     };
+
 
     $(window).on('hashchange', function() {
         adjustAnchor();
     });
-
-
-
-
 
 
     $('.sidebar-submenu a').click(function() {
@@ -222,8 +144,6 @@ $(document).ready(function() {
     }, 300);
 
 
-
-
     $('.search').on('focus', function() {
         $('.sidebar-submenu').addClass('visible');
     });
@@ -233,6 +153,5 @@ $(document).ready(function() {
             $('.sidebar-submenu').removeClass('visible');
         }
     });
-
 
 });

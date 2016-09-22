@@ -16,15 +16,14 @@
     margin-top: 1rem;
     font-size: smaller;
     float: left;
-    @media (min-width: 800px) {
-    }
+    @media (min-width: 800px) {}
     @media (max-width: 800px) {
-               margin: 0;
-               display: none;
-    float: right;
-    width: 40%;
-    font-size: 1rem !important;
-    margin-right: 38%;
+        margin: 0;
+        display: none;
+        float: right;
+        width: 40%;
+        font-size: 1rem !important;
+        margin-right: 38%;
     }
     @media (max-width: 500px) {
         width: 40%;
@@ -34,9 +33,9 @@
         font-size: 1.8rem;
     }
     strong {
-    font-size: 1.5em;
-    color: #000080;
-    display: block;
+        font-size: 1.5em;
+        color: #000080;
+        display: block;
     }
 }
 
@@ -50,38 +49,32 @@
     color: @text-color!important;
 }
 
-
 .subtitle {
     display: block;
     margin-top: 0;
     color: #81cbf5;
-     float: left;
+    float: left;
     position: relative;
     top: 12px;
     line-height: 1.2;
     font-style: italic;
-    @media( min-width: 800px) {
-    }
+    @media( min-width: 800px) {}
     @media (max-width: 800px) {
-    float: right;
-    display: none;
-    margin-right: 24%;
+        float: right;
+        display: none;
+        margin-right: 24%;
     }
     em {
-    font-style: normal;
-    display: block;
-    font-size: 1.8rem;
-    font-weight: 400;
-    color: navy;
+        font-style: normal;
+        display: block;
+        font-size: 1.8rem;
+        font-weight: 400;
+        color: navy;
     }
-
 }
-
-
 
 .account-menu,
 .lang-menu {
-
     list-style: none;
     margin: 0;
     box-sizing: border-box;
@@ -89,16 +82,14 @@
     overflow: hidden;
     display: none;
     @media screen and (max-width: 800px) {
-        // background: rgba(0, 0, 0, 0.1);
         border-bottom: solid @brand-orange;
         width: 100%;
     }
     @media screen and (min-width: 800px) {
         position: absolute;
-        
-            border-top: 1px solid @brand-blue;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
+        border-top: 1px solid @brand-blue;
+        border-bottom-right-radius: 5px;
+        border-bottom-left-radius: 5px;
         top: 31px;
         background: white;
         box-shadow: 0 0 2px rgba(0, 0, 0, 0.14), 0 2px 2px rgba(0, 0, 0, 0.28);
@@ -107,13 +98,13 @@
 
 .lang-menu {
     @media (min-width: 800px) {
-    right: 172px;
-    width: 111px;
+        right: 172px;
+        width: 111px;
     }
 }
 
 .account-menu {
-    @media (min-width: 800px){
+    @media (min-width: 800px) {
         right: 30px;
     }
 }
@@ -131,7 +122,6 @@
 
 .account-menu > li {
     @media screen and (min-width: 800px) {
-        // background: rgba(0, 0, 0, 0.1)
     }
 }
 
@@ -162,25 +152,23 @@
     height: 68px;
     overflow: hidden;
     img {
-    width: 100%;
-    height: auto;
+        width: 100%;
+        height: auto;
     }
-@media (max-width: 800px) {
-    margin-left: 2rem;
-    margin-right: -3rem;
-    padding: 0;
-       float: left;
-}
-
+    @media (max-width: 800px) {
+        margin-left: 2rem;
+        margin-right: -3rem;
+        padding: 0;
+        float: left;
+    }
 }
 
 .brand {
     @media (min-width: 800px) {
-    overflow: hidden;
-     }
-     float: left;
-    @media(min-width: 800px) {
+        overflow: hidden;
     }
+    float: left;
+    @media(min-width: 800px) {}
 }
 
 .nav-container {
@@ -199,15 +187,10 @@
 
 @media screen and (max-width: 800px) {
     .nav-container {
-        // transform: translateX(-100%);
-        // transition: all 0.2s;
         display: none;
     }
 }
 
-// .nav-open {
-//     transform: translateX(0)!important;
-// }
 .nav-container:after {
     content: '';
     display: table;
@@ -221,9 +204,6 @@
     @media screen and (min-width: 800px) {
         float: left;
         margin-left: 2rem;
-    }
-    @media (max-width: 800px) {
-        // width: 290px;
     }
 }
 
@@ -248,6 +228,7 @@
     display: block;
     line-height: 1.2
 }
+
 .nav-menu a,
 .accountwrapper a {
     display: block;
@@ -262,11 +243,10 @@
     }
     @media (min-width: 800px) {
         margin-left: -2px;
-         color: rgba(255, 255, 255, 1);
-            margin: .2rem;
+        color: rgba(255, 255, 255, 1);
+        margin: .2rem;
     }
 }
-
 
 .accountwrapper .account-menu-trigger,
 .lang-menu-trigger,
@@ -286,22 +266,19 @@ span.user a {
     border-bottom: none;
 }
 
-
 .lang-menu a,
 .account-menu a {
     color: @brand-blue!important;
-      line-height: 2;
-  }
-
+    line-height: 2;
+}
 
 .nav-container .active {
     position: relative;
     background: @brand-orange;
     color: white;
-    border-top: 1px solid #eee
-    margin: .1rem;
+    border-top: 1px solid #eee margin: .1rem;
     @media (min-width: 800px) {
-    border-radius: 3px;
+        border-radius: 3px;
     }
     @media (max-width: 800px) {}
 }
@@ -336,9 +313,6 @@ span.user a {
 }
 
 .nav-trigger {
-    // width: 100%;
-    // background: @brand-blue;
-    // overflow: hidden;
     overflow: hidden;
     position: absolute;
     top: 0;
@@ -373,9 +347,7 @@ span.user a {
     }
 }
 
-.sidebaropen {
-    // overflow: hidden;
-}
+
 
 .open {
     display: block!important;
@@ -385,30 +357,25 @@ span.user a {
     list-style: none;
 }
 
-
 .accountwrapper {
     @media (min-width: 800px) {
-    position: absolute;
-    top: -53px;
-    right: 0;
+        position: absolute;
+        top: -53px;
+        right: 0;
     }
 }
-
-
 
 .account-menu-header,
 .lang-menu-header {
     display: inline-block;
     float: right;
     cursor: pointer;
-
     @media (max-width: 800px) {
         display: block;
         float: none;
         i {
             color: @brand-blue;
         }
-
     }
     @media (min-width: 800px) {
         width: 112px;
@@ -419,31 +386,24 @@ span.user a {
         }
     }
 }
-  .clicked i {
-            color: white;
 
-
-        }
-
-
+.clicked i {
+    color: white;
+}
 
 .clicked {
-
     background: @brand-orange;
-
     @media (min-width: 800px) {
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
-    border-bottom: 1px solid @brand-blue;
-}
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
+        border-bottom: 1px solid @brand-blue;
+    }
     a {
-            color: white!important;
+        color: white!important;
     }
     .account-menu-trigger {
         color: white!important;
     }
-
-    // border-bottom: solid white;
 }
 
 .nav-brand {
@@ -506,12 +466,9 @@ span.user a {
     }
 }
 
-
 .change-lang-wrapper {
     form {
         display: none;
     }
-    @media (min-width: 800px) {
-
-    }
+    @media (min-width: 800px) {}
 }
