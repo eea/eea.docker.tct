@@ -15,9 +15,8 @@
 
 
 {% block content %}
-  <div class="homepage-info">
+  <div class="homepage-info info-translated">
     <h1 class="page-title">{% trans "Target Cross-linking tool" %}</h1>
-
     <div class="homepage-desc">
       <h2 class="homepage-title">The Target Cross-linking tool </h2>
       <p>
@@ -49,5 +48,20 @@
         Edit the content and mappings using the <a href="{% url 'admin_home'%}">Dashboard</a> (requires login) section.
       </li>
     </ul>
+    <div class="button-container">
+      <p><button id="trigger-overlay" type="button">Click for more info about this website</button><p>
+    </div>
   </div>
+    <div class="overlay overlay-contentscale">
+        <button type="button" class="overlay-close"></button>
+        <nav>
+            <ul>
+                <li><a href="#">Aichi</a><p class='menu-desc'>The Aichi Biodiversity Targets are a set of 20, time-bound, measureable targets agreed by the Parties to the Convention on Biological Diversity in Nagoya, Japan, in October 2010, that are now being translated into revised national strategies and action plans by the 193 Parties to the Convention.</p></li>
+                <li><a href="#">Eu Strategy</a><p class='menu-desc'>This section contians the Eu Strategy towards implementing the Aichi Biodiversity Targets </p></li>
+                <li><a href="#">National Strategy</a><p class='menu-desc'>This section contians the National Strategy towards implementing the Aichi Biodiversity Targets </p></li>
+                <li><a href="#">National Indicators</a><p class='menu-desc'>Here you can see more details on the National Indicators</p></li>
+                <li><a href="#">Implementation</a><p class='menu-desc'>Here you can see more details on the implementation National Indicators</p></li>
+            </ul>
+        </nav>
+    </div>
 {% endblock %}

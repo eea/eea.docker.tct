@@ -12,6 +12,7 @@ JS_ASSETS = (
     'bootstrap/js/sidebar-plugin.js',
     'bootstrap/js/sidebar.js',
     'bootstrap/js/scroll.js',
+    'bootstrap/js/homepage.js',
 )
 
 JS_ADMIN_ASSETS = (

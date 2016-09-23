@@ -3,30 +3,25 @@
 .homepage-targets,
 .homepage-indicators,
 .homepage-dashboard {
-    vertical-align: middle;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 50px;
-    padding: 2rem;
-    width: 50%;
+    padding: .5rem;
+    margin-bottom: 0;
     a {
-        font-size: larger;
-        vertical-align: middle;
         padding-left: 0;
         text-align: left;
     }
-    a:hover {
-    }
+    a:hover {}
     margin-bottom: 0;
 }
 
 .homepage-goals,
 .homepage-indicators,
-.homepage-targets {
-}
+.homepage-targets {}
 
 .homepage-desc {
-    text-align: center;
+    position: relative;
+    width: 46em;
+    padding: 1rem;
+    margin-left: 10%;
     .homepage-title {
         color: @brand-orange;
     }
@@ -36,14 +31,28 @@
 }
 
 .page-list {
+    position: relative;
     text-align: center;
+    width: 600px;
+    padding: 1rem;
+    text-align: left;
+    border-left: solid #11bb6d;
+    margin-left: 141px;
+    padding-top: 6px;
+    padding-bottom: 6px;
     li:hover {
-        box-shadow: 2px 2px 10px -1px rgba(194, 194, 194, 0.67);
         a {
             color: @brand-orange;
         }
     }
-    li {
-        transition: box-shadow .2s;
-    }
+}
+
+.info-translated {
+    transform: translateX(-10%);
+}
+
+.homepage-info {
+    position: relative;
+    left: 80px;
+    transition: all 1s;
 }

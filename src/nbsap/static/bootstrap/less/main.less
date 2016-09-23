@@ -21,12 +21,12 @@ a:hover {
 :after {
     font-family: FontAwesome;
 }
+
 .main {
     @media (min-width: 800px) {
         padding: 1rem;
     }
 }
-
 
 sub-
 /* bootstrap override */
@@ -275,7 +275,7 @@ h2 {
 html,
 body {
     width: 100%;
-    @media (min-width: 1440px){
+    @media (min-width: 1440px) {
         overflow-x: hidden;
     }
 }
@@ -283,20 +283,16 @@ body {
 body {
     padding: 0px;
     position: relative;
+    font-family: 'Roboto', sans-serif;
 }
 
-
-    @font-face {
+@font-face {
     font-family: 'Roboto';
-    src: url('/font-face/Regular/Roboto-Regular.eot'); /* IE9 Compat Modes */
+    src: url('/font-face/Regular/Roboto-Regular.eot');
+    /* IE9 Compat Modes */
     src: url('/font-face/Regular/Roboto-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-         url('/font-face/Regular/Roboto-Regularo.svg#svgFontName') format('svg'); /* Legacy iOS */
-    }
-
-
-   body  { font-family: 'Roboto', sans-serif; }
-
-
+    url('/font-face/Regular/Roboto-Regularo.svg#svgFontName') format('svg');
+}
 
 ::-webkit-scrollbar-track {
     background-color: transparent;
@@ -316,10 +312,12 @@ body {
     margin-top: 8rem;
     @media (max-width: 800px) {
         margin-top: 5rem;
-       padding-left: 1rem;
-       padding-right: 1rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
-    i{ color: @text-color;}
+    i {
+        color: @text-color;
+    }
 }
 
 .content:after {
@@ -357,7 +355,7 @@ body {
 }
 
 .content .active > a {
-   background: #57b9f2;
+    background: #57b9f2;
     color: #ffffff;
     padding: 5px 10px;
 }
@@ -395,14 +393,13 @@ body {
 }
 
 .sidebar-submenu .active a {
-      color: #57b9f2;
-      background: none;
+    color: #57b9f2;
+    background: none;
 }
 
 .content .active .targets:hover {
     color: @brand-blue;
 }
-
 
 .section {
     padding-top: 1em;
@@ -420,13 +417,12 @@ h5 {
     font-weight: 600;
 }
 
-
 .section .target-description {
     font-size: larger;
 }
 
 .footer {
-    display:none;
+    display: none;
     visibility: hidden;
     margin-top: 2em;
     padding-top: 1em;
@@ -467,23 +463,23 @@ h5 {
     border-bottom: 0;
     padding-top: .5em;
     margin-bottom: 1em;
-     ul {
+    ul {
         margin-bottom: 0;
-     }
-     li {
-         overflow: hidden;
-         margin-bottom: .75em;
-     }
-     p {
-          margin-bottom: 0;
-     }
+    }
+    li {
+        overflow: hidden;
+        margin-bottom: .75em;
+    }
+    p {
+        margin-bottom: 0;
+    }
     li:last-child {
-          margin-bottom: 0;
+        margin-bottom: 0;
     }
 }
 
 @media (min-width: 768px) {
-    .well li { 
+    .well li {
         padding-left: 7em;
     }
     .well li > a {
@@ -514,8 +510,8 @@ h5 {
 .well-title-indicator {
     border: none;
     color: @text-color;
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
 }
 
 .well .html-content {
@@ -586,8 +582,6 @@ h5 {
 .full {
     margin-top: 1rem;
 }
-
-
 
 .less:hover,
 .more:hover {
@@ -699,7 +693,7 @@ h5 {
 }
 
 .alert {
-       left: -1px;
+    left: -1px;
     top: 16.79%;
     text-align: center;
     background: #C7E0E9;
@@ -709,8 +703,8 @@ h5 {
     padding: .5rem;
     border-bottom-right-radius: 5px;
     border-top-right-radius: 5px;
-    p{
-        margin: 0!important ;
+    p {
+        margin: 0!important;
         font-style: normal;
         font-weight: bold;
     }
@@ -726,7 +720,6 @@ h5 {
     font-weight: bold;
     font-size: 1.2em;
 }
-
 
 i {
     color: white;
@@ -779,6 +772,7 @@ label.target {
 .list-goals-desc {
     color: @text-color;
 }
+
 .list-goals-title {
     color: @link-color;
 }
@@ -809,8 +803,8 @@ td.col-md-3 {
 .messages.alert {
     white-space: nowrap;
     position: fixed;
-       left: -1px;
-       top: 107px;
+    left: -1px;
+    top: 107px;
     text-align: center;
     background: #cbf0fd;
     color: @text-color;
@@ -819,8 +813,8 @@ td.col-md-3 {
     padding: .5rem;
     border-bottom-right-radius: 5px;
     border-top-right-radius: 5px;
-    p{
-        margin: 0!important ;
+    p {
+        margin: 0!important;
         font-style: normal;
         font-weight: bold;
     }
@@ -837,7 +831,6 @@ td.col-md-3 {
 }
 
 .info-count {
-
     margin-top: 0;
     margin-left: .4rem;
     display: inline-block;
@@ -864,18 +857,17 @@ td.col-md-3 {
 
 .list-targets-wrapper {
     li {
-    border-bottom: 1px solid #eee;
-    margin-bottom: 2rem;
+        border-bottom: 1px solid #eee;
+        margin-bottom: 2rem;
     }
     h2 {
-        color:@link-color;
+        color: @link-color;
     }
     p {
         margin-bottom: 0;
         color: @text-color;
     }
 }
-
 
 .search {
     width: 80%;
@@ -910,4 +902,12 @@ td.col-md-3 {
 
 .full td {
     padding: 1rem;
+}
+
+
+.eu-action-title {
+    font-weight: 400;
+    display: block;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
 }
