@@ -4,9 +4,9 @@
 <div class="mapping-wrapper">
   <div class="well">
     <h4 class="mapping" id="aichi-mapping">{% trans "Mapping with Aichi" %}</h4>
-    {% with strategies = subobj.objective_national_strategy.all %}
+    {% with strategies=subobj.objective_national_strategy.all %}
     {% if strategies|length %}
-      {% get_goals_for_strategies strategies = strategies as goals %}
+      {% get_goals_for_strategies strategies=strategies as goals %}
       <div class="well-title">{% trans "Aichi Goals" %}</div>
       {% if goals %}
         <ul>
@@ -24,7 +24,7 @@
       {% endif %}
     </div>
     <div class="well">
-      {% get_targets_for_strategies strategies = strategies as targets %}
+      {% get_targets_for_strategies strategies=strategies as targets %}
       <div class="well-title">{% trans "Most relevant Aichi Targets" %}</div>
       {% if targets %}
         <ul>
@@ -45,7 +45,7 @@
       {% endif %}
     </div>
     <div class="well">
-      {% get_other_targets_for_strategies strategies = strategies as other_targets %}
+      {% get_other_targets_for_strategies strategies=strategies as other_targets %}
       {% if other_targets %}
         <div class="well-title">{% trans "Other relevant Aichi Targets" %}</div>
         <ul>
@@ -69,8 +69,8 @@
 <div class="mapping-wrapper">
   <div class="well">
     <h4 class="mapping" id="nat-mapping">{% trans "Mapping with National Indicators" %}</h4>
-    {% with indicators = subobj.nat_indicators.all %}
-    {% with other_indicators = subobj.other_nat_indicators.all %}
+    {% with indicators=subobj.nat_indicators.all %}
+    {% with other_indicators=subobj.other_nat_indicators.all %}
     {% if indicators %}
       <div class="well-title">{% trans "Most relevant National Indicators" %}</div>
       <ul>
