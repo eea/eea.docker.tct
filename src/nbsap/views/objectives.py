@@ -25,12 +25,12 @@ def get_adjacent_objectives(objectives, current_objective):
 def nat_strategy(request, pk=None):
     objectives = (
         models.NationalObjective.objects
-        .filter(parent=None).order_by('id').all()
+        .filter(parent=None).order_by('id')
     )
     if not objectives.exists():
         return render(request, 'objectives/empty_nat_strategy.html')
 
-    pk = pk or objectives[0].pk
+    pk = pk or objectives.first().pk
     current_objective = models.NationalObjective.objects.get(pk=pk)
     current_objective_cls = current_objective.__class__.__name__
 
@@ -101,9 +101,16 @@ def nat_strategy_download(request):
 
 
 def implementation(request, code=None):
+    lang = request.LANGUAGE_CODE
+    data = {'body_%s' % lang: ''}
+    is_empty_page = models.NbsapPage.objects.filter(handle='implementation') \
+        .exclude(**data).exists()
+
     objectives = models.NationalObjective.objects.all()
     if len(objectives) == 0:
-        return render(request, 'objectives/empty_nat_strategy.html')
+        return render(request, 'objectives/empty_nat_strategy.html', {
+            'is_empty_page': is_empty_page,
+        })
 
     if code is None:
         code = objectives[0].code
@@ -116,10 +123,6 @@ def implementation(request, code=None):
         for action in objective.actions.all():
             current_objective.actions_tree.append(action)
 
-    lang = request.LANGUAGE_CODE
-    data = {'body_%s' % lang: ''}
-    is_empty_page = models.NbsapPage.objects.filter(handle='implementation') \
-        .exclude(**data).exists()
     return render(request, 'nat_strategy/implementation.html', {
         'current_objective': current_objective,
         'objectives': objectives,

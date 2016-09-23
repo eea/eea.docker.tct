@@ -72,10 +72,10 @@
         {% trans "Mapping with National Strategy" %}
       </div>
       <ul>
-        {% for strategy in target.relevant_targets_national_strategy.all %}
+        {% for objective in target.get_most_relevant_objectives|sort_by_code %}
           <li>
-            <a href ="{% url 'nat_strategy' pk=strategy.objective.pk %}">
-              {% trans "Objective" %} {{ strategy.objective.code }}
+            <a href ="{% url 'nat_strategy' pk=objective.pk %}">
+              {% trans "Objective" %} {{ objective.code }}
             </a>
           </li>
         {% endfor %}

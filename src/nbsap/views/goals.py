@@ -84,18 +84,17 @@ def aichi_goals(request, code=None):
 
 
 def aichi_target_detail(request, aichi_target_id, code=None):
+    target = get_object_or_404(models.AichiTarget,
+                               pk=aichi_target_id)
     if not code:
-        code = get_object_or_404(models.AichiTarget,
-                                 pk=aichi_target_id).get_parent_goal().code
+        code = target.get_parent_goal().code
 
     goals = models.AichiGoal.objects.order_by('code').all()
     current_goal = get_object_or_404(models.AichiGoal, code=code)
     all_targets = sort_by_code(models.AichiTarget.objects.all())
     targets = sort_by_code(current_goal.targets.all())
-    target = get_object_or_404(models.AichiTarget,
-                               pk=aichi_target_id)
 
-    if target not in current_goal.targets.all():
+    if target not in targets:
         raise Http404
 
     previous_target, next_target = get_adjacent_objects(all_targets, target)

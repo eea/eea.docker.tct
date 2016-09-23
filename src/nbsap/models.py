@@ -135,6 +135,18 @@ class AichiTarget(models.Model):
                                               related_name="other_targets",
                                               blank=True)
 
+    def get_most_relevant_objectives(self):
+        objectives = []
+        for strategy in self.relevant_targets_national_strategy.all():
+            objectives.append(strategy.objective)
+        return objectives
+
+    def get_other_relevant_objectives(self):
+        objectives = []
+        for strategy in self.other_targets_national_strategy.all():
+            objectives.append(strategy.objective)
+        return objectives
+
     def __unicode__(self):
         return u'Target %s' % self.code
 
@@ -229,7 +241,7 @@ class EuAction(models.Model):
 
     def get_all_objectives(self):
         objectives = []
-        if self.national_strategy:
+        if hasattr(self, 'national_strategy'):
             for strategy in self.national_strategy.all():
                 objectives.append(strategy.objective)
         return objectives

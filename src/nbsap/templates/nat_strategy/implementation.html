@@ -19,7 +19,7 @@
     <input class="search" placeholder="quick search" />
     <ul class="sidebar-menu list">
       {% if is_empty_page %}
-        <li {% if not current_objective %} class="active" {% endif %}></li>
+        <li {% if not current_objective %} class="active" {% endif %}>{% trans "No related actions found" %}</li>
       {% endif %}
       {% for objective in objectives|sort_by_code %}
         <li id="list-item-imp" {% if objective.code == current_objective.code %}class="active"{% endif %}>
