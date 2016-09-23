@@ -5,41 +5,41 @@
 
 
 {% block navmenu %}
-	{% include '_bits/nav_menu.html' %}
+  {% include '_bits/nav_menu.html' %}
 {% endblock %}
 
 
 {% block sidebar %}
-	<div id="nat-obj-list" class="sidebar">
-		<h4 class="sidebar-title">{% trans "Related actions" %}</h4>
-		<input class="search" placeholder="quick search" />
-		<ul class="sidebar-menu list">
-			{% if is_empty_page %}
-				<li {% if not current_objective %} class="active" {% endif %}></li>
-			{% endif %}
-			{% for objective in objectives|sort_by_code %}
-				<li id="list-item-imp" {% if objective.code == current_objective.code %}class="active"{% endif %}>
-					<a class="nat-objective" href="{% url 'implementation' code=objective.code %}">
-						{% trans "Objective" %} {{ objective.code }}
-					</a>
-					<ul class="sidebar-submenu list">
-						{% for action in objective.get_all_actions|sort_by_code %}
-							<li>
-								<a class="nat-objective" href="{% url 'implementation' code=objective.code %}#{{ action.code }}"
-									 rel='tooltip'>
-									{% trans "Action" %} {{ action.code }}
-								</a>
-							</li>
-						{% endfor %}
-					</ul>
-				</li>
-			{% endfor %}
-		</ul>
-	</div>
+  <div id="nat-obj-list" class="sidebar">
+    <h4 class="sidebar-title">{% trans "Related actions" %}</h4>
+    <input class="search" placeholder="quick search" />
+    <ul class="sidebar-menu list">
+      {% if is_empty_page %}
+        <li {% if not current_objective %} class="active" {% endif %}></li>
+      {% endif %}
+      {% for objective in objectives|sort_by_code %}
+        <li id="list-item-imp" {% if objective.code == current_objective.code %}class="active"{% endif %}>
+          <a class="nat-objective" href="{% url 'implementation' code=objective.code %}">
+            {% trans "Objective" %} {{ objective.code }}
+          </a>
+          <ul class="sidebar-submenu list">
+            {% for action in objective.get_all_actions|sort_by_code %}
+              <li>
+                <a class="nat-objective" href="{% url 'implementation' code=objective.code %}#{{ action.code }}"
+                   rel='tooltip'>
+                  {% trans "Action" %} {{ action.code }}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
 {% endblock %}
 
 
 {% block content %}
-	<h1>{{ page.title }}</h1>
-	{{ page.body|safe }}
+  <h1>{{ page.title }}</h1>
+  {{ page.body|safe }}
 {% endblock content %}

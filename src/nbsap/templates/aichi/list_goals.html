@@ -4,14 +4,14 @@
 
 <h1 class="page-title">{% trans "Aichi Goals" %}</h1>
 <ul class="list-goals-wrapper">
-	{% for goal in goals %}
-		<li {% if goal.code == current_goal.code %}class="active"{% endif %}>
-			<a href="{% url 'list_targets' code=goal.code %}" title="{{ goal.code|upper }}"</a>
-				<h2 class="list-goals-title">
-					{% trans "Goal" %} {{ goal.code|upper }}
-				</h2>
-				<p class="list-goals-desc">{{ goal.description }}</p>
-			</a>
-		</li>
-	{% endfor %}
+  {% for goal in goals %}
+    <li {% if goal.code == current_goal.code %}class="active"{% endif %}>
+      <a href="{% url 'list_targets' code=goal.code %}" title="{{ goal.code|upper }}"</a>
+        <h2 class="list-goals-title">
+          {% trans "Goal" %} {{ goal.code|upper }}
+        </h2>
+        <p class="list-goals-desc">{{ goal.description }}</p>
+      </a>
+    </li>
+  {% endfor %}
 </ul>

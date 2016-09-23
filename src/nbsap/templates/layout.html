@@ -4,146 +4,146 @@
 
 
 <html>
-	<head>
-		<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
-		<title>{% block title %}{% endblock %}</title>
-		<!--[if lte IE 8]>
-			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
-		{% assets "css" %}
-			<link rel="stylesheet" href="{{ ASSET_URL }}" />
-		{% endassets %}
+  <head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+    <!--[if lte IE 8]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    {% assets "css" %}
+      <link rel="stylesheet" href="{{ ASSET_URL }}" />
+    {% endassets %}
 
-		{% block extra_head %}
-		{% endblock %}
+    {% block extra_head %}
+    {% endblock %}
 
-		{% if GOOGLE_ANALYTICS_PROPERTY_ID %}
-			{% include "_bits/ga.html" %}
-		{% endif %}
-		<link rel="apple-touch-icon" sizes="57x57" href="/static/img/apple-icon-57x57.png">
-		<link rel="apple-touch-icon" sizes="60x60" href="/static/img/apple-icon-60x60.png">
-		<link rel="apple-touch-icon" sizes="72x72" href="/static/img/apple-icon-72x72.png">
-		<link rel="apple-touch-icon" sizes="76x76" href="/static/img/apple-icon-76x76.png">
-		<link rel="apple-touch-icon" sizes="114x114" href="/static/img/apple-icon-114x114.png">
-		<link rel="apple-touch-icon" sizes="120x120" href="/static/img/apple-icon-120x120.png">
-		<link rel="apple-touch-icon" sizes="144x144" href="/static/img/apple-icon-144x144.png">
-		<link rel="apple-touch-icon" sizes="152x152" href="/static/img/apple-icon-152x152.png">
-		<link rel="apple-touch-icon" sizes="180x180" href="/static/img/apple-icon-180x180.png">
-		<link rel="icon" type="image/png" sizes="192x192"  href="/static/img/android-icon-192x192.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="/static/img/favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="96x96" href="/static/img/favicon-96x96.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="/static/img/favicon-16x16.png">
-		<link rel="manifest" href="/manifest.json">
-		<meta name="msapplication-TileColor" content="#ffffff">
-		<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-		<meta name="theme-color" content="#ffffff">
-	</head>
+    {% if GOOGLE_ANALYTICS_PROPERTY_ID %}
+      {% include "_bits/ga.html" %}
+    {% endif %}
+    <link rel="apple-touch-icon" sizes="57x57" href="/static/img/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/static/img/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/static/img/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/static/img/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/static/img/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/static/img/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/static/img/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/static/img/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/img/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/static/img/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/static/img/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/img/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+  </head>
 
-	<body class="user">
-		<div class="header">
-			<div id="backdrop"></div>
-			<div class="container">
-				<div class="nav-brand">
-					<div class="brand">
-						<a href="/">
-							<span class="site-title">
-								<strong>TCT</strong>Target Cross-linking tool
-							</span>
+  <body class="user">
+    <div class="header">
+      <div id="backdrop"></div>
+      <div class="container">
+        <div class="nav-brand">
+          <div class="brand">
+            <a href="/">
+              <span class="site-title">
+                <strong>TCT</strong>Target Cross-linking tool
+              </span>
 
-							{% if LAYOUT_HEADER_LOGO %}
-								<div class="logo img">
-									<img src="/static/img/CHM_logo_45x70px.png">
-								</div>
-							{% endif %}
+              {% if LAYOUT_HEADER_LOGO %}
+                <div class="logo img">
+                  <img src="/static/img/CHM_logo_45x70px.png">
+                </div>
+              {% endif %}
 
-							<span class="subtitle">
-								Reporting tool towards the Aichi targets and the EU Strategy,<em>Testing Instance</em>
-							</span>
-						</a>
-						<form class='search-form'>
-							<input type="search" placeholder="Search">
-						</form>
-					</div>
-				</div>
+              <span class="subtitle">
+                Reporting tool towards the Aichi targets and the EU Strategy,<em>Testing Instance</em>
+              </span>
+            </a>
+            <form class='search-form'>
+              <input type="search" placeholder="Search">
+            </form>
+          </div>
+        </div>
 
-				<div class="nav-trigger">
-					<button type="button" class="btn">menu</button>
-				</div>
+        <div class="nav-trigger">
+          <button type="button" class="btn">menu</button>
+        </div>
 
-				<div class="nav-container">
-					<div class="close-trigger">
-							<button type="button" class="btn">X</button>
-					</div>
+        <div class="nav-container">
+          <div class="close-trigger">
+              <button type="button" class="btn">X</button>
+          </div>
 
-					{% include "_bits/account_menu.html" %}
+          {% include "_bits/account_menu.html" %}
 
-					{% block navmenu %}
-					{% endblock %}
-				</div>
+          {% block navmenu %}
+          {% endblock %}
+        </div>
 
-			</div>
-		</div>
+      </div>
+    </div>
 
-		<div class="container content">
-			{% if WARNING_MESSAGE %}
-				<div class="alert alert-warning warning-demo">
-					{{ WARNING_MESSAGE }}
-				</div>
-			{% endif %}
+    <div class="container content">
+      {% if WARNING_MESSAGE %}
+        <div class="alert alert-warning warning-demo">
+          {{ WARNING_MESSAGE }}
+        </div>
+      {% endif %}
 
-			{% block sidebar %}
-			{% endblock %}
+      {% block sidebar %}
+      {% endblock %}
 
-			{% block sidebar-right %}
-			{% endblock %}
+      {% block sidebar-right %}
+      {% endblock %}
 
-			<div class="main">
-				<div class="sidebar-trigger">
-					<button type="button" class="btn">
-						Table of contents
-					</button>
-				</div>
+      <div class="main">
+        <div class="sidebar-trigger">
+          <button type="button" class="btn">
+            Table of contents
+          </button>
+        </div>
 
-				{% if messages %}
-					<div class="messages alert alert-success">
-						{% for message in messages %}
-							<p {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</p>
-						{% endfor %}
-					</div>
-				{% endif %}
+        {% if messages %}
+          <div class="messages alert alert-success">
+            {% for message in messages %}
+              <p {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</p>
+            {% endfor %}
+          </div>
+        {% endif %}
 
-				{% block content %}
-				{% endblock %}
-			</div>
-		</div>
+        {% block content %}
+        {% endblock %}
+      </div>
+    </div>
 
-		<footer class="footer">
-			<div class="container">
-				{% if LAYOUT_FOOTER_LOGO %}
-					<div class="pull-right">
-							<a href="museum.be">
-									<img src="/static/img/logo_irscnb.png">
-							</a>
-					</div>
-				{% endif %}
-			</div>
-		</footer>
+    <footer class="footer">
+      <div class="container">
+        {% if LAYOUT_FOOTER_LOGO %}
+          <div class="pull-right">
+              <a href="museum.be">
+                  <img src="/static/img/logo_irscnb.png">
+              </a>
+          </div>
+        {% endif %}
+      </div>
+    </footer>
 
-		<div class="modal-container">
-			<div class="container">
-				{% block modal %}
-				{% endblock %}
-			</div>
-		</div>
+    <div class="modal-container">
+      <div class="container">
+        {% block modal %}
+        {% endblock %}
+      </div>
+    </div>
 
-		{% assets "js" %}
-			<script type="text/javascript" src="{{ ASSET_URL }}"></script>
-		{% endassets %}
+    {% assets "js" %}
+      <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
 
-		{% block head_scripts %}
-		{% endblock %}
+    {% block head_scripts %}
+    {% endblock %}
 
-		{% block scripts %}
-		{% endblock %}
-	</body>
+    {% block scripts %}
+    {% endblock %}
+  </body>
 </html>

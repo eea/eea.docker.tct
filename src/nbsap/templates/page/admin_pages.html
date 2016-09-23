@@ -4,41 +4,41 @@
 
 
 {% block title %}
-	NBSAP - {% trans "Edit Introduction page" %}
+  NBSAP - {% trans "Edit Introduction page" %}
 {% endblock %}
 
 
 {% block navmenu %}
-	{% include 'manager/admin_nav_tabs.html' %}
+  {% include 'manager/admin_nav_tabs.html' %}
 {% endblock %}
 
 
 {% block content %}
-	<section class="content-header">
-		<h1>{% trans "Edit Introduction page" %}</h1>
-	</section>
-	<section class="content">
-		<table class="table table-striped table-bordered objectives_listing minimalist">
+  <section class="content-header">
+    <h1>{% trans "Edit Introduction page" %}</h1>
+  </section>
+  <section class="content">
+    <table class="table table-striped table-bordered objectives_listing minimalist">
 
-			<thead>
-				<tr>
-					<th>Page</th>
-					<th>Page title</th>
-				</tr>
-			</thead>
+      <thead>
+        <tr>
+          <th>Page</th>
+          <th>Page title</th>
+        </tr>
+      </thead>
 
-			<tbody>
-				{% for page in pages %}
-					<tr>
-						<td>
-							{% url 'admin_page' handle=page.handle as page_url %}
-							<a href="{{ page_url }}">{{ page.handle }}</a>
-						</td>
-						<td>{{ page.title }}</td>
-					</tr>
-				{% endfor %}
-			</tbody>
+      <tbody>
+        {% for page in pages %}
+          <tr>
+            <td>
+              {% url 'admin_page' handle=page.handle as page_url %}
+              <a href="{{ page_url }}">{{ page.handle }}</a>
+            </td>
+            <td>{{ page.title }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
 
-		</table>
-	</section>
+    </table>
+  </section>
 {% endblock %}

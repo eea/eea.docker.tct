@@ -5,132 +5,132 @@
 
 
 {% block title %}
-	NBSAP - {% trans "National Strategy: Objectives" %}
+  NBSAP - {% trans "National Strategy: Objectives" %}
 {% endblock %}
 
 
 {% block navmenu %}
-	{% include '_bits/nav_menu.html' %}
+  {% include '_bits/nav_menu.html' %}
 {% endblock %}
 
 
 {% block sidebar %}
-	<div id="nat-obj-list" class="sidebar">
-		<h4 class="sidebar-title">{% trans "Objectives" %}</h4>
-		<input class="search" placeholder="quick search" />
-		<ul class="sidebar-menu list">
-			{% for objective in objectives|sort_by_code %}
-				<li class="{% if objective.pk == current_objective.pk %}active {% endif %}{% if current_objective in objective.objectives_tree %}active {% endif %}">
-					<a class="nat-objective"
-						 href="{% url 'nat_strategy' pk=objective.pk %}"
-						 title="{{ objective.code }}">
-						{% trans "Objective" %} {{ objective.code }}
-					</a>
-					{% if objective.objectives_tree|length %}
-						<ul class="sidebar-submenu list">
-							{% for obj in objective.objectives_tree|sort_by_code %}
-								<li class="{% if obj.pk == current_objective.pk %}active{% endif %} indent">
-									<a class="nat-objective"
-										 href="{% url 'nat_strategy' pk=obj.pk %}">
-										 {% trans "Objective" %} {{ obj.code }}
-									</a>
-								</li>
-							{% endfor %}
-						</ul>
-					{% endif %}
-				</li>
-			{% endfor %}
-		</ul>
-	</div>
+  <div id="nat-obj-list" class="sidebar">
+    <h4 class="sidebar-title">{% trans "Objectives" %}</h4>
+    <input class="search" placeholder="quick search" />
+    <ul class="sidebar-menu list">
+      {% for objective in objectives|sort_by_code %}
+        <li class="{% if objective.pk == current_objective.pk %}active {% endif %}{% if current_objective in objective.objectives_tree %}active {% endif %}">
+          <a class="nat-objective"
+             href="{% url 'nat_strategy' pk=objective.pk %}"
+             title="{{ objective.code }}">
+            {% trans "Objective" %} {{ objective.code }}
+          </a>
+          {% if objective.objectives_tree|length %}
+            <ul class="sidebar-submenu list">
+              {% for obj in objective.objectives_tree|sort_by_code %}
+                <li class="{% if obj.pk == current_objective.pk %}active{% endif %} indent">
+                  <a class="nat-objective"
+                     href="{% url 'nat_strategy' pk=obj.pk %}">
+                     {% trans "Objective" %} {{ obj.code }}
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
 {% endblock %}
 
 
 {% block content %}
-	<section class="content-header"></section>
-	<h1 class="page-title">
-		{% trans 'National Strategy' %}
-	</h1>
-	<h1 class="title-inline">
-		{% trans "Objective" %} {{ current_objective.code }}
-	</h1>
-	<h2 class="subtitle-inline">
-		{% if current_objective.title %}
-			{{ current_objective.title }}
-		{% endif %}
-	</h2>
-	<div>
-		<a class="quick-links"
-			 href="{% url 'implementation' code=current_objective.code %}"
-			 title="{{ current_objective.code }}">
-			See implementation
-		</a>
-		<a class="quick-links" 
-			 href="#aichi-mapping">
-			Mapping with Aichi
-		</a>
-		<a class="quick-links"
-			 href="#nat-mapping">
-			Mapping with National Indicators
-		</a>
-		<a class="quick-links"
-			 href="#eu-mapping">
-			Mapping with EU
-		</a>
-		<a class="quick-links"
-			 href="{% url 'nat_strategy_download' %}">
-			{% trans "Download the mapping" %}
-		</a>
-	</div>
-	<div class="summary">
-		<div class="snippet">
-			{{ current_objective.description|striptags|safe }}
-		</div>
-		<div class="full">
-			{{ current_objective.description|safe }}
-		</div>
-	</div>
+  <section class="content-header"></section>
+  <h1 class="page-title">
+    {% trans 'National Strategy' %}
+  </h1>
+  <h1 class="title-inline">
+    {% trans "Objective" %} {{ current_objective.code }}
+  </h1>
+  <h2 class="subtitle-inline">
+    {% if current_objective.title %}
+      {{ current_objective.title }}
+    {% endif %}
+  </h2>
+  <div>
+    <a class="quick-links"
+       href="{% url 'implementation' code=current_objective.code %}"
+       title="{{ current_objective.code }}">
+      See implementation
+    </a>
+    <a class="quick-links" 
+       href="#aichi-mapping">
+      Mapping with Aichi
+    </a>
+    <a class="quick-links"
+       href="#nat-mapping">
+      Mapping with National Indicators
+    </a>
+    <a class="quick-links"
+       href="#eu-mapping">
+      Mapping with EU
+    </a>
+    <a class="quick-links"
+       href="{% url 'nat_strategy_download' %}">
+      {% trans "Download the mapping" %}
+    </a>
+  </div>
+  <div class="summary">
+    <div class="snippet">
+      {{ current_objective.description|striptags|safe }}
+    </div>
+    <div class="full">
+      {{ current_objective.description|safe }}
+    </div>
+  </div>
 
-	<div class="pre-toc">
-		{% include 'mapping/../manager/nat_strategy/mapping/nat_strategy_aichi_mapping.html' with subobj=current_objective %}
-		{% if EU_STRATEGY %}
-			{% include 'mapping/../manager/nat_strategy/mapping/nat_strategy_eu_mapping.html' with subobj=current_objective %}
-		{% endif %}
-	</div>
+  <div class="pre-toc">
+    {% include 'mapping/../manager/nat_strategy/mapping/nat_strategy_aichi_mapping.html' with subobj=current_objective %}
+    {% if EU_STRATEGY %}
+      {% include 'mapping/../manager/nat_strategy/mapping/nat_strategy_eu_mapping.html' with subobj=current_objective %}
+    {% endif %}
+  </div>
 
-	<div class="pages-navigation">
-		{% with objectives.last.objectives_tree|last as last %}
-			{% ifnotequal previous_objective.pk last.pk %}
-				<div class="page-nav-prev-wrapper">
-					<a class="previous-page"
-						 href="{% url 'nat_strategy' pk=previous_objective.pk %}">
-						{% trans "Objective" %} {{ previous_objective.code }}
-					</a>
-				</div>
-			{% endifnotequal %}
-		{% endwith %}
+  <div class="pages-navigation">
+    {% with objectives.last.objectives_tree|last as last %}
+      {% ifnotequal previous_objective.pk last.pk %}
+        <div class="page-nav-prev-wrapper">
+          <a class="previous-page"
+             href="{% url 'nat_strategy' pk=previous_objective.pk %}">
+            {% trans "Objective" %} {{ previous_objective.code }}
+          </a>
+        </div>
+      {% endifnotequal %}
+    {% endwith %}
 
-		{% with objectives.first as first %}
-			{% ifnotequal next_objective.pk first.pk %}
-				<div class="page-nav-next-wrapper">
-					<a class="next-page"
-						 href="{% url 'nat_strategy' pk=next_objective.pk %}">
-						{% trans "Objective" %} {{ next_objective.code }}
-					</a>
-				</div>
-			{% endifnotequal %}
-		{% endwith %}
-	</div>
+    {% with objectives.first as first %}
+      {% ifnotequal next_objective.pk first.pk %}
+        <div class="page-nav-next-wrapper">
+          <a class="next-page"
+             href="{% url 'nat_strategy' pk=next_objective.pk %}">
+            {% trans "Objective" %} {{ next_objective.code }}
+          </a>
+        </div>
+      {% endifnotequal %}
+    {% endwith %}
+  </div>
 {% endblock %}
 
 
 {% block scripts %}
-	<script>
-		$(document).ready(function() {
-			var options = {
-				valueNames: [ 'nat-objective' ],
-				nestedSearch: true
-			};
-			var userList = new List('nat-obj-list', options);
-		});
-	</script>
+  <script>
+    $(document).ready(function() {
+      var options = {
+        valueNames: [ 'nat-objective' ],
+        nestedSearch: true
+      };
+      var userList = new List('nat-obj-list', options);
+    });
+  </script>
 {% endblock scripts %}

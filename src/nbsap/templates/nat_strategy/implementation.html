@@ -4,102 +4,102 @@
 
 
 {% block title %}
-	NBSAP - {% trans "Implementation: Actions related to objectives" %}
+  NBSAP - {% trans "Implementation: Actions related to objectives" %}
 {% endblock %}
 
 
 {% block navmenu %}
-	{% include '_bits/nav_menu.html' %}
+  {% include '_bits/nav_menu.html' %}
 {% endblock %}
 
 
 {% block sidebar %}
-	<div id="nat-obj-list" class="sidebar">
-		<h4 class="sidebar-title">{% trans "Related actions" %}</h4>
-		<input class="search" placeholder="quick search" />
-		<ul class="sidebar-menu list">
-			{% if is_empty_page %}
-				<li {% if not current_objective %} class="active" {% endif %}></li>
-			{% endif %}
-			{% for objective in objectives|sort_by_code %}
-				<li id="list-item-imp" {% if objective.code == current_objective.code %}class="active"{% endif %}>
-					<a class="nat-objective" href="{% url 'implementation' code=objective.code %}">
-						{% trans "Objective" %} {{ objective.code }}
-					</a>
-					<ul class="sidebar-submenu list">
-						{% for action in objective.get_all_actions|sort_by_code %}
-							<li>
-								<a class="nat-objective" href="{% url 'implementation' code=objective.code %}#{{ action.code }}"
-									 rel='tooltip'>
-									{% trans "Action" %} {{ action.code }}
-								</a>
-							</li>
-						{% endfor %}
-					</ul>
-				</li>
-			{% endfor %}
-		</ul>
-	</div>
+  <div id="nat-obj-list" class="sidebar">
+    <h4 class="sidebar-title">{% trans "Related actions" %}</h4>
+    <input class="search" placeholder="quick search" />
+    <ul class="sidebar-menu list">
+      {% if is_empty_page %}
+        <li {% if not current_objective %} class="active" {% endif %}></li>
+      {% endif %}
+      {% for objective in objectives|sort_by_code %}
+        <li id="list-item-imp" {% if objective.code == current_objective.code %}class="active"{% endif %}>
+          <a class="nat-objective" href="{% url 'implementation' code=objective.code %}">
+            {% trans "Objective" %} {{ objective.code }}
+          </a>
+          <ul class="sidebar-submenu list">
+            {% for action in objective.get_all_actions|sort_by_code %}
+              <li>
+                <a class="nat-objective" href="{% url 'implementation' code=objective.code %}#{{ action.code }}"
+                   rel='tooltip'>
+                  {% trans "Action" %} {{ action.code }}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
 {% endblock %}
 
 
 {% block content %}
-	<h1 class="page-title">Implementation</h1>
+  <h1 class="page-title">Implementation</h1>
 
-	<h1 class="x-title">{% trans "Actions related to Objective" %} {{ current_objective.code }} </h1>
-	<h2 class="x-subtitle"> {{ current_objective.title }} </h2>
+  <h1 class="x-title">{% trans "Actions related to Objective" %} {{ current_objective.code }} </h1>
+  <h2 class="x-subtitle"> {{ current_objective.title }} </h2>
 
-	<div>
-		<p>
-			<a href="{% url 'nat_strategy' pk=current_objective.pk %}"
-				 title="{{ current_objective.code }}">
-				See objective
-			</a>
-		</p>
-	</div>
+  <div>
+    <p>
+      <a href="{% url 'nat_strategy' pk=current_objective.pk %}"
+         title="{{ current_objective.code }}">
+        See objective
+      </a>
+    </p>
+  </div>
 
-	{% if current_objective.actions_tree %}
-		{% for action in current_objective.actions_tree|sort_by_code %}
-			<div class="section" id="{{ action.code }}">
-				<h3>{% trans "Action" %} {{ action.code }}</h3>
-				<h4>
-					{% if action.title %}
-						{{ action.title|title }}
-					{% endif %}
-				</h4>
-				<div class="summary">
-					<div class="snippet">
-						{{ action.description|striptags|safe }}
-					</div>
-					<div class="full">
-						<div class="html-content">{{ action.description|safe }}</div>
-						{% include 'manager/nat_strategy/mapping/nat_action_aichi_mapping.html' %}
-					</div>
-					<div>
-						<p>
-							<a href="{% url 'nat_strategy' pk=action.pk %}"
-								 title="{{ action.code }}">
-								See objective
-							</a>
-						</p>
-					</div>
-				</div>
-			</div>
-		{% endfor %}
-	{% else %}
-		<p>{% trans "No actions found" %}.</p>
-	{% endif %}
+  {% if current_objective.actions_tree %}
+    {% for action in current_objective.actions_tree|sort_by_code %}
+      <div class="section" id="{{ action.code }}">
+        <h3>{% trans "Action" %} {{ action.code }}</h3>
+        <h4>
+          {% if action.title %}
+            {{ action.title|title }}
+          {% endif %}
+        </h4>
+        <div class="summary">
+          <div class="snippet">
+            {{ action.description|striptags|safe }}
+          </div>
+          <div class="full">
+            <div class="html-content">{{ action.description|safe }}</div>
+            {% include 'manager/nat_strategy/mapping/nat_action_aichi_mapping.html' %}
+          </div>
+          <div>
+            <p>
+              <a href="{% url 'nat_strategy' pk=action.pk %}"
+                 title="{{ action.code }}">
+                See objective
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>{% trans "No actions found" %}.</p>
+  {% endif %}
 {% endblock content %}
 
 
 {% block scripts %}
-	<script>
-		$(document).ready(function() {
-		var options = {
-			valueNames: [ 'nat-objective' ],
-			nestedSearch: true
-		};
-		var userList = new List('nat-obj-list', options);
-	});
-	</script>
+  <script>
+    $(document).ready(function() {
+    var options = {
+      valueNames: [ 'nat-objective' ],
+      nestedSearch: true
+    };
+    var userList = new List('nat-obj-list', options);
+  });
+  </script>
 {% endblock scripts %}
