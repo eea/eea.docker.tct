@@ -255,3 +255,27 @@ label {
 .box {
     border-top: 0;
 }
+
+.loader-container {
+    display: none;
+	width: 100%;
+	height: 49px;
+	text-align: center;
+}
+
+.loader {
+	width: 49px;
+	height: 49px;
+	margin: 0 auto;
+	border: 3px solid rgb(0,0,0);
+	border-radius: 50%;
+	border-left-color: transparent;
+	border-right-color: transparent;
+	animation: loader-spin 575ms infinite linear;
+}
+
+
+
+@keyframes loader-spin {
+	100%{ transform: rotate(360deg); transform: rotate(360deg); }
+}
