@@ -1,67 +1,47 @@
 $(".chzn-select").chosen();
-$(function () {
-
-  forbidCrossChoicesIntersection('aichi_target', 'other_targets');
-
-  showObjectiveCodeValue('nat_objective',
-                         '.objective_text',
-                         "{% url 'objective_title' pk=1 %}");
-
-  showTargetCodeValue('aichi_targets',
-                  '.target_text',
-                  "{% url 'aichi_target_title' pk=1 %}");
-
-  showTargetCodeValue('other_targets',
-                      '.other_target_text',
-                      "{% url 'aichi_target_title' pk=1 %}");
-
-  showActionCodeValue('eu_actions',
-                      '.actions_text',
-                      "{% url 'action_title' pk=1 %}");
-
-  $('select[name=eu_targets]').on('change', function () {
-    var text = $(this).parents('.form-group').find('.eu_target_text');
-    var args = $("option:selected", this);
-    var eu_actions = $('select[name=eu_actions]');
-    var options = eu_actions.find('option:selected');
-    var url = "{% url 'eu_target_title' pk=1%}";
-    var action_url = "{% url 'target_action' pk=1%}";
-
-    eu_actions.html('');
-    text.html('');
-
-    if (args.length == 0) {
-      eu_actions.trigger('chosen:updated');
+$(function() {
+    function forbidChoicesIntersection(selector1, selector2) {
+        $(selector1).on('change', function() {
+            if (this.value && $(selector2).value) {
+                $("option", this).each(function() {
+                    var option2 = $(selector2).find('option[value=' + this.value + ']');
+                    if (this.selected) {
+                        option2.hide();
+                    } else {
+                        option2.show();
+                    }
+                });
+                $(selector2).trigger('chosen:updated');
+            }
+        }).change();
     }
 
-    $.each(args, function(i, arg){
-      $.get(url.replace('1', arg.value), function(data) {
-        data = $.parseJSON(data)[0];
-        text.append('<h5>Target '+ data.code + '</h5><p>' + data.value + '</p>');
-      });
+    function forbidCrossChoicesIntersection(name, nameOther) {
+        var selectorTargets = 'select[name=' + name + ']';
+        var selectorOtherTargets = 'select[name=' + nameOther + ']';
 
-      $.get(action_url.replace('1', arg.value), function(data) {
-        data = $.parseJSON(data);
-        $.each(data, function (i, d) {
-          var html = $('<option />').attr('value', d.id).text(d.value);
-          var action_text =  eu_actions.parents('.form-group').find('.actions_text');
+        forbidChoicesIntersection(selectorTargets, selectorOtherTargets);
+        forbidChoicesIntersection(selectorOtherTargets, selectorTargets);
+    }
+    forbidCrossChoicesIntersection('aichi_targets', 'other_targets');
 
-          action_text.html('');
-          $.each(options, function(j, o) {
-            if (o.value == d.id){
-              html = $('<option />').attr('value', d.id).attr('selected', 'selected').text(d.value);
-              $.get("{% url 'action_title' pk=1%}".replace('1', d.id), function(action_data) {
-                action_data = $.parseJSON(action_data)[0];
-                action_text.append('<h5>Action '+ action_data.code + ': '
-                    + action_data.title + '</h5><p>' + action_data.value + '</p>');
-              });
-            }
-          });
-          eu_actions.append(html);
-          eu_actions.trigger('chosen:updated');
-        });
-      });
-    });
-    eu_actions.change();
-  }).change();
+    showObjectiveCodeValue('nat_objective',
+        '.objective_text',
+        "{% url 'objective_title' pk=1 %}");
+
+    showTargetCodeValue('aichi_targets',
+        '.target_text',
+        "{% url 'aichi_target_title' pk=1 %}");
+
+    showTargetCodeValue('other_targets',
+        '.other_target_text',
+        "{% url 'aichi_target_title' pk=1 %}");
+
+    showTargetCodeValue('eu_targets',
+        '.eu_target_text',
+        "{% url 'eu_target_title' pk=1 %}");
+
+    showActionCodeValue('eu_actions',
+        '.actions_text',
+        "{% url 'action_title' pk=1 %}");
 });

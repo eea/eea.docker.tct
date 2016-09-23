@@ -2,33 +2,120 @@ import json
 from cStringIO import StringIO
 
 from django.shortcuts import render, get_object_or_404
-from django.core.paginator import Paginator
 from django.conf import settings
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.shortcuts import render_to_response
 
 from nbsap import models
-from indicators import get_indicators_pages
+from nbsap.utils import sort_by_code, get_adjacent_objects
 
 
-def goals(request, code):
-    current_goal = get_object_or_404(models.AichiGoal, code=code)
+def get_most_relevant_targets(target):
+    most_relevant_targets = []
+    if target.eu_aichi_strategy.count():
+        for strategy in target.eu_aichi_strategy.all():
+            most_relevant_targets.extend(list(strategy.eu_targets.all()))
+    return sort_by_code(most_relevant_targets)
+
+
+def get_other_relevant_targets(target):
+    other_relevant_targets = []
+    if target.eu_other_aichi_strategy.count():
+        for strategy in target.eu_other_aichi_strategy.all():
+            other_relevant_targets.extend(list(strategy.eu_targets.all()))
+    return sort_by_code(other_relevant_targets)
+
+
+def get_most_relevant_indicators(target):
+    most_relevant_indicators = []
+    if target.eu_indicator_aichi_strategy.count():
+        for strategy in target.eu_indicator_aichi_strategy.all():
+            most_relevant_indicators.append(strategy.eu_indicator)
+    return most_relevant_indicators
+
+
+def user_homepage(request):
+    return render(request, 'user_homepage.html')
+
+
+def list_goals(request):
     goals = models.AichiGoal.objects.order_by('code').all()
-    indicators_list = models.AichiIndicator.objects.all()
-
-    paginator = Paginator(indicators_list, 20)
-    info_header = settings.INFO_HEADER
-
     return render_to_response(
-        'aichi/goals.html',
+        'aichi/aichi.html',
         context_instance=RequestContext(
             request, {
                 'goals': goals,
+                'list_goals': True,
+                'list_targets': False,
+            })
+    )
+
+
+def list_targets(request, code=None):
+    if code:
+        current_goal = get_object_or_404(models.AichiGoal, code=code)
+        targets = current_goal.targets.all()
+    else:
+        current_goal = None
+        targets = models.AichiTarget.objects.all()
+    goals = models.AichiGoal.objects.order_by('code').all()
+    return render_to_response(
+        'aichi/aichi.html',
+        context_instance=RequestContext(
+            request, {
                 'current_goal': current_goal,
-                'indicators_pages': get_indicators_pages(paginator),
+                'goals': goals,
+                'list_goals': False,
+                'list_targets': True,
+                'targets': targets,
+            })
+    )
+
+
+def aichi_goals(request, code=None):
+    if not code:
+        return list_goals(request)
+    else:
+        aichi_target_id = sort_by_code(get_object_or_404(
+            models.AichiGoal, code=code).targets.all())[0].pk
+        return aichi_target_detail(request, code, aichi_target_id)
+
+
+def aichi_target_detail(request, aichi_target_id, code=None):
+    target = get_object_or_404(models.AichiTarget,
+                               pk=aichi_target_id)
+    if not code:
+        code = target.get_parent_goal().code
+
+    goals = models.AichiGoal.objects.order_by('code').all()
+    current_goal = get_object_or_404(models.AichiGoal, code=code)
+    all_targets = sort_by_code(models.AichiTarget.objects.all())
+    targets = sort_by_code(current_goal.targets.all())
+
+    if target not in targets:
+        raise Http404
+
+    previous_target, next_target = get_adjacent_objects(all_targets, target)
+
+    info_header = settings.INFO_HEADER
+
+    target.most_relevant_targets = get_most_relevant_targets(target)
+    target.other_relevant_targets = get_other_relevant_targets(target)
+    target.most_relevant_indicators = get_most_relevant_indicators(target)
+
+    return render_to_response(
+        'aichi/aichi.html',
+        context_instance=RequestContext(
+            request, {
+                'goals': goals,
+                'targets': targets,
+                'all_targets': all_targets,
+                'target': target,
                 'info_header': info_header,
+                'previous_target': previous_target,
+                'next_target': next_target
             })
     )
 

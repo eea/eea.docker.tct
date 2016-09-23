@@ -13,7 +13,7 @@ from functools import wraps
 def logout_view(request):
     messages.success(request, _("Successfully logged out") + "")
     logout(request)
-    return redirect('goals')
+    return redirect('user_homepage')
 
 
 def login_view(request, *args, **kwargs):

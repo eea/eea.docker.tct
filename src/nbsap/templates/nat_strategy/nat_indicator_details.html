@@ -1,0 +1,73 @@
+{% extends 'layout.html' %}
+{% load i18n %}
+{% load utils %}
+
+
+{% block title %}
+  NBSAP - {% trans "National Indicators" %}
+{% endblock %}
+
+
+{% block navmenu %}
+  {% include '_bits/nav_menu.html' %}
+{% endblock %}
+
+
+{% block sidebar %}
+  <div class="sidebar">
+  <h4 class="sidebar-title">National Indicators</h4>
+  <ul class="sidebar-menu">
+    {% for indicator in indicators|sort_by_code %}
+    <li class="{% if indicator.pk == current_indicator.pk %}active {% endif %}">
+      <a href="{% url 'nat_indicator_detail' pk=indicator.pk %}"
+       title="{{ indicator.code }}">
+      {{ indicator.code }}
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+  </div>
+{% endblock %}
+
+
+{% block content %}
+  <h1 class="title-inline">
+    {% trans "National Indicator" %} {{ current_indicator.code }}
+  </h1>
+  <h2 class="subtitle-inline">
+    {{ current_indicator.title }}
+  </h2>
+
+  {% if current_indicator.url %}
+    <p class="nat-indicator-url">URL: <a href="{{ current_indicator.url }}">{{ current_indicator.title }}</a></p>
+  {% endif %}
+
+  <div class="well">
+  <div class="well-title">{% trans "National objectives" %}</div>
+  <strong>Most relevant:</strong>
+  {% if current_indicator.nat_objectives.exists %}
+    <ul class="most-relevant-ul">
+    {% for objective in current_indicator.nat_objectives.all %}
+      <li>
+      <a href="{% url 'nat_strategy' pk=objective.pk %}">{{ objective.code }}</a>
+      <p class="target-decription"> {{ objective.title }}</p  >
+      </li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    <p class="no-corresponding">{% trans "No corresponding National Objective" %}.</p>
+  {% endif %}
+
+  <strong>Other:</strong>
+  {% if current_indicator.other_nat_objectives.exists %}
+    <ul class="other-relevant-ul">
+    {% for objective in current_indicator.other_nat_objectives.all %}
+      <li>
+      <a href="{% url 'nat_strategy' pk=objective.pk %}">{{ objective.code }} </a> <p>{{ objective.title }}</p>
+      </li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    <p class="no-corresponding">{% trans "No corresponding National Objective" %}.</p>
+  {% endif %}
+{% endblock %}

@@ -12,49 +12,21 @@
   {% include '_bits/nav_menu.html' %}
 {% endblock %}
 
+
 {% block content %}
   <h1 class="page-title">{% trans "National Indicators" %}</h1>
 
   {% if indicators %}
-    {% for indicator in indicators.all %}
-      <h2 id="indicator-{{ indicator.id }}">
-        {{ indicator.code }} {{ indicator.title }}
-      </h2>
-
-      {% if indicator.url %}
-        <p>URL: <a href="{{ indicator.url }}">{{ indicator.title }}</a></p>
-      {% endif %}
-
-      <div class="well">
-        <div class="well-title">{% trans "National objectives" %}</div>
-        <p><strong>Most relevant:</strong></p>
-        {% if indicator.nat_objectives.exists %}
-          <ul>
-            {% for objective in indicator.nat_objectives.all %}
-              <li>
-                <a href="{% url 'nat_strategy' code=objective.code %}">{{ objective.code }} {{ objective.title }}</a>
-              </li>
-            {% endfor %}
-          </ul>
-        {% else %}
-          <p>{% trans "No corresponding national objectives" %}.</p>
-        {% endif %}
-
-        <p><strong>Other:</strong></p>
-        {% if indicator.other_nat_objectives.exists %}
-          <ul>
-            {% for objective in indicator.other_nat_objectives.all %}
-              <li>
-                <a href="{% url 'nat_strategy' code=objective.code %}">{{ objective.code }} {{ objective.title }}</a>
-              </li>
-            {% endfor %}
-          </ul>
-        {% else %}
-          <p>{% trans "No corresponding national objectives" %}.</p>
-        {% endif %}
-      </div>
-    {% endfor %}
+    <ul class="list-nat-indicators">
+      {% for indicator in indicators.all %}
+        <li>
+          <a href="{% url 'nat_indicator_detail' pk=indicator.pk %}" id="indicator-{{ indicator.id }}">
+            {{ indicator.code }}
+          </a> - {{ indicator.title }}
+        </li>
+      {% endfor %}
+    </ul>
   {% else %}
-    <h1>{% trans 'No National Indicators' %}</h1>
+    <h1 class="no-corresponding">{% trans 'No National Indicators' %}</h1>
   {% endif %}
 {% endblock %}

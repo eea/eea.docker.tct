@@ -38,6 +38,4 @@ def admin_page(request, handle):
 
 @auth_required
 def admin_home(request):
-    if settings.NAT_STRATEGY:
-        return redirect('list_national_objectives')
-    return redirect('list_eu_targets')
+    return render(request, 'layout-admin.html')

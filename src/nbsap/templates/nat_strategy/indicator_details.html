@@ -1,7 +1,12 @@
 {% load utils %}
 {% load i18n %}
+
+
 <div class="modal-mid">
 <h3>{% trans "Indicator" %} {{ indicator.id }}: {{ indicator.title }}</h3>
+<div class="modal-bot text-center">
+  <a class="btn btn-danger" data-modal="close">close</a>
+</div>
 
 <table class="indicator_table table table-bordered table-striped">
   <tbody>
@@ -28,9 +33,8 @@
         {% trans "Strategic Goal" %}
       </td>
       <td class="col-md-8">
-        <label class="goal">{% trans "Goal" %} {{ indicator.strategic_goal_ob.code|upper }}:</label>
-        <br />
-        {{ indicator.strategic_goal_ob.description }}
+        <label class="goal">{% trans "Goal" %} {{ strategic_goal_ob.code|upper }}:</label>
+        {{ strategic_goal_ob.description }}
       </td>
     </tr>
 
@@ -57,9 +61,8 @@
         {% trans "Most Relevant Aichi Target" %}
       </td>
       <td class="col-md-8">
-        <label class="target">{% trans "Target" %} {{ indicator.relevant_target_ob.code }}:</label>
-        <br />
-        {{ indicator.relevant_target_ob.description }}
+        <label class="target">{% trans "Target" %} {{ relevant_target_ob.code }}:</label>
+        {{ relevant_target_ob.description }}
       </td>
     </tr>
 
@@ -69,143 +72,138 @@
       </td>
       <td class="col-md-8">
         <ul>
-        {% for target in indicator.other_targets_list %}
-          <li>
-            <label class="target">{% trans "Target" %} {{ target.code }}:</label>
-            <br />
-            {{ target.description }}
-          </li>
-        {% endfor %}
+          {% for target in other_targets_list %}
+            <li>
+              <label class="target">{% trans "Target" %} {{ target.code }}:</label>
+              {{ target.description }}
+            </li>
+          {% endfor %}
         </ul>
       </td>
     </tr>
 
     {% if indicator.classification %}
-    <tr>
-      <td class="col-md-3">
-        {{ indicator|field_verbose_name:"classification" }}
-      </td>
-      <td class="col-md-8">
-        {{ indicator.classification }}
-      </td>
-    </tr>
+      <tr>
+        <td class="col-md-3">
+          {{ indicator|field_verbose_name:"classification" }}
+        </td>
+        <td class="col-md-8">
+          {{ indicator.classification }}
+        </td>
+      </tr>
     {% endif %}
 
     {% if indicator.scales.all %}
-    <tr>
-      <td class="col-md-3">
-        {{ indicator|field_verbose_name:"scales" }}
-      </td>
-      <td class="col-md-8">
-        <ul>
-          {% for scale in indicator.scales.all %}
-          <li>
-            {{ scale.title }}
-          </li>
-          {% endfor %}
-        </ul>
-      </td>
-    </tr>
+      <tr>
+        <td class="col-md-3">
+          {{ indicator|field_verbose_name:"scales" }}
+        </td>
+        <td class="col-md-8">
+          <ul>
+            {% for scale in indicator.scales.all %}
+              <li>
+                {{ scale.title }}
+              </li>
+            {% endfor %}
+          </ul>
+        </td>
+      </tr>
     {% endif %}
 
     {% if indicator.validity %}
-    <tr>
-      <td class="col-md-3">
-        {{ indicator|field_verbose_name:"validity" }}
-      </td>
-      <td class="col-md-8">
-        {{ indicator.get_validity_display }}
-      </td>
-    </tr>
+      <tr>
+        <td class="col-md-3">
+          {{ indicator|field_verbose_name:"validity" }}
+        </td>
+        <td class="col-md-8">
+          {{ indicator.get_validity_display }}
+        </td>
+      </tr>
     {% endif %}
 
     {% if indicator.ease_of_communication %}
-    <tr>
-      <td class="col-md-3">
-        {{ indicator|field_verbose_name:"ease_of_communication" }}
-      </td>
-      <td class="col-md-8">
-        {{ indicator.get_ease_of_communication_display }}
-      </td>
-    </tr>
+      <tr>
+        <td class="col-md-3">
+          {{ indicator|field_verbose_name:"ease_of_communication" }}
+        </td>
+        <td class="col-md-8">
+          {{ indicator.get_ease_of_communication_display }}
+        </td>
+      </tr>
     {% endif %}
 
     {% if indicator.sources %}
-    <tr>
-      <td class="col-md-3">
-        {{ indicator|field_verbose_name:"sources" }}
-      </td>
-      <td class="col-md-8">
-        {{ indicator.sources }}
-      </td>
-    </tr>
+      <tr>
+        <td class="col-md-3">
+          {{ indicator|field_verbose_name:"sources" }}
+        </td>
+        <td class="col-md-8">
+          {{ indicator.sources }}
+        </td>
+      </tr>
     {% endif %}
 
     {% if indicator.status %}
-    <tr>
-      <td class="col-md-3">
-        {{ indicator|field_verbose_name:"status" }}
-      </td>
-      <td class="col-md-8">
-        {{ indicator.status|safe }}
-      </td>
-    </tr>
+      <tr>
+        <td class="col-md-3">
+          {{ indicator|field_verbose_name:"status" }}
+        </td>
+        <td class="col-md-8">
+          {{ indicator.status|safe }}
+        </td>
+      </tr>
     {% endif %}
 
     {% if indicator.requirements %}
-    <tr>
-      <td class="col-md-3">
-        {{ indicator|field_verbose_name:"requirements" }}
-      </td>
-      <td class="col-md-8">
-        {{ indicator.requirements }}
-      </td>
-    </tr>
+      <tr>
+        <td class="col-md-3">
+          {{ indicator|field_verbose_name:"requirements" }}
+        </td>
+        <td class="col-md-8">
+          {{ indicator.requirements }}
+        </td>
+      </tr>
     {% endif %}
 
     {% if indicator.measurer %}
-    <tr>
-      <td class="col-md-3">
-        {{ indicator|field_verbose_name:"measurer" }}
-      </td>
-      <td class="col-md-8">
-        {{ indicator.measurer }}
-      </td>
-    </tr>
+      <tr>
+        <td class="col-md-3">
+          {{ indicator|field_verbose_name:"measurer" }}
+        </td>
+        <td class="col-md-8">
+          {{ indicator.measurer }}
+        </td>
+      </tr>
     {% endif %}
 
     {% if indicator.conventions %}
-    <tr>
-      <td class="col-md-3">
-        {{ indicator|field_verbose_name:"conventions" }}
-      </td>
-      <td class="col-md-8">
-        {{ indicator.conventions }}
-      </td>
-    </tr>
+      <tr>
+        <td class="col-md-3">
+          {{ indicator|field_verbose_name:"conventions" }}
+        </td>
+        <td class="col-md-8">
+          {{ indicator.conventions }}
+        </td>
+      </tr>
     {% endif %}
 
     {% if indicator.links.all %}
-    <tr>
-      <td class="col-md-3">
-        {{ indicator|field_verbose_name:"links" }}
-      </td>
-      <td class="col-md-8">
-        <ul>
-          {% for link in indicator.links.all %}
-          <li>
-            <a href="{{ link.url }}">{{ link.title }}</a>
-          </li>
-          {% endfor %}
-        </ul>
-      </td>
-    </tr>
+      <tr>
+        <td class="col-md-3">
+          {{ indicator|field_verbose_name:"links" }}
+        </td>
+        <td class="col-md-8">
+          <ul>
+            {% for link in indicator.links.all %}
+              <li>
+                <a href="{{ link.url }}">{{ link.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </td>
+      </tr>
     {% endif %}
 
   </tbody>
 </table>
-</div>
-
-<div class="modal-bot text-center">
-  <a class="btn btn-danger" data-modal="close">{% trans "Close" %}</a>
 </div>

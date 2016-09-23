@@ -1,7 +1,14 @@
 import re
 from django import template
+from nbsap.utils import sort_by_code, sort_by_type, sort_by_type_and_code
+from nbsap.utils import sort_by_code_tuplets
 
 register = template.Library()
+
+register.filter('sort_by_code', sort_by_code)
+register.filter('sort_by_code_tuplets', sort_by_code_tuplets)
+register.filter('sort_by_type', sort_by_type)
+register.filter('sort_by_type_and_code', sort_by_type_and_code)
 
 
 @register.simple_tag
@@ -29,14 +36,6 @@ def get_page(id):
         return int(id / 20)
 
 
-@register.filter('sort_by_code')
-def sort_by_code(value):
-    try:
-       return sorted(value, key=lambda i: map(int, i.code.split('.')))
-    except ValueError:
-        return sorted(value, key=lambda i: i.code)
-
-
 @register.assignment_tag
 def assign(value):
     return value
@@ -61,8 +60,10 @@ def get_targets_for_strategies(strategies):
         targets.extend(s.relevant_targets.all())
     targets = list(set(targets))
     try:
-        targets.sort(cmp=lambda a, b: int(10 * (float(a.code) - float(b.code))))
-    except: pass
+        targets.sort(cmp=lambda a, b: int(
+            10 * (float(a.code) - float(b.code))))
+    except:
+        pass
     return targets
 
 

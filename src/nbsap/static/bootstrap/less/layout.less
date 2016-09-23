@@ -1,0 +1,262 @@
+@import "variables.less";
+.main {
+    background: white;
+    border-radius: 5px;
+}
+
+@media screen and (min-width: 800px) {
+    .sidebar-trigger {
+        display: none;
+    }
+    .main {
+        display: inline-block;
+        width: 64%;
+        position: relative;
+        box-sizing: border-box;
+        left: 19%;
+    }
+    .sidebar {
+        box-sizing: border-box;
+        position: fixed;
+        margin-left: 10px;
+        padding: 1rem;
+        overflow: auto;
+        margin-left: -16px;
+        bottom: 0;
+        opacity: .75;
+        will-change: opacity;
+        transition: opacity .3s;
+        top: 124px;
+        height: 84vh;
+        width: 18%;
+        padding-top: 1.8rem;
+        padding-left: 2rem;
+        li {
+            margin-bottom: .4rem;
+        }
+        a {
+            padding: 2px!important;
+        }
+        @media (min-width: 1440px) {
+            padding-left: 67px;
+        }
+        @media (max-width: 1000px) {}
+    }
+    .sidebar:hover {
+        opacity: 1!important;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .sidebar {
+        overflow: auto;
+        width: 30%;
+        position: fixed;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background-color: white;
+        z-index: 900;
+        display: none;
+        a {
+            white-space: nowrap;
+        }
+        li {
+            display: block;
+        }
+    }
+    .sidebaropen {
+        overflow: hidden;
+    }
+    #backdrop {
+        position: fixed;
+        display: none;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 100;
+    }
+    .sidebar li {
+        padding: .3rem;
+    }
+    .sidebar-trigger {
+        right: -80px;
+        display: block;
+        transform: rotate(270deg);
+        position: fixed;
+        top: 51%;
+        background: @brand-blue;
+        border-top-left-radius: 25px;
+        border-top-right-radius: 25px;
+        z-index: 500;
+        button {
+            background: none;
+            height: 32px;
+            padding: 0 24px;
+            font-size: 10px;
+            font-weight: 600;
+            line-height: 24px;
+        }
+    }
+}
+
+.sidebar {
+    @media (max-width: 462px) {
+        width: 50%;
+    }
+}
+
+.one-sidebar {
+    @media (min-width: 800px) {
+        width: 80%;
+    }
+}
+
+.no-sidebar {
+    @media(min-width: 800px) {
+        width: 100%;
+        left: 0;
+    }
+}
+
+.content {
+    @media(min-width: 800px) {
+        padding: 1rem;
+    }
+}
+
+.sidebar-submenu {
+    margin: .8rem;
+    display: none;
+}
+
+.visible {
+    display: block!important;
+}
+
+.active .sidebar-submenu {
+    display: block;
+}
+
+.sidebar-submenu-title {
+    line-height: 2;
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+
+.sampleClass {
+    float: left;
+}
+
+@media only screen and (max-width: 800px) {
+    .sampleClass {
+        float: none;
+    }
+}
+
+.list-item a {
+    cursor: pointer;
+    float: left;
+}
+
+.list-item {
+    position: relative;
+}
+
+.active .fa-caret-down {
+    color: #57b9f2!important;
+}
+
+.fa-caret-down {
+    display: none!important;
+    background: none!important;
+    color: @text-color!important;
+    font-size: small;
+    margin-left: 10px!important;
+    opacity: 0.4;
+}
+
+.fa-caret-down:hover {
+    opacity: 1;
+}
+
+.pages-navigation {
+    background: white;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    @media (min-width: 800px) {
+        border-top: 1px solid #ccc;
+    }
+    @media (max-width: 800px) {}
+}
+
+.page-nav-next-wrapper,
+.page-nav-prev-wrapper {
+    display: inline-block;
+    width: 50%;
+    box-sizing: border-box;
+}
+
+.page-nav-next-wrapper:hover,
+.page-nav-prev-wrapper:hover {
+    background: #f7f7f7;
+}
+
+.page-nav-next-wrapper {
+    float: right;
+    text-align: right;
+}
+
+.page-nav-prev-wrapper {
+    float: left;
+    border-right: 1px solid #ccc;
+}
+
+.next-page,
+.previous-page {
+    display: block;
+    color: @text-color;
+    padding: 20px;
+    line-height: 0.1;
+}
+
+.next-page {}
+
+.next-page:after {
+    content: "\f101";
+    padding-right: 10px;
+    visibility: visible;
+}
+
+.previous-page:before {
+    content: "\f100";
+    padding-right: 10px;
+    visibility: visible;
+}
+
+.previous-page {
+    margin-left: 20px;
+}
+
+.previous-page:hover,
+.next-page:hover {
+    color: @gray-muted;
+}
+
+@media (max-width: 530px) {
+    .previous-page,
+    .next-page {
+        visibility: hidden;
+    }
+}
+
+.eu-target-desc p {
+    margin: 0;
+}
+
+:target {
+    border-left: solid @brand-blue;
+    padding-left: .5rem;
+}

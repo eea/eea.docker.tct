@@ -1,91 +1,76 @@
-{% extends 'manager/base.html' %}
-
 {% load i18n %}
-
-{% block title %}
-  NBSAP - {% trans "Edit target " %}{{ target.code }}
-{% endblock %}
-
-
 {% block head_scripts %}
   {{ form.media }}
 {% endblock %}
-
-
 {% block scripts %}
   <script src="/static/js/language_change.js"></script>
 {% endblock %}
-
-
 {% block content %}
-
-  <h1 class="page-title">{% trans "Eu Strategy" %}</h1>
-  <h1>{% trans "Edit target" %} {{ target.code }}</h1>
-
-  {% if form.errors %}
-    <p>
-      {% blocktrans with form.errors|pluralize as errors %}Please correct the error {{ errors }} below.{% endblocktrans %}
-    </p>
-  {% endif %}
-  <form action="" method="post" id="national-target-edit" class="form">
-
-    <div class="form-group">
-      <label for="language">{% trans "Language" %}</label>
-      {{ form.language }}
-    </div>
-
-    {% if form.code %}
-      <div class="form-group">
-        <label for="code">{% trans "Code" %}</label>
-        {{ form.code }}
-        {{ form.code.errors }}
-      </div>
+  <section class="content-header">
+    <h1 class="page-title">{% trans "Edit target" %}
+      {{ target.code }}</h1>
+  </section>
+  <section class="content">
+    {% if form.errors %}
+      <p>
+        {% blocktrans with form.errors|pluralize as errors %}Please correct the error{{ errors }}
+        below.
+        {% endblocktrans %}
+      </p>
     {% endif %}
-
     <div class="row">
-      <div class="col-md-6">
-        <div class="language-container">
-
+      <div class="col-md-12 form-wrapper">
+        <form action="" method="post" id="national-target-edit" class="form">
           <div class="form-group">
-            <label for="title">{% trans "Title" %}</label>
-            {{ form.title }}
-            {{ form.title.errors }}
+            <label for="language">{% trans "Language" %}</label>
+            {{ form.language }}
           </div>
-
-          <div class="form-group">
-            <label for="description">{% trans "Description" %}</label>
-            {{ form.description }}
-            {{ form.description.errors }}
+          {% if form.code %}
+            <div class="form-group">
+              <label for="code">{% trans "Code" %}</label>
+              {{ form.code }}
+              {{ form.code.errors }}
+            </div>
+          {% endif %}
+          <div class="language-container">
+            <div class="form-group">
+              <label for="title">{% trans "Title" %}</label>
+              {{ form.title }}
+              {{ form.title.errors }}
+            </div>
+            <div class="form-group">
+              <label for="description">{% trans "Description" %}</label>
+              {{ form.description }}
+              {{ form.description.errors }}
+            </div>
           </div>
-
         </div>
+        {% if lang != DEFAULT_LANGUAGE %}
+          {% trans DEFAULT_LANGUAGE_LABEL as default_language_label %}
+          <div class="col-md-12 original-hideout">
+            <p class="original-title">
+              {% blocktrans with default_language_label as language %}Original title in
+              {{ language }}
+              {% endblocktrans %}
+            </p>
+            <div class="well">
+              {{ target.title_default }}
+            </div>
+            <p class="original-description">
+              {% blocktrans with default_language_label as language %}Original description in
+              {{ language }}
+              {% endblocktrans %}
+            </p>
+            <div class="well">
+              {{ target.description_default|safe }}
+            </div>
+          </div>
+        {% endif %}
       </div>
-
-      {% if lang != DEFAULT_LANGUAGE %}
-      {% trans DEFAULT_LANGUAGE_LABEL as default_language_label %}
-      <div class="col-md-6 original-hideout">
-        <p class="original-title">
-            {% blocktrans with default_language_label as language %}Original title in {{ language }}{% endblocktrans %}
-        </p>
-        <div class="well">
-          {{ target.title_default }}
-        </div>
-
-        <p class="original-description">
-            {% blocktrans with default_language_label as language %}Original description in {{ language }}{% endblocktrans %}
-        </p>
-        <div class="well">
-          {{ target.description_default|safe }}
-        </div>
+      <div class="action-bar">
+        <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
+        <a href="{% url 'list_eu_targets' %}" class="btn btn-default" type="button">{% trans "Cancel" %}</a>
       </div>
-      {% endif %}
-
-    </div>
-
-    <div class="action-bar">
-      <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
-      <a href="{% url 'view_eu_strategy_target' pk=target.pk %}" class="btn btn-default" type="button">{% trans "Cancel" %}</a>
-    </div>
-
-  </form>
+    </form>
+  </section>
 {% endblock %}

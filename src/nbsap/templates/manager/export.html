@@ -1,21 +1,22 @@
-{% extends "layout.html" %}
+{% extends "layout-admin.html" %}
 {% load i18n %}
 
 
 {% block title %}
-  NBSAP - {% trans "Export content" %}
+NBSAP - {% trans "Export content" %}
 {% endblock %}
 
 
 {% block navmenu %}
-  {% include 'manager/admin_nav_tabs.html' %}
+{% include 'manager/admin_nav_tabs.html' %}
 {% endblock %}
 
 
 {% block content %}
-
-  <h1 class="page-title">{% trans "Export content" %}</h1>
-
+<section class="content-header">
+  <h1>{% trans "Export content" %}</h1>
+</section>
+<section class="content">
   <h2>Export for BISE</h2>
 
   <p>Please copy and paste the following HTML content.</p>
@@ -23,4 +24,5 @@
   <div>
     <textarea style="height: 200px" rows="20" cols="120">{{ content }}</textarea>
   </div>
+</section>
 {% endblock %}

@@ -3,77 +3,79 @@
 {% load i18n %}
 {% load assets %}
 
-
-{% block title %}
-  NBSAP - {% trans "National Indicators: List Indicators" %}
-{% endblock %}
-
-
 {% block content %}
-
-  {% get_current_language as lang_code %}
-
-  <h1 class="page-title">{% trans "National Indicators" %}</h1>
-  <h1>{% trans "List National Indicators" %}</h1>
-
-  <ul class="nav nav-tabs">
-    <li class="{% if category == 'headline' %}active{% endif %}">
-      <a href="{% url 'list_nat_indicators' %}?category=headline">Headline indicators</a>
-    </li>
-    <li class="{% if category == 'other' %}active{% endif %}">
-      <a href="{% url 'list_nat_indicators' %}?category=other">Other indicators</a></li>
-  </ul>
-
-  <div class="action-bar">
-    <a class="btn btn-success add"
-       href="{% url 'edit_nat_indicator' %}?category={{ category }}">{% trans "Add indicator" %}
-    </a>
-  </div>
-
-  {% if indicators %}
-  <table class="table">
-
-    <thead>
-    <tr>
-      <th>{% trans "Code" %}</th>
-      <th>{% trans "Title" %}</th>
-      <th></th>
-    </tr>
-    </thead>
-
-    <tbody>
-    {% for indicator in indicators %}
-      <tr>
-        <td>
-          <strong>
-            <a href="{% url 'view_nat_indicator' pk=indicator.pk %}">
-              {{ indicator.code }}
-            </a>
-          </strong>
-        </td>
-        <td>
-          <strong><a href="{% url 'view_nat_indicator' pk=indicator.pk %}">
-            {{ indicator.title }}
-          </a></strong>
-        </td>
-        <td>
-          <a class="btn btn-default"
-             href="{% url 'edit_nat_indicator' pk=indicator.pk %}">{% trans "Edit" %}</a>
-        </td>
-      </tr>
-    {% endfor %}
-    </tbody>
-  </table>
-  {% else %}
-    <p><em>No indicators found.</em></p>
-  {% endif %}
-
+  <section class="content-header">
+    {% get_current_language as lang_code %}
+    <h1 class="page-title">{% trans "List National Indicators" %}</h1>
+  </section>
+  <section class="content">
+    {% url 'edit_nat_indicator' as edit_indicator %}
+    {% if indicators %}
+      <table data-url="{{ edit_indicator }}" id="indicator-table" class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>{% trans "Code" %}</th>
+            <th>{% trans "Title" %}</th>
+            <th>URL</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for indicator in indicators %}
+            <tr>
+              <td>{{ indicator.code }}</td>
+              <td>
+                <a href="{% url 'view_nat_indicator' pk=indicator.pk %}" title="{% trans 'Indicator' %} {{ indicator.code }}">
+                  {{ indicator.title }}</a>
+              </td>
+              <td>
+                {% if indicator.url %}
+                  <a href="{{ indicator.url }}">
+                    {{ indicator.get_indicator_type_display }}
+                    {{ indicator.code }}:
+                    {{indicator.title}}</a>
+                {% else %}
+                  {{ indicator.code|default:'' }}
+                  {{ indicator.title }}
+                {% endif %}
+              </td>
+              <td>
+                <form method="POST" class="delete" action="{% url 'delete_nat_indicator' pk=indicator.pk %}">
+                  <span class="btn btn-xs btn-warning ajaxget" data-url="{% url 'edit_nat_indicator' pk=indicator.pk %}">
+                    <i class="glyphicon glyphicon-edit"></i>
+                  </span>
+                  <button type="submit" class="btn btn-xs btn-danger edit" data-message="{% trans 'Are you sure you want to delete this indicator?' %}">
+                    <i class="glyphicon glyphicon-trash"></i>
+                  </button>
+                  <a class="btn btn-xs btn-default" href="{% url 'map_nat_indicator' pk=indicator.pk %}">{% trans "Objective Mapping" %}</a>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>
+        <em>No indicators found.</em>
+      </p>
+    {% endif %}
+    <div class="loader-container">
+      <div class="loader">
+      </div>
+    </div>
+    <div class="form"></div>
+  </section>
 {% endblock %}
 
 {% block scripts %}
-
-  {% assets "js_admin" %}
-    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-  {% endassets %}
-
+  <script src="/static/js/object_delete.js"></script>
+  <script src="/static/js/jquery.ajaxGetForm.js"></script>
+  <script>
+    $(function () {
+      $('#indicator-table').dataTable({"paging": false, "dom": '<"filter-wrapper"f>t'});
+      var url = $('#indicator-table').data('url');
+      $('.filter-wrapper').prepend('<div class="action-bar"><span class="btn btn-success add ajaxget" data-url="' + url + '?category={{ category }}">{% trans "Add indicator" %}</span></div>');
+      $.ajaxGet({targetForm: ".form", button: ".ajaxget"});
+    });
+  </script>
 {% endblock scripts %}

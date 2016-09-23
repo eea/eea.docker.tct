@@ -9,6 +9,7 @@ import tinymce.models
 
 from nbsap.utils import RE_ACTION_CODE
 from nbsap.utils import generate_code
+from nbsap.utils import sort_by_type_and_code
 
 
 def getter_for_default_language(field_name):
@@ -134,6 +135,18 @@ class AichiTarget(models.Model):
                                               related_name="other_targets",
                                               blank=True)
 
+    def get_most_relevant_objectives(self):
+        objectives = []
+        for strategy in self.relevant_targets_national_strategy.all():
+            objectives.append(strategy.objective)
+        return objectives
+
+    def get_other_relevant_objectives(self):
+        objectives = []
+        for strategy in self.other_targets_national_strategy.all():
+            objectives.append(strategy.objective)
+        return objectives
+
     def __unicode__(self):
         return u'Target %s' % self.code
 
@@ -225,6 +238,13 @@ class EuAction(models.Model):
             return self.target.all()[0]
         else:
             return self.parent.target.all()[0]
+
+    def get_all_objectives(self):
+        objectives = []
+        if hasattr(self, 'national_strategy'):
+            for strategy in self.national_strategy.all():
+                objectives.append(strategy.objective)
+        return objectives
 
     def subactions(self):
         return self.get_all_actions()[1:]
@@ -442,13 +462,20 @@ class NationalObjective(models.Model):
         else:
             NationalObjective._pre_save_objective_code_on_create(instance)
 
-    def get_all_objectives(self):
+    @property
+    def objectives_tree(self):
         # we should use https://github.com/django-mptt/django-mptt/
         r = []
         for ob in NationalObjective.objects.filter(parent=self):
             r.append(ob)
-            r.extend(ob.get_all_objectives())
+            r.extend(ob.objectives_tree)
         return r
+
+    def get_all_actions(self):
+        actions_list = list(self.actions.all())
+        for objective in self.objectives_tree:
+            actions_list.extend(list(objective.actions.all()))
+        return actions_list
 
     def get_national_strategies(self):
         return self.objective_national_strategy.all()
@@ -569,11 +596,13 @@ class EuTarget(models.Model):
     get_indicators.short_description = 'EU Indicators'
 
     def get_indicators_short(self):
-        return ', '.join(i.get_code_type() for i in self.indicators.all())
+        indicators = sort_by_type_and_code(self.indicators.all())
+        return ', '.join(i.get_code_type() for i in indicators)
 
     def get_other_indicators_short(self):
+        other_indicators = sort_by_type_and_code(self.other_indicators.all())
         return ', '.join(i.get_code_type()
-                         for i in self.other_indicators.all())
+                         for i in other_indicators)
 
     class Meta:
         verbose_name_plural = 'EU targets'

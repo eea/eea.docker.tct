@@ -1,41 +1,35 @@
-
 {% load i18n %}
 {% load utils %}
 
-<div class="well">
-  <div class="well-title">{% trans "Mapping with EU" %}</div>
-
-  {% if subobj.eu_objects %}
-
-    <h5>{% trans "EU Targets" %}</h5>
-    <ul>
-    {% for target, actions in subobj.eu_objects.items %}
-      <li>
-        <a href="{% url 'eu_targets' pk=target.pk %}">
-        {% trans "Target" %} {{ target.code }}</a>
-        {{ target.title }}
-
-        {% if actions %}
-          <p>
-            <h5>{% trans "Related EU Actions" %}</h5>
-              <ul>
-                {% for action in actions %}
-                  <li>
-                    <a href="{% url 'eu_targets' pk=target.pk %}#{{ action.code }}">
-                    {% trans "Action" %} {{ action.code }}</a>
-                    {{ action.description|safe }}
-                  </li>
-                {% endfor %}
-              </ul>
-          </p>
-        {% endif %}
-
-      </li>
-    {% endfor %}
+<div class="mapping-wrapper">
+  <div class="well">
+    <h4 class="mapping" id="eu-mapping">{% trans "Mapping with EU" %}</h4>
+    {% if subobj.eu_objects %}
+      <div class="well-title">{% trans "EU Targets" %}</div>
+      <ul>
+        {% for target, actions in subobj.eu_objects.items|sort_by_code_tuplets %}
+          <li>
+            <a href="{% url 'eu_target_detail' pk=target.pk %}">
+              {% trans "Target" %}
+              {{ target.code }}</a>
+            {{ target.title }}
+          </li>
+          {% if actions %}
+            <ul class="related">
+              <div class="well-title other">{% trans "Related EU Actions" %}</div>
+              {% for action in actions %}
+                <li>
+                  <a href="{% url 'eu_target_detail' pk=target.pk %}#{{ action.code }}">
+                    {% trans "Action" %}
+                    {{ action.code }}</a>
+                  {{ action.description|safe }}
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endfor %}
     </ul>
-
   {% else %}
-    <p>{% trans "No corresponding EU target" %}.</p>
+    <p class="no-corresponding">{% trans "No corresponding EU Target" %}.</p>
   {% endif %}
-
 </div>

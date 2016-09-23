@@ -1,14 +1,15 @@
 {% extends "layout.html" %}
+
 {% load i18n %}
+
 
 {% block title %}
   NBSAP - {% trans "Error" %}
 {% endblock %}
 
-{% block content %}
 
+{% block content %}
   <div class="alert alert-danger">
     <h4>{% trans "You are not allowed to view this page." %}</h4>
   </div>
-
 {% endblock %}

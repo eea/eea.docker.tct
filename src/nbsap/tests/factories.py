@@ -23,8 +23,8 @@ class NationalObjectiveFactory(factory.DjangoModelFactory):
 
     code = factory.Sequence(lambda n: '%d' % n)
     title_default = factory.Sequence(lambda n: 'obj%d_title_default' % n)
-    description_default = factory.Sequence(lambda n: 'obj%d_description_default' % n)
-
+    description_default = factory.Sequence(
+        lambda n: 'obj%d_description_default' % n)
 
     @factory.post_generation
     def parent(self, create, extracted, **kwargs):
@@ -36,6 +36,18 @@ class NationalObjectiveFactory(factory.DjangoModelFactory):
         if extracted:
             for action in extracted:
                 self.actions.add(action)
+
+    @factory.post_generation
+    def nat_indicators(self, create, extracted, **kwargs):
+        if extracted:
+            for nat_indicator in extracted:
+                self.nat_indicators.add(nat_indicator)
+
+    @factory.post_generation
+    def other_nat_indicators(self, create, extracted, **kwargs):
+        if extracted:
+            for other_nat_indicator in extracted:
+                self.other_nat_indicators.add(other_nat_indicator)
 
     @classmethod
     def _generate(cls, create, attrs):
@@ -56,7 +68,8 @@ class NationalActionFactory(factory.DjangoModelFactory):
 
     code = factory.Sequence(lambda n: '%d' % n)
     title_default = factory.Sequence(lambda n: 'action%d_title_default' % n)
-    description_default = factory.Sequence(lambda n: 'action%d_description_default' % n)
+    description_default = factory.Sequence(
+        lambda n: 'action%d_description_default' % n)
 
 
 class AichiGoalFactory(factory.DjangoModelFactory):
@@ -66,7 +79,8 @@ class AichiGoalFactory(factory.DjangoModelFactory):
 
     code = factory.Sequence(lambda n: '%d' % n)
     title_default = factory.Sequence(lambda n: 'obj%d_title_default' % n)
-    description_default = factory.Sequence(lambda n: 'obj%d_description_default' % n)
+    description_default = factory.Sequence(
+        lambda n: 'obj%d_description_default' % n)
 
     @factory.post_generation
     def targets(self, create, extracted, **kwargs):
@@ -81,7 +95,8 @@ class AichiTargetFactory(factory.DjangoModelFactory):
         model = models.AichiTarget
 
     code = factory.Sequence(lambda n: '%d' % n)
-    description_default = factory.Sequence(lambda n: 'action%d_description_default' % n)
+    description_default = factory.Sequence(
+        lambda n: 'action%d_description_default' % n)
 
 
 class NationalStrategyFactory(factory.DjangoModelFactory):
@@ -111,6 +126,7 @@ class NationalIndicatorFactory(factory.DjangoModelFactory):
 
     code = factory.Sequence(lambda n: '%d' % n)
     title_default = factory.Sequence(lambda n: 'indicator%d_title_default' % n)
+    url = 'www.test.url.com'
 
     @factory.post_generation
     def subindicators(self, create, extracted, **kwargs):

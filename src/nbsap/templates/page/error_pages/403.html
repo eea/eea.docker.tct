@@ -1,0 +1,12 @@
+{% extends 'page/error_pages/error_template.html' %}
+
+{% load i18n %}
+
+
+{% block pageerror %}
+  <h1 class="error-page-title">{% trans "Permission Denied" %}</h1>
+  <h2 class="error-page-type">403 Error</h2>
+  <p>
+    You don't have permission to access that page, either contact the site administrator or you can go back to our <a href="{% url 'user_homepage' %}">home page</a>.
+  </p>
+{% endblock %}

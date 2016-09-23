@@ -5,6 +5,15 @@ from django.utils.translation import ugettext_lazy as _
 from auth import auth_required
 from nbsap import models
 from nbsap.forms import EuIndicatorForm, EuIndicatorMapForm
+from nbsap.utils import sort_by_type_and_code, get_adjacent_objects
+
+
+def get_most_relevant(indicator):
+    aichi_targets = []
+    if indicator.eu_indicator_aichi_strategy.exists():
+        for strategy in indicator.eu_indicator_aichi_strategy.all():
+            aichi_targets.extend(list(strategy.aichi_targets.all()))
+    return list(set(aichi_targets))
 
 
 def get_indicators_pages(paginator):
@@ -19,11 +28,14 @@ def get_indicators_pages(paginator):
 
 def indicator(request, pk):
     indicator = get_object_or_404(models.AichiIndicator, pk=pk)
-    indicator.relevant_target_ob = indicator.relevant_target.all()[0]
-    indicator.strategic_goal_ob = indicator.relevant_target_ob.goals.all()[0]
-    indicator.other_targets_list = indicator.other_targets.all()
+    relevant_target_ob = indicator.relevant_target.first()
+    strategic_goal_ob = relevant_target_ob.goals.first()
+    other_targets_list = indicator.other_targets.all()
     return render(request, 'nat_strategy/indicator_details.html', {
         'indicator': indicator,
+        'relevant_target_ob': relevant_target_ob,
+        'strategic_goal_ob': strategic_goal_ob,
+        'other_targets_list': other_targets_list,
     })
 
 
@@ -33,6 +45,23 @@ def eu_indicators(request):
     return render(request, 'eu_strategy/eu_indicators.html', {
         'indicators': indicators,
         'subindicators': subindicators,
+    })
+
+
+def indicator_details(request, pk):
+    current_indicator = get_object_or_404(models.EuIndicator, pk=pk)
+    indicators = models.EuIndicator.objects.filter(parents=None).all()
+    previous_indicator, next_indicator = get_adjacent_objects(
+        sort_by_type_and_code(indicators), current_indicator)
+
+    current_indicator.relevant_aichi_targets = get_most_relevant(
+        current_indicator)
+
+    return render(request, 'eu_strategy/eu_indicator_detail.html', {
+        'current_indicator': current_indicator,
+        'indicators': indicators,
+        'previous_indicator': previous_indicator,
+        'next_indicator': next_indicator
     })
 
 

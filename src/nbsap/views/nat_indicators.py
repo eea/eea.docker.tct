@@ -17,6 +17,19 @@ def nat_indicators(request):
     })
 
 
+def nat_indicator_detail(request, pk=None):
+    if pk:
+        current_indicator = get_object_or_404(models.NationalIndicator, pk=pk)
+    else:
+        current_indicator = models.NationalIndicator.objects.filter(
+            parents=None).first()
+    indicators = models.NationalIndicator.objects.filter(parents=None).all()
+    return render(request, 'nat_strategy/nat_indicator_details.html', {
+        'current_indicator': current_indicator,
+        'indicators': indicators,
+    })
+
+
 @auth_required
 def list_nat_indicators(request):
     category = request.GET.get('category', models.NationalIndicator.HEADLINE)

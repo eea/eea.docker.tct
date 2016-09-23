@@ -8,24 +8,33 @@ import tablib
 
 from nbsap import models
 from nbsap.forms import NationalObjectiveForm, NationalObjectiveEditForm
-from nbsap.utils import remove_tags
+from nbsap.utils import remove_tags, sort_by_code, get_adjacent_objects
 
 from auth import auth_required
 
 
-def nat_strategy(request, code=None):
+def get_adjacent_objectives(objectives, current_objective):
+    all_objectives = []
+    for objective in objectives:
+        all_objectives.append(objective)
+        all_objectives.extend(objective.objectives_tree)
+    return get_adjacent_objects(sort_by_code(all_objectives),
+                                current_objective)
+
+
+def nat_strategy(request, pk=None):
     objectives = (
         models.NationalObjective.objects
-        .filter(parent=None).order_by('id').all()
+        .filter(parent=None).order_by('id')
     )
     if not objectives.exists():
         return render(request, 'objectives/empty_nat_strategy.html')
-    code = code or objectives[0].code
-    current_objective = models.NationalObjective.objects.get(code=code)
+
+    pk = pk or objectives.first().pk
+    current_objective = models.NationalObjective.objects.get(pk=pk)
     current_objective_cls = current_objective.__class__.__name__
 
     obj_actions = []
-    current_objective.objectives_tree = current_objective.get_all_objectives()
     actions = [i for i in current_objective.actions.all()]
     if actions:
         obj_actions.append({current_objective: actions})
@@ -35,8 +44,13 @@ def nat_strategy(request, code=None):
         if actions:
             obj_actions.append({subobj: actions})
 
+    previous_objective, next_objective = get_adjacent_objectives(
+        objectives, current_objective)
+
     return render(request, 'objectives/nat_strategy.html',
                   {'objectives': objectives,
+                   'previous_objective': previous_objective,
+                   'next_objective': next_objective,
                    'current_objective': current_objective,
                    'current_objective_cls': current_objective_cls,
                    'actions_by_objectives': obj_actions})
@@ -44,8 +58,9 @@ def nat_strategy(request, code=None):
 
 def nat_strategy_download(request):
     eu_strategy = settings.EU_STRATEGY
-    headers = ['Title', 'Subtitle', 'Objective', 'Aichi Goal', 'Most Relevant Aichi Targets',
-               'Other Relevant Aichi Targets', 'Objective description']
+    headers = ['Title', 'Subtitle', 'Objective', 'Aichi Goal',
+               'Most Relevant Aichi Targets', 'Other Relevant Aichi Targets',
+               'Objective description']
     if eu_strategy:
         headers.extend(['EU Targets', 'EU Actions'])
     data = tablib.Dataset(headers=headers)
@@ -86,9 +101,16 @@ def nat_strategy_download(request):
 
 
 def implementation(request, code=None):
+    lang = request.LANGUAGE_CODE
+    data = {'body_%s' % lang: ''}
+    is_empty_page = models.NbsapPage.objects.filter(handle='implementation') \
+        .exclude(**data).exists()
+
     objectives = models.NationalObjective.objects.all()
     if len(objectives) == 0:
-        return render(request, 'objectives/empty_nat_strategy.html')
+        return render(request, 'objectives/empty_nat_strategy.html', {
+            'is_empty_page': is_empty_page,
+        })
 
     if code is None:
         code = objectives[0].code
@@ -96,17 +118,11 @@ def implementation(request, code=None):
     current_objective = get_object_or_404(models.NationalObjective, code=code)
     objectives = models.NationalObjective.objects.filter(parent=None).all()
 
-    current_objective.objectives_tree = current_objective.get_all_objectives()
-
     current_objective.actions_tree = list(current_objective.actions.all())
-    for objective in current_objective.get_all_objectives():
+    for objective in current_objective.objectives_tree:
         for action in objective.actions.all():
             current_objective.actions_tree.append(action)
 
-    lang = request.LANGUAGE_CODE
-    data = {'body_%s' % lang: ''}
-    is_empty_page = models.NbsapPage.objects.filter(handle='implementation') \
-        .exclude(**data).exists()
     return render(request, 'nat_strategy/implementation.html', {
         'current_objective': current_objective,
         'objectives': objectives,
