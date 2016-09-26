@@ -10,13 +10,6 @@ from nbsap.forms import (
 )
 
 
-def nat_indicators(request):
-    indicators = models.NationalIndicator.objects.filter(parents=None).all()
-    return render(request, 'nat_strategy/nat_indicators.html', {
-        'indicators': indicators,
-    })
-
-
 def nat_indicator_detail(request, pk=None):
     if pk:
         current_indicator = get_object_or_404(models.NationalIndicator, pk=pk)

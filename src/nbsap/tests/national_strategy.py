@@ -4,9 +4,10 @@ from django.core.urlresolvers import reverse
 from unittest import skip
 
 from .base import BaseWebTest
-from .factories import StaffUserFactory
-from .factories import NationalStrategyFactory, NationalObjectiveFactory
-from .factories import AichiGoalFactory, AichiTargetFactory
+from .factories import (
+    StaffUserFactory, NationalStrategyFactory, NationalObjectiveFactory,
+    AichiGoalFactory, AichiTargetFactory
+)
 
 
 class NationalStrategyTest(BaseWebTest):
@@ -16,7 +17,6 @@ class NationalStrategyTest(BaseWebTest):
 
     def test_list_national_strategies(self):
         nat_strategy = NationalStrategyFactory()
-        targets = [t.id for t in nat_strategy.relevant_targets.all()]
         resp = self.app.get(reverse('list_national_strategy'), user='staff')
         self.assertEqual(200, resp.status_code)
 
@@ -37,8 +37,8 @@ class NationalStrategyTest(BaseWebTest):
             'aichi_goal': aichi_goal.pk,
             'aichi_targets': [aichi_target.pk],
         }
-        resp = self.app.post(reverse('edit_national_strategy'), data,
-                             user='staff')
+        self.app.post(reverse('edit_national_strategy'), data,
+                      user='staff')
         obj = self.assertObjectInDatabase(
             'NationalStrategy',
             {
@@ -74,7 +74,7 @@ class NationalStrategyTest(BaseWebTest):
         nat_strategy = NationalStrategyFactory()
         url = reverse('delete_national_strategy',
                       kwargs={'strategy': nat_strategy.pk})
-        resp = self.app.get(url, user='staff').follow()
+        self.app.get(url, user='staff').follow()
         with self.assertRaises(AssertionError):
             self.assertObjectInDatabase(
                 'NationalStrategy',
@@ -86,14 +86,13 @@ class NationalStrategyTest(BaseWebTest):
     def test_edit_national_strategy(self):
         nat_strategy = NationalStrategyFactory()
         nat_objective_for_edit = NationalObjectiveFactory()
-        targets = [t.id for t in nat_strategy.relevant_targets.all()]
-        aichi_goal = AichiGoalFactory(targets=targets)
         goals = ', '.join(g.code for g in nat_strategy.goals_list)
 
         data = {
             'nat_objective': nat_objective_for_edit.pk,
             'aichi_goal': goals,
-            'aichi_targets': [t.id for t in nat_strategy.relevant_targets.all()],
+            'aichi_targets': [t.id
+                              for t in nat_strategy.relevant_targets.all()],
         }
         url = reverse('edit_national_strategy', kwargs={'pk': nat_strategy.pk})
         resp = self.app.get(url, user='staff')

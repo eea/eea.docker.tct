@@ -1,9 +1,10 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.utils.translation import ugettext_lazy as _
 from django.contrib import messages
-from django.conf import settings
-from nbsap.models import NbsapPage, NationalStrategy
+from django.shortcuts import render, get_object_or_404
+from django.utils.translation import ugettext_lazy as _
+
 from nbsap.forms import NbsapPageForm
+from nbsap.models import NbsapPage, NationalStrategy
+
 from auth import auth_required
 
 

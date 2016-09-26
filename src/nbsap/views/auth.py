@@ -1,11 +1,11 @@
-from django.contrib.auth import logout
-from django.shortcuts import redirect
 from django.contrib import messages
-from django.contrib.auth.views import login
-from django.http import HttpResponse
-from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import login
+from django.shortcuts import redirect
+from django.http import HttpResponse
+from django.utils.translation import ugettext_lazy as _
 
 from functools import wraps
 

@@ -2,8 +2,7 @@
 from django.core.urlresolvers import reverse
 
 from .base import BaseWebTest
-from .factories import NationalObjectiveFactory
-from .factories import StaffUserFactory
+from .factories import NationalObjectiveFactory, StaffUserFactory
 
 
 class NationalSubObjectiveTest(BaseWebTest):
@@ -29,7 +28,8 @@ class NationalSubObjectiveTest(BaseWebTest):
             {
                 'pk': 2,
                 'title_default': nat_subobj.title_default,
-                'description_default__contains': nat_subobj.description_default,
+                'description_default__contains':
+                nat_subobj.description_default,
                 'parent': nat_obj,
             }
         )
@@ -83,7 +83,8 @@ class NationalSubObjectiveTest(BaseWebTest):
     def test_delete_subobjective(self):
         nat_obj = NationalObjectiveFactory()
         nat_subobj = NationalObjectiveFactory(parent=nat_obj)
-        url = reverse('delete_national_objective', kwargs={'pk': nat_subobj.pk})
+        url = reverse('delete_national_objective',
+                      kwargs={'pk': nat_subobj.pk})
         self.app.post(url, user='staff').follow()
         with self.assertRaises(AssertionError):
             self.assertObjectInDatabase(

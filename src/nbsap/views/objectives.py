@@ -1,10 +1,11 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.utils.translation import ugettext_lazy as _
-from django.contrib import messages
-from django.http import HttpResponse
-from django.conf import settings
 import json
 import tablib
+
+from django.conf import settings
+from django.contrib import messages
+from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404, redirect
+from django.utils.translation import ugettext_lazy as _
 
 from nbsap import models
 from nbsap.forms import NationalObjectiveForm, NationalObjectiveEditForm
@@ -103,8 +104,9 @@ def nat_strategy_download(request):
 def implementation(request, code=None):
     lang = request.LANGUAGE_CODE
     data = {'body_%s' % lang: ''}
-    is_empty_page = not (models.NbsapPage.objects.filter(handle='implementation') \
-        .exclude(**data).exists())
+    is_empty_page = not (models.NbsapPage.objects
+                         .filter(handle='implementation')
+                         .exclude(**data).exists())
 
     objectives = models.NationalObjective.objects.all()
     if len(objectives) == 0:

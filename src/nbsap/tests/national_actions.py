@@ -3,9 +3,10 @@
 from django.core.urlresolvers import reverse
 
 from .base import BaseWebTest
-from .factories import NationalObjectiveFactory, NationalActionFactory
-from .factories import RegionFactory
-from .factories import StaffUserFactory
+from .factories import (
+    NationalObjectiveFactory, NationalActionFactory, RegionFactory,
+    StaffUserFactory
+)
 
 
 class NationalActionsTest(BaseWebTest):
@@ -232,7 +233,7 @@ class NationalActionsTest(BaseWebTest):
     def test_add_national_subaction(self):
         nat_act = NationalActionFactory()
         nat_obj = NationalObjectiveFactory(actions=(nat_act,))
-        nat_subact = NationalActionFactory.build()
+        NationalActionFactory.build()
 
         url = reverse('edit_national_action',
                       kwargs={'objective': nat_obj.pk,

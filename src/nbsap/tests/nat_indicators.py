@@ -1,26 +1,18 @@
 # -*- coding: utf-8 -*-
 
 from django.core.urlresolvers import reverse
+from unittest import skip
 
 from .base import BaseWebTest
-from .factories import StaffUserFactory
-from .factories import NationalIndicatorFactory, NationalObjectiveFactory
-from unittest import skip
+from .factories import (
+    StaffUserFactory, NationalIndicatorFactory, NationalObjectiveFactory
+)
 
 
 class NationalIndicatorsTest(BaseWebTest):
 
     def setUp(self):
         StaffUserFactory()
-
-    @skip
-    def test_list_national_indicators(self):
-        nat_indicator = NationalIndicatorFactory()
-        resp = self.app.get(reverse('list_nat_indicators'), user='staff')
-        self.assertEqual(200, resp.status_code)
-        trs = resp.pyquery('.table tr')
-        self.assertEqual(2, len(trs))
-        self.assertIn(nat_indicator.title, trs[1].text_content())
 
     def test_view_simple_national_indicator(self):
         nat_indicator = NationalIndicatorFactory()

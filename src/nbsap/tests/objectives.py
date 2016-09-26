@@ -4,8 +4,9 @@ from django.core.urlresolvers import reverse
 from unittest import skip
 
 from .base import BaseWebTest
-from .factories import NationalObjectiveFactory, NationalActionFactory
-from .factories import StaffUserFactory
+from .factories import (
+    NationalObjectiveFactory, NationalActionFactory, StaffUserFactory
+)
 
 
 class NationalObjectiveTest(BaseWebTest):

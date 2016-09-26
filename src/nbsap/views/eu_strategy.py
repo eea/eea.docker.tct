@@ -1,14 +1,15 @@
 import json
-from django.shortcuts import render, get_object_or_404, redirect
+
 from django.contrib import messages
 from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import ugettext_lazy as _
-from nbsap.utils import sort_by_code, get_adjacent_objects
 
 from nbsap import models
-from auth import auth_required
-
 from nbsap.forms import EuTargetForm, EuTargetEditForm, RegionForm
+from nbsap.utils import sort_by_code, get_adjacent_objects
+
+from auth import auth_required
 
 
 def get_most_relevant_aichi_targets(target):

@@ -1,6 +1,3 @@
-import json
-
-from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
@@ -54,9 +51,10 @@ def list_national_strategy(request):
 @auth_required
 def list_eu_aichi_strategy(request):
     strategies = models.EuAichiStrategy.objects.all()
-    return render(request, 'manager/eu_strategy/mapping/list_eu_aichi_strategy.html', {
-        'strategies': strategies
-    })
+    return render(request,
+                  'manager/eu_strategy/mapping/list_eu_aichi_strategy.html', {
+                      'strategies': strategies
+                  })
 
 
 @auth_required
