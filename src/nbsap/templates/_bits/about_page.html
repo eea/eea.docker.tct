@@ -1,0 +1,56 @@
+{% load i18n %}
+{% load utils %}
+
+
+<div class="overlay overlay-contentscale">
+  <button type="button" class="overlay-close"></button>
+  <nav>
+    <ul>
+      <li>
+        <a href="{% url 'aichi_home' %}">Aichi</a>
+        <p class='menu-desc'>The Aichi Biodiversity Targets are a set of 20, time-bound, measureable targets agreed by the Parties to the Convention on Biological Diversity in Nagoya, Japan, in October 2010, that are now being translated into revised national strategies and action plans by the 193 Parties to the Convention.
+        </p>
+      </li>
+
+      {% if EU_STRATEGY %}
+        <li>
+          <a href="{% url 'eu_targets' %}">
+            {% trans "EU Strategy" %}
+          </a>
+          <p class='menu-desc'>This section contians the Strategy towards implementing the Aichi Biodiversity Targets</p>
+        </li>
+      {% endif %}
+
+      {% if NAT_STRATEGY %}
+        <li>
+          <a href="{% url 'nat_strategy' %}">
+            {% trans "National Strategy" %}
+          </a>
+          <p class='menu-desc'>This section contians the Strategy towards implementing the Aichi Biodiversity Targets</p>
+        </li>
+      {% else %}
+        <li>
+          <a href="{% url 'eu_indicators' %}">
+            {% trans "EU Indicators" %}
+          </a>
+          <p class='menu-desc'>This section contians the Strategy towards implementing the Aichi Biodiversity Targets</p>
+        </li>
+      {% endif %}
+
+      {% if NAT_STRATEGY %}
+        <li>
+          <a class="{% active request '^/national-strategy/indicators' %}" href="{% url 'nat_indicators' %}">
+            {% trans "National Indicators" %}
+          </a>
+          <p class='menu-desc'>Here you can see more details on the National Indicators</p>
+        </li>
+        <li>
+          <a class="{% active request '^/national-strategy/implementation' %}" href="{% url 'implementation_page' %}">
+            {% trans "Implementation" %}
+          </a>
+          <p class='menu-desc'>Here you can see more details on the implementation National Indicators</p>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+</div>
