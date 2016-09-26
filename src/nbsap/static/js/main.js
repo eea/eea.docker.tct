@@ -39,7 +39,7 @@ function Modal(container) {
         $('.modal-container').show(function() {
             toggleClassMenu();
         });
-
+        $('body').addClass('modal-open');
     };
 
     self.close = function() {

@@ -148,7 +148,7 @@ $(document).ready(function() {
         $('.sidebar-submenu').addClass('visible');
     });
 
-    $('body').click(function(e) {
+    $(document).click(function(e) {
         if (!($(e.target).hasClass('search') || $(e.target).hasClass('nat-objective'))) {
             $('.sidebar-submenu').removeClass('visible');
         }

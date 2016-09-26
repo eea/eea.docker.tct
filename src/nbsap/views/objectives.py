@@ -103,8 +103,8 @@ def nat_strategy_download(request):
 def implementation(request, code=None):
     lang = request.LANGUAGE_CODE
     data = {'body_%s' % lang: ''}
-    is_empty_page = models.NbsapPage.objects.filter(handle='implementation') \
-        .exclude(**data).exists()
+    is_empty_page = not (models.NbsapPage.objects.filter(handle='implementation') \
+        .exclude(**data).exists())
 
     objectives = models.NationalObjective.objects.all()
     if len(objectives) == 0:

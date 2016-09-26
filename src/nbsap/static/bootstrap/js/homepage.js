@@ -1,11 +1,15 @@
 $(document).ready(function() {
 
     setTimeout(function() {
+        $('.homepage-info').fadeTo("fast", 1);
+    setTimeout(function() {
         $('.homepage-info').removeClass('info-translated')
         setTimeout(function() {
             $('#trigger-overlay').fadeTo("fast", 1);
         }, 1500);
     }, 500);
+  }, 500);
+
 
     $(".overlay").prependTo("body");
     $trigger = $('#trigger-overlay');
