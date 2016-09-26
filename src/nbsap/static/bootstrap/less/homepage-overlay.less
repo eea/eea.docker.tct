@@ -20,6 +20,7 @@
     z-index: 9999;
     left: 0;
     background: fade(@brand-blue, 90%);
+    overflow: auto;
 }
 
 
@@ -53,10 +54,7 @@
 .overlay nav {
     text-align: center;
     position: relative;
-    top: 35%;
-    height: 60%;
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
+    overflow: auto;
 }
 
 .overlay ul {
@@ -124,9 +122,6 @@
 }
 
 @media screen and (max-height: 30.5em) {
-    .overlay nav {
-        height: 70%;
-    }
     .overlay ul li {
         min-height: 34px;
     }
@@ -140,10 +135,21 @@
     padding: .5rem;
 }
 
-#trigger-overlay {
+.content .trigger-overlay {
     opacity: 0;
     color: @brand-blue!important;
     background: transparent!important;
+}
+
+.nav-menu .trigger-overlay {
+    color: white;
+    text-transform: uppercase;
+}
+
+
+.trigger-overlay-wrapper {
+    float: right!important;
+    margin-right: 1rem;
 }
 
 .button-container {

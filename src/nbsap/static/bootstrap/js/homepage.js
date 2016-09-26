@@ -5,19 +5,20 @@ $(document).ready(function() {
     setTimeout(function() {
         $('.homepage-info').removeClass('info-translated')
         setTimeout(function() {
-            $('#trigger-overlay').fadeTo("fast", 1);
+            $('.content .trigger-overlay').fadeTo("fast", 1);
         }, 1500);
     }, 500);
   }, 500);
 
 
     $(".overlay").prependTo("body");
-    $trigger = $('#trigger-overlay');
+    $trigger = $('.trigger-overlay');
     $overlay = $('.overlay');
     $close = $('.overlay-close');
     $container = $('.container');
 
     $trigger.on('click', function() {
+        $('body').addClass('no-ovf');
         $overlay.addClass('display').delay(1).queue(function() {
             $overlay.addClass('open');
             $container.addClass('overlay-open');
@@ -27,6 +28,7 @@ $(document).ready(function() {
     })
 
     $close.on('click', function() {
+        $('body').removeClass('no-ovf');
         $overlay.removeClass('open').delay(500).queue(function() {
             $overlay.removeClass('display');
             $overlay.dequeue();
