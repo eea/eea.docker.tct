@@ -45,7 +45,7 @@
       {% endif %}
 
       <li class="homepage-dashboard">
-        Edit the content and mappings using the <a href="{% url 'admin_home'%}">Dashboard</a> (requires login) section.
+        Edit the content and mappings using the <a href="{% if EU_STRATEGY %}{% url 'list_eu_targets' %}{% else %}{% url 'list_national_objectives' %}{% endif %}">Dashboard</a> (requires login) section.
       </li>
     </ul>
     <div class="button-container">
