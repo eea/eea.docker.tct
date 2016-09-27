@@ -1,14 +1,18 @@
 {% load utils %}
 {% load i18n %}
 
+
 <ul class="nav-menu">
   <li>
-    <a class="{% active request '^/aichi' %}" href="{% url 'aichi_home' %}" class="uppercase">{% trans "Aichi" %}</a>
+    <a class="{% active 'aichi_home' 'list_goals' 'list_targets' 'aichi_target_detail' 'goals' %}"
+       href="{% url 'aichi_home' %}">
+      {% trans "Aichi" %}
+    </a>
   </li>
 
   {% if EU_STRATEGY %}
     <li>
-      <a class="{% active request '^/european-strategy/$' %}{% active request '^/european-strategy/targets' %}" href="{% url 'eu_targets' %}">
+      <a class="{% active 'eu_targets' 'eu_target_detail' %}" href="{% url 'eu_targets' %}">
         {% trans "EU Strategy" %}
       </a>
     </li>
@@ -16,13 +20,13 @@
 
   {% if NAT_STRATEGY %}
     <li>
-      <a class="{% active request '^/national-strategy/$' %}{% active request '^/national-strategy/objectives' %}" href="{% url 'nat_strategy' %}">
+      <a class="{% active 'nat_strategy' %}" href="{% url 'nat_strategy' %}">
         {% trans "National Strategy" %}
       </a>
     </li>
   {% else %}
     <li>
-      <a class="{% active request '^/european-strategy/indicators' %}" href="{% url 'eu_indicators' %}">
+      <a class="{% active 'eu_indicators' 'eu_indicator_details' %}" href="{% url 'eu_indicators' %}">
         {% trans "EU Indicators" %}
       </a>
     </li>
@@ -30,12 +34,12 @@
 
   {% if NAT_STRATEGY %}
     <li>
-      <a class="{% active request '^/national-strategy/indicators' %}" href="{% url 'nat_indicators' %}">
+      <a class="{% active 'nat_indicators' 'nat_indicator_detail' %}" href="{% url 'nat_indicators' %}">
         {% trans "National Indicators" %}
       </a>
     </li>
     <li>
-      <a class="{% active request '^/national-strategy/implementation' %}" href="{% url 'implementation_page' %}">
+      <a class="{% active 'implementation' 'implementation_page' %}" href="{% url 'implementation_page' %}">
         {% trans "Implementation" %}
       </a>
     </li>

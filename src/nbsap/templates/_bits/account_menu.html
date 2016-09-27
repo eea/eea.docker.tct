@@ -65,7 +65,7 @@
       {% if user.is_authenticated %}
           <a class="account-menu-trigger">  <i class="fa fa-caret-right" id="user-close"></i> {{ user }} </a>
       {% else %}
-          <a class="{% active request '^/accounts/login/$' %}" href="{% url 'login' %}">{% trans "Login" %}</a>
+          <a class="{% active 'login' %}" href="{% url 'login' %}">{% trans "Login" %}</a>
       {% endif %}
     </span>
   </div>

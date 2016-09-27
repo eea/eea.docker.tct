@@ -151,22 +151,6 @@ urlpatterns = [
         views.list_eu_targets,
         name='list_eu_targets'),
 
-    url(r'^dashboard/eu-strategy/regions/$',
-        views.list_regions,
-        name='list_regions'),
-
-    url(r'^dashboard/eu-strategy/regions/add/$',
-        views.edit_region,
-        name='add_region'),
-
-    url(r'^dashboard/eu-strategy/regions/(?P<pk>[\w\-]+)/edit/$',
-        views.edit_region,
-        name='edit_region'),
-
-    url(r'^dashboard/eu-strategy/regions/(?P<pk>\d+)/delete/$',
-        views.delete_region,
-        name='delete_region'),
-
     url(r'^dashboard/eu-strategy/targets/(?P<parent>[\w\-]+)/add$',
         views.edit_eu_strategy_target,
         name='edit_eu_target_with_parent'),
@@ -206,6 +190,22 @@ urlpatterns = [
     url(r'^dashboard/eu-strategy/targets/(?P<pk>[\w\-]+)/delete/$',
         views.delete_eu_strategy_target,
         name='delete_eu_strategy_target'),
+
+    url(r'^dashboard/eu-strategy/regions/$',
+        views.list_regions,
+        name='list_regions'),
+
+    url(r'^dashboard/eu-strategy/regions/add/$',
+        views.edit_region,
+        name='add_region'),
+
+    url(r'^dashboard/eu-strategy/regions/(?P<pk>[\w\-]+)/edit/$',
+        views.edit_region,
+        name='edit_region'),
+
+    url(r'^dashboard/eu-strategy/regions/(?P<pk>\d+)/delete/$',
+        views.delete_region,
+        name='delete_region'),
 
     url(r'^dashboard/eu-strategy/indicators/$',
         views.list_eu_indicators,

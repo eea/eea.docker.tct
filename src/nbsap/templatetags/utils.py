@@ -1,4 +1,3 @@
-import re
 from django import template
 from nbsap.utils import sort_by_code, sort_by_type, sort_by_type_and_code
 from nbsap.utils import sort_by_code_tuplets
@@ -11,9 +10,9 @@ register.filter('sort_by_type', sort_by_type)
 register.filter('sort_by_type_and_code', sort_by_type_and_code)
 
 
-@register.simple_tag
-def active(request, pattern):
-    if re.search(pattern, request.path):
+@register.simple_tag(takes_context=True)
+def active(context, *args):
+    if context['request'].resolver_match.url_name in args:
         return 'active'
     return ''
 
