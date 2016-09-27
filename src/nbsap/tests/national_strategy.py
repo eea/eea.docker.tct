@@ -22,7 +22,7 @@ class NationalStrategyTest(BaseWebTest):
 
         tds = resp.pyquery('.table').find('tbody').find('td')
         objective = nat_strategy.objective
-        goals = ', '.join(g.code for g in nat_strategy.goals_list)
+        goals = ', '.join(g.code for g in nat_strategy.get_goals)
         self.assertIn(objective.code, tds[0].text_content())
         self.assertIn(goals, tds[1].text_content())
 
@@ -86,7 +86,7 @@ class NationalStrategyTest(BaseWebTest):
     def test_edit_national_strategy(self):
         nat_strategy = NationalStrategyFactory()
         nat_objective_for_edit = NationalObjectiveFactory()
-        goals = ', '.join(g.code for g in nat_strategy.goals_list)
+        goals = ', '.join(g.code for g in nat_strategy.get_goals)
 
         data = {
             'nat_objective': nat_objective_for_edit.pk,

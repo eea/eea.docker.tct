@@ -38,7 +38,7 @@
                   {{ strategy.objective.code }}</a>
               </td>
               <td>
-                {% for goal in strategy.goals_list %}
+                {% for goal in strategy.get_goals %}
                   <a href="{% url 'list_targets' code=goal.code %}">
                     {{ goal.code|title }}</a>
                 {% endfor %}

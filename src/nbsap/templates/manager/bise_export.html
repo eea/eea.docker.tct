@@ -28,7 +28,7 @@
       </td>
       <td style="width: 115.55pt;" width="154">
 
-        {% for target in strategy.targets_list %}
+        {% for target in strategy.get_targets %}
         <img alt="Aichi target {{ target.code }}" height="46"
              src="abt-{{ target.code }}-48.png"
              title="Aichi target {{ target.code }}"

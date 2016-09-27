@@ -47,7 +47,7 @@ class Command(BaseCommand):
                         target.code for target in strategy.eu_targets.all()))
                 row.append(
                     ','.join(
-                        atarget.code for atarget in strategy.targets_list
+                        atarget.code for atarget in strategy.get_targets
                     )
                 )
                 row.append(

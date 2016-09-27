@@ -20,15 +20,15 @@
     <input class="search" placeholder="quick search" />
     <ul class="sidebar-menu list">
       {% for objective in objectives|sort_by_code %}
-        <li class="{% if objective.pk == current_objective.pk %}active {% endif %}{% if current_objective in objective.objectives_tree %}active {% endif %}">
+        <li class="{% if objective.pk == current_objective.pk %}active {% endif %}{% if current_objective in objective.get_objectives %}active {% endif %}">
           <a class="nat-objective"
              href="{% url 'nat_strategy' pk=objective.pk %}"
              title="{{ objective.code }}">
             {% trans "Objective" %} {{ objective.code }}
           </a>
-          {% if objective.objectives_tree|length %}
+          {% if objective.get_objectives|length %}
             <ul class="sidebar-submenu list">
-              {% for obj in objective.objectives_tree|sort_by_code %}
+              {% for obj in objective.get_objectives|sort_by_code %}
                 <li class="{% if obj.pk == current_objective.pk %}active{% endif %} indent">
                   <a class="nat-objective"
                      href="{% url 'nat_strategy' pk=obj.pk %}">

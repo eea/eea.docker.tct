@@ -18,7 +18,7 @@ def get_adjacent_objectives(objectives, current_objective):
     all_objectives = []
     for objective in objectives:
         all_objectives.append(objective)
-        all_objectives.extend(objective.objectives_tree)
+        all_objectives.extend(objective.get_objectives)
     return get_adjacent_objects(sort_by_code(all_objectives),
                                 current_objective)
 
@@ -40,7 +40,7 @@ def nat_strategy(request, pk=None):
     if actions:
         obj_actions.append({current_objective: actions})
 
-    for subobj in current_objective.objectives_tree:
+    for subobj in current_objective.get_objectives:
         actions = [i for i in subobj.actions.all()]
         if actions:
             obj_actions.append({subobj: actions})
@@ -79,7 +79,7 @@ def nat_strategy_download(request):
                 objective.title if title is None else title,
                 objective.title if title is not None else '',
                 objective.code,
-                ', '.join(g.code for g in strategy.goals_list) or '',
+                ', '.join(g.code for g in strategy.get_goals) or '',
                 ', '.join(t.code for t in strategy.relevant_targets.all()) or '',
                 ', '.join(t.code for t in strategy.other_targets.all()),
                 remove_tags(getattr(strategy.objective,
@@ -121,7 +121,7 @@ def implementation(request, code=None):
     objectives = models.NationalObjective.objects.filter(parent=None).all()
 
     current_objective.actions_tree = list(current_objective.actions.all())
-    for objective in current_objective.objectives_tree:
+    for objective in current_objective.get_objectives:
         for action in objective.actions.all():
             current_objective.actions_tree.append(action)
 

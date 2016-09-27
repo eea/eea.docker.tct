@@ -123,10 +123,10 @@
 
       {% if NAT_STRATEGY %}
         <div class="well">
-          {% if action.get_all_objectives|length %}
+          {% if action.get_objectives|length %}
             <div class="well-title">{% trans "Mapping with National Strategy" %}</div>
             <ul>
-              {% for objective in action.get_all_objectives|sort_by_code %}
+              {% for objective in action.get_objectives|sort_by_code %}
                 <li>
                   <a href="{% url 'nat_strategy' pk=objective.pk %}">
                     {% trans "Objective" %} {{ objective.code }}

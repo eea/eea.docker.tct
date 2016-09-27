@@ -239,27 +239,27 @@ class EuAction(models.Model):
         else:
             return self.parent.target.all()[0]
 
-    def get_all_objectives(self):
+    def get_objectives(self):
         objectives = []
         if hasattr(self, 'national_strategy'):
             for strategy in self.national_strategy.all():
                 objectives.append(strategy.objective)
         return objectives
 
-    def subactions(self):
-        return self.get_all_actions()[1:]
+    def get_subactions(self):
+        return self.get_actions()[1:]
 
-    def get_all_actions(self):
+    def get_actions(self):
         # we should use https://github.com/django-mptt/django-mptt/
         r = []
         r.append(self)
         for ob in EuAction.objects.filter(parent=self).order_by('code'):
-            r.extend(ob.get_all_actions())
+            r.extend(ob.get_actions())
         return r
 
     def get_next_code(self):
         if self.parent:
-            codes = [a.code for a in self.parent.subactions()]
+            codes = [a.code for a in self.parent.get_subactions()]
             if codes:
                 max_letter = RE_ACTION_CODE.match(max(codes)).groups()[1]
                 letter = chr(ord(max_letter) + 1)
@@ -463,17 +463,17 @@ class NationalObjective(models.Model):
             NationalObjective._pre_save_objective_code_on_create(instance)
 
     @property
-    def objectives_tree(self):
+    def get_objectives(self):
         # we should use https://github.com/django-mptt/django-mptt/
         r = []
         for ob in NationalObjective.objects.filter(parent=self):
             r.append(ob)
-            r.extend(ob.objectives_tree)
+            r.extend(ob.get_objectives)
         return r
 
-    def get_all_actions(self):
+    def get_actions(self):
         actions_list = list(self.actions.all())
-        for objective in self.objectives_tree:
+        for objective in self.get_objectives:
             actions_list.extend(list(objective.actions.all()))
         return actions_list
 
@@ -626,10 +626,10 @@ class EuIndicatorToAichiStrategy(models.Model):
         blank=True,
     )
 
-    def get_targets(self):
+    def get_targets_code_stringify(self):
         return ', '.join([obj.code for obj in self.aichi_targets.all()])
 
-    get_targets.short_description = 'AICHI targets'
+    get_targets_code_stringify.short_description = 'AICHI targets'
 
     class Meta:
         verbose_name_plural = 'Mappings: EU indicators to Aichi'
@@ -653,21 +653,21 @@ class EuAichiStrategy(models.Model):
         related_name="eu_other_aichi_strategy",
         blank=True)
 
-    def get_targets(self):
+    def get_targets_code_stringify(self):
         return ', '.join([obj.code for obj in self.aichi_targets.all()])
 
     @property
-    def goals_list(self):
-        goals = [t.get_parent_goal() for t in self.targets_list]
+    def get_goals(self):
+        goals = [t.get_parent_goal() for t in self.get_targets]
         return set(g for g in goals if g)
 
     @property
-    def targets_list(self):
+    def get_targets(self):
         ts = list(self.aichi_targets.all())
         ts.sort(key=lambda t: t.code)
         return ts
 
-    get_targets.short_description = 'AICHI targets'
+    get_targets_code_stringify.short_description = 'AICHI targets'
 
     class Meta:
         verbose_name_plural = ' Mappings: EU targets to Aichi'
@@ -692,28 +692,28 @@ class NationalStrategy(models.Model):
         return 'Strategy' + unicode(self.objective)
 
     @property
-    def goals_list(self):
-        goals = [t.get_parent_goal() for t in self.targets_list]
+    def get_goals(self):
+        goals = [t.get_parent_goal() for t in self.get_targets]
         return set(g for g in goals if g)
 
     @property
-    def targets_list(self):
+    def get_targets(self):
         ts = list(self.relevant_targets.all())
         ts.sort(key=lambda t: t.code)
         return ts
 
     @property
-    def eu_targets_list(self):
+    def get_eu_targets(self):
         return list(self.eu_targets.all())
 
     @property
     def targets_t(self):
-        return ''.join(['t{0}'.format(t.code) for t in self.eu_targets_list])
+        return ''.join(['t{0}'.format(t.code) for t in self.get_eu_targets])
 
     @property
     def targets_z(self):
         r = ''
-        targets = self.eu_targets_list
+        targets = self.get_eu_targets
         for target in EuTarget.objects.all():
             if target in targets:
                 r += '1'
