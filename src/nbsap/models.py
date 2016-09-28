@@ -137,13 +137,13 @@ class AichiTarget(models.Model):
 
     def get_most_relevant_objectives(self):
         objectives = []
-        for strategy in self.relevant_targets_national_strategy.all():
+        for strategy in self.relevant_targets_national_strategy.select_related('objective').all():
             objectives.append(strategy.objective)
         return objectives
 
     def get_other_relevant_objectives(self):
         objectives = []
-        for strategy in self.other_targets_national_strategy.all():
+        for strategy in self.other_targets_national_strategy.select_related('objective').all():
             objectives.append(strategy.objective)
         return objectives
 
@@ -151,7 +151,7 @@ class AichiTarget(models.Model):
         return u'Target %s' % self.code
 
     def get_parent_goal(self):
-        return self.goals.all()[0]
+        return self.goals.first()
 
     class Meta:
         ordering = ['code']
