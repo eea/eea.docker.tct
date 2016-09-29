@@ -40,34 +40,9 @@ class Migration(migrations.Migration):
             preserve_default=False,
         ),
         migrations.AlterField(
-            model_name='aichigoal',
-            name='description_de-de',
-            field=tinymce.models.HTMLField(blank=True, null=True, verbose_name=b'Description'),
-        ),
-        migrations.AlterField(
-            model_name='aichigoal',
-            name='description_en',
-            field=tinymce.models.HTMLField(verbose_name=b'Description'),
-        ),
-        migrations.AlterField(
-            model_name='aichigoal',
-            name='description_fr',
-            field=tinymce.models.HTMLField(blank=True, null=True, verbose_name=b'Description'),
-        ),
-        migrations.AlterField(
-            model_name='aichigoal',
-            name='description_nl',
-            field=tinymce.models.HTMLField(blank=True, null=True, verbose_name=b'Description'),
-        ),
-        migrations.AlterField(
             model_name='euaction',
             name='parent',
             field=mptt.fields.TreeForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='children', to='nbsap.EuAction'),
-        ),
-        migrations.AlterField(
-            model_name='euaction',
-            name='title_de-de',
-            field=models.TextField(blank=True, null=True, verbose_name=b'Title'),
         ),
         migrations.AlterField(
             model_name='euaction',
@@ -75,34 +50,9 @@ class Migration(migrations.Migration):
             field=models.TextField(verbose_name=b'Title'),
         ),
         migrations.AlterField(
-            model_name='euaction',
-            name='title_fr',
-            field=models.TextField(blank=True, null=True, verbose_name=b'Title'),
-        ),
-        migrations.AlterField(
-            model_name='euaction',
-            name='title_nl',
-            field=models.TextField(blank=True, null=True, verbose_name=b'Title'),
-        ),
-        migrations.AlterField(
-            model_name='nationalaction',
-            name='description_de-de',
-            field=tinymce.models.HTMLField(blank=True, null=True, verbose_name=b'Description'),
-        ),
-        migrations.AlterField(
             model_name='nationalaction',
             name='description_en',
             field=tinymce.models.HTMLField(verbose_name=b'Description'),
-        ),
-        migrations.AlterField(
-            model_name='nationalaction',
-            name='description_fr',
-            field=tinymce.models.HTMLField(blank=True, null=True, verbose_name=b'Description'),
-        ),
-        migrations.AlterField(
-            model_name='nationalaction',
-            name='description_nl',
-            field=tinymce.models.HTMLField(blank=True, null=True, verbose_name=b'Description'),
         ),
         migrations.AlterField(
             model_name='nationalaction',
@@ -116,49 +66,14 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterField(
             model_name='nationalindicator',
-            name='description_de-de',
-            field=tinymce.models.HTMLField(blank=True, null=True, verbose_name=b'Description'),
-        ),
-        migrations.AlterField(
-            model_name='nationalindicator',
             name='description_en',
             field=tinymce.models.HTMLField(blank=True, default=1, verbose_name=b'Description'),
             preserve_default=False,
         ),
         migrations.AlterField(
-            model_name='nationalindicator',
-            name='description_fr',
-            field=tinymce.models.HTMLField(blank=True, null=True, verbose_name=b'Description'),
-        ),
-        migrations.AlterField(
-            model_name='nationalindicator',
-            name='description_nl',
-            field=tinymce.models.HTMLField(blank=True, null=True, verbose_name=b'Description'),
-        ),
-        migrations.AlterField(
-            model_name='nationalobjective',
-            name='description_de-de',
-            field=tinymce.models.HTMLField(blank=True, null=True, verbose_name=b'Description'),
-        ),
-        migrations.AlterField(
             model_name='nationalobjective',
             name='description_en',
             field=tinymce.models.HTMLField(verbose_name=b'Description'),
-        ),
-        migrations.AlterField(
-            model_name='nationalobjective',
-            name='description_fr',
-            field=tinymce.models.HTMLField(blank=True, null=True, verbose_name=b'Description'),
-        ),
-        migrations.AlterField(
-            model_name='nationalobjective',
-            name='description_nl',
-            field=tinymce.models.HTMLField(blank=True, null=True, verbose_name=b'Description'),
-        ),
-        migrations.AlterField(
-            model_name='nbsappage',
-            name='body_de-de',
-            field=models.TextField(blank=True, null=True, verbose_name=b'Body'),
         ),
         migrations.AlterField(
             model_name='nbsappage',
@@ -168,32 +83,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterField(
             model_name='nbsappage',
-            name='body_fr',
-            field=models.TextField(blank=True, null=True, verbose_name=b'Body'),
-        ),
-        migrations.AlterField(
-            model_name='nbsappage',
-            name='body_nl',
-            field=models.TextField(blank=True, null=True, verbose_name=b'Body'),
-        ),
-        migrations.AlterField(
-            model_name='nbsappage',
-            name='title_de-de',
-            field=models.CharField(blank=True, max_length=128, null=True, verbose_name=b'Title'),
-        ),
-        migrations.AlterField(
-            model_name='nbsappage',
             name='title_en',
             field=models.CharField(max_length=128, verbose_name=b'Title'),
-        ),
-        migrations.AlterField(
-            model_name='nbsappage',
-            name='title_fr',
-            field=models.CharField(blank=True, max_length=128, null=True, verbose_name=b'Title'),
-        ),
-        migrations.AlterField(
-            model_name='nbsappage',
-            name='title_nl',
-            field=models.CharField(blank=True, max_length=128, null=True, verbose_name=b'Title'),
         ),
     ]
