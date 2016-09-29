@@ -35,8 +35,11 @@ def get_other_relevant_aichi_targets(target):
 def eu_target_detail(request, pk):
     current_target = get_object_or_404(models.EuTarget, pk=pk)
     current_target.actions_tree = []
+
     for action in current_target.actions.order_by('code'):
-        current_target.actions_tree.extend(action.get_actions())
+        current_target.actions_tree.extend(
+            action.get_descendants(include_self=True))
+
     current_target.most_relevant_aichi_targets = \
         get_most_relevant_aichi_targets(current_target)
     current_target.other_relevant_aichi_targets = \
@@ -55,7 +58,8 @@ def eu_target_detail(request, pk):
 
 
 def eu_targets(request):
-    targets = sort_by_code(models.EuTarget.objects.all())
+    targets = sort_by_code(models.EuTarget
+                           .objects.select_related('parent').all())
     return render(request, 'eu_strategy/eu_targets.html',
                   {'targets': targets})
 

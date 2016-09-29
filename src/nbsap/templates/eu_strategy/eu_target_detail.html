@@ -47,25 +47,29 @@
   {% endif %}
 
   <div class="well">
-    <div class="well-title">{% trans "Most relevant EU indicators" %}
-      {% if current_target.indicators.all|length %}
-        <div class="info-count">
-          {{ current_target.indicators.all|length }}
-        </div>
-      {% endif %}
-    </div>
-    {% include '_bits/eu_indicators.html' with indicators=current_target.indicators %}
+    {% with current_target.indicators.all as relevant_indicators %}
+      <div class="well-title">{% trans "Most relevant EU indicators" %}
+        {% if relevant_indicators|length %}
+          <div class="info-count">
+            {{ relevant_indicators|length }}
+          </div>
+        {% endif %}
+      </div>
+      {% include '_bits/eu_indicators.html' with indicators=relevant_indicators %}
+    {% endwith %}
   </div>
 
   <div class="well">
-    <div class="well-title other">{% trans "Other EU indicators" %}
-      {% if current_target.other_indicators.all|length %}
-        <div class="info-count">
-          {{ current_target.other_indicators.all|length }}
-        </div>
-      {% endif %}
-    </div>
-    {% include '_bits/eu_indicators.html' with indicators=current_target.other_indicators %}
+    {% with current_target.other_indicators.all as other_indicators %}
+      <div class="well-title other">{% trans "Other EU indicators" %}
+        {% if other_indicators|length %}
+          <div class="info-count">
+            {{ other_indicators|length }}
+          </div>
+        {% endif %}
+      </div>
+      {% include '_bits/eu_indicators.html' with indicators=other_indicators %}
+    {% endwith %}
   </div>
 
   <div class="well">
@@ -122,23 +126,25 @@
       <p>{{ action.description|safe }}</p>
 
       {% if NAT_STRATEGY %}
-        <div class="well">
-          {% if action.get_objectives|length %}
-            <div class="well-title">{% trans "Mapping with National Strategy" %}</div>
-            <ul>
-              {% for objective in action.get_objectives|sort_by_code %}
-                <li>
-                  <a href="{% url 'nat_strategy' pk=objective.pk %}">
-                    {% trans "Objective" %} {{ objective.code }}
-                  </a>
-                  <p>{{ objective.title }}</p>
-                </li>
-              {% endfor %}
-            </ul>
-          {% else %}
-            <p class="no-corresponding">{% trans "No corresponding strategy target" %}</p>
-          {% endif %}
-        </div>
+        {% with action.get_objectives as objectives %}
+          <div class="well">
+            {% if objectives|length %}
+              <div class="well-title">{% trans "Mapping with National Strategy" %}</div>
+              <ul>
+                {% for objective in objectives|sort_by_code %}
+                  <li>
+                    <a href="{% url 'nat_strategy' pk=objective.pk %}">
+                      {% trans "Objective" %} {{ objective.code }}
+                    </a>
+                    <p>{{ objective.title }}</p>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% else %}
+              <p class="no-corresponding">{% trans "No corresponding strategy target" %}</p>
+            {% endif %}
+          </div>
+        {% endwith %}
       {% endif %}
     </div>
   {% endfor %}
