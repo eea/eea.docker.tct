@@ -124,6 +124,7 @@ INSTALLED_APPS = (
     'gunicorn',
     'rosetta',
     'graypy',
+    'mptt',
 )
 
 # A sample logging configuration. The only tangible logging

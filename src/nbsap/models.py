@@ -4,6 +4,7 @@ from django.db.models.signals import pre_save
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from transmeta import TransMeta
+from mptt.models import MPTTModelBase, TreeForeignKey
 
 import tinymce.models
 
@@ -36,6 +37,10 @@ class Translatable(TransMeta):
                     property(getter_for_default_language(field),
                              setter_for_default_language(field)))
         return new_class
+
+
+class TranslatableMpttMeta(MPTTModelBase, Translatable):
+    pass
 
 
 class Link(models.Model):
@@ -208,15 +213,15 @@ class NationalAction(models.Model):
 
 
 class EuAction(models.Model):
-    __metaclass__ = Translatable
+    __metaclass__ = TranslatableMpttMeta
 
     code = models.CharField(max_length=16)
     title = models.TextField(verbose_name="Title")
     description = models.TextField(verbose_name="Description")
-    parent = models.ForeignKey('self',
-                               null=True,
-                               blank=True,
-                               related_name='children')
+    parent = TreeForeignKey('self',
+                            null=True,
+                            blank=True,
+                            related_name='children')
     region = models.ForeignKey(Region, null=True, blank=True)
 
     if settings.EU_STRATEGY and settings.NAT_STRATEGY:
@@ -225,6 +230,9 @@ class EuAction(models.Model):
             blank=True,
             verbose_name="National strategy",
             related_name="eu_actions")
+
+    class MPTTMeta:
+        order_insertion_by = ['code']
 
     class Meta:
         verbose_name_plural = 'EU actions'
@@ -242,7 +250,8 @@ class EuAction(models.Model):
     def get_objectives(self):
         objectives = []
         if hasattr(self, 'national_strategy'):
-            for strategy in self.national_strategy.all():
+            for strategy in self.national_strategy \
+                    .select_related('objective').all():
                 objectives.append(strategy.objective)
         return objectives
 
@@ -395,16 +404,16 @@ class NationalIndicator(BaseIndicator):
 
 
 class NationalObjective(models.Model):
-    __metaclass__ = Translatable
+    __metaclass__ = TranslatableMpttMeta
 
     code = models.CharField(max_length=16, unique=True)
     title = models.TextField(max_length=512,
                              verbose_name="Title")
     description = tinymce.models.HTMLField(verbose_name="Description")
-    parent = models.ForeignKey('self',
-                               null=True,
-                               blank=True,
-                               related_name='children')
+    parent = TreeForeignKey('self',
+                            null=True,
+                            blank=True,
+                            related_name='children')
     actions = models.ManyToManyField(NationalAction,
                                      blank=True,
                                      related_name="objective")
@@ -416,6 +425,9 @@ class NationalObjective(models.Model):
     other_nat_indicators = models.ManyToManyField(
         NationalIndicator, related_name="other_nat_objectives", blank=True
     )
+
+    class MPTTMeta:
+        order_insertion_by = ['code']
 
     class Meta:
         translate = ('title', 'description',)
