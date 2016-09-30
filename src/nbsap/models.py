@@ -250,21 +250,16 @@ class EuAction(models.Model):
     def get_objectives(self):
         objectives = []
         if hasattr(self, 'national_strategy'):
-            for strategy in self.national_strategy \
-                    .select_related('objective').all():
-                objectives.append(strategy.objective)
+            objectives = list(NationalObjective.objects.filter(
+                objective_national_strategy__eu_actions__pk=self.pk)
+                .distinct())
         return objectives
 
     def get_subactions(self):
-        return self.get_actions()[1:]
+        return self.get_descendants()
 
     def get_actions(self):
-        # we should use https://github.com/django-mptt/django-mptt/
-        r = []
-        r.append(self)
-        for ob in EuAction.objects.filter(parent=self).order_by('code'):
-            r.extend(ob.get_actions())
-        return r
+        return self.get_descendants(include_self=True)
 
     def get_next_code(self):
         if self.parent:
@@ -476,16 +471,11 @@ class NationalObjective(models.Model):
 
     @property
     def get_objectives(self):
-        # we should use https://github.com/django-mptt/django-mptt/
-        r = []
-        for ob in NationalObjective.objects.filter(parent=self):
-            r.append(ob)
-            r.extend(ob.get_objectives)
-        return r
+        return self.get_descendants()
 
     def get_actions(self):
-        actions_list = list(self.actions.all())
-        for objective in self.get_objectives:
+        actions_list = []
+        for objective in self.get_descendants(include_self=True):
             actions_list.extend(list(objective.actions.all()))
         return actions_list
 

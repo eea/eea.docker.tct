@@ -45,7 +45,8 @@ def eu_target_detail(request, pk):
     current_target.other_relevant_aichi_targets = \
         get_other_relevant_aichi_targets(current_target)
 
-    targets = sort_by_code(models.EuTarget.objects.all())
+    targets = sort_by_code(
+        models.EuTarget.objects.all().prefetch_related('parent'))
     previous_target, next_target = get_adjacent_objects(
         targets, current_target)
 

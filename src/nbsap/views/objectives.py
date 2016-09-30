@@ -9,7 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from nbsap import models
 from nbsap.forms import NationalObjectiveForm, NationalObjectiveEditForm
-from nbsap.utils import remove_tags, sort_by_code, get_adjacent_objects
+from nbsap.utils import remove_tags, get_adjacent_objects
 
 from auth import auth_required
 
@@ -17,9 +17,8 @@ from auth import auth_required
 def get_adjacent_objectives(objectives, current_objective):
     all_objectives = []
     for objective in objectives:
-        all_objectives.append(objective)
-        all_objectives.extend(objective.get_objectives)
-    return get_adjacent_objects(sort_by_code(all_objectives),
+        all_objectives.extend(objective.get_descendants(include_self=True))
+    return get_adjacent_objects(all_objectives,
                                 current_objective)
 
 
@@ -33,17 +32,6 @@ def nat_strategy(request, pk=None):
 
     pk = pk or objectives.first().pk
     current_objective = models.NationalObjective.objects.get(pk=pk)
-    current_objective_cls = current_objective.__class__.__name__
-
-    obj_actions = []
-    actions = [i for i in current_objective.actions.all()]
-    if actions:
-        obj_actions.append({current_objective: actions})
-
-    for subobj in current_objective.get_objectives:
-        actions = [i for i in subobj.actions.all()]
-        if actions:
-            obj_actions.append({subobj: actions})
 
     previous_objective, next_objective = get_adjacent_objectives(
         objectives, current_objective)
@@ -52,9 +40,8 @@ def nat_strategy(request, pk=None):
                   {'objectives': objectives,
                    'previous_objective': previous_objective,
                    'next_objective': next_objective,
-                   'current_objective': current_objective,
-                   'current_objective_cls': current_objective_cls,
-                   'actions_by_objectives': obj_actions})
+                   'current_objective': current_objective
+                   })
 
 
 def nat_strategy_download(request):
@@ -118,12 +105,11 @@ def implementation(request, code=None):
         code = objectives[0].code
 
     current_objective = get_object_or_404(models.NationalObjective, code=code)
-    objectives = models.NationalObjective.objects.filter(parent=None).all()
+    objectives = models.NationalObjective.objects.filter(parent=None)
 
-    current_objective.actions_tree = list(current_objective.actions.all())
-    for objective in current_objective.get_objectives:
-        for action in objective.actions.all():
-            current_objective.actions_tree.append(action)
+    current_objective.actions_tree = []
+    for objective in current_objective.get_descendants(include_self=True):
+        current_objective.actions_tree.extend(objective.actions.all())
 
     return render(request, 'nat_strategy/implementation.html', {
         'current_objective': current_objective,
