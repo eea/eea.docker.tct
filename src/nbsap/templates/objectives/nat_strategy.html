@@ -120,6 +120,15 @@
       {% endifnotequal %}
     {% endwith %}
   </div>
+
+  <div id="cbd-api">
+    <a class="btn btn-success small"
+       href="{% url 'send_to_cbd' current_objective_cls current_objective.pk %}">
+      {% trans "Send to CBD" %}
+    </a>
+    <div class="messages alert" style="position: relative;">
+    </div>
+  </div>
 {% endblock %}
 
 

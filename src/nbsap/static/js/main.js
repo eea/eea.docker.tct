@@ -9,6 +9,16 @@ $(function() {
         indicator_modal.html('');
     });
 
+    $('#cbd-api a').click(function(evt) {
+      evt.preventDefault();
+      var url = $(this).attr('href');
+      var messages_div = $(this).parent().find('div');
+      $.post(url, function(resp) {
+        messages_div.show();
+        messages_div.addClass('alert-' + resp.status);
+        messages_div.append('<p>' + resp.message + '</p>');
+      });
+    });
 });
 
 function toggleClassMenu() {
