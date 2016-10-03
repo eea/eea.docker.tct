@@ -1,6 +1,7 @@
 {% extends 'manager/base.html' %}
 
 {% load i18n %}
+{% load utils %}
 
 {% block title %}
   NBSAP - {% trans "Action" %} {{ activity.code }}: {{ activity.title }}
@@ -78,6 +79,37 @@
                       </form>
                     </td>
                   </tr>
+                  {% for subaction in action.get_descendants|sort_by_code %}
+                    <tr>
+                      <td class="table-indent">{{ subaction.code }}</td>
+                      <td class="table-indent">
+                        <a href="{% url 'view_eu_strategy_activity' target=target.pk pk=subaction.pk %}" title="{% trans 'action' %} {{ subaction.code }}">
+                          {{ subaction.title }}
+                        </a>
+                      </td>
+                      <td>
+                        {% if items.grouper %}
+                          {{ items.grouper }}
+                        {% else %}
+                          {% trans "All regions" %}
+                        {% endif %}
+                      </td>
+                      <td>
+                        <form class="delete" method="POST" action="{% url 'delete_eu_strategy_activity' target=target.pk pk=subaction.pk %}">
+                          <span class="btn btn-xs btn-warning ajaxget" data-url="{% url 'edit_eu_strategy_activity' target=target.pk pk=subaction.pk %}">
+                            <i class="glyphicon glyphicon-edit"></i>
+                          </span>
+                          <button type="submit" class="btn btn-xs btn-danger edit" data-message="{% trans 'Are you sure you want to delete this action?' %}">
+                            <i class="glyphicon glyphicon-trash"></i>
+                          </button>
+                          {% if not activity.parent %}
+                            <span class="btn btn-xs btn-default ajaxget" data-url="{% url 'edit_eu_strategy_activity' target=target.pk parent=subaction.pk %}">
+                              {% trans "Add sub-action" %}</span>
+                          {% endif %}
+                        </form>
+                      </td>
+                    </tr>
+                  {% endfor %}
                 {% endfor %}
               {% endfor %}
             </tbody>

@@ -12,7 +12,7 @@ from auth import auth_required
 def view_eu_strategy_activity(request, target, pk):
     target = get_object_or_404(models.EuTarget, pk=target)
     activity = get_object_or_404(models.EuAction, pk=pk)
-    actions = activity.get_subactions()
+    actions = activity.get_children()
     return render(request, 'manager/activities/view_eu_strategy_target.html', {
         'target': target,
         'activity': activity,
