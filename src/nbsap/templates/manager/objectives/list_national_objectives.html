@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load assets %}
+{% load utils %}
 
 {% block title %}
   NBSAP -  {% trans "National Strategy: List National Objectives" %}
@@ -22,7 +23,7 @@
         <th></th>
       </thead>
       <tbody>
-        {% for objective in objectives %}
+        {% for objective in objectives|sort_by_code %}
           <tr>
             <td>{{ objective.code }}</td>
             <td>
@@ -56,7 +57,7 @@
               </form>
             </td>
           </tr>
-          {% for subobjective in objective.children.all %}
+          {% for subobjective in objective.get_descendants|sort_by_code %}
             <tr>
               <td class="table-indent">{{ subobjective.code }}</td>
               <td class="table-indent">
@@ -84,6 +85,11 @@
                   <button type="submit" class="btn btn-xs btn-danger edit" data-message="{% trans 'Are you sure you want to delete this subobjective?' %}">
                     <i class="glyphicon glyphicon-trash"></i>
                   </button>
+                  {% if not target.parent %}
+                    <span class="btn btn-xs btn-default ajaxget" data-url="{% url 'edit_national_objective' parent=subobjective.pk %}">
+                      {% trans "Add sub objective" %}
+                    </a>
+                  {% endif %}
                 </form>
               </td>
             </tr>
@@ -102,7 +108,7 @@
   <script src="/static/js/jquery.ajaxGetForm.js"></script>
   <script>
     $(function () {
-      $('#objectives-table').dataTable({"paging": false, "dom": '<"filter-wrapper"f>t'});
+      $('#objectives-table').dataTable({"paging": false, "dom": '<"filter-wrapper"f>t', "aaSorting": []});
       var url = $('#objectives-table').data('url');
       $('.filter-wrapper').prepend('<div class="action-bar"><span class="btn btn-success add ajaxget" data-url="' + url + '?category={{ category }}">{% trans "Add objective" %}</span></div>');
       $.ajaxGet({targetForm: ".form", button: ".ajaxget"});

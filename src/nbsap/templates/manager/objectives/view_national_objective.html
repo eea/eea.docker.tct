@@ -32,7 +32,7 @@
             <th></th>
           </thead>
           <tbody>
-            {% for subobj in objective.children.all %}
+            {% for subobj in objective.get_descendants|sort_by_code %}
               <tr>
                 <td>{{ subobj.code }}</td>
                 <td>
@@ -47,6 +47,11 @@
                     <button type="submit" class="btn btn-xs btn-danger edit" data-message="{% trans 'Are you sure you want to delete this subobjective?' %}">
                       <i class="glyphicon glyphicon-trash"></i>
                     </button>
+                    {% if not target.parent %}
+                      <span class="btn btn-xs btn-default ajaxget" data-url="{% url 'edit_national_objective' parent=subobj.pk %}">
+                        {% trans "Add sub objective" %}
+                      </a>
+                    {% endif %}
                   </form>
                 </td>
               </tr>
@@ -74,7 +79,7 @@
           </thead>
           <tbody>
             {% for items in action_list %}
-              {% for action in items.list %}
+              {% for action in items.list|sort_by_code %}
                 <tr>
                   <td>{{ action.code }}</td>
                   <td>
@@ -103,7 +108,7 @@
                     </form>
                   </td>
                 </tr>
-                {% for subaction in action.children.all %}
+                {% for subaction in action.get_descendants|sort_by_code %}
                   <tr>
                     <td class="table-indent">{{ subaction.code }}</td>
                     <td class="table-indent">
@@ -125,6 +130,10 @@
                         <button type="submit" class="btn btn-xs btn-danger edit" data-message="{% trans 'Are you sure you want to delete this action?' %}">
                           <i class="glyphicon glyphicon-trash"></i>
                         </button>
+                        {% if not activity.parent %}
+                          <span class="btn btn-xs btn-default ajaxget" data-url="{% url 'edit_national_action' objective=objective.pk parent=subaction.pk %}">
+                            {% trans "Add sub-action" %}</span>
+                        {% endif %}
                       </form>
                     </td>
                   </tr>
