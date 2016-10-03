@@ -6,20 +6,18 @@ from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import ugettext_lazy as _
+from django.db.models import Q
 
 from nbsap import models
 from nbsap.forms import NationalObjectiveForm, NationalObjectiveEditForm
-from nbsap.utils import remove_tags, get_adjacent_objects
+from nbsap.utils import remove_tags, get_adjacent_objects, sort_by_code
 
 from auth import auth_required
 
 
-def get_adjacent_objectives(objectives, current_objective):
-    all_objectives = []
-    for objective in objectives:
-        all_objectives.extend(objective.get_descendants(include_self=True))
-    return get_adjacent_objects(all_objectives,
-                                current_objective)
+def get_adjacent_objectives(current_objective):
+    return get_adjacent_objects(sort_by_code(
+        models.NationalObjective.objects.all()), current_objective)
 
 
 def nat_strategy(request, pk=None):
@@ -34,7 +32,7 @@ def nat_strategy(request, pk=None):
     current_objective = models.NationalObjective.objects.get(pk=pk)
 
     previous_objective, next_objective = get_adjacent_objectives(
-        objectives, current_objective)
+        current_objective)
 
     return render(request, 'objectives/nat_strategy.html',
                   {'objectives': objectives,
@@ -95,21 +93,25 @@ def implementation(request, code=None):
                          .filter(handle='implementation')
                          .exclude(**data).exists())
 
-    objectives = models.NationalObjective.objects.all()
-    if len(objectives) == 0:
+    objectives = models.NationalObjective.objects
+    if not objectives:
         return render(request, 'objectives/empty_nat_strategy.html', {
             'is_empty_page': is_empty_page,
         })
 
     if code is None:
-        code = objectives[0].code
+        code = objectives.first().code
 
     current_objective = get_object_or_404(models.NationalObjective, code=code)
-    objectives = models.NationalObjective.objects.filter(parent=None)
+    objectives = objectives.filter(parent=None)
 
-    current_objective.actions_tree = []
-    for objective in current_objective.get_descendants(include_self=True):
-        current_objective.actions_tree.extend(objective.actions.all())
+    for objective in objectives:
+        query = Q()
+        for sobj in objective.get_descendants(include_self=True):
+            query |= Q(objective__pk=sobj.pk)
+        objective.actions_tree = models.NationalAction.objects.filter(query)
+        if objective.code == current_objective.code:
+            current_objective = objective
 
     return render(request, 'nat_strategy/implementation.html', {
         'current_objective': current_objective,

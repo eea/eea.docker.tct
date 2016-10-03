@@ -19,7 +19,7 @@ def get_most_relevant_aichi_targets(target):
     for strategy in target.eu_aichi_strategy.all():
         for aichi_target in strategy.aichi_targets.all():
             most_relevant_aichi_targets.append(aichi_target)
-    return sort_by_code(most_relevant_aichi_targets)
+    return sort_by_code(list(set(most_relevant_aichi_targets)))
 
 
 def get_other_relevant_aichi_targets(target):
