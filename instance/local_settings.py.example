@@ -125,3 +125,4 @@ LANGUAGES = (
 # CBD_AUTH_URL = CBD_API_BASE_URL + 'authentication/token'
 # CBD_SAVE_URL = CBD_API_BASE_URL + 'documents/{uid}/versions/draft?schema={schema}'
 # CBD_WORKFLOW_URL = CBD_API_BASE_URL + 'workflows'
+# CBD_VERIFY_SSL = True

@@ -23,7 +23,8 @@ def get_token():
         'password': settings.CBD_API_PASSWORD,
     }
     payload = json.dumps(credentials)
-    resp = requests.post(settings.CBD_AUTH_URL, payload, headers=headers)
+    resp = requests.post(settings.CBD_AUTH_URL, payload, headers=headers,
+                         verify=settings.CBD_VERIFY_SSL)
     if resp.status_code not in (200, 201):
         return
     return resp.json().get('authenticationToken')
@@ -68,7 +69,8 @@ def create_workflow(new_document, headers):
         }
     }
     payload = json.dumps(workflow_data)
-    resp = requests.post(settings.CBD_WORKFLOW_URL, payload, headers=headers)
+    resp = requests.post(settings.CBD_WORKFLOW_URL, payload, headers=headers,
+                         verify=settings.CBD_VERIFY_SSL)
     return resp.status_code == 200
 
 
@@ -97,7 +99,8 @@ def send_to_cbd(request, model_name, pk):
 
         payload = json.dumps(cbd_obj)
 
-        resp = requests.put(url, payload, headers=headers)
+        resp = requests.put(url, payload, headers=headers,
+                            verify=settings.CBD_VERIFY_SSL)
         if resp.status_code == 200:
             status = 'success'
             message = 'Successfully sent object to CBD.'
