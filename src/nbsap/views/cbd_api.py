@@ -69,7 +69,7 @@ def create_workflow(new_document, headers):
     }
     payload = json.dumps(workflow_data)
     resp = requests.post(settings.CBD_WORKFLOW_URL, payload, headers=headers)
-    return resp.status_code
+    return resp.status_code == 200
 
 
 def send_to_cbd(request, model_name, pk):
@@ -85,7 +85,7 @@ def send_to_cbd(request, model_name, pk):
             'Accept': 'application/json',
             'Content-Type': 'application/json;Charset=utf-8',
             'Realm': settings.CBD_API_REALM,
-            'Authorization': 'Token {}'.format(token),
+            'Authorization': 'Ticket {}'.format(token),
         }
 
         model_cls = getattr(models, model_name)
@@ -103,7 +103,8 @@ def send_to_cbd(request, model_name, pk):
             message = 'Successfully sent object to CBD.'
 
             new_document = resp.json()
-            create_workflow(new_document, headers)
+            if not create_workflow(new_document, headers):
+                message += ' Failed to create workflow.'
         else:
             error_message = resp.json().get('Message')
             status = 'error'
