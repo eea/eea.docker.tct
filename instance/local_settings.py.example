@@ -119,5 +119,9 @@ LANGUAGES = (
 # Set the following variables to enable communication with the CBD API
 # CBD_API_USERNAME = ''
 # CBD_API_PASSWORD = ''
-# CBD_API_REALM = ''
-# CBD_API_LANGUAGES = ['en', 'fr', 'es', 'ru']
+# CBD_API_REALM = 'CHM-DEV'
+# CBD_API_LANGUAGES = ['ar', 'zh', 'en', 'fr', 'ru', 'es']
+# CBD_API_BASE_URL = 'https://api.cbddev.xyz/api/v2013/'
+# CBD_AUTH_URL = CBD_API_BASE_URL + 'authentication/token'
+# CBD_SAVE_URL = CBD_API_BASE_URL + 'documents/{uid}/versions/draft?schema={schema}'
+# CBD_WORKFLOW_URL = CBD_API_BASE_URL + 'workflows'

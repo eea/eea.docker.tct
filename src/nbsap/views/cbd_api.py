@@ -8,11 +8,6 @@ from django.utils import translation
 from nbsap import models
 
 
-API_BASE_URL = 'https://api.cbd.int/api/v2013/'
-AUTH_URL = API_BASE_URL + 'authentication/token'
-SAVE_URL = API_BASE_URL + 'documents/{uid}/versions/draft?schema={schema}'
-WORKFLOW_URL = API_BASE_URL + 'workflows'
-
 MODEL_TO_SCHEMA = {
     models.NationalObjective: 'nationalTarget',
 }
@@ -28,7 +23,7 @@ def get_token():
         'password': settings.CBD_API_PASSWORD,
     }
     payload = json.dumps(credentials)
-    resp = requests.post(AUTH_URL, payload, headers=headers)
+    resp = requests.post(settings.CBD_AUTH_URL, payload, headers=headers)
     if resp.status_code not in (200, 201):
         return
     return resp.json().get('authenticationToken')
@@ -73,7 +68,7 @@ def create_workflow(new_document, headers):
         }
     }
     payload = json.dumps(workflow_data)
-    resp = requests.post(WORKFLOW_URL, payload, headers=headers)
+    resp = requests.post(settings.CBD_WORKFLOW_URL, payload, headers=headers)
     return resp.status_code
 
 
@@ -98,7 +93,7 @@ def send_to_cbd(request, model_name, pk):
 
         cbd_obj = get_cbd_obj(model_cls, pk, schema)
         uid = cbd_obj['header']['identifier']
-        url = SAVE_URL.format(uid=uid, schema=schema)
+        url = settings.CBD_SAVE_URL.format(uid=uid, schema=schema)
 
         payload = json.dumps(cbd_obj)
 
