@@ -71,7 +71,7 @@ def create_workflow(new_document, headers):
     payload = json.dumps(workflow_data)
     resp = requests.post(settings.CBD_WORKFLOW_URL, payload, headers=headers,
                          verify=settings.CBD_VERIFY_SSL)
-    return resp.status_code == 200
+    return resp.status_code in (200, 201)
 
 
 def send_to_cbd(request, model_name, pk):
@@ -101,7 +101,7 @@ def send_to_cbd(request, model_name, pk):
 
         resp = requests.put(url, payload, headers=headers,
                             verify=settings.CBD_VERIFY_SSL)
-        if resp.status_code == 200:
+        if resp.status_code in (200, 201):
             status = 'success'
             message = 'Successfully sent object to CBD.'
 
