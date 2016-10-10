@@ -6,11 +6,17 @@ from django.http import JsonResponse
 from django.utils import translation
 
 from nbsap import models
+from nbsap.definitions import JURISDICTIONS
 
 
+JURISDICTION = JURISDICTIONS[1]
 MODEL_TO_SCHEMA = {
     models.NationalObjective: 'nationalTarget',
 }
+
+
+def format_aichi_target(id):
+    return 'AICHI-TARGET-{0:02d}'.format(id)
 
 
 def get_token():
@@ -32,9 +38,15 @@ def get_token():
 
 def get_cbd_obj(model_cls, pk, schema):
     obj = model_cls.objects.get(pk=pk)
+    if not obj.aichi_targets:
+        return
     cbd_id = 'TCT-{}-{}'.format(model_cls.__name__, pk)
     languages = [code for code, name in settings.LANGUAGES
                  if code in settings.CBD_API_LANGUAGES]
+    aichi_targets = [{'identifier': format_aichi_target(t.id)}
+                     for t in obj.aichi_targets]
+    other_aichi_targets = [{'identifier': format_aichi_target(t.id)}
+                           for t in obj.other_aichi_targets]
 
     cbd_obj = {
         'header': {
@@ -45,6 +57,9 @@ def get_cbd_obj(model_cls, pk, schema):
         'government': {'identifier': 'eu'},
         'title': {},
         'description': {},
+        'jurisdiction': {'identifier': JURISDICTION['identifier']},
+        'aichiTargets': aichi_targets,
+        'otherAichiTargets': other_aichi_targets,
     }
 
     for lang in languages:
@@ -94,6 +109,12 @@ def send_to_cbd(request, model_name, pk):
         schema = MODEL_TO_SCHEMA.get(model_cls)
 
         cbd_obj = get_cbd_obj(model_cls, pk, schema)
+        if not cbd_obj:
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Object is missing mandatory fields: AICHI Targets',
+            })
+
         uid = cbd_obj['header']['identifier']
         url = settings.CBD_SAVE_URL.format(uid=uid, schema=schema)
 

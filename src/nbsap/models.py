@@ -526,6 +526,20 @@ class NationalObjective(models.Model):
             for obj in self.parent.get_parents():
                 yield obj
 
+    @property
+    def aichi_targets(self):
+        targets = set()
+        for strategy in self.objective_national_strategy.all():
+            targets.update(strategy.relevant_targets.all())
+        return list(targets)
+
+    @property
+    def other_aichi_targets(self):
+        targets = set()
+        for strategy in self.objective_national_strategy.all():
+            targets.update(strategy.other_targets.all())
+        return list(targets)
+
 
 class EuTarget(models.Model):
     __metaclass__ = Translatable
