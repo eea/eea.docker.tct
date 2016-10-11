@@ -60,6 +60,7 @@ def get_cbd_obj(model_cls, pk, schema):
         'jurisdiction': {'identifier': JURISDICTION['identifier']},
         'aichiTargets': aichi_targets,
         'otherAichiTargets': other_aichi_targets,
+        'isAichiTarget': False,
     }
 
     for lang in languages:
