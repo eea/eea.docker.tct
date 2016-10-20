@@ -1,0 +1,179 @@
+[
+{
+  "model": "nbsap.cmstarget",
+  "pk": 1,
+  "fields": {
+    "code": "1",
+    "description_en": "People are aware of the multiple values of migratory species and their habitats and migration systems, and the steps they can take to conserve them and ensure the sustainability of any use.",
+    "aichi_targets": [
+      1
+    ]
+  }
+},
+{
+  "model": "nbsap.cmstarget",
+  "pk": 2,
+  "fields": {
+    "code": "2",
+    "description_en": "Multiple values of migratory species and their habitats have been integrated into international, national and local development and poverty reduction strategies and planning processes, including on livelihoods, and are being incorporated into national accounting, as appropriate, and reporting systems.",
+    "aichi_targets": [
+      2
+    ]
+  }
+},
+{
+  "model": "nbsap.cmstarget",
+  "pk": 3,
+  "fields": {
+    "code": "3",
+    "description_en": "National, regional and international governance arrangements and agreements affecting migratory species and their migration systems have improved significantly, making relevant policy, legislative and implementation processes more coherent, accountable, transparent, participatory, equitable and inclusive.",
+    "aichi_targets": []
+  }
+},
+{
+  "model": "nbsap.cmstarget",
+  "pk": 4,
+  "fields": {
+    "code": "4",
+    "description_en": "Incentives, including subsidies, harmful to migratory species, and/or their habitats are eliminated, phased out or reformed in order to minimize or avoid negative impacts, and positive incentives for the conservation of migratory species and their habitats are developed and applied, consistent with engagements under the CMS and other relevant international and regional obligations and commitments.",
+    "aichi_targets": [
+      3
+    ]
+  }
+},
+{
+  "model": "nbsap.cmstarget",
+  "pk": 5,
+  "fields": {
+    "code": "5",
+    "description_en": "Governments, key sectors and stakeholders at all levels have taken steps to achieve or have implemented plans for sustainable production and consumption, keeping the impacts of use of natural resources, including habitats, on migratory species well within safe ecological limits to promote the favourable conservation status of migratory species and maintain the quality, integrity, resilience, and ecological connectivity of their habitats and migration routes",
+    "aichi_targets": [
+      4,
+      7
+    ]
+  }
+},
+{
+  "model": "nbsap.cmstarget",
+  "pk": 6,
+  "fields": {
+    "code": "6",
+    "description_en": "Fisheries and hunting have no significant direct or indirect adverse impacts on migratory species, their habitats or their migration routes, and impacts of fisheries and hunting are within safe ecological limits.",
+    "aichi_targets": [
+      6
+    ]
+  }
+},
+{
+  "model": "nbsap.cmstarget",
+  "pk": 7,
+  "fields": {
+    "code": "7",
+    "description_en": "Multiple anthropogenic pressures have been reduced to levels that are not detrimental to the conservation of migratory species or to the functioning, integrity, ecological connectivity and resilience of their habitats.",
+    "aichi_targets": [
+      10,
+      8,
+      9
+    ]
+  }
+},
+{
+  "model": "nbsap.cmstarget",
+  "pk": 8,
+  "fields": {
+    "code": "8",
+    "description_en": "The conservation status of all migratory species, especially threatened species, has considerably improved throughout their range.",
+    "aichi_targets": [
+      12
+    ]
+  }
+},
+{
+  "model": "nbsap.cmstarget",
+  "pk": 9,
+  "fields": {
+    "code": "9",
+    "description_en": "International and regional action and cooperation between States for the conservation and effective management of migratory species fully reflects a migration systems approach, in which all States sharing responsibility for the species concerned engage in such actions in a concerted way.",
+    "aichi_targets": []
+  }
+},
+{
+  "model": "nbsap.cmstarget",
+  "pk": 10,
+  "fields": {
+    "code": "10",
+    "description_en": "All critical habitats and sites for migratory species are identified and included in area-based conservation measures so as to maintain their quality, integrity, resilience and functioning in accordance with the implementation of Aichi Target 11, supported where necessary by environmentally sensitive land-use planning and landscape management on a wider scale.",
+    "aichi_targets": [
+      11,
+      5
+    ]
+  }
+},
+{
+  "model": "nbsap.cmstarget",
+  "pk": 11,
+  "fields": {
+    "code": "11",
+    "description_en": "Migratory species and their habitats which provide important ecosystem services are maintained at or restored to favourable conservation status, taking into account the needs of women, indigenous and local communities7 , and the poor and vulnerable.",
+    "aichi_targets": [
+      14,
+      15
+    ]
+  }
+},
+{
+  "model": "nbsap.cmstarget",
+  "pk": 12,
+  "fields": {
+    "code": "12",
+    "description_en": "The genetic diversity of wild populations of migratory species is safeguarded, and strategies have been developed and implemented for minimizing genetic erosion",
+    "aichi_targets": [
+      13
+    ]
+  }
+},
+{
+  "model": "nbsap.cmstarget",
+  "pk": 13,
+  "fields": {
+    "code": "13",
+    "description_en": "Priorities for effective conservation and management of migratory species, their habitats and migration systems have been included in the development and implementation of national biodiversity strategies and action plans, with reference where relevant to CMS agreements and action plans and their implementation bodies.",
+    "aichi_targets": [
+      17
+    ]
+  }
+},
+{
+  "model": "nbsap.cmstarget",
+  "pk": 14,
+  "fields": {
+    "code": "14",
+    "description_en": "The traditional knowledge, innovations and practices of indigenous and local communities relevant for the conservation and sustainable use of migratory species, their habitats and migration systems, and their customary sustainable use of biological resources, are respected, subject to national legislation and relevant international obligations, with the full and effective participation of indigenous and local communities, thereby contributing to the favourable conservation status of migratory species and the ecological connectivity and resilience of their habitats",
+    "aichi_targets": [
+      18
+    ]
+  }
+},
+{
+  "model": "nbsap.cmstarget",
+  "pk": 15,
+  "fields": {
+    "code": "15",
+    "description_en": "The science base, information, training, awareness, understanding and technologies relating to migratory species, their habitats and migration systems, their value, functioning, status and trends, and the consequences of their loss, are improved, widely shared and transferred, and effectively applied.",
+    "aichi_targets": [
+      19
+    ]
+  }
+},
+{
+  "model": "nbsap.cmstarget",
+  "pk": 16,
+  "fields": {
+    "code": "16",
+    "description_en": "The mobilization of adequate resources from all sources to implement the Strategic Plan for Migratory Species effectively has increased substantially",
+    "aichi_targets": [
+      20
+    ]
+  }
+}
+]
