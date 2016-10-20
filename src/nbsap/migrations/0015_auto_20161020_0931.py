@@ -3,6 +3,8 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
+from django.conf import settings
+
 import tinymce.models
 
 
@@ -16,9 +18,9 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='CMSGoal',
             fields=[
-                ('code', models.CharField(max_length=1, primary_key=True, serialize=False)),
-                ('title_en', models.TextField(max_length=512, verbose_name=b'Title')),
-                ('description_en', tinymce.models.HTMLField(verbose_name=b'Description')),
+                ('code', models.CharField(max_length=1,
+                                          primary_key=True,
+                                          serialize=False)),
             ],
             options={
                 'ordering': ['code'],
@@ -27,10 +29,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='CMSTarget',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('code', models.CharField(max_length=16)),
-                ('description_en', models.TextField(verbose_name=b'Description')),
-                ('aichi_targets', models.ManyToManyField(blank=True, related_name='related_aichi_targets', to='nbsap.AichiTarget')),
+                ('aichi_targets', models.ManyToManyField(blank=True,
+                 related_name='related_aichi_targets',
+                 to='nbsap.AichiTarget')),
             ],
             options={
                 'ordering': ['code'],
@@ -40,14 +44,40 @@ class Migration(migrations.Migration):
             model_name='euaichistrategy',
             name='eu_target',
         ),
-        migrations.AlterField(
-            model_name='aichigoal',
-            name='description_en',
-            field=tinymce.models.HTMLField(verbose_name=b'Description'),
-        ),
         migrations.AddField(
             model_name='cmsgoal',
             name='targets',
-            field=models.ManyToManyField(related_name='cms_goals', to='nbsap.CMSTarget'),
-        ),
+            field=models.ManyToManyField(
+                related_name='cms_goals', to='nbsap.CMSTarget'),
+        )
     ]
+
+    for i, lang in enumerate(settings.LANGUAGES):
+        if i == 0:
+            kw = {'blank': False, 'null': False}
+        else:
+            kw = {'blank': True, 'null': True}
+
+        operations.append(
+            migrations.AddField(
+                model_name='cmsgoal',
+                name='title_%s' % lang[0],
+                field=models.TextField(
+                    max_length=512, verbose_name=b'Title', **kw),
+            )
+        )
+        operations.append(
+            migrations.AddField(
+                model_name='cmsgoal',
+                name='description_%s' % lang[0],
+                field=tinymce.models.HTMLField(
+                    verbose_name=b'Description', **kw),
+            )
+        )
+        operations.append(
+            migrations.AddField(
+                model_name='cmstarget',
+                name='description_%s' % lang[0],
+                field=models.TextField(verbose_name=b'Description'),
+            )
+        )
