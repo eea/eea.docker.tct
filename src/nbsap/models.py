@@ -712,7 +712,7 @@ class NationalStrategy(models.Model):
 
     @property
     def get_goals(self):
-        goals = [t.get_parent_goal() for t in self.relevant_targets]
+        goals = [t.get_parent_goal() for t in self.relevant_targets.all()]
         return set(g for g in goals if g)
 
     @property

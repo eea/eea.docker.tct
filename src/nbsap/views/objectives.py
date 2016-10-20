@@ -30,6 +30,7 @@ def nat_strategy(request, pk=None):
 
     pk = pk or objectives.first().pk
     current_objective = models.NationalObjective.objects.get(pk=pk)
+    current_objective_cls = current_objective.__class__.__name__
 
     previous_objective, next_objective = get_adjacent_objectives(
         current_objective)
@@ -38,7 +39,8 @@ def nat_strategy(request, pk=None):
                   {'objectives': objectives,
                    'previous_objective': previous_objective,
                    'next_objective': next_objective,
-                   'current_objective': current_objective
+                   'current_objective': current_objective,
+                   'current_objective_cls': current_objective_cls,
                    })
 
 
