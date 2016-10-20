@@ -61,14 +61,14 @@
     </div>
   {% endif %}
 
-  {% if NAT_STRATEGY and target.relevant_targets_national_strategy.all %}
+  {% if NAT_STRATEGY and target.relevant_targets_national_strategy.exists %}
     <div class="well">
       {% with target.get_most_relevant_objectives as most_relevant_objectives %}
         <div class="well-title">
           {% trans "Mapping with National Strategy" %}
-          {% if most_relevant_objectives|length %}
+          {% if most_relevant_objectives.exists %}
             <div class="info-count">
-              {{ most_relevant_objectives|length }}
+              {{ most_relevant_objectives.count }}
             </div>
           {% endif %}
           <a href="{% url 'nat_strategy_export_preview' target_id=target.pk %}"

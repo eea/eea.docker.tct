@@ -141,16 +141,17 @@ class AichiTarget(models.Model):
                                               blank=True)
 
     def get_most_relevant_objectives(self):
-        objectives = []
-        for strategy in self.relevant_targets_national_strategy.select_related('objective').all():
-            objectives.append(strategy.objective)
-        return objectives
+        return (
+            NationalObjective.objects
+            .filter(objective_national_strategy__relevant_targets=self)
+        )
 
+    # TODO Remove if not used
     def get_other_relevant_objectives(self):
-        objectives = []
-        for strategy in self.other_targets_national_strategy.select_related('objective').all():
-            objectives.append(strategy.objective)
-        return objectives
+        return (
+            NationalObjective.objects
+            .filter(objective_national_strategy__other_targets=self)
+        )
 
     def __unicode__(self):
         return u'Target %s' % self.code
@@ -251,7 +252,7 @@ class EuAction(models.Model):
         objectives = []
         if hasattr(self, 'national_strategy'):
             objectives = list(NationalObjective.objects.filter(
-                objective_national_strategy__eu_actions__pk=self.pk)
+                objective_national_strategy__eu_actions=self)
                 .distinct())
         return objectives
 
@@ -473,6 +474,7 @@ class NationalObjective(models.Model):
     def get_objectives(self):
         return self.get_descendants()
 
+    # TODO Remove if not used
     def get_actions(self):
         actions_list = []
         for objective in self.get_descendants(include_self=True):
@@ -660,9 +662,10 @@ class EuAichiStrategy(models.Model):
 
     @property
     def get_goals(self):
-        goals = [t.get_parent_goal() for t in self.get_targets]
+        goals = [t.get_parent_goal() for t in self.aichi_targets]
         return set(g for g in goals if g)
 
+    # TODO Remove if not used
     @property
     def get_targets(self):
         ts = list(self.aichi_targets.all())
@@ -695,7 +698,7 @@ class NationalStrategy(models.Model):
 
     @property
     def get_goals(self):
-        goals = [t.get_parent_goal() for t in self.get_targets]
+        goals = [t.get_parent_goal() for t in self.relevant_targets]
         return set(g for g in goals if g)
 
     @property
@@ -705,17 +708,13 @@ class NationalStrategy(models.Model):
         return ts
 
     @property
-    def get_eu_targets(self):
-        return list(self.eu_targets.all())
-
-    @property
     def targets_t(self):
-        return ''.join(['t{0}'.format(t.code) for t in self.get_eu_targets])
+        return ''.join(['t{0}'.format(t.code) for t in self.eu_targets])
 
     @property
     def targets_z(self):
         r = ''
-        targets = self.get_eu_targets
+        targets = self.eu_targets
         for target in EuTarget.objects.all():
             if target in targets:
                 r += '1'
