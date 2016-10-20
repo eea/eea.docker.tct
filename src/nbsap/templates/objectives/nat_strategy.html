@@ -20,25 +20,27 @@
     <input class="search" placeholder="quick search" />
     <ul class="sidebar-menu list">
       {% for objective in objectives|sort_by_code %}
-        <li class="{% if objective.pk == current_objective.pk %}active {% endif %}{% if current_objective in objective.objectives_tree %}active {% endif %}">
-          <a class="nat-objective"
-             href="{% url 'nat_strategy' pk=objective.pk %}"
-             title="{{ objective.code }}">
-            {% trans "Objective" %} {{ objective.code }}
-          </a>
-          {% if objective.objectives_tree|length %}
-            <ul class="sidebar-submenu list">
-              {% for obj in objective.objectives_tree|sort_by_code %}
-                <li class="{% if obj.pk == current_objective.pk %}active{% endif %} indent">
-                  <a class="nat-objective"
-                     href="{% url 'nat_strategy' pk=obj.pk %}">
-                     {% trans "Objective" %} {{ obj.code }}
-                  </a>
-                </li>
-              {% endfor %}
-            </ul>
-          {% endif %}
-        </li>
+        {% with objective.get_objectives as subobjectives %}
+          <li class="{% if objective.pk == current_objective.pk %}active {% endif %}{% if current_objective in subobjectives %}active {% endif %}">
+            <a class="nat-objective"
+               href="{% url 'nat_strategy' pk=objective.pk %}"
+               title="{{ objective.code }}">
+              {% trans "Objective" %} {{ objective.code }}
+            </a>
+            {% if subobjectives|length %}
+              <ul class="sidebar-submenu list">
+                {% for obj in subobjectives|sort_by_code %}
+                  <li class="{% if obj.pk == current_objective.pk %}active{% endif %} indent">
+                    <a class="nat-objective"
+                       href="{% url 'nat_strategy' pk=obj.pk %}">
+                       {% trans "Objective" %} {{ obj.code }}
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </li>
+        {% endwith %}
       {% endfor %}
     </ul>
   </div>

@@ -19,7 +19,7 @@ def get_most_relevant_aichi_targets(target):
     for strategy in target.eu_aichi_strategy.all():
         for aichi_target in strategy.aichi_targets.all():
             most_relevant_aichi_targets.append(aichi_target)
-    return sort_by_code(most_relevant_aichi_targets)
+    return sort_by_code(list(set(most_relevant_aichi_targets)))
 
 
 def get_other_relevant_aichi_targets(target):
@@ -35,14 +35,18 @@ def get_other_relevant_aichi_targets(target):
 def eu_target_detail(request, pk):
     current_target = get_object_or_404(models.EuTarget, pk=pk)
     current_target.actions_tree = []
+
     for action in current_target.actions.order_by('code'):
-        current_target.actions_tree.extend(action.get_all_actions())
+        current_target.actions_tree.extend(
+            action.get_descendants(include_self=True))
+
     current_target.most_relevant_aichi_targets = \
         get_most_relevant_aichi_targets(current_target)
     current_target.other_relevant_aichi_targets = \
         get_other_relevant_aichi_targets(current_target)
 
-    targets = sort_by_code(models.EuTarget.objects.all())
+    targets = sort_by_code(
+        models.EuTarget.objects.all().prefetch_related('parent'))
     previous_target, next_target = get_adjacent_objects(
         targets, current_target)
 
@@ -55,7 +59,8 @@ def eu_target_detail(request, pk):
 
 
 def eu_targets(request):
-    targets = sort_by_code(models.EuTarget.objects.all())
+    targets = sort_by_code(models.EuTarget
+                           .objects.select_related('parent').all())
     return render(request, 'eu_strategy/eu_targets.html',
                   {'targets': targets})
 
@@ -85,7 +90,7 @@ def get_actions_for_target(request, pk=None):
     for action in target.actions.all():
         result.extend([{'id': subaction.id,
                         'value': ' '.join(['Action', subaction.code])}
-                       for subaction in action.get_all_actions()])
+                       for subaction in action.get_actions()])
     return HttpResponse(json.dumps(result))
 
 

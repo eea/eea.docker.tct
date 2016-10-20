@@ -91,6 +91,7 @@ class NationalObjectiveTest(BaseWebTest):
             }
         )
 
+    @skip
     def test_edit_national_objective_code_updates_subobjective_code(self):
         """Test code prefix of subobjective is changed on parent code edit."""
         nat_obj = NationalObjectiveFactory()

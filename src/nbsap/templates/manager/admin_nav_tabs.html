@@ -3,46 +3,60 @@
 
 <ul class="sidebar-menu">
   {% if NAT_STRATEGY %}
-    <li class="{% active request '^/dashboard/objectives/[\w\-]+' %}
-               {% active request '^/dashboard/objectives/' %}">
-      <a href="{% url 'list_national_objectives' %}">{% trans "National Objectives" %}</a>
+    <li class="{% active 'list_national_objectives' 'view_national_objective' 'view_national_action' %}">
+      <a href="{% url 'list_national_objectives' %}">
+        {% trans "National Objectives" %}
+      </a>
     </li>
-    <li class="{% active request '^/dashboard/nat-indicators/[\w\-]+' %}
-               {% active request '^/dashboard/nat-indicators/$' %}">
-      <a href="{% url 'list_nat_indicators' %}">{% trans "National Indicators" %}</a>
+
+    <li class="{% active 'list_nat_indicators' 'view_nat_indicator' 'map_nat_indicator' %}">
+      <a href="{% url 'list_nat_indicators' %}">
+        {% trans "National Indicators" %}
+      </a>
     </li>
-    <li class="{% active request '^/dashboard/mapping/[\w\-]+' %}
-               {% active request '^/dashboard/mapping/$' %}">
-      <a href="{% url 'list_national_strategy' %}">{% trans "Mapping" %}</a>
-    </li>
-    <li class="{% active request '^/dashboard/eu-strategy/regions' %}">
-      <a href="{% url 'list_regions' %}">{% trans "Regions" %}
+
+    <li class="{% active 'list_national_strategy' 'edit_national_strategy' %}">
+      <a href="{% url 'list_national_strategy' %}">
+        {% trans "Mapping" %}
       </a>
     </li>
   {% else %}
-    <li class="{% active request '^/dashboard/eu-strategy/targets/[\w\-]+' %}
-               {% active request '^/dashboard/eu-strategy/targets/' %}">
-      <a href="{% url 'list_eu_targets' %}">{% trans "EU Targets" %}</a>
+    <li class="{% active 'list_eu_targets' 'view_eu_strategy_target' 'view_eu_strategy_activity'  %}">
+      <a href="{% url 'list_eu_targets' %}">
+        {% trans "EU Targets" %}
+      </a>
     </li>
-    <li class="{% active request '^/dashboard/eu-strategy/indicator/\d+/' %}
-               {% active request '^/dashboard/eu-strategy/indicators/' %}">
-      <a href="{% url 'list_eu_indicators' %}">{% trans "EU Indicators" %}</a>
+
+    <li class="{% active 'list_eu_indicators' 'view_eu_indicator' 'map_eu_indicator' %}">
+      <a href="{% url 'list_eu_indicators' %}">
+        {% trans "EU Indicators" %}
+      </a>
     </li>
-    <li class="{% active request '^/dashboard/eu-aichi-mapping/[\w\-]+' %}
-               {% active request '^/dashboard/eu-aichi-mapping/$' %}">
-      <a href="{% url 'list_eu_aichi_strategy' %}">{% trans "Mapping" %}</a>
-    </li>
-    <li class="{% active request '^/dashboard/eu-strategy/regions' %}">
-      <a href="{% url 'list_regions' %}">{% trans "Regions" %}
+
+    <li class="{% active 'list_eu_aichi_strategy' 'edit_eu_aichi_strategy' %}">
+      <a href="{% url 'list_eu_aichi_strategy' %}">
+        {% trans "Mapping" %}
       </a>
     </li>
   {% endif %}
-  <li class="{% active request '^/dashboard/page' %}">
-    <a href="{% url 'admin_pages' %}">{% trans "Intro page" %}</a>
+
+  <li class="{% active 'list_regions' %}">
+    <a href="{% url 'list_regions' %}">
+      {% trans "Regions" %}
+    </a>
   </li>
+
+  <li class="{% active 'admin_page' 'admin_pages' %}">
+    <a href="{% url 'admin_pages' %}">
+      {% trans "Intro page" %}
+    </a>
+  </li>
+
   {% if NAT_STRATEGY %}
-    <li class="{% active request '^/dashboard/export' %}">
-      <a href="{% url 'admin_export' %}">{% trans "Export" %}</a>
+    <li class="{% active 'admin_export' %}">
+      <a href="{% url 'admin_export' %}">
+        {% trans "Export" %}
+      </a>
     </li>
   {% endif %}
 </ul>

@@ -37,7 +37,7 @@
                   {% endfor %}
                 </td>
                 <td>
-                  {% for goal in strategy.goals_list|sort_by_code %}
+                  {% for goal in strategy.get_goals|sort_by_code %}
                     <a href="{% url 'list_targets' code=goal.code %}">
                       {{ goal.code|title }}</a>
                   {% endfor %}

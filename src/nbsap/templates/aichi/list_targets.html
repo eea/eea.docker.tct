@@ -6,9 +6,9 @@
     <h2 class="list-targets-goal-title">{% trans "Goal" %} {{ current_goal.code|upper }}</h2>
     <p class="list-targets-goal-desc">{{ current_goal.description }}</p>
   {% endif %}
-  {% for target in targets.all|sort_by_code %}
+  {% for target in targets|sort_by_code %}
     <li>
-      <a href="{% url 'goals' code=target.get_parent_goal.code aichi_target_id=target.id %}"
+      <a href="{% url 'aichi_target_detail' aichi_target_id=target.id %}"
          rel="tooltip">
         <h2 class="target-title">{% trans "Aichi Target" %} {{ target.code }}</h2>
         <p class="target-desc">{{ target.description }}</p>

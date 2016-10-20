@@ -9,6 +9,7 @@ django-staticfiles==1.2.1
 django-tinymce==2.3.0
 django-webtest==1.7.8
 django-widget-tweaks==1.4.1
+django-mptt==0.8.6
 Django==1.9.5
 git+git://github.com/eaudeweb/django-transmeta.git@master
 graypy==0.2.13

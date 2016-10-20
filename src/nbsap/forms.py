@@ -416,7 +416,7 @@ class NationalStrategyForm(forms.Form):
         if self.strategy:
             self.fields['nat_objective'].initial = self.strategy.objective.id
             self.fields['aichi_goals'].initial = (
-                goal.code for goal in self.strategy.goals_list
+                goal.code for goal in self.strategy.get_goals
             )
             self.fields['aichi_targets'].initial = [
                 target.id for target in self.strategy.relevant_targets.all()
@@ -764,7 +764,7 @@ class EuAichiStrategyForm(forms.Form, ChoicesMixin):
                 .values_list('pk', flat=True)
             )
             self.fields['aichi_goals'].initial = (
-                goal.code for goal in self.strategy.goals_list
+                goal.code for goal in self.strategy.get_goals
             )
             self.fields['other_aichi_targets'].initial = (
                 self.strategy.other_aichi_targets

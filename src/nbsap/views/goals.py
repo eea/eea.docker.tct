@@ -30,7 +30,8 @@ def get_other_relevant_targets(target):
 def get_most_relevant_indicators(target):
     most_relevant_indicators = []
     if target.eu_indicator_aichi_strategy.count():
-        for strategy in target.eu_indicator_aichi_strategy.all():
+        for strategy in target.eu_indicator_aichi_strategy \
+                .select_related('eu_indicator').all():
             most_relevant_indicators.append(strategy.eu_indicator)
     return most_relevant_indicators
 
@@ -40,7 +41,8 @@ def user_homepage(request):
 
 
 def list_goals(request):
-    goals = models.AichiGoal.objects.order_by('code').all()
+    goals = models.AichiGoal.objects.order_by(
+        'code').all().prefetch_related('targets')
     return render_to_response(
         'aichi/aichi.html',
         context_instance=RequestContext(
@@ -53,13 +55,14 @@ def list_goals(request):
 
 
 def list_targets(request, code=None):
+    goals = models.AichiGoal.objects.order_by(
+        'code').all().prefetch_related('targets')
     if code:
         current_goal = get_object_or_404(models.AichiGoal, code=code)
         targets = current_goal.targets.all()
     else:
         current_goal = None
         targets = models.AichiTarget.objects.all()
-    goals = models.AichiGoal.objects.order_by('code').all()
     return render_to_response(
         'aichi/aichi.html',
         context_instance=RequestContext(
@@ -88,10 +91,12 @@ def aichi_target_detail(request, aichi_target_id, code=None):
     if not code:
         code = target.get_parent_goal().code
 
-    goals = models.AichiGoal.objects.order_by('code').all()
+    goals = models.AichiGoal.objects.order_by(
+        'code').all().prefetch_related('targets')
     current_goal = get_object_or_404(models.AichiGoal, code=code)
-    all_targets = sort_by_code(models.AichiTarget.objects.all())
-    targets = sort_by_code(current_goal.targets.all())
+    all_targets = sort_by_code(
+        models.AichiTarget.objects.all().prefetch_related('goals'))
+    targets = current_goal.targets.all()
 
     if target not in targets:
         raise Http404
@@ -114,7 +119,8 @@ def aichi_target_detail(request, aichi_target_id, code=None):
                 'target': target,
                 'info_header': info_header,
                 'previous_target': previous_target,
-                'next_target': next_target
+                'next_target': next_target,
+                'target_code': code
             })
     )
 

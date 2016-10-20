@@ -4,6 +4,7 @@ from django.db.models.signals import pre_save
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from transmeta import TransMeta
+from mptt.models import MPTTModelBase, TreeForeignKey
 
 import tinymce.models
 
@@ -36,6 +37,10 @@ class Translatable(TransMeta):
                     property(getter_for_default_language(field),
                              setter_for_default_language(field)))
         return new_class
+
+
+class TranslatableMpttMeta(MPTTModelBase, Translatable):
+    pass
 
 
 class Link(models.Model):
@@ -136,22 +141,23 @@ class AichiTarget(models.Model):
                                               blank=True)
 
     def get_most_relevant_objectives(self):
-        objectives = []
-        for strategy in self.relevant_targets_national_strategy.all():
-            objectives.append(strategy.objective)
-        return objectives
+        return (
+            NationalObjective.objects
+            .filter(objective_national_strategy__relevant_targets=self)
+        )
 
+    # TODO Remove if not used
     def get_other_relevant_objectives(self):
-        objectives = []
-        for strategy in self.other_targets_national_strategy.all():
-            objectives.append(strategy.objective)
-        return objectives
+        return (
+            NationalObjective.objects
+            .filter(objective_national_strategy__other_targets=self)
+        )
 
     def __unicode__(self):
         return u'Target %s' % self.code
 
     def get_parent_goal(self):
-        return self.goals.all()[0]
+        return self.goals.first()
 
     class Meta:
         ordering = ['code']
@@ -208,15 +214,15 @@ class NationalAction(models.Model):
 
 
 class EuAction(models.Model):
-    __metaclass__ = Translatable
+    __metaclass__ = TranslatableMpttMeta
 
     code = models.CharField(max_length=16)
     title = models.TextField(verbose_name="Title")
     description = models.TextField(verbose_name="Description")
-    parent = models.ForeignKey('self',
-                               null=True,
-                               blank=True,
-                               related_name='children')
+    parent = TreeForeignKey('self',
+                            null=True,
+                            blank=True,
+                            related_name='children')
     region = models.ForeignKey(Region, null=True, blank=True)
 
     if settings.EU_STRATEGY and settings.NAT_STRATEGY:
@@ -225,6 +231,9 @@ class EuAction(models.Model):
             blank=True,
             verbose_name="National strategy",
             related_name="eu_actions")
+
+    class MPTTMeta:
+        order_insertion_by = ['code']
 
     class Meta:
         verbose_name_plural = 'EU actions'
@@ -239,27 +248,23 @@ class EuAction(models.Model):
         else:
             return self.parent.target.all()[0]
 
-    def get_all_objectives(self):
+    def get_objectives(self):
         objectives = []
         if hasattr(self, 'national_strategy'):
-            for strategy in self.national_strategy.all():
-                objectives.append(strategy.objective)
+            objectives = list(NationalObjective.objects.filter(
+                objective_national_strategy__eu_actions=self)
+                .distinct())
         return objectives
 
-    def subactions(self):
-        return self.get_all_actions()[1:]
+    def get_subactions(self):
+        return self.get_descendants()
 
-    def get_all_actions(self):
-        # we should use https://github.com/django-mptt/django-mptt/
-        r = []
-        r.append(self)
-        for ob in EuAction.objects.filter(parent=self).order_by('code'):
-            r.extend(ob.get_all_actions())
-        return r
+    def get_actions(self):
+        return self.get_descendants(include_self=True)
 
     def get_next_code(self):
         if self.parent:
-            codes = [a.code for a in self.parent.subactions()]
+            codes = [a.code for a in self.parent.get_subactions()]
             if codes:
                 max_letter = RE_ACTION_CODE.match(max(codes)).groups()[1]
                 letter = chr(ord(max_letter) + 1)
@@ -395,16 +400,16 @@ class NationalIndicator(BaseIndicator):
 
 
 class NationalObjective(models.Model):
-    __metaclass__ = Translatable
+    __metaclass__ = TranslatableMpttMeta
 
     code = models.CharField(max_length=16, unique=True)
     title = models.TextField(max_length=512,
                              verbose_name="Title")
     description = tinymce.models.HTMLField(verbose_name="Description")
-    parent = models.ForeignKey('self',
-                               null=True,
-                               blank=True,
-                               related_name='children')
+    parent = TreeForeignKey('self',
+                            null=True,
+                            blank=True,
+                            related_name='children')
     actions = models.ManyToManyField(NationalAction,
                                      blank=True,
                                      related_name="objective")
@@ -416,6 +421,9 @@ class NationalObjective(models.Model):
     other_nat_indicators = models.ManyToManyField(
         NationalIndicator, related_name="other_nat_objectives", blank=True
     )
+
+    class MPTTMeta:
+        order_insertion_by = ['code']
 
     class Meta:
         translate = ('title', 'description',)
@@ -463,17 +471,13 @@ class NationalObjective(models.Model):
             NationalObjective._pre_save_objective_code_on_create(instance)
 
     @property
-    def objectives_tree(self):
-        # we should use https://github.com/django-mptt/django-mptt/
-        r = []
-        for ob in NationalObjective.objects.filter(parent=self):
-            r.append(ob)
-            r.extend(ob.objectives_tree)
-        return r
+    def get_objectives(self):
+        return self.get_descendants()
 
-    def get_all_actions(self):
-        actions_list = list(self.actions.all())
-        for objective in self.objectives_tree:
+    # TODO Remove if not used
+    def get_actions(self):
+        actions_list = []
+        for objective in self.get_descendants(include_self=True):
             actions_list.extend(list(objective.actions.all()))
         return actions_list
 
@@ -640,10 +644,10 @@ class EuIndicatorToAichiStrategy(models.Model):
         blank=True,
     )
 
-    def get_targets(self):
+    def get_targets_code_stringify(self):
         return ', '.join([obj.code for obj in self.aichi_targets.all()])
 
-    get_targets.short_description = 'AICHI targets'
+    get_targets_code_stringify.short_description = 'AICHI targets'
 
     class Meta:
         verbose_name_plural = 'Mappings: EU indicators to Aichi'
@@ -667,21 +671,22 @@ class EuAichiStrategy(models.Model):
         related_name="eu_other_aichi_strategy",
         blank=True)
 
-    def get_targets(self):
+    def get_targets_code_stringify(self):
         return ', '.join([obj.code for obj in self.aichi_targets.all()])
 
     @property
-    def goals_list(self):
-        goals = [t.get_parent_goal() for t in self.targets_list]
+    def get_goals(self):
+        goals = [t.get_parent_goal() for t in self.aichi_targets]
         return set(g for g in goals if g)
 
+    # TODO Remove if not used
     @property
-    def targets_list(self):
+    def get_targets(self):
         ts = list(self.aichi_targets.all())
         ts.sort(key=lambda t: t.code)
         return ts
 
-    get_targets.short_description = 'AICHI targets'
+    get_targets_code_stringify.short_description = 'AICHI targets'
 
     class Meta:
         verbose_name_plural = ' Mappings: EU targets to Aichi'
@@ -706,28 +711,24 @@ class NationalStrategy(models.Model):
         return 'Strategy' + unicode(self.objective)
 
     @property
-    def goals_list(self):
-        goals = [t.get_parent_goal() for t in self.targets_list]
+    def get_goals(self):
+        goals = [t.get_parent_goal() for t in self.relevant_targets]
         return set(g for g in goals if g)
 
     @property
-    def targets_list(self):
+    def get_targets(self):
         ts = list(self.relevant_targets.all())
         ts.sort(key=lambda t: t.code)
         return ts
 
     @property
-    def eu_targets_list(self):
-        return list(self.eu_targets.all())
-
-    @property
     def targets_t(self):
-        return ''.join(['t{0}'.format(t.code) for t in self.eu_targets_list])
+        return ''.join(['t{0}'.format(t.code) for t in self.eu_targets])
 
     @property
     def targets_z(self):
         r = ''
-        targets = self.eu_targets_list
+        targets = self.eu_targets
         for target in EuTarget.objects.all():
             if target in targets:
                 r += '1'

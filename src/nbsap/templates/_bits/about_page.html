@@ -39,13 +39,13 @@
 
       {% if NAT_STRATEGY %}
         <li>
-          <a class="{% active request '^/national-strategy/indicators' %}" href="{% url 'nat_indicators' %}">
+          <a href="{% url 'nat_indicators' %}">
             {% trans "National Indicators" %}
           </a>
           <p class='menu-desc'>Here you can see more details on the National Indicators</p>
         </li>
         <li>
-          <a class="{% active request '^/national-strategy/implementation' %}" href="{% url 'implementation_page' %}">
+          <a href="{% url 'implementation_page' %}">
             {% trans "Implementation" %}
           </a>
           <p class='menu-desc'>Here you can see more details on the implementation National Indicators</p>
