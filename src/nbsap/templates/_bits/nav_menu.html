@@ -10,6 +10,20 @@
     </a>
   </li>
 
+  <li>
+    <a class="{% active 'cms_home' 'list_goals' 'list_targets' 'cms_target_detail' %}"
+       href="{% url 'cms_home' %}">
+      {% trans "CMS" %}
+    </a>
+  </li>
+
+  <li>
+    <a class="{% active 'ramsar_home' 'list_goals' 'list_targets' 'ramsar_target_detail' %}"
+       href="{% url 'ramsar_home' %}">
+      {% trans "Ramsar" %}
+    </a>
+  </li>
+
   {% if EU_STRATEGY %}
     <li>
       <a class="{% active 'eu_targets' 'eu_target_detail' %}" href="{% url 'eu_targets' %}">
