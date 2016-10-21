@@ -1,16 +1,19 @@
 from django.core.management.base import BaseCommand
+from django.conf import settings
 from nbsap.models import EuAction, NationalObjective
 
 
 class Command(BaseCommand):
-    def add_arguments(self, parser):
-        parser.add_argument('table')
+
+    help = 'Apply mptt (a technique for storing hierarchical data in a database)'
 
     def handle(self, *args, **options):
-        if options['table'] == 'euaction':
+        if settings.EU_STRATEGY:
             for action in EuAction.objects.exclude(parent__isnull=False):
                 action._tree_manager.rebuild()
-        if options['table'] == 'nationalobjective':
+            self.stdout.write('Successfully applied mptt on EuAction')
+        if settings.NAT_STRATEGY:
             for objective in NationalObjective.objects \
                     .exclude(parent__isnull=False):
                 objective._tree_manager.rebuild()
+            self.stdout.write('Successfully applied mptt on NationalObjective')

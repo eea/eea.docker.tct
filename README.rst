@@ -217,6 +217,7 @@ Continue build devel by syncing database model and loading fixtures::
 
   $ ./instance/manage.py migrate
   $ ./instance/manage.py load_fixtures
+  $ ./instance/manage.py apply_mptt
 
 Run the tests to check the validity of your installation::
 
