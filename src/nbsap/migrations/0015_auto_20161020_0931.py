@@ -33,7 +33,7 @@ class Migration(migrations.Migration):
                  primary_key=True, serialize=False, verbose_name='ID')),
                 ('code', models.CharField(max_length=16)),
                 ('aichi_targets', models.ManyToManyField(blank=True,
-                 related_name='cms_aichi_target',
+                 related_name='cms_targets',
                  to='nbsap.AichiTarget')),
             ],
             options={

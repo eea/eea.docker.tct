@@ -25,11 +25,11 @@
             {% trans 'Dashboard' %}
           </a>
         </li>
-      {% endif %}
-      {% if user.is_superuser and LANGUAGES|length > 1 %}
-        <li>
-          <a href="{% url 'rosetta-home' %}">{% trans 'Translate' %}</a>
-        </li>
+        {% if LANGUAGES|length > 1 %}
+          <li>
+            <a href="{% url 'rosetta-home' %}">{% trans 'Translate' %}</a>
+          </li>
+        {% endif %}
       {% endif %}
       <li>
         <a href="{% url 'logout' %}">

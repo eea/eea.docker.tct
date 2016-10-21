@@ -186,7 +186,7 @@ class CMSTarget(models.Model):
     code = models.CharField(max_length=16)
     description = models.TextField(verbose_name="Description")
     aichi_targets = models.ManyToManyField(
-        AichiTarget, related_name="cms_aichi_target",
+        AichiTarget, related_name="cms_targets",
         blank=True)
 
     def __unicode__(self):
@@ -222,7 +222,7 @@ class RamsarTarget(models.Model):
     code = models.CharField(max_length=16)
     description = models.TextField(verbose_name="Description")
     aichi_targets = models.ManyToManyField(
-        AichiTarget, related_name="ramsar_aichi_target",
+        AichiTarget, related_name="ramsar_targets",
         blank=True)
 
     def __unicode__(self):
