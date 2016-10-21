@@ -4,7 +4,7 @@
 
 <h1 class="page-title">{% trans "Aichi Goals" %}</h1>
 <h1 class="goal-title">{% trans "Aichi Goal " %}{{ target_code|upper }}:</h1>
-<h1 class="goal-desc">{{ target.get_parent_goal.description|striptags|safe }}</h1>
+<h1 class="goal-desc">{{ target.get_parent_goal.description }}</h1>
 
 
 <div class="section" id="{{ target.code }}">

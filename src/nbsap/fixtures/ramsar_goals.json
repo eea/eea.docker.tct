@@ -1,0 +1,61 @@
+[
+{
+  "model": "nbsap.ramsargoal",
+  "pk": "1",
+  "fields": {
+    "title_en": "Ramsar Goal 1",
+    "description_en": "Addressing the Drivers of Wetland Loss And Degradation",
+    "targets": [
+      1,
+      2,
+      3,
+      4
+    ]
+  }
+},
+{
+  "model": "nbsap.ramsargoal",
+  "pk": "2",
+  "fields": {
+    "title_en": "Ramsar Goal 2",
+    "description_en": "Effectively Conserving and Managing the Ramsar Site Network",
+    "targets": [
+      5,
+      6,
+      7
+    ]
+  }
+},
+{
+  "model": "nbsap.ramsargoal",
+  "pk": "3",
+  "fields": {
+    "title_en": "Ramsar Goal 3",
+    "description_en": "Wisely Using All Wetlands",
+    "targets": [
+      10,
+      11,
+      12,
+      13,
+      8,
+      9
+    ]
+  }
+},
+{
+  "model": "nbsap.ramsargoal",
+  "pk": "4",
+  "fields": {
+    "title_en": "Ramsar Goal 4",
+    "description_en": "Enhancing Implementation",
+    "targets": [
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+    ]
+  }
+}
+]

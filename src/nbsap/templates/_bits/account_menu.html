@@ -19,15 +19,17 @@
       </li>
     {% endfor %}
     {% if user.is_authenticated %}
-      <li>
-        <a href="{% if NAT_STRATEGY %}{% url 'list_national_objectives' %}{% else %}{% url 'list_eu_targets' %}{% endif %}">
-          {% trans 'Dashboard' %}
-        </a>
-      </li>
-      {% if user.is_superuser and LANGUAGES|length > 1 %}
+      {% if user.is_superuser %}
         <li>
-          <a href="{% url 'rosetta-home' %}">{% trans 'Translate' %}</a>
+          <a href="{% if NAT_STRATEGY %}{% url 'list_national_objectives' %}{% else %}{% url 'list_eu_targets' %}{% endif %}">
+            {% trans 'Dashboard' %}
+          </a>
         </li>
+        {% if LANGUAGES|length > 1 %}
+          <li>
+            <a href="{% url 'rosetta-home' %}">{% trans 'Translate' %}</a>
+          </li>
+        {% endif %}
       {% endif %}
       <li>
         <a href="{% url 'logout' %}">

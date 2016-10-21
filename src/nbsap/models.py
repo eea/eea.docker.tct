@@ -180,6 +180,78 @@ class AichiGoal(models.Model):
         translate = ('title', 'description',)
 
 
+class CMSTarget(models.Model):
+    __metaclass__ = Translatable
+
+    code = models.CharField(max_length=16)
+    description = models.TextField(verbose_name="Description")
+    aichi_targets = models.ManyToManyField(
+        AichiTarget, related_name="cms_targets",
+        blank=True)
+
+    def __unicode__(self):
+        return u'CMS Target %s' % self.code
+
+    def get_parent_goal(self):
+        return self.cms_goals.first()
+
+    class Meta:
+        ordering = ['code']
+        translate = ('description',)
+
+
+class CMSGoal(models.Model):
+    __metaclass__ = Translatable
+
+    code = models.CharField(max_length=1, primary_key=True)
+    title = models.TextField(verbose_name="Title", max_length=512)
+    description = tinymce.models.HTMLField(verbose_name="Description")
+    targets = models.ManyToManyField(CMSTarget, related_name="cms_goals")
+
+    def __unicode__(self):
+        return self.title
+
+    class Meta:
+        ordering = ['code']
+        translate = ('title', 'description',)
+
+
+class RamsarTarget(models.Model):
+    __metaclass__ = Translatable
+
+    code = models.CharField(max_length=16)
+    description = models.TextField(verbose_name="Description")
+    aichi_targets = models.ManyToManyField(
+        AichiTarget, related_name="ramsar_targets",
+        blank=True)
+
+    def __unicode__(self):
+        return u'Ramsar Target %s' % self.code
+
+    def get_parent_goal(self):
+        return self.ramsar_goals.first()
+
+    class Meta:
+        ordering = ['code']
+        translate = ('description',)
+
+
+class RamsarGoal(models.Model):
+    __metaclass__ = Translatable
+
+    code = models.CharField(max_length=1, primary_key=True)
+    title = models.TextField(verbose_name="Title", max_length=512)
+    description = tinymce.models.HTMLField(verbose_name="Description")
+    targets = models.ManyToManyField(RamsarTarget, related_name="ramsar_goals")
+
+    def __unicode__(self):
+        return self.title
+
+    class Meta:
+        ordering = ['code']
+        translate = ('title', 'description',)
+
+
 class Region(models.Model):
 
     name = models.CharField(max_length=256)

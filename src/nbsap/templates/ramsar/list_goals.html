@@ -2,13 +2,13 @@
 {% load utils %}
 
 
-<h1 class="page-title">{% trans "Aichi Goals" %}</h1>
+<h1 class="page-title">{% trans "Ramsar Goals" %}</h1>
 <ul class="list-goals-wrapper">
   {% for goal in goals %}
     <li>
-      <a href="{% url 'list_targets' code=goal.code %}" title="{{ goal.code|upper }}"</a>
+      <a href="{% url 'list_ramsar_targets' code=goal.code %}" title="{{ goal.code }}"</a>
         <h2 class="list-goals-title">
-          {% trans "Goal" %} {{ goal.code|upper }}
+          {% trans "Goal" %} {{ goal.code }}
         </h2>
         <p class="list-goals-desc">{{ goal.description }}</p>
       </a>

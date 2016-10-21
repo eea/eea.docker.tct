@@ -1,0 +1,18 @@
+{% load i18n %}
+{% load utils %}
+
+<ul class="list-targets-wrapper">
+  {% if current_goal %}
+    <h2 class="list-targets-goal-title">{% trans "CMS Goal" %} {{ current_goal.code }}</h2>
+    <p class="list-targets-goal-desc">{{ current_goal.description }}</p>
+  {% endif %}
+  {% for target in targets.all|sort_by_code %}
+    <li>
+      <a href="{% url 'cms_target_detail' cms_target_id=target.id %}"
+         rel="tooltip">
+        <h2 class="target-title">{% trans "CMS Target" %} {{ target.code }}</h2>
+        <p class="target-desc">{{ target.description }}</p>
+      </a>
+    </li>
+  {% endfor %}
+</ul>
