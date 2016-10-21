@@ -1,0 +1,60 @@
+{% load i18n %}
+{% load utils %}
+
+<h1 class="page-title">{% trans "Ramsar Goals" %}</h1>
+<h1 class="goal-title">{% trans "Ramsar Goal " %}{{ target.get_parent_goal.code }}:</h1>
+<h1 class="goal-desc">{{ target.get_parent_goal.description }}</h1>
+
+
+<div class="section" id="{{ target.code }}">
+  <h2>{% trans "Ramsar Target" %} {{ target.code }}</h2>
+  <p class="target-description">{{ target.description }}</p>
+  <div class="well">
+    <div class="well-title">{% trans "Related Aichi targets" %}
+      {% if target.related_targets|length %}
+        <div class="info-count">
+          {{ target.related_targets|length }}
+        </div>
+      {% endif %}
+    </div>
+    {% if target.related_targets|length %}
+      <ul>
+        {% for aichi_target in target.related_targets|sort_by_code %}
+          <li>
+            <a href="{% url 'aichi_target_detail' aichi_target_id=aichi_target.id %}"
+               title="{{ aichi_target.code }}">
+              {% trans "Target" %} {{ aichi_target.code }}
+            </a>
+            <p class="content-description">{{ aichi_target.description }}</p>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="no-corresponding">{% trans 'No corresponding Aichi target.' %}</p>    
+    {% endif %}
+  </div>
+
+  <div class="pages-navigation">
+    {% with all_targets|last as last %}
+      {% ifnotequal previous_target.code last.code %}
+        <div class="page-nav-prev-wrapper">
+          <a class="previous-page"
+             href="{% url 'ramsar_target_detail' ramsar_target_id=previous_target.id %}">
+            {{ previous_target.get_parent_goal }} - Target {{ previous_target.code }}
+          </a>
+        </div>
+      {% endifnotequal %}
+    {% endwith %}
+
+    {% with all_targets|first as first %}
+      {% ifnotequal next_target.code first.code %}
+        <div class="page-nav-next-wrapper">
+          <a class="next-page"
+             href="{% url 'ramsar_target_detail' ramsar_target_id=next_target.id %}">
+            {{ next_target.get_parent_goal }} - Target {{ next_target.code }}
+          </a>
+        </div>
+      {% endifnotequal %}
+    {% endwith %}
+  </div>
+</div>

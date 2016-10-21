@@ -1,0 +1,225 @@
+[
+{
+  "model": "nbsap.ramsartarget",
+  "pk": 1,
+  "fields": {
+    "code": "1",
+    "description_en": "Wetland benefits are featured in national/local policy strategies and plans relating to key sectors such as water, energy, mining, agriculture, tourism, urban development, infrastructure, industry, forestry, aquaculture, fisheries at the national and local level.",
+    "aichi_targets": [
+      2
+    ]
+  }
+},
+{
+  "model": "nbsap.ramsartarget",
+  "pk": 2,
+  "fields": {
+    "code": "2",
+    "description_en": "Water use respects wetland ecosystem needs for them to fulfil their functions and provide services at the appropriate scale inter alia at the basin level or along a coastal zone.",
+    "aichi_targets": [
+      7,
+      8
+    ]
+  }
+},
+{
+  "model": "nbsap.ramsartarget",
+  "pk": 3,
+  "fields": {
+    "code": "3",
+    "description_en": "The public and private sectors have increased their efforts to apply guidelines and good practices for the wise use of water and wetlands.",
+    "aichi_targets": [
+      3,
+      4,
+      7,
+      8
+    ]
+  }
+},
+{
+  "model": "nbsap.ramsartarget",
+  "pk": 4,
+  "fields": {
+    "code": "4",
+    "description_en": "Invasive alien species and pathways of introduction and expansion are identified and prioritized, priority invasive alien species are controlled or eradicated, and management responses are prepared and implemented to prevent their introduction and establishment.",
+    "aichi_targets": [
+      9
+    ]
+  }
+},
+{
+  "model": "nbsap.ramsartarget",
+  "pk": 5,
+  "fields": {
+    "code": "5",
+    "description_en": "The ecological character of Ramsar sites is maintained or restored, through effective planning and integrated management.",
+    "aichi_targets": [
+      11,
+      12,
+      6
+    ]
+  }
+},
+{
+  "model": "nbsap.ramsartarget",
+  "pk": 6,
+  "fields": {
+    "code": "6",
+    "description_en": "There is a significant increase in area, numbers and ecological connectivity in the Ramsar Site network, in particular under-represented types of wetlands including in under-represented ecoregions and Transboundary Sites.",
+    "aichi_targets": [
+      10,
+      11
+    ]
+  }
+},
+{
+  "model": "nbsap.ramsartarget",
+  "pk": 7,
+  "fields": {
+    "code": "7",
+    "description_en": "Sites that are at risk of change of ecological character have threats addressed.",
+    "aichi_targets": [
+      11,
+      12,
+      5,
+      7
+    ]
+  }
+},
+{
+  "model": "nbsap.ramsartarget",
+  "pk": 8,
+  "fields": {
+    "code": "8",
+    "description_en": "National wetland inventories have been initiated, completed or updated and disseminated and used for promoting the conservation and effective management of all wetlands.",
+    "aichi_targets": [
+      12,
+      14,
+      18,
+      19
+    ]
+  }
+},
+{
+  "model": "nbsap.ramsartarget",
+  "pk": 9,
+  "fields": {
+    "code": "9",
+    "description_en": "The wise use of wetlands is strengthened through integrated resource management at the appropriate scale, inter alia, within a river basin or along a coastal zone.",
+    "aichi_targets": [
+      4,
+      6,
+      7
+    ]
+  }
+},
+{
+  "model": "nbsap.ramsartarget",
+  "pk": 10,
+  "fields": {
+    "code": "10",
+    "description_en": "The traditional knowledge, innovations and practices of indigenous peoples and local communities relevant for the wise use of wetlands and their customary use of wetland resources are documented, respected, subject to national legislation and relevant international obligations, and fully integrated and reflected in the implementation of the Convention, with a full and effective participation of indigenous peoples and local communities at all relevant levels.",
+    "aichi_targets": [
+      18
+    ]
+  }
+},
+{
+  "model": "nbsap.ramsartarget",
+  "pk": 11,
+  "fields": {
+    "code": "11",
+    "description_en": "Wetland functions, services and benefits are widely demonstrated, documented and disseminated.",
+    "aichi_targets": [
+      1,
+      13,
+      14,
+      2
+    ]
+  }
+},
+{
+  "model": "nbsap.ramsartarget",
+  "pk": 12,
+  "fields": {
+    "code": "12",
+    "description_en": "Restoration is in progress in degraded wetlands, with priority to wetlands that are relevant for biodiversity conservation, disaster risk reduction, livelihoods and/or climate change mitigation and adaptation.",
+    "aichi_targets": [
+      14,
+      15
+    ]
+  }
+},
+{
+  "model": "nbsap.ramsartarget",
+  "pk": 13,
+  "fields": {
+    "code": "13",
+    "description_en": "Enhanced sustainability of key sectors such as water, energy, mining, agriculture, tourism, urban development, infrastructure, industry, forestry, aquaculture and fisheries, when they affect wetlands, contributing to biodiversity conservation and human livelihoods.",
+    "aichi_targets": [
+      6,
+      7
+    ]
+  }
+},
+{
+  "model": "nbsap.ramsartarget",
+  "pk": 14,
+  "fields": {
+    "code": "14",
+    "description_en": "Scientific guidance and technical methodologies at global and regional levels are developed on relevant topics and are available to policy makers and practitioners in an appropriate format and language.",
+    "aichi_targets": [
+      19
+    ]
+  }
+},
+{
+  "model": "nbsap.ramsartarget",
+  "pk": 15,
+  "fields": {
+    "code": "15",
+    "description_en": "Ramsar Regional Initiatives with the active involvement and support of the Parties in each region are reinforced and developed into effective tools to assist in the full implementation of the Convention.",
+    "aichi_targets": []
+  }
+},
+{
+  "model": "nbsap.ramsartarget",
+  "pk": 16,
+  "fields": {
+    "code": "16",
+    "description_en": "Wetlands conservation and wise use are mainstreamed through communication, capacity development, education, participation and awareness.",
+    "aichi_targets": [
+      1
+    ]
+  }
+},
+{
+  "model": "nbsap.ramsartarget",
+  "pk": 17,
+  "fields": {
+    "code": "17",
+    "description_en": "Financial and other resources for effectively implementing the 4th Ramsar Strategic Plan 2016 \u2013 2024 from all sources are made available.",
+    "aichi_targets": [
+      20
+    ]
+  }
+},
+{
+  "model": "nbsap.ramsartarget",
+  "pk": 18,
+  "fields": {
+    "code": "18",
+    "description_en": "International cooperation is strengthened at all levels.",
+    "aichi_targets": []
+  }
+},
+{
+  "model": "nbsap.ramsartarget",
+  "pk": 19,
+  "fields": {
+    "code": "19",
+    "description_en": "Capacity building for implementation of the Convention and the 4th Ramsar Strategic Plan 2016 \u2013 2024 is enhanced.",
+    "aichi_targets": []
+  }
+}
+]

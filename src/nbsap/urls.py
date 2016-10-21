@@ -35,6 +35,11 @@ urlpatterns = [
         views.aichi_target_detail,
         name='aichi_target_detail'),
 
+    # CMS pages
+    url(r'^cms/$', views.cms_target_detail,
+        {'code': '1',
+         'cms_target_id': '1'},
+        name='cms_home'),
     url(r'^cms/goals/?$', views.list_cms_goals, name='list_cms_goals'),
     url(r'^cms/goals/targets/?$',
         views.list_cms_targets, name='list_cms_targets'),
@@ -50,6 +55,27 @@ urlpatterns = [
     url(r'^cms/targets/?$', views.list_cms_targets, name='list_cms_targets'),
     url(r'^cms/targets/(?P<cms_target_id>(\d+))/?$',
         views.cms_target_detail, name='cms_target_detail'),
+
+    # Ramsar pages
+    url(r'^ramsar/$', views.ramsar_target_detail,
+        {'code': '1',
+         'ramsar_target_id': '1'},
+        name='ramsar_home'),
+    url(r'^ramsar/goals/?$', views.list_ramsar_goals, name='list_ramsar_goals'),
+    url(r'^ramsar/goals/targets/?$',
+        views.list_ramsar_targets, name='list_ramsar_targets'),
+    url(r'^ramsar/goals/targets/(?P<ramsar_target_id>(\d+))/?$',
+        views.ramsar_target_detail, name='ramsar_target_detail'),
+
+    url(r'^ramsar/goals/(?P<code>(\d+))/?$',
+        views.list_ramsar_targets, name='list_ramsar_targets'),
+    url(r'^ramsar/goals/(?P<code>(\d+))/targets/?$',
+        views.list_ramsar_targets, name='list_ramsar_targets'),
+    url(r'^ramsar/goals/(?P<code>(\d+))/targets/(?P<ramsar_target_id>(\d+))/?$',
+        views.ramsar_target_detail, name='ramsar_target_detail'),
+    url(r'^ramsar/targets/?$', views.list_ramsar_targets, name='list_ramsar_targets'),
+    url(r'^ramsar/targets/(?P<ramsar_target_id>(\d+))/?$',
+        views.ramsar_target_detail, name='ramsar_target_detail'),
 
     url(r'^crashme$', views.crashme, name='crashme'),
     url(r'^ping/me$', views.pingme, name='pingme'),

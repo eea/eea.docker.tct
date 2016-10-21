@@ -10,6 +10,9 @@ admin.site.register(AichiTarget)
 admin.site.register(CMSGoal)
 admin.site.register(CMSTarget)
 
+admin.site.register(RamsarGoal)
+admin.site.register(RamsarTarget)
+
 
 class AichiIndicatorAdmin(admin.ModelAdmin):
     fields = ('title',)

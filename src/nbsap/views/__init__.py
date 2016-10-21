@@ -1,6 +1,7 @@
 from objectives import *
 from goals import *
 from cms import *
+from ramsar import *
 from indicators import *
 from nat_indicators import *
 from eu_strategy import *
