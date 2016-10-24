@@ -72,7 +72,21 @@ $(document).ready(function() {
             $('.lang-menu-header').removeClass('clicked');
         }
 
+        if ($(e.target).parent().hasClass('goals-menu-header')) {
+            $('.goals-menu').animate({
+                height: 'toggle'
+            }, 120);
+            // $('.goals-menu-header a').toggleClass('clicked');
+        } else {
+            $('.goals-menu').animate({
+                height: 'hide'
+            }, 120);
+            // $('.goals-menu-header a').removeClass('clicked');
+        }
+
     });
+
+
 
 
     $('body').click(function(e) {
