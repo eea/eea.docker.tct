@@ -438,15 +438,9 @@ class NationalIndicator(BaseIndicator):
         (OTHER, 'Other indicators'),
     )
 
-    code = models.CharField(max_length=25,
-                            null=True,
-                            blank=True)
-    title = models.TextField(max_length=512,
-                             verbose_name="Title")
-
-    description = tinymce.models.HTMLField(verbose_name="Description",
-                                           blank=True)
-
+    code = models.CharField(max_length=25, null=True, blank=True)
+    title = models.TextField(max_length=512, verbose_name="Title")
+    description = tinymce.models.HTMLField(verbose_name="Description")
     url = models.URLField(null=True, blank=True)
 
     subindicators = models.ManyToManyField('self', blank=True,
@@ -817,7 +811,7 @@ class NbsapPage(models.Model):
 
     handle = models.CharField(max_length=32)
     title = models.CharField(max_length=128, verbose_name='Title')
-    body = models.TextField(blank=True, verbose_name='Body')
+    body = models.TextField(verbose_name='Body')
 
     class Meta:
         translate = ('title', 'body',)

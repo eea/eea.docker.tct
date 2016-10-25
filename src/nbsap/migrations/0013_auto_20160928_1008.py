@@ -5,7 +5,6 @@ from __future__ import unicode_literals
 from django.db import migrations, models
 import django.db.models.deletion
 import mptt.fields
-import tinymce.models
 
 
 class Migration(migrations.Migration):
@@ -43,47 +42,5 @@ class Migration(migrations.Migration):
             model_name='euaction',
             name='parent',
             field=mptt.fields.TreeForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='children', to='nbsap.EuAction'),
-        ),
-        migrations.AlterField(
-            model_name='euaction',
-            name='title_en',
-            field=models.TextField(verbose_name=b'Title'),
-        ),
-        migrations.AlterField(
-            model_name='nationalaction',
-            name='description_en',
-            field=tinymce.models.HTMLField(verbose_name=b'Description'),
-        ),
-        migrations.AlterField(
-            model_name='nationalaction',
-            name='region',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='nbsap.Region'),
-        ),
-        migrations.AlterField(
-            model_name='nationalaction',
-            name='title_en',
-            field=models.TextField(blank=True, max_length=512, verbose_name=b'Title'),
-        ),
-        migrations.AlterField(
-            model_name='nationalindicator',
-            name='description_en',
-            field=tinymce.models.HTMLField(blank=True, default=1, verbose_name=b'Description'),
-            preserve_default=False,
-        ),
-        migrations.AlterField(
-            model_name='nationalobjective',
-            name='description_en',
-            field=tinymce.models.HTMLField(verbose_name=b'Description'),
-        ),
-        migrations.AlterField(
-            model_name='nbsappage',
-            name='body_en',
-            field=models.TextField(blank=True, default=1, verbose_name=b'Body'),
-            preserve_default=False,
-        ),
-        migrations.AlterField(
-            model_name='nbsappage',
-            name='title_en',
-            field=models.CharField(max_length=128, verbose_name=b'Title'),
         ),
     ]
