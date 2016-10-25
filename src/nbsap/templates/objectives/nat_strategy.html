@@ -123,6 +123,7 @@
     {% endwith %}
   </div>
 
+  {% if DEBUG %}
   <div id="cbd-api">
     <a class="btn btn-success small"
        href="{% url 'send_to_cbd' current_objective_cls current_objective.pk %}">
@@ -131,6 +132,7 @@
     <div class="messages alert" style="position: relative;">
     </div>
   </div>
+  {% endif %}
 {% endblock %}
 
 

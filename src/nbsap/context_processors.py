@@ -12,6 +12,7 @@ def nbsap_admin(request):
         'WARNING_MESSAGE': getattr(settings, 'WARNING_MESSAGE', ''),
         'DEFAULT_LANGUAGE': default_lang,
         'DEFAULT_LANGUAGE_LABEL': dict(settings.LANGUAGES)[default_lang],
+        'DEBUG': settings.DEBUG,
     }
 
 
