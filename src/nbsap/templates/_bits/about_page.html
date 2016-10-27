@@ -12,6 +12,18 @@
         </p>
       </li>
 
+      <li>
+        <a href="{% url 'cms_home' %}">CMS</a>
+        <p class='menu-desc'>Here you can see the Strategic Plan for Migratory Species 2015 – 2023, along with the mapping with the Aichi Targets according to UNEP/CMS/Resolution 10.05.
+        </p>
+      </li>
+
+      <li>
+        <a href="{% url 'ramsar_home' %}">Ramsar</a>
+        <p class='menu-desc'>Here you can see the Ramsar Strategic Plan 2016 – 2024, along with the mapping with the Aichi Targets according to Ramsar resolution XII/2.
+        </p>
+      </li>
+
       {% if EU_STRATEGY %}
         <li>
           <a href="{% url 'eu_targets' %}">
