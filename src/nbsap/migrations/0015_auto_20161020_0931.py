@@ -34,6 +34,7 @@ class Migration(migrations.Migration):
                 ('code', models.CharField(max_length=16)),
                 ('aichi_targets', models.ManyToManyField(blank=True,
                  related_name='cms_targets',
+                 db_constraint=False,
                  to='nbsap.AichiTarget')),
             ],
             options={
