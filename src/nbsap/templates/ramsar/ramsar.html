@@ -37,19 +37,6 @@
   </div>
 {% endblock %}
 
-
-{% block content %}
-
-  {% if list_goals %}
-    {% include 'ramsar/list_goals.html' %}
-  {% elif list_targets %}
-  	{% include 'ramsar/list_targets.html' %}
-  {% else %}
-  	{% include 'ramsar/target_details.html' %}
-  {% endif %}
-
-{% endblock %}
-
 {% block scripts %}
 <script>
   $(function () {
