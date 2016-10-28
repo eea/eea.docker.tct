@@ -78,9 +78,10 @@ class AichiGoalFactory(factory.DjangoModelFactory):
         model = models.AichiGoal
 
     code = factory.Sequence(lambda n: '%d' % n)
-    title_default = factory.Sequence(lambda n: 'obj%d_title_default' % n)
+    title_default = factory.Sequence(
+        lambda n: 'aichi_goal_%d_title_default' % n)
     description_default = factory.Sequence(
-        lambda n: 'obj%d_description_default' % n)
+        lambda n: 'aichi_goal_%d_description_default' % n)
 
     @factory.post_generation
     def targets(self, create, extracted, **kwargs):
@@ -96,7 +97,63 @@ class AichiTargetFactory(factory.DjangoModelFactory):
 
     code = factory.Sequence(lambda n: '%d' % n)
     description_default = factory.Sequence(
-        lambda n: 'action%d_description_default' % n)
+        lambda n: 'aichi_target_%d_description_default' % n)
+
+
+class CMSGoalFactory(factory.DjangoModelFactory):
+
+    class Meta:
+        model = models.CMSGoal
+
+    code = factory.Sequence(lambda n: '%d' % n)
+    title_default = factory.Sequence(
+        lambda n: 'cms_goal_%d_title_default' % n)
+    description_default = factory.Sequence(
+        lambda n: 'cms_goal_%d_description_default' % n)
+
+    @factory.post_generation
+    def targets(self, create, extracted, **kwargs):
+        if extracted:
+            for target in extracted:
+                self.targets.add(target)
+
+
+class CMSTargetFactory(factory.DjangoModelFactory):
+
+    class Meta:
+        model = models.CMSTarget
+
+    code = factory.Sequence(lambda n: '%d' % n)
+    description_default = factory.Sequence(
+        lambda n: 'cms_target_%d_description_default' % n)
+
+
+class RamsarGoalFactory(factory.DjangoModelFactory):
+
+    class Meta:
+        model = models.RamsarGoal
+
+    code = factory.Sequence(lambda n: '%d' % n)
+    title_default = factory.Sequence(
+        lambda n: 'ramsar_goal_%d_title_default' % n)
+    description_default = factory.Sequence(
+        lambda n: 'ramsar_goal_%d_description_default' % n)
+
+    @factory.post_generation
+    def targets(self, create, extracted, **kwargs):
+        if extracted:
+            for target in extracted:
+                self.targets.add(target)
+
+
+class RamsarTargetFactory(factory.DjangoModelFactory):
+
+    class Meta:
+        model = models.RamsarTarget
+
+    code = factory.Sequence(lambda n: '%d' % n)
+    description_default = factory.Sequence(
+        lambda n: 'ramsar_target_%d_description_default' % n)
 
 
 class NationalStrategyFactory(factory.DjangoModelFactory):
