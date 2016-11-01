@@ -91,11 +91,11 @@ class NationalObjectiveTest(BaseWebTest):
             }
         )
 
-    @skip
     def test_edit_national_objective_code_updates_subobjective_code(self):
         """Test code prefix of subobjective is changed on parent code edit."""
+        NationalObjectiveFactory.reset_sequence()
         nat_obj = NationalObjectiveFactory()
-        nat_subobj = NationalObjectiveFactory(parent=nat_obj, code='1.1')
+        nat_subobj = NationalObjectiveFactory(parent=nat_obj)
         edited_code = '42'
         data = {
             'language': 'en',
@@ -215,7 +215,6 @@ class ObjectivesTest(BaseWebTest):
     def setUp(self):
         NationalActionFactory.reset_sequence()
 
-    @skip
     def test_list_objectives(self):
         nat_obj = NationalObjectiveFactory()
         resp = self.app.get(reverse('nat_strategy'))

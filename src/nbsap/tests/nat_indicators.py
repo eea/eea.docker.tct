@@ -81,18 +81,6 @@ class NationalIndicatorsTest(BaseWebTest):
                 }
             )
 
-    @skip
-    def test_list_national_indicators_user(self):
-        nat_indicator = NationalIndicatorFactory()
-        url = reverse('nat_indicators')
-        resp = self.app.get(url)
-        self.assertEqual(200, resp.status_code)
-        title = resp.pyquery('.list-nat-indicators li')
-        self.assertEqual(1, len(title))
-        self.assertIn(nat_indicator.title, title[0].text_content())
-        code = resp.pyquery('.list-nat-indicators li a')
-        self.assertIn(nat_indicator.code, code[0].text_content())
-
     def test_national_indicator_detail_user(self):
         nat_indicator = NationalIndicatorFactory()
         nat_objective_relevant = NationalObjectiveFactory(

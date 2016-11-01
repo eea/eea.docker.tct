@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from django.core.urlresolvers import reverse
-from unittest import skip
 
 from .base import BaseWebTest
 from .factories import (
@@ -26,16 +25,15 @@ class NationalStrategyTest(BaseWebTest):
         self.assertIn(objective.code, tds[0].text_content())
         self.assertIn(goals, tds[1].text_content())
 
-    @skip
     def test_add_national_strategy(self):
-        aichi_target = AichiTargetFactory()
+        aichi_target = AichiTargetFactory(__sequence=1)
         aichi_goal = AichiGoalFactory(targets=(aichi_target,))
         nat_objective = NationalObjectiveFactory()
 
         data = {
             'nat_objective': nat_objective.pk,
-            'aichi_goal': aichi_goal.pk,
-            'aichi_targets': [aichi_target.pk],
+            'aichi_goals': aichi_goal.code,
+            'aichi_targets': aichi_target.code,
         }
         self.app.post(reverse('edit_national_strategy'), data,
                       user='staff')
@@ -49,13 +47,13 @@ class NationalStrategyTest(BaseWebTest):
         self.assertEqual(list(obj.relevant_targets.all()), [aichi_target])
 
     def test_add_national_strategy_fail(self):
-        aichi_target = AichiTargetFactory()
+        aichi_target = AichiTargetFactory(__sequence=1)
         nat_objective = NationalObjectiveFactory()
 
         data = {
             'nat_objective': nat_objective.pk,
             'aichi_goals': 'invalid_pk',
-            'aichi_targets': [aichi_target.pk],
+            'aichi_targets': aichi_target.code,
         }
         resp = self.app.get(reverse('edit_national_strategy'), user='staff')
         form = resp.forms['national-strategy-add']
@@ -86,12 +84,13 @@ class NationalStrategyTest(BaseWebTest):
     def test_edit_national_strategy(self):
         nat_strategy = NationalStrategyFactory()
         nat_objective_for_edit = NationalObjectiveFactory()
-        goals = ', '.join(g.code for g in nat_strategy.get_goals)
-
+        targets = [t.id for t in nat_strategy.relevant_targets.all()]
+        AichiGoalFactory(targets=targets)
+        goals = [g.code for g in nat_strategy.get_goals]
         data = {
             'nat_objective': nat_objective_for_edit.pk,
-            'aichi_goal': goals,
-            'aichi_targets': [t.id
+            'aichi_goals': goals,
+            'aichi_targets': [t.code
                               for t in nat_strategy.relevant_targets.all()],
         }
         url = reverse('edit_national_strategy', kwargs={'pk': nat_strategy.pk})
