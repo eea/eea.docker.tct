@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from django.core.urlresolvers import reverse
-from unittest import skip
 
 from .base import BaseWebTest
 from .factories import (
@@ -93,9 +92,9 @@ class NationalObjectiveTest(BaseWebTest):
 
     def test_edit_national_objective_code_updates_subobjective_code(self):
         """Test code prefix of subobjective is changed on parent code edit."""
-        NationalObjectiveFactory.reset_sequence()
         nat_obj = NationalObjectiveFactory()
-        nat_subobj = NationalObjectiveFactory(parent=nat_obj)
+        nat_subobj = NationalObjectiveFactory(
+            code='{0}.1'.format(nat_obj.code), parent=nat_obj)
         edited_code = '42'
         data = {
             'language': 'en',
