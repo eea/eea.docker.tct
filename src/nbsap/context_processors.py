@@ -13,6 +13,7 @@ def nbsap_admin(request):
         'DEFAULT_LANGUAGE': default_lang,
         'DEFAULT_LANGUAGE_LABEL': dict(settings.LANGUAGES)[default_lang],
         'DEBUG': settings.DEBUG,
+        'INSTANCE_NAME': getattr(settings, 'INSTANCE_NAME', ''),
     }
 
 
