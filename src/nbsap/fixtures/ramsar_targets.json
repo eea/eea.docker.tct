@@ -219,7 +219,10 @@
   "fields": {
     "code": "19",
     "description_en": "Capacity building for implementation of the Convention and the 4th Ramsar Strategic Plan 2016 \u2013 2024 is enhanced.",
-    "aichi_targets": []
+    "aichi_targets": [
+      1,
+      17
+    ]
   }
 }
 ]

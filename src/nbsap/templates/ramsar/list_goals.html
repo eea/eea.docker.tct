@@ -1,17 +1,20 @@
+{% extends 'ramsar/ramsar.html' %}
 {% load i18n %}
 {% load utils %}
 
 
-<h1 class="page-title">{% trans "Ramsar Goals" %}</h1>
-<ul class="list-goals-wrapper">
-  {% for goal in goals %}
-    <li>
-      <a href="{% url 'list_ramsar_targets' code=goal.code %}" title="{{ goal.code }}"</a>
-        <h2 class="list-goals-title">
-          {% trans "Goal" %} {{ goal.code }}
-        </h2>
-        <p class="list-goals-desc">{{ goal.description }}</p>
-      </a>
-    </li>
-  {% endfor %}
-</ul>
+{% block content %}
+  <h1 class="page-title">{% trans "Ramsar Goals" %}</h1>
+  <ul class="list-goals-wrapper">
+    {% for goal in goals %}
+      <li>
+        <a href="{% url 'list_ramsar_targets' code=goal.code %}" title="{{ goal.code }}"</a>
+          <h2 class="list-goals-title">
+            {% trans "Goal" %} {{ goal.code }}
+          </h2>
+          <p class="list-goals-desc">{{ goal.description }}</p>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

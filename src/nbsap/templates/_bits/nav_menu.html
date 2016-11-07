@@ -3,26 +3,31 @@
 
 
 <ul class="nav-menu">
-  <li>
-    <a class="{% active 'aichi_home' 'list_goals' 'list_targets' 'aichi_target_detail' 'goals' %}"
-       href="{% url 'aichi_home' %}">
-      {% trans "Aichi" %}
-    </a>
+  <li class="goals-menu-header">
+  <a>{%trans "Goals Menu"%} </a>
   </li>
+  <ul class="goals-menu">
+    <li>
+      <a class="{% active 'aichi_home' 'list_goals' 'list_targets' 'aichi_target_detail' 'goals' %}"
+         href="{% url 'aichi_home' %}">
+        {% trans "Aichi" %}
+      </a>
+    </li>
 
-  <li>
-    <a class="{% active 'cms_home' 'list_goals' 'list_targets' 'cms_target_detail' %}"
-       href="{% url 'cms_home' %}">
-      {% trans "CMS" %}
-    </a>
-  </li>
+    <li>
+      <a class="{% active 'cms_home' 'list_goals' 'list_targets' 'cms_target_detail' %}"
+         href="{% url 'cms_home' %}">
+        {% trans "CMS" %}
+      </a>
+    </li>
 
-  <li>
-    <a class="{% active 'ramsar_home' 'list_goals' 'list_targets' 'ramsar_target_detail' %}"
-       href="{% url 'ramsar_home' %}">
-      {% trans "Ramsar" %}
-    </a>
-  </li>
+    <li>
+      <a class="{% active 'ramsar_home' 'list_goals' 'list_targets' 'ramsar_target_detail' %}"
+         href="{% url 'ramsar_home' %}">
+        {% trans "Ramsar" %}
+      </a>
+    </li>
+  </ul>
 
   {% if EU_STRATEGY %}
     <li>
