@@ -3,7 +3,7 @@
 
 
 {% block title %}
-NBSAP - {% trans "Export content" %}
+  TCT - {% trans "Export content" %}
 {% endblock %}
 
 
@@ -13,16 +13,16 @@ NBSAP - {% trans "Export content" %}
 
 
 {% block content %}
-<section class="content-header">
-  <h1>{% trans "Export content" %}</h1>
-</section>
-<section class="content">
-  <h2>Export for BISE</h2>
+  <section class="content-header">
+    <h1>{% trans "Export content" %}</h1>
+  </section>
+  <section class="content">
+    <h2>Export for BISE</h2>
 
-  <p>Please copy and paste the following HTML content.</p>
+    <p>Please copy and paste the following HTML content.</p>
 
-  <div>
-    <textarea style="height: 200px" rows="20" cols="120">{{ content }}</textarea>
-  </div>
-</section>
+    <div>
+      <textarea style="height: 200px" rows="20" cols="120">{{ content }}</textarea>
+    </div>
+  </section>
 {% endblock %}
