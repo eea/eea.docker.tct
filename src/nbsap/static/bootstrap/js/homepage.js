@@ -1,6 +1,10 @@
 $(document).ready(function() {
 
-    setTimeout(function() {
+
+   
+
+    if (window.matchMedia("(min-width: 800px)").matches) {
+   setTimeout(function() {
         $('.homepage-info').fadeTo("fast", 1);
     setTimeout(function() {
         $('.homepage-info').removeClass('info-translated')
@@ -9,6 +13,12 @@ $(document).ready(function() {
         }, 1500);
     }, 500);
   }, 500);
+} else {
+    $('.homepage-info').fadeTo("fast", 1);
+    $('.homepage-info').removeClass('info-translated');
+    $('.homepage-info').css('left','0');
+    $('.content .trigger-overlay').fadeTo("fast", 1);
+}
 
 
     $(".overlay").prependTo("body");

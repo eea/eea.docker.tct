@@ -144,8 +144,8 @@
 .nav-menu .trigger-overlay {
     color: white;
     text-transform: uppercase;
+    cursor: pointer;
 }
-
 
 .trigger-overlay-wrapper {
     float: right!important;
@@ -155,13 +155,37 @@
 .button-container {
     margin-top: 2rem;
     text-align: center;
-
     p {
         text-align: left;
         margin-left: 80px;
     }
     button {
         font-size: 1rem!important;
-         transition: font-size .2s;
+        transition: font-size .2s;
+    }
+}
+
+@media (max-width: 800px) {
+    .overlay ul {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .menu-desc {
+        width: 100%;
+        margin: auto;
+    }
+    .overlay ul li a {
+        font-size: 31px;
+    }
+    .overlay .overlay-close {
+        height: 66px;
+        right: 20px;
+        top: -4px;
+    }
+    .overlay .overlay-close:after {
+        position: relative;
+        left: -19px;
     }
 }

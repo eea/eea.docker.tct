@@ -20,6 +20,11 @@
     position: relative;
     width: 46em;
     padding: 1rem;
+
+    @media(max-width: 800px) {
+        max-width: 90%;
+    }
+
     .homepage-title {
         color: @brand-orange;
     }
@@ -32,7 +37,9 @@
     position: relative;
     width: 600px;
     padding: 1rem;
-
+  @media(max-width: 800px) {
+        max-width: 90%;
+    }
     border-left: solid #11bb6d;
     padding-top: 6px;
     padding-bottom: 6px;
@@ -53,4 +60,10 @@
     position: relative;
     left: 80px;
     transition: all 1s;
+}
+
+@media (max-width: 800px) {
+.homepage-targets {
+    line-height: 1.8;
+}
 }
