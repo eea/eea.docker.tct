@@ -2,6 +2,14 @@
 {% load i18n %}
 {% load utils %}
 
+
+{% block metadata %}
+  <meta name="description" content="CMS Strategic Plan 2015 - 2023" />
+  <meta property="og:title" content="{% if current_goal %} CMS Goal {{ current_goal.code }} targets list. {% else %} List of CMS Targets. {% endif %}" />
+  <meta property="og:description" content="Here you can see the Strategic Plan for Migratory Species 2015 – 2023, along with the mapping with the Aichi Targets according to UNEP/CMS/Resolution 10.05." />
+{% endblock %}
+
+
 {% block content %}
   <ul class="list-targets-wrapper">
     {% if current_goal %}

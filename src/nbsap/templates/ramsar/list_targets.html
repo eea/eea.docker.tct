@@ -2,6 +2,14 @@
 {% load i18n %}
 {% load utils %}
 
+
+{% block metadata %}
+  <meta name="description" content="Ramsar Strategic Plan 2016 - 2024" />
+  <meta property="og:title" content="{% if current_goal %} Ramsar Goal {{ current_goal.code }} targets list. {% else %} List of Ramsar Targets. {% endif %}" />
+  <meta property="og:description" content="Here you can see the Ramsar Strategic Plan 2016 – 2024, along with the mapping with the Aichi Targets according to Ramsar resolution XII/2." />
+{% endblock %}
+
+
 {% block content %}
   <ul class="list-targets-wrapper">
     {% if current_goal %}

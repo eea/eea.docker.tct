@@ -2,6 +2,14 @@
 {% load i18n %}
 {% load utils %}
 
+
+{% block metadata %}
+  <meta name="description" content="CMS Strategic Plan 2015 - 2023" />
+  <meta property="og:title" content="CMS Goal {{ target_code }}, Target {{ target.code }}" />
+  <meta property="og:description" content="Here you can see the Strategic Plan for Migratory Species 2015 – 2023, along with the mapping with the Aichi Targets according to UNEP/CMS/Resolution 10.05." />
+{% endblock %}
+
+
 {% block content %}
   <h1 class="page-title">{% trans "Ramsar Goals" %}</h1>
   <h1 class="goal-title">{% trans "Ramsar Goal " %}{{ target_code }}:</h1>

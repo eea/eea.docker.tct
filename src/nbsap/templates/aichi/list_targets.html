@@ -1,18 +1,29 @@
+{% extends 'aichi/aichi.html' %}
 {% load i18n %}
 {% load utils %}
 
-<ul class="list-targets-wrapper">
-  {% if current_goal %}
-    <h2 class="list-targets-goal-title">{% trans "Goal" %} {{ current_goal.code|upper }}</h2>
-    <p class="list-targets-goal-desc">{{ current_goal.description }}</p>
-  {% endif %}
-  {% for target in targets|sort_by_code %}
-    <li>
-      <a href="{% url 'aichi_target_detail' aichi_target_id=target.id %}"
-         rel="tooltip">
-        <h2 class="target-title">{% trans "Aichi Target" %} {{ target.code }}</h2>
-        <p class="target-desc">{{ target.description }}</p>
-      </a>
-    </li>
-  {% endfor %}
-</ul>
+
+{% block metadata %}
+  <meta name="description" content="The Aichi Biodiversity Targets are a set of 20, time-bound, measureable targets..." />
+  <meta property="og:title" content="{% if current_goal %} Aichi Goal {{ current_goal.code }} targets list. {% else %} List of Aichi Targets. {% endif %}" />
+  <meta property="og:description" content="The Aichi Biodiversity Targets are a set of 20, time-bound, measureable targets agreed by the Parties to the Convention on Biological Diversity in Nagoya, Japan, in October 2010, that are now being translated into revised national strategies and action plans by the 193 Parties to the Convention." />
+{% endblock %}
+
+
+{% block content %}
+  <ul class="list-targets-wrapper">
+    {% if current_goal %}
+      <h2 class="list-targets-goal-title">{% trans "Goal" %} {{ current_goal.code|upper }}</h2>
+      <p class="list-targets-goal-desc">{{ current_goal.description }}</p>
+    {% endif %}
+    {% for target in targets|sort_by_code %}
+      <li>
+        <a href="{% url 'aichi_target_detail' aichi_target_id=target.id %}"
+           rel="tooltip">
+          <h2 class="target-title">{% trans "Aichi Target" %} {{ target.code }}</h2>
+          <p class="target-desc">{{ target.description }}</p>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

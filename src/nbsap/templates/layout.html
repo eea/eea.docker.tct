@@ -2,10 +2,18 @@
 {% load i18n %}
 {% load assets %}
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:og="http://ogp.me/ns#">
   <head>
+    <meta http-equiv="Content-Type" content="text/html">
     <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+
     <title>{% block title %}{% endblock %}</title>
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="The Target Cross-linking tool" />
+
+    {% block metadata %}
+    {% endblock %}
     <!--[if lte IE 8]>
       <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -19,6 +27,7 @@
     {% if GOOGLE_ANALYTICS_PROPERTY_ID %}
       {% include "_bits/ga.html" %}
     {% endif %}
+
     <link rel="apple-touch-icon" sizes="57x57" href="/static/img/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/static/img/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="/static/img/apple-icon-72x72.png">
@@ -51,10 +60,9 @@
 
               {% if LAYOUT_HEADER_LOGO %}
                 <div class="logo img">
-                  <img src="/static/img/CHM_logo_45x70px.png">
+                  <img src="/static/img/CHM_logo_45x70px.png" alt="chm logo">
                 </div>
               {% endif %}
-
               <span class="subtitle">
                 Reporting tool towards the Aichi targets and the EU Strategy,
                 <em>{{ INSTANCE_NAME }}</em>

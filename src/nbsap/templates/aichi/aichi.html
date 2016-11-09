@@ -38,43 +38,6 @@
 {% endblock %}
 
 
-{% block content %}
-
-  {% if info_header %}
-    <div class="alert alert-info alert-dismissible info-header" role="alert">
-      <button type="button" class="close" data-dismiss="alert">
-        <span aria-hidden="true">&times;</span>
-      </button>
-      <ul>
-        <h1>{% trans "What is The 2020 Target Cross-linking Tool?" %}</h1>
-        <li>* {% trans "A solution for multiple target reporting (Aichi targets, EU biodiversity strategy and other reporting obligations)" %}</li>
-        <li>* {% trans "A stand alone application - free of charge - to be completely “owned” by user countries" %}</li>
-        <li>* {% trans "Available in national and English languages" %}</li>
-        <li>* {% trans "Ready with Aichi targets and EU targets already integrated in English" %}</li>
-        <h2>{% trans "For further info contact EEA (Rania.Spyropoulou at eea.europa.eu)" %}</h2>
-      </ul>
-    </div>
-  {% endif %}
-
-  {% if list_goals %}
-    {% include 'aichi/list_goals.html' %}
-  {% endif %}
-  {% if list_targets %}
-    {% include 'aichi/list_targets.html' %}
-  {% endif %}
-  {% if not list_goals and not list_targets %}
-    {% include 'aichi/target_details.html' %}
-  {% endif %}
-
-{% endblock %}
-
-
-{% block modal %}
-  <div class="modal-window" id="nat_strategy_export_modal"></div>
-  <div class="modal-window" id="indicator_modal"></div>
-{% endblock %}
-
-
 {% block scripts %}
 <script>
   $(function () {

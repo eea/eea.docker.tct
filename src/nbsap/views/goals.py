@@ -44,12 +44,10 @@ def list_goals(request):
     goals = models.AichiGoal.objects.order_by(
         'code').all().prefetch_related('targets')
     return render_to_response(
-        'aichi/aichi.html',
+        'aichi/list_goals.html',
         context_instance=RequestContext(
             request, {
                 'goals': goals,
-                'list_goals': True,
-                'list_targets': False,
             })
     )
 
@@ -64,13 +62,11 @@ def list_targets(request, code=None):
         current_goal = None
         targets = models.AichiTarget.objects.all()
     return render_to_response(
-        'aichi/aichi.html',
+        'aichi/list_targets.html',
         context_instance=RequestContext(
             request, {
                 'current_goal': current_goal,
                 'goals': goals,
-                'list_goals': False,
-                'list_targets': True,
                 'targets': targets,
             })
     )
@@ -108,9 +104,9 @@ def aichi_target_detail(request, aichi_target_id, code=None):
     target.most_relevant_targets = get_most_relevant_targets(target)
     target.other_relevant_targets = get_other_relevant_targets(target)
     target.most_relevant_indicators = get_most_relevant_indicators(target)
-
+    # import pdb; pdb.set_trace()
     return render_to_response(
-        'aichi/aichi.html',
+        'aichi/target_details.html',
         context_instance=RequestContext(
             request, {
                 'goals': goals,
