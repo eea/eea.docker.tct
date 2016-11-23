@@ -27,7 +27,7 @@
             {% trans "Objective" %} {{ objective.code }}
           </a>
           <ul class="sidebar-submenu list">
-            {% for action in objective.actions_tree %}
+            {% for action in objective.actions_tree|sort_by_code %}
               <li>
                 <a class="nat-objective" href="{% url 'implementation' code=objective.code %}#{{ action.code }}"
                    rel='tooltip'>
