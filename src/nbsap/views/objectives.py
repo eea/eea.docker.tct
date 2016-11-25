@@ -89,17 +89,9 @@ def nat_strategy_download(request):
 
 
 def implementation(request, code=None):
-    lang = request.LANGUAGE_CODE
-    data = {'body_%s' % lang: ''}
-    is_empty_page = not (models.NbsapPage.objects
-                         .filter(handle='implementation')
-                         .exclude(**data).exists())
-
     objectives = models.NationalObjective.objects
-    if not objectives:
-        return render(request, 'objectives/empty_nat_strategy.html', {
-            'is_empty_page': is_empty_page,
-        })
+    if not objectives.exists():
+        return render(request, 'objectives/empty_nat_strategy.html')
 
     if code is None:
         code = objectives.first().code
@@ -118,7 +110,6 @@ def implementation(request, code=None):
     return render(request, 'nat_strategy/implementation.html', {
         'current_objective': current_objective,
         'objectives': objectives,
-        'is_empty_page': is_empty_page,
     })
 
 
@@ -126,7 +117,6 @@ def implementation_page(request):
     page = get_object_or_404(models.NbsapPage, handle='implementation')
     objectives = models.NationalObjective.objects.filter(parent=None).all()
     return render(request, 'nat_strategy/implementation_page.html', {
-        'is_empty_page': True,
         'page': page,
         'objectives': objectives,
     })

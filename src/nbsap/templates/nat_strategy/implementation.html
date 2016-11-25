@@ -18,9 +18,6 @@
     <h4 class="sidebar-title">{% trans "Related actions" %}</h4>
     <input class="search" placeholder="quick search" />
     <ul class="sidebar-menu list">
-      {% if is_empty_page %}
-        <li>{% trans "No content found" %}</li>
-      {% endif %}
       {% for objective in objectives|sort_by_code %}
         <li id="list-item-imp" {% if objective.code == current_objective.code %}class="active"{% endif %}>
           <a class="nat-objective" href="{% url 'implementation' code=objective.code %}">
