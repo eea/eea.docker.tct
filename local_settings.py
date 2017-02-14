@@ -25,7 +25,7 @@ LANGUAGE_CODE = 'en'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'nbsap.de',
+        'NAME': 'nbsap.db',
     }
 }
 
@@ -33,6 +33,7 @@ DATABASES = {
 # please use full mappings
 LANGUAGES = (
   ('en', ugettext('English')),
+  ('fr', ugettext('French')),
 )
 
 # Set to True if your application is EU dependent
