@@ -25,7 +25,7 @@ LANGUAGE_CODE = 'en'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'nbsap',
+        'NAME': 'nbsap.de',
     }
 }
 

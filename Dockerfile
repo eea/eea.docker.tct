@@ -17,4 +17,5 @@ WORKDIR $PROJ_DIR
 
 RUN pip install -r requirements.txt
 
-CMD "cat"
+ENTRYPOINT ["./docker-setup.sh"]
+CMD ["run"]
