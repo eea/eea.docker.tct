@@ -18,7 +18,7 @@ LANGUAGE_CODE = 'en'
 DATABASES = {
     'default': {
         'ENGINE': env('DATABASES_ENGINE', 'django.db.backends.sqlite3'),
-        'NAME': env('DATABASES_NAME', 'nbsap.de'),
+        'NAME': env('DATABASES_NAME', 'nbsap.db'),
         'USER': env('DATABASES_USER', ''),
         'PASSWORD': env('DATABASES_PASSWORD', ''),
         'HOST': env('DATABASES_HOST', ''),
@@ -80,7 +80,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '8u6d#h7cga4a!&qya#-e2ct%%&$1u^ce5rub$9#1zcn=n$j@^h'
+SECRET_KEY = env('SECRET_KEY', '')
 
 TEMPLATES = [
     {
@@ -228,14 +228,13 @@ NOSE_ARGS = [
 # ALLOWED_USERS = ['admin']
 
 # LDAP login
-AUTHENTICATION_BACKENDS = env('AUTHENTICATION_BACKENDS', (
+AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'django_auth_ldap.backend.LDAPBackend',
-))
+)
 
-AUTH_LDAP_SERVER_URI = env('AUTH_LDAP_SERVER_URI', "ldap://nas.edw.lan")
-AUTH_LDAP_USER_DN_TEMPLATE = env(
-    'AUTH_LDAP_USER_DN_TEMPLATE', "uid=%(user)s,cn=users,dc=edw,dc=lan")
+AUTH_LDAP_SERVER_URI = "ldap://ldap.eionet.europa.eu"
+AUTH_LDAP_USER_DN_TEMPLATE = "uid=%(user)s,ou=Users,o=EIONET,l=Europe"
 
 # Set to True if REG is a valid National Indicator value
 ENABLE_REG_INDICATORS = env('ENABLE_REG_INDICATORS', False)

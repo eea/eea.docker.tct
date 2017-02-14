@@ -1,0 +1,52 @@
+version: '2'
+
+services:
+  apache:
+    image: eeacms/apache:2.4s
+    labels:
+      io.rancher.scheduler.affinity:host_label_ne: reserved=yes
+    depends_on:
+    - tct
+    environment:
+      SERVER_ADMIN: helpdesk@eionet.europa.eu
+      SERVER_NAME: tct.eionet.europa.eu
+      TZ: Europe/Copenhagen
+    volumes:
+    - static:/var/local/tct/static:ro
+    - conf:/usr/local/apache2/conf
+
+  tct_base:
+    build: .
+    # image: eeacms/tct
+    labels:
+      io.rancher.scheduler.affinity:host_label_ne: reserved=yes
+    depends_on:
+    - mysql
+    environment:
+      TZ: Europe/Copenhagen
+    volumes:
+    - static:/var/local/tct/static
+
+  tct_it:
+    extends: tct
+    env_file:
+    - ./env-files/it.env
+
+  mysql:
+    image: mysql:latest
+    labels:
+      io.rancher.scheduler.affinity:host_label_ne: reserved=yes
+    environment:
+      MYSQL_ROOT_PASSWORD: Zaej8zai
+      TZ: Europe/Copenhagen
+    volumes:
+    - data:/var/lib/mysql
+    command: "--character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci"
+
+volumes:
+  static:
+    driver: rancher-nfs
+  apache:
+    driver: rancher-nfs
+  data:
+    driver: rancher-nfs
