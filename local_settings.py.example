@@ -1,12 +1,12 @@
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
-ASSETS_ROOT = 'src/nbsap/static'
+ASSETS_ROOT = 'nbsap/static'
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # define your language preference
 ugettext = lambda s: s
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
 
 DATABASES = {
     'default': {
@@ -89,6 +89,7 @@ LANGUAGES = (
 
 # Template settings
 #SITE_HEADER = 'Your site header'
+#INSTANCE_NAME = 'Your instance name'
 
 # Set to True for information header
 #INFO_HEADER = False
