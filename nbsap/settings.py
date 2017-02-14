@@ -1,21 +1,35 @@
-import sys
 import os
+import sys
+from getenv import env
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-DEBUG = False
+DEBUG = env('DEBUG', True)
+
+ASSETS_ROOT = env('ASSETS_ROOT', 'nbsap/static')
+ALLOWED_HOSTS = env('ALLOWED_HOSTS', ['localhost', '127.0.0.1'])
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en'
-
 ugettext = lambda s: s
 
-LANGUAGES = (
+LANGUAGE_CODE = 'en'
+
+DATABASES = {
+    'default': {
+        'ENGINE': env('DATABASES_ENGINE', 'django.db.backends.sqlite3'),
+        'NAME': env('DATABASES_NAME', 'nbsap.de'),
+        'USER': env('DATABASES_USER', ''),
+        'PASSWORD': env('DATABASES_PASSWORD', ''),
+        'HOST': env('DATABASES_HOST', ''),
+    }
+}
+
+LANGUAGES = env('LANGUAGES', (
     ('en', ugettext('English')),
     ('fr', ugettext('French')),
     ('nl', ugettext('Dutch')),
-)
+))
 
 SITE_ID = 1
 
@@ -43,11 +57,12 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+STATIC_ROOT = env('STATIC_ROOT', 'static')
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
-STATIC_URL = '/static/'
+STATIC_URL = env('STATIC_URL', '/static/')
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -61,7 +76,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -187,22 +202,21 @@ TINYMCE_DEFAULT_CONFIG = {
 }
 TINYMCE_SPELLCHECKER = False
 TINYMCE_COMPRESSOR = False
-TINYMCE_JS_URL = '/static/js/tiny_mce/tiny_mce.js'
-TINYMCE_JS_ROOT = '/static/js/tiny_mce'
+TINYMCE_JS_URL = 'nbsap/static/js/tiny_mce/tiny_mce.js'
+TINYMCE_JS_ROOT = 'nbsap/static/js/tiny_mce'
 
 CSS_ASSETS = ()
 
-ASSETS_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Main config
-EU_STRATEGY = False
-EU_STRATEGY_ADD = False
-NAT_STRATEGY = True
-SITE_HEADER = 'NBSAP'
-INFO_HEADER = False
-LAYOUT_FOOTER_LOGO_VISIBLE = False
-LAYOUT_HEADER_LOGO_VISIBLE = False
-HEADER_BACKGROUND_IMG = '/static/header.png'
+EU_STRATEGY = env('EU_STRATEGY', False)
+EU_STRATEGY_ADD = env('EU_STRATEGY_ADD', False)
+NAT_STRATEGY = env('NAT_STRATEGY', True)
+SITE_HEADER = env('SITE_HEADER', 'Reporting tool towards the AICHI targets,')
+INFO_HEADER = env('INFO_HEADER', False)
+LAYOUT_FOOTER_LOGO_VISIBLE = env('LAYOUT_FOOTER_LOGO_VISIBLE', False)
+LAYOUT_HEADER_LOGO_VISIBLE = env('LAYOUT_HEADER_LOGO_VISIBLE', False)
+HEADER_BACKGROUND_IMG = env('HEADER_BACKGROUND_IMG', '/static/header.png')
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 NOSE_ARGS = [
@@ -210,13 +224,44 @@ NOSE_ARGS = [
     '--cover-package=nbsap',
 ]
 
-FACILITY = 'tct'
+# Set the variable below to allow only certain users to use the application
+# ALLOWED_USERS = ['admin']
+
+# LDAP login
+AUTHENTICATION_BACKENDS = env('AUTHENTICATION_BACKENDS', (
+    'django.contrib.auth.backends.ModelBackend',
+    'django_auth_ldap.backend.LDAPBackend',
+))
+
+AUTH_LDAP_SERVER_URI = env('AUTH_LDAP_SERVER_URI', "ldap://nas.edw.lan")
+AUTH_LDAP_USER_DN_TEMPLATE = env(
+    'AUTH_LDAP_USER_DN_TEMPLATE', "uid=%(user)s,cn=users,dc=edw,dc=lan")
+
+# Set to True if REG is a valid National Indicator value
+ENABLE_REG_INDICATORS = env('ENABLE_REG_INDICATORS', False)
+
+# Set the following variables to enable communication with the CBD API
+CBD_API_USERNAME = env('CBD_API_USERNAME', '')
+CBD_API_PASSWORD = env('CBD_API_PASSWORD', '')
+CBD_API_REALM = env('CBD_API_REALM', 'CHM-DEV')
+CBD_API_LANGUAGES = env('CBD_API_LANGUAGES', [
+                        'ar', 'zh', 'en', 'fr', 'ru', 'es'])
+CBD_API_BASE_URL = env('CBD_API_BASE_URL', 'https://api.cbddev.xyz/api/v2013/')
+CBD_AUTH_URL = env('CBD_AUTH_URL', CBD_API_BASE_URL + 'authentication/token')
+CBD_SAVE_URL = env('CBD_SAVE_URL', CBD_API_BASE_URL +
+                   'documents/{uid}/versions/draft?schema={schema}')
+CBD_WORKFLOW_URL = env('CBD_WORKFLOW_URL', CBD_API_BASE_URL + 'workflows')
+CBD_VERIFY_SSL = env('CBD_VERIFY_SSL', True)
 
 
-try:
-    from local_settings import *
-except ImportError:
-    pass
+FACILITY = env('FACILITY', 'tct')
+INSTANCE_NAME = env('INSTANCE_NAME', 'Testing Instance')
+
+
+# try:
+#     from local_settings import *
+# except ImportError:
+#     pass
 
 
 LOGGING['handlers']['graypy']['facility'] = FACILITY
