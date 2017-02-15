@@ -6,7 +6,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 DEBUG = env('DEBUG', True)
 
-ASSETS_ROOT = env('ASSETS_ROOT', 'nbsap/static')
+ASSETS_ROOT = os.path.join(BASE_DIR, 'static')
 ALLOWED_HOSTS = env('ALLOWED_HOSTS', ['localhost', '127.0.0.1'])
 
 # Language code for this installation. All choices can be found here:
@@ -17,11 +17,14 @@ LANGUAGE_CODE = 'en'
 
 DATABASES = {
     'default': {
-        'ENGINE': env('DATABASES_ENGINE', 'django.db.backends.sqlite3'),
-        'NAME': env('DATABASES_NAME', 'nbsap.db'),
-        'USER': env('DATABASES_USER', ''),
-        'PASSWORD': env('DATABASES_PASSWORD', ''),
-        'HOST': env('DATABASES_HOST', ''),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': env('DATABASES_NAME', 'nbsap'),
+        'USER': env('DATABASES_USER', 'nbsap'),
+        'PASSWORD': env('DATABASES_PASSWORD', 'nbsap'),
+        'HOST': '',
+        'PORT': '',
+        'TEST_CHARSET': 'utf8',
+        'TEST_COLLATION': 'utf8_general_ci',
     }
 }
 
@@ -57,12 +60,12 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-
-STATIC_ROOT = env('STATIC_ROOT', 'static')
+# STATIC_ROOT = 'static'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
-STATIC_URL = env('STATIC_URL', '/static/')
+STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -80,7 +83,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = env('SECRET_KEY', '')
+SECRET_KEY = env('SECRET_KEY', '8u6d#h7cga4a!&qya#-e2ct%%&$1u^ce5rub$9#1zcn=n$j@^h')
 
 TEMPLATES = [
     {
@@ -214,8 +217,8 @@ EU_STRATEGY_ADD = env('EU_STRATEGY_ADD', False)
 NAT_STRATEGY = env('NAT_STRATEGY', True)
 SITE_HEADER = env('SITE_HEADER', 'Reporting tool towards the AICHI targets,')
 INFO_HEADER = env('INFO_HEADER', False)
-LAYOUT_FOOTER_LOGO_VISIBLE = env('LAYOUT_FOOTER_LOGO_VISIBLE', False)
 LAYOUT_HEADER_LOGO_VISIBLE = env('LAYOUT_HEADER_LOGO_VISIBLE', False)
+LAYOUT_FOOTER_LOGO_VISIBLE = env('LAYOUT_FOOTER_LOGO_VISIBLE', False)
 HEADER_BACKGROUND_IMG = env('HEADER_BACKGROUND_IMG', '/static/header.png')
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
@@ -240,27 +243,20 @@ AUTH_LDAP_USER_DN_TEMPLATE = "uid=%(user)s,ou=Users,o=EIONET,l=Europe"
 ENABLE_REG_INDICATORS = env('ENABLE_REG_INDICATORS', False)
 
 # Set the following variables to enable communication with the CBD API
-CBD_API_USERNAME = env('CBD_API_USERNAME', '')
-CBD_API_PASSWORD = env('CBD_API_PASSWORD', '')
-CBD_API_REALM = env('CBD_API_REALM', 'CHM-DEV')
-CBD_API_LANGUAGES = env('CBD_API_LANGUAGES', [
-                        'ar', 'zh', 'en', 'fr', 'ru', 'es'])
-CBD_API_BASE_URL = env('CBD_API_BASE_URL', 'https://api.cbddev.xyz/api/v2013/')
-CBD_AUTH_URL = env('CBD_AUTH_URL', CBD_API_BASE_URL + 'authentication/token')
-CBD_SAVE_URL = env('CBD_SAVE_URL', CBD_API_BASE_URL +
-                   'documents/{uid}/versions/draft?schema={schema}')
-CBD_WORKFLOW_URL = env('CBD_WORKFLOW_URL', CBD_API_BASE_URL + 'workflows')
-CBD_VERIFY_SSL = env('CBD_VERIFY_SSL', True)
+# CBD_API_USERNAME = ''
+# CBD_API_PASSWORD = ''
+# CBD_API_REALM = 'CHM-DEV'
+# CBD_API_LANGUAGES = ['ar', 'zh', 'en', 'fr', 'ru', 'es']
+# CBD_API_BASE_URL = 'https://api.cbddev.xyz/api/v2013/'
+# CBD_AUTH_URL = CBD_API_BASE_URL + 'authentication/token'
+# CBD_SAVE_URL = CBD_API_BASE_URL + \
+#     'documents/{uid}/versions/draft?schema={schema}'
+# CBD_WORKFLOW_URL = CBD_API_BASE_URL + 'workflows'
+# CBD_VERIFY_SSL = True
 
 
 FACILITY = env('FACILITY', 'tct')
 INSTANCE_NAME = env('INSTANCE_NAME', 'Testing Instance')
-
-
-# try:
-#     from local_settings import *
-# except ImportError:
-#     pass
 
 
 LOGGING['handlers']['graypy']['facility'] = FACILITY
