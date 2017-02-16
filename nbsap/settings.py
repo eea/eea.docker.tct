@@ -1,6 +1,7 @@
 import os
 import sys
 from getenv import env
+from django.utils.translation import ugettext_lazy as _
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -11,7 +12,7 @@ ALLOWED_HOSTS = env('ALLOWED_HOSTS', ['localhost', '127.0.0.1'])
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-ugettext = lambda s: s
+# ugettext = lambda s: s
 
 LANGUAGE_CODE = 'en'
 
@@ -28,11 +29,78 @@ DATABASES = {
     }
 }
 
-LANGUAGES = env('LANGUAGES', (
-    ('en', ugettext('English')),
-    ('fr', ugettext('French')),
-    ('nl', ugettext('Dutch')),
-))
+ALL_LANGUAGES = (
+    ('en', 'English'),
+    ('cs', 'Czech'),
+    ('sq-al', 'Albanian'),
+    ('lt', 'Lithuanian'),
+    ('hy', 'Armenian'),
+    ('fr', 'French'),
+    ('nl', 'Dutch'),
+    ('ru', 'Russian'),
+    ('tr', 'Turkish'),
+    ('pl', 'Polish'),
+    ('ky', 'Kyrgyz'),
+    ('bg', 'Bulgaria'),
+    ('de-at', 'German'),
+    ('az-az', 'Azeri'),
+    ('uk', 'Ukrainian'),
+    ('tk', 'Turkmen'),
+    ('be-by', 'Belarusian'),
+    ('se-se', 'Sami'),
+    ('uz', 'Uzbek'),
+    ('sk', 'Slovak'),
+    ('fi', 'Finnish'),
+    ('no', 'Norwegian'),
+    ('is', 'Icelandic'),
+    ('de-de', 'German'),
+    ('fr-ch', 'French'),
+    ('de-ch', 'German'),
+    ('it-ch', 'Italian'),
+    ('ro', 'Romanian'),
+    ('de-li', 'German'),
+    ('hu', 'Hungarian'),
+    ('bs-ba', 'Bosnian'),
+    ('lv', 'Latvian'),
+    ('it-it', 'Italian'),
+    ('fr-mc', 'French'),
+    ('sl', 'Slovenian'),
+    ('ka', 'Georgian'),
+    ('hr-hr', 'Croatian'),
+    ('mk', 'Macedonian'),
+    ('sr', 'Montenegrin'),
+    ('ca', 'Catalan'),
+    ('sr', 'Serbian'),
+    ('sq', 'Albanian'),
+    ('tg', 'Tajik'),
+    ('kk', 'Kazakh'),
+    ('pt-pt', 'Portuguese'),
+    ('mt', 'Maltese'),
+    ('et', 'Estonian'),
+    ('fr-lu', 'French'),
+    ('de-lu', 'German'),
+    ('es-es', 'Spanish'),
+    ('md', 'Moldavian'),
+    ('da-dk', 'Danish'),
+    ('el-gr', 'Greek'),
+)
+
+
+def get_languages(ENV_LANGUAGES):
+    LANGUAGES = filter(lambda language:
+                       language[0] in ENV_LANGUAGES.split(','), ALL_LANGUAGES)
+    utext_languages = ()
+    for lang in LANGUAGES:
+        utext_languages += ((lang[0], _(lang[1])),)
+    return utext_languages
+
+
+LANGUAGES = get_languages(env('LANGUAGES')) if env('LANGUAGES') else (
+    ('en', _('English')),
+    ('fr', _('French')),
+    ('nl', _('Dutch')),
+)
+
 
 SITE_ID = 1
 
@@ -60,7 +128,6 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-# STATIC_ROOT = 'static'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # URL prefix for static files.
