@@ -1,0 +1,88 @@
+{% extends 'manager/base.html' %}
+
+{% load i18n %}
+{% load assets %}
+
+{% block title %}
+  TCT - {% trans "EU Indicators: List Indicators" %}
+{% endblock %}
+
+{% block content %}
+  {% get_current_language as lang_code %}
+  <section class="content-header">
+    <h1 class="page-title">{% trans "European Indicators" %}</h1>
+  </section>
+  <section class="content">
+    <ul class="nav nav-tabs">
+      <li class="{% if category == 'headline' %}active{% endif %}">
+        <a href="{% url 'list_eu_indicators' %}?category=headline">Headline indicators</a>
+      </li>
+      <li class="{% if category == 'other' %}active{% endif %}">
+        <a href="{% url 'list_eu_indicators' %}?category=other">Other indicators</a>
+      </li>
+    </ul>
+    {% url 'edit_eu_indicator' as edit_indicator %}
+    <table data-url="{{ edit_indicator }}" id="indicator-table" class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>{% trans "Code" %}</th>
+          <th>{% trans "Title" %}</th>
+          <th>URL</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for indicator in indicators %}
+          <tr>
+            <td>{{ indicator.full_code|default:'' }}</td>
+            <td>
+              <a href="{% url 'view_eu_indicator' pk=indicator.pk %}" title="{% trans 'Indicator' %} {{ indicator.code }}">
+                {{ indicator.title|default:indicator.code }}</a>
+            </td>
+            <td>
+              {% if indicator.url %}
+                <a href="{{ indicator.url }}">
+                  {{ indicator.get_indicator_type_display }}
+                  {{ indicator.code|default:'' }}:
+                  {{indicator.title}}</a>
+              {% else %}
+                {{ indicator.code|default:'' }}
+                {{ indicator.title }}
+              {% endif %}
+            </td>
+            <td>
+              <form method="POST" class="delete" action="{% url 'delete_eu_indicator' pk=indicator.pk %}">
+
+                <span class="btn btn-xs btn-warning ajaxget" data-url="{% url 'edit_eu_indicator' pk=indicator.pk %}">
+                  <i class="glyphicon glyphicon-edit"></i>
+                </span>
+                <button type="submit" class="btn btn-xs btn-danger edit" data-message="{% trans 'Are you sure you want to delete this indicator?' %}">
+                  <i class="glyphicon glyphicon-trash"></i>
+                </button>
+                <a class="btn btn-xs btn-default" href="{% url 'map_eu_indicator' pk=indicator.pk %}">{% trans "Aichi Mapping" %}</a>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="loader-container">
+      <div class="loader">
+      </div>
+    </div>
+    <div class="form"></div>
+  </section>
+{% endblock %}
+{% block scripts %}
+  <script src="/static/js/object_delete.js"></script>
+  <script src="/static/js/jquery.ajaxGetForm.js"></script>
+  <script>
+    $(function () {
+      $('#indicator-table').dataTable({"paging": false, "dom": '<"filter-wrapper"f>t'});
+      var url = $('#indicator-table').data('url');
+      $('.filter-wrapper').prepend('<div class="action-bar"><span class="btn btn-success add ajaxget" data-url="' + url + '?category={{ category }}">{% trans "Add indicator" %}</span></div>');
+      $.ajaxGet({targetForm: ".form", button: ".ajaxget"});
+    });
+  </script>
+
+{% endblock scripts %}

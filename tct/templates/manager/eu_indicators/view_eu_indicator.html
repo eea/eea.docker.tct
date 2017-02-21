@@ -1,0 +1,67 @@
+{% extends 'manager/base.html' %}
+
+{% load i18n %}
+{% load utils %}
+
+{% block title %}
+  TCT - {% trans "Indicator" %} {{ indicator.code }}: {{indicator.title }}
+{% endblock %}
+
+{% block content %}
+  <section class="content-header">
+    <h1>
+      {% if indicator.code %}
+        {% trans "Indicator" %}
+        {{ indicator.code }}:
+      {% endif %}
+      {{ indicator.title }}
+    </h1>
+  </section>
+  <section class="content">
+    <div class="box">
+      <div class="box-header with-border action-bar filter-wrapper">
+        <a class="btn btn-success" href="javascript: history.go(-1)">
+          <i class="glyphicon glyphicon-arrow-left"></i>
+          {% trans "Back" %}
+        </a>
+        <a class="btn btn-default" href="{% url 'map_eu_indicator' pk=indicator.pk %}">{% trans "Aichi Mapping" %}</a>
+      </div>
+      <div class="box-body">
+        {% if indicator.url %}
+          URL:
+          <a href="{{ indicator.url }}">
+            {{ indicator.get_indicator_type_display }}
+            {{ indicator.code|default:'' }}:
+            {{indicator.title}}</a>
+        {% else %}
+          {{ indicator.code|default:'' }}
+          {{ indicator.title }}
+        {% endif %}
+        {% if indicator.eu_indicator_aichi_strategy.exists %}
+          <h2>{% trans "Mapping with Aichi Strategy" %}</h2>
+          <h4>Most relevant</h4>
+          <ul>
+            {% for strategy in indicator.eu_indicator_aichi_strategy.all %}
+              {% for aichi_target in strategy.aichi_targets.all %}
+                <li>{{ aichi_target }}</li>
+              {% endfor %}
+            {% endfor %}
+          </ul>
+          {% if indicator.eu_indicator_aichi_strategy.count %}
+            <h4>Other</h4>
+            <ul>
+              {% for strategy in indicator.eu_indicator_aichi_strategy.all %}
+                {% for aichi_target in strategy.other_aichi_targets.all %}
+                  <li>{{ aichi_target }}</li>
+                {% endfor %}
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
+  </section>
+{% endblock %}
+{% block scripts %}
+  <script src="/static/js/object_delete.js"></script>
+{% endblock scripts %}

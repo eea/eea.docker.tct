@@ -1,0 +1,84 @@
+{% extends 'layout.html' %}
+
+{% load i18n %}
+{% load utils %}
+
+
+{% block title %}
+  TCT - {% trans "Aichi Goals" %}
+{% endblock %}
+
+
+{% block navmenu%}
+  {% include '_bits/nav_menu.html' %}
+{% endblock %}
+
+
+{% block sidebar %}
+  <div class="sidebar">
+    <h4 class="sidebar-title">Goals</h4>
+    <ul class="sidebar-menu">
+      {% for goal in goals %}
+        <li id="list-item" {% if goal.code == target_code %}class="active"{% endif %}>
+          <a>{% trans "Goal" %} {{ goal.code|upper }}</a>
+          <ul class="sidebar-submenu">
+            {% for current_target in goal.targets.all|sort_by_code %}
+              <li {% if current_target.code == target.code %}class="active"{% endif %}>
+                <a href="{% url 'goals' code=goal.code aichi_target_id=current_target.id %}"
+                  rel="tooltip" class="targets">
+                  {% trans "Target" %} {{ current_target.code }}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}
+
+
+{% block content %}
+
+  {% if info_header %}
+    <div class="alert alert-info alert-dismissible info-header" role="alert">
+      <button type="button" class="close" data-dismiss="alert">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <ul>
+        <h1>{% trans "What is The 2020 Target Cross-linking Tool?" %}</h1>
+        <li>* {% trans "A solution for multiple target reporting (Aichi targets, EU biodiversity strategy and other reporting obligations)" %}</li>
+        <li>* {% trans "A stand alone application - free of charge - to be completely “owned” by user countries" %}</li>
+        <li>* {% trans "Available in national and English languages" %}</li>
+        <li>* {% trans "Ready with Aichi targets and EU targets already integrated in English" %}</li>
+        <h2>{% trans "For further info contact EEA (Rania.Spyropoulou at eea.europa.eu)" %}</h2>
+      </ul>
+    </div>
+  {% endif %}
+
+  {% if list_goals %}
+    {% include 'aichi/list_goals.html' %}
+  {% endif %}
+  {% if list_targets %}
+    {% include 'aichi/list_targets.html' %}
+  {% endif %}
+  {% if not list_goals and not list_targets %}
+    {% include 'aichi/target_details.html' %}
+  {% endif %}
+
+{% endblock %}
+
+
+{% block modal %}
+  <div class="modal-window" id="nat_strategy_export_modal"></div>
+  <div class="modal-window" id="indicator_modal"></div>
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+  $(function () {
+    $("[rel=tooltip]").tooltip();
+  });
+</script>
+{% endblock scripts %}

@@ -1,0 +1,72 @@
+[
+  {
+      "pk" : "a",
+      "model" : "tct.aichigoal",
+      "fields" : {
+          "title_en" : "Strategic Goal A",
+          "description_en" : "Address the underlying causes of biodiversity loss by mainstreaming biodiversity across government and society",
+          "targets" : [
+              1,
+              2,
+              3,
+              4
+          ]
+      }
+  },
+  {
+      "pk" : "b",
+      "model" : "tct.aichigoal",
+      "fields" : {
+          "title_en" : "Strategic Goal B",
+          "description_en" : "Reduce the direct pressures on biodiversity and promote sustainable use",
+          "targets" : [
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
+          ]
+      }
+  },
+  {
+      "pk" : "c",
+      "model" : "tct.aichigoal",
+      "fields" : {
+          "title_en" : "Strategic Goal C",
+          "description_en" : "To improve the status of biodiversity by safeguarding ecosystems, species and genetic diversity",
+          "targets" : [
+              11,
+              12,
+              13
+          ]
+      }
+  },
+  {
+      "pk" : "d",
+      "model" : "tct.aichigoal",
+      "fields" : {
+          "title_en" : "Strategic Goal D",
+          "description_en" : "Enhance the benefits to all from biodiversity and ecosystem services",
+          "targets" : [
+              14,
+              15,
+              16
+          ]
+      }
+  },
+  {
+      "pk" : "e",
+      "model" : "tct.aichigoal",
+      "fields" : {
+          "title_en" : "Strategic Goal E",
+          "description_en" : "Enhance implementation through participatory planning, knowledge management and capacity building",
+          "targets" : [
+              17,
+              18,
+              19,
+              20
+          ]
+      }
+  }
+]

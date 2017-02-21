@@ -14,7 +14,7 @@ gen
 *~
 sandbox/*
 fabfile/env.ini
-/src/nbsap/static/node_modules
+/tct/static/node_modules
 .vagrant
 salt
 Vagrantfile

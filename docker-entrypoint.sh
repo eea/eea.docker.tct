@@ -10,8 +10,8 @@ case $1 in
         exec python manage.py ${args[@]:1}
         ;;
     run)
-        exec gunicorn nbsap.wsgi:application \
-            --name nbsap \
+        exec gunicorn tct.wsgi:application \
+            --name tct \
             --bind 0.0.0.0:8000 \
             --workers 3 \
             --access-logfile - \

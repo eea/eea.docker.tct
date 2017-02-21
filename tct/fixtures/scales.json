@@ -1,0 +1,30 @@
+[
+  {
+      "pk" : 1,
+      "model" : "tct.scale",
+      "fields" : {
+          "title" : "Global"
+      }
+  },
+  {
+      "pk" : 2,
+      "model" : "tct.scale",
+      "fields" : {
+          "title" : "National"
+      }
+  },
+  {
+      "pk" : 3,
+      "model" : "tct.scale",
+      "fields" : {
+          "title" : "Sub-national"
+      }
+  },
+  {
+      "pk" : 4,
+      "model" : "tct.scale",
+      "fields" : {
+          "title" : "Regional"
+      }
+  }
+]

@@ -1,10 +1,10 @@
 ===============================================
-Quick Installation Guide for NBSAP platform
+Quick Installation Guide for TCT platform
 ===============================================
 
 .. contents ::
 
-Following this readme will create an isolated environment for running NBSAP platform.
+Following this readme will create an isolated environment for running TCT platform.
 There are three configurations available for running this buildout::
   1. production (production)
   2. testing (staging)
@@ -72,8 +72,8 @@ Product directory
 ~~~~~~~~~~~~~~~~
 ::
 
-  $ mkdir -p /var/local/nbsap
-  $ chown -R [USER]:[USER] /var/local/nbsap
+  $ mkdir -p /var/local/tct
+  $ chown -R [USER]:[USER] /var/local/tct
   $ exit
 
 
@@ -95,8 +95,8 @@ Login on remote machine::
 
 Prepare database on remote machine::
 
-  mysql> create database nbsap DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
-  mysql> grant all on nbsap.* to nbsap@localhost identified by 'nbsap';
+  mysql> create database tct DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+  mysql> grant all on tct.* to tct@localhost identified by 'tct';
 
 Configure supervisord on remote machine::
 
@@ -110,14 +110,14 @@ Tune Django to serve static files::
 
  $ cd /var/local/project-root
  $ mkdir static
- $ echo "STATIC_ROOT = '/var/local/project-root/static'" >> instance/local_settings.py
- $ ./instance/manage.py collectstatic --noinput
+ $ echo "STATIC_ROOT = '/var/local/project-root/static'" >> local_settings.py
+ $ ./manage.py collectstatic --noinput
 
 Tune Apache to proxy-pass and serve static files for the app::
 
   # Add the following entry to http conf files
   #    <VirtualHost *:80>
-  #      ServerName nbsap...
+  #      ServerName tct...
   #      Alias /static /var/local/project-root/static
   #      ProxyPass /static !
   #      ProxyPass / http://localhost:[PORT]/
@@ -148,8 +148,8 @@ Login on remote machine::
 
 Prepare database on remote machine::
 
-  mysql> create database nbsap DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
-  mysql> grant all on nbsap.* to nbsap@localhost identified by 'nbsap';
+  mysql> create database tct DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+  mysql> grant all on tct.* to tct@localhost identified by 'tct';
 
 Configure supervisord on remote machine::
 
@@ -163,14 +163,14 @@ Tune Django to serve static files::
 
  $ cd /var/local/project-root
  $ mkdir static
- $ echo "STATIC_ROOT = '/var/local/project-root/static'" >> instance/local_settings.py
- $ ./instance/manage.py collectstatic --noinput
+ $ echo "STATIC_ROOT = '/var/local/project-root/static'" >> settings.py
+ $ ./manage.py collectstatic --noinput
 
 Tune Apache to proxy-pass and serve static files for the app::
 
   # Add the following entry to http conf files
   #    <VirtualHost *:80>
-  #      ServerName nbsap...
+  #      ServerName tct...
   #      Alias /static /var/local/project-root/static
   #      ProxyPass /static !
   #      ProxyPass / http://localhost:[PORT]/
@@ -188,51 +188,49 @@ Build devel
 -------------
 ::
 
-  $ cd /var/local/nbsap
-  $ git clone https://github.com/eea/nbsap.git django
+  $ cd /var/local/tct
+  $ git clone https://github.com/eea/eea.docker.tct.git django
   $ cd django
   $ virtualenv-2.7 --no-site-packages sandbox
   $ echo '*' > sandbox/.gitignore
   $ . sandbox/bin/activate
   $ pip install -U distribute
   $ pip install -r requirements-dev.txt
-  $ pip install -e .
-  $ cp instance/local_settings.py.example instance/local_settings.py
 
 Select preferred languages::
 
-  # edit instance/local_settings.py and filter the preferred languages
+  # edit settings.py and filter the preferred languages
 
 Prepare database::
 
-  mysql> create database nbsap DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
-  mysql> grant all on nbsap.* to nbsap@localhost identified by 'nbsap';
+  mysql> create database tct DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+  mysql> grant all on tct.* to tct@localhost identified by 'tct';
 
 Tune up manage.py script::
 
   The first line should define the python executable used to run the script. This should be the path to your virtualenv's python. In this particular case it should be:
-  #!/var/local/nbsap/django/sandbox/bin/python
+  #!/var/local/tct/django/sandbox/bin/python
 
 Continue build devel by syncing database model and loading fixtures::
 
-  $ ./instance/manage.py migrate
-  $ ./instance/manage.py load_fixtures
-  $ ./instance/manage.py apply_mptt
+  $ ./manage.py migrate
+  $ ./manage.py load_fixtures
+  $ ./manage.py apply_mptt
 
 Run the tests to check the validity of your installation::
 
-  $ ./instance/manage.py test nbsap
+  $ ./manage.py test tct
 
 Start running development server::
 
-  $ ./instance/manage.py runserver
+  $ ./manage.py runserver
 
 
 Common configuration
 --------------------
 
 Set `ALLOWED_USERS` in settings to restrict access to a specific set of usernames.
-See `local_settings.py.example` for LDAP Authentication configuration.
+See `settings.py` for LDAP Authentication configuration.
 
 
 =================
@@ -244,34 +242,34 @@ For translations there are two methods.
 
 Run over the entire source tree and pull out all strings marked for translation::
 
-  $ cd src/nbsap
+  $ cd tct
   $ django-admin.py makemessages -a
 
-Edit <msgstr> for each <msgid> in nbsap/locale/_LANGUAGE_/LC_MESSAGE/django.po
+Edit <msgstr> for each <msgid> in tct/locale/_LANGUAGE_/LC_MESSAGE/django.po
 
 Compile .po file created with previous command::
 
-  $ cd src/nbsap
+  $ cd tct
   $ django-admin.py compilemessages
 
 Restart server::
 
   # if devel mode
-  $ ./instance/manage.py runserver
+  $ ./manage.py runserver
   # otherwise
   $ supervisorctl
-  supervisor> restart nbsap
+  supervisor> restart tct
 
 2. Automatic translation
 
-Make sure 'DEBUG=True' in instance/local_settings.py so that an admin user is
+Make sure 'DEBUG=True' in local_settings.py so that an admin user is
 automatically generated when starting sever::
 
-  $ ./instance/manage.py runserver
+  $ ./manage.py runserver
   # surf over [HOST]:[PORT]/translate to use Rosetta tool for translation
   # complete the forms within the correct translations
   # restart server when ready
-  $ ./instance/manage.py runserver
+  $ ./manage.py runserver
 
 
 ========

@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+{% load i18n %}
+{% load utils %}
+
+
+{% block title %}
+  TCT - {% trans "EU Targets" %}
+{% endblock %}
+
+
+{% block navmenu %}
+  {% include '_bits/nav_menu.html' %}
+{% endblock %}
+
+
+{% block sidebar %}
+  <div class="sidebar">
+    <h4 class="sidebar-title">Targets</h4>
+    <ul class="sidebar-menu">
+      {% for target in targets %}
+        <li class="{% if target.pk == current_target.pk %}active {% endif %}{% if target.parent %}indent{% endif %}">
+          <a href="{% url 'eu_target_detail' pk=target.pk %}"
+             title="{{ target.code }}">
+            {% trans "Target" %} {{ target.code }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}
+
+
+{% block content %}
+  <h1 class="page-title">{% trans "EU Targets" %}</h1>
+  <ul class="target-list">
+    {% for target in targets %}
+      <li>
+        <a href="{% url 'eu_target_detail' pk=target.pk %}"
+           title="{% trans 'Target' %} {{ target.code }}">
+          <span>EU Target</span>
+          <span class="target-code">{{ target.code }}</span>
+          {{ target.title|default:target.code }}
+        </a>
+        <div class="eu-target-desc">{{ target.description|safe }}</div>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

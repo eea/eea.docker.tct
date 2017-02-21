@@ -2,7 +2,7 @@ language: python
 python:
   - "2.7"
 install: pip install -r requirements-dev.txt && ./manage.py collectstatic --noinput
-script:  ./manage.py test nbsap
+script:  ./manage.py test tct
 after_success: coveralls
 notifications:
   email:

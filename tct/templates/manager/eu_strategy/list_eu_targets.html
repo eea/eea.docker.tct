@@ -1,0 +1,119 @@
+{% extends 'manager/base.html' %}
+
+{% load i18n %}
+{% load assets %}
+
+{% block title %}
+  TCT - {% trans "EU Strategy: List Targets" %}
+{% endblock %}
+
+{% block content %}
+
+  {% get_current_language as lang_code %}
+  <section class="content-header">
+    <h1 class="page-title">{% trans "European Targets" %}</h1>
+  </section>
+  <section class="content">
+    {% if EU_STRATEGY_ADD %}
+      {% url 'edit_eu_target' as edit %}
+    {% endif %}
+    <table data-url="{{ edit }}" id="target-table" class="table table-striped table-bordered dataTable">
+      <thead>
+        <th>{% trans "Code" %}</th>
+        <th>{% trans "EU Target" %}</th>
+        <th>{% trans "Has actions" %}</th>
+        <th></th>
+      </thead>
+      <tbody>
+        {% for target in targets %}
+          <tr>
+            <td>{{ target.code }}</td>
+            <td>
+              <a href="{% url 'view_eu_strategy_target' target.id %}" title="{% trans 'Target' %} {{ target.code }}">
+                {{ target.title|default:target.code }}</a>
+            </td>
+            <td>
+              {% if not target.actions.all %}
+                <span class="label label-danger">
+                  <i class="glyphicon glyphicon-remove-sign"></i>
+                </span>
+              {% else %}
+                <span class="label label-success">
+                  <i class="glyphicon glyphicon-ok-sign"></i>
+                </span>
+              {% endif %}
+            </td>
+            <td>
+              <form class="delete" method="POST" action="{% url 'delete_eu_strategy_target' pk=target.pk %}">
+                <span class="btn btn-xs btn-warning ajaxget" data-url="{% url 'edit_eu_strategy_target' pk=target.pk %}">
+                  <i class="glyphicon glyphicon-edit"></i>
+                </span>
+
+                <button type="submit" class="btn btn-xs btn-danger edit" data-message="{% trans 'Are you sure you want to delete this target?' %}">
+                  <i class="glyphicon glyphicon-trash"></i>
+                </button>
+                {% if not target.parent %}
+                  <span class="btn btn-xs btn-default ajaxget" data-url="{% url 'edit_eu_target_with_parent' parent=target.pk %}">
+                    {% trans "Add sub target" %}
+                  </a>
+                {% endif %}
+              </form>
+            </td>
+          </tr>
+          {% for subtarget in target.children.all %}
+            <tr>
+              <td class="table-indent">{{ subtarget.code }}</td>
+              <td class="table-indent">
+                <a href="{% url 'view_eu_strategy_target' subtarget.id %}" title="{% trans 'Target' %} {{ subtarget.code }}">
+                  {{ subtarget.title|default:subtarget.code }}</a>
+              </td>
+              <td>
+                {% if not subtarget.actions.all %}
+                  <span class="label label-danger">
+                    <i class="glyphicon glyphicon-remove-sign"></i>
+                  </span>
+                {% else %}
+                  <span class="label label-success">
+                    <i class="glyphicon glyphicon-ok-sign"></i>
+                  </span>
+                {% endif %}
+              </td>
+              <td>
+                <form class="delete" method="POST" action="{% url 'delete_eu_strategy_target' pk=subtarget.pk %}">
+                  <span class="btn btn-xs btn-warning ajaxget" data-url="{% url 'edit_eu_strategy_target' pk=subtarget.pk %}">
+                    <i class="glyphicon glyphicon-edit"></i>
+                  </span>
+                  <button type="submit" class="btn btn-xs btn-danger edit" data-message="{% trans 'Are you sure you want to delete this target?' %}">
+                    <i class="glyphicon glyphicon-trash"></i>
+                  </button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="loader-container">
+      <div class="loader">
+      </div>
+    </div>
+    <div class="form"></div>
+  </section>
+{% endblock %}
+
+{% block scripts %}
+  <script src="/static/js/jquery.ajaxGetForm.js"></script>
+  <script>
+    $(function () {
+      $('#target-table').dataTable({"paging": false, "dom": '<"filter-wrapper"f>t'});
+      var url = $('#target-table').data('url');
+      {% if EU_STRATEGY_ADD %}
+        $('.filter-wrapper').prepend('<div class="action-bar"><span class="btn btn-success add ajaxget" data-url="' + url + '">{% trans "Add target" %}</span></div>');
+      {% else %}
+        $('.filter-wrapper').css("display", "inline-block");
+      {% endif %}
+      $.ajaxGet({targetForm: ".form", button: ".ajaxget"});
+    });
+  </script>
+  <script src="/static/js/object_delete.js"></script>
+{% endblock scripts %}

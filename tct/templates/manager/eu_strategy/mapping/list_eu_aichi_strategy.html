@@ -1,0 +1,89 @@
+{% extends 'manager/base.html' %}
+
+{% load i18n %}
+{% load assets %}
+{% load utils %}
+
+{% block title %}
+  TCT - {% trans "Mapping EU Targets to Aichi Targets" %}
+{% endblock %}
+
+{% block content %}
+  <section class="content-header">
+    <h1 class="page-title">{% trans "Mapping EU Targets to Aichi Targets" %}</h1>
+  </section>
+
+  <section class="content">
+    {% url 'edit_eu_aichi_strategy' as edit_strategy %}
+    {% if strategies %}
+      <div class="table-responsive">
+        <table data-url="{{ edit_strategy }}" id="aichi-map" class="table table-striped table-bordered dataTable">
+          <thead>
+            <th>{% trans "Eu Targets" %}</th>
+            <th>{% trans "AICHI Goals" %}</th>
+            <th>{% trans "Relevant AICHI Targets"%}</th>
+            <th>{% trans "Other AICHI Targets"%}</th>
+            <th>{% trans "Eu Indicators"%}</th>
+            <th>{% trans "Other Eu Indicators"%}</th>
+            <th></th>
+          </thead>
+          <tbody>
+            {% for strategy in strategies %}
+              <tr>
+                <td class="strategy">
+                  {% for eu_target in strategy.eu_targets.all|sort_by_code %}
+                    <a href="{% url 'view_eu_strategy_target' pk=eu_target.pk %}">
+                      {{ eu_target.code }}</a>
+                  {% endfor %}
+                </td>
+                <td>
+                  {% for goal in strategy.get_goals|sort_by_code %}
+                    <a href="{% url 'list_targets' code=goal.code %}">
+                      {{ goal.code|title }}</a>
+                  {% endfor %}
+                </td>
+                <td>
+                  {{ strategy.aichi_targets.all|sort_by_code|join:", " }}
+                </td>
+                <td>
+                  {{ strategy.other_aichi_targets.all|sort_by_code|join:", " }}
+                </td>
+                <td>
+                  {{ strategy.eu_targets.first.get_indicators_short }}
+                </td>
+                <td>
+                  {{ strategy.eu_targets.first.get_other_indicators_short }}
+                </td>
+                <td>
+                  <form method="POST" class="delete" action="{% url 'delete_eu_aichi_strategy' pk=strategy.pk %}">
+                    <a class="btn btn-xs btn-warning add" href="{% url 'edit_eu_aichi_strategy' pk=strategy.pk %}">
+                      <i class="glyphicon glyphicon-edit"></i>
+                    </a>
+                    <button type="submit" class="btn btn-xs btn-danger edit" data-message="{% trans 'Are you sure you want to delete this strategy?' %}">
+                      <i class="glyphicon glyphicon-trash"></i>
+                    </button>
+                  </form>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <p>
+        <em>No mappings</em>
+      </p>
+    {% endif %}
+  </section>
+{% endblock %}
+
+{% block scripts %}
+  <script src="/static/js/object_delete.js"></script>
+  <script>
+    $(function () {
+      $('#aichi-map').dataTable({"paging": false, "dom": '<"filter-wrapper"f>t'});
+      var url = $('#aichi-map').data('url');
+      $('.filter-wrapper').prepend('<div class="action-bar"><a class="btn btn-success add" href="' + url + '">{% trans "Add Mapping" %}</a></div>')
+    });
+  </script>
+{% endblock scripts %}

@@ -1,0 +1,68 @@
+[
+{
+  "model": "tct.cmsgoal",
+  "pk": "1",
+  "fields": {
+    "title_en": "CMS Goal 1",
+    "description_en": "Address the underlying causes of decline of migratory species by mainstreaming relevant conservation and sustainable use priorities across government and society",
+    "targets": [
+      1,
+      2,
+      3,
+      4
+    ]
+  }
+},
+{
+  "model": "tct.cmsgoal",
+  "pk": "2",
+  "fields": {
+    "title_en": "CMS Goal 2",
+    "description_en": "Reduce the direct pressures on migratory species and their habitats",
+    "targets": [
+      5,
+      6,
+      7
+    ]
+  }
+},
+{
+  "model": "tct.cmsgoal",
+  "pk": "3",
+  "fields": {
+    "title_en": "CMS Goal 3",
+    "description_en": "Improve the conservation status of migratory species and the ecological connectivity and resilience of their habitats",
+    "targets": [
+      10,
+      8,
+      9
+    ]
+  }
+},
+{
+  "model": "tct.cmsgoal",
+  "pk": "4",
+  "fields": {
+    "title_en": "CMS Goal 4",
+    "description_en": "Enhance the benefits to all from the favourable conservation status of migratory species",
+    "targets": [
+      11,
+      12
+    ]
+  }
+},
+{
+  "model": "tct.cmsgoal",
+  "pk": "5",
+  "fields": {
+    "title_en": "CMS Goal 5",
+    "description_en": "Enhance implementation through participatory planning, knowledge management and capacity building",
+    "targets": [
+      13,
+      14,
+      15,
+      16
+    ]
+  }
+}
+]
