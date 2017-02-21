@@ -3,7 +3,7 @@ Fabric==1.10.2
 paramiko==1.16.0
 pycrypto==2.6.1
 webassets==0.11.1
-factory-boy==2.7.0
+factory-boy==2.8.1
 pyquery==1.2.13
 lxml==3.6.0
 cssselect==0.9.1
