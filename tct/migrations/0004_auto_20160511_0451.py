@@ -128,7 +128,7 @@ class Migration(migrations.Migration):
 
         operations.append(
             migrations.AddField(
-                model_name='tctpage',
+                model_name='nbsappage',
                 name='title_%s' % lang[0],
                 field=models.TextField(max_length=512, verbose_name=b'Title',
                                        **kw),
@@ -136,7 +136,7 @@ class Migration(migrations.Migration):
         )
         operations.append(
             migrations.AddField(
-                model_name='tctpage',
+                model_name='nbsappage',
                 name='body_%s' % lang[0],
                 field=models.TextField(blank=True, null=True,
                                        verbose_name=b'Description'),

@@ -55,7 +55,7 @@ class Migration(migrations.Migration):
                 field=tinymce.models.HTMLField(verbose_name=b'Description', **kw),
             ),
             migrations.AlterField(
-                model_name='tctpage',
+                model_name='nbsappage',
                 name='title_%s' % lang[0],
                 field=models.CharField(max_length=128, verbose_name=b'Title', **kw),
             ),
@@ -77,7 +77,7 @@ class Migration(migrations.Migration):
                 **field_kw
             ),
             migrations.AlterField(
-                model_name='tctpage',
+                model_name='nbsappage',
                 name='body_%s' % lang[0],
                 field=models.TextField(verbose_name=b'Body', **kw),
                 **field_kw
