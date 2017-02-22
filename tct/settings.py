@@ -8,7 +8,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 DEBUG = env('DEBUG', True)
 
 ASSETS_ROOT = os.path.join(BASE_DIR, 'static')
-ALLOWED_HOSTS = env('ALLOWED_HOSTS', ['localhost', '127.0.0.1'])
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', env('ALLOWED_HOSTS')]
 
 
 LANGUAGE_CODE = 'en'
@@ -19,7 +19,7 @@ DATABASES = {
         'NAME': env('DATABASES_NAME', 'tct'),
         'USER': env('DATABASES_USER', 'tct'),
         'PASSWORD': env('DATABASES_PASSWORD', 'tct'),
-        'HOST': '',
+        'HOST': 'mysql',
         'PORT': '',
         'TEST_CHARSET': 'utf8',
         'TEST_COLLATION': 'utf8_general_ci',
