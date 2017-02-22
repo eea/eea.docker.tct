@@ -180,7 +180,7 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='TCTPage',
+            name='NbsapPage',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('handle', models.CharField(max_length=32)),
