@@ -4,7 +4,7 @@ MAINTAINER "EEA: IDM2 C-TEAM" <eea-edw-c-team-alerts@googlegroups.com>
 
 ENV PROJ_DIR=/var/local/tct
 
-RUN runDeps="gcc git vim gettext libmysqlclient-dev libldap2-dev libsasl2-dev" \
+RUN runDeps="gcc git vim gettext libmysqlclient-dev libldap2-dev libsasl2-dev netcat mysql-client" \
     && apt-get -y update \
     && apt-get install -y --no-install-recommends $runDeps \
     && rm -vrf /var/lib/apt/lists/*
