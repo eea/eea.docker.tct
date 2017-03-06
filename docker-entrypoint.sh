@@ -19,7 +19,7 @@ if ! mysql -h mysql -u root -p$MYSQL_ROOT_PASSWORD -e "use $DATABASES_NAME;"; th
 fi
 
 python manage.py collectstatic --noinput
-python manage.py loaddata aichi_goals aichi_indicators aichi_links aichi_targets cms_goals cms_targets eu_actions eu_aichi_indicators_mapping eu_aichi_mapping eu_indicators eu_targets groups pages ramsar_goals ramsar_targets scales users
+python manage.py load_fixtures
 python manage.py migrate
 
 case $1 in
