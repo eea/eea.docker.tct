@@ -19,7 +19,7 @@ DATABASES = {
         'NAME': env('DATABASES_NAME', 'tct'),
         'USER': env('DATABASES_USER', 'tct'),
         'PASSWORD': env('DATABASES_PASSWORD', 'tct'),
-        'HOST': 'mysql',
+        'HOST': '',
         'PORT': '',
         'TEST_CHARSET': 'utf8',
         'TEST_COLLATION': 'utf8_general_ci',
@@ -287,7 +287,6 @@ SITE_HEADER = env('SITE_HEADER', 'Reporting tool towards the AICHI targets,')
 INFO_HEADER = env('INFO_HEADER', False)
 LAYOUT_HEADER_LOGO_VISIBLE = env('LAYOUT_HEADER_LOGO_VISIBLE', False)
 LAYOUT_FOOTER_LOGO_VISIBLE = env('LAYOUT_FOOTER_LOGO_VISIBLE', False)
-HEADER_BACKGROUND_IMG = env('HEADER_BACKGROUND_IMG', '/static/header.png')
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 NOSE_ARGS = [
