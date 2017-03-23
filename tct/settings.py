@@ -19,7 +19,7 @@ DATABASES = {
         'NAME': env('DATABASES_NAME', 'tct'),
         'USER': env('DATABASES_USER', 'tct'),
         'PASSWORD': env('DATABASES_PASSWORD', 'tct'),
-        'HOST': '',
+        'HOST': 'mysql',
         'PORT': '',
         'TEST_CHARSET': 'utf8',
         'TEST_COLLATION': 'utf8_general_ci',
