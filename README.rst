@@ -4,12 +4,6 @@ Quick Installation Guide for TCT platform
 
 .. contents ::
 
-Following this readme will create an isolated environment for running TCT platform.
-There are three configurations available for running this buildout::
-  1. production (production)
-  2. testing (staging)
-  3. development (development)
-
 
 Project name and whereabouts
 ----------------------------
@@ -25,211 +19,36 @@ the national strategy. (e.g. add/modify/delete an objective, action or even
 elements from AICHI) in the purpose of building it.
 
 
-Prerequisites - System packages
--------------------------------
-These should be installed by the sysadmin (needs root)
-This buildout was tested on RHEL based-linux.
+Run in devel with Docker Compose
+--------------------------------
 
+**Create and edit the following files**::
 
-RHEL based systems
-~~~~~~~~~~~~~~~~~
-We will need pip to install some python related packages for versions greater
-than the python shipped with RHEL 6.5. We will also need additional repos: PUIAS
+Edit `mysql.env`::
 
-Install prerequisites::
+  $ cp env-files/mysql.env.example env-files/mysql.env
+  $ vim env-files/mysql.env
 
-  $ yum install openssl-devel vim wget
+Edit `demo.env`. You can change the environment variables to suit your needs. In `demo.env.example` file you can see an example of how this variables should look like::
 
-Bring out puias repo for python 2.7::
+  $ cp env-files/demo.env.example env-files/demo.env
+  $ vim env-files/demo.env
 
-  $ touch /etc/yum.repos.d/puias-computational.repo
+**Start the containers**::
 
-Copy the following lines into the above mentioned file::
+  $ docker-compose up -d
 
-  [PUIAS_6_computational]
-  name=PUIAS computational Base $releasever - $basearch
-  mirrorlist=http://puias.math.ias.edu/data/puias/computational/$releasever/$basearch/mirrorlist
-  #baseurl=http://puias.math.ias.edu/data/puias/computational/$releasever/$basearch
-  gpgcheck=1
-  gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-puias
+**Copy `apache.conf` file to the Apache container**::
 
-Download and import the Repo GPG key::
-
-  $ cd /etc/pki/rpm-gpg/
-  $ wget -q http://springdale.math.ias.edu/data/puias/6/x86_64/os/RPM-GPG-KEY-puias
-  $ rpm --import RPM-GPG-KEY-puias
-
-Install python packages::
-
-  $ sudo bash
-  $ yum install python27 python27-devel python27-libs python27-setuptools git
-  $ yum install mysql-devel mysql-server
-  $ service mysqld restart
-  $ easy_install-2.7 virtualenv
-
-
-Product directory
-~~~~~~~~~~~~~~~~
-::
-
-  $ mkdir -p /var/local/tct
-  $ chown -R [USER]:[USER] /var/local/tct
-  $ exit
-
-
-Build production
-----------------
-::
-
-  # copy and adjust env dict in fabfile.py.sample
-  # then define own Fabric file
-  $ cp fabfile.py.sample fabfile.py
-
-Deploy code on remote host::
-
-  $ fab install:target=production
-
-Login on remote machine::
-
-  # activate production-venv virtualenv
-
-Prepare database on remote machine::
-
-  mysql> create database tct DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
-  mysql> grant all on tct.* to tct@localhost identified by 'tct';
-
-Configure supervisord on remote machine::
-
-  $ cp supervisord.conf.sample production-venv/supervisord.conf
-  # edit production-venv/supervisord.conf with corresponding PROJECT_ROOT path
-  $ supervisord
-  # double check system is running with no errors
-  $ supervisorctl
-
-Tune Django to serve static files::
-
- $ cd /var/local/project-root
- $ mkdir static
- $ echo "STATIC_ROOT = '/var/local/project-root/static'" >> local_settings.py
- $ ./manage.py collectstatic --noinput
-
-Tune Apache to proxy-pass and serve static files for the app::
-
-  # Add the following entry to http conf files
-  #    <VirtualHost *:80>
-  #      ServerName tct...
-  #      Alias /static /var/local/project-root/static
-  #      ProxyPass /static !
-  #      ProxyPass / http://localhost:[PORT]/
-  #      ProxyPassReverse / http://localhost:[PORT]/
-  #    </VirtualHost>
-
-
-Restart Apache to load new changes::
-
-  $ service httpd reload
-
-
-Build staging
--------------
-::
-
-  # copy and adjust env dict in fabfile.py.sample
-  # then define own Fabric file
-  $ cp fabfile.py.sample fabfile.py
-
-Deploy code on remote host::
-
-  $ fab install
-
-Login on remote machine::
-
-  # activate staging-venv virtualenv
-
-Prepare database on remote machine::
-
-  mysql> create database tct DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
-  mysql> grant all on tct.* to tct@localhost identified by 'tct';
-
-Configure supervisord on remote machine::
-
-  $ cp supervisord.conf.sample staging-venv/supervisord.conf
-  # edit staging-venv/supervisord.conf with corresponding PROJECT_ROOT path
-  $ supervisord
-  # double check system is running with no errors
-  $ supervisorctl
-
-Tune Django to serve static files::
-
- $ cd /var/local/project-root
- $ mkdir static
- $ echo "STATIC_ROOT = '/var/local/project-root/static'" >> settings.py
- $ ./manage.py collectstatic --noinput
-
-Tune Apache to proxy-pass and serve static files for the app::
-
-  # Add the following entry to http conf files
-  #    <VirtualHost *:80>
-  #      ServerName tct...
-  #      Alias /static /var/local/project-root/static
-  #      ProxyPass /static !
-  #      ProxyPass / http://localhost:[PORT]/
-  #      ProxyPassReverse / http://localhost:[PORT]/
-  #    </VirtualHost>
-
-
-Restart Apache to load new changes::
-
-  $ service httpd reload
-
-
-
-Build devel
--------------
-::
-
-  $ cd /var/local/tct
-  $ git clone https://github.com/eea/eea.docker.tct.git django
-  $ cd django
-  $ virtualenv-2.7 --no-site-packages sandbox
-  $ echo '*' > sandbox/.gitignore
-  $ . sandbox/bin/activate
-  $ pip install -U distribute
-  $ pip install -r requirements-dev.txt
-
-Select preferred languages::
-
-  # edit settings.py and filter the preferred languages
-
-Prepare database::
-
-  mysql> create database tct DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
-  mysql> grant all on tct.* to tct@localhost identified by 'tct';
-
-Tune up manage.py script::
-
-  The first line should define the python executable used to run the script. This should be the path to your virtualenv's python. In this particular case it should be:
-  #!/var/local/tct/django/sandbox/bin/python
-
-Continue build devel by syncing database model and loading fixtures::
-
-  $ ./manage.py migrate
-  $ ./manage.py load_fixtures
-  $ ./manage.py apply_mptt
-
-Run the tests to check the validity of your installation::
-
-  $ ./manage.py test tct
-
-Start running development server::
-
-  $ ./manage.py runserver
+    $ docker cp conf-files/apache.conf tct_apache_1:/usr/local/apache2/conf/extra/vh-my-app.conf
+    $ docker-compose restart apache
 
 
 Common configuration
 --------------------
 
 Set `ALLOWED_USERS` in settings to restrict access to a specific set of usernames.
+
 See `settings.py` for LDAP Authentication configuration.
 
 
@@ -278,16 +97,6 @@ Contacts
 The project owner is EEA (European Environment Agency)
 
 Technical development team: contact at eaudeweb.ro
-
-=========
-Resources
-=========
-Minimum requirements:
- * [CPU] Single Core >= 2.5 GHz
- * [RAM] 2048 MB
- * [Hard disc] current necessary < 1 GB
- * [Hard disc] 6 months forecast <= 10 GB
- * [NIC] 100 Mbit
 
 
 =====================
