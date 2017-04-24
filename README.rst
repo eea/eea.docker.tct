@@ -24,12 +24,12 @@ Run in devel with Docker Compose
 
 **Create and edit the following files**::
 
-Edit `mysql.env`::
+Edit *mysql.env*::
 
   $ cp env-files/mysql.env.example env-files/mysql.env
   $ vim env-files/mysql.env
 
-Edit `demo.env`. You can change the environment variables to suit your needs. In `demo.env.example` file you can see an example of how this variables should look like::
+Edit *demo.env*. You can change the environment variables to suit your needs. In *demo.env.example* file you can see an example of how this variables should look like::
 
   $ cp env-files/demo.env.example env-files/demo.env
   $ vim env-files/demo.env
@@ -38,7 +38,7 @@ Edit `demo.env`. You can change the environment variables to suit your needs. In
 
   $ docker-compose up -d
 
-**Copy `apache.conf` file to the Apache container**::
+**Copy apache.conf file to the Apache container**::
 
     $ docker cp conf-files/apache.conf tct_apache_1:/usr/local/apache2/conf/extra/vh-my-app.conf
     $ docker-compose restart apache
@@ -47,9 +47,9 @@ Edit `demo.env`. You can change the environment variables to suit your needs. In
 Common configuration
 --------------------
 
-Set `ALLOWED_USERS` in settings to restrict access to a specific set of usernames.
+Set *ALLOWED_USERS* in settings to restrict access to a specific set of usernames.
 
-See `settings.py` for LDAP Authentication configuration.
+See *settings.py* for LDAP Authentication configuration.
 
 
 =================
