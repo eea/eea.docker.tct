@@ -61,6 +61,7 @@ For translations there are two methods.
 
 Run over the entire source tree and pull out all strings marked for translation::
 
+  $ docker exec -it tct_demo_1 bash
   $ cd tct
   $ django-admin.py makemessages -a
 
@@ -68,27 +69,25 @@ Edit <msgstr> for each <msgid> in tct/locale/_LANGUAGE_/LC_MESSAGE/django.po
 
 Compile .po file created with previous command::
 
-  $ cd tct
   $ django-admin.py compilemessages
 
 Restart server::
 
-  # if devel mode
-  $ ./manage.py runserver
-  # otherwise
-  $ supervisorctl
-  supervisor> restart tct
+  $ docker-compose restart demo
 
 2. Automatic translation
 
-Make sure 'DEBUG=True' in local_settings.py so that an admin user is
-automatically generated when starting sever::
+Enter the application container::
 
-  $ ./manage.py runserver
-  # surf over [HOST]:[PORT]/translate to use Rosetta tool for translation
+  $ docker exec -it tct_demo_1 bash
+
+Create a superuser::
+
+  $ ./manage.py createsuperuser
+  # surf over /translate to use Rosetta tool for translation
   # complete the forms within the correct translations
   # restart server when ready
-  $ ./manage.py runserver
+  $ docker-compose restart demo
 
 
 ========
