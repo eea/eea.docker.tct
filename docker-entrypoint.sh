@@ -19,8 +19,8 @@ if ! mysql -h mysql -u root -p$MYSQL_ROOT_PASSWORD -e "use $DATABASES_NAME;"; th
 fi
 
 python manage.py collectstatic --noinput
-python manage.py load_fixtures
 python manage.py migrate
+python manage.py load_fixtures
 
 case $1 in
     manage)

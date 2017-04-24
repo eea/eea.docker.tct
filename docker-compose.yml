@@ -1,0 +1,59 @@
+version: '2'
+
+services:
+  apache:
+    image: eeacms/apache:2.4-1.0
+    depends_on:
+    - base
+    environment:
+      SERVER_ADMIN: helpdesk@eionet.europa.eu
+      SERVER_NAME: tct.eionet.europa.eu
+      TZ: Europe/Copenhagen
+    volumes:
+    - tct-static-files:/var/local/tct/static:ro
+    - tct-apache-files:/usr/local/apache2/conf
+    - tct-apache-htdocs:/usr/local/apache2/htdocs:ro
+
+  base:
+    build: .
+    environment:
+      TZ: Europe/Copenhagen
+      DEBUG: 'False'
+    env_file:
+    - ./env-files/mysql.env
+    volumes:
+    - tct-static-files:/var/local/tct/static
+
+  demo:
+    extends:
+      service: base
+    ports:
+    - "80:80"
+    depends_on:
+    - mysql
+    environment:
+      DEBUG: 'True'
+    env_file:
+    - ./env-files/mysql.env
+    - ./env-files/demo.env
+
+  mysql:
+    image: mysql:latest
+    environment:
+      TZ: Europe/Copenhagen
+    env_file:
+    - ./env-files/mysql.env
+    volumes:
+    - data:/var/lib/mysql
+    command: "--character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci"
+
+
+volumes:
+  tct-static-files:
+    driver: local
+  tct-apache-files:
+    driver: local
+  tct-apache-htdocs:
+    driver: local
+  data:
+    driver: local
