@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-DEBUG = env('DEBUG', True)
+DEBUG = env('DEBUG', False)
 
 ASSETS_ROOT = os.path.join(BASE_DIR, 'static')
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', env('ALLOWED_HOSTS')]
