@@ -38,10 +38,26 @@ Edit *demo.env*. You can change the environment variables to suit your needs. In
 
   $ docker-compose up -d
 
-**Copy apache.conf file to the Apache container**::
+**Verify that all containers are up (check ``State`` column)**::
 
-    $ docker cp conf-files/apache.conf tct_apache_1:/usr/local/apache2/conf/extra/vh-my-app.conf
-    $ docker-compose restart apache
+  $ docker-compose ps
+
+**Create a superuser**::
+
+  $ docker exec -it tct_demo_1 bash
+  $ ./manage.py createsuperuser
+
+**Run tests**::
+
+  $ docker exec -it tct_demo_1 bash
+  $ pip install -r requirements-dev.txt
+  $ ./manage.py test
+
+**Restore a mysql database**::
+
+    $ cat backup.sql | docker exec -i nbsapdocker_mysql_1 /usr/bin/mysql -u root --password=$PASSWORD DATABASE
+
+You should replace ``$PASSWORD`` with the password set in ``mysql.env``, ``DATABASE`` with the ``DATABASES_NAME`` set in the instance coresponding env file and ``backup.sql`` with the name of the .sql file containing your data dump.
 
 
 Common configuration
