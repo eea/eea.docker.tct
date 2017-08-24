@@ -21,6 +21,7 @@ class NationalObjectiveFactory(factory.DjangoModelFactory):
     class Meta:
         model = models.NationalObjective
 
+    id = factory.Sequence(lambda n: '%d' % n)
     code = factory.Sequence(lambda n: '%d' % n)
     title_default = factory.Sequence(lambda n: 'obj%d_title_default' % n)
     description_default = factory.Sequence(

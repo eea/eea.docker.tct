@@ -1,5 +1,6 @@
 import os
 import sys
+import ldap
 from getenv import env
 from django.utils.translation import ugettext_lazy as _
 
@@ -15,11 +16,11 @@ LANGUAGE_CODE = 'en'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': env('DATABASES_NAME', 'tct'),
-        'USER': env('DATABASES_USER', 'tct'),
-        'PASSWORD': env('DATABASES_PASSWORD', 'tct'),
-        'HOST': 'mysql',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': env('DATABASES_NAME', 'demo'),
+        'USER': env('DATABASES_USER', 'demo'),
+        'PASSWORD': env('DATABASES_PASSWORD', 'password'),
+        'HOST': 'postgres',
         'PORT': '',
         'TEST_CHARSET': 'utf8',
         'TEST_COLLATION': 'utf8_general_ci',
@@ -162,10 +163,10 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                'django.core.context_processors.request',
                 'django.contrib.messages.context_processors.messages',
                 'django.contrib.auth.context_processors.auth',
-                'django.core.context_processors.i18n',
+                'django.template.context_processors.request',
+                'django.template.context_processors.i18n',
                 'tct.context_processors.tct_admin',
                 'tct.context_processors.tct_navbar_link',
                 'tct.context_processors.google_analytics',

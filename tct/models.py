@@ -742,7 +742,7 @@ class EuAichiStrategy(models.Model):
 
     @property
     def get_goals(self):
-        goals = [t.get_parent_goal() for t in self.aichi_targets]
+        goals = [t.get_parent_goal() for t in self.aichi_targets.all()]
         return set(g for g in goals if g)
 
     # TODO Remove if not used
