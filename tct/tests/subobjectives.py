@@ -9,6 +9,7 @@ class NationalSubObjectiveTest(BaseWebTest):
 
     def setUp(self):
         StaffUserFactory()
+        NationalObjectiveFactory.reset_sequence(1)
 
     def test_add_subobjective(self):
         nat_obj = NationalObjectiveFactory()
