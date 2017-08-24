@@ -1,5 +1,6 @@
 import os
 import sys
+import ldap
 from getenv import env
 from django.utils.translation import ugettext_lazy as _
 
@@ -15,11 +16,11 @@ LANGUAGE_CODE = 'en'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': env('DATABASES_NAME', 'tct'),
         'USER': env('DATABASES_USER', 'tct'),
         'PASSWORD': env('DATABASES_PASSWORD', 'tct'),
-        'HOST': 'mysql',
+        'HOST': 'postgres',
         'PORT': '',
         'TEST_CHARSET': 'utf8',
         'TEST_COLLATION': 'utf8_general_ci',

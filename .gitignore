@@ -18,5 +18,7 @@ fabfile/env.ini
 .vagrant
 salt
 Vagrantfile
-env-files/demo.env
-env-files/mysql.env
+
+docker/demo.env
+docker/init.sql
+docker/postgres.env
