@@ -11,7 +11,7 @@ django-webtest==1.9.2
 django-widget-tweaks==1.4.1
 django-mptt==0.8.7
 Django==1.11.4
-git+git://github.com/eaudeweb/django-transmeta.git@master
+django-transmeta-edw==0.7.3
 graypy==0.2.14
 gunicorn==19.7.1
 psycopg2==2.7.3
