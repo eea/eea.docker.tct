@@ -1,6 +1,5 @@
 import os
 import sys
-import ldap
 from getenv import env
 from django.utils.translation import ugettext_lazy as _
 
