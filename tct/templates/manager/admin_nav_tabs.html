@@ -20,7 +20,9 @@
         {% trans "Mapping" %}
       </a>
     </li>
-  {% else %}
+  {% endif %}
+
+  {% if EU_STRATEGY %}
     <li class="{% active 'list_eu_targets' 'view_eu_strategy_target' 'view_eu_strategy_activity'  %}">
       <a href="{% url 'list_eu_targets' %}">
         {% trans "EU Targets" %}

@@ -9,8 +9,10 @@ from .factories import (
 
 
 class NationalObjectiveTest(BaseWebTest):
+
     def setUp(self):
         StaffUserFactory()
+        NationalObjectiveFactory.reset_sequence(1)
 
     def test_list_national_objectives(self):
         nat_obj = NationalObjectiveFactory()

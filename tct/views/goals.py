@@ -3,8 +3,7 @@ from cStringIO import StringIO
 
 from django.conf import settings
 from django.http import HttpResponse, Http404
-from django.shortcuts import render, get_object_or_404, render_to_response
-from django.template import RequestContext
+from django.shortcuts import render, get_object_or_404
 from django.template.loader import render_to_string
 
 from tct import models
@@ -43,14 +42,14 @@ def user_homepage(request):
 def list_goals(request):
     goals = models.AichiGoal.objects.order_by(
         'code').all().prefetch_related('targets')
-    return render_to_response(
+    return render(
+        request,
         'aichi/aichi.html',
-        context_instance=RequestContext(
-            request, {
-                'goals': goals,
-                'list_goals': True,
-                'list_targets': False,
-            })
+        {
+            'goals': goals,
+            'list_goals': True,
+            'list_targets': False,
+        }
     )
 
 
@@ -63,16 +62,16 @@ def list_targets(request, code=None):
     else:
         current_goal = None
         targets = models.AichiTarget.objects.all()
-    return render_to_response(
+    return render(
+        request,
         'aichi/aichi.html',
-        context_instance=RequestContext(
-            request, {
-                'current_goal': current_goal,
-                'goals': goals,
-                'list_goals': False,
-                'list_targets': True,
-                'targets': targets,
-            })
+        {
+            'current_goal': current_goal,
+            'goals': goals,
+            'list_goals': False,
+            'list_targets': True,
+            'targets': targets,
+        }
     )
 
 
@@ -109,19 +108,19 @@ def aichi_target_detail(request, aichi_target_id, code=None):
     target.other_relevant_targets = get_other_relevant_targets(target)
     target.most_relevant_indicators = get_most_relevant_indicators(target)
 
-    return render_to_response(
+    return render(
+        request,
         'aichi/aichi.html',
-        context_instance=RequestContext(
-            request, {
-                'goals': goals,
-                'targets': targets,
-                'all_targets': all_targets,
-                'target': target,
-                'info_header': info_header,
-                'previous_target': previous_target,
-                'next_target': next_target,
-                'target_code': code
-            })
+        {
+            'goals': goals,
+            'targets': targets,
+            'all_targets': all_targets,
+            'target': target,
+            'info_header': info_header,
+            'previous_target': previous_target,
+            'next_target': next_target,
+            'target_code': code
+        }
     )
 
 
