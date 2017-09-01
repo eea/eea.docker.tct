@@ -1,134 +1,80 @@
-===============================================
-Quick Installation Guide for TCT platform
-===============================================
+Target Cross Linking Tool (TCT)
+===============================
 
-.. contents ::
+The project name is Target Cross Linking Tool, a platform for organizing the implementation of a country's national biodiversity strategy after AICHI (and by case after EU Strategy).
 
-
-Project name and whereabouts
-----------------------------
-The project name is National Biodiversity Strategies and Action Plan (or simply NBSAP).
-It is a platform for organizing the implementation of a country's
-national biodiversity strategy after AICHI (and by case after EU Strategy).
 It consists of two panels each corresponding an operation: viewing and editing.
 The first panel allows anyone to overview the aichi goals, targets and
-indicators along with national strategy mappings (the way a country develops its
-own strategy in terms of objectives and actions) and its implementation.
-The second panel(Admin), authentication-available only, allows an user to actually define
-the national strategy. (e.g. add/modify/delete an objective, action or even
-elements from AICHI) in the purpose of building it.
+indicators along with national strategy mappings (the way a country develops its own strategy in terms of objectives and actions) and its implementation.
+
+The second panel(Admin), authentication-available only, allows an user to actually define the national strategy. (e.g. add/modify/delete an objective, action or even elements from AICHI) in the purpose of building it.
+
+Installation
+------------
+
+* Install `Docker <https://docker.com>`_
+* Install `Docker Compose <https://docs.docker.com/compose>`_
 
 
-Run in devel with Docker Compose
---------------------------------
+Usage
+-----
 
-**Create and edit the following files**::
+1. Clone the repository::
 
-Edit *mysql.env*::
+    $ git clone https://github.com/eea/eea.docker.tct
+    $ cd eea.docker.tct
 
-  $ cp env-files/mysql.env.example env-files/mysql.env
-  $ vim env-files/mysql.env
+2. Customize env files::
 
-Edit *demo.env*. You can change the environment variables to suit your needs. In *demo.env.example* file you can see an example of how this variables should look like::
+    $ cp docker/postgres.env.example docker/postgres.env
+    $ vim docker/postgres.env
+    $ cp docker/demo.env.example docker/demo.env
+    $ vim docker/demo.env
+    $ cp docker/init.sql.example docker/init.sql
+    $ vim docker/init.sql
 
-  $ cp env-files/demo.env.example env-files/demo.env
-  $ vim env-files/demo.env
+3. Start application stack::
 
-**Start the containers**::
+    $ docker-compose up -d
+    $ docker-compose logs
 
-  $ docker-compose up -d
+4. Create a superuser:
 
-**Verify that all containers are up (check ``State`` column)**::
+    $ docker exec -it tct.app sh
+    $ ./manage.py createsuperuser
 
-  $ docker-compose ps
+5. Run tests:
 
-**Create a superuser**::
+    $ docker exec -it tct.app sh
+    $ apk add --no-cache libxslt-dev libffi-dev
+    $ pip install -r requirements-dev.txt
+    $ ./manage.py test
 
-  $ docker exec -it tct_demo_1 bash
-  $ ./manage.py createsuperuser
+6. Type: http://localhost:8000
 
-**Run tests**::
-
-  $ docker exec -it tct_demo_1 bash
-  $ pip install -r requirements-dev.txt
-  $ ./manage.py test
-
-**Restore a mysql database**::
-
-    $ cat backup.sql | docker exec -i nbsapdocker_mysql_1 /usr/bin/mysql -u root --password=$PASSWORD DATABASE
-
-You should replace ``$PASSWORD`` with the password set in ``mysql.env``, ``DATABASE`` with the ``DATABASES_NAME`` set in the instance coresponding env file and ``backup.sql`` with the name of the .sql file containing your data dump.
-
-
-Common configuration
---------------------
+LDAP integration
+----------------
 
 Set *ALLOWED_USERS* in settings to restrict access to a specific set of usernames.
 
-See *settings.py* for LDAP Authentication configuration.
+Set AUTH_LDAP_SERVER_URI and AUTH_LDAP_USER_DN_TEMPLATE from settings.py for LDAP Authentication configuration. Add 'django_auth_ldap.backend.LDAPBackend' value in AUTHENTICATION_BACKENDS.
 
 
-=================
-Translation files
-=================
-For translations there are two methods.
+Translations
+------------
 
 1. Manual translation
 
-Run over the entire source tree and pull out all strings marked for translation::
+Run over the entire source tree and pull out all strings marked for translation, add/edit/delete translations for each file in tct/locale/[LANGUAGE]/LC_MESSAGE/django.po, compile the po files and restart the server::
 
-  $ docker exec -it tct_demo_1 bash
-  $ cd tct
-  $ django-admin.py makemessages -a
-
-Edit <msgstr> for each <msgid> in tct/locale/_LANGUAGE_/LC_MESSAGE/django.po
-
-Compile .po file created with previous command::
-
-  $ django-admin.py compilemessages
-
-Restart server::
-
-  $ docker-compose restart demo
+    $ docker exec -it tct.app sh
+    # cd tct
+    # django-admin.py makemessages -a
+    # django-admin.py compilemessages
+    $ docker-compose restart demo
 
 2. Automatic translation
 
-Enter the application container::
+Translate the messages using the Rosetta tool for translation (http://localhost:8000/translate) and restart the server when ready::
 
-  $ docker exec -it tct_demo_1 bash
-
-Create a superuser::
-
-  $ ./manage.py createsuperuser
-  # surf over /translate to use Rosetta tool for translation
-  # complete the forms within the correct translations
-  # restart server when ready
-  $ docker-compose restart demo
-
-
-========
-Contacts
-========
-The project owner is EEA (European Environment Agency)
-
-Technical development team: contact at eaudeweb.ro
-
-
-=====================
-Copyright and license
-=====================
-Copyright 2007 European Environment Agency (EEA)
-
-Licensed under the EUPL, Version 1.1 or – as soon they will be approved
-by the European Commission - subsequent versions of the EUPL (the "Licence");
-
-You may not use this work except in compliance with the Licence.
-
-You may obtain a copy of the Licence at:
-https://joinup.ec.europa.eu/software/page/eupl/licence-eupl
-
-Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-
-See the Licence for the specific language governing permissions and limitations under the Licence.
-
+    $ docker-compose restart app
