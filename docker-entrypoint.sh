@@ -10,7 +10,6 @@ while ! nc -z $POSTGRES_ADDR 5432; do
 done
 
 python manage.py migrate
-python manage.py load_fixtures
 
 case "$1" in
     manage)
