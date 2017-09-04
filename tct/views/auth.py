@@ -51,4 +51,4 @@ def crashme(request):
 
 
 def pingme(request):
-    return HttpResponse('OK')
+    return HttpResponse(status=204)
