@@ -3,16 +3,21 @@ MAINTAINER "EEA: IDM2 C-TEAM" <eea-edw-c-team-alerts@googlegroups.com>
 
 ENV PROJ_DIR=/var/local/tct/
 
-RUN runDeps="gcc musl-dev gettext postgresql-client postgresql-dev netcat-openbsd libressl-dev openldap-dev" \
+RUN runDeps="gcc musl-dev gettext postgresql-dev netcat-openbsd libressl-dev openldap-dev" \
     && apk add --no-cache $runDeps
 
-RUN mkdir -p $PROJ_DIR
+RUN apk add --no-cache --virtual .build-deps \
+        gcc musl-dev postgresql-dev libressl-dev \
+    && apk add --no-cache \
+        gettext netcat-openbsd openldap-dev \
+    && mkdir -p $PROJ_DIR
 
 # Add requirements.txt before rest of repo for caching
 COPY requirements.txt $PROJ_DIR
 WORKDIR $PROJ_DIR
 
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt \
+    && apk del .build-deps
 
 COPY . $PROJ_DIR
 
@@ -22,9 +27,9 @@ RUN cd /usr/local/lib/python2.7/site-packages/django/apps/ && patch < /tmp/confi
 RUN echo -e "--- settings.original.py\n+++ settings.py\n@@ -1,5 +1,6 @@\n import os\n import sys\n+import ldap\n from getenv import env\n from django.utils.translation import ugettext_lazy as _\n \n" > /tmp/settings.py.patch
 RUN cd /var/local/tct/tct/ && patch < /tmp/settings.py.patch
 
-RUN python manage.py makemessages
-RUN python manage.py compilemessages
-RUN python manage.py collectstatic --noinput
+RUN python manage.py makemessages \
+    && python manage.py compilemessages \
+    && python manage.py collectstatic --noinput
 
 ENTRYPOINT ["./docker-entrypoint.sh"]
 CMD ["run"]
