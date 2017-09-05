@@ -8,7 +8,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 DEBUG = env('DEBUG', False)
 
 ASSETS_ROOT = os.path.join(BASE_DIR, 'static')
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', env('ALLOWED_HOSTS')]
+ALLOWED_HOSTS = [env('ALLOWED_HOSTS')]
 
 
 LANGUAGE_CODE = 'en'
