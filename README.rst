@@ -43,12 +43,12 @@ Usage
     $ docker-compose up -d
     $ docker-compose logs
 
-4. Create a superuser:
+4. Create a superuser::
 
     $ docker exec -it tct.app sh
     $ ./manage.py createsuperuser
 
-5. Run tests:
+5. Run tests::
 
     $ docker exec -it tct.app sh
     $ apk add --no-cache libxslt-dev libffi-dev
