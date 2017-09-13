@@ -12,7 +12,7 @@ The second panel(Admin), authentication-available only, allows an user to actual
 .. image:: https://travis-ci.org/eea/eea.docker.tct.svg?branch=master
     :target: https://travis-ci.org/eea/eea.docker.tct 
 .. image:: https://coveralls.io/repos/github/eea/eea.docker.tct/badge.svg?branch=master
-:target: https://coveralls.io/github/eea/eea.docker.tct?branch=master
+    :target: https://coveralls.io/github/eea/eea.docker.tct?branch=master
 
 Installation
 ------------
