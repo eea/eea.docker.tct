@@ -13,7 +13,9 @@ The second panel(Admin), authentication-available only, allows an user to actual
     :target: https://travis-ci.org/eea/eea.docker.tct 
 .. image:: https://coveralls.io/repos/github/eea/eea.docker.tct/badge.svg?branch=master
     :target: https://coveralls.io/github/eea/eea.docker.tct?branch=master
-
+.. image:: https://dockerbuildbadges.quelltext.eu/status.svg?organization=eeacms&repository=tct-biodiversity
+    :target: https://hub.docker.com/r/eeacms/tct-biodiversity/builds
+    
 Installation
 ------------
 
