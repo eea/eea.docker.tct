@@ -273,8 +273,8 @@ TINYMCE_DEFAULT_CONFIG = {
 }
 TINYMCE_SPELLCHECKER = False
 TINYMCE_COMPRESSOR = False
-TINYMCE_JS_URL = 'tct/static/js/tiny_mce/tiny_mce.js'
-TINYMCE_JS_ROOT = 'tct/static/js/tiny_mce'
+TINYMCE_JS_URL = 'js/tiny_mce/tiny_mce.js'
+TINYMCE_JS_ROOT = 'js/tiny_mce'
 
 CSS_ASSETS = ()
 
