@@ -213,6 +213,12 @@ INSTALLED_APPS = (
     'mptt',
 )
 
+# sentry configuration
+if env('SENTRY_DSN', ''):
+    INSTALLED_APPS += ('raven.contrib.django.raven_compat',)
+    RAVEN_CONFIG = {'dsn': env('SENTRY_DSN')}
+
+
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error when DEBUG=False.
@@ -324,7 +330,6 @@ ENABLE_REG_INDICATORS = env('ENABLE_REG_INDICATORS', False)
 
 FACILITY = env('FACILITY', 'tct')
 INSTANCE_NAME = env('INSTANCE_NAME', 'Testing Instance')
-
 
 LOGGING['handlers']['graypy']['facility'] = FACILITY
 
