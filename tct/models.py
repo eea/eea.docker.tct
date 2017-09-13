@@ -789,12 +789,12 @@ class NationalStrategy(models.Model):
 
     @property
     def targets_t(self):
-        return ''.join(['t{0}'.format(t.code) for t in self.eu_targets])
+        return ''.join(['t{0}'.format(t.code) for t in self.eu_targets.all()])
 
     @property
     def targets_z(self):
         r = ''
-        targets = self.eu_targets
+        targets = self.eu_targets.all()
         for target in EuTarget.objects.all():
             if target in targets:
                 r += '1'
