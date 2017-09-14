@@ -7,6 +7,8 @@ from tct import models
 
 admin.autodiscover()
 
+handler500 = 'tct.views.errors.handler500'
+
 urlpatterns = [
     # homepage URLs
     url(r'^$', views.user_homepage, name='user_homepage'),
