@@ -211,6 +211,10 @@ INSTALLED_APPS = (
     'rosetta',
     'graypy',
     'mptt',
+    'hijack',
+    'compat',
+    'hijack_admin',
+
 )
 
 # sentry configuration
@@ -268,6 +272,10 @@ LOGGING = {
 
 # TCT special variables
 LOGIN_REDIRECT_URL = '/'
+
+HIJACK_LOGIN_REDIRECT_URL = '/'
+HIJACK_LOGOUT_REDIRECT_URL = '/'
+HIJACK_ALLOW_GET_REQUESTS = True
 
 TINYMCE_DEFAULT_CONFIG = {
     "theme_advanced_buttons1": ("formatselect,"

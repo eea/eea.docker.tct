@@ -4,6 +4,8 @@ django-appconf==1.0.2
 django-assets==0.12
 django-auth-ldap==1.2.15
 django-chosen==0.1
+django-hijack==2.1.4
+django-hijack-admin==2.1.4
 django-rosetta==0.7.13
 django-staticfiles==1.2.1
 django-tinymce==2.6.0

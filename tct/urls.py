@@ -10,6 +10,7 @@ admin.autodiscover()
 urlpatterns = [
     # homepage URLs
     url(r'^$', views.user_homepage, name='user_homepage'),
+    url(r'^hijack/', include('hijack.urls')),
     url(r'^aichi/$', views.aichi_target_detail,
         {'code': 'a',
          'aichi_target_id': '1'},
