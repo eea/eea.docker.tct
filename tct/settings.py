@@ -166,6 +166,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.template.context_processors.request',
                 'django.template.context_processors.i18n',
+                'tct.context_processors.sentry',
                 'tct.context_processors.tct_admin',
                 'tct.context_processors.tct_navbar_link',
                 'tct.context_processors.google_analytics',

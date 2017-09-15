@@ -1,12 +1,13 @@
+<!DOCTYPE html>
 <html>
   <head>
     <script src="https://cdn.ravenjs.com/2.3.0/raven.min.js"></script>
-    {% if request.sentry.id %}
+    {% if sentry_id %}
       <script>
       Raven.showReportDialog({
-        eventId: '{{ request.sentry.id }}',
+        eventId: '{{ sentry_id }}',
         // use the public DSN (dont include your secret!)
-        dsn: 'https://2f0895b443b64f06a35b646931060537@sentry.io/216529'
+        dsn: '{{ sentry_public_id }}'
       });
       </script>
     {% endif %}

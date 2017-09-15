@@ -1,5 +1,6 @@
 from django.conf import settings
 from tct.models import NavbarLink
+from getenv import env
 
 
 def tct_admin(request):
@@ -38,3 +39,13 @@ def google_analytics(request):
 
 def login(request):
     return {'RESTRICTED_ACCESS': bool(getattr(settings, 'ALLOWED_USERS', []))}
+
+
+def sentry(request):
+    sentry_id = ''
+    if hasattr(request, 'sentry'):
+        sentry_id = request.sentry['id']
+    return {
+        'sentry_id': sentry_id,
+        'sentry_public_id': env('SENTRY_PUBLIC_DSN', ''),
+    }

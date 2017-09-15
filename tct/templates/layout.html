@@ -15,6 +15,16 @@
       <link rel="stylesheet" href="{{ ASSET_URL }}" />
     {% endassets %}
 
+      <script src="https://cdn.ravenjs.com/3.17.0/raven.min.js" crossorigin="anonymous"></script>
+      <script>
+        Raven.config('{{ sentry_public_id }}').install()
+        Raven.setUserContext({
+          email: '{{ request.user.email }}',
+          username: '{{ request.user.username }}',
+          id: '{{ request.user.id }}',
+        })
+      </script>
+
     {% block extra_head %}
     {% endblock %}
 
