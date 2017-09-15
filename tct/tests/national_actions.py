@@ -118,7 +118,7 @@ class NationalActionsTest(BaseWebTest):
         self.populate_fields(form, data)
         form.submit()
         self.assertObjectInDatabase('NationalAction',
-                                    {'code': '1', 'parent': None})
+                                    {'code': '5NR_1', 'parent': None})
 
     def test_add_subnational_action_code(self):
         nat_act = NationalActionFactory(code='1')

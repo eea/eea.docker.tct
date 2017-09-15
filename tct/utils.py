@@ -37,8 +37,8 @@ def generate_code(model, instance):
         # if empty national strategy table - reinitialize code values
         if len(codes) == 0:
             codes = ['0']
-
-        codes = [x.split('_')[1] for x in codes]
+        else:
+            codes = [x.split('_')[1] for x in codes]
         codes.sort(key=lambda x: [int(y) for y in x.split('.')])
         parts = codes[-1].split('.')
         last_code = parts[-1]
