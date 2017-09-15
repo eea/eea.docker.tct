@@ -38,9 +38,11 @@ def generate_code(model, instance):
         if len(codes) == 0:
             codes = ['0']
 
+        codes = [x.split('_')[1] for x in codes]
         codes.sort(key=lambda x: [int(y) for y in x.split('.')])
-        last_code = codes[-1]
-        code = '{0}'.format(int(last_code) + 1)
+        parts = codes[-1].split('.')
+        last_code = parts[-1]
+        code = '5NR_{0}'.format(int(last_code) + 1)
 
     return code
 
