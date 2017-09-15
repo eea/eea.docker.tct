@@ -224,6 +224,7 @@ if env('SENTRY_DSN', ''):
     INSTALLED_APPS += ('raven.contrib.django.raven_compat',)
     RAVEN_CONFIG = {'dsn': env('SENTRY_DSN')}
 
+GOOGLE_ANALYTICS_PROPERTY_ID = env('GOOGLE_ANALYTICS_PROPERTY_ID', '')
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
