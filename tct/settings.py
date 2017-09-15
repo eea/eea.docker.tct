@@ -219,6 +219,7 @@ INSTALLED_APPS = (
 )
 
 # sentry configuration
+SENTRY_PUBLIC_DSN = env('SENTRY_PUBLIC_DSN', '')
 if env('SENTRY_DSN', ''):
     INSTALLED_APPS += ('raven.contrib.django.raven_compat',)
     RAVEN_CONFIG = {'dsn': env('SENTRY_DSN')}
