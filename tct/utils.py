@@ -38,9 +38,8 @@ def generate_code(model, instance):
         new_codes = []
         if len(codes) == 0:
             codes = ['0']
-            code = '{0}'.format(1)
+            code = 1
         else:
-            # import pdb; pdb.set_trace()
             for code in codes:
                 if "_" in code:
                     code = code.split('_')[1]
