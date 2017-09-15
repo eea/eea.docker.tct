@@ -9,12 +9,10 @@ indicators along with national strategy mappings (the way a country develops its
 
 The second panel(Admin), authentication-available only, allows an user to actually define the national strategy. (e.g. add/modify/delete an objective, action or even elements from AICHI) in the purpose of building it.
 
-.. image:: https://travis-ci.org/eea/eea.docker.tct.svg?branch=master
-    :target: https://travis-ci.org/eea/eea.docker.tct 
-.. image:: https://coveralls.io/repos/github/eea/eea.docker.tct/badge.svg?branch=master
-    :target: https://coveralls.io/github/eea/eea.docker.tct?branch=master
-.. image:: https://dockerbuildbadges.quelltext.eu/status.svg?organization=eeacms&repository=tct-biodiversity
-    :target: https://hub.docker.com/r/eeacms/tct-biodiversity/builds
+[![Travis](https://travis-ci.org/eea/eea.docker.tct.svg?branch=master)](https://travis-ci.org/eea/eea.docker.tct)
+[![Coverage](https://coveralls.io/repos/github/eea/eea.docker.tct/badge.svg?branch=master)](https://coveralls.io/github/eea/eea.docker.tct?branch=master)
+[![Docker]( https://dockerbuildbadges.quelltext.eu/status.svg?organization=eeacms&repository=tct-biodiversity)](https://hub.docker.com/r/eeacms/tct-biodiversity/builds)
+
 
 ### Prerequisites
 
