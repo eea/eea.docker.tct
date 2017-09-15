@@ -35,14 +35,22 @@ def generate_code(model, instance):
     else:
         codes = [ob.code for ob in model.objects.filter(parent=None).all()]
         # if empty national strategy table - reinitialize code values
+        new_codes = []
         if len(codes) == 0:
             codes = ['0']
+            code = '{0}'.format(1)
         else:
-            codes = [x.split('_')[1] for x in codes]
-        codes.sort(key=lambda x: [int(y) for y in x.split('.')])
-        parts = codes[-1].split('.')
-        last_code = parts[-1]
-        code = '5NR_{0}'.format(int(last_code) + 1)
+            # import pdb; pdb.set_trace()
+            for code in codes:
+                if "_" in code:
+                    code = code.split('_')[1]
+                    new_codes.append(code)
+                else:
+                    new_codes.append(code)
+            new_codes.sort(key=lambda x: [int(y) for y in x.split('.')])
+            parts = new_codes[-1].split('.')
+            last_code = parts[-1]
+            code = '{0}'.format(int(last_code) + 1)
 
     return code
 
