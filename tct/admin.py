@@ -21,6 +21,7 @@ class AichiIndicatorAdmin(admin.ModelAdmin):
 admin.site.register(AichiIndicator, AichiIndicatorAdmin)
 admin.site.register(NationalAction)
 admin.site.register(NationalObjective)
+admin.site.register(NationalIndicator)
 
 
 class EuAichiStrategyAdmin(admin.ModelAdmin):
