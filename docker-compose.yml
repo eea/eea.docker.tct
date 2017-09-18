@@ -41,6 +41,7 @@ services:
     - ./docker/demo.env
     volumes:
     - static-files:/var/local/tct/static
+    - .:/var/local/tct/
 
   postgres:
     image: postgres:9-alpine

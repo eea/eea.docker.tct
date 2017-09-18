@@ -39,15 +39,6 @@
           {% block navmenu %}
             {% include 'manager/admin_nav_tabs.html' %}
           {% endblock %}
-          {% block admin-menu %}
-            <ul class="sidebar-menu">
-              <li class="nav-btn">
-                <a class="exit-admin" href="{% url 'user_homepage' %}">
-                  {% trans "View site" %}
-                </a>
-              </li>
-            </ul>
-          {% endblock %}
         </section>
       </aside>
 

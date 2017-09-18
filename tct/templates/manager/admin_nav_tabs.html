@@ -20,9 +20,21 @@
         {% trans "Mapping" %}
       </a>
     </li>
+    {% if ENABLE_REG_INDICATORS %}
+      <li class="{% active 'list_regions' %}">
+        <a href="{% url 'list_regions' %}">
+          {% trans "Regions" %}
+        </a>
+      </li>
+    {% endif %}
+    <li class="{% active 'admin_export' %}">
+      <a href="{% url 'admin_export' %}">
+        {% trans "Export" %}
+      </a>
+    </li>
   {% endif %}
 
-  {% if EU_STRATEGY %}
+  {% if EU_STRATEGY_ADD %}
     <li class="{% active 'list_eu_targets' 'view_eu_strategy_target' 'view_eu_strategy_activity'  %}">
       <a href="{% url 'list_eu_targets' %}">
         {% trans "EU Targets" %}
@@ -42,23 +54,9 @@
     </li>
   {% endif %}
 
-  <li class="{% active 'list_regions' %}">
-    <a href="{% url 'list_regions' %}">
-      {% trans "Regions" %}
-    </a>
-  </li>
-
   <li class="{% active 'admin_page' 'admin_pages' %}">
     <a href="{% url 'admin_pages' %}">
       {% trans "Intro page" %}
     </a>
   </li>
-
-  {% if NAT_STRATEGY %}
-    <li class="{% active 'admin_export' %}">
-      <a href="{% url 'admin_export' %}">
-        {% trans "Export" %}
-      </a>
-    </li>
-  {% endif %}
 </ul>
