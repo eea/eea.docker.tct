@@ -1,5 +1,7 @@
 import os
 import sys
+# Fixes bug that is being thrown by postgres interacting with ldap (see http://stackoverflow.com/questions/38740631/need-to-pre-import-module-to-avoid-error)
+import ldap
 from getenv import env
 from django.utils.translation import ugettext_lazy as _
 
