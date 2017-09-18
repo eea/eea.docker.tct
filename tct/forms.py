@@ -402,8 +402,8 @@ class NationalStrategyForm(forms.Form):
         self.fields['aichi_goals'].choices = self.get_choices('Goal',
                                                               AichiGoal,
                                                               isString=True)
-        self.fields['aichi_targets'].choices = (
-            [('', '----')] + self.get_choices('Target', AichiTarget)
+        self.fields['aichi_targets'].choices = (self.get_choices('Target',
+                                                                 AichiTarget)
         )
         self.fields['other_targets'].choices = self.get_choices('Target',
                                                                 AichiTarget)
