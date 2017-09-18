@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+  nginx:
+    image: eeacms/hello
+
+  app:
+    build: .
+    ports:
+    - "80"
+    volumes:
+    - .:/var/local/tct/
+
+  postgres:
+    volumes:
+    - ./docker/init.sql:/docker-entrypoint-initdb.d/init.sql

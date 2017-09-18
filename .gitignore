@@ -22,3 +22,4 @@ Vagrantfile
 docker/demo.env
 docker/init.sql
 docker/postgres.env
+docker-compose.override.yml

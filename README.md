@@ -69,7 +69,18 @@ The second panel(Admin), authentication-available only, allows an user to actual
 3. See it in action: [http://localhost:8000](http://localhost:8000)
 
 ### Development instructions
-* Start stack, all services should be "Up" :
+
+1. Customize docker orchestration for local development:
+
+        $ cp docker-compose.override.yml.example docker-compose.override.yml
+
+By default, it replaces nginx service with a dummy container, builds a local image for app service and maps the project directory inside the app container. 
+
+You can add a fixed port number instead the floating one by specifying it under the ports directive (e.g. "8000:80" instead of "80").
+
+Make sure the database user and password from `demo.env` is matching the ones from `init.sql` file. 
+
+2. Start stack, all services should be "Up" :
 
         $ docker-compose up -d
         $ docker-compose ps
@@ -80,20 +91,14 @@ The second panel(Admin), authentication-available only, allows an user to actual
 
 * When the image is modified you should update the stack:
 
+        $ docker-compose down -v #optional step for droping all containers and volumes
         $ docker-compose up -d --build
-
-* Cleanup containers, images and volumes:
-
-        $ docker-compose down -v
-        $ docker rm $(docker ps -aq)
-        $ docker rmi $(docker images -q)
-        $ docker volume rm $(docker volume ls -q)
 
 ### Debugging
 
-* Please make sure that `DEBUG=True` in `settings.py`
+* Please make sure that `DEBUG=True` in `demo.env` file.
 
-* Update docker-compose `app` section with the following so that `docker-entrypoint.sh`
+* Update docker-compose.override.yml file `app` section with the following so that `docker-entrypoint.sh`
 is not executed:
 
         entrypoint: ["/usr/bin/tail", "-f", "/dev/null"]
@@ -101,12 +106,7 @@ is not executed:
 * Attach to docker container and start the server in debug mode:
 
         $ docker exec -it tct.app sh
-        # gunicorn tct.wsgi:application \
-            --name tct \
-            --bind 0.0.0.0:80 \
-            --workers 3 \
-            --access-logfile - \
-            --error-logfile -
+        # ./manage.py runserver 0.0.0.0:8000
 
 * See it in action: [http://localhost:8000](http://localhost:8000)
 

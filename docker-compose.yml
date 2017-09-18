@@ -27,21 +27,15 @@ services:
     command: /bin/sh -c 'echo "$$NGINX_CONF" > /etc/nginx/conf.d/default.conf && exec nginx -g "daemon off;"'
 
   app:
-    #image: eeacms/tct-biodiversity:1.15-alpine
-    build: .
+    image: eeacms/tct-biodiversity:1.26-alpine
     container_name: tct.app
-    ports:
-    - "8000:80"
     depends_on:
     - postgres
-    environment:
-      DEBUG: 'True'
     env_file:
     - ./docker/postgres.env
     - ./docker/demo.env
     volumes:
     - static-files:/var/local/tct/static
-    - .:/var/local/tct/
 
   postgres:
     image: postgres:9-alpine
@@ -50,7 +44,6 @@ services:
     - ./docker/postgres.env
     volumes:
     - data:/var/lib/postgresql/data
-    - ./docker/init.sql:/docker-entrypoint-initdb.d/init.sql
 
 volumes:
   static-files:
