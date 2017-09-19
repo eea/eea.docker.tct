@@ -70,7 +70,7 @@ def nat_strategy_download(request):
                 ', '.join(t.code for t in strategy.relevant_targets.all()) or '',
                 ', '.join(t.code for t in strategy.other_targets.all()),
                 remove_tags(getattr(strategy.objective,
-                                    'description_' + lang).rstrip(), 'p'),
+                                    'description_' + lang, '').rstrip(), 'p'),
             ]
             if eu_strategy:
                 row.extend([
