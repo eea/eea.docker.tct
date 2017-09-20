@@ -62,6 +62,13 @@ def nat_strategy_download(request):
             objectives = (strategy.objective,)
             title = None
         for objective in objectives:
+            field = 'description_' + lang
+            if getattr(strategy.objective, field) is None:
+                description = ''
+            else:
+                description = remove_tags(getattr(strategy.objective,
+                                                  field).rstrip(), 'p')
+
             row = [
                 objective.title if title is None else title,
                 objective.title if title is not None else '',
@@ -69,8 +76,7 @@ def nat_strategy_download(request):
                 ', '.join(g.code for g in strategy.get_goals) or '',
                 ', '.join(t.code for t in strategy.relevant_targets.all()) or '',
                 ', '.join(t.code for t in strategy.other_targets.all()),
-                remove_tags(getattr(strategy.objective,
-                                    'description_' + lang).rstrip(), 'p'),
+                description,
             ]
             if eu_strategy:
                 row.extend([
