@@ -211,6 +211,11 @@ class NationalObjectiveTest(BaseWebTest):
         with self.assertRaises(AssertionError):
             self.assertObjectInDatabase('NationalObjective', {'pk': 1})
 
+    def test_national_strategy_download(self):
+        nat_obj = NationalObjectiveFactory()
+        resp = self.app.get(reverse('nat_strategy'))
+        self.assertEqual(200, resp.status_code)
+
 
 class ObjectivesTest(BaseWebTest):
     def setUp(self):
