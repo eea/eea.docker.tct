@@ -68,6 +68,9 @@ def indicator_details(request, pk):
 @auth_required
 def list_eu_indicators(request):
     category = request.GET.get('category', models.EuIndicator.HEADLINE)
+    indicators = models.EuIndicator.objects.filter(parents=None).all()
+    indicators.filter(parents=None).filter(category='').update(
+        category=models.NationalIndicator.HEADLINE)
     indicators = (
         models.EuIndicator.objects.filter(parents=None)
         .filter(category=category)
