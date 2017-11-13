@@ -11,7 +11,7 @@ The second panel(Admin), authentication-available only, allows an user to actual
 
 [![Travis](https://travis-ci.org/eea/eea.docker.tct.svg?branch=master)](https://travis-ci.org/eea/eea.docker.tct)
 [![Coverage](https://coveralls.io/repos/github/eea/eea.docker.tct/badge.svg?branch=master)](https://coveralls.io/github/eea/eea.docker.tct?branch=master)
-[![Docker]( https://dockerbuildbadges.quelltext.eu/status.svg?organization=eeacms&repository=tct-biodiversity)](https://hub.docker.com/r/eeacms/tct-biodiversity/builds)
+[![Docker]( https://dockerbuildbadges.quelltext.eu/status.svg?organization=eeacms&repository=european.cache.registry)](https://hub.docker.com/r/eeacms/european.cache.registry/builds)
 
 
 ### Prerequisites
