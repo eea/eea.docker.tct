@@ -35,10 +35,7 @@ def get_other_relevant_aichi_targets(target):
 def eu_target_detail(request, pk):
     current_target = get_object_or_404(models.EuTarget, pk=pk)
     current_target.actions_tree = []
-
-    for action in current_target.actions.order_by('code'):
-        current_target.actions_tree.extend(
-            action.get_descendants(include_self=True))
+    current_target.actions_tree = current_target.actions.order_by('code')
 
     current_target.most_relevant_aichi_targets = \
         get_most_relevant_aichi_targets(current_target)
