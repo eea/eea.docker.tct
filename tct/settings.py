@@ -70,7 +70,7 @@ ALL_LANGUAGES = (
     ('ka', 'Georgian'),
     ('hr-hr', 'Croatian'),
     ('mk', 'Macedonian'),
-    ('sr', 'Montenegrin'),
+    ('me', 'Montenegrin'),
     ('ca', 'Catalan'),
     ('sr', 'Serbian'),
     ('sq', 'Albanian'),
