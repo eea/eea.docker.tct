@@ -12,7 +12,7 @@ django-tinymce==2.6.0
 django-webtest==1.9.2
 django-widget-tweaks==1.4.1
 django-mptt==0.8.7
-Django==1.11.4
+Django==1.11.24
 django-transmeta-edw==0.7.3
 graypy==0.2.14
 gunicorn==19.7.1
@@ -21,7 +21,7 @@ natsort==5.1.0
 openpyxl==2.4.8
 python-ldap==2.4.20
 raven==6.1.0
-requests==2.9.0
+requests==2.22.0
 six==1.9.0
 supervisor==3.3.3
 tablib==0.11.5
